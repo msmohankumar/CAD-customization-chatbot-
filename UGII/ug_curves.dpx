@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Curves" csh="PMAN_Curves" package_suppress="simviewer,view,mechatronicsplayer">
+        <Category name="General" csh="PMAN_Curves_General">
+            <Tab name="All" csh="PMAN_Curves_General_All">
+                <Pref name="Solids_EnableLegacyEditCurveParameters" type="logical" title="Use Legacy Edit Curve Parameters" value="false" ver="7.5.0" scope="Session">
+                    <Description>This option determines whether the Edit Curve command on the shortcut menu for a non-associative curve should use the legacy command and have it be the default action when double-clicking on a non-associative curve.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Spline" csh="PMAN_Curves_Spline">
+            <Tab name="All" csh="PMAN_Curves_Spline_All">
+                <Pref name="Model_Spline_Degree" type="int" title="Spline Degree" value="5" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the degree of a spline when created using the Studio Spline command.</Description>
+                    <IntegerScale/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="24" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Model_Spline_Degree_In_Sketch" type="int" title="Spline Degree in the Sketcher" value="3" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the degree of a spline when created using the Studio Spline command while in the Sketch environment.</Description>
+                    <IntegerScale/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="24" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Fillet" csh="PMAN_Curves_Fillet">
+            <Tab name="All" csh="PMAN_Curves_Fillet_All">
+                <Pref name="UG_filletRadius_EU" type="real" title="Radius" value="0.25" unit="in" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the fillet radius for the Fillet command in Basic Curves.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_filletRadius_MU" type="real" title="Radius" value="6.0" unit="mm" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the fillet radius for the Fillet command in Basic Curves.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Trim Curve" csh="PMAN_Curves_Trim_Curve">
+            <Tab name="All" csh="PMAN_Curves_Trim_Curve_All">
+                <Pref name="Solids_TrimCurve_BoundingObject_Option" type="int" title="Bounding Object Type" value="0" ver="11.0.1" scope="Session">
+                    <Description>This option specifies the object type to use as the bounding object.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Selected Object" value="0"/>
+                        <EnumElem name="Plane" value="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="Solids_TrimCurve_TrimOrDivide_Operation" type="int" title="Trim or Divide Operation" value="0" ver="11.0.1" scope="Session">
+                    <Description>This option specifies the operation to be performed on the selected input curves.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Trim" value="0"/>
+                        <EnumElem name="Divide" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Solids_TrimCurve_Operation_Direction" type="int" title="Direction" value="0" ver="11.0.1" scope="Session">
+                    <Description>This option specifies the method the system will use to find intersections between objects.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Shortest 3D Distance" value="0"/>
+                        <EnumElem name="Along Direction" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Solids_TrimCurve_Direction" type="int" title="Specify Direction Option" value="10" ver="11.0.1" scope="Session">
+                    <Description>When the Direction option is set to Along Direction, this option specifies the vector option to be used to specify the direction.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Inferred Vector" value="0"/>
+                        <EnumElem name="Two Points" value="1"/>
+                        <EnumElem name="Curve/Axis Vector" value="3"/>
+                        <EnumElem name="On Curve Vector" value="4"/>
+                        <EnumElem name="Face/Plane Normal" value="5"/>
+                        <EnumElem name="XC-axis" value="8"/>
+                        <EnumElem name="YC-axis" value="9"/>
+                        <EnumElem name="ZC-axis" value="10"/>
+                        <EnumElem name="-XC-axis" value="11"/>
+                        <EnumElem name="-YC-axis" value="12"/>
+                        <EnumElem name="-ZC-axis" value="13"/>
+                        <EnumElem name="View Direction" value="14"/>
+                    </Data>
+                </Pref>
+                <Pref name="Solids_TrimCurve_KeepOrDiscard" type="int" title="Selected Region" value="0" ver="11.0.1" scope="Session">
+                    <Description>This option specifies if the selected region should be kept or discarded.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Keep" value="0"/>
+                        <EnumElem name="Discard" value="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="Solids_TrimCurve_Assoc_InputCurves" type="int" title="Input Curves (associative trim)" value="1" ver="12.0.0" scope="Session">
+                    <Description>This option specifies how the input curves are handled after an associative trim is performed.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Keep" value="0"/>
+                        <EnumElem name="Hide" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Solids_TrimCurve_NonAssoc_InputCurves" type="int" title="Input Curves (non-associative trim)" value="3" ver="11.0.1" scope="Session">
+                    <Description>This option specifies how the input curves are handled after a non-associative trim is performed.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Keep" value="0"/>
+                        <EnumElem name="Hide" value="1"/>
+                        <EnumElem name="Delete" value="2"/>
+                        <EnumElem name="Replace" value="3"/>
+                    </Data>
+                </Pref>
+                <Pref name="Solids_TrimCurve_InputCurves_Dashed" type="logical" title="Make Input Curves Dashed" value="false" ver="11.0.1" scope="Session">
+                    <Description>This option specifies whether or not trimmed input curves will be changed to dashed.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="Solids_TrimCurve_CurveExtension" type="int" title="Curve Extension" value="0" ver="12.0.0" scope="Session">
+                    <Description>This option specifies how curves should be extended to the bounding objects.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Natural" value="0"/>
+                        <EnumElem name="Linear" value="1"/>
+                        <EnumElem name="Circular" value="2"/>
+                        <EnumElem name="None" value="3"/>
+                    </Data>
+                </Pref>
+                <Pref name="Solids_TrimCurve_ProcessBounding_Object" type="logical" title="Trim Bounding Objects" value="false" ver="11.0.1" scope="Session">
+                    <Description>This option determines whether or not the bounding objects should be trimmed as well.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="Solids_TrimCurve_Perform_Extended_Intersection_Calculation" type="logical" title="Extended Intersection Calculation" value="false" ver="11.0.1" scope="Session">
+                    <Description>Allows intersection calculation to offer solutions that are not within default tolerance.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="Solids_TrimCurve_SingleSelection" type="logical" title="Single Selection" value="true" ver="12.0.0" scope="Session">
+                    <Description>This option determines whether or not a selection input is automatically satisfied after a single selection has been made. Having this option on streamlines the interaction for straightforward curve trimming cases.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Curve Length" csh="PMAN_Curves_Curve_Length">
+            <Tab name="All" csh="PMAN_Curves_Curve_Length_All">
+                <Pref name="Solids_Curve_Length_ExtensionMethod" type="int" title="Extension Method" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies if the extension method is incremental or total.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Incremental" value="0"/>
+                        <EnumElem name="Total" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Solids_Curve_Length_IncrementalExtensionSide" type="int" title="Incremental Extension Side" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the extension side for the incremental extension method.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Start/End" value="0"/>
+                        <EnumElem name="Symmetric" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Solids_Curve_Length_TotalExtensionSide" type="int" title="Total Extension Side" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the extension side for the total extension method.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Start" value="0"/>
+                        <EnumElem name="End" value="1"/>
+                        <EnumElem name="Symmetric" value="2"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="Solids_Curve_Length_ExtensionDirection" type="int" title="Extension Direction" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies how curves should be extended if the curve length is increased.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Natural" value="0"/>
+                        <EnumElem name="Linear" value="1"/>
+                        <EnumElem name="Circular" value="2"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="Solids_Curve_Length_NonAssocInputCurves" type="int" title="Input Curves (non-associative curve length)" value="3" ver="4.0.0" scope="Session">
+                    <Description>This option specifies how the input curves are handled after a non-associative curve length is performed.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Keep" value="0"/>
+                        <EnumElem name="Hide" value="1"/>
+                        <EnumElem name="Delete" value="2"/>
+                        <EnumElem name="Replace" value="3"/>
+                    </Data>
+                </Pref>
+                <Pref name="Solids_Curve_Length_AssocInputCurves" type="int" title="Input Curves (associative curve length)" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies how the input curves are handled after an associative curve length is performed.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Keep" value="0"/>
+                        <EnumElem name="Hide" value="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Selection Intent Rules" csh="PMAN_Curves_Selection_Intent_Rules">
+            <Tab name="Edit Curve" csh="PMAN_Curves_Selection_Intent_Rules_Edit_Curve">
+                <Group name="Trim Curve">
+                    <Pref name="Curve_TrimCurveStringCurveSIRule" type="int" title="Curve to Trim - Curve Rule" value="1" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the selection intent rule for the curve to trim in the Trim Curve command.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Curve" value="1"/>
+                            <EnumElem name="Connected Curves" value="2"/>
+                            <EnumElem name="Tangent Curves" value="4"/>
+                            <EnumElem name="Feature Curves" value="64"/>
+                            <EnumElem name="Face Edges" value="8"/>
+                            <EnumElem name="Sheet Edges" value="32"/>
+                            <EnumElem name="Curves in Group" value="4096"/>
+                            <EnumElem name="Infer Curves" value="128"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Curve_TrimCurveBoundingObjCurveSIRule" type="int" title="Bounding Object - Curve Rule" value="1" ver="11.0.1" scope="Session">
+                        <Description>This option specifies the curve selection intent rule for the bounding object in the Trim Curve command.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Curve" value="1"/>
+                            <EnumElem name="Connected Curves" value="2"/>
+                            <EnumElem name="Tangent Curves" value="4"/>
+                            <EnumElem name="Feature Curves" value="64"/>
+                            <EnumElem name="Face Edges" value="8"/>
+                            <EnumElem name="Sheet Edges" value="32"/>
+                            <EnumElem name="Infer Curves" value="128"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Curve_TrimCurveBoundingObjFaceSIRule" type="int" title="Bounding Object - Face Rule" value="16" ver="11.0.1" scope="Session">
+                        <Description>This option specifies the face selection intent rule for the bounding object in the Trim Curve command.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Face" value="1"/>
+                            <EnumElem name="Tangent Faces" value="4"/>
+                            <EnumElem name="Adjacent Faces" value="64"/>
+                            <EnumElem name="Feature Faces" value="32"/>
+                            <EnumElem name="Body Faces" value="16"/>
+                            <EnumElem name="Region Faces" value="2"/>
+                            <EnumElem name="Tangent Region Faces" value="8"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Curve Length">
+                    <Pref name="Curve_CurveLengthCurveSIRule" type="int" title="Curve Rule" value="1" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the selection intent rule for the curves in the Curve Length command.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Curve" value="1"/>
+                            <EnumElem name="Connected Curves" value="2"/>
+                            <EnumElem name="Tangent Curves" value="4"/>
+                            <EnumElem name="Feature Curves" value="64"/>
+                            <EnumElem name="Face Edges" value="8"/>
+                            <EnumElem name="Sheet Edges" value="32"/>
+                            <EnumElem name="Region Boundary Curves" value="2048"/>
+                            <EnumElem name="Curves in Group" value="4096"/>
+                            <EnumElem name="Infer Curves" value="128"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Curve from Curves" csh="PMAN_Curves_Selection_Intent_Rules_Curve_from_Curves">
+                <Group name="Offset Curve">
+                    <Pref name="Curve_OffsetCurveSIRule" type="int" title="Curve Rule" value="128" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the selection intent rule for the curves in the Offset Curve command.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Curve" value="1"/>
+                            <EnumElem name="Connected Curves" value="2"/>
+                            <EnumElem name="Tangent Curves" value="4"/>
+                            <EnumElem name="Feature Curves" value="64"/>
+                            <EnumElem name="Face Edges" value="8"/>
+                            <EnumElem name="Sheet Edges" value="32"/>
+                            <EnumElem name="Region Boundary Curves" value="2048"/>
+                            <EnumElem name="Curves in Group" value="4096"/>
+                            <EnumElem name="Infer Curves" value="128"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Offset Curve in Face">
+                    <Pref name="Solids_OffsetInFaceCurveSIRule" type="int" title="Curve to Offset - Curve Rule" value="128" ver="11.0.0" scope="Session">
+                        <Description>This option specifies the selection intent rule for the curves in the Offset Curve in Face command.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Curve" value="1"/>
+                            <EnumElem name="Connected Curves" value="2"/>
+                            <EnumElem name="Tangent Curves" value="4"/>
+                            <EnumElem name="Feature Curves" value="64"/>
+                            <EnumElem name="Face Edges" value="8"/>
+                            <EnumElem name="Sheet Edges" value="32"/>
+                            <EnumElem name="Curves in Group" value="4096"/>
+                            <EnumElem name="Infer Curves" value="128"/>
+                            <EnumElem name="Feature Intersection Edges" value="32768"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Solids_OffsetInFaceFaceSIRule" type="int" title="Face for Offset - Face Rule" value="16" ver="11.0.0" scope="Session">
+                        <Description>This option specifies the selection intent rule for the faces in the Offset Curve in Face command.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Face" value="1"/>
+                            <EnumElem name="Tangent Faces" value="4"/>
+                            <EnumElem name="Adjacent Faces" value="64"/>
+                            <EnumElem name="Feature Faces" value="32"/>
+                            <EnumElem name="Body Faces" value="16"/>
+                            <EnumElem name="Region Faces" value="2"/>
+                            <EnumElem name="Tangent Region Faces" value="8"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Bridge Curve">
+                    <Pref name="Curve_BridgeCurveStartCurveSIRule" type="int" title="Start - Curve Rule" value="4" ver="8.5.0" scope="Session">
+                        <Description>This option specifies the selection intent rule for the start set of curves in the Bridge Curve command.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Curve" value="1"/>
+                            <EnumElem name="Connected Curves" value="2"/>
+                            <EnumElem name="Tangent Curves" value="4"/>
+                            <EnumElem name="Feature Curves" value="64"/>
+                            <EnumElem name="Face Edges" value="8"/>
+                            <EnumElem name="Sheet Edges" value="32"/>
+                            <EnumElem name="Body Edges" value="16"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Curve_BridgeCurveEndCurveSIRule" type="int" title="End - Curve Rule" value="4" ver="8.5.0" scope="Session">
+                        <Description>This option specifies the selection intent rule for the end set of curves in the Bridge Curve command.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Curve" value="1"/>
+                            <EnumElem name="Connected Curves" value="2"/>
+                            <EnumElem name="Tangent Curves" value="4"/>
+                            <EnumElem name="Feature Curves" value="64"/>
+                            <EnumElem name="Face Edges" value="8"/>
+                            <EnumElem name="Sheet Edges" value="32"/>
+                            <EnumElem name="Body Edges" value="16"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Circular Blend Curve">
+                    <Pref name="Curve_CircularBlendCurve1CurveSIRule" type="int" title="Curve 1 - Curve Rule" value="128" ver="11.0.0" scope="Session">
+                        <Description>This option specifies the selection intent rule for the first set of curves in the Circular Blend Curve command.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Curve" value="1"/>
+                            <EnumElem name="Tangent Curves" value="4"/>
+                            <EnumElem name="Feature Curves" value="64"/>
+                            <EnumElem name="Curves in Group" value="4096"/>
+                            <EnumElem name="Infer Curves" value="128"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Curve_CircularBlendCurve2CurveSIRule" type="int" title="Curve 2 - Curve Rule" value="128" ver="11.0.0" scope="Session">
+                        <Description>This option specifies the selection intent rule for the second set of curves in the Circular Blend Curve command.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Curve" value="1"/>
+                            <EnumElem name="Tangent Curves" value="4"/>
+                            <EnumElem name="Feature Curves" value="64"/>
+                            <EnumElem name="Curves in Group" value="4096"/>
+                            <EnumElem name="Infer Curves" value="128"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Project Curve">
+                    <Pref name="Curve_ProjectCurveSIRule" type="int" title="Curve to Project - Curve Rule" value="128" ver="11.0.0" scope="Session">
+                        <Description>This option specifies the selection intent rule for the curves to project in the Project Curve command.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Curve" value="1"/>
+                            <EnumElem name="Connected Curves" value="2"/>
+                            <EnumElem name="Tangent Curves" value="4"/>
+                            <EnumElem name="Feature Curves" value="64"/>
+                            <EnumElem name="Face Edges" value="8"/>
+                            <EnumElem name="Sheet Edges" value="32"/>
+                            <EnumElem name="Region Boundary Curves" value="2048"/>
+                            <EnumElem name="Curves in Group" value="4096"/>
+                            <EnumElem name="Infer Curves" value="128"/>
+                            <EnumElem name="Feature Intersection Edges" value="32768"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Curve_ProjectFaceSIRule" type="int" title="Face to Project to - Face Rule" value="16" ver="11.0.0" scope="Session">
+                        <Description>This option specifies the selection intent rule for the faces to project to in the Project Curve command.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Face" value="1"/>
+                            <EnumElem name="Tangent Faces" value="4"/>
+                            <EnumElem name="Adjacent Faces" value="64"/>
+                            <EnumElem name="Feature Faces" value="32"/>
+                            <EnumElem name="Body Faces" value="16"/>
+                            <EnumElem name="Region Faces" value="2"/>
+                            <EnumElem name="Tangent Region Faces" value="8"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Combined Projection">
+                    <Pref name="Curve_CombinedProjectionSIRule" type="int" title="Curve Rule" value="128" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the selection intent rule for the curves in the Combined Projection command. This value applies for the selection of both curve chains.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Curve" value="1"/>
+                            <EnumElem name="Connected Curves" value="2"/>
+                            <EnumElem name="Tangent Curves" value="4"/>
+                            <EnumElem name="Feature Curves" value="64"/>
+                            <EnumElem name="Face Edges" value="8"/>
+                            <EnumElem name="Sheet Edges" value="32"/>
+                            <EnumElem name="Curves in Group" value="4096"/>
+                            <EnumElem name="Infer Curves" value="128"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Mirror Curve">
+                    <Pref name="Curve_MirrorCurveSIRule" type="int" title="Curve Rule" value="128" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the selection intent rule for the curves in the Mirror Curve command.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Curve" value="1"/>
+                            <EnumElem name="Connected Curves" value="2"/>
+                            <EnumElem name="Tangent Curves" value="4"/>
+                            <EnumElem name="Feature Curves" value="64"/>
+                            <EnumElem name="Face Edges" value="8"/>
+                            <EnumElem name="Sheet Edges" value="32"/>
+                            <EnumElem name="Region Boundary Curves" value="2048"/>
+                            <EnumElem name="Curves in Group" value="4096"/>
+                            <EnumElem name="Infer Curves" value="128"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Scale Curve">
+                    <Pref name="Curve_ScaleCurveSIRule" type="int" title="Curve Rule" value="128" ver="11.0.0" scope="Session">
+                        <Description>This option specifies the selection intent rule for the curves in the Scale Curve command.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Curve" value="1"/>
+                            <EnumElem name="Connected Curves" value="2"/>
+                            <EnumElem name="Tangent Curves" value="4"/>
+                            <EnumElem name="Feature Curves" value="64"/>
+                            <EnumElem name="Face Edges" value="8"/>
+                            <EnumElem name="Sheet Edges" value="32"/>
+                            <EnumElem name="Region Boundary Curves" value="2048"/>
+                            <EnumElem name="Curves in Group" value="4096"/>
+                            <EnumElem name="Infer Curves" value="128"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Curve from Bodies" csh="PMAN_Curves_Selection_Intent_Rules_Curve_from_Bodies">
+                <Group name="Intersection Curve">
+                    <Pref name="Curve_IntersectSet1FaceSIRule" type="int" title="Set 1 - Face Rule" value="16" ver="11.0.0" scope="Session">
+                        <Description>This option specifies the selection intent rule for the first set of faces in the Intersection Curve command.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Face" value="1"/>
+                            <EnumElem name="Tangent Faces" value="4"/>
+                            <EnumElem name="Adjacent Faces" value="64"/>
+                            <EnumElem name="Feature Faces" value="32"/>
+                            <EnumElem name="Body Faces" value="16"/>
+                            <EnumElem name="Region Faces" value="2"/>
+                            <EnumElem name="Tangent Region Faces" value="8"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Curve_IntersectSet2FaceSIRule" type="int" title="Set 2 - Face Rule" value="16" ver="11.0.0" scope="Session">
+                        <Description>This option specifies the selection intent rule for the second set of faces in the Intersection Curve command.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Single Face" value="1"/>
+                            <EnumElem name="Tangent Faces" value="4"/>
+                            <EnumElem name="Adjacent Faces" value="64"/>
+                            <EnumElem name="Feature Faces" value="32"/>
+                            <EnumElem name="Body Faces" value="16"/>
+                            <EnumElem name="Region Faces" value="2"/>
+                            <EnumElem name="Tangent Region Faces" value="8"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="Curve Associativity" csh="PMAN_Curves_Curve_Associativity">
+            <Tab name="All" csh="PMAN_Curves_Curve_Associativity_All">
+                <Label label="The following options determine whether or not the curve/point created by the corresponding curve command should be created associative to the input data."/>
+                <Pref name="Curve_Assoc_LineArc" type="logical" title="Line, Arc/Circle, Lines and Arcs" value="true" ver="5.0.0" scope="Session">
+                    <Description>This option determines the value of the Associative check box for the Line and Arc/Circle commands as well as the Lines and Arcs command set collectively (since they are tied together).</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Curve_Assoc_LineArcDrafting" type="logical" title="Line, Arc/Circle, Lines and Arcs (Drafting Application)" value="false" ver="5.0.0" scope="Session">
+                    <Description>This option determines the value of the Associative check box for the Line and Arc/Circle commands as well as the Lines and Arcs command set collectively (since they are tied together), when a drawing sheet is displayed in the Drafting application.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Curve_Assoc_Text" type="logical" title="Text" value="true" ver="5.0.0" scope="Session">
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Curve_Assoc_Point" type="logical" title="Point" value="true" ver="5.0.0" scope="Session">
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Curve_Assoc_OffsetCurve" type="logical" title="Offset Curve" value="true" ver="5.0.0" scope="Session">
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Curve_Assoc_StudioSpline" type="logical" title="Studio Spline" value="true" ver="5.0.0" scope="Session">
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Curve_Assoc_BridgeCurve" type="logical" title="Bridge Curve" value="true" ver="5.0.0" scope="Session">
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Curve_Assoc_Project" type="logical" title="Project Curve" value="true" ver="5.0.0" scope="Session">
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Curve_Assoc_CombinedProjection" type="logical" title="Combined Projection" value="true" ver="5.0.0" scope="Session">
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Curve_Assoc_Intersect" type="logical" title="Intersection Curve" value="true" ver="5.0.0" scope="Session">
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Curve_Assoc_Section" type="logical" title="Section Curve" value="true" ver="5.0.0" scope="Session">
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Curve_Assoc_OffsetInFace" type="logical" title="Offset Curve in Face" value="true" ver="5.0.0" scope="Session">
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Curve_Assoc_CircularBlend" type="logical" title="Circular Blend Curve" value="true" ver="5.0.0" scope="Session">
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Solids_TrimCurve_Associative" type="logical" title="Trim Curve" value="true" ver="11.0.1" scope="Session">
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_TrimCurve_Associative" type="logical" title="Trim Curve (Sketcher)" value="false" ver="5.0.0" scope="Session">
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Solids_Curve_Length_Associative" type="int" title="Curve Length" value="1" ver="4.0.0" scope="Session">
+                    <Toggle off="2"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="Curve_Assoc_MirrorCurve" type="logical" title="Mirror Curve" value="true" ver="6.0.0" scope="Session">
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Curve_Assoc_ScaleCurve" type="logical" title="Scale Curve" value="true" ver="11.0.0" scope="Session">
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>

@@ -1,0 +1,72 @@
+START_PREFIX
+; =========================================================================
+; Copyright (C) Siemens AG 2012.  All Rights Reserved. Confidential
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+; File:           model.spf
+; Project:        NCK
+; =========================================================================
+
+END_PREFIX
+
+START_DELETE_CHAINS
+     DEF INT RETVAL
+     RETVAL = DELOBJ("PROT_AREA_ALL")
+     IF (RETVAL <> 0)
+      MSG("Error when trying to delete protection areas")
+      G4 F5
+     ENDIF
+
+    RETVAL = DELOBJ("KIN_CHAIN_ELEM")
+     IF (RETVAL <> 0)
+     MSG("Error when trying to delete kinematics")
+     G4 F5
+    ENDIF
+END_DELETE_CHAINS
+
+
+START_KEYWORD
+$NK_CHAIN_NAME $NK_CHAIN_NAME
+$NK_1ST_ELEM $NK_1ST_ELEM
+$NK_TYPE $NK_TYPE
+$NK_NAME $NK_NAME
+$NK_NEXT $NK_NEXT
+$NK_OFF_DIR $NK_OFF_DIR
+$NK_AXIS $NK_AXIS
+$NK_NEXTP $NK_NEXTP
+$NP_PROT_TYPE $NP_PROT_TYPE
+$NP_PROT_NAME $NP_PROT_NAME
+$NP_CHAIN_NAME $NP_CHAIN_NAME
+$NP_CHAIN_ELEM $NP_CHAIN_ELEM
+$NP_1ST_PROT $NP_1ST_PROT
+$NP_TYPE $NP_TYPE
+$NP_PARA $NP_PARA
+$NP_NAME $NP_NAME
+$NP_COLOR $NP_COLOR
+$NP_FILENAME $NP_FILENAME
+$NP_COLL_PAIR $NP_COLL_PAIR
+$NP_USAGE $NP_USAGE
+$NP_D_LEVEL $NP_D_LEVEL
+$NP_INIT_STAT $NP_INIT_STAT
+$NP_BIT_NO $NP_BIT_NO
+$NP_INDEX $NP_INDEX
+$NP_NEXT $NP_NEXT
+$NP_OFF $NP_OFF
+$NP_DIR $NP_DIR
+$NP_ANG $NP_ANG
+$NK_PARALLEL $NK_PARALLEL
+$NP_PROT_D_LEVEL $NP_PROT_D_LEVEL
+$NP_PROT_COLOR $NP_PROT_COLOR
+$NP_SAFETY_DIST $NP_SAFETY_DIST
+$NK_A_OFF $NK_A_OFF
+PROTS PROTS
+PROTA PROTA
+M17 M17
+END_KEYWORD
+
+START_PROGRAM
+; #########################################################################
+; ##### define Kinematic  #################################################
+; #########################################################################
+END_PROGRAM

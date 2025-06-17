@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Structure Welding" csh="PMAN_Structure_Welding" package_suppress="simviewer,view,mechatronicsplayer,nx2dedit">
+        <Category name="General" csh="PMAN_Structure_Welding_General">
+            <Tab name="Attributes" csh="PMAN_Structure_Welding_General_Attributes">
+                <Pref name="Weld_JointAttribTitleOrientationFace" type="string" title="Orientation Face Attribute Title" value="MK_TYPE" ver="8.0.0" scope="Session">
+                    <Description>This field specifies the attribute title marking the orientation face (also called the mold face) of components used to create welding joints.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="Weld_JointAttribStringOrientationFace" type="string" title="Orientation Face Attribute String" value="MOLDINGLINE" ver="8.0.0" scope="Session">
+                    <Description>This field specifies the attribute string marking the orientation face (also called the mold face) of components used to create welding joints.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="Weld_JointAttribStringFillet" type="string" title="Fillet Orientation Face Attribute String" value="TOPLINE;BASELINE" ver="10.0.2" scope="Session">
+                    <Description>This field specifies the attribute string marking additional orientation faces that will be used along with the Orientation Face Attribute String to mark places where fillet type joints (T-joint, corner, lap) will be created. Multiple values can be entered separated by semicolons.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="Weld_JointBodyThickness" type="string" title="Body Thickness Attribute Title" value="SAW_THICKNESS" ver="8.5.0" scope="Session">
+                    <Description>This field specifies the attribute title for the body thickness.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="Weld_JointFaceThickness" type="string" title="Face Thickness Attribute Title" value="PROFILE_THICKNESS;SAW_THICKNESS" ver="2007" scope="Session">
+                    <Description>This field specifies the attribute title for the welding thickness for a particular face. Multiple values can be entered separated by semicolons.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="Weld_JointAttribTitleEdge" type="string" title="Edge Attribute Title" value="MK_TYPE" ver="9.0.3" scope="Session">
+                    <Description>This field only applies to bodies that are attributed as ship application reuse bodies. It specifies the attribute title which should be applied to any edges where welding joint is to be created using the automatic method. For fillet type joints, the attribute will also indicate that the edge will be a master edge of the joint. If this value is not blank, the system will only place a joint if the geometric rules are satisfied and the edge attribute is present. If this value is blank, the system will place joints everywhere the geometric rules indicate.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="Weld_JointAttribTitleRoutingDiameter" type="string_list" title="Pipe Joint Routing Diameter Attribute Title" value="D1" ver="10.0.2" scope="Session">
+                    <Description>This option specifies the attribute title of the diameter value for the component part associated to the selected port. This only applies to pipe joints and will be used when a port is selected without associated stock. After entering more than one attribute title, the system will check each title in listed order and will stop when it finds one whose value is a positive number. Enter one title per line.</Description>                   
+                    <MultiLineText height="4"/>
+                </Pref>
+                <Pref name="Weld_JointAttribTitleRoutingEngagement" type="string" title="Pipe Joint Routing Engagement Attribute Title" value="SOCKET DEPTH" ver="10.0.3" scope="Session">
+                     <Description>This option specifies the attribute title of the engagement value for the selected port. This only applies to pipe joints and will be used when a port is selected without an engagement value specified.</Description>                   
+                     <Widestring/>
+                 </Pref>
+                <Pref name="Weld_JointManagedAttributeGroupTitle" type="string" title="Manufacturing Managed Attribute Group Title" value="ManufacturingWeldMAG" ver="12.0.2" scope="Session">
+                     <Description>This option specifies the title of the managed attribute group that controls the weld parameters applied to the manufacturing part.</Description>                   
+                     <Widestring/>
+                 </Pref>            
+             </Tab>
+            <Tab name="Units" csh="PMAN_Structure_Welding_General_Units">
+                <Pref name="Weld_StructureWeldingVolumeUnits" type="int" title="Volume" value="0" ver="11.0.0" scope="Session">
+                        <Description>This option specifies the units to be used for volume attributes created by the structure welding functions.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Use Part Units"  value="0"/>
+                            <EnumElem name="m^3"  value="1"/>
+                            <EnumElem name="mm^3"  value="2"/>
+                            <EnumElem name="in^3"  value="3"/>
+                            <EnumElem name="ft^3"  value="4"/>
+                            <EnumElem name="cm^3"  value="5"/>
+                        </Data>
+                    </Pref>
+                <Pref name="Weld_StructureWeldingLengthUnits" type="int" title="Length" value="0" ver="11.0.0" scope="Session">
+                        <Description>This option specifies the units to be used for length attributes created by the structure welding functions.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Use Part Units"  value="0"/>
+                            <EnumElem name="m"  value="1"/>
+                            <EnumElem name="mm"  value="2"/>
+                            <EnumElem name="in"  value="3"/>
+                            <EnumElem name="ft"  value="4"/>
+                            <EnumElem name="cm"  value="5"/>
+                            <EnumElem name="km"  value="6"/>
+                            <EnumElem name="mi"  value="7"/>
+                            <EnumElem name="micron"  value="8"/>
+                            <EnumElem name="nm"  value="9"/>
+                            <EnumElem name="angstrom"  value="10"/>
+                        </Data>
+                    </Pref>
+            </Tab>
+        </Category>
+  
+        <Category name="Creation" csh="PMAN_Structure_Welding_Creation">
+            <Tab name="Welding Joint" csh="PMAN_Structure_Welding_Creation_Welding_Joint">
+                <Pref name="Weld_JointCharacteristics" type="string_list" title="Characteristics" value="&quot;List: Contour : CONTOUR :None,Convex,Flush,Concave:None:::Required:Inherited&quot;\&quot;List: Weld Process : WELD_PROCESS :None,SMAW,FCAW,SAW,GMAW,GTAW,ESW,EGW:None:::Required:Inherited&quot;\&quot;List: Method : METHOD :Continuous,Skip:Continuous:::Required:Inherited&quot;\&quot;None: Field: FIELD WELD:::::Inherited&quot;\&quot;None: All Around: ALL AROUND:::::Inherited&quot;\&quot;List: Side : SIDE :P side,S side:P side::::Inherited&quot;\&quot;List: Weld Stage : WELD_STAGE :erection,assembly,not determined:erection::::Inherited&quot;\&quot;List: Groove Direction : GROOVE_DIRECTION :None,up,down,inner,outer,fore,aft:None::::Inherited&quot;\&quot;List: Weld Posture : WELD_POSTURE :None,up,down,inner,outer:None::::Inherited&quot;\&quot;List: Stretch Direction : STRETCH_DIRECTION :None,up,down,inner,outer,fore,aft,Sside,Pside,center:None:::Required:Inherited&quot;\&quot;Real:Stretch Value: STRETCH_VALUE:0.0:::Required:Inherited&quot;\&quot;List: Root Gap Direction : ROOT_GAP_DIR :None,up,down,inner,outer,fore,aft,Sside,Pside,center:None:::Required:Inherited&quot;\&quot;Real:Shrink Value: SHRINK_VALUE:0.0:::Required:Inherited&quot;\&quot;List: Shrink Direction : SHRINK_DIR :None,up,down,inner,outer,fore,aft,Sside,Pside:None:::Required:Inherited&quot;\&quot;List: Weld Method : WELD_METHOD :None,S,F,A,C,EG,K,CA,CAF,CO2,V,H,CE,SG,CH,B,CAH,CAV,M,CT,MH,CL,L,HL,FL,AL:None::::Inherited&quot;\&quot;List: Group Seam: GRP_SEAM: none,1aa, 1bb, 1cc, 1dd, 1ee, 1ff, 1gg:none::::Inherited&quot;\&quot;List :Groove Chart (narai): GROOVE_CHART:A,B,C,D,E:A::::Inherited&quot;\&quot;List :Leg Length Code: LEG_LENGTH_CODE:F0, F1, F2, F3:F0::::Inherited&quot;\&quot;None: Back Weld: BACK WELD:::::Inherited&quot;" ver="1953" scope="Session">
+                    <Description>This box allows characteristics for the welding joint to be specified. These can be used to assign specific attributes to the weld connection feature.</Description>
+                    <MultiLineText height="6"/>
+                </Pref>
+                <Pref name="Weld_JointContainerItemType" type="string" title="Welding Joint Container Item Type" value="Item" ver="10.0.0" scope="Part">
+                  <Description>This string specifies the item type's internal name in Teamcenter for the welding joint container.</Description>
+                  <String/>
+                </Pref>                    
+                <Separator/>
+                <Pref name="Weld_JointPromotedBodySource" type="logical" title="Use Source Part of Promoted Body" value="false" ver="1872" scope="Part">
+                  <Description>This option determines whether or not the source part of a promoted body will be used as a connect part for welding joints.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Separator/>
+                <Group name="Minimum Body Overlap Distance">                
+                    <Pref name="Weld_ButtOverlapDistance_MU" type="real" title="Butt Joint" value="0.0" unit="mm" ver="1953+" scope="Session">
+                        <Description>This option specifies the minimum distance used to determine if two bodies overlap in order to create a butt joint using Automatic creation method.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Weld_ButtOverlapDistance_EU" type="real" title="Butt Joint" value="0.0" unit="in" ver="1953+" scope="Session">
+                         <Description>This option specifies the minimum distance used to determine if two bodies overlap in order to create a butt joint using Automatic creation method.</Description>
+                         <Real/>
+                         <Data type="range">
+                             <LowerBound value="0.0" include="1"/>
+                         </Data>
+                     </Pref>
+                </Group>
+
+                <Group name="T-joint">                
+                    <Pref name="Weld_JointFilletColor" type="int" title="Color" value="12" ver="8.0.0" scope="Part">
+                        <Description>This option specifies the color of a T-joint type joint curve.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="Weld_JointFilletFont" type="int" title="Style" value="1" ver="1847" scope="Session">
+                        <Description>This option specifies the line style of a T-joint type joint curve.</Description>
+                      <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                    </Pref>
+                    <Pref name="Weld_JointFilletWidth" type="int" title="Width" value="1" ver="10.0.0" scope="Part">
+                        <Description>This option specifies the line width of a T-joint type joint curve.</Description>
+                        <ObjectLineWidth allowWideLineWidth="true"/>
+                    </Pref>
+                </Group>
+
+                <Group name="Butt">                
+                    <Pref name="Weld_JointButtColor" type="int" title="Color" value="12" ver="8.0.0" scope="Part">
+                        <Description>This option specifies the color of a butt type joint curve.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="Weld_JointButtFont" type="int" title="Style" value="1" ver="1847" scope="Session">
+                        <Description>This option specifies the line style of a butt type joint curve.</Description>
+                      <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                    </Pref>
+                    <Pref name="Weld_JointButtWidth" type="int" title="Width" value="0" ver="10.0.0" scope="Part">
+                        <Description>This option specifies the line width of a butt type joint curve.</Description>
+                        <ObjectLineWidth allowWideLineWidth="true"/>
+                    </Pref>
+                </Group>
+
+                <Group name="Lap">                
+                <Pref name="Weld_JointLapColor" type="int" title="Color" value="12" ver="9.0.0" scope="Part">
+                    <Description>This option specifies the color of a lap type joint curve.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="Weld_JointLapFont" type="int" title="Style" value="1" ver="1847" scope="Session">
+                        <Description>This option specifies the line style of a lap type joint curve.</Description>
+                      <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                    </Pref>
+                    <Pref name="Weld_JointLapWidth" type="int" title="Width" value="0" ver="10.0.0" scope="Part">
+                        <Description>This option specifies the line width of a lap type joint curve.</Description>
+                        <ObjectLineWidth allowWideLineWidth="true"/>
+                    </Pref>
+                </Group>
+
+                <Group name="Corner">                
+                    <Pref name="Weld_JointCornerColor" type="int" title="Color" value="12" ver="9.0.0" scope="Part">
+                        <Description>This option specifies the color of a corner type joint curve.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="Weld_JointCornerFont" type="int" title="Style" value="1" ver="1847" scope="Session">
+                        <Description>This option specifies the line style of a corner type joint curve.</Description>
+                      <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                    </Pref>
+                    <Pref name="Weld_JointCornerWidth" type="int" title="Width" value="0" ver="10.0.0" scope="Part">
+                        <Description>This option specifies the line width of a corner type joint curve.</Description>
+                        <ObjectLineWidth allowWideLineWidth="true"/>
+                    </Pref>
+                </Group>
+
+                <Group name="Socket">                
+                    <Pref name="Weld_JointSocketColor" type="int" title="Color" value="12" ver="9.0.0" scope="Part">
+                         <Description>This option specifies the color of a socket type joint curve.</Description>
+                         <Color/>
+                    </Pref>
+                    <Pref name="Weld_JointSocketFont" type="int" title="Style" value="1" ver="1847" scope="Session">
+                        <Description>This option specifies the line style of a socket type joint curve.</Description>
+                      <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                    </Pref>
+                    <Pref name="Weld_JointSocketWidth" type="int" title="Width" value="0" ver="10.0.0" scope="Part">
+                        <Description>This option specifies the line width of a socket type joint curve.</Description>
+                        <ObjectLineWidth allowWideLineWidth="true"/>
+                    </Pref>
+                </Group>
+
+                <Group name="Mechanical">                
+                     <Pref name="Weld_JointMechanicalColor" type="int" title="Color" value="12" ver="9.0.0" scope="Part">
+                         <Description>This option specifies the color of a mechanical type joint curve.</Description>
+                         <Color/>
+                    </Pref>
+                    <Pref name="Weld_JointMechanicalFont" type="int" title="Style" value="1" ver="1847" scope="Session">
+                        <Description>This option specifies the line style of a mechanical type joint curve.</Description>
+                      <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                    </Pref>
+                    <Pref name="Weld_JointMechanicalWidth" type="int" title="Width" value="0" ver="10.0.0" scope="Part">
+                        <Description>This option specifies the line width of a mechanical type joint curve.</Description>
+                        <ObjectLineWidth allowWideLineWidth="true"/>
+                    </Pref>
+                </Group>
+
+                <Group name="Sleeve">                
+                     <Pref name="Weld_JointSleeveColor" type="int" title="Color" value="12" ver="10.0.0" scope="Part">
+                         <Description>This option specifies the color of a sleeve type joint curve.</Description>
+                         <Color/>
+                    </Pref>
+                    <Pref name="Weld_JointSleeveFont" type="int" title="Style" value="1" ver="1847" scope="Session">
+                        <Description>This option specifies the line style of a sleeve type joint curve.</Description>
+                      <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                    </Pref>
+                    <Pref name="Weld_JointSleeveWidth" type="int" title="Width" value="0" ver="10.0.0" scope="Part">
+                        <Description>This option specifies the line width of a sleeve type joint curve.</Description>
+                        <ObjectLineWidth allowWideLineWidth="true"/>
+                    </Pref>
+                </Group>
+
+                <Group name="Boss">                
+                    <Pref name="Weld_JointBossColor" type="int" title="Color" value="12" ver="10.0.0" scope="Part">
+                         <Description>This option specifies the color of a boss type joint curve.</Description>
+                         <Color/>
+                    </Pref>
+                    <Pref name="Weld_JointBossFont" type="int" title="Style" value="1" ver="1847" scope="Session">
+                        <Description>This option specifies the line style of a boss type joint curve.</Description>
+                      <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                    </Pref>
+                    <Pref name="Weld_JointBossWidth" type="int" title="Width" value="0" ver="10.0.0" scope="Part">
+                        <Description>This option specifies the line width of a boss type joint curve.</Description>
+                        <ObjectLineWidth allowWideLineWidth="true"/>
+                    </Pref>
+                </Group>
+            </Tab>
+
+            <Tab name="Surface Weld" csh="PMAN_Structure_Welding_Creation_Surface_Weld">
+                <Pref name="Weld_SurfaceWeld_Characteristics" type="string_list" title="Characteristics" value="&quot;List: Weld Stage : WELD_STAGE :erection,assembly,not determined:erection&quot;\&quot;List: Weld Process : WELD_PROCESS :None,SMAW,FCAW,SAW,GMAW,GTAW,ESW,EGW:None:::Required&quot;" ver="9.0.0" scope="Session">
+                    <Description>This box allows characteristics for the surface weld to be specified. These can be used to assign specific attributes to the weld connection feature.</Description>
+                    <MultiLineText height="6"/>
+                </Pref>
+                <Pref name="Weld_SurfaceContainerItemType" type="string" title="Surface Weld Container Item Type" value="Item" ver="10.0.0" scope="Part">
+                  <Description>This string specifies the item type's internal name in Teamcenter for the surface weld container.</Description>
+                  <String/>
+                </Pref>
+                <Separator/>
+                <Pref name="Weld_SurfaceWeld_Thickness_MU" type="real" title="Thickness" value="12.5" unit="mm" ver="9.0.0" scope="Session">
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="Weld_SurfaceWeld_Thickness_EU" type="real" title="Thickness" value="0.5" unit="in" ver="9.0.0" scope="Session">
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="Weld_SurfaceWeld_Width_MU" type="real" title="Width" value="12.5" unit="mm" ver="9.0.0" scope="Session">
+                    <Description>The width used to derive the estimated volume for open profiles.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="Weld_SurfaceWeld_Width_EU" type="real" title="Width" value="0.5" unit="in" ver="9.0.0" scope="Session">
+                    <Description>The width used to derive the estimated volume for open profiles.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="Weld_SurfaceWeldColor" type="int" title="Color" value="36" ver="9.0.0" scope="Session">
+                    <Description>This option specifies the color of a surface weld type curve.</Description>
+                    <Color/>
+                </Pref>
+            </Tab>
+
+            <Tab name="Export" csh="PMAN_Structure_Welding_Creation_Export">
+            <Pref name="Weld_JointExportDir_WIN" type="string" title="XML Template Directory" value="$UGWELD_DIR" ver="8.5.1" scope="Session">
+                    <Description>This field specifies the directory to be used when creating or opening the XML template file.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+                <Pref name="Weld_JointExportDir_UNX" type="string" title="XML Template Directory" value="" ver="8.5.0" scope="Session">
+                    <Description>This field specifies the directory to be used when creating or opening the XML template file.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+                <Pref name="Weld_JointExportTemplateSeparator" type="string" title="Export Template Separator String" value="$" ver="10.0.3" scope="Part">
+                    <Description>This string separates equivalent or substitute attribute titles for export joint template files.</Description>
+                    <String/>
+                </Pref>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="PLMXMLEDSSchema_options.xsl"?>
+<MigrationOptions author="CMM" date="2007-07-23" schemaVersion="5.1" time="17:45:00" 
+     xmlns:plm="http://www.plmxml.org/Schemas/PLMXMLSchema"
+     xmlns="http://www.plmxml.org/Schemas/MigrationOptionsXML">
+  <plm:Description>
+  The master definition of the options file for the Content Migration Manager applications.
+
+  This options document is meant to be accompanied by a cmmOptionsHelp.xml file that
+  includes all the help and tool tip text for the options.
+
+  For each Group definition:
+             name = The name presented to the User via the UI
+           helpId = The ID of the help text in the accompanying cmmOptionsHelp.xml file   
+
+
+  For each Option definition:
+             name = The name presented to the User via the UI
+           unique = The unique name for the option in the options document
+             type = The datatype for the option
+   possibleValues = All possible values for the option (if appropriate)
+          default = The default value for the option
+      application = The list of applications that will handle the option
+           helpId = The ID of the help text in the accompanying cmmOptionsHelp.xml file   
+
+
+  For each option value or default (typically a path or directory) that includes a 
+  value like %%XXX%%, these are to be replaced by an installation script or mechanism. 
+  </plm:Description>
+  <OptionsHistory>
+    <Change date="2004-01-01" by="Ian Fisher"> Current version in use with CMM apps. </Change>
+    <Change date="2004-03-15" by="Ian Fisher"> Created stylesheet. Added new options for CMM-Native, geometry healing, assembly and drawing fidelity, assembly and drawing validation (debug). </Change>
+    <Change date="2004-03-16" by="Mark Whalen"> Updated assembly options and fixed help items. </Change>
+    <Change date="2004-03-17" by="Ian Fisher"> Modified name of PMI migration option and updated helps strings. </Change>
+    <Change date="2004-03-19" by="Ian Fisher"> Added 3D constraint tolerance field. </Change>
+    <Change date="2004-03-23" by="Ian Fisher"> Remove the 'AssyConfigurations' and 'AssySequences' content options. Change the AssemblyConstraintFidelityVerify to be just Assembly Fidelity (AssemblyFidelityVerify) </Change>
+    <Change date="2004-04-16" by="Ian Fisher"> Remove the 'PersistAction' option - it was too complicated and messy for reasonable workflows. 'Exchange fail action' is now changed to 'Item fail action' with new enumerations. </Change>
+    <Change date="2004-05-06" by="Ian Fisher"> Change the assembly success/completeness criteria options. </Change>
+    <Change date="2004-07-08" by="Ian Fisher"> Change the assembly fidelity check options (again). </Change>
+    <Change date="2004-07-27" by="Ian Fisher"> Add drawing fidelity tolerances for NX3.0.1. </Change>
+    <Change date="2004-07-30" by="Ian Fisher"> Consolidate CMM-Eng and CMM-Native options XML - Abraham, Ian, Raman. Also set defaults appropriately. </Change>
+    <Change date="2004-08-03" by="Ian Fisher"> Hide Assembly fidelity toggle. </Change>
+    <Change date="2004-08-23" by="Abraham George"> Update name attribute text based on feedback from Mike Gouin </Change>
+    <Change date="2004-09-15" by="Abraham George"> Hide AnnotationsMigrate, AssemblyIgnoreConstraintComplete. Add ACFReferenceLatest. Hide all debug menus</Change>
+    <Change date="2004-11-01" by="Ian Fisher"> Change cosmetic tolerance name </Change>
+    <Change date="2004-11-11" by="Abraham George"> Change text label for assembly migration , Default options for Drawing, Add fidelity stylesheet, Correct default for cmmhighlevelsummary.xsl  </Change>
+    <Change date="2004-12-11" by="Ian Fisher"> Change feature limit to 1000  </Change>
+    <Change date="2005-02-17" by="Ian Fisher"> Added new options : CreateDefaultViews, ShadedViews, RestartServiceCount, GenerateJT, preMS6AssyConstraints and AssyConstraintNames. Changed some visibility flags. Changed assembly fidelity tolerance values. </Change>
+    <Change date="2005-02-22" by="Ian Fisher"> Changed assembly constraints options to default ON and edited some help text. </Change>
+    <Change date="2005-02-28" by="Ian Fisher"> Fixed some help text, changed the default assembly fidelity tolerance value to 1.0e-6 and to be switched on by default. </Change>
+    <Change date="2005-03-15" by="Ian Fisher"> Fixed application attribute for assembly fidelity tolerance. </Change>
+    <Change date="2005-03-17" by="Ian Fisher"> Merge changes from CMM development and latest evaluations. </Change>
+    <Change date="2005-05-24" by="Salil S. Kodkani"> Add new options for DRF30350D for drawings </Change>
+    <Change date="2006-01-06" by="Geoff Hammerle"> Add new options for DRF30450D for drawings </Change>
+    <Change date="2006-02-27" by="Ram Deshpande"> Added brepForSubtree Option </Change>
+    <Change date="2005-12-09" by="Abraham George"> CMM 4.0 changes. </Change>     
+    <Change date="2006-03-06" by="Abraham George"> CMM 4.1 changes for remigration, phased migration and quarantine action. </Change>     
+    <Change date="2006-04-06" by="Abraham George"> CMM 4.1 changes add CombineDisjoinedGeometry,  remove QuarantineCheckValidIdeasGeometry, visible DrawingsMigrate</Change>      
+    <Change date="2006-04-28" by="Niranjan Vasan"> Add new option for NX402 drawings </Change>
+    <Change date="2006-05-17" by="Manish Agrawal"> Added Fidelity Option, use this with 402 and beyond </Change>
+    <Change date="2006-05-24" by="Abraham George"> Merge Changes with CMM Eng </Change>
+    <Change date="2006-06-19" by="Abraham George"> Add Mechanism migration  options </Change>
+    <Change date="2006-06-20" by="Brad Coats"> Sheet metal options from for NX5</Change>
+    <Change date="2006-06-21" by="Abraham George"> Add option for Combine Disjointed Geometry. Changes to header to comply with PLMXML 5.1 schema</Change>
+    <Change date="2006-06-27" by="Abraham George"> New options for Elysium translator </Change>    
+    <Change date="2006-07-11" by="Geoff Hammerle"> Add help ids for drawing options </Change>
+    <Change date="2006-08-30" by="Abraham George"> CMM 4.3 Options</Change>
+    <Change date="2006-09-07" by="Geoff Hammerle"> Add new options for drawing error handling/reporting </Change>
+    <Change date="2006-10-16" by="Abraham George"> Merge changes with CMM 4.3</Change>
+    <Change date="2007-04-13" by="Vishal Soni"> Added calcMassProperties Option </Change>
+    <Change date="2007-02-12" by="Abraham George"> CMM 5.0 Options</Change>
+    <Change date="2007-06-04" by="Geoff Hammerle">Fixed unique ids for drawing view evaluation criteria</Change>
+    <Change date="2007-07-23" by="Abraham George"> CMM 5.0.1 Options</Change>
+  </OptionsHistory>
+  <Group helpId="helpId1000" name="Content Migration">
+    <Group helpId="helpId1100" name="Geometry">
+      <Option default="true" helpId="helpId1111" name="Feature History" possibleValues="true;false" type="boolean" unique="FeatureHistory" value="true" application="Native;Eng;Ent"/>
+        <Option default="true" helpId="helpId1125" name="Brep for Older Revisions" possibleValues="true;false" type="boolean" unique="brepForOlderRevisions" value="true"/>        
+        <Option default="false" helpId="helpId1115" name="Brep for Subtree" possibleValues="true;false" type="boolean" unique="brepForSubtree" value="false"/>
+      <Option default="false" helpId="helpId11111" name="Recover Brep for Failed Nodes" possibleValues="true;false" type="boolean" unique="BrepForFailedNodes" value="false" application="Native;Eng;Ent"/>
+      <Option default="0" helpId="helpId1119" name="Brep for Failed Nodes Lower Limit" type="int" unique="BrepForFailedNodesLimit" value="0" isVisible="false"/>
+      <Option default="100" helpId="helpId1112" name="Unsupported Feature Limit" type="int" unique="FeatureUnsupportLimit" value="100"/>
+        <Option default="false" helpId="helpId1113" name="Geometry Healing" possibleValues="true;false" type="boolean" unique="GeometryHealing" value="false"/>
+        <Option default="false" helpId="helpId1116" name="Combine Disjoined Geometry" possibleValues="true;false" type="boolean" unique="CombineDisjoinedGeometry" value="false"/>    
+        <Option default="true" helpId="helpId1114" name="ACF Reference Latest Source" possibleValues="true;false" type="boolean" unique="ACFReferenceLatest" value="true"/>
+        <Option default="false" helpId="helpId1124" name="Calculate Mass Properties" possibleValues="true;false" type="boolean" unique="calcMassProperties" value="false"/>        
+      <Option default="OnFeatureFailure" helpId="helpId1121" name="Brep Feature" possibleValues="OnFeatureFailure;Always" type="enum" unique="BRepFeature" value="OnFeatureFailure" isVisible="false"/>
+      <Option default="2" helpId="helpId1122" name="Brep Layer" type="int" unique="BReplayer" value="2"/>
+      <Option default="151" helpId="helpId1132" name="Reference Geometry Layer" type="int" unique="RefGeomlayer" value="151"/>
+      <Option default="150" helpId="helpId1142" name="Wireframe Layer" type="int" unique="WFlayer" value="150"/>
+      <Option default="FullyFeatured" helpId="helpId2111" name="Feature History" possibleValues="FullyFeatured;FeaturesWithGeometry;UnparameterisedGeometry" type="enum" unique="FeatureHistoryComplete" value="FullyFeatured" isVisible="false"/>
+      <Option default="true" helpId="helpId2123" name="Fidelity Check" possibleValues="true;false" type="boolean" unique="FidelityVerify" value="true"/>
+    </Group>
+    <Group helpId="helpId1200" name="Assembly">
+      <Option default="true" helpId="helpId1210" name="Constraints" possibleValues="true;false" type="boolean" unique="AssyConstraints" value="true" isVisible="true"/>
+      <Option default="false" helpId="helpId1211" name="Include pre-MS6 Constraints" possibleValues="true;false" type="boolean" unique="preMS6AssyConstraints" value="false" isVisible="true"/>
+      <Option default="true" helpId="helpId1212" name="Migrate constraint names" possibleValues="true;false" type="boolean" unique="AssyConstraintNames" value="true" isVisible="true"/>
+      <Option default="true" helpId="helpId2221" name="Check Position Fidelity" possibleValues="true;false" type="boolean" unique="AssemblyFidelityVerify" value="true" isVisible="true"/>
+      <Option default="1.0e-6" helpId="helpId2222" name="Position Fidelity Tolerance" possibleValues="[1.0e-7;1.0e-1]" type="double" unique="AssemblyConstraintFidelityVerifyTol" value="1.0e-6" isVisible="true"/>
+      <Option default="false" helpId="helpId2211" name="Ignore Sequence Migration Failures" possibleValues="true;false" type="boolean" unique="AssemblyIgnoreSequenceComplete" value="false"/>
+      <Option default="false" helpId="helpId2212" name="Ignore Constraint Migration Failures" possibleValues="true;false" type="boolean" unique="AssemblyIgnoreConstraintComplete" value="false" isVisible="true"/>
+    </Group>
+    <Group helpId="helpId1500" name="Mechanism">
+      <Option default="false" helpId="helpId1501" name="Mechanism Data" possibleValues="true;false" type="boolean" unique="MechanismDesign" value="false" isVisible="true"/>
+      <Option default="false" helpId="helpId2411" name="Ignore Mechanism Errors" possibleValues="true;false" type="boolean" unique="AssemblyIgnoreMechDesComplete" value="false" isVisible="true"/>
+    </Group>
+    <Group helpId="helpId1300" name="Annotation">
+      <Option default="false" helpId="helpId1310" name="3D Annotation" possibleValues="true;false" type="boolean" unique="AnnotationsMigrate" value="false" isVisible="true"/>
+    </Group>
+    <Group helpId="helpId1400" name="Drawing">
+      <Group helpId="helpId1400" name="Options">
+      <Option default="Associative" helpId="helpId1410" name="Drawings" possibleValues="Picture;Associative" type="enum" unique="DrawingsMigrate" value="Associative" isVisible="true"/>
+      <Option type="enum" default="Associative" possibleValues="NonAssociative;Associative" name="Views With User Defined Clipping" isVisible="false" unique="DrawingsViewsWithUserDefinedClipping" value="Associative" helpId="helpId1411"/>
+      <Option type="boolean" default="true" possibleValues="true;false" name="Blank Partially Clipped Annotation" isVisible="false" unique="DrawingsPartiallyClippedAnnotation" value="true" helpId="helpId1412"/>
+      <Option type="boolean" default="true" possibleValues="true;false" name="Blank Extra Entities" isVisible="false" unique="DrawingsBlankExtraEntities" value="true" helpId="helpId1413"/>
+    </Group>
+      <Group helpId="helpId2310" name="Completeness">
+        <Option default="EntityLevel" helpId="helpId2311" name="Associativity" possibleValues="EntityLevel;ItemLevel;None" type="enum" unique="DrawingAssociativityComplete" value="EntityLevel" isVisible="false"/>
+      </Group>
+      <Group helpId="helpId2360" name="Verification">
+        <Option default="true" helpId="helpId2361" name="Drawing Entity Fidelity" possibleValues="true;false" type="boolean" unique="DrawingEntFidelityVerify" value="true"/>
+        <Option default="1.0e-5" helpId="helpId2362" name="Manufacturing Fidelity Tolerance" type="double" possibleValues="[1.0e-5;1.0e-2]" unique="DrawingEntFidelityManufactureTol" value="1.0e-5" isVisible="false"/>
+        <Option default="5.0e-4" helpId="helpId2363" name="Appearance Fidelity Tolerance" type="double" possibleValues="[1.0e-4;1.0e-1]" unique="DrawingEntFidelityCosmeticTol" value="5.0e-4" isVisible="false"/>
+        <Option default="1.0e-5" helpId="helpId2364" name="Geometry Fidelity Tolerance" type="double" possibleValues="[1.0e-5;1.0e-2]" unique="DrawingEntFidelityGeometryTol" value="1.0e-5" isVisible="false"/>
+        <Option default="false" helpId="helpId2365"  name="Report Error Codes For Drawing Migration Errors" type="boolean" possibleValues="true;false"  unique="DrawingReportErrorCodes" value="false" isVisible="false" />
+        <Option default="" helpId="helpId2366" name="List Of Drawing Failure Error Codes To Handle As Warning" type="string" unique="DrawingFailuresAsWarnings" value="" isVisible="false"/>
+        <Option default="" helpId="helpId2367" name="List Of Drawing Warning Codes To Handle As Failures" type="string" unique="DrawingWarningsAsFailures" value="" isVisible="false"/>
+      </Group>
+        <Group helpId="helpId2320" name="Drawing Evaluation Parameters"> 
+          <Group helpId="helpId2322" name="Drawing Evaluation Basic Parameters">
+            <Option default="Basic" helpId="helpId2321" name="Drawing Evaluation Method" possibleValues="None;Basic;Custom" type="enum" unique="DrawingEvaluationMethod" value="Basic" isVisible="true"/>
+            <Option default="Level4" helpId="helpId2323" name="Drawing Evaluation Basic Crtieria" possibleValues="None;Level1;Level2;Level3;Level4;Level5" type="enum" unique="DrawingEvaluationCriteria" value="Level4" isVisible="false"/>
+            <Option default="93.0" helpId="helpId2324" name="Drawing Evaluation Lower Boundary" type="real" unique="DrawingEvaluationLowerBounds" value="93.0" isVisible="false"/>
+            <Option default="93.93" helpId="helpId2325" name="Drawing Evaluation Upper Boundary" type="real" unique="DrawingEvaluationUpperBounds" value="93.93" isVisible="false"/>
+            <Option default="0.47"  helpId="helpId2326" name="Drawing Evaluation Allowed Native Failures Due To Unsupported Conditions" type="real" unique="DrawingEvaluationAllowedUnsupportedNativeFailures" value="0.47" isVisible="false"/>
+            <Option default="1.09" helpId="helpId2327" name="Drawing Evaluation Allowed Unsupported Warnings" type="real" unique="DrawingEvaluationAllowedUnsupportedWarnings" value="1.09" isVisible="false"/>
+          </Group>
+          <Group helpId="helpId2328" name="Drawing Evaluation Custom Parameters">
+            <Group helpId="helpId2329" name="Drawing Evaluation Custom View Parameters">
+              <Option default="Level4" helpId="helpId2330" name="Drawing Evaluation Custom View Crtieria" possibleValues="None;Level1;Level2;Level3;Level4;Level5" type="enum" unique="DrawingViewEvaluationCriteria" value="Level4" isVisible="false"/>
+              <Option default="96.0" helpId="helpId2331" name="Drawing View Evaluation Lower Boundary" type="real" unique="DrawingViewEvaluationLowerBounds" value="96.0" isVisible="false"/>
+              <Option default="97.94" helpId="helpId2332" name="Drawing View Evaluation Upper Boundary" type="real" unique="DrawingViewEvaluationUpperBounds" value="97.94" isVisible="false"/>
+              <Option default="1.72"  helpId="helpId2333" name="Drawing View Evaluation Allowed Native Failures Due To Unsupported Conditions" type="real" unique="DrawingViewEvaluationAllowedUnsupportedNativeFailures" value="1.72" isVisible="false"/>
+              <Option default="7.47" helpId="helpId2334" name="Drawing View Evaluation Allowed Unsupported Warnings" type="real" unique="DrawingViewEvaluationAllowedUnsupportedWarnings" value="7.47" isVisible="false"/>
+            </Group>
+            <Group helpId="helpId2335" name="Drawing Evaluation Custom Geometry Parameters">
+              <Option default="Level4" helpId="helpId2336" name="Drawing Evaluation Custom Geometry Crtieria" possibleValues="None;Level1;Level2;Level3;Level4;Level5" type="enum" unique="DrawingGeometryEvaluationCriteria" value="Level4" isVisible="false"/>
+              <Option default="99.0" helpId="helpId2337" name="Drawing Geometry Evaluation Lower Boundary" type="real" unique="DrawingGeometryEvaluationLowerBounds" value="99.0" isVisible="false"/>
+              <Option default="99.9" helpId="helpId2338" name="Drawing Geometry Evaluation Upper Boundary" type="real" unique="DrawingGeometryEvaluationUpperBounds" value="99.9" isVisible="false"/>
+              <Option default="0.0"  helpId="helpId2339" name="Drawing Geometry Evaluation Allowed Native Failures Due To Unsupported Conditions" type="real" unique="DrawingGeometryEvaluationAllowedUnsupportedNativeFailures" value="0.0" isVisible="false"/>
+              <Option default="0.0" helpId="helpId2340" name="Drawing Geometry Evaluation Allowed Unsupported Warnings" type="real" unique="DrawingGeometryEvaluationAllowedUnsupportedWarnings" value="0.0" isVisible="false"/>
+            </Group>
+            <Group helpId="helpId2341" name="Drawing Evaluation Custom Model Geometry Parameters">
+               <Option default="Level4" helpId="helpId2342" name="Drawing Evaluation Custom Model Geometry Crtieria" possibleValues="None;Level1;Level2;Level3;Level4;Level5" type="enum" unique="DrawingModelGeometryEvaluationCriteria" value="Level4" isVisible="false"/>
+              <Option default="92.8" helpId="helpId2343" name="Drawing Model Geometry Evaluation Lower Boundary" type="real" unique="DrawingModelGeometryEvaluationLowerBounds" value="92.8" isVisible="false"/>
+              <Option default="93.0" helpId="helpId2344" name="Drawing Model Geometry Evaluation Upper Boundary" type="real" unique="DrawingModelGeometryEvaluationUpperBounds" value="93.0" isVisible="false"/>
+              <Option default="0.1"  helpId="helpId2345" name="Drawing Model Geometry Evaluation Allowed Native Failures Due To Unsupported Conditions" type="real" unique="DrawingModelGeometryEvaluationAllowedUnsupportedNativeFailures" value="0.1" isVisible="false"/>
+              <Option default="0.0" helpId="helpId2346" name="Drawing Model Geometry Evaluation Allowed Unsupported Warnings" type="real" unique="DrawingModelGeometryEvaluationAllowedUnsupportedWarnings" value="0.0" isVisible="false"/>
+            </Group>
+            <Group helpId="helpId2347" name="Drawing Evaluation Custom Dimension Parameters">
+              <Option default="Level4" helpId="helpId2348" name="Drawing Evaluation Custom Dimension Crtieria" possibleValues="None;Level1;Level2;Level3;Level4;Level5" type="enum" unique="DrawingDimensionEvaluationCriteria" value="Level4" isVisible="false"/>
+              <Option default="79.0" helpId="helpId2349" name="Drawing Dimension Evaluation Lower Boundary" type="real" unique="DrawingDimensionEvaluationLowerBounds" value="79.0" isVisible="false"/>
+              <Option default="86.67" helpId="helpId2350" name="Drawing Dimension Evaluation Upper Boundary" type="real" unique="DrawingDimensionEvaluationUpperBounds" value="86.67" isVisible="false"/>
+              <Option default="6.72"  helpId="helpId2351" name="Drawing Dimension Evaluation Allowed Native Failures Due To Unsupported Conditions" type="real" unique="DrawingDimensionEvaluationAllowedUnsupportedNativeFailures" value="6.72" isVisible="false"/>
+              <Option default="22.7" helpId="helpId2352" name="Drawing Dimension Evaluation Allowed Unsupported Warnings" type="real" unique="DrawingDimensionEvaluationAllowedUnsupportedWarnings" value="22.7" isVisible="false"/>
+            </Group>
+            <Group helpId="helpId2353" name="Drawing Evaluation Custom Annotation Parameters">
+               <Option default="Level4" helpId="helpId2354" name="Drawing Evaluation Custom Annotation Crtieria" possibleValues="None;Level1;Level2;Level3;Level4;Level5" type="enum" unique="DrawingAnnotationEvaluationCriteria" value="Level4" isVisible="false"/>
+              <Option default="91.15" helpId="helpId2355" name="Drawing Annotation Evaluation Lower Boundary" type="real" unique="DrawingAnnotationEvaluationLowerBounds" value="91.15" isVisible="false"/>
+              <Option default="93.39" helpId="helpId2356" name="Drawing Annotation Evaluation Upper Boundary" type="real" unique="DrawingAnnotationEvaluationUpperBounds" value="93.39" isVisible="false"/>
+              <Option default="2.24"  helpId="helpId2357" name="Drawing Annotation Evaluation Allowed Native Failures Due To Unsupported Conditions" type="real" unique="DrawingAnnotationEvaluationAllowedUnsupportedNativeFailures" value="2.24" isVisible="false"/>
+              <Option default="4.3" helpId="helpId2358" name="Drawing Annotation Evaluation Allowed Unsupported Warnings" type="real" unique="DrawingAnnotationEvaluationAllowedUnsupportedWarnings" value="4.3" isVisible="false"/>
+            </Group>
+          </Group>
+        </Group>
+      </Group>
+    <Group helpId="helpId1600" name="Sheet Metal">
+      <Option type="boolean" default="false" possibleValues="true;false" name="Sheet Metal" isVisible="true" unique="SheetMetalMigrate" value="false" helpId="helpId1610"/>
+      <Option type="double" default="1.0e-4" possibleValues="[1.0e-5;1.0e-2]" name="Gap Tolerance (m)" unique="SMGapTolerance" value="0.0001" helpId="helpId1611"/>
+      <Option type="boolean" default="true" possibleValues="true;false" name="Use 'Convert to Sheet Metal' if error" unique="SMConvertIfError" value="true" helpId="helpId1612"/>
+      <Option default="Cyan Cyan Azure" name="Color" unique="SMGeometryColor" type="string" value="Cyan Cyan Azure" helpId="helpId1613"/>
+      <Option type="int" default="152" name="Layer" unique="SMGeometryLayer" value="152" helpId="helpId1614"/>
+    </Group>
+  </Group>
+  <Group helpId="helpId3000" name="Application">
+    <Group helpId="helpId3100" name="Migration controls">
+      <Option default="false" helpId="helpId3102" name="Remigrate" possibleValues="true;false" type="boolean" unique="DebugRemigrate" value="false" application="Native" isVisible="false"/>
+      <Option default="Managed" helpId="helpId3105" name="Target data" possibleValues="Filesystem;Managed" type="enum" unique="MigrationTargetSystem" value="Managed" application="Eng"/>
+      <Option default="true" helpId="helpId3120" name="Generate JT" possibleValues="true;false" type="boolean" unique="GenerateJT" value="true" application="Eng" isVisible="true"/>
+      <Option default="c:\Windows\Temp" helpId="helpId3106" name="Item Map Path" type="directory" unique="ItemMapFileDir" value="c:\Windows\Temp" application="Native"/>
+      <Option default="false" helpId="helpId3101" name="Migrate Related Datasets" possibleValues="true;false" type="boolean" unique="MigrateRelatedDatasets" value="false" application="Eng" isVisible="true"/>
+      <Option default="%%CMM_USER_SCRATCH_DIR%%" helpId="helpId3107" name="Scratch Location" type="directory" unique="MigrationTargetDir" value="%%CMM_USER_SCRATCH_DIR%%"/>
+      <Option default="%%CMM_USER_SCRATCH_DIR%%" helpId="helpId3108" name="Report Location" type="directory" unique="LocalReportDir" value="%%CMM_USER_SCRATCH_DIR%%"/>
+      <Option default="-1" helpId="helpId3109" name="Report Hierarchy Level" type="int" unique="ReportHierarchyLevel" value="-1" application="Eng;Ent" isVisible="false"/>
+      <Option default="%%CMM_BASE_DIR%%/Report/PLMXMLEDSSchema_report.xsl" helpId="helpId3110" name="Report Style Sheet" type="path" unique="ReportStyleSheetPath" value="%%CMM_BASE_DIR%%/Report/PLMXMLEDSSchema_report.xsl" isVisible="true"/>
+    </Group>
+    <Group helpId="helpId3700" name="Quarantine">
+      <Option default="Brep" helpId="helpId3701" name="Quarantine Action" possibleValues="Disabled;Info only;Brep;Failed" type="enum" unique="QuarantineAction" value="Brep" application="Eng;Ent" isVisible="true"/>
+      <Option default="true" helpId="helpId3703" name="Replay Errors" possibleValues="true;false" type="boolean" unique="QuarantineCheckReplayErrors" value="true" application="Eng;Ent" isVisible="true"/>
+      <Option default="false" helpId="helpId3704" name="Locked Nodes" possibleValues="true;false" type="boolean" unique="QuarantineCheckLockedNodes" value="false" application="Eng;Ent" isVisible="true"/>
+      <Option default="false" helpId="helpId3705" name="Suppressed Nodes" possibleValues="true;false" type="boolean" unique="QuarantineCheckSuppressedNodes" value="false" application="Eng;Ent" isVisible="true"/>
+      <Option default="true" helpId="helpId3706" name="Default Tolerance" possibleValues="true;false" type="boolean" unique="QuarantineCheckDefaultTolerance" value="true" application="Eng;Ent" isVisible="true"/>
+    </Group>
+    <Group helpId="helpId3500" name="Remigration">
+      <Option default="Disabled" helpId="helpId3501" name="Remigrate" possibleValues="Disabled;Selected;All" type="enum" unique="DebugRemigrate2" value="Disabled" application="Eng;Ent" isVisible="true"/>
+      <Option default="&lt;" helpId="helpId3502" name="CMM Version Conditional" possibleValues="&lt;;&lt;=;==;&gt;=;&gt;" type="enum" unique="CMMVersionCheck" value="&lt;" application="Eng;Ent" isVisible="true"/>
+      <Option default="" helpId="helpId3503" name="CMM Version" type="String" unique="CMMVersionString" value="" application="Eng;Ent" isVisible="true"/>
+      <Option default="All" helpId="helpId3508" name="Item Type" possibleValues="All;Assemblies&amp;Drawings" type="enum" unique="ItemTypeString" value="All" application="Eng;Ent" isVisible="true"/>
+      <Option default="&lt;" helpId="helpId3504" name="Migration Date Conditional" possibleValues="&lt;;&lt;=;==;&gt;=;&gt;" type="enum" unique="MigrationDateCheck" value="&lt;" application="Eng;Ent" isVisible="true"/>
+      <Option default="" helpId="helpId3505" name="Migration Date" type="String" unique="MigrationDateString" value="" application="Eng;Ent" isVisible="true"/>
+      <Option default="All" helpId="helpId3506" name="Report Status" possibleValues="All;Failure;+Warnings" type="enum" unique="ReportStatusString" value="All" application="Eng;Ent" isVisible="true"/>
+      <Option default="+++pendingApproval" helpId="helpId3507" name="Review Status" possibleValues="rejected;+not checked;++pendingRepair;+++pendingApproval" type="enum" unique="RemigrateReviewStatusString" value="+++pendingApproval" application="Eng;Ent" isVisible="true"/>
+    </Group>
+    <Group helpId="helpId3600" name="Phased Migration">
+      <Option default="true" helpId="helpId3601" name="Phased Migration" possibleValues="true;false" type="boolean" unique="PhasedMigration" value="true" application="Eng;Ent" isVisible="false"/>
+      <Option default="+PendingApproval" helpId="helpId3602" name="Check Review Status" possibleValues="Approved;+PendingApproval;++PendingRepair" type="enum" unique="CheckReviewStatus" value="+PendingApproval" application="Eng;Ent" isVisible="true"/>
+    </Group>
+    <Group helpId="helpId3200" name="Actions">
+      <Option default="NeverStop" helpId="helpId3201" name="Migrate action" possibleValues="StopAfter;NeverStop" type="enum" unique="MigrateAction" value="NeverStop"/>
+      <Option default="0" helpId="helpId3202" name="Error limit" type="int" unique="MigrateActionErrorLimit" value="0"/>
+      <Option default="0" helpId="helpId3203" name="Migration Timeout [mins]" type="int" unique="MigrationTimeout" value="0"/>
+      <Option default="SeedItem" helpId="helpId3204" name="Item fail action" possibleValues="SkipItem;SeedItem" type="enum" unique="ExchangeFailAction" value="SeedItem"/>
+      <Option default="500" helpId="helpId3206" name="Restart services after items" type="int" unique="RestartServiceCount" value="500" application="Eng;Ent" isVisible="true"/>
+      <Option default="true" helpId="helpId3207" name="Create CMM Attribute" possibleValues="true;false" type="boolean" unique="CreateCMMAttrib" value="true" application="Eng"/>       
+      <Option default="false" helpId="helpId3205" name="Confirm Selection" possibleValues="true;false" type="boolean" unique="MigrationContinue" value="false" application="Eng;Ent"/>       
+    </Group>
+    <Group helpId="helpId3300" name="NX Part">
+      <Option default="true" helpId="helpId3301" name="Close After Part Save" possibleValues="true;false" type="boolean" unique="CloseFileAfterSave" value="true" application="Native"/>
+      <Option default="Millimeters" helpId="helpId3302" name="Target Units" possibleValues="Inches;Millimeters" type="enum" unique="MigTargetUnits" value="Millimeters" application="Native;Ent"/>
+      <Option default="Metric" helpId="helpId3309" name="Model Template Item ID" type="string" unique="ModelTemplateId" value="Metric" application="Eng" isVisible="true"/>
+      <Option default="A" helpId="helpId3310" name="Model Template Item Revision" type="string" unique="ModelTemplateRevision" value="A" application="Eng" isVisible="true"/>
+      <Option default="Metric" helpId="helpId3309" name="Assembly Template Item ID" type="string" unique="AssemblyTemplateId" value="Metric" application="Eng" isVisible="true"/>
+      <Option default="A" helpId="helpId3310" name="Assembly Template Item Revision" type="string" unique="AssemblyTemplateRevision" value="A" application="Eng" isVisible="true"/>
+      <Option default="Metric" helpId="helpId3309" name="Drawing Template Item ID" type="string" unique="DrawingTemplateId" value="Metric" application="Eng" isVisible="true"/>
+      <Option default="A" helpId="helpId3310" name="Drawing Template Item Revision" type="string" unique="DrawingTemplateRevision" value="A" application="Eng" isVisible="true"/>
+      <Option default="specification" helpId="helpId3307" name="Non-Master Part Type" possibleValues="specification;manifestation" type="enum" unique="NonMasterPartType" value="specification" application="Eng" isVisible="true"/>
+      <Option default="false" helpId="helpId3303" name="Create Default views" possibleValues="true;false" type="boolean" unique="CreateDefaultViews" value="false" isVisible="true"/>
+      <Option default="true" helpId="helpId3304" name="Save Parts with Shaded View" possibleValues="true;false" type="boolean" unique="ShadedViews" value="true" isVisible="true"/>
+      <Option default="Precise; Any Status" helpId="helpId3305" name="Revision Rules" type="string" unique="RevisionRules" value="Precise; Any Status" application="Eng" isVisible="true"/>
+      <Option default="false" helpId="helpId3306" name="Allow Multiple Revisions" type="boolean" unique="AllowMultipleRevisions" value="false" application="Eng" isVisible="true"/>
+    </Group>
+    <Group helpId="helpId3400" name="User Data">
+      <Option default="" helpId="helpId3401" name="User_Data_1" type="string" unique="User_Data_1" value="" application="Eng;Ent" isVisible="true"/>
+      <Option default="" helpId="helpId3401" name="User_Data_2" type="string" unique="User_Data_2" value="" application="Eng;Ent" isVisible="true"/>
+      <Option default="" helpId="helpId3401" name="User_Data_3" type="string" unique="User_Data_3" value="" application="Eng;Ent" isVisible="true"/>
+      <Option default="" helpId="helpId3401" name="User_Data_4" type="string" unique="User_Data_4" value="" application="Eng;Ent" isVisible="true"/>                     
+    </Group>
+  <Group helpId="helpId4000" name="Services">
+      <Option default="localhost" helpId="helpId4001" name="IDEAS Service host" type="string" unique="IDEASServiceHost" value="localhost" application="Eng;Ent" isVisible="false"/>
+      <Option default="localhost" helpId="helpId4009" name="XCad Service host" type="string" unique="XCadServiceHost" value="localhost" application="Eng;Ent" isVisible="false"/>
+      <Option default="%%CMM_USER_SCRATCH_DIR%%" helpId="helpId4002" name="IDEAS Service Scratch Area" type="directory" unique="IDEASServiceScratchDir" value="%%CMM_USER_SCRATCH_DIR%%" application="Eng;Ent" isVisible="false"/>
+      <Option default="localhost" helpId="helpId4003" name="NX Service host" type="string" unique="NXServiceHost" value="localhost" application="Eng;Ent" isVisible="false"/>
+      <Option default="%%CMM_USER_SCRATCH_DIR%%" helpId="helpId4004" name="NX Service Scratch Area" type="directory" unique="NXServiceScratchDir" value="%%CMM_USER_SCRATCH_DIR%%" application="Eng;Ent" isVisible="false"/>
+      <Option default="" helpId="helpId4005" name="Registry Port" type="string" unique="RegistryPort" value="" application="Eng;Ent" isVisible="false"/>
+    <Option default="On Failure" helpId="helpId4006" name="Stop Services" possibleValues="End of Session;On Failure;After Each Item" type="enum" unique="DebugStopServices" value="On Failure" application="Eng;Ent" isVisible="true"/>
+    <Option default="%%TDM_CONFIG_DIR%%" helpId="helpId4007" name="TDM Parameter Dir" type="directory" unique="IdeasParamFileDir" value="%%TDM_CONFIG_DIR%%" application="Native"/>
+    <Option default="%%IDEAS_LIC_FILE%%" helpId="helpId4008" name="I-deas license file" type="path" unique="IdeasLicFile" value="%%IDEAS_LIC_FILE%%" application="Native"/>
+  </Group>
+  </Group>
+  <Group helpId="helpId5000" name="Debug">
+    <Group helpId="helpId5100" name="User Interface">
+      <Option default="false" helpId="helpId82" name="XPK File UI" possibleValues="true;false" type="boolean" unique="DisplayXPKFileOption" value="false" application="Native" isVisible="false"/>
+    </Group>
+    <Group helpId="helpId5200" name="Flow control">
+      <Option default="false" helpId="helpId5202" name="Skip I-deas" possibleValues="true;false" type="boolean" unique="DebugSkipIdeas" value="false" isVisible="false"/>
+      <Option default="false" helpId="helpId5201" name="Skip NX" possibleValues="true;false" type="boolean" unique="DebgSkipNX" value="false" isVisible="false"/>
+      <Option default="true" helpId="helpId5204" name="Cleanup Scratch Files" possibleValues="true;false" type="boolean" unique="DebugCleanupFiles" value="true" application="Native" isVisible="false"/>
+      <Option default="All but report files" helpId="helpId5205" name="Cleanup Scratch Files" possibleValues="All files;All but report files;All but xpk and report files;None" type="enum" unique="DebugCleanupFiles2" value="All but report files" application="Eng;Ent" isVisible="true"/>
+    </Group>
+    <Group helpId="helpId5300" name="Validation">
+      <Option default="false" helpId="helpId5301" name="Geometry validation" possibleValues="true;false" type="boolean" unique="DebugGeomValidation" value="false" isVisible="false"/>
+      <Option default="false" helpId="helpId5302" name="Assembly validation" possibleValues="true;false" type="boolean" unique="DebugAssyValidation" value="false" isVisible="false"/>
+      <Option default="false" helpId="helpId5303" name="Drawing validation" possibleValues="true;false" type="boolean" unique="DebugDrawValidation" value="false" isVisible="false"/>
+      <Option default="false" helpId="helpId5304" name="Annotation validation" possibleValues="true;false" type="boolean" unique="DebugAnnoValidation" value="false" isVisible="false"/>
+    </Group>
+  </Group>
+</MigrationOptions>

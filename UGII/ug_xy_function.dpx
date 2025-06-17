@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="XY Function" csh="PMAN_XY_Function" package_suppress="view,mechatronicsplayer,nx2dedit">
+        <Category name="General" csh="PMAN_XY_Function_General">
+            <Tab name ="Navigator" csh="PMAN_XY_Function_General_Navigator">
+                <Pref name="CAE_DefaultAutoLoadXYFuncNavHistory" type="logical" title="Auto Load Navigator History" value="false" ver="12.0.0" scope="Session">
+                    <Description>This option determines whether or not the navigator history file should be loaded automatically.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="CAE_DefaultNodeCountPerXYFuncNavPage" type="int" title="Number of Nodes per Navigator Page" value="100" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the number of nodes per navigator page.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="100" include="1"/>
+                    </Data>
+                </Pref>
+                <Group name="Filters">
+                    <Pref name="CAE_DefaultAutoSaveXYFunctionFilters" type="logical" title="Auto Save" value="true" ver="2007" scope="Session">
+                        <Description>This option determines whether or not to save filters automatically.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="CAE_DefaultAutoApplyXYFunctionFilters" type="logical" title="Auto Apply" value="true" ver="2007" scope="Session">
+                        <Description>This option determines whether or not to apply filters automatically.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Plot Parameters" csh="PMAN_XY_Function_General_Plot_Parameters">
+                <Pref name="CAE_DefaultXYPlotMinLogDecadeCount" type="int" title="Minimum Log Decade of Optimized Limits" value="1" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the minimum log decade of optimized axis limits.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="100" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="CAE_DefaultXYPlotMaxLogDecadeCount" type="int" title="Maximum Log Decade of Optimized Limits" value="10" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the maximum log decade of optimized axis limits.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="0"/>
+                        <UpperBound value="100" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="CAE_DefaultXYPlotMaxGridsCount" type="int" title="Maximum Grid Count of dB or Linear Optimized Limits" value="8" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the maximum grid count of optimized limits for dB or linear axis.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="20" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="CAE_DefaultXYPlotMaxAxisTicksCount" type="int" title="Maximum Number of dB and Linear Axis Ticks Count" value="20" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the maximum number of dB and linear axis ticks count.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="100" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="CAE_DefaultXYPlotMaxOctaveAxisGridsCount" type="int" title="Maximum Grid Count of Optimized Octave Limits" value="15" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the maximum grid count of optimized limits for octave axis.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="0"/>
+                        <UpperBound value="50" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="CAE_DefaultXYPlotMaxInputRecordCountPerColorBarPlot" type="int" title="Maximum Input Records Count per Color Bar Plot" value="100" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the maximum count of input records per color bar plot.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="0"/>
+                        <UpperBound value="200" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Data Export" csh="PMAN_XY_Function_General_Data_Export">
+                <Pref name="CAE_DefaultMaxColumnNumber" type="int" title="Maximum Number of Columns" value="100" ver="1847" scope="Session">
+                    <Description>This option specifies the maximum number of columns.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="3" include="1"/>
+                        <UpperBound value="500" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="CAE_DefaultMaxCharacterNumberOfEachColumn" type="int" title="Maximum Number of Characters per Column" value="133" ver="1847" scope="Session">
+                    <Description>This option specifies the maximum number of characters per column.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="5" include="1"/>
+                        <UpperBound value="500" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Graph Template" csh="PMAN_XY_Function_Graph_Template">
+            <Tab name="Axis Options" csh="PMAN_XY_Function_Graph_Template_Axis_Options">
+                <Pref name="CAE_DefaultXyplotAxisUnitSystem" type="int" title="Units System" value="0" ver="2007" scope="Session">
+                    <Description>This option specifies the system of units for axis options in the default graph template.</Description>
+                    <OptionMenu/>
+                    <Data type="enum"> 
+                        <EnumElem name="Function Units" value="0"/>
+                        <EnumElem name="Model Units" value="1"/>
+                        <EnumElem name="Metric - mm/N/deg/C" value="2"/>
+                        <EnumElem name="English - in/lbf/deg/F" value="3"/>
+                        <EnumElem name="Metric - mm/mN/rad/C" value="4"/>
+                        <EnumElem name="English - in/lbf/rad/F" value="5"/>
+                        <EnumElem name="Metric(SI) - m/N/rad/K" value="6"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>

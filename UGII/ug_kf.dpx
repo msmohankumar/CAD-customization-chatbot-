@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Knowledge Fusion" csh="PMAN_Knowledge_Fusion" package_suppress="simcenter3d,simviewer,view,mechatronicsplayer,nx2dedit">
+        <Category name="General" csh="PMAN_Knowledge_Fusion_General">
+            <Tab name="All" csh="PMAN_Knowledge_Fusion_General_All">
+                <Pref name="UG_kf_default_object_name" type="string" title="Prefix for Object Names" value="" ver="3.0.0" scope="Session">
+                    <Description>This option allows a prefix to be specified for the name of new Knowledge Fusion child rule objects. The prefix specified will have an ascending number appended. If this option is not set, then no default name is supplied when a child rule object is created.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UG_kf_default_attribute_name" type="string" title="Prefix for Attribute Names" value="" ver="3.0.0" scope="Session">
+                    <Description>This option allows a prefix to be specified for the name of new Knowledge Fusion attributes. The prefix specified will have an ascending number appended. If this option is not set, then no default name is supplied when an attribute is created.</Description>
+                    <String/>
+                </Pref>
+                <Separator/>
+                <Pref name="UG_kf_modifiable_search_directories" type="int" title="Modifiable Search Directories" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the DFA search directories are to be read from the registry. When the option is off, the search directories are to be read from the environment variable UGII_KF_USER_CLASS_DIR and no modifications of the search directories are permitted.
+
+Ensure that the environment variable references a proper and secure location.
+</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_kf_RestoreApplication" type="int" title="Restore Knowledge Fusion Application" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not an attempt to restore the Knowledge Fusion application will be made on NX startup. The attempt will be successful if all of the following conditions are true.
+<Formatted>1. This option is on.
+2. The Knowledge Fusion application was in use when last exiting NX.
+3. A Knowledge Fusion license is available.</Formatted></Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_kf_enable_nx_classes" type="int" title="Allow NX Classes" value="1" ver="4.0.0" scope="Part">
+                    <Description>This option determines whether or not the NX classes are exposed in Create Child Rule and adoption.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="UG_kf_TeamcenterDfaPartLoadOption" type="int" title="Load Teamcenter DFA with Part" value="0" ver="6.0.0" scope="Session">
+                     <Description>This option specifies the revision of a Teamcenter managed DFA to use when a part is loaded.</Description>
+                     <RadioBox/>
+                     <Data type="enum">
+                         <EnumElem name="As Saved" value="0"/>
+                         <EnumElem name="Use DFA Revision Rule" value="1"/>
+                     </Data>
+                </Pref>
+                <Pref name="UG_kf_TeamcenterDfaDefaultRevisionRule" type="string" title="DFA Revision Rule" value="" ver="6.0.0" scope="Session">
+                     <Description>This option specifies the revision of a Teamcenter managed DFA to use for a new instance.</Description>
+                     <String/>
+                </Pref>
+                <Separator/>
+                <Pref name="UG_kf_PackagePartLoadOption" type="int" title="Load Application Package / Native DFA Versions with Part" value="0" ver="6.0.0" scope="Session">
+                     <Description>This option specifies which version of an application package or versioned DFA file (one containing #!Version) to use when a part is loaded.</Description>
+                     <RadioBox/>
+                     <Data type="enum">
+                         <EnumElem name="As Saved" value="0"/>
+                         <EnumElem name="Use Latest Package or Version" value="1"/>
+                     </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="UG_kf_ApplicationPackageExtension" type="string" title="Application Package File Extension" value="" ver="6.0.0" scope="Session">
+                    <Description>This option allows a file extension to be specified for application packages. If this option is set, then NX will attempt to extract the contents of any application package file with this extension it finds at NX startup. If this option is not set, then no application packages will be extracted during NX startup. This is directly related to the Application Package File Extractor setting below.
+
+Ensure that files with this extension are scanned and virus free and reside in a secure location.
+</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UG_kf_ApplicationPackageExtractor" type="string" title="Application Package File Extractor" value="" ver="6.0.0" scope="Session">
+                    <Description>This option specifies a command line string that will be used to extract the contents of an Application Package.
+
+Ensure that extractor is scanned and virus free and resides in a secure location.
+
+<Formatted>Examples:
+     If the Application Package file extension is tar, then an appropriate command line string would be
+
+     tar -xf 
+
+     If the Application Package file extension is zip, then an appropriate command line string would be
+
+     wzunzip -o -d
+
+        or
+
+     7z x -aoa
+
+</Formatted></Description>
+                    <String/>
+                </Pref>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>

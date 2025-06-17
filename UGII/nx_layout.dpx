@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Layout" csh="PMAN_Layout" package_suppress="simcenter3d,simviewer,view,mechatronicsplayer,nx2dedit">
+      <Category name="General" csh="PMAN_Layout_General">
+        <Tab name="Workflow" csh="PMAN_Layout_General_Workflow">
+          <Pref name="Layout_LayoutName" type="string" title="Layout Name" value="Layout" ver="12.0.0" scope="Session">
+            <Description>This option specifies the layout name.</Description>
+            <String/>
+          </Pref>
+          <Pref name="Layout_ShowOriginSymbol" type="logical" title="Show Origin Symbol" value="true" ver="12.0.0" scope="Session">
+            <Description>This option determines whether or not a symbol is shown at the layout origin (0,0).</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="No" value="false"/>
+              <EnumElem name="Yes" value="true"/>
+            </Data>
+          </Pref>
+        </Tab>
+        <Tab name="2D Component" csh="PMAN_Layout_General_2D_Component">
+          <Pref name="Drafting_2DComponentNamePrefix" type="string" title="Name Prefix" value="2DComp" ver="10.0.0" scope="Session">
+            <Description>This option specifies a name prefix to be used for 2D components. This name will be used when no name is specified when the 2D component is created. A sequential numeric identifier will be appended to the end of the name.</Description>
+            <Widestring/>
+          </Pref>
+          <Group name="Preview">
+            <Pref name="Drafting_2DComponentPreviewImageSize" type="int" title="Image Size" value="128" ver="11.0.0" scope="Session">
+              <Description>This option specifies the size of the 2D component preview images when they are captured from the graphics window. A value of, for example, 128 Pixels means that the preview image size will be 128x128 pixels.</Description>
+              <OptionMenu/>
+              <Data type="enum">
+                <EnumElem name="16 Pixels" value="16"/>
+                <EnumElem name="24 Pixels" value="24"/>
+                <EnumElem name="32 Pixels" value="32"/>
+                <EnumElem name="48 Pixels" value="48"/>
+                <EnumElem name="64 Pixels" value="64"/>
+                <EnumElem name="96 Pixels" value="96"/>
+                <EnumElem name="128 Pixels" value="128"/>
+              </Data>
+            </Pref>
+            <Pref name="Drafting_2DComponentPreviewImageFileFormat" type="int" title="Image File Format" value="0" ver="10.0.0" scope="Session">
+              <Description>This option specifies the file format for the 2D component preview image.</Description>
+              <OptionMenu/>
+              <Data type="enum">
+                <EnumElem name="BMP" value="0"/>
+                <EnumElem name="JPG" value="1"/>
+                <EnumElem name="GIF" value="2"/>
+                <EnumElem name="PNG" value="3"/>
+                <EnumElem name="TIFF" value="4"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Workflow">
+            <Pref name="Drafting_2DComponentAutomaticUpdate" type="logical" title="Automatic Update" value="true" ver="10.0.0" scope="Part">
+              <Description>This option determines whether or not unlocked 2D component instances update automatically when changes are made to their definition.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+            </Pref>
+            <Pref name="Drafting_2DComponentKeepEditedPartsOpen" type="logical" title="Edited and Activated Parts Remain Open" value="false" ver="11.0.0" scope="Session">
+              <Description>This option determines whether or not parts of edited or activated 2D components will be kept open.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+            </Pref>
+            <Pref name="Drafting_2DComponentSceneDialogDelay" type="int" title="Pause Delay for On-Screen Dialog" value="1" ver="12.0.0" scope="Session">
+              <Description>This option specifies the delay, in increments of 250 milliseconds, between pausing the cursor and when the on-screen dialog is displayed during 2D component insertion.</Description>
+              <OptionMenu/>
+              <Data type="enum">
+                <EnumElem name="0" value="0"/>
+                <EnumElem name="1" value="1"/>
+                <EnumElem name="2" value="2"/>
+                <EnumElem name="3" value="3"/>
+                <EnumElem name="4" value="4"/>
+                <EnumElem name="5" value="5"/>
+              </Data>
+            </Pref>        
+          </Group>
+          <Group name="Appearance">
+            <Pref name="Drafting_2DComponentReferenceGeometry" type="logical" title="Show Reference Geometry" value="true" ver="10.0.0" scope="Part">
+              <Description>This option determines whether or not reference geometry is visible in 2D component instances.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+            </Pref>
+            <Pref name="Drafting_2DComponentAnnotations" type="logical" title="Show Annotations" value="true" ver="10.0.0" scope="Part">
+              <Description>This option determines whether or not annotations are visible in 2D component instances.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="Drafting_2DComponentDimensions" type="logical" title="Show Dimensions" value="true" ver="10.0.0" scope="Part">
+              <Description>This option determines whether or not dimensions are visible in 2D component instances.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+          </Group>
+        </Tab>
+        <Tab name="Create from 3D" csh="PMAN_Layout_General_Create_from_3D">
+          <Group name="Workflow">
+            <Pref name="Drafting_2DLayoutCreateSingle2DComponent" type="logical" title="Create Single 2D Component Definition" value="false" ver="11.0.0" scope="Session">
+              <Description>This option determines whether or not a single 2D component definition is generated for the selected assembly components.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="Drafting_2DLayoutComponentActiveSetScope" type="int" title="Active Set Scope for 2D Components" value="1" ver="1953" scope="Session">
+              <Description>This option specifies whether no active set or an active set for the entire 2D component will be created for each 2D component.</Description>
+              <OptionMenu/>
+              <Data type="enum">
+                <EnumElem name="No Active Set" value="0"/>
+                <EnumElem name="Entire 2D Component" value="1"/>
+              </Data>
+            </Pref>
+            <Pref name="Drafting_2DLayoutStartInsertCommand" type="logical" title="Automatically Start Insert 2D Component Command" value="true" ver="11.0.0" scope="Session">
+              <Description>This option determines whether or not to start the Insert 2D Component command after the creation of the Layout 2D components.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Curves">
+            <Pref name="Drafting_2DLayoutCreateFrom3DCurveColorOption" type="int" title="Color Option" value="0" ver="11.0.0" scope="Session">
+              <Description>This option specifies how the color of the 2D component curves is defined.</Description>
+              <OptionMenu/>
+              <Data type="enum">
+                <EnumElem name="Body Color" value="0"/>
+                <EnumElem name="Specify Color" value="1"/>
+              </Data>
+            </Pref>
+            <Pref name="Drafting_2DLayoutCreateFrom3DCurveColor" type="int" title="Color" value="100" ver="11.0.0" scope="Session">
+              <Description>This option specifies the color of 2D component curves when Curve Option is set to Specify Color.</Description>
+              <Color/>
+            </Pref>
+          </Group>
+        </Tab>
+        <Tab name="Assembly Creation" csh="PMAN_Layout_General_Assembly_Creation">
+          <Group name="Workflow">
+            <Pref name="Drafting_2DLayoutTransferTopLevelAnnotations" type="logical" title="Transfer Top Level Sketch Annotations" value="true" ver="10.0.0" scope="Session">
+              <Description>This option determines whether or not assorted parts are generated in the assembly part for the annotations associated to the Layout top level sketch objects.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+            </Pref>
+            <Pref name="Drafting_2DLayoutTransfer2DComponnetAnnotations" type="logical" title="Transfer 2D Component Annotations" value="true" ver="10.0.0" scope="Session">
+              <Description> This option determines whether or not assorted parts are generated in the 2D component part for the 2D component annotations.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="Drafting_2DLayoutStartModeling" type="logical" title="Automatically Start Modeling Application" value="true" ver="10.0.0" scope="Session">
+              <Description>This option determines whether or not to switch to the Modeling application after the creation of the assembly.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+          </Group>
+        </Tab>
+      </Category>
+    </Application>
+</PrefDefinition>

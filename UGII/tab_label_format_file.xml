@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+    Sample Automated annotation format file. 
+    Implemented UG NX3 
+-->
+<tab_label_format_schema:Tab_Label_Format_File 
+	xmlns:tab_label_format_schema="http://www.plmxml.org/Schemas/RoutingAutoAnnSchema"
+	xsi:schemaLocation="http://www.plmxml.org/Schemas/RoutingAutoAnnSchema tab_label_format_schema.xsd" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        version ="1.0"
+>
+
+<Format format_name = "Format1">
+<!--
+    "display_name" is the title which goes on the header row of the
+    tabular note. the content of the element Attribute, for example
+    run_id is the UG attribute we search for. The tabular note will
+    thus have the string corresponding to display_name as the header
+    and the value of the attribute as shown below. If the user did
+    not define run_id attribute, then the second row will have "" 
+    ( empty ) string.  
+   
+    _________________________________________________
+    | Run ID        |                               |
+    |_______________|_______________________________|
+    | 300           |                               |
+    |_______________|_______________________________|
+-->
+    <Attribute display_name = "Run ID ">
+	 run_id
+    </Attribute>
+    <Attribute display_name = "Flow Code">
+	 R$NPS 
+    </Attribute>
+    <Attribute display_name = "Reference ID">
+	 reference_id
+    </Attribute>
+    <Attribute display_name = "Location">
+	 location
+    </Attribute>
+</Format>
+
+<Format format_name = "Format2">
+    <Attribute display_name = "Name">
+	 name 
+    </Attribute>
+    <Attribute display_name = "Owner">
+	 owner 
+    </Attribute>
+    <Attribute display_name = "Fabrication Number">
+	 fab_number
+    </Attribute>
+    <Attribute display_name = "Description">
+	 description
+    </Attribute>
+</Format>
+
+</tab_label_format_schema:Tab_Label_Format_File>

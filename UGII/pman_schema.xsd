@@ -1,0 +1,564 @@
+<?xml version="1.0"?>
+<!--
+                Copyright (c) 2004 Unigraphics Solutions Inc
+                       Unpublished - All rights reserved
+
+ This is the XML Schema for NX preferences definitions files
+ 
+=============================================================================================
+Date         Name
+09-Feb-2004  Pavel Avramenko   Initial version
+10-Feb-2004  Pavel Avramenko   Add Docum element and csh attr
+13-Feb-2004  Altaf Arsiwala    Docum elem has minOccs 0
+05-Mar-2004  Raj Sodhi         Fix Label element to reference an attribute called label
+14-Mar-2004  Pavel Avramenko   Add ColorOption and ColorToggle widgets and color data type
+15-Mar-2004  Raj Sodhi         Allow Docum to be a subelement of a Pref as well
+16-Mar-2004  Raj Sodhi         Add a type attribute to the BrowseFileSel ui data widget
+14-Apr-2004  Raj Sodhi         Add MultiLineText box widget
+06-May-2004  Raj Sodhi         Add Image widget
+19-May-2004 Pavel Avramenko Add Code and Formatted elements
+29-Jun-2004  Pavel Avramenko Add Formatted element to the description
+NX4
+23-Sep-2004  Pavel Avramenko   Add logical to the prefType. Reviewed by Raj Sodhi
+01-Oct-2004  Pavel Avramenko   Add ver attribute to the Pref. Reviewed by Raj Sodhi
+01-Dec-2004  Pavel Avramenko   Add bitmap attributes to Toggle and EnumElem elements
+07-Dec-2004  Pavel Avramenko   Add Group Element
+09-Dec-2004  Pavel Avramenko   Add increment, precision, and limits attributes to the IntegerScale
+                               and RealScale elements. Reviewer Raj Sodhi.
+16-Dec-2004  Pavel Avramenko   Add string_list to PrefType. Reviewer Raj Sodhi.                               
+12-Jan-2005  Pavel Avramenko   Add scope attribute to Pref element. Reviewer Raj Sodhi.
+17-Mar-2005  Pavel Avramenko   Allow Passive UI widgets at Group and Tab levels.
+22-Apr-2005  Pavel Avramenko   Obsolete UIData element. Rename to pman_schema.xsd.
+27-Sep-2005  Pavel Avramenko   Make csh tags required and make sure that they don't have invalid characters.
+NX5
+27-Apr-2006  Pavel Avramenko   Add PrefValue element.
+01-Jun-2006  Pavel Avramenko   Add drftStd attribute to Pref element and DraftingStandard element
+21-Jan-2008  Onkar Pandey      Add utf8string and utf8string_list as base type for prefType
+20-May-2009  Onkar Pandey      DES10945 Add support for reorderable selectable list
+13-Jul-2011  Ryan Peng         ARCH8117: support wide line. Create New Element
+13-Oct-2011  Margaret Bourguet ARCH8155: Add ColorRgb
+26-Jul-2013  Pradnya Deshmukh  Increase range of VerType to accept two digit version no.
+30-Dec-2013  Onkar Pandey      DRF41010: Add support for SubCategory node.
+10-Nov-2015  Pradnya Deshmukh  Fix dpx_validate error
+03-Nov-2017  Pradnya Deshmukh  Modified format of VerType to accept new format of 1847 and no product name appended to it
+13-Nov-2017  Pradnya Deshmukh  Modified format of VerType to accept NX13.0.0 verType value
+28-Feb-2018  Eric Zhou         ARCH1847104: Create new elements
+18-Jul-2018  Bente Dignam      Modify format of VerType to no longer accept "NX"
+03-Oct-2018  Bente Dignam      Modify format of verType to accept a "+" at the end to support monthly releases
+04-Jan-2019  Palak Shah        ARCH1872210: Added support for 'package suppress' and 'suppress' attributes
+31-May-2021  Shu Ling          KIA2007SD03: add StructureDesignLibrary
+$HISTORY$
+=============================================================================================
+-->
+<xs:schema targetNamespace="http://www-cyp.ugsolutions.com/assemblies/pman" xmlns:pman="http://www-cyp.ugsolutions.com/assemblies/pman" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:simpleType name="CodeType">
+        <xs:annotation>
+            <xs:documentation>Contains non-translatable text</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    <xs:complexType name="DescriptionType" mixed="true">
+        <xs:annotation>
+            <xs:documentation>Complex type for Description elements</xs:documentation>
+        </xs:annotation>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Code" type="pman:CodeType"/>
+            <xs:element name="Formatted" type="pman:FormattedType"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="FormattedType" mixed="true">
+        <xs:annotation>
+            <xs:documentation>Indicates that text inside this element is already formatted so xsl can preseve format</xs:documentation>
+        </xs:annotation>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Code" type="pman:CodeType"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="DocumType" mixed="true">
+        <xs:annotation>
+            <xs:documentation>ComplexType for storing help text</xs:documentation>
+        </xs:annotation>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Formatted" type="pman:FormattedType"/>
+            <xs:element name="Code" type="pman:CodeType"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:simpleType name="prefType" final="restriction">
+        <xs:annotation>
+            <xs:documentation>Enumeration for Preference type</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="string"/>
+            <xs:enumeration value="real"/>
+            <xs:enumeration value="int"/>
+            <xs:enumeration value="logical"/>
+            <xs:enumeration value="string_list"/>
+            <xs:enumeration value="utf8string"/>
+            <xs:enumeration value="utf8string_list"/>
+            <xs:enumeration value="list_sel_reorder_value"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="scopeType" final="restriction">
+        <xs:annotation>
+            <xs:documentation>Enumeration for scope</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Part"/>
+            <xs:enumeration value="Session"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="verType" final="restriction">
+        <xs:annotation>
+            <xs:documentation>Specifies valid format for ver attribute value</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[3-9]\.[0-9]\.[0-9]|1[0-2]\.[0-9]\.[0-9]|[1-9][0-9][0-9][0-9]\+?"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="cshType" final="restriction">
+        <xs:annotation>
+            <xs:documentation>Specifies valid format for csh attribute value</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:ID">
+            <xs:pattern value="PMAN_[A-Za-z_0-9]*"/>            
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="orientationType">
+        <xs:annotation>
+            <xs:documentation>Enumeration for setting orientation (used in Radio Box)</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="vertical"/>
+            <xs:enumeration value="horizontal"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:group name="ActiveUIWidget">
+        <xs:annotation>
+            <xs:documentation>Contains one of the elements representing UI widget which could change preference value</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element ref="pman:IntegerScale"/>
+            <xs:element ref="pman:BrowseFileSel"/>
+            <xs:element ref="pman:BrowseDirSel"/>
+            <xs:element ref="pman:RealScale"/>
+            <xs:element ref="pman:RadioBox"/>
+            <xs:element ref="pman:Toggle"/>
+            <xs:element ref="pman:OptionMenu"/>
+            <xs:element ref="pman:Real"/>
+            <xs:element ref="pman:Integer"/>
+            <xs:element ref="pman:Color"/>
+            <xs:element ref="pman:ColorRgb"/>
+            <xs:element ref="pman:Widestring"/>
+            <xs:element ref="pman:String"/>
+            <xs:element ref="pman:ColorOption"/>
+            <xs:element ref="pman:ColorToggle"/>
+            <xs:element ref="pman:MultiLineText"/>
+            <xs:element ref="pman:DraftingStandard"/>
+            <xs:element ref="pman:ListSelReorder"/>
+            <xs:element ref="pman:ObjectLineWidth"/>
+            <xs:element ref="pman:ViewLineWidth"/>
+            <xs:element ref="pman:AnnotationLineWidth"/>
+            <xs:element ref="pman:AnnotationTextWidth"/>
+            <xs:element ref="pman:EdgeLineWidth"/>
+            <xs:element ref="pman:GeneralLineFont"/>
+            <xs:element ref="pman:ModelingLineFont"/>
+            <xs:element ref="pman:StructureDesignLibrary"/>
+        </xs:choice>
+    </xs:group>
+    <xs:element name="PrefDefinition">
+        <xs:annotation>
+            <xs:documentation>Top level element</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Application" type="pman:ApplicationType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="PrefValue" type="pman:PrefValueType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="version" type="xs:string"/>
+            <xs:attribute name="author" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="dataType" final="restriction">
+        <xs:annotation>
+            <xs:documentation>Enumeration for Data type</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="color"/>
+            <xs:enumeration value="range"/>
+            <xs:enumeration value="enum"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="BoundType">
+        <xs:annotation>
+            <xs:documentation>GomplexType for elements defining range bounds (LowerBound UpperBound)</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="value" type="xs:string"/>
+        <xs:attribute name="include" type="xs:boolean"/>
+        <xs:attribute name="name" type="xs:string" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="GroupType">
+        <xs:annotation>
+            <xs:documentation>ComplexType for Group element which represents a level in UI hierarchy below Tabs. Group element contains sequence of preferences</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Docum" type="pman:DocumType" minOccurs="0"/>
+            <xs:choice minOccurs ="1" maxOccurs ="unbounded">
+            <xs:element name="Pref" type="pman:PrefType"  minOccurs="1" maxOccurs="1"/>            
+            <xs:group ref="pman:PassiveUIWidget" minOccurs="0" maxOccurs="1"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="csh" type="xs:string" use="optional"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="package_suppress" type="xs:string" use="optional"/>
+        <xs:attribute name="suppress" type="xs:string" use="optional"/>
+    </xs:complexType>   
+    <xs:complexType name="TabType">
+        <xs:annotation>
+            <xs:documentation>ComplexType for Tab element which represents a level in UI hierarchy corresponding to Tab in the Tab control. Tab element contains sequence of preferences and Groups</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Docum" type="pman:DocumType" minOccurs="0" maxOccurs="1"/>
+            <xs:choice minOccurs ="1" maxOccurs ="unbounded">
+                <xs:element name="Pref" type="pman:PrefType"  minOccurs="1" maxOccurs="1"/>
+                <xs:element name="Group" type="pman:GroupType"   minOccurs="0" maxOccurs="1"/>
+                <xs:group ref="pman:PassiveUIWidget" minOccurs="0" maxOccurs="1"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="csh" type="pman:cshType" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="package_suppress" type="xs:string" use="optional"/>
+        <xs:attribute name="suppress" type="xs:string" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="SubCategoryType">
+        <xs:annotation>
+            <xs:documentation>ComplexType for SubCategory element which contains a sequence of Tab elements</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Docum" type="pman:DocumType" minOccurs="0"/>
+            <xs:element name="Tab" type="pman:TabType" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="csh" type="pman:cshType" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="package_suppress" type="xs:string" use="optional"/>
+        <xs:attribute name="suppress" type="xs:string" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="CategoryType">
+        <xs:annotation>
+            <xs:documentation>ComplexType for Category element which contains a sequence of Tab elements</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Docum" type="pman:DocumType" minOccurs="0"/>
+            <xs:element name="SubCategory" type="pman:SubCategoryType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Tab" type="pman:TabType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="csh" type="pman:cshType" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="package_suppress" type="xs:string" use="optional"/>
+        <xs:attribute name="suppress" type="xs:string" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="ApplicationType">
+        <xs:annotation>
+            <xs:documentation>ComplexType fro Application element which contains a sequence of Category elements</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Docum" type="pman:DocumType" minOccurs="0"/>
+            <xs:element name="Category" type="pman:CategoryType" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="csh" type="pman:cshType" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="package_suppress" type="xs:string" use="optional"/>
+        <xs:attribute name="suppress" type="xs:string" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="DataType">
+        <xs:annotation>
+            <xs:documentation>ComplexType for the Data element which contains data for validation and UI representaion</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="EnumElem" type="pman:EnumElemType" maxOccurs="unbounded"/>
+            <xs:sequence>
+                <xs:element ref="pman:LowerBound" minOccurs="0"/>
+                <xs:element ref="pman:UpperBound" minOccurs="0"/>
+            </xs:sequence>
+        </xs:choice>
+        <xs:attribute name="type" type="pman:dataType" use="required"/>
+    </xs:complexType>
+    <xs:group name="PassiveUIWidget">
+        <xs:annotation>
+            <xs:documentation>Contains one of the elements representing UI widget which cannot change preference value</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="Label" type="pman:LabelType"/>
+            <xs:element name="Image" type="pman:ImageType"/>
+            <xs:element ref="pman:Separator"/>
+        </xs:choice>
+    </xs:group>
+    <xs:complexType name="LabelType" mixed="false">
+        <xs:annotation>
+            <xs:documentation>ComplexType for Label element which represents label in UI</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="label" type="xs:string" use="required"/>
+        <xs:attribute name="package_suppress" type="xs:string" use="optional"/>
+        <xs:attribute name="suppress" type="xs:string" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="ImageType" mixed="false">
+        <xs:annotation>
+            <xs:documentation>ComplexType for the Image element which represents a bitmap in the UI</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="bitmap" type="xs:string" use="required"/>
+        <xs:attribute name="package_suppress" type="xs:string" use="optional"/>
+        <xs:attribute name="suppress" type="xs:string" use="optional"/>
+    </xs:complexType>
+    <xs:element name="Separator">
+        <xs:annotation>
+            <xs:documentation>Element representing separator in UI</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="package_suppress" type="xs:string" use="optional"/>
+        <xs:attribute name="suppress" type="xs:string" use="optional"/>
+    </xs:element>
+    <xs:complexType name="PrefType">
+        <xs:annotation>
+            <xs:documentation>ComplexType for Pref element which contains data for individual preference</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Description" type="pman:DescriptionType" minOccurs="0"/>
+            <xs:group ref="pman:ActiveUIWidget" minOccurs ="1"/>
+            <xs:element name="Data" type="pman:DataType" minOccurs="0"/>
+            <xs:element name="Docum" type="pman:DocumType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="unit" type="xs:string" use="optional"/>
+        <xs:attribute name="name" type="xs:ID" use="required"/>
+        <xs:attribute name="type" type="pman:prefType" use="required"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+        <xs:attribute name="title" type="xs:string" use="required"/>
+        <xs:attribute name="ver" type="pman:verType" use="required"/>
+        <xs:attribute name="scope" type="pman:scopeType" use="required"/>
+        <xs:attribute name="drftStd" type="xs:string" use="optional"/>
+        <xs:attribute name="package_suppress" type="xs:string" use="optional"/>
+        <xs:attribute name="suppress" type="xs:string" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="PrefValueType">
+        <xs:annotation>
+            <xs:documentation>ComplexType for Pref element value which contains data for individual preference value</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Description" type="pman:DescriptionType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:ID" use="required"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+        <xs:attribute name="ver" type="pman:verType" use="required"/>
+    </xs:complexType>
+    <xs:element name="IntegerScale">
+        <xs:annotation>
+            <xs:documentation>Element representing IntegerScale UI widget</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="increment" use="optional"/>
+            <xs:attribute name="limits" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="BrowseFileSel">
+        <xs:annotation>
+            <xs:documentation>Element representing  UI widget for entering file name</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="type" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="BrowseDirSel">
+        <xs:annotation>
+            <xs:documentation>Element representing  UI widget for entering directory name</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="RealScale">
+        <xs:annotation>
+            <xs:documentation>Element representing RealScale UI widget</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="increment" use="optional"/>
+            <xs:attribute name="limits" use="optional"/>
+            <xs:attribute name="precision" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RadioBox">
+        <xs:annotation>
+            <xs:documentation>Element representing RadioBox UI widget</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="orientation" type="pman:orientationType"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Toggle">
+        <xs:annotation>
+            <xs:documentation>Element representing Toggle UI widget</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="off" type="xs:string" use="required"/>
+            <xs:attribute name="bitmap" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MultiLineText">
+        <xs:annotation>
+            <xs:documentation>Element representing a Multi-line text entry UI widget</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="height" type="xs:integer"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OptionMenu">
+        <xs:annotation>
+            <xs:documentation>Element representing OptionMenu UI widget</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Real">
+        <xs:annotation>
+            <xs:documentation>Element representing Real UI widget</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Integer">
+        <xs:annotation>
+            <xs:documentation>Element representing Integer UI widget</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="ColorOption">
+        <xs:annotation>
+            <xs:documentation>Element representing combined Color = Option Menu widget</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="ColorToggle">
+        <xs:annotation>
+            <xs:documentation>Element representing combine Color + Toggle widget</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Color">
+        <xs:annotation>
+            <xs:documentation>Element representing Color UI widget</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="ColorRgb">
+        <xs:annotation>
+            <xs:documentation>Element representing RGB Color UI widget</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="Widestring">
+        <xs:annotation>
+            <xs:documentation>Element representing WideString UI widget</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="String">
+        <xs:annotation>
+            <xs:documentation>Element representing String UI widget</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="DraftingStandard">
+        <xs:annotation>
+            <xs:documentation>Element representing Drafting Standard UI widget</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="ListSelReorder">
+      <xs:annotation>
+        <xs:documentation>Element representing a read only selectable re-orderable list UI widget</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:attribute name="height" type="xs:integer" use="required"/>
+        <xs:attribute name="selectable" type="xs:string" use="required"/>
+        <xs:attribute name="reorderable" type="xs:string" use="required"/>
+      </xs:complexType>
+    </xs:element>
+  <xs:element name="GeneralLineFont">
+    <xs:annotation>
+      <xs:documentation>Element representing line font UI widget</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="allowNoChangeFont"  type="xs:boolean" default="false" use="optional"/>
+      <xs:attribute name="allowDefaultFont" type="xs:boolean" default="false" use="optional"/>
+      <xs:attribute name="allowInvisibleFont" type="xs:boolean" default="false" use="optional"/>
+      <xs:attribute name="showDefaultAsOriginalFont"  type="xs:boolean" default="false" use="optional"/>
+      <xs:attribute name="LineFontOptionMaskString" type="xs:string" use="required"/>
+      <xs:attribute name="LineFontDefaultValue" type="xs:integer" use="optional"/>
+      <xs:attribute name="LineFontInvisibleValue" type="xs:integer" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModelingLineFont">
+    <xs:annotation>
+      <xs:documentation>Element representing modeling line font UI widget</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="allowNoChangeFont"  type="xs:boolean" default="false" use="optional"/>
+      <xs:attribute name="allowDefaultFont" type="xs:boolean" default="false" use="optional"/>
+      <xs:attribute name="allowInvisibleFont" type="xs:boolean" default="false" use="optional"/>
+      <xs:attribute name="showDefaultAsOriginalFont"  type="xs:boolean" default="false" use="optional"/>
+      <xs:attribute name="LineFontOptionMaskString" type="xs:string" default="GeneralLineFonts" use="optional"/>
+      <xs:attribute name="LineFontDefaultValue" type="xs:integer" use="optional"/>
+      <xs:attribute name="LineFontInvisibleValue" type="xs:integer" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+    <xs:element name="ObjectLineWidth">
+        <xs:annotation>
+            <xs:documentation>Element representing line width UI widget</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="allowDefaultWidth"  type="xs:boolean" default="false" use="optional"/>
+            <xs:attribute name="allowNoChangeWidth" type="xs:boolean" default="false" use="optional"/>
+            <xs:attribute name="allowWideLineWidth" type="xs:boolean" default="false" use="optional"/>
+            <xs:attribute name="showDefaultAsOriginal"  type="xs:boolean" default="false" use="optional"/>
+            <xs:attribute name="showNoChangeAsOriginal" type="xs:boolean" default="false" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ViewLineWidth">
+        <xs:annotation>
+            <xs:documentation>Element representing view line width UI widget</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="allowOriginalWidth" type="xs:boolean" default="false" use="optional"/>
+            <xs:attribute name="allowWideLineWidth" type="xs:boolean" default="false" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AnnotationLineWidth">
+        <xs:annotation>
+            <xs:documentation>Element representing annotation line width UI widget</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="allowRetainWidth"   type="xs:boolean" default="false" use="optional"/>
+            <xs:attribute name="allowWideLineWidth" type="xs:boolean" default="false" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AnnotationTextWidth">
+        <xs:annotation>
+            <xs:documentation>Element representing note text width UI widget</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="allowWideLineWidth"   type="xs:boolean" default="false" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EdgeLineWidth">
+        <xs:annotation>
+            <xs:documentation>Element representing edge line width UI widget</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="allowWideLineWidth"   type="xs:boolean" default="false" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="EnumElemType">
+        <xs:annotation>
+            <xs:documentation>ComplexType for EnumElem element (name value pair)</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+        <xs:attribute name="bitmap" type="xs:string" />
+    </xs:complexType>
+    <xs:element name="LowerBound" type="pman:BoundType">
+        <xs:annotation>
+            <xs:documentation>Element which represents lower bound of the range</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="UpperBound" type="pman:BoundType">
+        <xs:annotation>
+            <xs:documentation>Element which represents upper bound of the range</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="StructureDesignLibrary">
+        <xs:annotation>
+            <xs:documentation>Element representing structure design library UI widget</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+</xs:schema>

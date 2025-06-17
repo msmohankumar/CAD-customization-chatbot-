@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Mendix" csh="PMAN_Mendix"  package_suppress="simcenter3d,simviewer,view,mechatronicsplayer,nx2dedit">
+        <Category name="NX Reporting" csh="PMAN_Mendix_NX_Reporting">
+            <Tab name="All" csh="PMAN_Mendix_NX_Reporting_All">
+              <Pref name="PMAN_EnableNXReportingUpdates" type ="logical" title="Automatically Publish Part Updates on Save" value="false" ver="1980" scope="Session">
+                <Description>This option determines whether or not to automatically publish updates of all modified parts when they are saved. Use this option to maintain an up-to-date database of all parts in the NX Reporting web application.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                      <EnumElem name="Yes" value="true"/>
+                      <EnumElem name="No" value="false"/>
+                  </Data>
+              </Pref>
+              <Pref name="PMAN_NXReporting_URL" type="string" title="URL" value="https://localhost" ver="1980" scope="Session">
+                <Description>This field specifies the URL of the NX Reporting web application. This URL is required to publish part data to private Mendix web applications.</Description>
+                <Widestring/>
+              </Pref>
+              <Pref name="PMAN_NXReporting_Username" type="string" title="Username" value="" ver="1980" scope="Session">
+                <Description>This field specifies the username for authenticating to the NX Reporting web application. This username is required to publish part data to private Mendix web applications.</Description>
+                <Widestring/>
+              </Pref>
+              <Group name="Data">
+                <Pref name="PMAN_NXReporting_Include3DVisualization" type="logical" title="3D Visualization" value="true" ver="1980" scope="Session">
+                  <Description>This option determines whether or not to include 3D visualization in data uploaded to NX Reporting web application.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="PMAN_NXReporting_CheckMateResults" type="logical" title="Check-Mate Results" value="true" ver="1980" scope="Session">
+                  <Description>This option determines whether or not to include Check-Mate results which have been saved in the part in data uploaded to NX Reporting web application.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="PMAN_NXReporting_IncludeDrawings" type="logical" title="Drawings" value="true" ver="1980" scope="Session">
+                  <Description>This option determines whether or not to include drawings in data uploaded to NX Reporting web application.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="PMAN_NXReporting_IncludeThumbnailImages" type="logical" title="Thumbnail Images" value="true" ver="1980" scope="Session">
+                  <Description>This option determines whether or not to include thumbnail images in data uploaded to NX Reporting web application.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+              </Group>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>

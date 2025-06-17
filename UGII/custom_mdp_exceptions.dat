@@ -1,0 +1,59 @@
+#  custom_mdp_exceptions.dat: Filters to turn off MDP for automation programs
+#
+#                                                                                
+#        Copyright 2016 Siemens Product Lifecycle Management Software Inc.  
+#                               All Rights Reserved.                             
+#                                                                                
+#
+###############################################################################
+# 
+#
+# This file is used to specify patterns which will be used to turn off MDP and
+# turn it back on when running automation programs inside of NX.
+#
+# Patterns must be listed one per line, with nothing else on the line.  If 
+# a $ is needed in a pattern, it may be specified using $$, e.g. 
+# my$$ would be the pattern my$.  No / or \ are allowable in the pattern. 
+#
+# If no extension is given (e.g. .dll, .so, .py) the pattern will apply for 
+# all extensions (see examples)
+#
+# ------Pattern------------------|---Will Match--------------------------------
+# MyApp                          | any file with the leaf name of 
+#                                | MyApp (e.g. MyApp.vb, 
+#                                | MyApp.so and so on)
+#------------------------------------------------------------------------------
+# MyApp.vb                       | MyApp.vb
+#------------------------------------------------------------------------------
+# MyApp.1.0.2.4.dll              | any file  with the leaf name of
+#                                | MyApp.1.0.2.4 and a shared libary
+#                                | extension.  (e.g. MyApp.1.0.2.4.so,
+#                                | MyApp.1.0.2.4.dll, or MyApp.1.0.2.4.dylib )
+#------------------------------------------------------------------------------
+# MyApp.$                        | any file with the filename of MyApp and having
+#                                | an extension.
+#                                | (e.g. MyApp.jar, MyApp.grx)
+#------------------------------------------------------------------------------
+# MyApp$                         | Any file with the leaf name beginning with 
+#                                | MyApp (e.g. MyApp.vb, MyApp.1.0.2.4.dll)
+#------------------------------------------------------------------------------
+# MyApp$$                        | Any file with the leaf name of MyApp$ 
+#                                | (e.g. MyApp$.vb or MyApp$.dll)
+#------------------------------------------------------------------------------
+#
+# It is highly recommended to use the report_custom_dirs application to ensure
+# expected behavior when setting up this file.  As this will report on the automation
+# programs in the application roots, and if they will be run with MDP off 
+# according to the exception file.
+#
+# It is not recommended that customers directly edit this file.  Instead this file
+# should be copied to a common location for the site and then editted.  And finally
+# the environment variable UGII_MDP_AUTOMATION_EXCEPTION_FILE should be set to 
+# point to the new file.  This procedure will make upgrading to a new release 
+# easier.
+#
+# Please reference the NXOpen Programmer's Guide for more information.
+###############################################################################
+#
+# Customer modifications can follow on here
+#

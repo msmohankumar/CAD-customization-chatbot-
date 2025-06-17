@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+    targetNamespace="http://www.plmxml.org/Schemas/RoutingAutoAnnSchema" 
+    xmlns:tab_label_format_schema="http://www.plmxml.org/Schemas/RoutingAutoAnnSchema" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    elementFormDefault="unqualified" 
+    attributeFormDefault="unqualified" 
+    xml:lang="en">
+<xsd:annotation>
+    <xsd:documentation>
+     This schema defines a namespace "http"//www.plmxml.org/Schemas/RoutingAutoAnnSchema"
+     ( mapped to "tab_label_format_schema" in this document ). 
+    
+     Tutorial for schema creation:
+     http://www.w3schools.com/schema/schema_intro.asp
+    
+     For other references see apv.xsd
+    </xsd:documentation>
+</xsd:annotation>
+
+<xsd:element name="Tab_Label_Format_File" type="tab_label_format_schema:format_file">
+</xsd:element>
+
+<xsd:complexType name="format_file">
+    <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+
+        <xsd:element name="Format" type="tab_label_format_schema:format_list"/>
+
+    </xsd:sequence>
+    
+    <xsd:attribute name="version" type="xsd:decimal" use="required" fixed="1.0"/>
+
+</xsd:complexType>
+
+<xsd:complexType name="format_list">
+    <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+
+        <xsd:element name="Attribute" type="tab_label_format_schema:attrib"/>
+
+    </xsd:sequence>
+
+    <xsd:attribute name="format_name" type="tab_label_format_schema:title"/>
+
+</xsd:complexType>
+
+<xsd:complexType name="attrib">
+
+   <xsd:simpleContent>
+       
+        <xsd:extension base="xsd:string">
+
+           <xsd:attribute name="display_name" type="tab_label_format_schema:title"/>
+
+        </xsd:extension>
+
+   </xsd:simpleContent>
+
+</xsd:complexType>
+
+<xsd:simpleType name="title">
+    <xsd:annotation>
+        <xsd:documentation>
+            Ensures string is 1->50 characters.
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="50"/>
+        <xsd:whiteSpace value="collapse"/>
+    </xsd:restriction>
+</xsd:simpleType>
+
+</xsd:schema>

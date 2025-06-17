@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PLMXML xmlns="http://www.plmxml.org/Schemas/PLMXMLSchema" author="IanF" time="15:57:11" date="2003-06-12"
+  schemaVersion="5.0">
+
+  <AttributeMapTable sourceApp="I-deas" targetApp="NX">
+
+    <!--  type="system Name" -->
+    <Map sourceAttr="z_dmd Item Name"                          targetAttr="I-deas Item Name"        action="map"/>
+    <Map sourceAttr="z_dmd Item Type Name"                     targetAttr="I-deas Item Type"        action="map"/>
+    <Map sourceAttr="Part Number"                              targetAttr="I-deas Part Number"      action="map"/>
+    <Map sourceAttr="z_dmd Version Number"                     targetAttr="I-deas Version"          action="map"/>
+    <Map sourceAttr="z_dmd Version and Revision"               targetAttr="I-deas Ver. (Rev.)"      action="map"/>
+    <Map sourceAttr="z_dmd Version Description"                targetAttr="I-deas Description"      action="map"/>
+    <Map sourceAttr="z_dmd Parent Name + Type"                 targetAttr="Parent Items"            action="exclude"/>
+    <Map sourceAttr="z_dmd Project Name"                       targetAttr="I-deas Project"          action="map"/>
+
+    <!--  type="system File" -->
+    <Map sourceAttr="z_dmd File OS Name"                       targetAttr="z_dmd File OS Name"      action="exclude"/>
+    <Map sourceAttr="z_dm Current OS File Length"              targetAttr="OS File Length"          action="exclude"/>
+    <Map sourceAttr="z_dmd System File Name"                   targetAttr="File Name"               action="exclude"/>
+
+    <!--  type="system History" -->
+    <Map sourceAttr="z_dmd Creator Name"                       targetAttr="I-deas Creator"          action="map"/>
+    <Map sourceAttr="z_dmd Create Date"                        targetAttr="Create Date"             action="exclude"/>
+    <Map sourceAttr="z_dmd Create Time"                        targetAttr="Create Time"             action="exclude"/>
+    <Map sourceAttr="z_dmd Created On By"                      targetAttr="Created On/By"           action="exclude"/>
+    <Map sourceAttr="z_dmd Modifier Name"                      targetAttr="Last Modifier"           action="exclude"/>
+    <Map sourceAttr="z_dmd Modification Date"                  targetAttr="Last Modification Date"  action="exclude"/>
+    <Map sourceAttr="z_dmd Last Modification Time"             targetAttr="Last Modification Time"  action="exclude"/>
+    <Map sourceAttr="z_dmd Modified On By"                     targetAttr="Last Modified On/By"     action="exclude"/>
+
+    <!--  type="system Access" -->
+    <Map sourceAttr="z_dmd Library Status"                     targetAttr="Library Status"          action="exclude"/>
+    <Map sourceAttr="z_dmd In Use Lock Owner Name"             targetAttr="In-Use Owner"            action="exclude"/>
+    <Map sourceAttr="z_dmd In Use Lock Date"                   targetAttr="In-Use Date"             action="exclude"/>
+    <Map sourceAttr="z_dmd In Use Lock Time"                   targetAttr="In-Use Time"             action="exclude"/>
+    <Map sourceAttr="z_dmd In Use On By"                       targetAttr="In-Use On/By"            action="exclude"/>
+    <Map sourceAttr="z_dmd Protected Lock Owner Name"          targetAttr="Protection Owner"        action="exclude"/>
+    <Map sourceAttr="z_dmd Protected Lock Date"                targetAttr="Protection Date"         action="exclude"/>
+    <Map sourceAttr="z_dmd Protected Lock Time"                targetAttr="Protection Time"         action="exclude"/>
+    <Map sourceAttr="z_dmd Protected On By"                    targetAttr="Protected On/By"         action="exclude"/>
+    <Map sourceAttr="z_dmd Reserved Lock Owner Name"           targetAttr="Reservation Owner"       action="exclude"/>
+    <Map sourceAttr="z_dmd Reserved Lock Date"                 targetAttr="Reservation Date"        action="exclude"/>
+    <Map sourceAttr="z_dmd Reserved Time"                      targetAttr="Reservation Time"        action="exclude"/>
+    <Map sourceAttr="z_dmd Reserved On By"                     targetAttr="Reserved On/By"          action="exclude"/>
+    <Map sourceAttr="z_dmd Referenced Lock Owner Name"         targetAttr="Reference Owner"         action="exclude"/>
+    <Map sourceAttr="z_dmd Referenced Lock Date"               targetAttr="Reference Date"          action="exclude"/>
+    <Map sourceAttr="z_dmd Referenced Time"                    targetAttr="Reference Time"          action="exclude"/>
+    <Map sourceAttr="z_dmd Referenced On By"                   targetAttr="Referenced On/By"        action="exclude"/>
+    <Map sourceAttr="z_dmd Version State Name"                 targetAttr="State"                   action="exclude"/>
+    <Map sourceAttr="z_dmd Checked Out Lock Owner Name"        targetAttr="Checked Out Owner"       action="exclude"/>
+    <Map sourceAttr="z_dmd Checked Out Lock Date"              targetAttr="Checked Out Date"        action="exclude"/>
+    <Map sourceAttr="z_dmd Checked Out Lock Time"              targetAttr="Checked Out Time"        action="exclude"/>
+    <Map sourceAttr="z_dmd Checked Out On By"                  targetAttr="Checked Out On/By"       action="exclude"/>
+    <Map sourceAttr="z_dmd Check Out Intent Lock Owner Name"   targetAttr="Check Out Intent Owner"  action="exclude"/>
+    <Map sourceAttr="z_dmd Check Out Intent Lock Date"         targetAttr="Check Out Intent Date"   action="exclude"/>
+    <Map sourceAttr="z_dmd Check Out Intent Lock Time"         targetAttr="Check Out Intent Time"   action="exclude"/>
+    <Map sourceAttr="z_dmd Check Out Intent On By"             targetAttr="Check Out Intent On/By"  action="exclude"/>
+
+    <!--  type="system Data Management" -->
+    <Map sourceAttr="z_dm file size"                           targetAttr="File size"               action="exclude"/>
+
+  </AttributeMapTable>
+ 
+</PLMXML>

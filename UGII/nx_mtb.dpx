@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Machine Tool Builder" csh="PMAN_Machine_Tool_Builder" package_suppress="simcenter3d,simviewer,view,mechatronicsplayer,nx2dedit">
+        <Category name="General" csh="PMAN_Machine_Tool_Builder_General">
+            <Tab name="General" csh="PMAN_Machine_Tool_Builder_General_General">
+                <Pref name="MTB_general_sinumerik_nc_archive_api_path_WIN" type="string" title="Sinumerik NC Archive Runtime Library" value="${UGII_CAM_AUXILIARY_DIR}\sinumerik\sinumerikarchiveapi.dll" ver="10.0.3" scope="Session">
+                    <Description>This field specifies the Sinumerik NC Archive Runtime library file. The library will be loaded when importing a Machine Tool Configuration.</Description>
+                    <BrowseFileSel type="dll"/>
+                </Pref>
+                <Pref name="MTB_general_sinumerik_nc_archive_api_path_UNX" type="string" title="Sinumerik NC Archive Runtime Library" value="" ver="10.0.2" scope="Session">
+                    <Description>This field specifies the Sinumerik NC Archive Runtime library file. The library will be loaded when importing a Machine Tool Configuration.</Description>
+                    <BrowseFileSel type="dll"/>
+                </Pref>
+                <Pref name="MTB_general_smk_database_UNX" type="string" title="Smart Machine Kit Database" value="${UGII_CAM_AUXILIARY_DIR}/smk/smk_registry.xml" ver="1926" scope="Session">
+                    <Description>This field specifies the smart machine kit database file to be used.</Description>
+                    <BrowseFileSel type="xml"/>
+                </Pref>
+                <Pref name="MTB_general_smk_database_WIN" type="string" title="Smart Machine Kit Database" value="${UGII_CAM_AUXILIARY_DIR}\smk\smk_registry.xml" ver="1926" scope="Session">
+                    <Description>This field specifies the smart machine kit database file to be used.</Description>
+                    <BrowseFileSel type="xml"/>
+                </Pref>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>

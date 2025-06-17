@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Electrode Design" csh="PMAN_MW_EW" package_suppress="simcenter3d,simviewer,view,mechatronicsplayer,nx2dedit">
+        <Category name="General" csh="PMAN_MW_EW_General">
+            <Tab name="General" csh="PMAN_MW_EW_General_General">
+                <Pref name="MW_EW_PART_ITEM_TYPE" type="string" title="Part Item Type in Teamcenter" value="Item" ver="9.0.1" scope="Session">
+                    <Description>This option specifies the customized item type of the part in Teamcenter.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="MW_EW_CONFIG_ITEM" type="string" title="Configuration File Item ID and Revision" value="@DB/00005/A" ver="11.0.1" scope="Session">
+                  <Description>This option specifies the item ID and revision of the configuration file type in Teamcenter.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="MW_EW_BOM_EXPORT" type="int" title="BOM Export" value="1" ver="4.0.0" scope="Session">
+                    <Description>This option specifies where the BOM should be exported.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Excel" value="1"/>
+                        <EnumElem name="Information Window" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_DRAFT_TEMPLATE_PREFIX" type="string" title="Draft Template Prefix" value="ELE_" ver="4.0.0" scope="Session">
+                    <Description>This field defines the prefix string of the drafting template.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="MW_EW_PART_FAMILY_LIB_SAVE_DIR_UNX" type="string" title="Part Family Save Directory" value="" ver="4.0.0" scope="Session">
+                    <Description>This field specifies where the part family will be saved.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+                <Pref name="MW_EW_PART_FAMILY_LIB_SAVE_DIR_WIN" type="string" title="Part Family Save Directory" value="" ver="4.0.0" scope="Session">
+                    <Description>This field specifies where the part family will be saved.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+                <Group name="Electrode Advanced">
+                    <Pref name="MW_EW_ADD_PALLET" type="logical" title="Activate Pallet" value="false" ver="5.0.0" scope="Session">
+                        <Description>This option determines whether or not the pallet function is activated.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_EW_SETUP_CSYS_NAME" type="string" title="Setup CSYS Name" value="SETUP_MATE_ORIGIN" ver="5.0.0" scope="Session">
+                        <Description>This field defines the CSYS name in the work piece. The CSYS is used to define the installation coordinate which the pallet mates to.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="MW_EW_MATE_CSYS_NAME" type="string" title="Pallet Mate CSYS Name" value="PALLET_MATE_ORIGIN" ver="5.0.0" scope="Session">
+                        <Description>This field defines the CSYS name in the pallet. The CSYS is used to define the installation coordinate of the pallet. </Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="MW_EW_PALLET_MSYS_NAME" type="string" title="Pallet MSET CSYS Name" value="PALLET_MSET_ORIGIN" ver="5.0.0" scope="Session">
+                        <Description>This field defines the CSYS name in the pallet. The CSYS is used to define the machine set coordinate.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="MW_EW_CHUCK_NUMBER" type="string" title="Chuck Number" value="EW_CHUCKNR" ver="5.0.0" scope="Session">
+                        <Description>This field defines a part attribute to identify a part as a pallet.</Description>
+                        <Widestring/>
+                    </Pref>
+                  <Pref name="MW_EW_HOLDER_CSYS_NAME" type="string" title="Holder CSYS Name" value="HOLDER_CSYS_ORIGIN" ver="1926" scope="Session">
+                    <Description>This field defines the CSYS name in the holder. The CSYS is used to define the installation coordinates of the holder.</Description>
+                        <Widestring/>
+                  </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Layers and Colors" csh="PMAN_MW_EW_General_Layers_and_Colors">
+                <Group name="Electrode Blank">
+                    <Pref name="MW_EW_ELECTRODE_WORKING_SOLID_LAYER" type="int" title="Work Solid Layer" value="255" ver="4.0.0" scope="Session">
+                        <Description>This option specifies which layer is the working solid layer.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="256" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_EW_ELECTRODE_LINKED_SOLID_LAYER" type="int" title="Linked Solid Layer" value="1" ver="4.0.0" scope="Session">
+                        <Description>This option specifies which layer the linked solid should be placed on.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="256" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Electrode Check Touch Face">
+                    <Pref name="MW_EW_CK_TOUCH_FACE_LAYER" type="int" title="Layer" value="251" ver="4.0.0" scope="Session">
+                        <Description>This option specifies which layer the electrode check touch face should be placed on.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="256" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_EW_TOUCH_SHEET_COLOR" type="int" title="Color" value="47" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the color of the electrode check touch face.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="MW_EW_CK_TOUCH_FACE_LAYER_VISIBLE" type="logical" title="Layer Visibility" value="true" ver="4.0.0" scope="Session">
+                        <Description>This option determines whether or not the layer for the electrode check touch face should be visible.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Off" value="false"/>
+                            <EnumElem name="On" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Initialize Electrode Project">
+                  <Pref name="MW_EW_LINKER_WORKPIECE_BODY_LAYER" type="int" title="Linked Workpiece Body Layer" value="0" ver="11.0.0" scope="Session">
+                    <Description>This option specifies which layer the linked workpiece body of the initialize electrode project should be placed on. If 0 (zero) is specified, the original body layer will be used.</Description>
+                    <Integer/>
+                    <Data type="range">
+                      <LowerBound value="0" include="1"/>
+                      <UpperBound value="256" include="1"/>
+                    </Data>
+                  </Pref>
+              </Group>
+              <Group name="Electrode Check Interference Solid">
+                    <Pref name="MW_EW_CK_INTERFERE_SOLID_LAYER" type="int" title="Layer" value="252" ver="4.0.0" scope="Session">
+                        <Description>This option specifies which layer the electrode check interference solid should be placed on.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="256" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_EW_INTERFERENCE_SOLID_COLOR" type="int" title="Color" value="188" ver="6.0.0" scope="Session">
+                        <Description>This option specifies the color of the electrode check interference solid.</Description>
+                        <Color/>
+                    </Pref>                    
+                    <Pref name="MW_EW_CK_INTERFERE_SOLID_LAYER_VISIBLE" type="logical" title="Layer Visibility" value="true" ver="4.0.0" scope="Session">
+                        <Description>This option determines whether or not the layer for the electrode check interference solid should be visible.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Off" value="false"/>
+                            <EnumElem name="On" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Electrode Drafting">
+                    <Pref name="MW_EW_BLANK_LAYER" type="int" title="Electrode Objects Layer" value="1" ver="7.5.5" scope="Session">
+                        <Description>This option specifies the layer on which electrode objects should be placed in drawing views.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="256" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_EW_BLANK_DRAFT_LAYER" type="int" title="Layer Visible in View" value="20" ver="7.5.5" scope="Session">
+                        <Description>This option specifies the layer visible in electrode drawing views.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="256" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Part Name Definition" csh="PMAN_MW_EW_General_Part_Name_Definition">
+                <Group name="Common">
+                    <Pref name="MW_EW_DISPLAY_RENAME_DIALOG" type="logical" title="Display Rename Dialog Box" value="false" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not the part name mapping dialog box will be displayed when new parts are added to an Electrode Design project.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_EW_NAME_MAP_TEMPLATE_FILE" type="string" title="Template Name Mapping File" value="map_template_name.xlsx::DEFAULT_MAPPING_TEMPLATE" ver="1980" scope="Session">
+                        <Description>This option specifies a customized file to map template name.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="MW_EW_PART_NAME_RULE" type="string_list" title="Custom Part Naming Rules" value="&lt;PROJECT_NAME&gt;_&lt;TEMPLATE_NAME&gt;_???" ver="4.0.0" scope="Session">
+                        <Description>This field allows the custom part naming rules to be specified. The part name is formed by combining a series of variables and characters.
+<Formatted>1. All alphanumeric characters are valid except \, /, ", *, :, and ?.
+2. The "?" character is an incrementing or user defined variable.
+The standard variables are:
+"PROJECT_NAME"  (set during project initialization)
+"TEMPLATE_NAME" (the name of the template part being cloned).</Formatted>
+                        </Description>
+                        <MultiLineText height="2"/>
+                    </Pref>
+                </Group>
+                <Group name="Drawing Rules">
+                    <Pref name="MW_EW_DRAWING_PART_NAME_RULE" type="string" title="Master Part Naming Rules" value="&lt;TEMPLATE_NAME&gt;_dwg_???" ver="10.0.0" scope="Session">
+                        <Description>
+                            This field allows the electrode drawing master part naming rule to be specified in native. The part name is formed by combining a series of variables and characters.
+"TEMPLATE_NAME" (the name of the electrode part to create a drawing part.).
+                        </Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Electrode Blank" csh="PMAN_MW_EW_General_Electrode_Blank">
+                <Pref name="MW_EW_BLANK_REF_PRECISION_MU" type="real" title="Reference Point Precision" value="0.001" unit="mm" ver="8.0.3" scope="Session">
+                    <Description>This option specifies the X, Y, and Z precision of the reference point.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_BLANK_REF_PRECISION_EU" type="real" title="Reference Point Precision" value="0.00001" unit="in" ver="8.0.3" scope="Session">
+                    <Description>This option specifies the X, Y, and Z precision of the reference point.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_BLANK_EXTENSION_HEIGHT_MU" type="real" title="Blank Extension Height" value="5.0" unit="mm" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the blank extension height.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_BLANK_EXTENSION_HEIGHT_EU" type="real" title="Blank Extension Height" value="0.2" unit="in" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the blank extension height.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_REFZ_KEEP_SAME_IN_MSET" type="logical" title="Keep Z Reference in One Machine Set" value="false" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not the Z reference should be kept in one machine set.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_BLANK_LINE_RATIO" type="real" title="Center Line Ratio" value="1.0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the ratio of the length of center line to blank size.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.1" include="1"/>
+                        <UpperBound value="10" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_ROUND_CROSS_LINE_LEVEL" type="logical" title="Round Cross Line Position" value="false" ver="5.0.0" scope="Session">
+                    <Description>This variable determines whether or not the position of the cross lines should be rounded.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_UNITE_HEAD_BLANK" type="logical" title="Unite Head" value="true" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not the head solid should be united to the blank solid.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_KEEP_BLANK_SIZE" type="logical" title="Keep Blank Size" value="false" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not the blank size should be kept when new head solids are added.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Electrode Tools" csh="PMAN_MW_EW_General_Electrode_Tools">
+                <Group name="Electrode Checking Parameters">
+                    <Pref name="MW_EW_DEVI_CHECK_EDGE_POINTS" type="int" title="Number of Checking Points" value="5" ver="4.0.0" scope="Session">
+                        <Description>This option specifies how many points should be used for edge to face match checking.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_EW_DEVI_DISTANCE_TOLERANCE_EU" type="real" title="Distance Tolerance" value="0.0004" unit="in" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the tolerance of the distance between the two faces in the normal direction at each check point.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_EW_DEVI_DISTANCE_TOLERANCE_MU" type="real" title="Distance Tolerance" value="0.01" unit="mm" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the tolerance of the distance between the two faces in the normal direction at each check point.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_EW_DEVI_ANGULAR_TOLERANCE" type="real" title="Angular Tolerance" value="3.0" unit="deg" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the tolerance of the angle between the normal direction vectors of the two faces at each check point.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_EW_CALCULATE_AREA_ANGULAR_ACCURACY" type="real" title="Angular Accuracy of Calculate Area" value="1.0" unit="deg" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the accuracy of the angle between the reference plane and the face to get the maximum and minimum area.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_EW_USE_UG_INTERSECT" type="logical" title="Use NX Intersect" value="false" ver="5.0.0" scope="Session">
+                        <Description>This option determines whether or not the intersect solid is created by using NX Boolean when Parasolid method is not able to create the intersect solid.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>                    
+                    <Pref name="MW_EW_CHECKING_INTERFERENCE_TOLERANCE_EU" type="real" title="Interference Tolerance" value="0.0004" unit="in" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the length tolerance for interference checking.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_EW_CHECKING_INTERFERENCE_TOLERANCE_MU" type="real" title="Interference Tolerance" value="0.01" unit="mm" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the length tolerance for interference checking.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_EW_TOUCH_SHEET_THICK_MU" type="real" title="Touch Sheet Thickness" value="0.0" unit="mm" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the touch sheet thickness.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_EW_TOUCH_SHEET_THICK_EU" type="real" title="Touch Sheet Thickness" value="0.0" unit="in" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the touch sheet thickness.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>                    
+                </Group>
+                <Group name="Extend Solid">
+                    <Pref name="MW_EW_ELECTRODE_EXTEND_SOLID_OFFSET_MU" type="real" title="Solid Offset" value="0.2" unit="mm" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the offset value of the extrusion in Extend Solid.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_EW_ELECTRODE_EXTEND_SOLID_OFFSET_EU" type="real" title="Solid Offset" value="0.01" unit="in" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the offset value of the extrusion in Extend Solid.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_EW_ELECTRODE_EXTEND_SOLID_ANGLE" type="real" title="Extrude Taper" value="0" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the taper of the extrusion in Extend Solid.</Description>
+                        <Real/>
+                    </Pref>
+                </Group>
+                <Group name="Replace Solid">
+                    <Pref name="MW_EW_ELECTRODE_REPLACE_SOLID_DISTANCE_ALLOWANCE_MU" type="real" title="Distance Allowance" value="0.3" unit="mm" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the clearance value of the boundary box.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_EW_ELECTRODE_REPLACE_SOLID_DISTANCE_ALLOWANCE_EU" type="real" title="Distance Allowance" value="0.02" unit="in" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the clearance value of the boundary box.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Calculate Area">
+                    <Pref name="MW_EW_CAL_MAX_MIN_AREA" type="logical" title="Max/Min Project Area" value="false" ver="4.0.0" scope="Session">
+                        <Description>This option determines whether or not the maximum and minimum project area should be calculated.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Electrode Head" csh="PMAN_MW_EW_General_Electrode_Head">
+                <Pref name="MW_EW_HEAD_FACE_TYPE" type="int" title="Head Face Type" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the user selection face type.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Face" value="0"/>
+                        <EnumElem name="Sheet Body" value="1"/>
+                        <EnumElem name="Defined" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_HEAD_OP_TYPE" type="int" title="Head Operation Type" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the operation type of the trim solid.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Trim" value="0"/>
+                        <EnumElem name="Subtract" value="1"/>
+                        <EnumElem name="Keep Region and Box" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_HEAD_CLEARANCE_MU" type="real" title="Head Clearance" value="0.3" unit="mm" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the clearance of the bounding box.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_HEAD_CLEARANCE_EU" type="real" title="Head Clearance" value="0.01" unit="in" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the clearance of the bounding box.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_HEAD_BOX_TYPE" type="int" title="Head Box Type" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the type of bounding box which will be edited in Trim Solid.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Bounding Box" value="0"/>
+                        <EnumElem name="Existing Box" value="1"/>
+                    </Data>
+                </Pref>
+             </Tab>
+            <Tab name="Electrode Drawing" csh="PMAN_MW_EW_General_Electrode_Drawing">
+                <Pref name="MW_EW_DIMENSION_MARGIN_MU" type="real" title="Dimension Margin" value="5.0" unit="mm" ver="11.0.1" scope="Session">
+                    <Description>This option specifies the margin value of drawing dimension.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="-180.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_DIMENSION_MARGIN_EU" type="real" title="Dimension Margin" value="1.6" unit="in" ver="8.0.0" scope="Session">
+                    <Description>This option specifies the margin value of drawing dimension.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="-7.2" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_ADJUST_VIEW_SCALE" type="logical" title="Adjust View Scale" value="true" ver="9.0.2" scope="Session">
+                    <Description>This option determines whether or not the view scale should be adjusted automatically when the view does not fit on the drawing.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+              <Group name="Automation Dimension">
+                <Image bitmap="electrode_drawing_dimension_control.bmp"/>
+                <Pref name="MW_EW_BLANK_SPARK_DIMENSION" type="logical" title="(A) MSET Origin to Blank Spark Tip" value="true" ver="1926" scope="Session">
+                    <Description>This option determines whether or not to create an additional dimension in the front view from the MSET origin to the deepest electrode point (spark tip).</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Off" value="false"/>
+                        <EnumElem name="On" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_BLANK_POSITION_DIMENSION" type="logical" title="(B) MSET Origin to Blank" value="true" ver="1926" scope="Session">
+                    <Description>This option determines whether or not to create an additional dimension in the front and top views from the MSET origin to the blank origin.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Off" value="false"/>
+                        <EnumElem name="On" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_HIGHTER_BLANK_DIMENSION" type="logical" title="(C) MSET Origin to Higher Blank Body Face" value="true" ver="1926" scope="Session">
+                    <Description>This option determines whether or not to create an additional dimension in the front view from the MSET origin to the higher blank body face.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Off" value="false"/>
+                        <EnumElem name="On" value="true"/>
+                    </Data>
+                </Pref>
+              </Group>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>

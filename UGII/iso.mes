@@ -1,0 +1,1346 @@
+/
+/ ************************************************************ 
+/ *****      Copyright 1991.  Valisys Corporation.       *****
+/ ***** All rights reserved under Federal copyright law. *****
+/ *****                                                  *****
+/ ***** This program is the sole property of Valisys     *****
+/ ***** Corporation, and is considered a trade secret    *****
+/ ***** and a proprietary product of Valisys Corporation.*****
+/ ***** Use or disclosure of this program or any part of *****
+/ ***** this program in either executable form or source *****
+/ ***** form by other than authorized personnel of       *****
+/ ***** Valisys Corporation or its licensees is strictly *****
+/ ***** forbidden by law.                                *****
+/ ************************************************************
+/
+/ ISO.MES
+/            ISO CHECK MESSAGES
+/
+/23456789 12 15   901234567890123456789012345  49 12345678901234567   72
+/..........V..V.................................V....A.................V
+/
+/ UNKNOWN TYPE  MESSAGE NUMBERS 52000-52019
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052000  3   INVALID TEXT
+&              Text in compartment &C01 is 
+&              invalid.
+&              ISO 1101 Section: 5.1
+/
+/ EMPTY TYPE  MESSAGE NUMBERS 52020-52039
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052020  3   EMPTY COMPARTMENT
+&              Empty compartment in feature 
+&              control frame.
+&              ISO 1101 Section: 5.1
+/
+/ SYMBOL TYPE  MESSAGE NUMBERS 52040-52059
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052040  3   EXTRA TEXT
+&              Extra text &C01 found in 
+&              compartment &C02.
+&              ISO 1101 Section: 5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052041  3   EXTRA GDT SYMBOLS
+&              &I01 symbols found in compartment
+&              &C01.
+&              ISO 1101 Section: 5.1
+/
+/ TOLERANCE TYPE  MESSAGE NUMBER 52060-52079
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052060  3   NO TOLERANCE SPECIFIED
+&              Tolerance value required.  No 
+&              tolerance found in compartment
+&              &C01.
+&              ISO 1101 Section: 5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052061  3   MULTIPLE TOLERANCES FOUND
+&              Only one tolerance allowed in
+&              a compartment.  &I01 tolerances 
+&              found in compartment &C01.
+&              ISO 1101 Section: 5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052062  3   NEGATIVE TOLERANCE
+&              Positive tolerance value required.
+&              Negative tolerance &R01 found in 
+&              compartment &C01.
+&              ISO 1101 Section: 5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052063  3   ZERO TOLERANCE AT RFS
+&              Zero based tolerancing should be
+&              used at MMC only.
+&              ISO 2692 Section: 7.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052064  3   INCOMPLETE PER UNIT BASIS
+&              Incomplete per unit basis
+&              tolerance specified in compartment
+&              &C01.
+&              ISO 1101 Section: 9.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052065  3   DIAMETER SYMBOL IN WRONG LOCATION
+&              The diameter symbol must proceed 
+&              the tolerance value.  A diameter
+&              symbol follows the tolerance in 
+&              compartment &C01.
+&              ISO 1101 Section: 7.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052066  3   SYMBOL IN WRONG LOCATION
+&              The modifier symbol must 
+&              follow the tolerance value.  
+&              &I01 modifier symbol(s) proceed
+&              the tolerance value in 
+&              compartment &C01.
+&              ISO 1101 Section: 12
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052069  3   ENVELOPE SYMBOL NOT ALLOWED
+&              Envelope symbol can be applied to
+&              coordinate dimensions only.
+&              Envelope symbol found in
+&              compartment &C01.
+&              ISO 8015 Section: 6.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052070  3   UNIT DESIGNATION IN WRONG LOCATION
+&              Linear unit designation, MM and
+&              IN, follow the tolerance value and 
+&              proceed the material condition 
+&              modifiers.
+&              ISO 1000 Section: 4.5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052071  3   EXTRA TEXT IN COMPARTMENT
+&              Extra text &C01 found in 
+&              compartment &C02.
+&              ISO 1101 Section: 5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052072  3   DUPLICATE MODIFIERS
+&              A modifier may be specified
+&              once in a compartment.  The 
+&              modifier &C01 is specified &I01
+&              times in compartment &C02.
+&              ISO 1101 Section: 11 and 12
+/
+/ TOLERANCE_MAX TYPE  MESSAGE NUMBERS 52080-52099
+/-----------------------------------------------------------------------
+/
+/ DATUM REFERENCE TYPE  MESSAGE NUMBER 52100-52119
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052101  3   INCOMPLETE COMPOUND DATUM
+&              Compound datum references have the
+&              form |A-B|.  Compartment &C01
+&              has an incomplete compound datum 
+&              definition.
+&              ISO 1101 Section: 8.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052103  3   INVALID SYMBOL IN DATUM 
+&              MMC is the only valid symbol in a
+&              datum reference.  The symbol 
+&              &C01 found in compartment
+&              &C02.
+&              ISO 1101 Section: 12
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052104  3   SYMBOL BEFORE DATUM
+&              Material condition modifier must
+&              follow the datum.  The symbol
+&              &C01 proceeds the datum in
+&              compartment &C02.
+&              ISO 1101 Section: 12
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052105  3   MORE THAN THREE COMPOUND DATUMS
+&              Valisys only allows three datums
+&              for a compound datum.  &I01 
+&              datums found in compartment
+&              &C01.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052107  3   NUMBER FOUND IN DATUM
+&              Alpha characters must be used in
+&              datum references.  The number
+&              &C01 was found in compartment
+&              &C02.
+&              ISO 1101 Section: 8.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052108  3   EXTRA TEXT IN COMPARTMENT
+&              Extra text &C01 found in 
+&              compartment &C02.
+&              ISO 1101 Section: 8.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052110  3   MORE THAN THREE DATUMS SPECIFIED
+&              Only three datums are allowed in
+&              a datum compartment.  &I01 datums
+&              found in compartment &C01.
+&              ISO 5459 Section: 8
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052111  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum references can not
+&              be specified in a datum 
+&              compartment. Datum &C01 was 
+&              specified &I01 times in 
+&              compartment &C02.
+&              ISO 5459 Section: 6.2.3
+/
+/ DATUM DEFINITION TYPE  MESSAGE NUMBERS 52120-52139
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052123  3   MORE THAN ONE DATUM LETTER
+&              Datum definitions must have one 
+&              letter. &I01 letters have
+&              been used in the datum definition.
+&              ISO 5459 Section: 6.1.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052124  3   SYMBOL IN DATUM DEFINITION
+&              Symbols are not allowed in datum 
+&              definitions.  The symbol &C01
+&              was found in the datum definition.
+&              ISO 5459 Section: 6.1.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052125  3   NUMBER IN DATUM DEFINITION
+&              Alpha characters must be used in
+&              datum definitions.  The number
+&              &C01 was found in compartment
+&              &C02.
+&              ISO 5459 Section: 6.1.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052126  3   EXTRA TEXT IN COMPARTMENT
+&              Extra text &C01 found in the 
+&              datum definition &C02.
+&              ISO 5459 Section: 6.1.2
+/
+/ TOO MANY INVALID COMPARTMENTS  MESSAGE NUMBER 52140-52159
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052140  3  TOO MANY INVALID COMPARTMENTS
+&             Feature control frame checking
+&             was stopped because of excessive
+&             errors in compartments.
+/
+/ ORDER OF COMPARTMENTS  MESSAGE NUMBERS 52160-52179
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052160  3   MORE THAN ONE SYMBOL COMPARTMENT
+&              Only one symbol compartment is 
+&              valid in a feature control frame.
+&              &I01 symbol compartments found.
+&              ISO 1101 Section: 5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052161  3   NO TOLERANCE COMPARTMENT
+&              A tolerance compartment is 
+&              required for each feature control 
+&              frame.
+&              ISO 1101 Section: 5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052162  3   MULTIPLE TOLERANCE COMPARTMENTS
+&              Only one tolerance compartment is
+&              allowed. &I01 tolerance 
+&              compartments have been specified.
+&              ISO 1101 Section: 5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052164  3   MORE THAN THREE DATUM REFERENCES
+&              A maximum of three datum reference
+&              compartments can be specified.
+&              &I01 datum reference compartments
+&              have been specified.
+&              ISO 5459 Section: 8
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052165  3   INCORRECT FCF COMPARTMENT ORDER
+&              The feature control frame 
+&              compartments are not in the 
+&              correct order.  The correct order
+&              is &C01.
+&              ISO 1101 Section: 5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052166  3   MAX TOLERANCE SPECIFIED
+&              Max tolerance is not allowed in 
+&              the ISO standard.
+&              ISO 1101 Section: 5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052167  3   NO SYMBOL COMPARTMENT
+&              A symbol compartment must be 
+&              specified in each feature control
+&              frame. 
+&              ISO 1101 Section: 5.1
+/
+/ PROJECTED TOLERANCE ZONE COMPARTMENTS  MESSAGE NUMBER 52180-52199
+/-----------------------------------------------------------------------
+/
+/ POSITION FCF's  MESSAGE NUMBERS 52200-52219 
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052206  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum reference can not
+&              be specified.  Datum &C01 has 
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ISO 5459 Section: 6.2.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052207  3   MORE THAN THREE DATUM REFERENCES
+&              A maximum of three datum reference
+&              can be specified. &I01 datums
+&              have been specified.
+&              ISO 5459 Section: 8
+/
+/ CONCENTRICITY FCF's  MESSAGE NUMBERS 52220-52239
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052222  3   DIAMETER SYMBOL REQUIRED
+&              A diameter symbol must be 
+&              specified for concentricity.
+&              ISO 5459 Section: 5.1 and 14.11
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052227  2   W: TERTIARY DATUM IS NOT USED
+&              WARNING: The specification of a 
+&              tertiary datum has no effect on 
+&              the analysis for concentricity.
+&              ISO 1101 Section: 14.11
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052228  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum reference can not
+&              be specified.  Datum &C01 has 
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ISO 5459 Section: 6.2.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052229  3   MORE THAN THREE DATUM REFERENCES
+&              A maximum of three datum reference
+&              can be specified. &I01 datums 
+&              have been specified.
+&              ISO 5459 Section: 8
+/
+/ SYMMETRY FCF's  MESSAGE NUMBERS 52240-52259
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052240  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum references can not
+&              be specified.  Datum &C01 has 
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ISO 5459 Section: 6.2.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052241  3   MORE THAN THREE DATUM REFERENCES
+&              A maximum of three datum 
+&              references can be specified. 
+&              &I01 datums have been specified.
+&              ISO 5459 Section: 8
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052242  3   DIAMETER SYMBOL NOT ALLOWED
+&              Diameter symbol is not allowed for
+&              symmetry.
+&              ISO 5459 Section: 5.1 and 14.12
+/
+/ ANGULARITY FCF's  MESSAGE NUMBERS 52260-52279
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052266  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum references can not
+&              be specified.  Datum &C01 has 
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ISO 5459 Section: 6.2.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052267  3   MORE THAN THREE DATUM REFERENCES
+&              A maximum of three datum 
+&              references can be specified. 
+&              &I01 datums have been specified.
+&              ISO 5459 Section: 8
+/
+/ PERPENDICULARITY FCF's  MESSAGE NUMBERS 52280-52299
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052286  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum references can not
+&              be specified.  Datum &C01 has 
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ISO 5459 Section: 6.2.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052287  3   MORE THAN THREE DATUM REFERENCES
+&              A maximum of three datum 
+&              references can be specified. 
+&              &I01 datums have been specified.
+&              ISO 5459 Section: 8
+/
+/ PARALLELISM FCF's MESSAGE NUMBERS 52300-52319
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052306  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum references can not
+&              be specified.  Datum &C01 has
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ISO 5459 Section: 6.2.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052307  3   MORE THAN THREE DATUM REFERENCES
+&              A maximum of three datum 
+&              references can be specified. 
+&              &I01 datums have been specified.
+&              ISO 5459 Section: 8
+/
+/ CYLINDRICITY FCF's  MESSAGE NUMBERS 52320-52339
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052320  3   DIAMETER SYMBOL NOT ALLOWED
+&              Diameter symbol is not allowed for
+&              cylindricity.  Cylindricity is a
+&              condition of a surface of
+&              revolution in which all points of
+&              a surface are equidistant from a
+&              common center axis.
+&              ISO 5459 Section: 5.1 and 14.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052321  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol
+&              found in the cylindricity feature
+&              control frame.
+&              ISO 5459 Section: 11
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052322  3   MATERIAL CONDITION MODIFIER FOUND
+&              Material condition modifiers can
+&              not be specified for cylindricity.
+&              Cylindricity is a condition of a 
+&              surface of revolution in which all
+&              points are equidistant from a
+&              common center axis.
+&              ISO 5459 Section: 4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052325  3   DATUMS NOT ALLOWED
+&              Datums can not be specified for
+&              cylindricity.  Form tolerances are
+&              applicable to single features or
+&              elements of single features; 
+&              therefore, form tolerances are not
+&              related to datums.
+&              ISO 1101 Section: 14.4 and 8.1
+/
+/ FLATNESS FCF's  MESSAGE NUMBERS 52340-52359
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052340  3   DIAMETER SYMBOL NOT ALLOWED
+&              Diameter symbol is not allowed for
+&              flatness.  Flatness is a condition
+&              of a surface having all elements
+&              in one plane.
+&              ISO 1101 Section: 14.2 and 5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052341  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol
+&              found in the flatness feature control
+&              frame.
+&              ISO 5459 Section: 11
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052342  3   MATERIAL CONDITION MODIFIER FOUND
+&              Material condition modifiers can
+&              not be specified for flatness.
+&              Flatness is a condition of a
+&              surface having all elements in one
+&              plane.
+&              ISO 5459 Section: 4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052345  3   DATUMS NOT ALLOWED
+&              Datums can not be specified for
+&              flatness.  Form tolerances are
+&              applicable to single features or
+&              elements of single features;
+&              therefore, form tolerances are not
+&              related to datums.
+&              ISO 1101 Section: 14.2 and 8.1
+/
+/ CIRCULARITY FCF's  MESSAGE NUMBERS 52360-52379
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052360  3   DIAMETER SYMBOL NOT ALLOWED
+&              Diameter symbol is not allowed for
+&              circularity.  Circularity is a
+&              condition of a surface of
+&              revolution where all points of the
+&              surface intersected by a plane are
+&              equidistant from a common center.
+&              ISO 1101 Section: 14.3 and 5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052361  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol
+&              found in the circularity feature
+&              control frame.
+&              ISO 5459 Section: 11
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052362  3   MATERIAL CONDITION MODIFIER FOUND
+&              Material condition modifiers can
+&              not be specified for circularity.
+&              Circularity is a condition of a
+&              surface of revolution where all
+&              points of the surface intersected
+&              by a plane are equidistant from a
+&              common center.
+&              ISO 5459 Section: 4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052365  3   DATUMS NOT ALLOWED
+&              Datums can not be specified for
+&              circularity.  Form tolerances are
+&              applicable to single features or
+&              elements of single features;
+&              therefore, form tolerances are not
+&              related to datums.
+&              ISO 1101 Section: 14.3 and 8.1
+/
+/ STRAIGHTNESS FCF's  MESSAGE NUMBER 52380-52399
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052380  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              found in the straightness feature
+&              control frame.
+&              ISO 5459 Section: 11
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052385  3   DATUMS NOT ALLOWED
+&              Datums can not be specified for
+&              straightness.  Form tolerances are
+&              applicable to single features or
+&              elements of single features;
+&              therefore, form tolerances are not
+&              related to datums.
+&              ISO 1101 Section: 14.1 and 8.1
+/
+/ CIRCULAR RUNOUT FCF's  MESSAGE NUMBERS 52400-52419
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052400  3   DIAMETER SYMBOL NOT ALLOWED
+&              Diameter symbol is not allowed for
+&              circular runout.  Circular runout
+&              provides control of circular
+&              elements of a surface as the part
+&              is rotated about the datum axis.
+&              ISO 1101 Section: 14.13 and 5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052401  3   MATERIAL CONDITION MODIFIER FOUND
+&              Material condition modifiers can
+&              not be specified for circular
+&              runout.  Circular runout provides
+&              control of circular elements of a
+&              surface as the part is rotated
+&              about the datum axis.
+&              ISO 5459 Section: 4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052402  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol
+&              found in the circular runout feature
+&              control frame.
+&              ISO 5459 Section: 11
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052406  3   TERTIARY DATUM NOT ALLOWED
+&              Tertiary datums can not be
+&              specified for circular runout.
+&              ISO 1101 Section: 14.13
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052407  3   MMC NOT ALLOWED ON DATUMS
+&              MMC can not be specified
+&              for circular runout datums. Datums
+&              for circular runout are applied on 
+&              a RFS basis only.
+&              ISO 1101 Section: 14.13
+&              ISO 2692 Section: 4.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052408  3   DUPLICATE DATUMS SPECIFIED
+&              Duplicate datum references can not
+&              be specified.  Datum &C01 has
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ISO 5459 Section: 6.2.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052409  3   MORE THAN THREE DATUM REFERENCES
+&              A maximum of three datum reference
+&              can be specified. &I01 datums 
+&              have been specified.
+&              ISO 5459 Section: 8
+/
+/ TOTAL RUNOUT FCF's  MESSAGE NUMBERS 52420- 52439
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052420  3   DIAMETER SYMBOL NOT ALLOWED
+&              Diameter symbol is not allowed for
+&              total runout.  Total runout 
+&              provides composite control of all
+&              surface elements as the part is
+&              rotated about the datum axis.
+&              ISO 1101 Section: 14.14 and 5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052421  3   MATERIAL CONDITION MODIFIER FOUND
+&              Material condition modifiers can
+&              not be specified for total runout.
+&              Total runout provides composite
+&              control of all surface elements as
+&              the parts is rotated about the
+&              datum axis.
+&              ISO 5459 Section: 4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052422  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              found in the total runout feature
+&              control frame.
+&              ISO 5459 Section: 11
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052426  3   TERTIARY DATUM NOT ALLOWED
+&              Tertiary datums can not be
+&              specified for total runout.
+&              ISO 1101 Section: 14.14
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052427  3   MMC NOT ALLOWED ON DATUMS
+&              MMC can not be specified
+&              for total runout datums. Datums
+&              for total runout are applied on a
+&              RFS basis only.
+&              ISO 1101 Section: 14.13
+&              ISO 2692 Section: 4.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052428  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum reference can not
+&              be specified.  Datum &C01 has
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ISO 5459 Section: 6.2.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052429  3   MORE THAN THREE DATUM REFERENCES
+&              A maximum of three datum 
+&              references can be specified. 
+&              &I01 datums have been specified.
+&              ISO 5459 Section: 8
+/
+/ LINE PROFILE FCF's  MESSAGE NUMBERS 52440-52459
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052440  3   DIAMETER SYMBOL NOT ALLOWED
+&              Diameter symbol is not allowed for
+&              line profile.  Line profile
+&              specifies a two dimensional
+&              uniform boundary along the true
+&              boundary within which the elements
+&              of the surface must lie.
+&              ISO 1101 Section: 14.5 and 5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052441  3   MATERIAL CONDITION MODIFIER FOUND
+&              Material condition modifiers can
+&              not be specified for line profile.
+&              Line profile specifies a two 
+&              dimensional uniform boundary along
+&              the true boundary within which the
+&              elements of the surface must lie.
+&              ISO 5459 Section: 4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052442  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              found in the line profile feature
+&              control frame.
+&              ISO 5459 Section: 11
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052445  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum references can not
+&              be specified.  Datum &C01 has
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ISO 5459 Section: 6.2.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052446  3   MORE THAN THREE DATUM REFERENCES
+&              A maximum of three datum 
+&              references can be specified. 
+&              &I01 datums have been specified.
+&              ISO 5459 Section: 8
+/
+/ SURFACE PROFILE FCF's  MESSAGE NUMBERS 52460-52479
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052460  3   DIAMETER SYMBOL NOT ALLOWED
+&              Diameter symbol is not allowed for
+&              surface profile.  Surface profile
+&              specifies a three dimensional
+&              uniform boundary along the true
+&              boundary within which the elements
+&              of the surface must lie.
+&              ISO 1101 Section: 14.6 and 5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052461  3   MATERIAL CONDITION MODIFIER FOUND
+&              Material condition modifiers can
+&              not be specified for surface
+&              profile. Surface profile specifies
+&              a three dimensional uniform
+&              boundary along the true boundary
+&              within which the elements of the
+&              surface must lie.
+&              ISO 5459 Section: 4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052462  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              found in the surface profile feature
+&              control frame.
+&              ISO 5459 Section: 11
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052465  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum references can not
+&              be specified.  Datum &C01 has
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ISO 5459 Section: 6.2.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052466  3   MORE THAN THREE DATUM REFERENCES
+&              A maximum of three datum 
+&              references can be specified. 
+&              &I01 datums have been specified.
+&              ISO 5459 Section: 8
+/
+/ COMPOSITE ENTRY CHECKS  MESSAGE NUMBERS 52500-52519
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052502  3   IDENTICAL FEATURE CONTROL FRAME
+&              Identical feature control frame
+&              has been  specified for a feature.
+&              &I01 &C01 callouts have been
+&              specified.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052504  2   W: DIFFERENT TOLERANCE ZONE TYPES
+&              WARNING:  The toleranced feature
+&              has both total wide and diameter
+&              zones specified.
+/
+/ COMPOSITE POSITION CHECKS  MESSAGE NUMBERS 52520-52539
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052524  2   TOLERANCE NOT A REFINEMENT
+&              The tolerance for the feature
+&              relating callout should be a 
+&              refinement of the tolerance for
+&              the pattern locating callout.
+&              Tolerance &R01 in the feature-
+&              relating callout is not less
+&              than the tolerance &R02 in the
+&              pattern-relating callout.
+/
+/ COMPOSITE OTHER RELATED CHECKS  MESSAGE NUMBERS 52540-52599
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052540  2   POSITION LESS THAN ORIENTATION
+&              Position callouts also control
+&              orientation of a feature.  The
+&              orientation tolerance should be a
+&              refinement of the position 
+&              tolerance.  The &C01 
+&              tolerance &R01 is not less than
+&              the position tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052541  2   SURFACE PROF. LESS THAN LINE PROF.
+&              Surface profile callouts also
+&              control line profile of a feature.
+&              The line profile tolerance should
+&              be a refinement of the surface
+&              profile tolerance. The
+&              line profile tolerance &R01 is
+&              not less than the surface profile
+&              tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052542  2   CYLINDRICITY LESS THAN SURF. STR.
+&              Cylindricity callouts also control
+&              surface straightness of a feature.
+&              The surface straightness tolerance
+&              should be a refinement of the 
+&              cylindricity tolerance. The
+&              surface straightness tolerance
+&              &R01 is not less than the 
+&              cylindricity tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052543  2   CYLINDRICITY LESS THAN CIRCULARITY
+&              Cylindricity callouts also control
+&              circularity of a feature. The 
+&              circularity tolerance should be a
+&              refinement of the cylindricity 
+&              tolerance. The circularity 
+&              tolerance &R01 is not less
+&              than the cylindricity tolerance 
+&              &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052544  2   PARALLELISM LESS THAN STRAIGHTNESS
+&              Parallelism callouts also control
+&              straightness of a feature. The 
+&              straightness tolerance should be a
+&              refinement of the parallelism 
+&              tolerance. The straightness
+&              tolerance &R01 is not less
+&              than the parallelism tolerance 
+&              &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052545  2   PARALLELISM LESS THAN FLATNESS
+&              Parallelism callouts also control
+&              flatness of a feature. The 
+&              flatness tolerance should be a
+&              refinement of the parallelism
+&              tolerance. The flatness
+&              tolerance &R01 is not less
+&              than the parallelism tolerance 
+&              &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052546  2   ANGULARITY LESS THAN STRAIGHTNESS
+&              Angularity callouts also control
+&              straightness of a feature. The 
+&              straightness tolerance should be a
+&              refinement of the angularity 
+&              tolerance. The straightness
+&              tolerance &R01 is not less
+&              than the angularity tolerance 
+&              &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052547  2   ANGULARITY LESS THAN FLATNESS
+&              Angularity callouts also control
+&              flatness of a feature. The 
+&              flatness tolerance should be a
+&              refinement of the angularity 
+&              tolerance. The flatness
+&              tolerance &R01 is not less
+&              than the angularity tolerance 
+&              &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052548  2   PERP LESS THAN STRAIGHTNESS
+&              Perpendicularity callouts also
+&              control straightness of a feature.
+&              The straightness tolerance
+&              should be a refinement of the 
+&              perpendicularity tolerance. The 
+&              straightness tolerance &R01 is
+&              not less than the perpendicularity
+&              tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052549  2   PERP LESS THAN FLATNESS
+&              Perpendicularity callouts also
+&              control flatness of a feature.
+&              The flatness tolerance should be a
+&              refinement of the perpendicularity
+&              tolerance. The flatness tolerance
+&              &R01 is not less than the
+&              perpendicularity tolerance
+&              &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052550  2   FLATNESS LESS THAN STRAIGHTNESS
+&              Flatness callouts also control
+&              straightness of a feature.
+&              The straightness tolerance should be
+&              a refinement of the flatness
+&              tolerance. The straightness 
+&              tolerance &R01 is not less
+&              than the flatness tolerance
+&              &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052551  2   TOT. RUNOUT LESS THAN CIR. RUNOUT
+&              Total runout callouts also control
+&              circular runout of a feature.
+&              The circular runout tolerance should
+&              be a refinement of the total 
+&              runout tolerance. The circular
+&              runout tolerance &R01 is not
+&              less than the total runout 
+&              tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052552  2   TOT. RUNOUT LESS THAN CYLINDRICITY
+&              Total runout callouts also control
+&              cylindricity of a feature.
+&              The cylindricity tolerance should
+&              be a refinement of the total 
+&              runout tolerance. The cylindricity
+&              tolerance &R01 is not
+&              less than the total runout 
+&              tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052553  2   TOT. RUNOUT LESS THAN CIRCULARITY
+&              Total runout callouts also control
+&              circularity of a feature.
+&              The circularity tolerance should
+&              be a refinement of the total 
+&              runout tolerance. The circularity
+&              tolerance &R01 is not
+&              less than the total runout 
+&              tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052554  2   TOT. RUNOUT LESS THAN STRAIGHTNESS
+&              Total runout callouts also control
+&              surface straightness of a feature.
+&              The surface straightness tolerance
+&              should be a refinement of the total 
+&              runout tolerance. The surface
+&              straightness tolerance &R01 is
+&              not less than the total runout 
+&              tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052555  2   CIR. RUNOUT LESS THAN CIRCULARITY
+&              Circular runout callouts also 
+&              control circularity of a feature.
+&              The circularity tolerance should
+&              be a refinement of the circular
+&              runout tolerance. The circularity
+&              tolerance &R01 is not
+&              less than the circular runout 
+&              tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ISO052556  3   UNIT BASIS GREATER THAN TOTAL TOL.
+&              The unit basis tolerance must be 
+&              less than the total variation 
+&              tolerance.  The unit basis 
+&              tolerance &R01 is greater than
+&              the total tolerance of &R02.
+/
+/
+/                                                          
+/                                                          
+/ Used in: bck33:vchk_composite_iso1101.c                   
+/                                                          
+/ Comment: No composite check was done.                    
+/                                                          
+ISO052650  2   GD&T OK
+&              Feature control frames do not define a
+&              composite callout.
+/                                                          
+/
+/ Used in: 
+/
+/ Comment: 
+/
+ISO052660  3   LMC SYMBOL NOT ALLOWED
+&              LMC symbol is not allowed in the ISO
+&              standard.  LMC symbol found in 
+&              compartment &C01
+/
+/ Used in: 
+/
+/ Comment: 
+/
+ISO052661  3   RFS SYMBOL NOT ALLOWED
+&              RFS symbol is not allowed in the ISO
+&              standard.  RFS symbol found in 
+&              compartment &C01
+/
+/

@@ -1,0 +1,23 @@
+#(BSH_CORE_ID=2EA/1E71A7)  <08.10.2020 15:54:55>
+LoadOptions_SearchPaths: U:\\ugparts 
+LoadOptions_LoadComponents: load_all_components
+#__BSH_OK_TO_MODIFY1__
+LoadOptions_PartLoadOption: partially_load_lightweight_display
+#__BSH_OK_TO_MODIFY1__
+LoadOptions_LoadWAVE: YES
+LoadOptions_LoadWAVEParents: ALL
+LoadOptions_LoadSubstitution: allow_substitution
+#__BSH_OK_TO_MODIFY1__
+LoadOptions_LoadLatest: YES
+LoadOptions_LoadOption: load_from_dir
+LoadOptions_ManagedModeLoadOption: load_by_revision_rule
+LoadOptions_LoadFilters: load_no_components
+LoadOptions_LoadFailOption: dont_abort
+LoadOptions_ReferenceSets: "As Saved" "BODY" "Entire Part" "Empty" "Use Model" 
+LoadOptions_ApplyAllLevels: YES
+LoadOptions_ActiveVariants: 
+LoadOptions_GenerateMissingPFM: NO
+LoadOptions_BookmarkRefSets: Import
+LoadOptions_BookmarkPartsLoad: Load_Visible
+LoadOptions_BookmarkRestoreFullyLoadedState: no
+LoadOptions_SubsetLoadBehavior: Do_Not_Update

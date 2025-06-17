@@ -1,0 +1,331 @@
+
+#
+# Filtering (Removing) Entities
+#
+[FILTRAGE DE DOMAINE]
+#  Which trimming curves should we setup ?
+#    1 : Only 2D curves
+# 	 2 : Boths 2D+3D
+# 	 3 : Only 3D curves
+COURBE_LIM_3D=0
+
+
+#  Should we remove some entities ?
+#  (only for independant entities)
+#    [1] -> Yes, [0] -> No
+FILAIRE=0
+FDT=0
+FEATURES=1
+META_PARAMETERS=0
+REFERENTIEL=1
+MESH=1
+RENDER_INFOS=1
+DRAW=0
+CONSTRUCT_SOLIDS=1
+
+#  Should we ignore geometrical links for highlightning?
+#    [1] -> Yes, [0] -> No 
+GEOM_LINK=1
+#  Should we ignore model displays?
+#    [1] -> Yes, [0] -> No 
+MODEL_DISPLAY=1
+
+
+[MODIFICATION D'ATTRIBUT]
+#  Should we write the 'Invisible' entity (point, curves, surfaces, solids)?
+#    [-1] -> No, [0] -> Yes
+VISIBILITY=-1
+#  Should we write the 'Invisible' assemblies/sub-assemblies ?
+#    [-1] -> No, [0] -> Yes
+ASM_VISIBILITY=-1
+#  Should we write the PMIs ?
+#    [-1] -> No, [0] -> Yes
+FDT_VISIBILITY=-1
+
+
+#
+# Tranforming Entities
+#
+[TRANSFORMATION ENTITES]
+#  Should we convert all geometries to nurbs ?
+#    [1] -> yes, [0] -> no
+BODY_TO_NURBS=0
+#  Should we write the parts/assemblies  (308/408 IGES) ?
+#    [1] -> yes, [0] -> no (flatten entities)
+KEEP_ASSEMBLY=1
+#  Should we write a group for faces in same solid  if KEEP_ASSEMBLY = 0 ?
+#    [1] -> no, [0] -> yes 
+EXPLOSE_GROUP=1
+#  Should we merge all bodies with only one face in one body ?
+#  (usefull for facetted and xmt writers)
+#    [1] -> yes, [0] -> no 
+MERGE_BODIES=0
+#  Should we organise bodies by layers ?
+#    [1] -> Yes, [0] -> No
+MERGE_BODIES_BY_LAYER=0
+#  Should we simplfy node tree?
+#  (Usefull for pdf writer)
+#    [0](Default) -> keep complete tree
+#    [1] -> remove leaf node which does not contain any 3D data 
+REMOVE_NODES=0
+
+
+#
+# Configuration for IGES writer
+#
+[IGES CONF]
+#  Should we put the name of an entity as a 406 ?
+#    [1] -> Yes, [0] -> No
+#  We should use 1 (except if we are using the old writing style)
+NAME_AS_406=0
+#  Which boundary curves should we read ?
+#   2 : Priority to UV boundary curves
+#   3 : Priority to 3D boundary curves
+BOUND_PREFERENCE=2
+
+
+#
+# This is related to the tessellation
+#
+[STL CONF]
+#  double : maximun size of a triangle
+MAXSIZE=100000000000000010000000000000000000000000000000000.0000000 
+#  double  : minimun size of a triangle 
+MINSIZE=0.0000000  
+#  double  : ratio between two side of a triangle ( maximun value )  
+RATIO=10000.0000000  
+#  boolean : Disable linear tolerance ( 0=linear tolerance enable 1=linear tolerance disable)
+LINEAR_DIS=1     
+#  double  : linear tolerance value         
+LINEAR_TOL=0.1000000          
+#  boolean : Disable angular tolerance ( 0=angular tolerance enable 1=angular tolerance disable)
+ANGULAR_DIS=1     
+#  double  : angle value in radian 
+ANGULAR_TOL= 0.174532 
+#  boolean : if 0 write a binary stl file if 1 write an ascii stl file 
+WRITE_ASCII=0         
+#  boolean : if 1 compute the normale from surface  0 normal is an approximation of triangle   (suggest 0 for STL writer , 1 for other writer)
+COMPUTE_NORMALES_FROM_SURFACE=1 
+#  boolean : Sould we use tesselation on body or mesh read in model (1 = use tessel,  0 = use mesh read )
+USE_TESSEL=1
+COMPUTE_BOUNDARIES_FROM_MESH=1
+
+
+[DIALOG BOX]
+#  Should we apply an axis placement ?
+#    [-1] -> Use Default, [0] -> Use None, [1] -> Open box
+CHOOSE_AXIS=0
+#  Should we convert all part configuration ?
+#    [-1] -> Convert Default, [0] -> Convert All, [1] -> Open box
+CHOOSE_IN_CATALOG=-1
+#  Should we apply a layer filter ?
+#    [-1] -> Use Default, [0] -> Use None, [1] -> Open box
+CHOOSE_LAYER_FILTER=0
+#  Should we choose a part in assembly ?
+#    [-1] -> Use Default, [0] -> Use None, [1] -> Open box
+CHOOSE_IN_ASSEMBLY_TREE=0
+[DIALOG BOX]
+#  Should we apply a referenceset ?
+#    [0] -> Use None, [1] -> Open box
+CHOOSE_REFERENCESET_FILTER=0
+
+[FILE CONF]
+#  Should we write lst file ?
+#    [1] -> Yes, [0] -> No
+WRITE_LST_FILE=0
+#  Should we write log file ?
+#    [1] -> Yes, [0] -> No
+WRITE_LOG_FILE=1
+
+
+#
+# This is related to the split of the resulting file
+#
+[SCISSION FICHIER]
+#  Should we write one file per body ?
+#    [1] -> Yes, [0] -> No
+PAR_SOLIDE=0
+#  Should we write one file per catalog ?
+#    [1] -> Yes, [0] -> No
+PER_CATALOG=0
+
+
+#
+# Configuration for Parasolid writer
+#
+[XMT CONF]
+#  Should we write body attributes ?
+#  [0] -> No
+#  [1] -> Yes
+# [-1] -> Yes and all bodies attributs are updated by the part attibuts
+# [-2] -> Yes and only bodies name are updated by part name    
+WRITE_BODY_ATTRIBUTES=1 
+#  Should we set the part attribut to the unique body ?
+#  [0] -> No
+#  [1] -> Yes all the part attributs update body attributs
+#  [2] -> Yes but only the part name update body name
+USE_PART_NAME=2
+
+
+#
+# Configuration for Catia V5 writer
+#
+[CATIAV5 CONF]
+#  Should we write reference planes as hidden ?
+#    [1] -> Yes, [0] -> No
+WRITE_REF_PLANE_AS_HIDDEN=1
+#  Should we write hybrid bodies ?
+#    [1] -> Yes, [0] -> No
+WRITE_HYBRID_BODIES=0
+#  integer Writes Catia V5 Version (14 or 19)
+WRITE_RELEASE=14
+
+
+#
+# Configuration for Solidworks writer
+#
+[SW CONF]
+#  Should we read all bodies ?
+#    [1] -> Yes, [0] -> No
+MULTI_BODY=1
+
+[STEP CONF]
+#  integer Drives Reading of FDT (0=no 1=graphic only 2=graphic + semantic)
+READ_FDT=0
+#  integer Drives Writing of FDT (0=no 1=semantic + graphic 2=semantic only 3=graphic only)
+WRITE_FDT=1
+#  integer Selects mode for graphic output (0=default 1=minimal graphic 2=polyline 3=2D tesselation 4=3D tesselation)
+WRITE_FDT_POLYLINE=0
+#  integer Writes Step Version (0=AP214 or AP203E2 with FDT 1=AP203 2=AP214 3=AP203E2 4=AP242)
+WRITE_VERSION=0
+#  integer Writes Names of Items (topological items)
+#    [0] -> no (empty name)
+#    [1] -> name from CAD if defined, else empty
+#    [2] -> "n° iii" : ID from CAD
+#    [3] -> "no iii" : ID from CAD
+WRITE_ITEMNAME=2
+#  integer Writes Attributes and Properties
+#    [0] -> no
+#    [1] -> Product Data
+#    [2] -> also general attributes (metadata) except "File Property"
+#    [3] -> all general attributes, also "File Property"
+WRITE_PROPERTY=0
+#  integer Drives Reading of Component Name
+#    [0] -> default : PRODUCT.ID only is taken
+#    [1] -> PRODUCT.ID is prior to PRODUCT.NAME if equally meaningfull
+#    [2] -> PRODUCT.NAME is prior to PRODUCT.ID if equally meaningfull
+#    [1 or 2] : if not equally meaningfull, the most meaningfull is taken
+#    [3] -> if different, PRODUCT.ID and PRODUCT.NAME are concatenated
+#    - Equally meaningfull : ordered from (1) empty or void, (2) number only or "ID_"+number, (3) alphanumeric 
+READ_COMPONENT_NAME=1
+#  integer Drives Computing/Checking of Validation Propeties (Read & Write)
+#    [0] -> no
+#    [1] -> computes simple validation properties
+#    [2] -> computes geometric validation properties (except clouds of points)
+#    [3] -> computes also clouds of points
+VALIDATION_PROPERTY=0
+#  integer Controls Length Unit on Writing
+#    [0] -> keeps original unit : MM (default)
+#    [between 1 and 6] -> changes writing unit but no conversion
+#    [1] -> MM [2] -> CM [3] -> M [4] -> KM [5] -> INCH [6] -> FOOT
+#    [between 11 and 16] -> changes writing unit and converts data from MM
+#    [11] -> MM [12] -> CM [13] -> M [14] -> KM [15] -> INCH [16] -> FOOT
+WRITE_LN_UNIT=0
+
+#
+# Configuration for COLLADA writer
+#
+[COLLADA CONF]
+REVERSE_TRANSPARENCY=0
+KEEP_DTK_TREE=1
+NO_INSTANCE_NODE=1
+VERSION=141
+USE_VERTEX_COLOR=0
+EXPLODE_ENTITIES=0
+
+
+#
+# Configuration for PDF writer
+#
+[PDF CONF]
+#  Should we convert texts to poylines ?
+#    [1] -> Yes(Default), [0] -> No
+RASTERIZE_TEXTS=0
+
+#  Font (TrueType or OpenType) used to display texts in PDF File if we don't rasterize them
+#  Please provide fullpath.
+#  If font is not found at the specified path, RASTERIZE_TEXTS will be activated.
+
+#  Arial Unicode MS: Standard Windows unicode font
+#  provided with MS Office
+TRUETYPE_FONT="C:\Windows\Fonts\ARIALUNI.TTF"
+
+#  QUIVIRA: Open source font with good unicode support
+#  Get it from http://www.quivira-font.com/
+#TRUETYPE_FONT="C:\Windows\Fonts\Quivira.otf"
+
+#  GNU Unifont: UNICODE font with full support of
+#  unicode Basic Multilingual Plane (BMP).
+#  Get it from http://www.unifoundry.com/unifont.html
+#TRUETYPE_FONT="C:\Windows\Fonts\unifont_0.ttf"
+
+
+#  Should we activate PRC format ?
+#    [1] -> Yes (Default), [0] -> No
+WRITE_PRC=1
+
+# This option lets you force a background color in 2D Writing - in Red Green Blue format -
+#The value of each component must be between 0-255. -1 means no value and invalidates the color.
+# Color sample:
+# RGB,255,0,0 #To have a red color
+#BACKGROUND_COLOR=RGB,0,0,0
+
+#  Should we write tesselated data or brep data ?
+#    [0] -> Mesh (Default), [1] -> BRep, [2] -> Mesh + BRep
+#    BRep is only available when writing PRC
+3D_FORMAT=0
+
+#  Should we export as monochrome display ?
+#    [0] -> No(Default) [1] -> Yes
+MONOCHROME_DISPLAY=0
+
+#
+# Configuration for Catia V5 2d Reader
+#
+[CATIAV5 2D CONF]
+#  Should we filter detail sheets into CATDrawing files ?
+#    [1] -> Yes (default), [0] -> No
+FILTER_DETAIL_SHEETS=1
+
+#
+# Configuration for JT Writer
+#
+#  Should we write ParasolidBRep in the JT file ?
+#    [1] -> Yes , [0] -> No (default)
+[JT CONF]
+WRITE_XTBREP=0
+#  Version output
+#  [80] -> version 8.0 (default), [95] -> version 9.5
+WRITE_RELEASE=80
+#  Export type
+#  [0] -> Monolithic (default), [1] -> Shattered, [2] -> PerPart
+WRITE_EXPORT_TYPE=0
+#  Assembly strategy
+#  [0] -> Write components only (default), [1] -> Write components and filled nodes
+WRITE_STRATEGY=1
+
+#
+# Configuration for JT Reader
+#
+#  Should we read PMI as semantic
+#    [1] -> Yes , [0] -> No (default, graphical)
+JT_PMI_AS_SEMANTIC=0
+
+[TOLERANCE]
+NB_DECIMALE=10
+TOL_CONTINUITE=0.01
+
+[PROE CONF]
+#  Should we change nurbs to conic for edge curves ?
+#    [1] -> Yes , [0] -> No (default)
+CREATE_CONIC_EDGES=0

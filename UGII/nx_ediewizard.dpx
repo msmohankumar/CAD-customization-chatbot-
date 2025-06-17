@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Engineering Die Wizard" csh="PMAN_EDW" package_suppress="simcenter3d,simviewer,view,mechatronicsplayer,nx2dedit">
+      <Category name="General" csh="PMAN_EDW_General">
+        <Tab name="General" csh="PMAN_EDW_General_General">
+          <Pref name="EDW_LOAD_WAVE_DATA" type="logical" title="Load WAVE Data" value="false" ver="8.0.0" scope="Session">
+            <Description>This option determines whether or not WAVE data should be loaded.</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="No" value="false"/>
+              <EnumElem name="Yes" value="true"/>
+            </Data>
+          </Pref>
+          <Pref name="EDW_RESERVE_CLONE_LOGFILE" type="logical" title="Keep Clone Log File under Project Directory" value="false" ver="8.0.0" scope="Session">
+            <Description>This option determines whether or not the clone log file should be kept under the project directory.</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="No" value="false"/>
+              <EnumElem name="Yes" value="true"/>
+            </Data>
+          </Pref>
+          <Group name="Teamcenter">
+            <Pref name="EDW_PART_ITEM_TYPE" type="string" title="Part Item Type" value="Item" ver="9.0.1" scope="Session">
+              <Description>This option specifies the customized item type of the part in Teamcenter.</Description>
+              <String/>
+            </Pref>
+            <Pref name="EDW_CONFIG_ITEM" type="string" title="Configuration File Item ID and Revision" value="@DB/00005/A" ver="11.0.0" scope="Session">
+              <Description>This option specifies the item ID and revision of the configuration file type in Teamcenter.</Description>
+              <String/>
+            </Pref>
+          </Group>
+        </Tab>
+        <Tab name="Part Name Definition" csh="PMAN_EDW_General_Part_Name_Definition">
+          <Group name="Project Settings">
+            <Pref name="EDW_DISPLAY_RENAME_DIALOG" type="logical" title="Display Rename Dialog Box" value="false" ver="8.0.0" scope="Session">
+              <Description>This option determines whether or not the part name mapping dialog box will be displayed when new parts are added to a Engineering Die Wizard project.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+            </Pref>
+            <Pref name="EDW_PROJECTNAMEDELIMITER" type="string" title="Delimiter in Part Name" value="_" ver="8.0.0" scope="Session">
+              <Description>This option specifies the customized delimiter in part names.</Description>
+              <String/>
+            </Pref>
+          </Group>
+          <Group name="Common">
+            <Pref name="EDW_NAME_MAP_TEMPLATE_FILE" type="string" title="Template Name Mapping File" value="map_template_name.xlsx::DEFAULT_MAPPING_TEMPLATE" ver="1980" scope="Session">
+              <Description>This option specifies a customized file to map template name.</Description>
+              <Widestring/>
+            </Pref>
+            <Pref name="EDW_PART_NAME_RULE" type="string_list" title="Custom Part Naming Rules" value="&quot;&lt;PROJECT_NAME&gt;_&lt;TEMPLATE_NAME&gt;_???&quot;\&quot;&lt;PROJECT_NAME&gt;_&lt;TEMPLATE_NAME&gt;_&lt;???&gt;&quot;" ver="2312" scope="Session">
+              <Description>This field allows the custom part naming rules to be specified. The part name is formed by combining a series of variables and characters.
+<Formatted>1. All alphanumeric characters are valid except \, /, ", *, :, and ?.
+2. The "?" character is an incrementing or user defined variable.
+The standard variables are:
+"PROJECT_NAME"  (set during project initialization)
+"TEMPLATE_NAME" (the name of the template part being cloned).</Formatted></Description>
+              <MultiLineText height="6"/>
+            </Pref>
+          </Group>
+          <Group name="Teamcenter">
+            <Pref name="EDW_NAME_IMAN_NUMBER" type="logical" title="Use Teamcenter Number as ??? in above Naming Rule" value="true" ver="8.0.0" scope="Session">
+              <Description>This option determines whether or not the Teamcenter name number should be used.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+            </Pref>
+            <Pref name="EDW_IMAN_NAME_METHOD" type="int" title="Teamcenter Part Naming Method" value="2" ver="8.0.0" scope="Session">
+              <Description>This option specifies the part naming method in the Teamcenter environment.
+<Formatted>
+First option: DB_PART_NAME = DB_PART_NO, which is defined by name rules.
+
+Second option: DB_PART_NO is defined by name rules, DB_PART_NAME is replaced by TEMPLATE_NAME.
+
+Third option: DB_PART_NO is defined by unique Teamcenter number, DB_PART_NAME is defined by name rules.</Formatted></Description>
+              <RadioBox/>
+              <Data type="enum">
+                <EnumElem name="Use Naming Rule for Part Name and Part Number" value="0"/>
+                <EnumElem name="Use Naming Rule for Part Number, Template Name for Part Name" value="1"/>
+                <EnumElem name="Use Teamcenter Number for Part Number, Naming Rule for Part Name" value="2"/>
+              </Data>
+            </Pref>
+          </Group>
+        </Tab>
+      </Category>
+      <Category name="Die Base" csh="PMAN_EDW_Die_Base">
+        <Tab name="General" csh="PMAN_EDW_Die_Base_General">
+          <Pref name="EDW_DIEBASEPARENT" type="string_list" title="Additional Parents" value="&quot;EDW_DB&quot;\&quot;EDW_SUB&quot;\&quot;EDW_STATION&quot;" ver="2212" scope="Session">
+            <Description>The Parent option menu in the Die Base Management System allows the parent to be chosen. This box allows additional parents to be specified that will be added to Parent option menu. The list values are attributes names in the components.</Description>
+            <MultiLineText height="4"/>
+          </Pref>
+        </Tab>
+      </Category>      
+      <Category name="Standard Parts" csh="PMAN_EDW_Standard_Parts">
+        <Tab name="General" csh="PMAN_EDW_Standard_Parts_General">
+          <Pref name="EDW_STANDARDPARENT" type="string_list" title="Standard Parent" value="&quot;EDW_DB&quot;\&quot;EDW_SUB&quot;\&quot;EDW_STATION&quot;" ver="2212" scope="Session">
+            <Description>The Parent option menu in the Standard Parts Management System allows the parent of the standard part to be chosen. This box allows additional parents to be specified that will be added to Parent option menu. The list values are attributes names in the components.</Description>
+            <MultiLineText height="4"/>
+          </Pref>
+          <Pref name="EDW_CURRENT_PARENT" type="string" title="Current Parent" value="EDW_DB" ver="2306" scope="Session">
+            <Description>This option specifies the parent for a different designer.</Description>
+            <Widestring/>
+          </Pref>
+        </Tab>
+      </Category>
+      <Category name="Insert Group" csh="PMAN_EDW_Insert_Group">
+        <Tab name="General" csh="PMAN_EDW_Insert_Group_General">
+          <Pref name="EDW_USE_CLEARANCES_FOR_ALL_INSERTS" type="logical" title="Use Clearances for All Insert Designs" value="true" ver="2306" scope="Session">
+            <Description>This option determines whether or not to use clearances for all insert designs.</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="No" value="false"/>
+              <EnumElem name="Yes" value="true"/>
+            </Data>
+          </Pref>
+          <Pref name="EDW_RECOGNIZE_SUB_DIE_BASE" type="logical" title="Recognize Corresponding Sub-die Base as Parent Part" value="false" ver="2306" scope="Session">
+            <Description>This option determines whether or not to recognize corresponding sub-die base as parent part.</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="No" value="false"/>
+              <EnumElem name="Yes" value="true"/>
+            </Data>
+          </Pref>
+        </Tab>
+        <Tab name="Punch Insert" csh="PMAN_EDW_Insert_Group_Punch_Insert">
+          <Pref name="EDW_PUNCH_LEN_EU" type="string" title="Punch Length" value="&lt;EDW_VAR&gt;::PUNCH_PENETRATION+&lt;EDW_DB&gt;::PP_DP_CL" ver="2206" scope="Session">
+            <Description>This option specifies the punch length in the format of an expression.</Description>
+            <Widestring/>
+          </Pref>
+          <Pref name="EDW_PUNCH_LEN_MU" type="string" title="Punch Length" value="ceil(&lt;EDW_VAR&gt;::PUNCH_PENETRATION+&lt;EDW_DB&gt;::PP_DP_CL)" ver="2206" scope="Session">
+            <Description>This option specifies the punch length in the format of an expression.</Description>
+            <Widestring/>
+          </Pref>
+        </Tab>
+      </Category>
+      <Category name="Station Management" csh="PMAN_EDW_Station_Management">
+        <Tab name="General" csh="PMAN_EDW_Station_Management_General">
+          <Pref name="EDW_Station_Management_Distance_MU" type="real" title="Distance" value="1000" unit="mm" ver="2206" scope="Session">
+            <Description>This option specifies the station distance.</Description>
+            <Real/>
+            <Data type="range">
+              <LowerBound value="0.0" include="0"/>
+            </Data>
+          </Pref>
+          <Pref name="EDW_Station_Management_Distance_EU" type="real" title="Distance" value="40" unit="in" ver="2206" scope="Session">
+            <Description>This option specifies the station distance.</Description>
+            <Real/>
+            <Data type="range">
+              <LowerBound value="0.0" include="0"/>
+            </Data>
+          </Pref>
+        </Tab>
+      </Category>      
+      <Category name="Inner Stripper Plate" csh="PMAN_EDW_Inner_Stripper_Plate">
+        <Tab name="General" csh="PMAN_EDW_Inner_Stripper_Plate_General">
+          <Pref name="EDW_Inner_Stripper_Plate_Height_First" type="string" title="Inner Stripper Plate Height 1" value="&lt;EDW_DB&gt;::DP_h-&lt;EDW_PART&gt;::UP_THICK-&lt;EDW_VAR&gt;::PUNCH_PENETRATION" ver="2206" scope="Session">
+            <Description>This option specifies the inner stripper plate height 1 in the format of an expression.</Description>
+            <Widestring/>
+          </Pref>
+          <Pref name="EDW_Inner_Stripper_Plate_Height_Second" type="string" title="Inner Stripper Plate Height 2" value="&lt;EDW_DB&gt;::SP_h" ver="2206" scope="Session">
+            <Description>This option specifies the inner stripper plate height 2 in the format of an expression.</Description>
+            <Widestring/>
+          </Pref>
+        </Tab>
+      </Category>      
+      <Category name="Tools" csh="PMAN_EDW_Tools">
+        <Tab name="Wire EDM Start Hole" csh="PMAN_EDW_Tools_Wire_EDM_Start_Hole">
+          <Pref name="EDW_Wire_Hole_Diameter_MU" type="real" title="Diameter" value="3.0" unit="mm" ver="2206" scope="Session">
+            <Description>This option specifies the wire EDM start hole diameter.</Description>
+            <Real/>
+            <Data type="range">
+              <LowerBound value="0.0" include="0"/>
+            </Data>
+          </Pref>
+          <Pref name="EDW_Wire_Hole_Diameter_EU" type="real" title="Diameter" value="0.12" unit="in" ver="2206" scope="Session">
+            <Description>This option specifies the wire EDM start hole diameter.</Description>
+            <Real/>
+            <Data type="range">
+              <LowerBound value="0.0" include="0"/>
+            </Data>
+          </Pref>
+          <Pref name="EDW_Wire_Hole_Centerline" type="string" title="Centerline Length" value="2*d" ver="2206" scope="Session">
+            <Description>This option specifies the wire EDM start hole centerline length in relation to its diameter.</Description>
+            <String/>
+          </Pref>
+          <Pref name="EDW_Wire_Hole_Distance_To_Midpoint_MU" type="real" title="Distance" value="3.0" unit="mm" ver="2206" scope="Session">
+            <Description>This option specifies the distance from the wire EDM start hole center to the edge midpoint.</Description>
+            <Real/>
+            <Data type="range">
+              <LowerBound value="0.0" include="0"/>
+            </Data>
+          </Pref>
+          <Pref name="EDW_Wire_Hole_Distance_To_Midpoint_EU" type="real" title="Distance" value="0.12" unit="in" ver="2206" scope="Session">
+            <Description>This option specifies the distance from the wire EDM start hole center to the edge midpoint.</Description>
+            <Real/>
+            <Data type="range">
+              <LowerBound value="0.0" include="0"/>
+            </Data>
+          </Pref>
+        </Tab>
+        <Tab name="Stripper Venting" csh="PMAN_EDW_Tools_Stripper_Venting">
+          <Pref name="EDW_Stripper_Venting_Blend_Radius_MU" type="real" title="Edge Blend Radius" value="0.2" unit="mm" ver="2206" scope="Session">
+            <Description>This option specifies the blend radius of venting hole.</Description>
+            <Real/>
+            <Data type="range">
+              <LowerBound value="0.0" include="1"/>
+            </Data>
+          </Pref>
+          <Pref name="EDW_Stripper_Venting_Blend_Radius_EU" type="real" title="Edge Blend Radius" value="0.01" unit="in" ver="2206" scope="Session">
+            <Description>This option specifies the blend radius of venting hole.</Description>
+            <Real/>
+            <Data type="range">
+              <LowerBound value="0.0" include="1"/>
+            </Data>
+          </Pref>
+        </Tab>
+        <Tab name="Slug Retention" csh="PMAN_EDW_Tools_Slug_Retention">
+          <Pref name="EDW_Slug_Retention_Metric_Spreadsheet_WIN" type="string" title="Metric Part" value="$EDIEWIZARD_DIR\templates\metric\edw_slug_retention.xlsx" ver="2206" scope="Session">
+            <Description>This field specifies the full file name of the slug retention spreadsheet with Metric units.</Description>
+            <BrowseFileSel type="xlsx"/>
+          </Pref>
+          <Pref name="EDW_Slug_Retention_Metric_Spreadsheet_UNX" type="string" title="Metric Part" value="$EDIEWIZARD_DIR/templates/metric/edw_slug_retention.xlsx" ver="2206" scope="Session">
+            <Description>This field specifies the full file name of the slug retention spreadsheet with Metric units.</Description>
+            <BrowseFileSel type="xlsx"/>
+          </Pref>
+          <Pref name="EDW_Slug_Retention_English_Spreadsheet_WIN" type="string" title="English Part" value="$EDIEWIZARD_DIR\templates\english\edw_slug_retention.xlsx" ver="2206" scope="Session">
+            <Description>This field specifies the full file name of the slug retention spreadsheet with English units.</Description>
+            <BrowseFileSel type="xlsx"/>
+          </Pref>
+          <Pref name="EDW_Slug_Retention_English_Spreadsheet_UNX" type="string" title="English Part" value="$EDIEWIZARD_DIR/templates/english/edw_slug_retention.xlsx" ver="2206" scope="Session">
+            <Description>This field specifies the full file name of the slug retention spreadsheet with English units.</Description>
+            <BrowseFileSel type="xlsx"/>
+          </Pref>
+        </Tab>
+      </Category>      
+    </Application>
+</PrefDefinition>
