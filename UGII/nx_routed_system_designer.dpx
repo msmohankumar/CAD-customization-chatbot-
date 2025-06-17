@@ -1,0 +1,1059 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Routed System Designer" csh="PMAN_RoutedSystemDesigner" package_suppress="simcenter3d,simviewer,view,nx2dedit">
+        <Category name="General" csh="PMAN_RoutedSystemDesigner_General">
+          <Tab name="General" csh="PMAN_RoutedSystemDesigner_General_General">
+            <Pref name="RSD_AutomaticallyLoadRoutingData" type="logical" title="Automatically Load Routing Data" value="false" ver="2312" scope="Session">
+              <Description>This option determines whether routing data should be loaded when opening an assembly in a Routed System Designer application.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+          </Tab>
+            <Tab name="Paths" csh="PMAN_RoutedSystemDesigner_General_Paths">
+                <Group name="Splines">
+                    <Pref name="RSD_UseMinimumRadiusAttribute" type="logical" title="Use Minimum Radius Attribute" value="false" ver="1953" scope="Session">
+                        <Description>This option determines whether or not the value of the Minimum Curve Check attribute on each path segment should be used when checking the minimum radius.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_RadiusAttributeMethod" type="int" title="Radius Attribute Method" value="1" ver="1953" scope="Session">
+                        <Description>This option specifies the radius attribute method.
+                            <Formatted>
+Radius: The value entered for the Minimum Checking Radius is the final minimum radius value.
+Ratio to Diameter: A ratio to be multiplied by the diameter of the stock or space reservation to generate the minimum radius value.
+                            </Formatted>
+                        </Description>
+                        <RadioBox orientation="vertical"/>
+                        <Data type="enum">
+                            <EnumElem name="Radius" value="1"/>
+                            <EnumElem name="Ratio to Diameter" value="2"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_DefaultPortExtensionLength_MU" type="real" title="Port Extension Length" value="1" unit="mm" ver="1953" scope="Session">
+                        <Description>This option specifies the spline extension magnitude for ports that do not have an extension defined.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_DefaultPortExtensionLength_EU" type="real" title="Port Extension Length" value="0.04" unit="in" ver="1953" scope="Session">
+                        <Description>This option specifies the spline extension magnitude for ports that do not have an extension defined.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_ConstrainedCurvatureFailureColor" type="int" title="Color when Failing Curvature Constraint" value="186" ver="1953" scope="Session">
+                        <Description>This option specifies the color of a constrained curvature spline when it fails to meet the specified radius.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Pref name="RSD_StockOffsetExpression" type="string" title="Stock Offset Expression" value="(MAX_PATH_STOCK_DIA/2.0)" ver="1953" scope="Session">
+                    <Description>This option specifies the expression used to offset a control point due to stock on the path.</Description>
+                    <Widestring/>
+                </Pref>
+                <Group name="Jump Path">
+                    <Pref name="RSD_JumpPathApplyStyle" type="logical" title="Apply Style" value="true" ver="2312" scope="Session">
+                        <Description>This option determines whether or not to show cableway jump paths in the specified color, style, and width.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_JumpPathColor" type="int" title="Color" value="181" ver="2312" scope="Session">
+                        <Description>This option specifies the color of cableway jump paths.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="RSD_JumpPathStyle" type="int" title="Style" value="2" ver="2312" scope="Session">
+                        <Description>This option specifies the line style for cableway jump paths.</Description>
+                        <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="2"/>
+                    </Pref>
+                    <Pref name="RSD_JumpPathWidth" type="int" title="Width" value="10" ver="2312" scope="Session">
+                        <Description>This option specifies the line width for cableway jump paths.</Description>
+                        <ObjectLineWidth allowWideLineWidth="true"/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Stock" csh="PMAN_RoutedSystemDesigner_General_Stock">
+                <Group name="New Object Translucency">
+                    <Label label="The following options are used to define the translucency of newly created routing objects."/>
+                    <Pref name="RSD_StockTranslucency" type="int" title="Stock" value="0" unit="%" ver="1953" scope="Session">
+                        <Description>This option specifies the translucency of general routing stock.</Description>
+                        <IntegerScale/>
+                        <Data type="range">
+                            <LowerBound value="0" include="1"/>
+                            <UpperBound value="100" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_InsulationTranslucency" type="int" title="Insulation" value="50" unit="%" ver="1953" scope="Session">
+                        <Description>This option specifies the translucency of routing insulation.</Description>
+                        <IntegerScale/>
+                        <Data type="range">
+                            <LowerBound value="0" include="1"/>
+                            <UpperBound value="100" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_SpaceReservationTranslucency" type="int" title="Space Reservation" value="50" unit="%" ver="1953" scope="Session">
+                        <Description>This option specifies the translucency of routing space reservation.</Description>
+                        <IntegerScale/>
+                        <Data type="range">
+                            <LowerBound value="0" include="1"/>
+                            <UpperBound value="100" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Existing Object Translucency">
+                    <Pref name="RSD_ExistingObjectTranslucency" type="logical" title="Apply Translucency to Work Part Components" value="false" ver="2312" scope="Session">
+                        <Description>This option determines whether or not to apply temporary translucency to routing components in the work part.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                 </Group>
+                <Pref name="RSD_SpaceReservationSetBodyDensityToZero" type="logical" title="Set Space Reservation Body Density to Zero" value="true" ver="1953" scope="Session">
+                    <Description>This option determines whether or not to set the body density to zero for space reservation.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Group name="Native NX">
+                    <Pref name="RSD_StockComponentFolder_WIN" type="string" title="Stock Component Folder" value="" ver="1953" scope="Session">
+                        <Description>This option specifies the location of newly created temporary stock components. This may be a directory that does not exist, as the directory will then be created. If the directory cannot be created, the work directory is used. The directory specified may be relative or absolute.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                    <Pref name="RSD_StockComponentFolder_UNX" type="string" title="Stock Component Folder" value="" ver="1953" scope="Session">
+                        <Description>This option specifies the location of newly created temporary stock components. This may be a directory that does not exist, as the directory will then be created. If the directory cannot be created, the work directory is used. The directory specified may be relative or absolute.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                </Group>
+                <Group name="Teamcenter Integration">
+                    <Pref name="RSD_StockComponentFolder_TC" type="string" title="Stock Component Folder" value="" ver="1953" scope="Session">
+                        <Description>This option specifies the location of newly created temporary stock components. This should be an existing folder. If the folder does not exist, the default folder is used.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Parts" csh="PMAN_RoutedSystemDesigner_General_Parts">
+                <Pref name="RSD_PartsLayerOption" type="int" title="Layer" value="1" ver="1953" scope="Session">
+                    <Description>This option specifies the layer option used when adding routing components to an assembly.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Original" value="1"/>
+                        <EnumElem name="Work" value="2"/>
+                        <EnumElem name="As Specified" value="3"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_PartsUsePrefPortPlacement" type="logical" title="Use Preferred Port Placement" value="false" ver="1953" scope="Session">
+                    <Description>If a port is found with a user-specified attribute or name value during Place Part, this option determines whether or not the most favorable solution derived using this port is suggested as the first solution for placing the routing part.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                    <Docum>Having this option on takes extra processing, so is probably best used only if there are many placement possibilities for the parts.</Docum>
+                </Pref>
+                <Pref name="RSD_PrefPortPlacementMethod" type="int" title="Placement Method" value="0" ver="1953" scope="Session">
+                    <Description>This option specifies the method used for the preferred port placement.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Attribute" value="0"/>
+                        <EnumElem name="Name" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_PrefPortPlacementAttributeName" type="string" title="Attribute Name" value="" ver="1953" scope="Session">
+                    <Description>When Method is set to Attribute, this option defines the name of the port attribute.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="RSD_PrefPortPlacementAttributeValue" type="string" title="Attribute Value" value="" ver="1953" scope="Session">
+                    <Description>When Method is set to Attribute, this option defines the value of the port attribute.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="RSD_PrefPortPlacementName" type="string" title="Port Name" value="" ver="1953" scope="Session">
+                    <Description>When Method is set to Name, this option defines the name of the port.</Description>
+                    <String/>
+                </Pref>
+            </Tab>
+            <Tab name="Display" csh="PMAN_RoutedSystemDesigner_General_Display">
+                <Group name="Port">
+                    <Pref name="RSD_DisplayConnectedPorts" type="logical" title="Display Connected Ports" value="false" ver="1953" scope="Session">
+                        <Description>This option determines whether or not connected ports are displayed.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_DisplayPortLength_MU" type="real" title="Port Length" value="25.4" unit="mm" ver="1953" scope="Session">
+                        <Description>This option specifies the length of ports to display.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_DisplayPortLength_EU" type="real" title="Port Length" value="1.0" unit="in" ver="1953" scope="Session">
+                        <Description>This option specifies the length of ports to display.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Design Rule Display">
+                    <Pref name="RSD_ViolationObjectsColor" type="int" title="Violation Objects Color" value="-1" ver="1953" scope="Session">
+                        <Description>This option specifies the color of violated objects.</Description>
+                        <ColorOption/>
+                        <Data type="color">
+                            <EnumElem name="Default" value="-1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="Part Library" csh="PMAN_RoutedSystemDesigner_Part_Library">
+            <Tab name="Reuse Library" csh="PMAN_RoutedSystemDesigner_Part_Library_Reuse_Library">
+                <Group name="Library Configuration">
+                    <Pref name="RSD_PartLibraryConfiguration" type="int" title="Part Library Configuration" value="0" ver="1953" scope="Session">
+                        <Description>This options specifies if the part library is driven by Teamcenter Classification or PTB files (Native or Teamcenter).</Description>
+                        <RadioBox orientation="vertical"/>
+                        <Data type="enum">
+                            <EnumElem name="Native/Teamcenter PTB" value="0"/>
+                            <EnumElem name="Teamcenter Classification" value="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_PartLibraryClassificationRoot" type="string" title="Classification Root" value="routing_parts" ver="1953" scope="Session">
+                        <Description>This options is valid for Teamcenter Classification mode only. It specifies which node in the classification hierarchy is the root of the routing part library.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="RSD_PartLibraryStartingNodeType" type="int" title="Search" value="1" ver="1953" scope="Session">
+                        <Description>This option determines whether to search the Routing Part Library only from the current node or from the root node.</Description>
+                        <RadioBox/>
+                        <Data type="enum">
+                            <EnumElem name="From Current Node" value="0"/>
+                            <EnumElem name="From Root Node" value="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_EnableSearchingTeamcenterClassificationDirectly" type="logical" title="Provide Search of Teamcenter Classification Directly" value="false" ver="1953" scope="Session">
+                        <Description>This option determines whether or not a Search button should be provided to allow searching of attribute values directly from the Teamcenter Classification database. For large Teamcenter Classification libraries, this is faster than querying for and loading all the underlying members. This option applies only when using the Routing Part Library with Teamcenter Classification.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_ClassificationObjectThresholdForSearchingTeamcenterDirectly" type="int" title="Threshold Value to Search Teamcenter Classification Directly" value="200" ver="1953" scope="Session">
+                        <Description>When the 'Provide Search of Teamcenter Classification Directly' option is on, this option specifies the number of classification objects that have to be classified under a specific node or its child nodes in the Routing Part Library for a Search button to be provided on the Search Children dialog. The Search button allows a search directly of Teamcenter Classification without having to load all the underlying data for the node or its child nodes. This option applies only when using the Routing Part Library with Teamcenter Classification.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="0" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Discipline">
+                    <Docum>The discipline specified here is used as the current discipline on Routing application load. If the discipline specified here is not present in the Application View XML files, then the current discipline is set to "none".</Docum>
+                    <Label label="The following options are used to define the initial discipline for the Routing applications. Disciplines are defined in the Application View XML files."/>
+                    <Pref name="RSD_PartLibraryDefaultElecDiscipline" type="string" title="Routing Electrical" value="Wiring" ver="1953" scope="Session">
+                        <Description>This option specifies the initial discipline for the Routing Electrical application.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="RSD_PartLibraryDefaultMechDiscipline" type="string" title="Routing Mechanical" value="Piping" ver="1953" scope="Session">
+                        <Description>This option specifies the initial discipline for the Routing Mechanical application.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Specification Folders" csh="PMAN_RoutedSystemDesigner_Part_Library_Specifications_Folders">
+                <Label label="The following options are used to define the native folder path for the Routing applications."/>
+                <Pref name="RSD_ElectricalSpecificationsFolder_WIN" type="string" title="Routing Electrical" value="$UGII_ROUTE_ELEC_KIT_DIR\specifications\$UGII_ROUTING_KIT_UNITS\" ver="1953" scope="Session">
+                    <Description>This option specifies the folder path for specification XML files in Routing Electrical.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+                <Pref name="RSD_ElectricalSpecificationsFolder_UNX" type="string" title="Routing Electrical" value="$UGII_ROUTE_ELEC_KIT_DIR/specifications/$UGII_ROUTING_KIT_UNITS/" ver="1953" scope="Session">
+                    <Description>This option specifies the folder path for specification XML files in Routing Electrical.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+                <Pref name="RSD_MechanicalSpecificationsFolder_WIN" type="string" title="Routing Mechanical" value="$UGII_ROUTE_MECH_KIT_DIR\specifications\$UGII_ROUTING_KIT_UNITS\" ver="1953" scope="Session">
+                    <Description>This option specifies the folder path for specification XML files in Routing Mechanical.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+                <Pref name="RSD_MechanicalSpecificationsFolder_UNX" type="string" title="Routing Mechanical" value="$UGII_ROUTE_MECH_KIT_DIR/specifications/$UGII_ROUTING_KIT_UNITS/" ver="1953" scope="Session">
+                    <Description>This option specifies the folder path for specification XML files in Routing Mechanical.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+                <Pref name="RSD_SpecificationNativeOption" type="int" title="Folders when Connected to Teamcenter" value="1" ver="1953" scope="Session">
+                    <Description>This option applies only when connected to Teamcenter and determines if specification files are loaded and saved exclusively from/to native folders or from/to Teamcenter. The Teamcenter specification folders are set in the Teamcenter preferences.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Native" value="0"/>
+                        <EnumElem name="Teamcenter" value="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Electrical" csh="PMAN_RoutedSystemDesigner_Electrical">
+            <Tab name="General" csh="PMAN_RoutedSystemDesigner_Electrical_General">
+                <Pref name="RSD_ElectricalBundleColor" type="int" title="Bundle Color" value="134" ver="1953" scope="Session">
+                    <Description>This option specifies the color of routed bundles.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="RSD_ElectricalDeleteSRStockOnRoute" type="logical" title="Delete Space Reservation Stock on Auto or Manual Route" value="false" ver="1953" scope="Session">
+                    <Description>This option determines whether or not to delete Space Reservation stock upon Auto or Manual route. When this option is off, Space Reservation stock remains over the segments along with other stocks but not as a part of the bundle stock.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_ElectricalUseParentCableStock" type="logical" title="Use Cable Stock when Wire Stock is Missing" value="false" ver="2206" scope="Session">
+                    <Description>This option determines whether or not to use the stock of the parent cable if the stock of the child wire cannot be found.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_ElectricalMinimumInsulationWidth_MU" type="real" title="Minimum Insulation Width" value="2.5" unit="mm" ver="1953" scope="Session">
+                    <Description>This option specifies the minimum insulation length for insulation that does not have a specified width.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_ElectricalMinimumInsulationWidth_EU" type="real" title="Minimum Insulation Width" value="0.1" unit="in" ver="1953" scope="Session">
+                    <Description>This option specifies the minimum insulation length for insulation that does not have a specified width.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Group name="Wire Cut Length Calculation">
+                    <Pref name="RSD_ElectricalCutLengthMultiplier" type="real" title="Cut Length Multiplier" value="10.0" unit="%" ver="1953" scope="Session">
+                        <Description>This option specifies how much a wire's length should be increased when calculating the cut length. The cut length is calculated by starting with the modeled length and adding the modeled length multiplied by the Cut Length Multiplier and then adding the Cut Length Offset.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_ElectricalCutLengthOffset_MU" type="real" title="Cut Length Offset" value="5.0" unit="mm" ver="1953" scope="Session">
+                        <Description>This option specifies the additional length to add to a wire's length when calculating the cut length. The cut length is calculated by multiplying the wire's modeled length by the Cut Length Multiplier and then adding the Cut Length Offset.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_ElectricalCutLengthOffset_EU" type="real" title="Cut Length Offset" value="0.25" unit="in" ver="1953" scope="Session">
+                        <Description>This option specifies the additional length to add to a wire's length when calculating the cut length. The cut length is calculated by multiplying the wire's modeled length by the Cut Length Multiplier and then adding the Cut Length Offset.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Pref name="RSD_ElectricalDefaultJumperLength_MU" type="real" title="Jumper Wire Length" value="25.0" unit="mm" ver="1953" scope="Session">
+                      <Description>Automatic Route and Manual Route set the length of jumper wires to this value when the calculated 3D length of the wire is 0 (zero).</Description>
+                       <Real/>
+                       <Data type="range">
+                       <LowerBound value="0.0" include="1"/>
+                       </Data>
+                </Pref>
+                <Pref name="RSD_ElectricalDefaultJumperLength_EU" type="real" title="Jumper Wire Length" value="1.0" unit="in" ver="1953" scope="Session">
+                    <Description>DAutomatic Route and Manual Route set the length of jumper wires to this value when the calculated 3D length of the wire is 0 (zero).</Description>
+                    <Real/>
+                    <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Navigators" csh="PMAN_RoutedSystemDesigner_Electrical_Navigators">
+              <Pref name="RSD_ElectricalHarnessName" type="string" title="Harness Name" value="" ver="1953" scope="Session">
+                <Description>This option specifies the harness name supplied to connections that have no specified harness.</Description>
+                <Widestring/>
+              </Pref>
+
+              <Group name="Auto Assignment Method">
+                  <Pref name="RSD_ElectricalComponentMatchMethod" type="list_sel_reorder_value" title="Match By" value="&quot;COMPONENT_NAME&quot;\&quot;ATTRIBUTE&quot;\&quot;FILE_NAME&quot;" ver="1980" scope="Session">
+                      <Description>This option specifies the methods by which to automatically assign components in the Component List Navigator. The order in the list indicates the order in which they will be shown in the dialog box.</Description>
+                      <ListSelReorder height="4" reorderable="true" selectable="false"/>
+                      <Data type="enum">
+                          <EnumElem name="Component Name" value="COMPONENT_NAME"/>
+                          <EnumElem name="Attribute" value="ATTRIBUTE"/>
+                          <EnumElem name="File Name" value="FILE_NAME"/>
+                      </Data>
+                  <Docum>
+                    <Formatted>
+Attribute: Compares the Component List Navigator cell value under the Column Heading to the value of the component or port attribute of the given title.
+    The column name is the display name of the field in the display format.
+    The comparison is case sensitive.
+
+Component Name: Compares the Connector name, Component name, and Equipment name to the name of each component.
+    The comparison is case sensitive.
+
+File Name: Compares the part name of a Connector to the file name of a candidate part.
+    The comparison is not case sensitive and does not compare the extension.
+                    </Formatted>
+                  </Docum>
+                </Pref>
+                <Pref name="RSD_ElectricalColumnToMatch" type="string" title="Component List Column Title" value="&lt;NONE&gt;" ver="1953" scope="Session">
+                  <Description>This option specifies the Component List Navigator column name in which to look for a match to the Component Attribute value. This option is used when Match By is set to Attribute.</Description>
+                  <Widestring/>
+                </Pref>
+                <Pref name="RSD_ElectricalNameToMatch" type="string" title="Component Attribute Title" value="&lt;NONE&gt;" ver="1953" scope="Session">
+                  <Description>This option specifies the component attribute name for which to get the value for matching with the Component List Navigator's specified column's row value for attribute matching. This option is used when Match By is set to Attribute.</Description>
+                  <Widestring/>
+                </Pref>
+              </Group>
+
+              <Pref name="RSD_ElectricalHighlightWireStock" type="logical" title="Highlight Wire Stock" value="true" ver="1953" scope="Session">
+                <Description>This option determines whether or not wire stock is highlighted when a Connection List Navigator row is selected.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>
+              <Pref name="RSD_ElectricalHighlightWirePath" type="logical" title="Highlight Wire Path" value="false" ver="1953" scope="Session">
+                <Description>This option determines whether or not wire paths are highlighted when a routed segment is selected.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>
+              <Group name="Automatic Route">
+                    <Pref name="RSD_ElectricalAutoRoute" type="int" title="Route Level" value="1" ver="1953" scope="Session">
+                        <Description>This option specifies at what level to route. Component level routing does not require that the connection have pin information.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Pin" value="1"/>
+                            <EnumElem name="Component" value="2"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_ElectricalAutoRouteStockStyle" type="int" title="Stock Style" value="1" ver="1953" scope="Session">
+                        <Description>This option specifies the stock style to use during automatic routing. Centerline makes automatic routing faster. Simple shows the wire bundles as sweeps.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Centerline" value="0"/>
+                            <EnumElem name="Simple" value="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_ElectricalAllowEditOfNavigatorData" type="logical" title="Allow Edit of Navigator Column Data" value="true" ver="1953" scope="Session">
+                        <Description>This option determines whether or not to allow editing of the data in the Connection and Component List columns.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                        <Docum>When this option is off, data cannot be created or edited in the Connector or Component List. Data can still be imported and exported. Entire rows can also be deleted.</Docum>
+                    </Pref>
+                </Group>
+            </Tab>
+
+            <!--=================================================================================-->
+            <Tab name="Import and Export" csh="PMAN_RoutedSystemDesigner_Electrical_Import_Export">
+                <Pref name="RSD_ElectricalExportRouteListInBulk" type="logical" title="Export Route List in Bulk" value="false" ver="2212" scope="Session">
+                    <Description>This option determines whether or not to export route list PLMXML from assemblies in the work part.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_ElectricalExportUnroutedTopology" type="logical" title="Include Unrouted Topology and Parts on Export" value="false" ver="2212" scope="Session">
+                    <Description>This option determines whether or not to include unrouted topology and parts when exporting route list files (PLMXML and ZIP).</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_ElectricalReportConnectorClockingAngleInfo" type="logical" title="Include Component Orientation" value="false" ver="2212" scope="Session">
+                    <Description>This option determines whether or not to include component orientation when exporting route list files.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_ElectricalExportToTeamCenterOnSave" type="logical" title="Export Route List to Teamcenter on Part Save" value="false" ver="2212" scope="Session">
+                    <Description>This option determines whether or not to automatically update and export route list files (PLMXML) to Teamcenter when the work part is saved.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No"  value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_ElectricalExportFilterFormatsWithLegacyFiles" type="logical" title="Export Format with Legacy Files" value="true" ver="2212" scope="Session">
+                    <Description>This option determines whether or not to export the format description in legacy CMP/HRN files.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Formboard" csh="PMAN_RoutedSystemDesigner_Formboard">
+            <Tab name="Layout Options" csh="PMAN_RoutedSystemDesigner_Formboard_Layout_Options">
+                <Pref name="RSD_FormboardMainRunMethod" type="int" title="Main Run" value="0" ver="2212" scope="Session">
+                    <Description>This option specifies the method used to calculate the main run in the Formboard.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Longest"        value="0"/>
+                        <EnumElem name="Thickest"       value="1"/>
+                        <EnumElem name="User Selection" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_FormboardBranchAngleMethod" type="int" title="Branch Angles" value="0" ver="2212" scope="Session">
+                    <Description>This option specifies the method used to calculate the angles of the flattened branches in the Formboard.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="As Designed"        value="0"/>
+                        <EnumElem name="Standard Angles"    value="1"/>
+                        <EnumElem name="Maximum Angles"     value="2"/>
+                        <EnumElem name="Random Angles"      value="3"/>
+                    </Data>
+                </Pref>
+                <Group name="Standard Angles">
+                    <Pref name="RSD_FormboardPrimaryAngle" type="real" title="Primary Angle" value="90.0" unit="deg" ver="2212" scope="Session">
+                        <Description>This option specifies the primary standard angle.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                            <UpperBound value="180.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_FormboardSecondaryAngle" type="real" title="Secondary Angle" value="45.0" unit="deg" ver="2212" scope="Session">
+                        <Description>This option specifies the secondary standard angle (applies only when all of the primary angle locations have been filled with branches).</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                            <UpperBound value="180.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_FormboardTertiaryAngle" type="real" title="Tertiary Angle" value="30.0" unit="deg" ver="2212" scope="Session">
+                        <Description>This option specifies the tertiary standard angle (applies only when all of the primary and secondary angle locations have been filled with branches).</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                            <UpperBound value="180.0" include="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Random Angles">
+                    <Pref name="RSD_FormboardMinRandomAngle" type="real" title="Minimum Angle" value="10.0" unit="deg" ver="2212" scope="Session">
+                        <Description>This option specifies the minimum random branch angle.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                            <UpperBound value="180.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_FormboardMaxRandomAngle" type="real" title="Maximum Angle" value="170.0" unit="deg" ver="2212" scope="Session">
+                        <Description>This option specifies the maximum random branch angle.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                            <UpperBound value="180.0" include="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Pref name="RSD_FormboardBranchShapeType" type="int" title="Branch Shape" value="0" ver="2212" scope="Session">
+                    <Description>This option specifies if branches should be straightened out or angled when flattening.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Straight"   value="0"/>
+                        <EnumElem name="Angled"     value="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Length Rounding" csh="PMAN_RoutedSystemDesigner_Formboard_Length_Rounding">
+                <Group name="Modeled Segment Lengths">
+                    <Pref name="RSD_FormboardSegmentLengthRoundingMethod" type="int" title="Rounding Method" value="2" ver="2212" scope="Session">
+                        <Description>This option specifies if formboard segments should be modeled at a rounded length and if so what rounding method should be used.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Exact"              value="0"/>
+                            <EnumElem name="Nearest"            value="1"/>
+                            <EnumElem name="Up to Nearest"      value="2"/>
+                            <EnumElem name="Down to Nearest"    value="3"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_FormboardSegmentLengthIncrement_MU" type="real" title="Increment" value="10" unit="mm" ver="2212" scope="Part">
+                        <Description>This option specifies the value to round to when not using exact segment lengths.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_FormboardSegmentLengthIncrement_EU" type="real" title="Increment" value=".25" unit="in" ver="2212" scope="Part">
+                        <Description>This option specifies the value to round to when not using exact segment lengths.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Overstock Lengths">
+                    <Pref name="RSD_FormboardOverstockLengthRoundingMethod" type="int" title="Rounding Method" value="2" ver="2212" scope="Session">
+                        <Description>This option specifies if the wrapped length of overstocks should be rounded and if so what rounding method should be used.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Exact"              value="0"/>
+                            <EnumElem name="Nearest"            value="1"/>
+                            <EnumElem name="Up to Nearest"      value="2"/>
+                            <EnumElem name="Down to Nearest"    value="3"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_FormboardOverstockLengthIncrement_MU" type="real" title="Increment" value="10" unit="mm" ver="2212" scope="Part">
+                        <Description>This option specifies the value to round to when not using exact wrapped overstock lengths.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_FormboardOverstockLengthIncrement_EU" type="real" title="Increment" value=".25" unit="in" ver="2212" scope="Part">
+                        <Description>This option specifies the value to round to when not using exact wrapped overstock lengths.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Connection List Lengths">
+                    <Pref name="RSD_FormboardNetlistLengthRoundingMethod" type="int" title="Rounding Method" value="2" ver="2212" scope="Session">
+                        <Description>This option specifies if the cut-length values of the connections in the Connection List should be rounded and if so what rounding method should be used.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Exact"              value="0"/>
+                            <EnumElem name="Nearest"            value="1"/>
+                            <EnumElem name="Up to Nearest"      value="2"/>
+                            <EnumElem name="Down to Nearest"    value="3"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_FormboardNetlistLengthIncrement_MU" type="real" title="Increment" value="10" unit="mm" ver="2212" scope="Part">
+                        <Description>This option specifies the value to round to when not using exact connection cut-lengths in the Connection List.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_FormboardNetlistLengthIncrement_EU" type="real" title="Increment" value=".25" unit="in" ver="2212" scope="Part">
+                        <Description>This option specifies the value to round to when not using exact connection cut-lengths in the Connection List.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Annotation" csh="PMAN_RoutedSystemDesigner_Formboard_Annotation">
+                <Pref name="RSD_FormboardCutSheetAttributesList" type="string_list" title="Attribute List" value="unique_id" ver="2212" scope="Session">
+                    <Description>This list defines the attributes for Formboard cut sheets.</Description>
+                    <MultiLineText height="4"/>
+                </Pref>
+                <Group name="Annotation Preference">
+                    <Pref name="RSD_FormboardAutoUpdate" type="logical" title="Automatic Update" value="true" ver="2212" scope="Session">
+                        <Description>This option determines whether or not selected objects should update automatically when the formboard is updated.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_FormboardFlattenHierarchy" type="logical" title="Flatten Hierarchy" value="false" ver="2212" scope="Session">
+                        <Description>This option determines whether or not to show Cable/Shield nodes that do not have an explicit route associated with them.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_FormboardtabnoteInitialNumberOfRows" type="int" title="Number of Rows" value="5" ver="2212" scope="Session">
+                        <Description>This option specifies the number of rows for a new, empty tabular note for a cut sheet annotation.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_FormboardtabnoteInitialNumberOfColumns" type="int" title="Number of Columns" value="5" ver="2212" scope="Session">
+                        <Description>This option specifies the number of columns for a new, empty tabular note for a cut sheet annotation.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Pin List Annotation" csh="PMAN_RoutedSystemDesigner_Formboard_Pin_List_Annotation">
+                <Pref name="RSD_FormboardPinListAttributesList" type="string_list" title="Attribute List" value="unique_id" ver="2212" scope="Session">
+                    <Description>This list defines the attributes for the Pin List.</Description>
+                    <MultiLineText height="4"/>
+                </Pref>
+                <Pref name="RSD_FormboardPinListFilter" type="int" title="Pin List Filter" value="0" ver="2212" scope="Session">
+                    <Description>This option specifies what types of connection list items to display in the Pin List tabular note.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Routed and Unrouted Connections"  value="0"/>
+                        <EnumElem name="Only Routed Connections"  value="1"/>
+                        <EnumElem name="Only Unrouted Connections" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_FormboardPinListHeaderAttribute" type="string" title="Header Attribute" value="" ver="2212" scope="Session">
+                    <Description>This option specifies the attribute name to display in the Pin List header.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="RSD_FormboardPinListColumnWidth_MU" type="real" title="Column Width" value="40.0" unit="mm" ver="2212" scope="Session">
+                    <Description>This option specifies the column width for a new, empty pin list.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_FormboardPinListColumnWidth_EU" type="real" title="Column Width" value="2.0" unit="in" ver="2212" scope="Session">
+                    <Description>This option specifies the column width for a new, empty pin list.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Object Attribute Annotation" csh="PMAN_RoutedSystemDesigner_Formboard_Object_Attribute_Annotation">
+                <Pref name="RSD_FormboardObjectAttributeInitialNumberOfRows" type="int" title="Number of Rows" value="2" ver="2212" scope="Session">
+                    <Description>This option specifies the number of rows for a new, empty tabular note for an object attribute annotation.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_FormboardObjectAttributeInitialNumberOfColumns" type="int" title="Number of Columns" value="5" ver="2212" scope="Session">
+                    <Description>This option specifies the number of columns for a new, empty tabular note for an object attribute annotation.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_FormboardObjectAttributeAutoPlacement" type="logical" title="Automatic Placement" value="false" ver="2212" scope="Session">
+                    <Description>This option determines whether or not object attribute annotations should be placed automatically when an object (for example, a stock) is selected.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="On" value="true"/>
+                        <EnumElem name="Off" value="false"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Mechanical" csh="PMAN_RoutedSystemDesigner_Mechanical">
+            <Tab name="General" csh="PMAN_RoutedSystemDesigner_Mechanical_General">
+                <Pref name="RSD_EnableRunNavigator" type="logical" title="Display Run Navigator in No Part State" value="false" ver="1953" scope="Session">
+                    <Description>This option determines if the Run Navigator should be available when these conditions are satisfied:
+                        <Formatted>
+1. There is no work part.
+2. NX is connected to Teamcenter.
+3. The "Piping and Tubing" license is available.
+                        </Formatted>
+                    </Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_MechanicalMinimumInsulationWidth_MU" type="real" title="Minimum Insulation Width" value="2.5" unit="mm" ver="1953" scope="Session">
+                    <Description>This option specifies the minimum insulation width for insulation that does not have a specified width.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_MechanicalMinimumInsulationWidth_EU" type="real" title="Minimum Insulation Width" value="0.1" unit="in" ver="1953" scope="Session">
+                    <Description>This option specifies the minimum insulation width for insulation that does not have a specified width.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_MechanicalBendRadiusToAttributeRatio" type="real" title="Ratio to Attribute" value="2.0" ver="1953" scope="Session">
+                  <Description>This option specifies the ratio between the bend corner radius and the attribute value for bend method Ratio to Attribute.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="RSD_MechanicalBendRadiusToAttributeName" type="string" title="Attribute Name for Ratio to Attribute" value="" ver="1953" scope="Session">
+                  <Description>This option specifies the attribute name for bend method Ratio to Attribute.</Description>
+                  <String/>
+                </Pref>
+            </Tab>
+            <Tab name="Bend Radius Table" csh="PMAN_RoutedSystemDesigner_Mechanical_Bend_Radius_Table">
+                <Pref name="RSD_BendRadiusTableExcel_WIN" type="string" title="Spreadsheet File" value="$UGII_ROUTE_MECH_KIT_DIR\metric\tables\bend_radius_table_mm.xlsx" ver="2212" scope="Session">
+                    <Description>This option specifies the bend radius table Excel file for Routing Mechanical.</Description>
+                    <BrowseFileSel type="xlsx"/>
+                </Pref>
+                <Pref name="RSD_BendRadiusTableExcel_UNX" type="string" title="Spreadsheet File" value="$UGII_ROUTE_MECH_KIT_DIR/metric/tables/bend_radius_table_mm.xlsx" ver="2212" scope="Session">
+                    <Description>This option specifies the bend radius table Excel file for Routing Mechanical.</Description>
+                    <BrowseFileSel type="xlsx"/>
+                </Pref>
+            </Tab>
+            <Tab name="Spools" csh="PMAN_RoutedSystemDesigner_Mechanical_Spools">
+              <Group name="Attribute">
+                  <Pref name="RSD_UseAttributeGroupForSpools" type="logical" title="Use Teamcenter Attribute Group" value="false" ver="2312" scope="Session">
+                      <Description>This option determines whether or not a spool component should use a Teamcenter configured attribute group.</Description>
+                      <Toggle off="false"/>
+                      <Data type="enum">
+                          <EnumElem name="Yes" value="true"/>
+                          <EnumElem name="No" value="false"/>
+                      </Data>
+                  </Pref>
+                  <Pref name="RSD_SpoolAttributeGroupName" type="string" title="Attribute Group Name" value="Tcn4RoutingSpool" ver="2312" scope="Session">
+                      <Description>This option specifies the spool attribute group name which is configured in Teamcenter.</Description>
+                      <Widestring/>
+                  </Pref>
+                  <Pref name="RSD_SpoolIdentifierAttributeCategory" type="string" title="Identifier Attribute Category" value="Routing" ver="2007" scope="Session">
+                      <Description>This option specifies the category of the attribute used to identify which spools a component belongs in.</Description>
+                      <Widestring/>
+                  </Pref>
+                  <Pref name="RSD_SpoolIdentifierAttribute" type="string" title="Identifier Attribute Name" value="SPOOL_ID" ver="2007" scope="Session">
+                      <Description>This option specifies the attribute name used to identify which spools a component belongs in.</Description>
+                      <Widestring/>
+                  </Pref>
+              </Group>
+              <Group name="Naming">
+                <Pref name="RSD_SpoolNamePrefix" type="string" title="Name Prefix" value="Spool " ver="2007" scope="Session">
+                  <Description>This option specifies the initial letter or letter sequence to use for naming a spool identifier.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="RSD_SpoolNameSuffix" type="string" title="Name Suffix" value="" ver="2007" scope="Session">
+                  <Description>This option specifies the final letter or letter sequence to use for naming a spool identifier.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="RSD_SpoolNameSequenceMethod" type="int" title="Sequence Method" value="0" ver="2007" scope="Session">
+                  <Description>This option specifies which sequence method should be used for naming a spool identifier.</Description>
+                  <RadioBox/>
+                  <Data type="enum">
+                    <EnumElem name="Numeric" value="0"/>
+                    <EnumElem name="Uppercase Alphabetic" value="1"/>
+                    <EnumElem name="Lowercase Alphabetic" value="2"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Component Groups">
+                <Pref name="RSD_CreateComponentGroupsForSpools" type="logical" title="Create" value="true" ver="2007" scope="Session">
+                  <Description>This option determines whether or not a component group should be added to the work part when a spool is created.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Visual Reporting">
+                <Pref name="RSD_SpoolVisualReportFilename_WIN" type="string" title="Visual Reporting File" value="$NXREPORTS_DIR\visual_reporting\definitions\$UGII_LANG\spools.vpx" ver="2007" scope="Session">
+                  <Description>This option specifies the visual report to activate when the Show Visual Report command is selected from the Spool Navigator.</Description>
+                  <BrowseFileSel type="vpx"/>
+                </Pref>
+                <Pref name="RSD_SpoolVisualReportFilename_UNX" type="string" title="Visual Reporting File" value="$NXREPORTS_DIR/visual_reporting/definitions/$UGII_LANG/spools.vpx" ver="2007" scope="Session">
+                  <Description>This option specifies the visual report to activate when the Show Visual Report command is selected from the Spool Navigator.</Description>
+                  <BrowseFileSel type="vpx"/>
+                </Pref>
+              </Group>
+              <Group name="Model Views">
+                <Pref name="RSD_CreateModelViewsForSpools" type="list_sel_reorder_value" title="Create" value="&quot;trimetric:1&quot;\&quot;isometric:0&quot;\&quot;dimetric:0&quot;\&quot;top:0&quot;\&quot;front:1&quot;\&quot;right:0&quot;\&quot;back:0&quot;\&quot;bottom:0&quot;\&quot;left:0&quot;" ver="2007" scope="Session">
+                  <Description>This option specifies the view orientations to add to a spool view set. The first view orientation in the list is the base view.</Description>
+                  <ListSelReorder height="9" reorderable="true" selectable="true"/>
+                  <Data type="enum">
+                    <EnumElem name="Trimetric" value="trimetric"/>
+                    <EnumElem name="Isometric" value="isometric"/>
+                    <EnumElem name="Dimetric" value="dimetric"/>
+                    <EnumElem name="Top" value="top"/>
+                    <EnumElem name="Front" value="front"/>
+                    <EnumElem name="Right" value="right"/>
+                    <EnumElem name="Back" value="back"/>
+                    <EnumElem name="Bottom" value="bottom"/>
+                    <EnumElem name="Left" value="left"/>
+                  </Data>
+                </Pref>
+              </Group>
+            </Tab>
+        </Category>
+        <Category name="Cableway" csh="PMAN_RoutedSystemDesigner_Cableway">
+            <Tab name="File Export" csh="PMAN_RoutedSystemDesigner_Cableway_File_Export">
+                <Pref name="RSD_Cableway_Native_File" type="string" title="File Name or Folder" value="" ver="1980" scope="Session">
+                    <Description>This option specifies either the full path to the file or folder into which the Cableway data is saved.</Description>
+                    <Widestring/>
+                </Pref>
+               <Pref name="RSD_Cableway_Area_Attribute" type="string" title="Area Attribute Name" value="Electrical_Device_Area" ver="1980" scope="Session">
+                    <Description>This option specifies the attribute that identifies an area in the ship.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="RSD_Cableway_Electrical_Relevant_Attribute" type="string" title="Device Relevancy Attribute Name" value="Electrical_Relevant" ver="1980" scope="Session">
+                    <Description>This option specifies the name of a boolean attribute that identifies device components that should be included in the Cableway Export.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="RSD_Cableway_Device_ID_Attribute" type="string" title="Device ID Attribute Name" value="Electrical_Device_ID" ver="1980" scope="Session">
+                    <Description>This option specifies the attribute name whose value holds the device identifier.</Description>
+                    <String/>
+                </Pref>
+              <Pref name="RSD_Cableway_Effectivity_Attribute" type="string" title="Effectivity Attribute Name" value="Effectivity Text" ver="1980" scope="Session">
+                <Description>This option specifies the attribute name whose value holds the effectivity.</Description>
+                <String/>
+              </Pref>
+              <Pref name="RSD_Cableway_Project_ID_Attribute" type="string" title="Project Identifier Attribute Name" value="Effectivity End Item" ver="1980" scope="Session">
+                <Description>This option specifies the attribute name whose value holds the project identifier.</Description>
+                <String/>
+              </Pref>
+              <Pref name="RSD_Cableway_Air_Jump_Segment_Type" type="string" title="Air Jump Segment Type" value="_JUMP" ver="1980" scope="Session">
+                    <Description>This option specifies the segment type of an air jump. A jump segment is used to record gaps in the cable route where there is no physical cable containment.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="RSD_Cableway_Discipline_Name" type="string" title="Cableway Discipline" value="Cableway" ver="1980" scope="Session">
+                  <Description>This option specifies the name of the Discipline from which the cableway network is defined.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="RSD_Cableway_Configuration_File_WIN" type="string" title="Configuration File" value="$UGII_ROUTE_MECH_KIT_DIR\appview\RSD_CablewayExport.xml" ver="1980" scope="Session">
+                    <Description>This option specifies the name of the configuration file used by the Cableway Export command.</Description>
+                    <BrowseFileSel type="xml"/>
+                </Pref>
+                <Pref name="RSD_Cableway_Configuration_File_UNX" type="string" title="Configuration File" value="$UGII_ROUTE_MECH_KIT_DIR/appview/RSD_CablewayExport.xml" ver="1980" scope="Session">
+                    <Description>This option specifies the name of the configuration file used by the Cableway Export command.</Description>
+                    <BrowseFileSel type="xml"/>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Bill of Materials" csh="PMAN_RoutedSystemDesigner_BOM">
+            <Tab name="General" csh="PMAN_RoutedSystemDesigner_BOM_General">
+                <Pref name="RSD_BomDetailLevel" type="int" title="Detail Level" value="0" ver="1953" scope="Session">
+                    <Description>This option specifies how fabrications are reported on a Routing Bill of Materials.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Summary" value="0"/>
+                        <EnumElem name="Itemized" value="1"/>
+                    </Data>
+                    <Docum>
+                        <Formatted>
+Summary: The system will report only components and stock in the current work part.
+Itemized: The existence of each routing object is reported individually, regardless of its position in the assembly hierarchy.
+                        </Formatted>
+                    </Docum>
+                </Pref>
+                <Pref name="RSD_BomReportCountOfStockPieces" type="logical" title="Report Count of Stock Pieces" value="true" ver="1953" scope="Session">
+                    <Description>This option determines whether or not the Quantity column for rows containing stocks or insulations should report the number of pieces of stock for the "Summary" level of reporting.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_BomFabricationNumbering" type="int" title="Fabrication Numbering" value="0" ver="1953" scope="Session">
+                    <Description>This option specifies the numbering of any fabrications in a Routing Bill of Materials.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Sequential" value="0"/>
+                        <EnumElem name="Original" value="1"/>
+                    </Data>
+                    <Docum>
+                        <Formatted>
+Sequential: Sequential numbering is used as the callout in the Routing Bill of Materials.
+Original: The user supplied fabrication numbering is used as the callout in the Routing Bill of Materials.
+                        </Formatted>
+                    </Docum>
+                </Pref>
+                <Pref name="RSD_BomIncludeComponents" type="logical" title="Include Components" value="true" ver="1953" scope="Session">
+                    <Description>This option determines whether to include components underneath the Assembly.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RSD_BomIncludeGaskets" type="logical" title="Include Gaskets, Nuts, and Bolts" value="false" ver="1953" scope="Session">
+                    <Description>This option determines whether to include Routing UDOs created to store information about Bolts and Gaskets (under Piping Preferences of Routing Mechanical).</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Group name="Stock">
+                    <Pref name="RSD_BomIncludeStock" type="logical" title="Include Stock" value="true" ver="1953" scope="Session">
+                        <Description>This option determines whether to include mechanical stock such as conduit, filler stock, piping, raceway, etc. (anything assigned using the "Stock" dialog box).</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_BomIncludeInsulations" type="logical" title="Include Insulations" value="true" ver="1953" scope="Session">
+                        <Description>This option determines whether to include anything assigned using the "Insulation" dialog box (except for insulations that are defined as "Wrapped" insulations).</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_BomIncludeWireStock" type="logical" title="Include Wire Stock" value="true" ver="1953" scope="Session">
+                        <Description>This option determines whether to include wire stock from Routing Electrical that have a "PART_NUMBER" attribute.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RSD_BomStockLength" type="int" title="Length Reporting" value="0" ver="1953" scope="Session">
+                        <Description>This option specifies how stock length should be reported.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Single Sum" value="0"/>
+                            <EnumElem name="List Each" value="1"/>
+                        </Data>
+                        <Docum>
+                            <Formatted>
+Single Sum: Collapses all stock of a given type into a single line and displays the sum of all lengths in the "Length" column.
+List Each: Groups all stock of a given type and length together (applicable only when the "Level" option is set to "Itemized").
+                            </Formatted>
+                        </Docum>
+                    </Pref>
+                </Group>
+                <Group name="Template Parts">
+                    <Pref name="RSD_BomMetricTemplatePartName_WIN" type="string" title="Metric" value="routing_bom_metric.prt" ver="1953" scope="Session">
+                        <Description>This option specifies the name of the Metric (millimeter) template part to use for the Routing Bill of Materials. If no path is given with the part, the environment variable UGII_ROUTING_BOM_PATH is used as the path to the part.</Description>
+                        <BrowseFileSel type="prt"/>
+                    </Pref>
+                    <Pref name="RSD_BomMetricTemplatePartName_UNX" type="string" title="Metric" value="routing_bom_metric.prt" ver="1953" scope="Session">
+                        <Description>This option specifies the name of the Metric (millimeter) template part to use for the Routing Bill of Materials. If no path is given with the part, the environment variable UGII_ROUTING_BOM_PATH is used as the path to the part.</Description>
+                        <BrowseFileSel type="prt"/>
+                    </Pref>
+                    <Pref name="RSD_BomEnglishTemplatePartName_WIN" type="string" title="English" value="routing_bom_english.prt" ver="1953" scope="Session">
+                        <Description>This option specifies the name of the English (inch) template part to use for the Routing Bill of Materials. If no path is given with the part, the environment variable UGII_ROUTING_BOM_PATH is used as the path to the part.</Description>
+                        <BrowseFileSel type="prt"/>
+                    </Pref>
+                    <Pref name="RSD_BomEnglishTemplatePartName_UNX" type="string" title="English" value="routing_bom_english.prt" ver="1953" scope="Session">
+                        <Description>This option specifies the name of the English (inch) template part to use for the Routing Bill of Materials. If no path is given with the part, the environment variable UGII_ROUTING_BOM_PATH is used as the path to the part.</Description>
+                        <BrowseFileSel type="prt"/>
+                    </Pref>
+                </Group>
+                <Pref name="RSD_BomWriteToListingWindow" type="logical" title="Write to Information Window" value="false" ver="1953" scope="Session">
+                    <Description>This option determines whether or not to write the Bill of Materials information to the Information window when a new BOM is created.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>

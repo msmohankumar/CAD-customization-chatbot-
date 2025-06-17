@@ -1,0 +1,1132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Mold Wizard" csh="PMAN_Mold_Wizard" package_suppress="simcenter3d,simviewer,view,mechatronicsplayer,nx2dedit">
+        <Category name="General" csh="PMAN_Mold_Wizard_General">
+            <Tab name="General" csh="PMAN_Mold_Wizard_General_General">
+                <Pref name="MW_ExcelBackground" type="logical" title="Operate NX while Microsoft Excel is Open" value="true" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not NX can be operated while Microsoft Excel is open.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_Load_WAVE_Data" type="logical" title="Load Wave Data" value="false" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not WAVE data should be loaded.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+              <Group name="Teamcenter">
+                <Pref name="MW_PART_ITEM_TYPE" type="string" title="Part Item Type" value="Item" ver="9.0.1" scope="Session">
+                  <Description>This option specifies the customized item type of the part in Teamcenter.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="MW_CONFIG_ITEM" type="string" title="Configuration File Item ID and Revision" value="@DB/00005/A" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the item ID and revision of the configuration file type in Teamcenter.</Description>
+                  <String/>
+                </Pref>
+              </Group>
+            </Tab>
+            <Tab name="Project Settings" csh="PMAN_Mold_Wizard_General_Project_Setting">
+                <Group name="Project Initialize">
+                    <Pref name="MW_ProjectInitialUnit" type="int" title="Project Unit" value="3" ver="2306" scope="Session">
+                        <Description>This option specifies the project unit.</Description>
+                        <RadioBox/>
+                        <Data type="enum">
+                            <EnumElem name="Metric" value="1"/>
+                            <EnumElem name="English" value="2"/>
+                            <EnumElem name="Same as Project Library" value="3"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_ProjectPath_WIN" type="string" title="Project File Path" value="" ver="4.0.0" scope="Session">
+                        <Description>This field defines the project file path.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                    <Pref name="MW_ProjectPath_UNX" type="string" title="Project File Path" value="" ver="4.0.0" scope="Session">
+                        <Description>This field defines the project file path.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                  <Pref name="MW_UPDATE_MOLD_CSYS_WORKPIECE_AUTOMATICALLY" type="logical" title="Update Mold CSYS and Workpiece Automatically" value="true" ver="1980" scope="Session">
+                    <Description>This option determines whether or not to update the mold CSYS and workpiece automatically when initializing a project.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                      <EnumElem name="No" value="false"/>
+                      <EnumElem name="Yes" value="true"/>
+                    </Data>
+                  </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Part Name Definition" csh="PMAN_Mold_Wizard_General_Part_Name_Definition">
+                <Group name="Common">
+                    <Pref name="MW_DISPLAY_RENAME_DIALOG" type="logical" title="Display Rename Dialog Box" value="false" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not the part name mapping dialog box will be displayed when new parts are added to a Mold Wizard project.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_NAME_MAP_TEMPLATE_FILE" type="string" title="Template Name Mapping File" value="map_template_name.xlsx::DEFAULT_MAPPING_TEMPLATE" ver="1926" scope="Session">
+                        <Description>This option specifies a customized file to map template name.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="MW_Part_Name_Rule" type="string_list" title="Custom Part Naming Rules" value="&quot;&lt;PROJECT_NAME&gt;_&lt;TEMPLATE_NAME&gt;_???&quot;\&quot;&lt;PROJECT_NAME&gt;_&lt;TEMPLATE_NAME&gt;_&lt;???&gt;&quot;" ver="1926" scope="Session">
+                        <Description>This field allows the custom part naming rules to be specified. The part name is formed by combining a series of variables and characters.
+<Formatted>1. All alphanumeric characters are valid except \, /, ", *, :, and ?.
+2. The "?" character is an incrementing or user defined variable.
+The standard variables are:
+"PROJECT_NAME"  (set during project initialization)
+"TEMPLATE_NAME" (the name of the template part being cloned).</Formatted></Description>
+                        <MultiLineText height="6"/>
+                    </Pref>
+                </Group>
+                <Group name="Teamcenter">
+                    <Pref name="MW_NAME_IMAN_NUMBER" type="logical" title="Use Teamcenter Number as ??? in above Naming Rule" value="true" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not the Teamcenter name number should be used.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_IMAN_Name_Method" type="int" title="Teamcenter Part Naming Method" value="2" ver="6.0.0" scope="Session">
+                    <Description>This option specifies the part naming method in the Teamcenter environment.
+<Formatted>
+First option: DB_PART_NAME = DB_PART_NO, which is defined by name rules.
+
+Second option: DB_PART_NO is defined by name rules, DB_PART_NAME is replaced by TEMPLATE_NAME.
+
+Third option: DB_PART_NO is defined by unique Teamcenter number, DB_PART_NAME is defined by name rules.</Formatted></Description>
+                        <RadioBox/>
+                        <Data type="enum">
+                            <EnumElem name="Use Naming Rule for Part Name and Part Number" value="0"/>
+                            <EnumElem name="Use Naming Rule for Part Number, Template Name for Part Name" value="1"/>
+                            <EnumElem name="Use Teamcenter Number for Part Number, Naming Rule for Part Name" value="2"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Pref name="MW_PART_FAMILY_LIB_SAVE_DIR_UNX" type="string" title="Part Family Save Directory" value="" ver="4.0.0" scope="Session">
+                    <Description>This field defines the directory in which part family data should be saved.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+                <Pref name="MW_PART_FAMILY_LIB_SAVE_DIR_WIN" type="string" title="Part Family Save Directory" value="" ver="4.0.0" scope="Session">
+                    <Description>This field defines the directory in which part family data should be saved.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+            </Tab>
+            <Tab name="Layer and Category" csh="PMAN_Mold_Wizard_General_Layer_and_Category">
+                <Group name="Hidden Objects">
+                    <Pref name="MW_HideObjectLayer" type="int" title="Layer" value="255" ver="4.0.0" scope="Session">
+                        <Description>This option specifies which layer the hidden objects should be placed on.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="256" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_HideObjectLayerName" type="string" title="Layer Category Name" value="HiddenObject" ver="6.0.0" scope="Session">
+                        <Description>This field allows a layer category name to be specified for the layer where the hidden objects are placed.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+                <Group name="Datum">
+                    <Pref name="MW_DatumLayer" type="int" title="Layer" value="100" ver="4.0.0" scope="Session">
+                        <Description>This option specifies which layer the datum objects should be placed on.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="256" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_DatumLayerName" type="string" title="Layer Category Name" value="Datum" ver="4.0.0" scope="Session">
+                        <Description>This field allows a layer category name to be specified for the layer where the datum objects are placed.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="Workpiece" csh="PMAN_Mold_Wizard_Work_Piece">
+            <Tab name="General" csh="PMAN_Mold_Wizard_Work_Piece_General">
+                <Pref name="MW_WorkPieceOffset_MU" type="real" title="Offset" value="25.0" unit="mm" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the offset value of the initial work piece calculated from the bounding box of the product model.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_WorkPieceOffset_EU" type="real" title="Offset" value="1.0" unit="in" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the offset value of the initial work piece calculated from the bounding box of the product model.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_WorkPieceMethod" type="int" title="Dimensioning" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the work piece dimensioning method. The Distance Allowance method is centered on the product body. The Reference Point method is centered on the absolute CSYS or a specified point.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Distance Allowance" value="0"/>
+                        <EnumElem name="Reference Point" value="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Layer and Category" csh="PMAN_Mold_Wizard_Work_Piece_Layer_and_Category">
+                <Group name="Workpiece">
+                <Pref name="MW_WorkPieceLayer" type="int" title="Layer" value="20" ver="4.0.0" scope="Session">
+                    <Description>This option specifies which layer the work piece should be placed on.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_WorkPieceLayerName" type="string" title="Layer Category Name" value="WorkPiece" ver="4.0.0" scope="Session">
+                    <Description>This field allows a layer category name to be specified for the layer where the work piece is placed.</Description>
+                    <Widestring/>
+                </Pref>
+                </Group>
+                <Group name="Combined Workpiece">
+                <Pref name="MW_CombinedWorkPieceLayer" type="int" title="Layer" value="200" ver="10.0.0" scope="Session">
+                    <Description>This option specifies which layer the combined work piece should be placed on.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_CombinedWorkPieceLayerName" type="string" title="Layer Category Name" value="CombinedWorkPiece" ver="10.0.0" scope="Session">
+                    <Description>This field allows a layer category name to be specified for the layer where the combined work piece is placed.</Description>
+                    <Widestring/>
+                </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="Mold Tools" csh="PMAN_Mold_Wizard_Mold_Tools">
+            <Tab name="General" csh="PMAN_Mold_Wizard_Mold_Tools_General">
+                <Pref name="MW_ToolsTolerance_MU" type="real" title="Tolerance" value="0.025" unit="mm" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the modeling tolerance for the Mold Tools patch command's sheet trim, enlarge face, and traverse loop.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_ToolsTolerance_EU" type="real" title="Tolerance" value="0.001" unit="in" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the modeling tolerance for the Mold Tools patch command's sheet trim, enlarge face, and traverse loop.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Group name="Bounding Body">
+                    <Pref name="MW_ToolsBoxTranslucency" type="int" title="Translucency" value="50" ver="8.0.0" scope="Session">
+                        <Description>The Bounding Body command creates solid boxes (blocks). This option specifies the translucency of the box.</Description>
+                        <IntegerScale/>
+                        <Data type="range">
+                            <LowerBound value="0" include="1"/>
+                            <UpperBound value="100" include="1"/>
+                        </Data>
+                    </Pref>                                
+                </Group>    
+                <Pref name="MW_ToolsPatchFeatureNum" type="int" title="Maximum Number of Features for Feature Patch" value="150" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the maximum number of features allowed in the original product model for feature patch to be active as a patching option.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                    </Data>
+                    <Docum>When patching a hole in the product model, a method called feature patch-up is sometimes used. This method creates new features in the original product model. If the original product model has a large number of features, the update processing may be time-consuming.</Docum>
+                </Pref>
+            </Tab>
+            <Tab name="Casting Process Assistant" csh="PMAN_Mold_Wizard_Mold_Tools_Casting_Process_Assistant">
+                <Group name="Body Box Offsets">
+                    <Pref name="MW_CastingBodyBoxOffsetX1_MU" type="real" title="X1" value="10.0" unit="mm" ver="4.0.0" scope="Session">
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_CastingBodyBoxOffsetX1_EU" type="real" title="X1" value="0.4" unit="in" ver="4.0.0" scope="Session">
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_CastingBodyBoxOffsetX2_MU" type="real" title="X2" value="10.0" unit="mm" ver="4.0.0" scope="Session">
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_CastingBodyBoxOffsetX2_EU" type="real" title="X2" value="0.4" unit="in" ver="4.0.0" scope="Session">
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_CastingBodyBoxOffsetY1_MU" type="real" title="Y1" value="10.0" unit="mm" ver="4.0.0" scope="Session">
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_CastingBodyBoxOffsetY1_EU" type="real" title="Y1" value="0.4" unit="in" ver="4.0.0" scope="Session">
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_CastingBodyBoxOffsetY2_MU" type="real" title="Y2" value="10.0" unit="mm" ver="4.0.0" scope="Session">
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_CastingBodyBoxOffsetY2_EU" type="real" title="Y2" value="0.4" unit="in" ver="4.0.0" scope="Session">
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Step Parting Sheet">
+                    <Pref name="MW_CastingStepSheetToolLand_MU" type="real" title="Tool Land" value="5.0" unit="mm" ver="4.0.0" scope="Session">
+                        <Real/>
+                    </Pref>
+                    <Pref name="MW_CastingStepSheetToolLand_EU" type="real" title="Tool Land" value="0.2" unit="in" ver="4.0.0" scope="Session">
+                        <Real/>
+                    </Pref>
+                    <Pref name="MW_CastingStepSheetDraftAngle" type="real" title="Draft Angle" value="5.0" unit="deg" ver="4.0.0" scope="Session">
+                        <Real/>
+                    </Pref>
+                    <Pref name="MW_CastingStepSheetRadius_MU" type="real" title="Radius" value="5.0" unit="mm" ver="4.0.0" scope="Session">
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_CastingStepSheetRadius_EU" type="real" title="Radius" value="0.2" unit="in" ver="4.0.0" scope="Session">
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_CastingStepSheetCornerRadiusOption" type="int" title="Corner Radius Type" value="0" ver="4.0.0" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Constant" value="0"/>
+                            <EnumElem name="Conical" value="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Pref name="MW_CastingRampAngle" type="real" title="Ramp Parting Sheet Angle" value="5.0" unit="deg" ver="4.0.0" scope="Session">
+                    <Real/>
+                </Pref>
+            </Tab>
+            <Tab name="Design Inserts" csh="PMAN_Mold_Wizard_Mold_Tools_Design_Inserts">
+                <Pref name="MW_InsertColor" type="int" title="Color" value="11" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the color of the insert.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="MW_InsertLayer" type="int" title="Layer" value="175" ver="4.0.0" scope="Session">
+                    <Description>This option specifies which layer the insert should be placed on.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_InsertLayerName" type="string" title="Layer Category Name" value="Subinsert" ver="4.0.0" scope="Session">
+                    <Description>This field allows a layer category name to be specified for the layer where the insert objects are placed.</Description>
+                    <Widestring/>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Parting" csh="PMAN_Mold_Wizard_Parting">
+            <Tab name="General" csh="PMAN_Mold_Wizard_Parting_General">
+                <Pref name="MW_PartingAutoEdit" type="logical" title="Automatic Update on Product Model Change" value="false" ver="4.0.0" scope="Session">
+                    <Description>The Mold Wizard parting module can monitor the product model for changes that affect parting geometry and automatically update the parting lines and surfaces when possible. This option determines whether or not the parting will be edited automatically.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Off" value="false"/>
+                        <EnumElem name="On" value="true"/>
+                    </Data>
+                    <Docum>In some cases, new parting geometry is designed by the system automatically. In some complex cases, it may be preferable to update the parting design manually rather than automatically. Clear this option if you plan to make a complex change to the product.</Docum>
+                </Pref>
+                <Pref name="MW_PartingAutoProcess" type="logical" title="Automated Parting Process" value="true" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not the parting process should be done automatically.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Off" value="false"/>
+                        <EnumElem name="On" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_PartingColorTraverse" type="logical" title="Traverse by Color" value="true" ver="4.0.0" scope="Session">
+                    <Description>When defining the parting curves or edges from the product model, this option determines whether or not any curve that has different face colors on either side should be selected. The option allows the parting command to automatically finds all connected curves or edges with the same adjacent colors as the start curve.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_PartingAssociateSwap" type="logical" title="Associative Swap" value="true" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not the Swap Product Model command should be associative. When this option is on, it allows the product model used in a mold design project to be replaced with a new version of the model, and still keep full association between the existing mold design features (such as tapers, split faces, parting lines, patch surfaces, parting surfaces, etc) in the mold assembly and new product solid.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_PartingSwapCompareUIOn" type="logical" title="Swap Compare UI" value="true" ver="4.0.3" scope="Session">
+                    <Description>This option determines whether or not to activate Model Compare UI in Swap Model.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Off" value="false"/>
+                        <EnumElem name="On" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_WaveControlForceWipeout" type="logical" title="Wave Update Control Force Wipe Out" value="false" ver="4.0.3" scope="Session">
+                    <Description>This option determines whether or not to allow force wipe out in removing out-of-date linked feature with geometry changes.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_UseNewSewPartingWorkflow" type="logical" title="Use Sew and Keep Tool Body" value="true" ver="2312" scope="Session">
+                    <Description>This option determines whether or not to use the sew parting workflow and keep the tool body. When this option is on, creating additional copies for parting and patch surfaces is not needed.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Group name="Tolerances">
+                    <Pref name="MW_PartingLinesTolerance_MU" type="real" title="Parting Lines" value="0.01" ver="4.0.0" scope="Session" unit="mm">
+                        <Description>This option specifies the tolerance for finding parting lines (including positive and negative faces), traverse loop, isocline, and split face.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_PartingLinesTolerance_EU" type="real" title="Parting Lines" value="0.0004" ver="4.0.0" scope="Session" unit="in">
+                        <Description>This option specifies the tolerance for finding parting lines (including positive and negative faces), traverse loop, isocline, and split face.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_PartingSurfTolerance_MU" type="real" title="Surface" value="0.01" ver="4.0.0" scope="Session" unit="mm">
+                        <Description>This option specifies the modeling tolerance for extrude surface, bounded plane, enlarge surface, swept surface, bridge surface, and trim sheet.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_PartingSurfTolerance_EU" type="real" title="Surface" value="0.0004" ver="4.0.0" scope="Session" unit="in">
+                        <Description>This option specifies the modeling tolerance for extrude surface, bounded plane, enlarge surface, swept surface, bridge surface, and trim sheet.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_PartingCoreCavityTolerance_MU" type="real" title="Core/Cavity" value="0.1" ver="4.0.0" scope="Session" unit="mm">
+                        <Description>This option specifies the modeling tolerance for the cavity and core trim.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_PartingCoreCavityTolerance_EU" type="real" title="Core/Cavity" value="0.004" ver="4.0.0" scope="Session" unit="in">
+                        <Description>This option specifies the modeling tolerance for the cavity and core trim.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Angles">
+                    <Pref name="MW_PartingSmallDraftAngle" type="real" title="Small Draft Angle" value="3.0" unit="deg" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the parting small draft angle.</Description>
+                        <Real/>
+                    </Pref>
+                    <Pref name="MW_PartingCrossOverAngle" type="real" title="Cross Over Angle" value="5.0" unit="deg" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the parting cross over angle.</Description>
+                        <Real/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Colors" csh="PMAN_Mold_Wizard_Parting_Colors">
+                <Label label="The following options specify the colors of different parting objects."/>
+                <Pref name="MW_PartingProdColor" type="int" title="Product" value="120" ver="6.0.0" scope="Session">
+                    <Color/>
+                </Pref>
+                <Pref name="MW_PartingLinesColor" type="int" title="Line" value="82" ver="6.0.0" scope="Session">
+                    <Color/>
+                </Pref>
+                <Pref name="MW_PartingTransitObjectColor" type="int" title="Transit Object" value="64" ver="6.0.0" scope="Session">
+                    <Color/>
+                </Pref>
+                <Pref name="MW_PartingSurfColor" type="int" title="Surface" value="158" ver="7.5.0" scope="Session">
+                    <Color/>
+                </Pref>
+                <Pref name="MW_PartingPatchColor" type="int" title="Patch Body" value="67" ver="6.0.0" scope="Session">
+                    <Color/>
+                </Pref>
+                <Pref name="MW_PartingCavityRegionColor" type="int" title="Cavity Region" value="120" ver="8.5.0" scope="Session">
+                    <Color/>
+                </Pref>
+                <Pref name="MW_PartingCoreRegionColor" type="int" title="Core Region" value="134" ver="8.5.0" scope="Session">
+                    <Color/>
+                </Pref>
+                <Pref name="MW_PartingNX6RegionColor" type="int" title="Additional Surface" value="154" ver="7.5.0" scope="Session">
+                    <Color/>
+                </Pref>
+            </Tab>
+            <Tab name="Layers" csh="PMAN_Mold_Wizard_Parting_Layers">
+                <Label label="The following options specify which layers different parting objects should be placed on."/>
+                <Pref name="MW_PartingProdLayer" type="int" title="Product" value="1" ver="4.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_PartingLinesLayer" type="int" title="Parting Line, Guide Line, Parting Surface" value="26" ver="1926" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_PartingPatchSurfaceLayer" type="int" title="Patch Surface" value="250" ver="4.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_PartingPatchBodyLayer" type="int" title="Patch Body" value="25" ver="4.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_PartingCavitySurfLayer" type="int" title="Cavity Surface" value="28" ver="4.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_PartingCoreSurfLayer" type="int" title="Core Surface" value="27" ver="4.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_PartingNX6RegionLayer" type="int" title="Additional Surface" value="29" ver="6.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_PartingCavityLayer" type="int" title="Cavity" value="8" ver="4.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_PartingCoreLayer" type="int" title="Core" value="7" ver="4.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Layer Categories" csh="PMAN_Mold_Wizard_Parting_Layer_Categories">
+                <Label label="The following fields allow layer category names to be specified for the layers defined on the Layers tab."/>
+                <Pref name="MW_PartingProdLayerName" type="string" title="Product" value="ProductModel" ver="4.0.0" scope="Session">
+                    <Widestring/>
+                </Pref>
+                <Pref name="MW_PartingLinesLayerName" type="string" title="Line" value="PartingLine" ver="4.0.0" scope="Session">
+                    <Widestring/>
+                </Pref>
+                <Pref name="MW_PartingPatchBodyLayerName" type="string" title="Patch Body" value="PatchBody" ver="4.0.0" scope="Session">
+                    <Widestring/>
+                </Pref>
+                <Pref name="MW_PartingCavitySurfLayerName" type="string" title="Cavity Surface" value="CavitySurface" ver="4.0.0" scope="Session">
+                    <Widestring/>
+                </Pref>
+                <Pref name="MW_PartingCoreSurfLayerName" type="string" title="Core Surface" value="CoreSurface" ver="4.0.0" scope="Session">
+                    <Widestring/>
+                </Pref>
+                <Pref name="MW_PartingCavityLayerName" type="string" title="Cavity" value="Cavity" ver="4.0.0" scope="Session">
+                    <Widestring/>
+                </Pref>
+                <Pref name="MW_PartingCoreLayerName" type="string" title="Core" value="Core" ver="4.0.0" scope="Session">
+                    <Widestring/>
+                </Pref>
+            </Tab>
+            <Tab name="Model Comparison" csh="PMAN_Mold_Wizard_Parting_Model_Comparison">
+                <Group name="Colors">
+                    <Label label="The following color options apply when comparing two versions of the parting model. They allow different colors to be assigned to different faces, making it easier to see the differences between the two models."/>
+                    <Pref name="MW_PartingCompUnchangedFaces" type="int" title="Unchanged Faces" value="3" ver="4.0.0" scope="Session">
+                        <Color/>
+                    </Pref>
+                    <Pref name="MW_PartingCompRemovedFaces" type="int" title="Removed Faces" value="1" ver="4.0.0" scope="Session">
+                        <Color/>
+                    </Pref>
+                    <Pref name="MW_PartingCompNewFaces" type="int" title="New Faces" value="5" ver="4.0.0" scope="Session">
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Pref name="MW_PartingCompTolerance_MU" type="real" title="Parting Compare Tolerance" value="0.01" ver="2212" scope="Session" unit="mm">
+                    <Description>This option specifies the parting model comparison tolerance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_PartingCompTolerance_EU" type="real" title="Parting Compare Tolerance" value="0.01" ver="2212" scope="Session" unit="in">
+                    <Description>This option specifies the parting model comparison tolerance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Standard Parts" csh="PMAN_Mold_Wizard_Standard_Parts">
+            <Tab name="General" csh="PMAN_Mold_Wizard_Standard_Parts_General">
+                <Pref name="MW_StandardPointConfirm" type="logical" title="Confirm Placement" value="false" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not selection confirmation should be used when selecting the placement point of the standard part component in the product model.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>             
+                <Pref name="MW_StandardParent" type="string_list" title="Standard Parent" value="&quot;MW_PROD_SIDE_A&quot;\&quot;MW_PROD_SIDE_B&quot;\&quot;MW_MISC_SIDE_A&quot;\&quot;MW_MISC_SIDE_B&quot;\&quot;MW_COOL_SIDE_A&quot;\&quot;MW_COOL_SIDE_B&quot;" ver="4.0.0" scope="Session">
+                    <Description>The Parent option menu in the Standard Parts Management System allows the parent of the standard part to be chosen. This box allows additional parents to be specified that will be added to Parent option menu. The list values are attributes names in the components.</Description>
+                    <MultiLineText height="6"/>
+                </Pref>
+                <Pref name="MW_SMLinkedFaceLayer" type="int" title="Standard Linked Face Layer" value="190" ver="4.0.0" scope="Session">
+                    <Description>This option specifies which layer the standard part linked face should be placed on.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_ConceptDesignLayer" type="int" title="Concept Design Object Layer" value="210" ver="7.5.0" scope="Session">
+                    <Description>This option specifies which layer the linked position planes and points should be placed on.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_StandardDefaultRefset" type="int" title="Standard Reference Set" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies which reference set that should be displayed for a standard part that is added to the product model. The TRUE reference set usually contains the component body, while the FALSE reference set contains the bodies used for mounting create pockets.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="TRUE" value="0"/>
+                        <EnumElem name="FALSE" value="1"/>
+                        <EnumElem name="Entire Part" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_StandardCorrectRefSet" type="logical" title="Correct Reference Set after Adding Standard Part" value="true" ver="4.0.3" scope="Session">
+                    <Description>When adding a standard part with child components to the product model, this option determines whether or not the Standard Part's Child Component's Reference Set (TRUE, FALSE, or BOTH) should be added to the corresponding reference set in the standard part.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                       <EnumElem name="No" value="false"/>
+                       <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>      
+                <Pref name="MW_StandardPlaneView" type="logical" title="Reorient View when Using Plane Position Method" value="true" ver="4.0.0" scope="Session">
+                    <Description>When a standard part is added to the product model using the plane position method, this option determines whether or not the view is reoriented to the placement plane.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_StandardAutoUndo" type="logical" title="Automatically Undo when Failing to Add Standard Part" value="true" ver="4.0.0" scope="Session">
+                    <Description>When a standard part fails to be added to the product model, this option determines whether or not an automatic undo should be performed.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_StandardAddInstanceBlank" type="logical" title="Show First Instance of Cavity Set" value="false" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not the first instance of a cavity set will be shown during component placement when the displayed part shows multiple instances of a cavity set.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Catalog Order" csh="PMAN_Mold_Wizard_Standard_Parts_Catalog_Order">
+                <Pref name="MW_MoldbaseCatalogOrder" type="string_list" title="Moldbase Catalog Order" value="" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the listing order of moldbases in the moldbase dialog box.</Description>
+                    <MultiLineText height="4"/>
+                </Pref>
+                <Pref name="MW_StandardCatalogOrder" type="string_list" title="Standard Catalog Order" value="" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the listing order of standard parts in the moldbase dialog box.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Drawing" csh="PMAN_Mold_Wizard_Drawing">
+            <Tab name="Ejector Pin" csh="PMAN_Mold_Wizard_Drawing_Ejector">
+                <Pref name="MW_Drawing_EjectorDrawingPartNameRule" type="string" title="Ejector Drawing Part Name Rule" value="&lt;PROJECT_NAME&gt;_EJ_dwg" ver="9.0.0" scope="Session">
+                    <Description>This field allows the ejector drawing part naming rule to be specified. The part name is formed by combining a series of variables and characters.
+<Formatted>
+1. All alphanumeric characters are valid except \, /, ", *, :, and ?.
+2. The "?" character is an incrementing, or user defined, variable.
+"PROJECT_NAME"  (set during project initialization)
+</Formatted></Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="MW_Drawing_EjectorSheetName" type="string" title="Sheet Name" value="Sheet" ver="9.0.0" scope="Session">
+                    <Description>This box specifies the name of the ejector drawing sheet.</Description>
+                    <String/>
+                </Pref>
+                <Group name="Table Columns">
+                    <Pref name="MW_Drawing_EjectorTableColumn1" type="string" title="First" value="No." ver="9.0.0" scope="Session">
+                        <Description>This option specifies the name of the first column in the ejector pin table.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_Drawing_EjectorTableColumn2" type="string" title="Second" value="Part Name" ver="9.0.0" scope="Session">
+                        <Description>This option specifies the name of the second column in the ejector pin table.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_Drawing_EjectorTableColumn3" type="string" title="Third" value="Size" ver="9.0.0" scope="Session">
+                        <Description>This option specifies the name of the third column in the ejector pin table.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_Drawing_EjectorTableColumn4" type="string" title="Fourth" value="Count" ver="9.0.0" scope="Session">
+                        <Description>This option specifies the name of the fourth column in the ejector pin table.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_Drawing_EjectorTableColumn5" type="string" title="Fifth" value="Sum" ver="9.0.0" scope="Session">
+                        <Description>This option specifies the name of the fifth column in the ejector pin table.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_Drawing_EjectorTableColumn6" type="string" title="Sixth" value="Process" ver="9.0.0" scope="Session">
+                        <Description>This option specifies the name of the sixth column in the ejector pin table.</Description>
+                        <String/>
+                    </Pref>
+                </Group>
+
+                <Group name="Straight">
+                    <Pref name="MW_Drawing_EjectorStraightGroupLabel" type="string" title="Group Name" value="Straight" ver="9.0.0" scope="Session">
+                        <Description>This box specifies the group name for straight ejector pins.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_Drawing_EjectorStraightLabel" type="string" title="Label" value="A" ver="9.0.0" scope="Session">
+                        <Description>This box specifies the label of the straight ejector pin.</Description>
+                        <String/>
+                    </Pref>
+                </Group>
+                <Group name="Shouder">
+                    <Pref name="MW_Drawing_EjectorShoulderGroupLabel" type="string" title="Group Name" value="Shoulder" ver="9.0.0" scope="Session">
+                        <Description>This box specifies the group name for shoulder ejector pins.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_Drawing_EjectorShoulderLabel" type="string" title="Label" value="B" ver="9.0.0" scope="Session">
+                        <Description>This box specifies the label of the shoulder ejector pin.</Description>
+                        <String/>
+                    </Pref>
+                </Group>
+                <Group name="Blade">
+                    <Pref name="MW_Drawing_EjectorBladeGroupLabel" type="string" title="Group Name" value="Blade" ver="9.0.0" scope="Session">
+                        <Description>This box specifies the group name for blade ejector pins.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_Drawing_EjectorBladeLabel" type="string" title="Label" value="C" ver="9.0.0" scope="Session">
+                        <Description>This box specifies the label of the blade ejector pin.</Description>
+                        <String/>
+                    </Pref>
+                </Group>
+                <Group name="Sleeve">
+                    <Pref name="MW_Drawing_EjectorSleeveGroupLabel" type="string" title="Group Name" value="Sleeve" ver="9.0.0" scope="Session">
+                        <Description>This box specifies the group name for sleeve ejector pins.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_Drawing_EjectorSleeveLabel" type="string" title="Label" value="D" ver="9.0.0" scope="Session">
+                        <Description>This box specifies the label of the sleeve ejector pin.</Description>
+                        <String/>
+                    </Pref>
+                </Group>
+                <Group name="Other">
+                    <Pref name="MW_Drawing_EjectorNotTypeGroupLabel" type="string" title="Group Name" value="Other" ver="9.0.0" scope="Session">
+                        <Description>This box specifies the group name for other types of ejector pins.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_Drawing_EjectorNotTypeLabel" type="string" title="Label" value="E" ver="9.0.0" scope="Session">
+                        <Description>This box specifies the label of other types of ejector pins.</Description>
+                        <String/>
+                    </Pref>
+                </Group>    
+                <Pref name="MW_Drawing_EjectorDelimited" type="string" title="Delimited Character" value="-" ver="9.0.0" scope="Session">
+                    <Description>This box specifies the delimited character.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="MW_Drawing_EjectorPrecision_MU" type="int" title="Decimal Places" value="2" ver="9.0.0" scope="Session">
+                    <Description>This option specifies the number of decimal places for numerical values in the ejector pin table.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="4" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_Drawing_EjectorPrecision_EU" type="int" title="Decimal Places" value="3" ver="9.0.0" scope="Session">
+                    <Description>This option specifies the number of decimal places for numerical values in the ejector pin table.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="5" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>      
+        <Category name="Tooling Validation" csh="PMAN_Mold_Wizard_Validation">
+            <Tab name="Interference Check" csh="PMAN_Mold_Wizard_Validation_Interference_Check">
+                <Pref name="MW_CLEARANCE_ZONE_MU" type="real" title="Clearance Zone" value="0.01" unit="mm" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the clearance zone value for interference check.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_CLEARANCE_ZONE_EU" type="real" title="Clearance Zone" value="0.0004" unit="in" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the clearance zone value for interference check.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Collision Check" csh="PMAN_Mold_Wizard_Validation_Collision_Check">
+              <Pref name="MW_CLEARANCE_MU" type="real" title="Clearance" value="0.1" unit="mm" ver="12.0.0" scope="Session">
+                <Description>This option specifies the clearance value for collision check.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.00001" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="MW_CLEARANCE_EU" type="real" title="Clearance" value="0.004" unit="in" ver="12.0.0" scope="Session">
+                <Description>This option specifies the clearance value for collision check.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0000004" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="MW_MOUNTED_FACET_BODY_LAYER" type="int" title="Mounted Facet Bodies Layer" value="250" ver="2007" scope="Session">
+                <Description>This option specifies the layer on which the user defined mounted facet bodies for simulation should be placed.</Description>
+                <Integer/>
+                <Data type="range">
+                  <LowerBound value="1" include="1"/>
+                  <UpperBound value="256" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="MW_SHOW_MOUNT_FACET_LAYER" type="logical" title="Activate Mounted Facet Bodies Layer" value="false" ver="2007" scope="Session">
+                <Description>This option determines whether or not to activate the layer on which the user defined mounted facet bodies for simulation are placed.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+              <Pref name="MW_MOUNTED_FACET_INHERIT_TRANSLUCENCY" type="logical" title="Inherit Translucency from Source" value="true" ver="2007" scope="Session">
+                <Description>This option determines whether or not to inherit the translucency from the source solid.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+            </Tab>
+        </Category>
+        <Category name="Mold Cost" csh="PMAN_Mold_Wizard_Mold_Cost">
+            <Tab name="General" csh="PMAN_Mold_Wizard_Mold_Cost_General">
+                <Pref name="MW_MoldCostDatabaseDir_UNX" type="string" title="Database File" value="${UGII_TMP_DIR}/MoldCostDatabase.xlsx"  ver="2206" scope="Session">
+                    <Description>This option specifies the Mold Cost database file.</Description>
+                    <BrowseFileSel type="xlsx"/>
+                </Pref>
+                <Pref name="MW_MoldCostDatabaseDir_WIN" type="string" title="Database File" value="${UGII_TMP_DIR}\MoldCostDatabase.xlsx"  ver="2206" scope="Session">
+                    <Description>This option specifies the Mold Cost database file.</Description>
+                    <BrowseFileSel type="xlsx"/>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Others" csh="PMAN_Mold_Wizard_Others">
+            <Tab name="Shrink Body" csh="PMAN_Mold_Wizard_Others_Shrink_Body">
+                <Pref name="MW_ShrinkBodyColor" type="int" title="Color" value="8" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the color of the shrunken bodies.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="MW_ShrinkBodyLayer" type="int" title="Layer" value="6" ver="4.0.0" scope="Session">
+                    <Description>This option specifies which layer the shrunken bodies should be placed on.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_ShrinkBodyLayerName" type="string" title="Layer Category Name" value="ShrinkBody" ver="4.0.0" scope="Session">
+                    <Description>This field allows a layer category name to be specified for the layer where the shrunken bodies are placed.</Description>
+                    <Widestring/>
+                </Pref>
+            </Tab>
+            <Tab name="Ejector Pin" csh="PMAN_Mold_Wizard_Others_Ejector_Pin">
+                <Pref name="MW_EjectPinFit_MU" type="real" title="Fit Distance" value="10.0" unit="mm" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the distance between the lowest point of the ejector pin hole and the level of the ejector pin clearance hole. Ejector pins can be selected individually to alter the fit distance for any one of them.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EjectPinFit_EU" type="real" title="Fit Distance" value="0.4" unit="in" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the distance between the lowest point of the ejector pin hole and the level of the ejector pin clearance hole. Ejector pins can be selected individually to alter the fit distance for any one of them.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EjectorPinSaveAsUniquePart" type="logical" title="Save As Unique Part" value="true" ver="9.0.0" scope="Session">
+                    <Description>This option determines whether or not the instances of ejector pin should be saved as unique parts.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EjectorPinForceFitDistance" type="logical" title="Force Fit Distance Value" value="false" ver="11.0.0" scope="Session">
+                    <Description>This option determines whether or not to force the use of the Fit Distance value on the Ejector Pin Postprocessing dialog box, instead of the value from the ejector pin part.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_TrimInforAttrName" type="string" title="Trim Information Attribute Name" value="MW_STOCK_SIZE" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the part attribute name for Mold Trim and Ejector Trim size information.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="MW_EjectPinRecommendLength" type="logical" title="Recommend Eject Pin Length" value="false" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not the system should automatically recommend (calculate) the ejector pin length. There is a possible loss of performance to have the ejector pin length automatically calculated. When this option is off, the length can be chosen, which avoids any possible loss of performance.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EjectorPinSingleFeature" type="logical" title="Combine Multiple Ejector Pins in One Trim Feature" value="false" ver="8.5.0" scope="Session">
+                    <Description>This option determines whether or not ejector pin post processing should create only one trim body feature with target bodies of multiple selected ejector pins.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Group name="Trim Part Object Layers">
+                    <Pref name="MW_TrimPartCoreSurfLayer" type="int" title="Core Surface" value="29" ver="4.0.0" scope="Session">
+                        <Description>This option specifies which layer the core surface should be placed on.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="256" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_TrimPartCavitySurfLayer" type="int" title="Cavity Surface" value="30" ver="4.0.0" scope="Session">
+                        <Description>This option specifies which layer the cavity surface should be placed on.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="256" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_TrimPartCoreMoldSurfLayer" type="int" title="Core Mold Surface" value="31" ver="4.0.0" scope="Session">
+                        <Description>This option specifies which layer the core mold surface should be placed on.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="256" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_TrimPartCavityMoldSurfLayer" type="int" title="Cavity Mold Surface" value="32" ver="4.0.0" scope="Session">
+                        <Description>This option specifies which layer the cavity mold surface should be placed on.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="256" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_TrimPartUserInsertSurfLayer" type="int" title="User Insert Surface" value="33" ver="4.0.0" scope="Session">
+                        <Description>This option specifies which layer the user insert surface should be placed on.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="256" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Runner" csh="PMAN_Mold_Wizard_Others_Runner">
+                <Group name="Guide">
+                    <Pref name="MW_RunnerGuideColor" type="int" title="Color" value="31" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the color of the runner guide.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="MW_RunnerGuideLayer" type="int" title="Layer" value="171" ver="4.0.0" scope="Session">
+                        <Description>This option specifies which layer the runner guide should be placed on.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="256" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Solid">
+                    <Pref name="MW_RunnerSolidColor" type="int" title="Color" value="6" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the color of the runner solid.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="MW_RunnerSolidLayer" type="int" title="Layer" value="72" ver="4.0.0" scope="Session">
+                        <Description>This option specifies which layer the runner solid should be placed on.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="256" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Cooling" csh="PMAN_Mold_Wizard_Others_Cooling">
+                <Pref name="MW_CoolInterferenceCheck" type="logical" title="Interference Check" value="false" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not the system should automatically check for cooling interference with the cavity or core surface. There is a possible loss of performance using automatic checking.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Off" value="false"/>
+                        <EnumElem name="On" value="true"/>
+                    </Data>
+                </Pref>
+                <Group name="Baffle Part Clearances">
+                    <Pref name="MW_CoolingBaffleAxialClearance_MU" type="real" title="Axial" value="15.0" unit="mm" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the axial clearance value used to determine the length of the cooling hole and baffle.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_CoolingBaffleAxialClearance_EU" type="real" title="Axial" value="0.6" ver="4.0.0" scope="Session" unit="in">
+                        <Description>This option specifies the axial clearance value used to determine the length of the cooling hole and baffle.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_CoolingBaffleRadialClearance_MU" type="real" title="Radial" value="10.0" ver="4.0.0" scope="Session" unit="mm">
+                        <Description>This option specifies the radial clearance value used to determine the length of the cooling hole and baffle.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_CoolingBaffleRadialClearance_EU" type="real" title="Radial" value="0.4" ver="4.0.0" scope="Session" unit="in">
+                        <Description>This option specifies the radial clearance value used to determine the length of the cooling hole and baffle.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Channel">
+                    <Pref name="MW_CoolingPartiallyShaded" type="logical" title="Partially Shaded" value="true" ver="7.5.2" scope="Session">
+                        <Description>This option determines whether or not partial shading display should be applied to faces and bodies of cooling channel at creation time.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>        
+                    </Pref>
+                    <Pref name="MW_CoolingChannelLayerName" type="string" title="Layer Category Name" value="CoolChannel" ver="6.0.0" scope="Session">
+                        <Description>This field allows a layer category name to be specified for the layer where the cooling channel is placed.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="MW_CoolingEndClearance_MU" type="real" title="Extension Clearance" value="1.0" unit="mm" ver="1899" scope="Session">
+                        <Description>This option specifies the extension value for the channel.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_CoolingEndClearance_EU" type="real" title="Extension Clearance" value="0.04" unit="in" ver="1899" scope="Session">
+                        <Description>This option specifies the extension value for the channel.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_CoolingAngledClearance_MU" type="real" title="Angled Fitting Clearance" value="0.5" unit="mm" ver="1980" scope="Session">
+                        <Description>This option specifies the clearance value to adjust an angled fitting.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_CoolingAngledClearance_EU" type="real" title="Angled Fitting Clearance" value="0.02" unit="in" ver="1980" scope="Session">
+                        <Description>This option specifies the clearance value to adjust an angled fitting.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MW_CoolingUpdateDistanceToBoundaryBody" type="logical" title="Update Distance to Boundary Body" value="true" ver="1953+" scope="Session">
+                        <Description>This option determines whether or not a direct channel with "None" type updates the distance value to the boundary body. There is a possible loss of performance using distance update.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Pocket" csh="PMAN_Mold_Wizard_Others_Pocket">
+                <Pref name="MW_Pocket_ExpressionSuppControl" type="logical" title="Expression Control" value="false" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not the subtract feature should be suppressed by expression in the target part.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Mold CSYS" csh="PMAN_Mold_Wizard_Others_Mold_CSYS">
+              <Pref name="MW_UPDATE_PARTING_PART_WCS" type="logical" title="Update Parting Part WCS to Linked Datum CSYS" value="true" ver="2007" scope="Session">
+                <Description>This option determines whether or not to update the parting part WCS when repositioning the original product component for molding in the Mold CSYS command. When the option is on, the parting part WCS will be same as the linked Datum CSYS.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>

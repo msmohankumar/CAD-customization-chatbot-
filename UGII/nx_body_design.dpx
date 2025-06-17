@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Vehicle Design - Body Design" csh="PMAN_Vehicle_Design_Body_Design" package_suppress="simcenter3d,simviewer,view,mechatronicsplayer,nx2dedit">
+        <Category name="B-pillar" csh="PMAN_Vehicle_Design_Body_Design_B_Pillar">
+            <Tab name="General" csh="PMAN_Vehicle_Design_Body_Design_B_Pillar_General">
+                <Pref name="DDBPILLAR_BODY_TYPE" type="string" title="Body Type" value="Sedan" ver="4.0.0" scope="Session">
+                    <Description>This field allows the vehicle body type to be specified.</Description>
+                    <String/>
+                </Pref>
+                <Group name="Section Information">
+                <Pref name="DDBPILLAR_SECTION_PARAMETER_MAX_COUNT" type="int" title="Maximum Number of Segments" value="8" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the maximum number of segments in the B-pillar cross section.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DDBPILLAR_SECTION_REG_NAME" type="string" title="Registry Spreadsheet Name" value="bd_bpillar_cross_section_reg.xls" ver="4.0.0" scope="Session">
+                    <Description>This field allows a spreadsheet file name to be specified. This spreadsheet will register all B-pillar cross sections.</Description>
+                    <Widestring/>
+                </Pref>
+                </Group>
+                <Pref name="DDBPILLAR_UPPER_OFFSET_MU" type="real" title="Upper Offset" value="36.0" unit="mm" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the upper offset to the beltline.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DDBPILLAR_UPPER_OFFSET_EU" type="real" title="Upper Offset" value="1.42" unit="in" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the upper offset to the beltline.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DDBPILLAR_LOWER_OFFSET_MU" type="real" title="Lower Offset" value="-178.0" unit="mm" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the lower offset to the beltline.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <UpperBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DDBPILLAR_LOWER_OFFSET_EU" type="real" title="Lower Offset" value="-7.01" unit="in" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the lower offset to the beltline.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <UpperBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DDBPILLAR_FACE_OFFSET_MU" type="real" title="Face Offset" value="28.0" unit="mm" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the offset between the B-pillar outer surface and the B and R surfaces.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DDBPILLAR_FACE_OFFSET_EU" type="real" title="Face Offset" value="1.1" unit="in" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the offset between the B-pillar outer surface and the B and R surfaces.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="DATABASE_READ_MODE_IN_XLS" type="int" title="Format for Database (spreadsheet)" value="1" ver="4.0.0" scope="Session">
+                    <Description>This option specifies which database that should be loaded.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="xs4" value="0"/>
+                        <EnumElem name="xls" value="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Template Components" csh="PMAN_Vehicle_Design_Body_Design_B_Pillar_Template_Components">
+                <Pref name="DDBPILLAR_STRIKER" type="string" title="Striker" value="STRIKER" ver="4.0.0" scope="Session">
+                    <Description>This field allows the striker component name to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_STRIKER_REINFORCEMENT" type="string" title="Striker Reinforcement" value="REINFORCEMENT" ver="4.0.0" scope="Session">
+                    <Description>This field allows the reinforcement component name to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_STRIKER_TOOL" type="string" title="Striker Tool" value="TOOL" ver="4.0.0" scope="Session">
+                    <Description>This field allows the striker tool component name to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_CHECK_ASSM" type="string" title="Check Link Assembly" value="CHECK_LINK_ASSEM" ver="4.0.0" scope="Session">
+                    <Description>This field allows the check link assembly name to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_CHECK_BASE" type="string" title="Door Check Assembly" value="DR-CHECK-ASM" ver="4.0.0" scope="Session">
+                    <Description>This field allows the door check assembly name to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_CHECK_BODY_STRAP" type="string" title="Door Check Body Strap" value="DR-CHECK-BODY-STRAP" ver="4.0.0" scope="Session">
+                    <Description>This field allows the check link strap component name to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_CHECK_ARM" type="string" title="Door Check Arm" value="DR-CHECK-ARM" ver="4.0.0" scope="Session">
+                    <Description>This field allows the check link arm component name to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_CONDUIT_ASSM_DR" type="string" title="Conduit Assembly" value="CONDUIT_ASSEM" ver="4.0.0" scope="Session">
+                    <Description>This field allows the conduit assembly name to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_CONDUIT_BASE_DR" type="string" title="Conduit Base to Door" value="CONDUIT-BASE-TO-DOOR" ver="4.0.0" scope="Session">
+                    <Description>This field allows the conduit base to door component name to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_CONDUIT_BASE_BP" type="string" title="Conduit Base to B-pillar" value="CONDUIT-BASE-TO-BPILLAR" ver="4.0.0" scope="Session">
+                    <Description>This field allows the conduit base to B-pillar component name to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_CONDUIT" type="string" title="Conduit" value="CONDUIT" ver="4.0.0" scope="Session">
+                    <Description>This field allows the conduit component name to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_SEAT_RETRACTOR" type="string" title="Seat Belt Retractor" value="SEAT-RETRACTOR" ver="4.0.0" scope="Session">
+                    <Description>This field allows the seat belt retractor component name to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+            </Tab>
+            <Tab name="Template Subcomponents" csh="PMAN_Vehicle_Design_Body_Design_B_Pillar_Template_Subcomponents">
+                <Pref name="DDBPILLAR_STRIKERS" type="string_list" title="Striker Subcomponents" value="" ver="4.0.0" scope="Session">
+                    <Description>This box allows the subcomponents in the striker template to be specified.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DDBPILLAR_STRIKER_REINFORCMENTS" type="string_list" title="Striker Reinforcement Subcomponents" value="" ver="4.0.0" scope="Session">
+                    <Description>This box allows the subcomponents in the striker reinforcement template to be specified.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DDBPILLAR_STRIKER_TOOLS" type="string_list" title="Striker Tool Subcomponents" value="" ver="4.0.0" scope="Session">
+                    <Description>This box allows the subcomponents in the striker tool template to be specified.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DDBPILLAR_CHECK_BASES" type="string_list" title="Check Link Base Subcomponents" value="&quot;dr-check-body&quot;\&quot;dr-check-base&quot;\&quot;dr-check-seal&quot;\&quot;dr-check-stud&quot;" ver="4.0.0" scope="Session">
+                    <Description>This box allows the subcomponents in the check link base template to be specified.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DDBPILLAR_CHECK_BODY_STRAPS" type="string_list" title="Check Link Body Strap Subcomponents" value="dr-check-pin" ver="4.0.0" scope="Session">
+                    <Description>This box allows the subcomponents in the check link body strap template to be specified.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DDBPILLAR_CHECK_ARMS" type="string_list" title="Check Link Arm Subcomponents" value="&quot;dr-check-retainer&quot;\&quot;dr-check-washer&quot;" ver="4.0.0" scope="Session">
+                    <Description>This box allows the subcomponents in the check link arm template to be specified.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DDBPILLAR_CONDUIT_BASE_DRS" type="string_list" title="Conduit Base to Door Subcomponents" value="" ver="4.0.0" scope="Session">
+                    <Description>This box allows the subcomponents in the conduit base to door template to be specified.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DDBPILLAR_CONDUIT_BASE_BPS" type="string_list" title="Conduit Base to B-pillar Subcomponents" value="" ver="4.0.0" scope="Session">
+                    <Description>This box allows the subcomponents in the conduit base to B-pillar template to be specified.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DDBPILLAR_SEAT_RETRACTORS" type="string_list" title="Seat Retractor Subcomponents" value="" ver="4.0.0" scope="Session">
+                    <Description>This box allows the subcomponents in the seat retractor template to be specified.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+            </Tab>
+            <Tab name="Template Search Filters" csh="PMAN_Vehicle_Design_Body_Design_B_Pillar_Template_Search_Filters">
+                <Docum>The directory specified by UGII_BD_TEMPLATE_TOP_LEVEL_FOLDER is the top level directory for all body design templates. The filters are used when searching the sub-directories for specific templates.</Docum>
+                <Group name="Striker">
+                <Pref name="DDBPILLAR_TEMPLATE_STRIKER_FOLDER_NAME_FILTER" type="string" title="Directory" value="*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the striker template directory.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="DDBPILLAR_TEMPLATE_STRIKER_PART_NAME_FILTER" type="string" title="Part Name" value="*striker*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the striker template part name.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="DDBPILLAR_TEMPLATE_STRIKER_PART_ATTR_FILTER" type="string" title="Part Attribute" value="*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the striker template part attribute.</Description>
+                    <String/>
+                </Pref>
+                </Group>
+                <Group name="Reinforcement">
+                <Pref name="DDBPILLAR_TEMPLATE_REINFORCE_FOLDER_NAME_FILTER" type="string" title="Directory" value="*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the reinforcement template directory.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="DDBPILLAR_TEMPLATE_REINFORCE_PART_NAME_FILTER" type="string" title="Part Name" value="*reinforcement*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the reinforcement template part name.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="DDBPILLAR_TEMPLATE_REINFORCE_PART_ATTR_FILTER" type="string" title="Part Attribute" value="*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the reinforcement template part attribute.</Description>
+                    <String/>
+                </Pref>
+                </Group>
+                <Group name="Check Link Assembly">
+                <Pref name="DDBPILLAR_TEMPLATE_CHECKLINK_FOLDER_NAME_FILTER" type="string" title="Directory" value="*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the check link assembly template directory.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="DDBPILLAR_TEMPLATE_CHECKLINK_PART_NAME_FILTER" type="string" title="Part Name" value="*check_link_assem*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the check link assembly template part name.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="DDBPILLAR_TEMPLATE_CHECKLINK_PART_ATTR_FILTER" type="string" title="Part Attribute" value="*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the check link assembly template part attribute.</Description>
+                    <String/>
+                </Pref>
+                </Group>
+                <Group name="Conduit Assembly">
+                <Pref name="DDBPILLAR_TEMPLATE_CONDUIT_FOLDER_NAME_FILTER" type="string" title="Directory" value="*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the conduit assembly template directory.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="DDBPILLAR_TEMPLATE_CONDUIT_PART_NAME_FILTER" type="string" title="Part Name" value="*conduit_assem*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the conduit assembly template part name.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="DDBPILLAR_TEMPLATE_CONDUIT_PART_ATTR_FILTER" type="string" title="Part Attribute" value="*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the conduit assembly template part attribute.</Description>
+                    <String/>
+                </Pref>
+                </Group>
+                <Group name="Seat Belt Retractor">
+                <Pref name="DDBPILLAR_TEMPLATE_SEAT_FOLDER_NAME_FILTER" type="string" title="Directory" value="*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the seat belt retractor template directory.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="DDBPILLAR_TEMPLATE_SEAT_PART_NAME_FILTER" type="string" title="Part Name" value="*seat-retractor*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the seat belt retractor template part name.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="DDBPILLAR_TEMPLATE_SEAT_PART_ATTR_FILTER" type="string" title="Part Attribute" value="*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the seat belt retractor template part attribute.</Description>
+                    <String/>
+                </Pref>
+                </Group>
+                <Group name="Tool">
+                <Pref name="DDBPILLAR_TEMPLATE_TOOL_FOLDER_NAME_FILTER" type="string" title="Directory" value="*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the tool template directory.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="DDBPILLAR_TEMPLATE_TOOL_PART_NAME_FILTER" type="string" title="Part Name" value="*tool*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the tool template part name.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="DDBPILLAR_TEMPLATE_TOOL_PART_ATTR_FILTER" type="string" title="Part Attribute" value="*" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the filter that should be used when searching for the tool template part attribute.</Description>
+                    <String/>
+                </Pref>
+                </Group>   
+            </Tab>
+            <Tab name="Object Names" csh="PMAN_Vehicle_Design_Body_Design_B_Pillar_Object_Names">
+                <Label label="The B-pillar wizard will look for hinge centerlines and mounting plane by their names."/>
+                <Pref name="DDBPILLAR_FRONT_HINGE_CENTER_LINE" type="string" title="Front Hinge Centerline" value="FRONT_HINGE_CENTER_LINE" ver="4.0.0" scope="Session">
+                    <Description>This field allows an object name for the front hinge centerline to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_REAR_HINGE_CENTER_LINE" type="string" title="Rear Hinge Centerline" value="REAR_HINGE_CENTER_LINE" ver="4.0.0" scope="Session">
+                    <Description>This field allows an object name for the rear hinge centerline to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_MOUNTING_PLANE" type="string" title="Mounting Plane" value="MOUNTING_PLANE" ver="4.0.0" scope="Session">
+                    <Description>This field allows an object name for the striker mounting plane to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+            </Tab>
+            <Tab name="Layers" csh="PMAN_Vehicle_Design_Body_Design_B_Pillar_Layers">
+                <Pref name="DDBPILLAR_FRONT_B_LINE" type="int" title="Front B Line" value="201" ver="4.0.0" scope="Session">
+                    <Description>This option specifies which layer the front B line should be placed on.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DDBPILLAR_FRONT_R_LINE" type="int" title="Front R Line" value="202" ver="4.0.0" scope="Session">
+                    <Description>This option specifies which layer the front R line should be placed on.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DDBPILLAR_REAR_B_LINE" type="int" title="Rear B Line" value="203" ver="4.0.0" scope="Session">
+                    <Description>This option specifies which layer the rear B line should be placed on.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DDBPILLAR_REAR_R_LINE" type="int" title="Rear R Line" value="204" ver="4.0.0" scope="Session">
+                    <Description>This option specifies which layer the rear R line should be placed on.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DDBPILLAR_BELT_LINE" type="int" title="Beltline" value="22" ver="4.0.0" scope="Session">
+                    <Description>This option specifies which layer the beltline should be placed on.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Linked Objects" csh="PMAN_Vehicle_Design_Body_Design_B_Pillar_Linked_Objects">
+                <Pref name="DDBPILLAR_STRAP_LINK_OBJECTS" type="string_list" title="Linked Objects for Check Link Strap" value="{DDBPILLAR_CHECK_BODY_STRAP_ATTR,REFERENCE_CIRCLE,REFERENCE_LINE}" ver="4.0.0" scope="Session">
+                    <Description>This box allows object names to locate the check link strap to be specified.</Description>
+                    <MultiLineText height="3"/>
+                </Pref>
+                <Pref name="DDBPILLAR_BASE_DR_LINK_OBJECTS" type="string_list" title="Linked Objects for Check Link to Door" value="{DDBPILLAR_CONDUIT_TO_DR_ATTR,CENTER_LINE}" ver="4.0.0" scope="Session">
+                    <Description>This box allows object names to locate the check link to door to be specified.</Description>
+                    <MultiLineText height="3"/>
+                </Pref>
+                <Pref name="DDBPILLAR_BASE_BP_LINK_OBJECTS" type="string_list" title="Linked Objects for Check Link to B-pillar" value="{DDBPILLAR_CONDUIT_TO_BPIL_ATTR,CENTER_LINE}" ver="4.0.0" scope="Session">
+                    <Description>This box allows object names to locate the check link to B-pillar to be specified.</Description>
+                    <MultiLineText height="3"/>
+                </Pref>
+                <Pref name="DDBPILLAR_BASE_BP_MOUNTING_OBJECTS" type="string_list" title="Mounting Objects for Conduit to B-pillar" value="&quot;{DDBPILLAR_CONDUIT_TO_BPIL_ATTR,REFER_CIRCLE}&quot;\&quot;{DDBPILLAR_CONDUIT_TO_BPIL_ATTR,REFER_FACE_0}&quot;" ver="4.0.0" scope="Session">
+                    <Description>This box allows B-pillar mounting objects to be specified.</Description>
+                    <MultiLineText height="3"/>
+                </Pref>
+            </Tab>
+            <Tab name="Component Part Attributes" csh="PMAN_Vehicle_Design_Body_Design_B_Pillar_Component_Part_Attributes">
+                <Label label="The following attributes are used to identify B-pillar components by part attributes."/>
+                <Pref name="DDBPILLAR_ATTRIBUTE_TITLE" type="string" title="Attribute Title" value="DDBPILLAR_ATTR" ver="4.0.0" scope="Session">
+                    <Description>This field allows the attribute title to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Group name="Attribute Values">
+                <Pref name="DDBPILLAR_TOOL_ATTR" type="string" title="Striker Tool" value="TOOL_BODY" ver="4.0.0" scope="Session">
+                    <Description>This field allows the attribute value for the striker tool component to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_CHECK_ASM_ATTR" type="string" title="Door Check Assembly" value="DR_CHECK_ASM" ver="4.0.0" scope="Session">
+                    <Description>This field allows the attribute value for the door check assembly to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_CHECK_BODY_STRAP_ATTR" type="string" title="Door Check Body Strap" value="DR_CHECK_BODY_STRAP" ver="4.0.0" scope="Session">
+                    <Description>This field allows the attribute value for the check link strap component to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_CHECK_LINK_ARM_ATTR" type="string" title="Door Check Arm" value="CHECK_LINK_ARM" ver="4.0.0" scope="Session">
+                    <Description>This field allows the attribute value for the check link arm component to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_CONDUIT_TO_DR_ATTR" type="string" title="Conduit Base to Door" value="CONDUIT_TO_DR" ver="4.0.0" scope="Session">
+                    <Description>This field allows the attribute value for the conduit base to door component to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_CONDUIT_TO_BPIL_ATTR" type="string" title="Conduit Base to B-pillar" value="CONDUIT_TO_BPIL" ver="4.0.0" scope="Session">
+                    <Description>This field allows the attribute value for the conduit base to B-pillar component to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Component Positioning" csh="PMAN_Vehicle_Design_Body_Design_B_Pillar_Component_Positioning">
+                <Pref name="DDBPILLAR_REINFORCMENT_CONSTRAINTS" type="string_list" title="Reinforcement Constraints" value="&quot;{BASE_PLANE,BASE_PLANE,3,5}&quot;\&quot;{REFER_FACE_0,REFER_FACE_0,6,0}&quot;\&quot;{REFER_FACE_1,REFER_FACE_1,6,0}&quot;" ver="4.0.0" scope="Session">
+                    <Description>This box allows reinforcement mating constraints to be specified.</Description>
+                    <MultiLineText height="4"/>
+                </Pref>
+                <Pref name="DDBPILLAR_BASE_CONSTRAINTS" type="string_list" title="Base Constraints" value="&quot;{YZ_PLN,XY_PLN,3,33.30}&quot;\&quot;{XZ_PLN,YZ_PLN,3,58.92}&quot;\&quot;{XY_PLN,XZ_PLN,3,31.00}&quot;" ver="4.0.0" scope="Session">
+                    <Description>This box allows base mating constraints to be specified.</Description>
+                    <MultiLineText height="4"/>
+                </Pref>
+                <Pref name="DDBPILLAR_STRAP_CONSTRAINTS" type="string_list" title="Check Link Strap Constraints" value="&quot;{STRAP_CENTER_PLANE,XY_PLN,0,0}&quot;\&quot;{XZ_PLANE,REFERENCE_PLANE,4,0.0}&quot;\&quot;{XY_PLANE,REAR_HINGE_CENTER_LINE,3,-75.67}&quot;\&quot;{XZ_PLANE,REAR_HINGE_CENTER_LINE,3,-11.4}&quot;" ver="4.0.0" scope="Session">
+                    <Description>This box allows check link strap mating constraints to be specified.</Description>
+                    <MultiLineText height="4"/>
+                </Pref>
+                <Pref name="DDBPILLAR_ARM_CONSTRAINS" type="string_list" title="Check Link Arm Constraints" value="&quot;{ARM_CENTER_PLANE,STRAP_CENTER_PLANE,1,0}&quot;\&quot;{ARM_TANGENT_FACE,BASE_TANGENT_FACE,7,0}&quot;\&quot;{ARM_CENTER_LINE,STRAP_CENTER_LINE,1,0}&quot;" ver="4.0.0" scope="Session">
+                    <Description>This box allows check link arm mating constraints to be specified.</Description>
+                    <MultiLineText height="4"/>
+                </Pref>
+                <Pref name="DDBPILLAR_BASE_DR_CONSTRAINS" type="string_list" title="Check Link to Door Constraints" value="&quot;{XY_PLN,XY_PLN,3,36.0}&quot;\&quot;{YZ_PLN,YZ_PLN,3,18.0}&quot;\&quot;{XZ_PLN,XZ_PLN,3,160.0}&quot;" ver="4.0.0" scope="Session">
+                    <Description>This box allows check link to door mating constraints to be specified.</Description>
+                    <MultiLineText height="4"/>
+                </Pref>
+                <Pref name="DDBPILLAR_BASE_BP_CONSTRAINS" type="string_list" title="Check Link to B-pillar Constraints" value="&quot;{BASE_PLANE,MOUNTING_PLANE,3,5.0}&quot;\&quot;{BASE_REFER_0,BASE_REFER_0,3,-350.0}&quot;\&quot;{BASE_REFER_1,BASE_REFER_1,3,-25.0}&quot;" ver="4.0.0" scope="Session">
+                    <Description>This box allows check link to B-pillar mating constraints to be specified.</Description>
+                    <MultiLineText height="4"/>
+                </Pref>
+            </Tab>
+            <Tab name="User Defined Feature Library" csh="PMAN_Vehicle_Design_Body_Design_B_Pillar_User_Defined_Feature_Library">
+                <Group name="Native NX">
+                <Pref name="DDBPILLAR_TOOL_UDF_LIB_NATIVE_SWITCH" type="logical" title="Specify User Defined Feature Library for B-pillar" value="false" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not a user defined feature library for B-pillar should be specified. When this option is off, the system environment values will be used to load user defined features for B-pillar.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="DDBPILLAR_TOOL_UDF_LIB_NATIVE_METRIC" type="string" title="Metric User Defined Feature Library Category" value="/metric" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the user defined feature library class hierarchy category for B-pillar. If the system supplied value of "/metric" is not used, the database file (defined by UGII_UDF_DATABASE_FILE) should also be updated.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_TOOL_UDF_LIB_NATIVE_INCH" type="string" title="English User Defined Feature Library Category" value="/english" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the user defined feature library class hierarchy category for B-pillar. If the system supplied value of "/english" is not used, the database file (defined by UGII_UDF_DATABASE_FILE) should also be updated.</Description>
+                    <Widestring/>
+                </Pref>
+                </Group>
+              <Group name="Teamcenter Integration">
+                <Pref name="DDBPILLAR_TOOL_UDF_LIB_IMAN_SWITCH" type="logical" title="Specify User Defined Feature Library for B-pillar" value="false" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not a user defined feature library for B-pillar should be specified. When this option is off, the system environment values will be used to load user defined features for B-pillar.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="DDBPILLAR_TOOL_UDF_LIB_IMAN_METRIC" type="string" title="Metric User Defined Feature Library Folder" value="/Unigraphics_UDF_parts/Metric" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the user defined feature library class hierarchy folder for B-pillar. If UGII_UDF_IMAN_WITH_NATIVE_DATABASE is set, this option will be ignored since the user defined feature will be loaded from the native environment instead.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDBPILLAR_TOOL_UDF_LIB_IMAN_INCH" type="string" title="English User Defined Feature Library Folder" value="/Unigraphics_UDF_parts/Inch" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the user defined feature library class hierarchy folder for B-pillar. If UGII_UDF_IMAN_WITH_NATIVE_DATABASE is set, this option will be ignored since the user defined feature will be loaded from the native environment instead.</Description>
+                    <Widestring/>
+                </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="Glass Drop" csh="PMAN_Vehicle_Design_Body_Design_Glass_Drop">
+            <Tab name="General" csh="PMAN_Vehicle_Design_Body_Design_Glass_Drop_General">
+                <Pref name="DDGLASS_HIDDEN_LAYER" type="int" title="Hidden Layer" value="255" ver="4.0.0" scope="Session">
+                    <Description>This option specifies which layer some geometry will be put and hidden.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DDGLASS_THICKNESS_MU" type="real" title="Glass Thickness" value="4.0" unit="mm" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the thickness of the glass in order to construct the barrel surface as a thickened sheet.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DDGLASS_THICKNESS_EU" type="real" title="Glass Thickness" value="0.16" unit="in" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the thickness of the glass in order to construct the barrel surface as a thickened sheet.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Barrel Surface" csh="PMAN_Vehicle_Design_Body_Design_Glass_Drop_Barrel_Surface">
+                <Label label="The barrel surface is based on three section curves. The locations of these section curves are defined by the following options."/>
+                <Pref name="DDGLASS_FIT_FRONT_OFFSET_MU" type="real" title="Forward Section" value="100.0" unit="mm" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the offset of the forward section curve from the front of the glass.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="DDGLASS_FIT_FRONT_OFFSET_EU" type="real" title="Forward Section" value="3.94" unit="in" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the offset of the forward section curve from the front of the glass.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="DDGLASS_FIT_MID_LOCATION_MU" type="real" title="Middle Section" value="3300.0" unit="mm" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the location of a section curve (measured longitudinally) through the styled glass surface. This should be approximately in the middle of the glass; sometimes referred to as the 3300 section.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="DDGLASS_FIT_MID_LOCATION_EU" type="real" title="Middle Section" value="129.9" unit="in" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the location of a section curve (measured longitudinally) through the styled glass surface. This should be approximately in the middle of the glass; sometimes referred to as the 3300 section.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="DDGLASS_FIT_REAR_OFFSET_MU" type="real" title="Rearward Section" value="50.0" unit="mm" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the offset of the rearward section curve from the rear of the glass.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="DDGLASS_FIT_REAR_OFFSET_EU" type="real" title="Rearward Section" value="1.97" unit="in" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the offset of the rearward section curve from the rear of the glass.</Description>
+                    <Real/>
+                </Pref>
+                <Separator/>
+                <Pref name="DDGLASS_DROP_BARREL_TYPE" type="int" title="Barrel Surface Type" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies how the barrel surface should be created. This also determines the way the glass will drop down. The Drop Range step of the wizard will only display if the second option is chosen.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Revolved - Glass Drop Down by Motion" value="0"/>
+                        <EnumElem name="Swept - Glass Drop Down by Translation" value="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Motion Analysis" csh="PMAN_Vehicle_Design_Body_Design_Glass_Drop_Motion_Analysis">
+                <Pref name="DDGLASS_CHECK_OBJECT_NAME" type="string" title="Objects for Interference Checking" value="{BODY_0,BODY_1,BODY_2}" ver="4.0.0" scope="Session">
+                    <Description>This field allows object names which will automatically be used for interference checking to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+            </Tab>
+            <Tab name="Channels" csh="PMAN_Vehicle_Design_Body_Design_Glass_Drop_Channels">
+                <Pref name="DDGLASS_CHANNEL_START" type="int" title="Start Point of Glass Channel" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the starting point of the glass channel. The length of the front and rear glass channels will extend from this point.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="At the Upper Path Point" value="0"/>
+                        <EnumElem name="At the Beltline with Offset" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DDGLASS_START_OFFSET_BLT_MU" type="real" title="Beltline Offset" value="10.0" unit="mm" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the offset from the beltline. The offset applies if the above option is set to 'At the Beltline with Offset'.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="DDGLASS_START_OFFSET_BLT_EU" type="real" title="Beltline Offset" value="0.39" unit="in" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the offset from the beltline. The offset applies if the above option is set to 'At the Beltline with Offset'.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="DDGLASS_FRONT_CHANNEL_COMPONENT" type="string" title="Front Glass Channel Component Name" value="front_channel" ver="4.0.0" scope="Session">
+                    <Description>This field allows a component name for the front glass channel to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDGLASS_REAR_CHANNEL_COMPONENT" type="string" title="Rear Glass Channel Component Name" value="rear_channel" ver="4.0.0" scope="Session">
+                    <Description>This field allows a component name for the rear glass channel to be specified.</Description>
+                    <Widestring/>
+                </Pref>
+            </Tab>
+            <Tab name="User Defined Feature Library" csh="PMAN_Vehicle_Design_Body_Design_Glass_Drop_User_Defined_Feature_Library">
+                <Group name="Native NX">
+                <Pref name="DDGLASS_UDF_LIB_NATIVE_SWITCH" type="logical" title="Specify User Defined Feature Library for Glass Drop" value="false" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not a user defined feature library for glass drop should be specified. When this option is off, the system environment values will be used to load user defined features for glass drop.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="DDGLASS_UDF_LIB_NATIVE_INCH" type="string" title="English User Defined Feature Library Category" value="/english" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the user defined feature library class hierarchy category for glass drop. If the system supplied value of "/english" is not used, the database file (defined by UGII_UDF_DATABASE_FILE) should also be updated.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDGLASS_UDF_LIB_NATIVE_METRIC" type="string" title="Metric User Defined Feature Library Category" value="/metric" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the user defined feature library class hierarchy category for glass drop. If the system supplied value of "/metric" is not used, the database file (defined by UGII_UDF_DATABASE_FILE) should also be updated.</Description>
+                    <Widestring/>
+                </Pref>
+                </Group>
+              <Group name="Teamcenter Integration">
+                <Pref name="DDGLASS_UDF_LIB_IMAN_SWITCH" type="logical" title="Specify User Defined Feature Library for Glass Drop" value="false" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not a user defined feature library for glass drop should be specified. When this option is off, the system environment values will be used to load user defined features for glass drop.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="DDGLASS_UDF_LIB_IMAN_METRIC" type="string" title="Metric User Defined Feature Library Folder" value="/Unigraphics_UDF_parts/Metric" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the user defined feature library class hierarchy folder for glass drop. If UGII_UDF_IMAN_WITH_NATIVE_DATABASE is set, this option will be ignored since the user defined feature will be loaded from the native environment instead.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DDGLASS_UDF_LIB_IMAN_INCH" type="string" title="English User Defined Feature Library Folder" value="/Unigraphics_UDF_parts/Inch" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the user defined feature library class hierarchy folder for glass drop. If UGII_UDF_IMAN_WITH_NATIVE_DATABASE is set, this option will be ignored since the user defined feature will be loaded from the native environment instead.</Description>
+                    <Widestring/>
+                </Pref>
+                </Group>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>

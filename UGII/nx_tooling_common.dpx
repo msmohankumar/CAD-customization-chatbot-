@@ -1,0 +1,1385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Shared Tooling Options" csh="PMAN_Tooling" package_suppress="simcenter3d,simviewer,view,mechatronicsplayer,nx2dedit">
+        <Category name="General" csh="PMAN_Tooling_General">
+            <Tab name="Miscellaneous" csh="PMAN_Tooling_General_Miscellaneous">
+                <Pref name="Tooling_RestoreApplication" type="logical" title="Restore Tooling Application" value="true" ver="10.0.2" scope="Session">
+                    <Description>This option determines whether or not an attempt to restore a tooling application will be made on NX startup. The attempt will be successful if all of the following conditions are true:
+<Formatted>1. This option is on.
+2. The tooling application, e.g. Mold Wizard, was in use when last exiting NX.
+3. The tooling application license is available.
+</Formatted>
+Suitable tooling applications include Mold Wizard, Progressive Die Wizard, Electrode Design, and Engineering Die Wizard.
+                    </Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Group name="Part Material Attribute">
+                    <Pref name="Tooling_Material" type="logical" title="Use Tooling_Material Attribute Title Alias" value="true" ver="11.0.1" scope="Session">
+                        <Description>This option determines whether or not to use the Tooling_Material attribute title alias instead of NX_Material as the part material attribute.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Tooling_MaterialPartAttributeTitleAlias" type="string" title="Tooling_Material Attribute Title Alias" value="MATERIAL_TOOLING" ver="12.0.0" scope="Session">
+                        <Description>This field specifies the character string that is used as the Tooling_Material attribute title alias.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Tooling_ReadToolingMaterialFirst" type="logical" title="Read Tooling_Material Attribute First" value="false" ver="2306" scope="Session">
+                        <Description>When part has both Tooling_Material and NX Material attributes, this option determines whether or not to get the part material from the Tooling_Material attribute first.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                          <EnumElem name="Yes" value="true"/>
+                          <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Spreadsheet" csh="PMAN_Tooling_General_Spreadsheet">
+              <Pref name="Tooling_CacheSpreadsheetData" type="logical" title="Cache Spreadsheet Data" value="true" ver="12.0.0" scope="Session">
+                <Description>This option determines whether or not the spreadsheet data should be cached. Once cached, the data will load faster the next time it is accessed within the same session.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>
+          </Tab>
+          <Tab name="QR/Bar Code" csh="PMAN_Tooling_General_QR_Bar_Code">
+            <Pref name="Tooling_CodeRules" type="string_list" title="Code Rules" value="&quot;&lt;PART_NAME&gt;&quot;\&quot;&lt;PART_NAME&gt;_&lt;CATALOG&gt;&quot;" ver="1980" scope="Session">
+              <Description>This field specifies code rules. The code rules are formed by combining a series of attribute names, specific keywords, and characters.
+                <Formatted>
+1. Enclose attribute names and specific keywords in &lt;&gt;
+2. Only FILE_PATH is supported as a specific keyword. In addition, only when generating a QR code and using native NX, will &lt;FILE_PATH&gt; be replaced with a part file path. When generating a bar code, or using Teamcenter Integration for NX, &lt;FILE_PATH&gt; does not work.
+                </Formatted>
+              </Description>
+              <MultiLineText height="6"/>
+            </Pref>
+            <Pref name="Tooling_CodeBasePoint" type="int" title="Base Point" value="4" ver="1980" scope="Session">
+              <Description>This option specifies a base point on the QR code or bar code.</Description>
+              <OptionMenu/>
+              <Data type="enum">
+                <EnumElem name="Bottom Left" value="0"/>
+                <EnumElem name="Bottom Center" value="1"/>
+                <EnumElem name="Bottom Right" value="2"/>
+                <EnumElem name="Middle Left" value="3"/>
+                <EnumElem name="Middle Center" value="4"/>
+                <EnumElem name="Middle Right" value="5"/>
+                <EnumElem name="Top Left" value="6"/>
+                <EnumElem name="Top Center" value="7"/>
+                <EnumElem name="Top Right" value="8"/>
+              </Data>
+            </Pref>
+            <Group name="QR Code Size">
+              <Pref name="Tooling_QRCodeWidth_MU" type="real" title="Width" value="31.75" unit="mm" ver="1980" scope="Session">
+                <Description>This option specifies the QR code width.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="Tooling_QRCodeWidth_EU" type="real" title="Width" value="1.25" unit="in" ver="1980" scope="Session">
+                <Description>This option specifies the QR code width.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="Tooling_QRCodeHeight_MU" type="real" title="Height" value="31.75" unit="mm" ver="1980" scope="Session">
+                <Description>This option specifies the QR code height.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="Tooling_QRCodeHeight_EU" type="real" title="Height" value="1.25" unit="in" ver="1980" scope="Session">
+                <Description>This option specifies the QR code height.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+            </Group>
+            <Group name="Bar Code Size">
+              <Pref name="Tooling_BarCodeHeight_EU" type="real" title="Height" value="0.5" unit="in" ver="1980" scope="Session">
+                <Description>This option specifies the bar code character height.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="Tooling_BarCodeHeight_MU" type="real" title="Height" value="12.5" unit="mm" ver="1980" scope="Session">
+                <Description>This option specifies the bar code character height.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+            </Group>
+          </Tab>
+          <Tab name="Stock Size" csh="PMAN_Tooling_General_StockSize">
+            <Pref name="Tooling_StockSize_DecimalPlaces" type="int" title="Decimal Places for Stock Size" value="3" ver="2206" scope="Session">
+              <Description>This option specifies the number of decimal places for the stock size value.</Description>
+              <IntegerScale/>
+              <Data type="range">
+                <LowerBound value="0" include="1"/>
+                <UpperBound value="10" include="1"/>
+              </Data>
+            </Pref>
+          </Tab>
+        </Category>
+        <Category name="Manufacturing Geometry" csh="PMAN_Tooling_Manufacturing_Geometry">
+            <Tab name="General" csh="PMAN_Tooling_Manufacturing_Geometry_General">
+                <Pref name="MW_EW_MT_BOUNDING_BOX" type="logical" title="Display Bounding Box" value="false" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not the manufacturing geometry should calculate the bounding box of the selected face and save the box value to the face attribute.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_MT_TRANSLUCENCY" type="logical" title="Support Translucency" value="true" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not the manufacturing geometry should support the translucency function.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_MT_COLOR" type="logical" title="Set Color" value="true" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not the manufacturing geometry should support the set color function.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_MT_GROUP" type="logical" title="Display Group Node" value="true" ver="8.0.0" scope="Session">
+                    <Description>This option determines whether or not the manufacturing geometry should display group nodes in the manufacturing tree view.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="MW_EW_MT_FEATURE_COUNT" type="int" title="Number of Manufacturing Methods" value="7" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the number of manufacturing methods.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Group name="First Manufacturing Method">
+                    <Pref name="MW_EW_MT_FEATURE1_NAME" type="string" title="Name" value="EDM" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the first manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE1_SUBNAME" type="string" title="Identified Feature Name" value="electrode" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the identified feature for the first manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE1_ICON" type="string" title="Icon" value="mw_electrode_sc" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the icon for the first manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE1_DEFAULT_COLOR" type="int" title="Color" value="78" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the color of the first manufacturing method.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="Second Manufacturing Method">
+                    <Pref name="MW_EW_MT_FEATURE2_NAME" type="string" title="Name" value="WEDM" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the second manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE2_SUBNAME" type="string" title="Identified Feature Name" value="w-electrode" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the identified feature for the second manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE2_ICON" type="string" title="Icon" value="mthd_wedm_sc" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the icon for the second manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE2_DEFAULT_COLOR" type="int" title="Color" value="36" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the color of the second manufacturing method.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="Third Manufacturing Method">
+                    <Pref name="MW_EW_MT_FEATURE3_NAME" type="string" title="Name" value="Hard Milling" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the third manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE3_SUBNAME" type="string" title="Identified Feature Name" value="hard-milling" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the identified feature for the third manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE3_ICON" type="string" title="Icon" value="mill_zig_zag_sc" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the icon for the third manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE3_DEFAULT_COLOR" type="int" title="Color" value="186" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the color of the third manufacturing method.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="Fourth Manufacturing Method">
+                    <Pref name="MW_EW_MT_FEATURE4_NAME" type="string" title="Name" value="Grinding" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the fourth manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE4_SUBNAME" type="string" title="Identified Feature Name" value="grinding" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the identified feature for the fourth manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE4_ICON" type="string" title="Icon" value="mthd_mill_sc" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the icon for the fourth manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE4_DEFAULT_COLOR" type="int" title="Color" value="175" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the color of the fourth manufacturing method.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="Fifth Manufacturing Method">
+                    <Pref name="MW_EW_MT_FEATURE5_NAME" type="string" title="Name" value="Drill" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the fifth manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE5_SUBNAME" type="string" title="Identified Feature Name" value="drill" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the identified feature for the fifth manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE5_ICON" type="string" title="Icon" value="drill_sc" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the icon for the fifth manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE5_DEFAULT_COLOR" type="int" title="Color" value="42" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the color of the fifth manufacturing method.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="Sixth Manufacturing Method">
+                    <Pref name="MW_EW_MT_FEATURE6_NAME" type="string" title="Name" value="Seal Face" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the sixth manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE6_SUBNAME" type="string" title="Identified Feature Name" value="seal face" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the identified feature for the sixth manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE6_ICON" type="string" title="Icon" value="surface_enlarge_sc" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the icon for the sixth manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE6_DEFAULT_COLOR" type="int" title="Color" value="114" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the color of the sixth manufacturing method.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="Seventh Manufacturing Method">
+                    <Pref name="MW_EW_MT_FEATURE7_NAME" type="string" title="Name" value="Other" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the seventh manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE7_SUBNAME" type="string" title="Identified Feature Name" value="other" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the identified feature for the seventh manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE7_ICON" type="string" title="Icon" value="select_face_sc" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the name of the icon for the seventh manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MW_EW_MT_FEATURE7_DEFAULT_COLOR" type="int" title="Color" value="31" ver="4.0.0" scope="Session">
+                        <Description>This option specifies the color of the seventh manufacturing method.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Additional Method" csh="PMAN_Tooling_Manufacturing_Geometry_AM">
+                <Pref name="MFM_MFG_XML_FILE_NAME" type="string" title="XML File Name" value="EDW_MFG" ver="8.0.0" scope="Session">
+                    <Description>This option specifies the manufacturing geometry configuration XML file name.</Description>
+                    <String/>
+                </Pref>
+                <Group name="Press Key Manufacturing Method">
+                    <Pref name="MFM_PressKey_Attribute" type="string" title="Attribute" value="MFM_PressKey" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the attribute for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_PressKey_Icon" type="string" title="Icon" value="mw_electrode_sc" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the name of the icon for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_PressKey_Color" type="int" title="Color" value="186" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the color of this manufacturing method.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="Finishing Manufacturing Method">
+                    <Pref name="MFM_Finishing_Attribute" type="string" title="Attribute" value="MFM_Finishing" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the attribute for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_Finishing_Icon" type="string" title="Icon" value="mthd_wedm_sc" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the name of the icon for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_Finishing_Color" type="int" title="Color" value="15" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the color of this manufacturing method.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="Refined Manufacturing Method">
+                    <Pref name="MFM_Refined_Attribute" type="string" title="Attribute" value="MFM_Refined" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the attribute for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_Refined_Icon" type="string" title="Icon" value="mill_zig_zag_sc" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the name of the icon for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_Refined_Color" type="int" title="Color" value="75" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the color of this manufacturing method.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="Rough Manufacturing Method">
+                    <Pref name="MFM_Rough_Attribute" type="string" title="Attribute" value="MFM_Rough" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the attribute for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_Rough_Icon" type="string" title="Icon" value="mthd_mill_sc" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the name of the icon for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_Rough_Color" type="int" title="Color" value="6" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the color of this manufacturing method.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="Casting Manufacturing Method">
+                    <Pref name="MFM_Casting_Attribute" type="string" title="Attribute" value="MFM_Casting" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the attribute for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_Casting_Icon" type="string" title="Icon" value="drill_sc" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the name of the icon for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_Casting_Color" type="int" title="Color" value="86" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the color of this manufacturing method.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="Screw Manufacturing Method">
+                    <Pref name="MFM_Screw_Attribute" type="string" title="Attribute" value="MFM_Screw" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the attribute for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_Screw_Icon" type="string" title="Icon" value="surface_enlarge_sc" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the name of the icon for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_Screw_Color" type="int" title="Color" value="181" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the color of this manufacturing method.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="Location-PIN Manufacturing Method">
+                    <Pref name="MFM_Location-PIN_Attribute" type="string" title="Attribute" value="MFM_Location-PIN" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the attribute for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_Location-PIN_Icon" type="string" title="Icon" value="select_face_sc" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the name of the icon for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_Location-PIN_Color" type="int" title="Color" value="169" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the color of this manufacturing method.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="Bush Manufacturing Method">
+                    <Pref name="MFM_Bush_Attribute" type="string" title="Attribute" value="MFM_Bush" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the attribute for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_Bush_Icon" type="string" title="Icon" value="instance_sc" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the name of the icon for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_Bush_Color" type="int" title="Color" value="166" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the color of this manufacturing method.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="Guide-Post Manufacturing Method">
+                    <Pref name="MFM_Guide-Post_Attribute" type="string" title="Attribute" value="MFM_Guide-Post" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the attribute for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_Guide-Post_Icon" type="string" title="Icon" value="force_sc" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the name of the icon for this manufacturing method.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="MFM_Guide-Post_Color" type="int" title="Color" value="78" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the color of this manufacturing method.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="Standard Parts" csh="PMAN_Tooling_Standard_Parts">
+            <Tab name="General" csh="PMAN_Tooling_Standard_Parts_General">
+                <Pref name="TOOLING_StandardPartSetAbsoluteCSYS" type="logical" title="Set WCS to Absolute before Selecting a Point" value="true" ver="11.0.1" scope="Session">
+                  <Description>This option determines whether or not the WCS should be moved to the orientation and position of the absolute CSYS before selecting a point to add standard parts.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="TOOLING_LoadComponentsFromSearchFolders" type="logical" title="Load Components from Search Folders" value="false" ver="12.0.0" scope="Session">
+                  <Description>This option determines whether or not the tooling templates' components should be loaded from search folders.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="TOOLING_StandardPartSetDateAttribute" type="logical" title="Set Date Attribute" value="false" ver="1899" scope="Session">
+                    <Description>This option determines whether or not the Date attribute should be assigned to a new standard part.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="TOOLING_StandardPartAddAsNewComponent" type="logical" title="Add as New Component" value="false" ver="1980" scope="Session">
+                    <Description>This option determines whether or not multiple components of the same type should be added as new components (instead of adding them as instances of a component one at a time). When adding as new components, they will follow the name rules.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="TOOLING_StandardPartUpdateForExternalChange" type="logical" title="Update for External Change" value="false" ver="1980" scope="Session">
+                    <Description>This option determines whether or not an update for external changes, such as executing Knowledge Fusion rules, should be performed when editing a tooling component which contains Knowledge Fusion data.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Tooling_StandardPartFeatureNamePrefix" type="string" title="Quick Edit Feature Name Prefix" value="SREF" ver="2306" scope="Session">
+                    <Description>This field specifies a feature name prefix that the Standard Part Library command will use to find qualifying features in a standard part assembly. These features can then be edited directly via the Standard Part Library dialog box.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="Tooling_StandardPartAdditionalReferenceSet" type="string_list" title="Custom Reference Set of Standard Part" value="" ver="2312" scope="Session">
+                  <Description>This field specifies additional reference sets for standard parts. They will be added to the Reference Set option menu in the Standard Part Management dialog box.</Description>
+                  <MultiLineText height="2"/>
+                </Pref>              
+              <Group name="Standard Part Position Dialog">
+                <Pref name="Tooling_StandardPartPlanePosition" type="logical" title="Use for Plane Position Placement" value="true" ver="2306" scope="Session">
+                  <Description>This option determines whether or not to use the Standard Part Position sub-dialog when the Position placement option in the Standard Part Management dialog is set to Plane.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="No" value="false"/>
+                    <EnumElem name="Yes" value="true"/>
+                  </Data>
+                </Pref>
+                <Pref name="Tooling_StandardPartPointPosition" type="logical" title="Use for Point Position Placement" value="false" ver="2306" scope="Session">
+                  <Description>This option determines whether or not to use the Standard Part Position sub-dialog when the Position placement option in the Standard Part Management dialog is set to Point.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="No" value="false"/>
+                    <EnumElem name="Yes" value="true"/>
+                  </Data>
+                </Pref>
+                <Pref name="Tooling_StandardPositionXIncrement_MU" type="real" title="Drag Increment in X" value="1.0" ver="2306" unit="mm" scope="Session">
+                  <Description>This option specifies the drag increment value in the X direction when positioning a standard part by dragging.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="Tooling_StandardPositionXIncrement_EU" type="real" title="Drag Increment in X" value="0.0625" ver="2306" unit="in" scope="Session">
+                  <Description>This option specifies the drag increment value in the X direction when positioning a standard part by dragging.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="Tooling_StandardPositionYIncrement_MU" type="real" title="Drag Increment in Y" value="1.0" ver="2306" unit="mm" scope="Session">
+                  <Description>This option specifies the drag increment value in the Y direction when positioning a standard part by dragging.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="Tooling_StandardPositionYIncrement_EU" type="real" title="Drag Increment in Y" value="0.0625" ver="2306" unit="in" scope="Session">
+                  <Description>This option specifies the drag increment value in the Y direction when positioning a standard part by dragging.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Teamcenter">
+                <Pref name="TOOLING_SearchFileContainer" type="logical" title="Search File Container" value="false" ver="1926+" scope="Session">
+                  <Description>This option determines whether or not to search the file container when adding tooling components.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                  <Pref name="TOOLING_UseLegacyMethodToImportPart" type="logical" title="Use Legacy Method to Import Parts into Teamcenter" value="false" ver="2206" scope="Session">
+                      <Description>This option determines whether to use the legacy method of Assembly Cloning to import parts into Teamcenter. To improve cloning efficiency, the new import method is now used by default to import parts into Teamcenter. If there are problems importing the parts, set this option to clone parts using the legacy method.</Description>
+                      <Toggle off="false"/>
+                      <Data type="enum">
+                          <EnumElem name="No" value="false"/>
+                          <EnumElem name="Yes" value="true"/>
+                      </Data>
+                  </Pref>
+                  <Pref name="TOOLING_UseLegacyMethodToClonePart" type="logical" title="Use Legacy Method to Clone Parts within Teamcenter" value="false" ver="2206" scope="Session">
+                      <Description>This option determines whether to use the legacy method of Assembly Cloning to clone parts within Teamcenter. To improve cloning efficiency, the new clone method is now used by default to clone parts. If there are problems cloning the parts, set this option to clone parts using the legacy method.</Description>
+                      <Toggle off="false"/>
+                      <Data type="enum">
+                          <EnumElem name="No" value="false"/>
+                          <EnumElem name="Yes" value="true"/>
+                      </Data>
+                  </Pref>
+              </Group>
+            </Tab>
+            <Tab name="Display Information" csh="PMAN_Tooling_Standard_Parts_Display_Information">
+              <Group name="Scrap Parameter">
+                <Pref name="PDW_STANDARD_DISPLAYINFORMATION_COLOR" type="int" title="Color" value="216" ver="11.0.1" scope="Part">
+                  <Description>This option specifies the color of the scrap parameter.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="PDW_STANDARD_DISPLAYINFORMATION_FONT" type="string" title="Font" value="blockfont" ver="11.0.1" scope="Part">
+                  <Description>This option specifies the font of the scrap parameter.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="PDW_STANDARD_DISPLAYINFORMATION_FONT_STYLE" type="int" title="Font Style" value="0" ver="11.0.1" scope="Part">
+                  <Description>This option specifies the font style of the scrap parameter.</Description>
+                  <OptionMenu/>
+                  <Data type="enum">
+                    <EnumElem name="Regular" value="0"/>
+                    <EnumElem name="Bold" value="1"/>
+                    <EnumElem name="Italic" value="2"/>
+                    <EnumElem name="Bold Italic" value="3"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_STANDARD_DISPLAYINFORMATION_WIDTH" type="int" title="Width" value="3" ver="11.0.1" scope="Part">
+                  <Description>This option specifies the width of the scrap parameter.</Description>
+                  <AnnotationTextWidth/>
+                </Pref>
+              </Group>
+                <Group name="SVG Information">
+                    <Pref name="TOOLING_SVG_Language" type="string" title="Language" value="English" ver="1899" scope="Session">
+                        <Description>This option specifies the language used to show information in the SVG picture.</Description>
+                        <String/>
+                    </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="Reuse Library" csh="PMAN_Tooling_Reuse_Library">
+          <Tab name="General" csh="PMAN_Tooling_Reuse_Library_General">
+            <Pref name="Tooling_Reuse_Library_General_LIB_Storage" type="int" title="Manage Tooling Reuse Library in" value="1" ver="11.0.0" scope="Session">
+              <Description>This option specifies if the tooling databases in the Reuse Library are managed in Teamcenter or in the operating system.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="Teamcenter" value="0"/>
+                <EnumElem name="OS" value="1"/>
+              </Data>
+            </Pref>
+          </Tab>
+        </Category>
+        <Category name="Blank Nesting" csh="PMAN_Tooling_Blank_Nesting">
+          <Tab name="General" csh="PMAN_Tooling_Blank_Nesting_General">
+            <Pref name="TOOLING_BlankNestingDisplayBoundingBox" type="logical" title="Display Bounding Box" value="false" ver="8.5.0" scope="Session">
+              <Description>This option determines whether or not blank nesting will display a bounding box for the selected blank.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="TOOLING_BlankNestingColorBoundingBoxLine" type="int" title="Bounding Box Color" value="138" ver="8.5.0" scope="Session">
+              <Description>This option specifies the color of the bounding box.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="TOOLING_BlankNestingColorStripLine" type="int" title="Strip Color" value="78" ver="8.5.0" scope="Session">
+              <Description>This option specifies the color of the strip line.</Description>
+              <Color/>
+            </Pref>
+          </Tab>
+        </Category>
+      <Category name="Drawing" csh="PMAN_Tooling_Drawing">
+        <Tab name="Assembly Drawing" csh="PMAN_Tooling_Drawing_Assembly_Drawing">
+          <Pref name="Tooling_Drawing_AutoViews" type="logical" title="Create Views Automatically" value="false" ver="2206" scope="Session">
+            <Description>This option determines whether or not drawing views should be created automatically.</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="No" value="false"/>
+              <EnumElem name="Yes" value="true"/>
+            </Data>
+          </Pref>
+          <Pref name="Tooling_Drawing_SectionViewNames" type="string" title="Section View Names" value="FRONTSECTION, RIGHTSECTION" ver="2206" scope="Session">
+            <Description>This box specifies the names of the section views in the drawing template.</Description>
+            <Widestring/>
+          </Pref>          
+          <Group name="Attribute Spreadsheet">
+          <Pref name="Tooling_Drawing_MW_Assembly_Drawing_Attribute_Spreadsheet_WIN" type="string" title="Mold Wizard" value="$MOLDWIZARD_DIR\templates\mw_attribute.xlsx" ver="1847" scope="Session">
+            <Description>This field specifies the full file name of the Mold Wizard assembly drawing attribute spreadsheet.</Description>
+            <BrowseFileSel type="xls,xlsx,xs4"/>
+          </Pref>
+          <Pref name="Tooling_Drawing_MW_Assembly_Drawing_Attribute_Spreadsheet_UNX" type="string" title="Mold Wizard" value="$MOLDWIZARD_DIR/templates/mw_attribute.xs4" ver="8.5.0" scope="Session">
+            <Description>This field specifies the full file name of the Mold Wizard assembly drawing attribute spreadsheet.</Description>
+            <BrowseFileSel type="xs4"/>
+          </Pref>
+          <Pref name="Tooling_Drawing_PDW_Assembly_Drawing_Attribute_Spreadsheet_WIN" type="string" title="Progressive Die Wizard" value="$PDIEWIZARD_DIR\templates\pdw_attribute.xlsx" ver="1847" scope="Session">
+            <Description>This field specifies the full file name of the Progressive Die Wizard assembly drawing attribute spreadsheet.</Description>
+            <BrowseFileSel type="xls,xlsx,xs4"/>
+          </Pref>
+          <Pref name="Tooling_Drawing_PDW_Assembly_Drawing_Attribute_Spreadsheet_UNX" type="string" title="Progressive Die Wizard" value="$PDIEWIZARD_DIR/templates/pdw_attribute.xs4" ver="8.5.0" scope="Session">
+            <Description>This field specifies the full file name of the Progressive Die Wizard assembly drawing attribute spreadsheet.</Description>
+            <BrowseFileSel type="xs4"/>
+          </Pref>
+          <Pref name="Tooling_Drawing_EDW_Assembly_Drawing_Attribute_Spreadsheet_WIN" type="string" title="Engineering Die Wizard" value="$EDIEWIZARD_DIR\templates\edw_attribute.xlsx" ver="2206" scope="Session">
+            <Description>This field specifies the full file name of the Engineering Die Wizard assembly drawing attribute spreadsheet.</Description>
+            <BrowseFileSel type="xlsx"/>
+          </Pref>
+          <Pref name="Tooling_Drawing_EDW_Assembly_Drawing_Attribute_Spreadsheet_UNX" type="string" title="Engineering Die Wizard" value="$EDIEWIZARD_DIR/templates/edw_attribute.xlsx" ver="2206" scope="Session">
+            <Description>This field specifies the full file name of the Engineering Die Wizard assembly drawing attribute spreadsheet.</Description>
+            <BrowseFileSel type="xlsx"/>
+          </Pref>            
+          <Pref name="Tooling_Drawing_PDCW_Assembly_Drawing_Attribute_Spreadsheet_WIN" type="string" title="Pressure Die Casting Wizard" value="$PDCASTING_WIZARD_DIR\templates\pdcw_attribute.xlsx" ver="1899" scope="Session">
+            <Description>This field specifies the full file name of the Pressure Die Casting Wizard assembly drawing attribute spreadsheet.</Description>
+            <BrowseFileSel type="xls,xlsx,xs4"/>
+          </Pref>
+          <Pref name="Tooling_Drawing_PDCW_Assembly_Drawing_Attribute_Spreadsheet_UNX" type="string" title="Pressure Die Casting Wizard" value="$PDCASTING_WIZARD_DIR/templates/pdcw_attribute.xs4" ver="1899" scope="Session">
+            <Description>This field specifies the full file name of the Pressure Die Casting Wizard assembly drawing attribute spreadsheet.</Description>
+            <BrowseFileSel type="xs4"/>
+          </Pref>
+          </Group>
+          <Pref name="Tooling_Drawing_Assembly_Drawing_Sheet_Name" type="string" title="Sheet Name" value="Sheet_001" ver="1926" scope="Session">
+            <Description>This field specifies the name of the sheet for the assembly drawing.</Description>
+            <Widestring/>
+          </Pref>
+        </Tab>
+        <Tab name="Component Drawing" csh="PMAN_Tooling_Component_Drawing">
+          <Group name="User Defined Template Frame Layer">
+            <Pref name="Tooling_MW_Component_Drawing_User_Defined_Template_Frame_Layer" type="int" title="Mold Wizard" value="159" ver="8.5.0" scope="Session">
+              <Description>This option specifies the layer the user defined template frame should be placed on in Mold Wizard component drawings.</Description>
+              <Integer/>
+              <Data type="range">
+                <LowerBound value="1" include="1"/>
+                <UpperBound value="256" include="1"/>
+              </Data>
+            </Pref>
+            <Pref name="Tooling_PDW_Component_Drawing_User_Defined_Template_Frame_Layer" type="int" title="Progressive Die Wizard" value="159" ver="8.5.0" scope="Session">
+              <Description>This option specifies the layer the user defined template frame should be placed on in Progressive Die Wizard component drawings.</Description>
+              <Integer/>
+              <Data type="range">
+                <LowerBound value="1" include="1"/>
+                <UpperBound value="256" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Attribute Spreadsheet">
+            <Pref name="Tooling_Drawing_MW_Component_Drawing_Attribute_Spreadsheet_WIN" type="string" title="Mold Wizard" value="$MOLDWIZARD_DIR\drafting\component_drawing\mw_drawing.xlsx" ver="2007+" scope="Session">
+              <Description>This field specifies the full file name of the Mold Wizard component drawing attribute spreadsheet.</Description>
+              <BrowseFileSel type="xls,xlsx,xs4"/>
+            </Pref>
+            <Pref name="Tooling_Drawing_MW_Component_Drawing_Attribute_Spreadsheet_UNX" type="string" title="Mold Wizard" value="$MOLDWIZARD_DIR/drafting/component_drawing/mw_drawing.xs4" ver="2007+" scope="Session">
+              <Description>This field specifies the full file name of the Mold Wizard component drawing attribute spreadsheet.</Description>
+              <BrowseFileSel type="xs4"/>
+            </Pref>
+            <Pref name="Tooling_Drawing_PDW_Component_Drawing_Attribute_Spreadsheet_WIN" type="string" title="Progressive Die Wizard" value="$PDIEWIZARD_DIR\drafting\component_drawing\pdw_drawing.xlsx" ver="2007+" scope="Session">
+              <Description>This field specifies the full file name of the Progressive Die Wizard component drawing attribute spreadsheet.</Description>
+              <BrowseFileSel type="xls,xlsx,xs4"/>
+            </Pref>
+            <Pref name="Tooling_Drawing_PDW_Component_Drawing_Attribute_Spreadsheet_UNX" type="string" title="Progressive Die Wizard" value="$PDIEWIZARD_DIR/drafting/component_drawing/pdw_drawing.xs4" ver="2007+" scope="Session">
+              <Description>This field specifies the full file name of the Progressive Die Wizard component drawing attribute spreadsheet.</Description>
+              <BrowseFileSel type="xs4"/>
+            </Pref>
+            <Pref name="Tooling_Drawing_EDW_Component_Drawing_Attribute_Spreadsheet_WIN" type="string" title="Engineering Die Wizard" value="$EDIEWIZARD_DIR\drafting\component_drawing\edw_drawing.xlsx" ver="2206+" scope="Session">
+              <Description>This field specifies the full file name of the Engineering Die Wizard component drawing attribute spreadsheet.</Description>
+              <BrowseFileSel type="xlsx"/>
+            </Pref>
+            <Pref name="Tooling_Drawing_EDW_Component_Drawing_Attribute_Spreadsheet_UNX" type="string" title="Engineering Die Wizard" value="$EDIEWIZARD_DIR/drafting/component_drawing/edw_drawing.xlsx" ver="2206+" scope="Session">
+              <Description>This field specifies the full file name of the Engineering Die Wizard component drawing attribute spreadsheet.</Description>
+              <BrowseFileSel type="xlsx"/>
+            </Pref>
+            <Pref name="Tooling_Drawing_PDCW_Component_Drawing_Attribute_Spreadsheet_WIN" type="string" title="Pressure Die Casting Wizard" value="$PDCASTING_WIZARD_DIR\drafting\component_drawing\pdcw_drawing.xlsx" ver="2007+" scope="Session">
+              <Description>This field specifies the full file name of the Pressure Die Casting Wizard component drawing attribute spreadsheet.</Description>
+              <BrowseFileSel type="xls,xlsx,xs4"/>
+            </Pref>
+            <Pref name="Tooling_Drawing_PDCW_Component_Drawing_Attribute_Spreadsheet_UNX" type="string" title="Pressure Die Casting Wizard" value="$PDCASTING_WIZARD_DIR/drafting/component_drawing/pdcw_drawing.xs4" ver="2007+" scope="Session">
+              <Description>This field specifies the full file name of the Pressure Die Casting Wizard component drawing attribute spreadsheet.</Description>
+              <BrowseFileSel type="xs4"/>
+            </Pref>
+          </Group>
+          <Group name="User Defined Attribute to Create Drawing">
+            <Pref name="PDW_NEED_DRAWING" type="string" title="Progressive Die Wizard" value="User Defined Attribute" ver="11.0.0" scope="Session">
+              <Description>This field specifies the attribute of components which need to create drawings in Progressive Die Wizard.</Description>
+              <Widestring/>
+            </Pref>
+            <Pref name="MW_NEED_DRAWING" type="string" title="Mold Wizard" value="User Defined Attribute" ver="11.0.0" scope="Session">
+              <Description>This field specifies the attribute of components which need to create drawings in Mold Wizard.</Description>
+              <Widestring/>
+            </Pref>
+          </Group>
+        </Tab>
+      </Category>
+      <Category name="Object Attribute Management" csh="PMAN_Tooling_Object_Attribute_Management">
+        <Tab name="General" csh="PMAN_Tooling_Object_Attribute_Management_General">
+          <Group name="Attribute Spreadsheet">
+          <Pref name="Tooling_MW_Object_Attribute_Management_Spreadsheet_WIN" type="string" title="Mold Wizard" value="$MOLDWIZARD_DIR\templates\mw_attribute.xlsx" ver="1847" scope="Session">
+            <Description>This field specifies the full file name of the Mold Wizard object attribute management spreadsheet.</Description>
+            <BrowseFileSel type="xls,xlsx,xs4"/>
+          </Pref>
+          <Pref name="Tooling_MW_Object_Attribute_Management_Spreadsheet_UNX" type="string" title="Mold Wizard" value="$MOLDWIZARD_DIR/templates/mw_attribute.xs4" ver="9.0.0" scope="Session">
+            <Description>This field specifies the full file name of the Mold Wizard object attribute management spreadsheet.</Description>
+            <BrowseFileSel type="xs4"/>
+          </Pref>
+          <Pref name="Tooling_PDW_Object_Attribute_Management_Spreadsheet_WIN" type="string" title="Progressive Die Wizard" value="$PDIEWIZARD_DIR\templates\pdw_attribute.xlsx" ver="1847" scope="Session">
+            <Description>This field specifies the full file name of the Progressive Die Wizard object attribute management spreadsheet.</Description>
+            <BrowseFileSel type="xls,xlsx,xs4"/>
+          </Pref>
+          <Pref name="Tooling_PDW_Object_Attribute_Management_Spreadsheet_UNX" type="string" title="Progressive Die Wizard" value="$PDIEWIZARD_DIR/templates/pdw_attribute.xs4" ver="9.0.0" scope="Session">
+            <Description>This field specifies the full file name of the Progressive Die Wizard object attribute management spreadsheet.</Description>
+            <BrowseFileSel type="xs4"/>
+          </Pref>
+          <Pref name="Tooling_EDW_Object_Attribute_Management_Spreadsheet_WIN" type="string" title="Engineering Die Wizard" value="$EDIEWIZARD_DIR\templates\edw_attribute.xlsx" ver="2206" scope="Session">
+            <Description>This field specifies the full file name of the Engineering Die Wizard object attribute management spreadsheet.</Description>
+            <BrowseFileSel type="xlsx"/>
+          </Pref>
+          <Pref name="Tooling_EDW_Object_Attribute_Management_Spreadsheet_UNX" type="string" title="Engineering Die Wizard" value="$EDIEWIZARD_DIR/templates/edw_attribute.xlsx" ver="2206" scope="Session">
+            <Description>This field specifies the full file name of the Engineering Die Wizard object attribute management spreadsheet.</Description>
+            <BrowseFileSel type="xlsx"/>
+          </Pref>            
+          <Pref name="Tooling_PDCW_Object_Attribute_Management_Spreadsheet_WIN" type="string" title="Pressure Die Casting Wizard" value="$PDCASTING_WIZARD_DIR\templates\pdcw_attribute.xlsx" ver="1899" scope="Session">
+            <Description>This field specifies the full file name of the Pressure Die Casting Wizard object attribute management spreadsheet.</Description>
+            <BrowseFileSel type="xls,xlsx,xs4"/>
+          </Pref>
+          <Pref name="Tooling_PDCW_Object_Attribute_Management_Spreadsheet_UNX" type="string" title="Pressure Die Casting Wizard" value="$PDCASTING_WIZARD_DIR/templates/pdcw_attribute.xs4" ver="1899" scope="Session">
+            <Description>This field specifies the full file name of the Pressure Die Casting Wizard object attribute management spreadsheet.</Description>
+            <BrowseFileSel type="xs4"/>
+          </Pref>
+          </Group>
+        </Tab>
+      </Category>
+      <Category name="Face Color Management" csh="PMAN_Tooling_Face_Color_Management">
+        <Tab name="General" csh="PMAN_Tooling_Face_Color_Management_General">
+          <Pref name="Tooling_Face_Color_Management_Recover_Face_Color" type="logical" title="Recover Face Color According to Color Attribute" value="true" ver="9.0.2" scope="Session">
+                <Description>This option determines whether or not to check and recover face color according to color attribute.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                    <EnumElem name="No" value="false"/>
+                    <EnumElem name="Yes" value="true"/>
+                </Data>
+          </Pref>
+          <Pref name="Tooling_Face_Color_Management_Only_Check_Hole_Faces" type="logical" title="Only Check Hole Faces to Show Face without Any Manufacturing Information" value="true" ver="9.0.2" scope="Session">
+              <Description>This option determines whether or not the 'Show Face without Any Manufacturing Information' command should check hole faces only.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                    <EnumElem name="No" value="false"/>
+                    <EnumElem name="Yes" value="true"/>
+               </Data>
+          </Pref>
+          <Pref name="Tooling_Face_Color_Management_Select_Sub_Hole_Face_Automatically" type="logical" title="Select Sub-hole Face Automatically " value="true" ver="9.0.2" scope="Session">
+                <Description>This option determines whether or not to select sub-hole faces automatically.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                    <EnumElem name="No" value="false"/>
+                    <EnumElem name="Yes" value="true"/>
+                </Data>
+          </Pref>
+          <Group name="Color Spreadsheet">
+              <Pref name="Tooling_MW_Face_Color_Management_Metric_Spreadsheet_WIN" type="string" title="Mold Wizard - Metric Part" value="$MOLDWIZARD_DIR\templates\metric\mw_color_management_template.xlsx" ver="1847" scope="Session">
+                  <Description>This field specifies the full file name of the Mold Wizard face color management spreadsheet with Metric units.</Description>
+                  <BrowseFileSel type="xls,xlsx,xs4"/>
+              </Pref>
+              <Pref name="Tooling_MW_Face_Color_Management_Metric_Spreadsheet_UNX" type="string" title="Mold Wizard - Metric Part" value="$MOLDWIZARD_DIR/templates/metric/mw_color_management_template.xs4" ver="9.0.0" scope="Session">
+                  <Description>This field specifies the full file name of the Mold Wizard face color management spreadsheet with Metric units.</Description>
+                  <BrowseFileSel type="xs4"/>
+              </Pref>
+              <Pref name="Tooling_MW_Face_Color_Management_English_Spreadsheet_WIN" type="string" title="Mold Wizard - English Part" value="$MOLDWIZARD_DIR\templates\english\mw_color_management_template.xlsx" ver="1847" scope="Session">
+                  <Description>This field specifies the full file name of the Mold Wizard face color management spreadsheet with English units.</Description>
+                  <BrowseFileSel type="xls,xlsx,xs4"/>
+              </Pref>
+              <Pref name="Tooling_MW_Face_Color_Management_English_Spreadsheet_UNX" type="string" title="Mold Wizard - English Part" value="$MOLDWIZARD_DIR/templates/english/mw_color_management_template.xs4" ver="9.0.0" scope="Session">
+                  <Description>This field specifies the full file name of the Mold Wizard face color management spreadsheet with English units.</Description>
+                  <BrowseFileSel type="xs4"/>
+              </Pref>
+              <Pref name="Tooling_PDW_Face_Color_Management_Metric_Spreadsheet_WIN" type="string" title="Progressive Die Wizard - Metric Part" value="$PDIEWIZARD_DIR\templates\metric\pdw_color_management_template.xlsx" ver="1847" scope="Session">
+                  <Description>This field specifies the full file name of the Progressive Die Wizard face color management spreadsheet with Metric units.</Description>
+                  <BrowseFileSel type="xls,xlsx,xs4"/>
+              </Pref>
+              <Pref name="Tooling_PDW_Face_Color_Management_Metric_Spreadsheet_UNX" type="string" title="Progressive Die Wizard - Metric Part" value="$PDIEWIZARD_DIR/templates/metric/pdw_color_management_template.xs4" ver="9.0.0" scope="Session">
+                  <Description>This field specifies the full file name of the Progressive Die Wizard face color management spreadsheet with Metric units.</Description>
+                  <BrowseFileSel type="xs4"/>
+              </Pref>
+              <Pref name="Tooling_PDW_Face_Color_Management_English_Spreadsheet_WIN" type="string" title="Progressive Die Wizard - English Part" value="$PDIEWIZARD_DIR\templates\english\pdw_color_management_template.xlsx" ver="1847" scope="Session">
+                  <Description>This field specifies the full file name of the Progressive Die Wizard face color management spreadsheet with English units.</Description>
+                  <BrowseFileSel type="xls,xlsx,xs4"/>
+              </Pref>
+              <Pref name="Tooling_PDW_Face_Color_Management_English_Spreadsheet_UNX" type="string" title="Progressive Die Wizard - English Part" value="$PDIEWIZARD_DIR/templates/english/pdw_color_management_template.xs4" ver="9.0.0" scope="Session">
+                  <Description>This field specifies the full file name of the Progressive Die Wizard face color management spreadsheet with English units.</Description>
+                  <BrowseFileSel type="xs4"/>
+              </Pref>
+              <Pref name="Tooling_EDW_Face_Color_Management_Metric_Spreadsheet_WIN" type="string" title="Engineering Die Wizard - Metric Part" value="$EDIEWIZARD_DIR\templates\metric\edw_color_management_template.xlsx" ver="2206" scope="Session">
+                <Description>This field specifies the full file name of the Engineering Die Wizard face color management spreadsheet with Metric units.</Description>
+                <BrowseFileSel type="xlsx"/>
+              </Pref>
+              <Pref name="Tooling_EDW_Face_Color_Management_Metric_Spreadsheet_UNX" type="string" title="Engineering Die Wizard - Metric Part" value="$EDIEWIZARD_DIR/templates/metric/edw_color_management_template.xlsx" ver="2206" scope="Session">
+                <Description>This field specifies the full file name of the Engineering Die Wizard face color management spreadsheet with Metric units.</Description>
+                <BrowseFileSel type="xlsx"/>
+              </Pref>
+              <Pref name="Tooling_EDW_Face_Color_Management_English_Spreadsheet_WIN" type="string" title="Engineering Die Wizard - English Part" value="$EDIEWIZARD_DIR\templates\english\edw_color_management_template.xlsx" ver="2206" scope="Session">
+                <Description>This field specifies the full file name of the Engineering Die Wizard face color management spreadsheet with English units.</Description>
+                <BrowseFileSel type="xlsx"/>
+              </Pref>
+              <Pref name="Tooling_EDW_Face_Color_Management_English_Spreadsheet_UNX" type="string" title="Engineering Die Wizard - English Part" value="$EDIEWIZARD_DIR/templates/english/edw_color_management_template.xlsx" ver="2206" scope="Session">
+                <Description>This field specifies the full file name of the Engineering Die Wizard face color management spreadsheet with English units.</Description>
+                <BrowseFileSel type="xlsx"/>
+              </Pref>            
+              <Pref name="Tooling_EW_Face_Color_Management_Metric_Spreadsheet_WIN" type="string" title="Electrode Design - Metric Part" value="$ELECTRODE_DESIGN_DIR\templates\metric\color_management.xlsx" ver="1847" scope="Session">
+                  <Description>This field specifies the full file name of the Electrode Design face color management spreadsheet with Metric units.</Description>
+                  <BrowseFileSel type="xls,xlsx,xs4"/>
+              </Pref>
+              <Pref name="Tooling_EW_Face_Color_Management_Metric_Spreadsheet_UNX" type="string" title="Electrode Design - Metric Part" value="$ELECTRODE_DESIGN_DIR/templates/metric/color_management.xs4" ver="9.0.0" scope="Session">
+                  <Description>This field specifies the full file name of the Electrode Design face color management spreadsheet with Metric units.</Description>
+                  <BrowseFileSel type="xs4"/>
+              </Pref>
+              <Pref name="Tooling_EW_Face_Color_Management_English_Spreadsheet_WIN" type="string" title="Electrode Design - English Part" value="$ELECTRODE_DESIGN_DIR\templates\english\color_management.xlsx" ver="1847" scope="Session">
+                  <Description>This field specifies the full file name of the Electrode Design face color management spreadsheet with English units.</Description>
+                  <BrowseFileSel type="xls,xlsx,xs4"/>
+              </Pref>
+              <Pref name="Tooling_EW_Face_Color_Management_English_Spreadsheet_UNX" type="string" title="Electrode Design - English Part" value="$ELECTRODE_DESIGN_DIR/templates/english/color_management.xs4" ver="9.0.0" scope="Session">
+                  <Description>This field specifies the full file name of the Electrode Design face color management spreadsheet with English units.</Description>
+                  <BrowseFileSel type="xs4"/>
+              </Pref>
+              <Pref name="Tooling_PDCW_Face_Color_Management_Metric_Spreadsheet_WIN" type="string" title="Pressure Die Casting Wizard - Metric Part" value="$PDCASTING_WIZARD_DIR\templates\metric\pdcw_color_management_template.xlsx" ver="1899" scope="Session">
+                  <Description>This field specifies the full file name of the Pressure Die Casting Wizard face color management spreadsheet with Metric units.</Description>
+                  <BrowseFileSel type="xls,xlsx,xs4"/>
+              </Pref>
+              <Pref name="Tooling_PDCW_Face_Color_Management_Metric_Spreadsheet_UNX" type="string" title="Pressure Die Casting Wizard - Metric Part" value="$PDCASTING_WIZARD_DIR/templates/metric/pdcw_color_management_template.xs4" ver="1899" scope="Session">
+                  <Description>This field specifies the full file name of the Pressure Die Casting Wizard face color management spreadsheet with Metric units.</Description>
+                  <BrowseFileSel type="xs4"/>
+              </Pref>
+              <Pref name="Tooling_PDCW_Face_Color_Management_English_Spreadsheet_WIN" type="string" title="Pressure Die Casting Wizard - English Part" value="$PDCASTING_WIZARD_DIR\templates\english\pdcw_color_management_template.xlsx" ver="1899" scope="Session">
+                  <Description>This field specifies the full file name of the Pressure Die Casting Wizard face color management spreadsheet with English units.</Description>
+                  <BrowseFileSel type="xls,xlsx,xs4"/>
+              </Pref>
+              <Pref name="Tooling_PDCW_Face_Color_Management_English_Spreadsheet_UNX" type="string" title="Pressure Die Casting Wizard - English Part" value="$PDCASTING_WIZARD_DIR/templates/english/pdcw_color_management_template.xs4" ver="1899" scope="Session">
+                  <Description>This field specifies the full file name of the Pressure Die Casting Wizard face color management spreadsheet with English units.</Description>
+                  <BrowseFileSel type="xs4"/>
+              </Pref>
+          </Group>
+        </Tab>
+      </Category>
+      <Category name="Hole Manufacturing Note" csh="PMAN_Tooling_Hole_Manufacturing_Note">
+        <Tab name="General" csh="PMAN_Tooling_Hole_Manufacturing_Note_General">
+          <Group name="Hole Manufacturing Note">
+            <Pref name="Tooling_Hole_Manufacturing_Note_Title" type="string" title="Hole Manufacturing Note Title" value="Hole Manufacturing Note :" ver="9.0.0" scope="Session">
+                <Description>This option specifies the hole manufacturing note title.</Description>
+                <Widestring/>
+            </Pref>
+            <Pref name="Tooling_Hole_Manufacturing_Note_Hole_Label_With_Leader" type="logical" title="Display Hole Label with Leader" value="true" ver="9.0.0" scope="Session">
+              <Description>This option determines whether or not hole labels should be displayed with leaders.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                    <EnumElem name="No" value="false"/>
+                    <EnumElem name="Yes" value="true"/>
+                  </Data>
+            </Pref>
+            <Pref name="Tooling_User_Defined_Hole_Symbol_Attribute" type="string" title="User Defined Hole Symbol Attribute" value="User Defined Hole Symbol" ver="9.0.0" scope="Session">
+                <Description>This option specifies the user defined hole symbol attribute.</Description>
+                <Widestring/>
+            </Pref>
+            <Pref name="Tooling_Manufacturing_Instruction_Attribute" type="string" title="Manufacturing Instruction Attribute" value="Manufacturing Instruction" ver="9.0.0" scope="Session">
+                <Description>This option specifies the manufacturing instruction attribute.</Description>
+                <Widestring/>
+            </Pref>
+            <Pref name="Tooling_Manufacturing_Face_Type_Attribute" type="string" title="Manufacturing Face Type Attribute" value="Manufacturing Face" ver="9.0.0" scope="Session">
+                <Description>This option specifies the manufacturing face type attribute.</Description>
+                <Widestring/>
+            </Pref>
+          </Group>
+        </Tab>
+      </Category>
+      <Category name="Hole Symbol" csh="PMAN_Tooling_Hole_Symbol">
+        <Tab name="General" csh="PMAN_Tooling_Hole_Symbol_General">
+          <Group name="Hole Symbol Type Spreadsheet">
+              <Pref name="Tooling_MW_Hole_Symbol_Type_Spreadsheet_WIN" type="string" title="Mold Wizard" value="$MOLDWIZARD_DIR\templates\hole_datum_symbol\mw_hole_symbol_type.xlsx" ver="1847" scope="Session">
+                  <Description>This field specifies the full file name of the Mold Wizard hole symbol type spreadsheet.</Description>
+                  <BrowseFileSel type="xls,xlsx,xs4"/>
+              </Pref>
+              <Pref name="Tooling_MW_Hole_Symbol_Type_Spreadsheet_UNX" type="string" title="Mold Wizard" value="$MOLDWIZARD_DIR/templates/hole_datum_symbol/mw_hole_symbol_type.xs4" ver="11.0.0" scope="Session">
+                  <Description>This field specifies the full file name of the Mold Wizard hole symbol type spreadsheet.</Description>
+                  <BrowseFileSel type="xs4"/>
+              </Pref>
+              <Pref name="Tooling_PDW_Hole_Symbol_Type_Spreadsheet_WIN" type="string" title="Progressive Die Wizard" value="$PDIEWIZARD_DIR\templates\hole_datum_symbol\pdw_hole_symbol_type.xlsx" ver="1847" scope="Session">
+                  <Description>This field specifies the full file name of the Progressive Die Wizard hole symbol type spreadsheet.</Description>
+                  <BrowseFileSel type="xls,xlsx,xs4"/>
+              </Pref>
+              <Pref name="Tooling_PDW_Hole_Symbol_Type_Spreadsheet_UNX" type="string" title="Progressive Die Wizard" value="$PDIEWIZARD_DIR/templates/pdw_hole_symbol_type.xs4" ver="11.0.0" scope="Session">
+                  <Description>This field specifies the full file name of the Progressive Die Wizard hole symbol type spreadsheet.</Description>
+                  <BrowseFileSel type="xs4"/>
+              </Pref>
+              <Pref name="Tooling_EDW_Hole_Symbol_Type_Spreadsheet_WIN" type="string" title="Engineering Die Wizard" value="$EDIEWIZARD_DIR\templates\hole_datum_symbol\edw_hole_symbol_type.xlsx" ver="2206" scope="Session">
+                <Description>This field specifies the full file name of the Engineering Die Wizard hole symbol type spreadsheet.</Description>
+                <BrowseFileSel type="xlsx"/>
+              </Pref>
+              <Pref name="Tooling_EDW_Hole_Symbol_Type_Spreadsheet_UNX" type="string" title="Engineering Die Wizard" value="$EDIEWIZARD_DIR/templates/hole_datum_symbol/edw_hole_symbol_type.xlsx" ver="2206" scope="Session">
+                <Description>This field specifies the full file name of the Engineering Die Wizard hole symbol type spreadsheet.</Description>
+                <BrowseFileSel type="xlsx"/>
+              </Pref>            
+              <Pref name="Tooling_PDCW_Hole_Symbol_Type_Spreadsheet_WIN" type="string" title="Pressure Die Casting Wizard" value="$PDCASTING_WIZARD_DIR\templates\hole_datum_symbol\pdcw_hole_symbol_type.xlsx" ver="1899" scope="Session">
+                  <Description>This field specifies the full file name of the Pressure Die Casting Wizard hole symbol type spreadsheet.</Description>
+                  <BrowseFileSel type="xls,xlsx,xs4"/>
+              </Pref>
+              <Pref name="Tooling_PDCW_Hole_Symbol_Type_Spreadsheet_UNX" type="string" title="Pressure Die Casting Wizard" value="$PDCASTING_WIZARD_DIR/templates/pdcw_hole_symbol_type.xs4" ver="1899" scope="Session">
+                  <Description>This field specifies the full file name of the Pressure Die Casting Wizard hole symbol type spreadsheet.</Description>
+                  <BrowseFileSel type="xs4"/>
+              </Pref>
+          </Group>
+          <Group name="Hole Attribute Spreadsheet">
+          <Pref name="Tooling_MW_Hole_Attribute_Spreadsheet_WIN" type="string" title="Mold Wizard" value="$MOLDWIZARD_DIR\templates\mw_attribute.xlsx" ver="1899" scope="Session">
+            <Description>This field specifies the full file name of the Mold Wizard hole attribute spreadsheet.</Description>
+            <BrowseFileSel type="xls,xlsx,xs4"/>
+          </Pref>
+          <Pref name="Tooling_MW_Hole_Attribute_Spreadsheet_UNX" type="string" title="Mold Wizard" value="$MOLDWIZARD_DIR/templates/mw_attribute.xs4" ver="1899" scope="Session">
+            <Description>This field specifies the full file name of the Mold Wizard hole attribute spreadsheet.</Description>
+            <BrowseFileSel type="xs4"/>
+          </Pref>
+          <Pref name="Tooling_PDW_Hole_Attribute_Spreadsheet_WIN" type="string" title="Progressive Die Wizard" value="$PDIEWIZARD_DIR\templates\pdw_attribute.xlsx" ver="1899" scope="Session">
+            <Description>This field specifies the full file name of the Progressive Die Wizard hole attribute spreadsheet.</Description>
+            <BrowseFileSel type="xls,xlsx,xs4"/>
+          </Pref>
+          <Pref name="Tooling_PDW_Hole_Attribute_Spreadsheet_UNX" type="string" title="Progressive Die Wizard" value="$PDIEWIZARD_DIR/templates/pdw_attribute.xs4" ver="1899" scope="Session">
+            <Description>This field specifies the full file name of the Progressive Die Wizard hole attribute spreadsheet.</Description>
+            <BrowseFileSel type="xs4"/>
+          </Pref>
+          <Pref name="Tooling_EDW_Hole_Attribute_Spreadsheet_WIN" type="string" title="Engineering Die Wizard" value="$EDIEWIZARD_DIR\templates\edw_attribute.xlsx" ver="2206" scope="Session">
+            <Description>This field specifies the full file name of the Engineering Die Wizard hole attribute spreadsheet.</Description>
+            <BrowseFileSel type="xlsx"/>
+          </Pref>
+          <Pref name="Tooling_EDW_Hole_Attribute_Spreadsheet_UNX" type="string" title="Engineering Die Wizard" value="$EDIEWIZARD_DIR/templates/edw_attribute.xlsx" ver="2206" scope="Session">
+            <Description>This field specifies the full file name of the Engineering Die Wizard hole attribute spreadsheet.</Description>
+            <BrowseFileSel type="xlsx"/>
+          </Pref>            
+          <Pref name="Tooling_PDCW_Hole_Attribute_Spreadsheet_WIN" type="string" title="Pressure Die Casting Wizard" value="$PDCASTING_WIZARD_DIR\templates\hole_datum_symbol\pdcw_hole_attribute.xlsx" ver="1899" scope="Session">
+            <Description>This field specifies the full file name of the Pressure Die Casting Wizard hole attribute spreadsheet.</Description>
+            <BrowseFileSel type="xls,xlsx,xs4"/>
+          </Pref>
+          <Pref name="Tooling_PDCW_Hole_Attribute_Spreadsheet_UNX" type="string" title="Pressure Die Casting Wizard" value="$PDCASTING_WIZARD_DIR/templates/pdcw_hole_attribute.xs4" ver="1899" scope="Session">
+            <Description>This field specifies the full file name of the Pressure Die Casting Wizard hole attribute spreadsheet.</Description>
+            <BrowseFileSel type="xs4"/>
+          </Pref>
+          </Group>
+        </Tab>
+      </Category>
+      <Category name="View Manager" csh="PMAN_Tooling_View_Manager">
+        <Tab name="All" csh="PMAN_Tooling_View_Manager_All">
+          <Group name="View Manager XML File">
+            <Pref name="MW_View_Manager_XML" type="string" title="Mold Wizard" value="mw_view.xml" ver="11.0.2" scope="Session">
+              <Description>This option specifies the View Manager XML file name for Mold Wizard.</Description>
+              <String/>
+            </Pref>
+            <Pref name="PDW_View_Manager_XML" type="string" title="Progressive Die Wizard" value="pdw_view.xml" ver="11.0.2" scope="Session">
+              <Description>This option specifies the View Manager XML file name for Progressive Die Wizard.</Description>
+              <String/>
+            </Pref>
+            <Pref name="EDW_View_Manager_XML" type="string" title="Engineering Die Wizard" value="edw_view.xml" ver="11.0.2" scope="Session">
+              <Description>This option specifies the View Manager XML file name for Engineering Die Wizard.</Description>
+              <String/>
+            </Pref>
+            <Pref name="PDCW_View_Manager_XML" type="string" title="Pressure Die Casting Wizard" value="pdcw_view.xml" ver="1899" scope="Session">
+              <Description>This option specifies the View Manager XML file name for Pressure Die Casting Wizard.</Description>
+              <String/>
+            </Pref>
+          </Group>
+          <Pref name="Tooling_View_Name_Set" type="int" title="Tree Display Name" value="1" ver="11.0.2" scope="Session">
+            <Description>This option specifies the name that should be displayed in the Customized Name column of the View Manager tree.</Description>
+            <RadioBox orientation="horizontal"/>
+            <Data type="enum">
+              <EnumElem name="Part Attribute" value="0"/>
+              <EnumElem name="Custom Name" value="1"/>
+            </Data>
+            <Docum>
+<Formatted>Part Attribute:</Formatted>
+The names shown in the Customized Name column display the value of the part attribute <Code>TOOLING_COMPONENT_NAME</Code>. For example, a mold component that is a screw would contain the part attribute <Code>TOOLING_COMPONENT_NAME=SCREW</Code>, so the column will display "<Code>SCREW</Code>".
+<Formatted>Custom Name:</Formatted>
+The names shown in the Customized Name column display a customizable name that is specified in an XML file. The wizard reads the value of the part attribute <Code>TOOLING_COMPONENT_TYPE</Code>, then changes the name displayed in accordance with the format contained in the XML file.
+            </Docum>
+          </Pref>
+          <Pref name="Tooling_Expand_All_Nodes" type="logical" title="Expand All Nodes" value="false" ver="11.0.2" scope="Session">
+            <Description>This option determines whether or not all tree nodes should expand when the View Manager is invoked.</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="No" value="false"/>
+              <EnumElem name="Yes" value="true"/>
+            </Data>
+          </Pref>
+          <Pref name="Tooling_ViewManager_Ref_Set" type="string_list" title="Reference Set" value="&quot;TRUE&quot;\&quot;FALSE&quot;" ver="11.0.2" scope="Session">
+            <Description>This field allows additional reference sets to be specified that will be added to the View Manager's reference set control.</Description>
+            <MultiLineText height="2"/>
+          </Pref>
+        </Tab>
+      </Category>
+      <Category name="Unused File Management" csh="PMAN_Tooling_UnusedFileManagement">
+        <Tab name="All" csh="PMAN_Tooling_UnusedFileManagement_All">
+          <Pref name="Tooling_Remove_Suppressed_Files" type="logical" title="List Suppressed Files when Removing Unused Files" value="true" ver="11.0.2" scope="Session">
+            <Description>This option determines whether or not suppressed part files should be listed when removing unused part tools.</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="No" value="false"/>
+              <EnumElem name="Yes" value="true"/>
+            </Data>
+          </Pref>
+          <Pref name="Tooling_File_Delete_Exclude_Attr" type="string" title="File Delete Exclude Attribute" value="" ver="11.0.2" scope="Session">
+            <Description>This field allows an attribute to be specified. The files having this attribute will not be listed when removing unused part tools.</Description>
+            <Widestring/>
+          </Pref>
+        </Tab>
+      </Category>
+      <Category name="Hole Table" csh="PMAN_Tooling_Hole_Table">
+        <Tab name="General" csh="PMAN_Tooling_Hole_Table_General">
+          <Group name="Template Spreadsheet">
+            <Pref name="Tooling_MW_Hole_Table_Template_Spreadsheet_WIN" type="string" title="Mold Wizard" value="$MOLDWIZARD_DIR\templates\mw_attribute.xlsx" ver="1899" scope="Session">
+              <Description>This field specifies the full file name of the Mold Wizard hole table template spreadsheet.</Description>
+              <BrowseFileSel type="xls,xlsx,xs4"/>
+            </Pref>
+            <Pref name="Tooling_MW_Hole_Table_Template_Spreadsheet_UNX" type="string" title="Mold Wizard" value="$MOLDWIZARD_DIR/templates/mw_attribute.xs4" ver="1899" scope="Session">
+              <Description>This field specifies the full file name of the Mold Wizard hole table template spreadsheet.</Description>
+              <BrowseFileSel type="xs4"/>
+            </Pref>
+            <Pref name="Tooling_PDW_Hole_Table_Template_Spreadsheet_WIN" type="string" title="Progressive Die Wizard" value="$PDIEWIZARD_DIR\templates\pdw_attribute.xlsx" ver="1899" scope="Session">
+              <Description>This field specifies the full file name of the Progressive Die Wizard hole table template spreadsheet.</Description>
+              <BrowseFileSel type="xls,xlsx,xs4"/>
+            </Pref>
+            <Pref name="Tooling_PDW_Hole_Table_Template_Spreadsheet_UNX" type="string" title="Progressive Die Wizard" value="$PDIEWIZARD_DIR/templates/pdw_attribute.xs4" ver="1899" scope="Session">
+              <Description>This field specifies the full file name of the Progressive Die Wizard hole table template spreadsheet.</Description>
+              <BrowseFileSel type="xs4"/>
+            </Pref>
+            <Pref name="Tooling_EDW_Hole_Table_Template_Spreadsheet_WIN" type="string" title="Engineering Die Wizard" value="$EDIEWIZARD_DIR\templates\edw_attribute.xlsx" ver="2206" scope="Session">
+              <Description>This field specifies the full file name of the Engineering Die Wizard hole table template spreadsheet.</Description>
+              <BrowseFileSel type="xlsx"/>
+            </Pref>
+            <Pref name="Tooling_EDW_Hole_Table_Template_Spreadsheet_UNX" type="string" title="Engineering Die Wizard" value="$EDIEWIZARD_DIR/templates/edw_attribute.xlsx" ver="2206" scope="Session">
+              <Description>This field specifies the full file name of the Engineering Die Wizard hole table template spreadsheet.</Description>
+              <BrowseFileSel type="xlsx"/>
+            </Pref>            
+            <Pref name="Tooling_PDCW_Hole_Table_Template_Spreadsheet_WIN" type="string" title="Pressure Die Casting Wizard" value="$PDCASTING_WIZARD_DIR\templates\pdcw_attribute.xlsx" ver="1899" scope="Session">
+              <Description>This field specifies the full file name of the Pressure Die Casting Wizard hole table template spreadsheet.</Description>
+              <BrowseFileSel type="xls,xlsx,xs4"/>
+            </Pref>
+            <Pref name="Tooling_PDCW_Hole_Table_Template_Spreadsheet_UNX" type="string" title="Pressure Die Casting Wizard" value="$PDCASTING_WIZARD_DIR/templates/pdcw_attribute.xs4" ver="1899" scope="Session">
+              <Description>This field specifies the full file name of the Pressure Die Casting Wizard hole table template spreadsheet.</Description>
+              <BrowseFileSel type="xs4"/>
+            </Pref>
+          </Group>
+        </Tab>
+      </Category>
+      <Category name="Tooling Validation" csh="PMAN_Tooling_Validation">
+        <Tab name="Preprocess Motion" csh="PMAN_Tooling_Validation_Preprocess_Motion">
+          <Pref name="TOOLING_PreprocessMotionAutoMount" type="logical" title="Auto-Mount" value="true" ver="10.0.1" scope="Session">
+            <Description>This option determines whether or not Preprocess Motion should automatically mount component.</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="Yes" value="true"/>
+              <EnumElem name="No" value="false"/>
+            </Data>
+          </Pref>
+        </Tab>
+        <Tab name="Static Interference Check" csh="PMAN_Tooling_Validation_Static_Interference_Check">
+            <Group name="Standard Sets Spreadsheet">
+                <Pref name="Tooling_MW_Standard_Sets_Spreadsheet_WIN" type="string" title="Mold Wizard" value="$MOLDWIZARD_DIR\templates\static_interference_check_standard_sets.xlsx" ver="1847" scope="Session">
+                    <Description>This field specifies the full file name of the Mold Wizard static interference check spreadsheet.</Description>
+                    <BrowseFileSel type="xls,xlsx,xs4"/>
+                </Pref>
+                <Pref name="Tooling_MW_Standard_Sets_Spreadsheet_UNX" type="string" title="Mold Wizard" value="$MOLDWIZARD_DIR/templates/static_interference_check_standard_sets.xs4" ver="11.0.0" scope="Session">
+                    <Description>This field specifies the full file name of the Mold Wizard static interference check spreadsheet.</Description>
+                    <BrowseFileSel type="xs4"/>
+                </Pref>
+                <Pref name="Tooling_PDW_Standard_Sets_Spreadsheet_WIN" type="string" title="Progressive Die Wizard" value="$PDIEWIZARD_DIR\configuration\tooling_validation\static_interference_check_standard_sets.xlsx" ver="1847" scope="Session">
+                    <Description>This field specifies the full file name of the Progressive Die Wizard static interference check spreadsheet.</Description>
+                    <BrowseFileSel type="xls,xlsx,xs4"/>
+                </Pref>
+                <Pref name="Tooling_PDW_Standard_Sets_Spreadsheet_UNX" type="string" title="Progressive Die Wizard" value="$PDIEWIZARD_DIR/configuration/tooling_validation/static_interference_check_standard_sets.xs4" ver="11.0.0" scope="Session">
+                    <Description>This field specifies the full file name of the Progressive Die Wizard static interference check spreadsheet.</Description>
+                    <BrowseFileSel type="xs4"/>
+                </Pref>
+                <Pref name="Tooling_EDW_Standard_Sets_Spreadsheet_WIN" type="string" title="Engineering Die Wizard" value="$EDIEWIZARD_DIR\configuration\tooling_validation\static_interference_check_standard_sets.xlsx" ver="2206" scope="Session">
+                  <Description>This field specifies the full file name of the Engineering Die Wizard static interference check spreadsheet.</Description>
+                  <BrowseFileSel type="xlsx"/>
+                </Pref>
+                <Pref name="Tooling_EDW_Standard_Sets_Spreadsheet_UNX" type="string" title="Engineering Die Wizard" value="$EDIEWIZARD_DIR/configuration/tooling_validation/static_interference_check_standard_sets.xlsx" ver="2206" scope="Session">
+                  <Description>This field specifies the full file name of the Engineering Die Wizard static interference check spreadsheet.</Description>
+                  <BrowseFileSel type="xlsx"/>
+                </Pref>              
+                <Pref name="Tooling_PDCW_Standard_Sets_Spreadsheet_WIN" type="string" title="Pressure Die Casting Wizard" value="$PDCASTING_WIZARD_DIR\templates\static_interference_check_standard_sets.xlsx" ver="1899" scope="Session">
+                    <Description>This field specifies the full file name of the Pressure Die Casting Wizard static interference check spreadsheet.</Description>
+                    <BrowseFileSel type="xls,xlsx,xs4"/>
+                </Pref>
+                <Pref name="Tooling_PDCW_Standard_Sets_Spreadsheet_UNX" type="string" title="Pressure Die Casting Wizard" value="$PDCASTING_WIZARD_DIR/templates/static_interference_check_standard_sets.xs4" ver="1899" scope="Session">
+                    <Description>This field specifies the full file name of the Pressure Die Casting Wizard static interference check spreadsheet.</Description>
+                    <BrowseFileSel type="xs4"/>
+                </Pref>
+            </Group>
+        </Tab>       
+      </Category>   
+      <Category name="Pocket" csh="PMAN_Tooling_Pocket">
+        <Tab name="All" csh="PMAN_Tooling_Pocket_All">
+            <Pref name="Tooling_Pocket_SingleFeature" type="logical" title="Single Boolean" value="true" ver="1847" scope="Session">
+                <Description>This option determines whether or not the pocket feature should be created in one Boolean operation.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                    <EnumElem name="No" value="false"/>
+                    <EnumElem name="Yes" value="true"/>
+                </Data>
+            </Pref>
+            <Pref name="Tooling_Pocket_ThreadData" type="int" title="Thread Data" value="0" ver="2007" scope="Session">
+                <Description>This option specifies from which file the pocket thread data should be read.</Description>
+                <RadioBox/>
+                <Data type="enum">
+                    <EnumElem name="Data from NX_Thread_Standard.xml" value="0"/>
+                    <EnumElem name="Data from thread_standard_dat.xlsx" value="1"/>
+                </Data>
+            </Pref>
+            <Pref name="Tooling_Pocket_ThreadMethod" type="int" title="Thread Symbol" value="1" ver="1847" scope="Session">
+                <Description>This option specifies if symbols will be automatically created for threaded holes and if so, which symbol type should be used.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                    <EnumElem name="None" value="0"/>
+                    <EnumElem name="Simplified" value="1"/>
+                    <EnumElem name="Offset Face" value="2"/>
+                </Data>
+            </Pref>
+            <Pref name="Tooling_Pocket_ThreadForm" type="int" title="Thread Form" value="2" ver="1847" scope="Session">
+                <Description>This option specifies the form of the thread symbols.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                    <EnumElem name="Unified" value="0"/>
+                    <EnumElem name="Metric" value="1"/>
+                    <EnumElem name="Automatic" value="2"/>
+                </Data>
+            </Pref>
+            <Pref name="Tooling_Pocket_ThreadOffsetColor" type="int" title="Thread Offset Color" value="31" ver="1847" scope="Session">
+                <Description>This option specifies the color of the thread offset.</Description>
+                <Color/>
+            </Pref>          
+            <Pref name="Tooling_Pocket_AllowAssociative" type="logical" title="Associative" value="true" ver="1847" scope="Session">
+                <Description>This option determines whether or not pockets should be made associative.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                    <EnumElem name="No" value="false"/>
+                    <EnumElem name="Yes" value="true"/>
+                </Data>
+            </Pref>
+            <Pref name="Tooling_Pocket_ClearanceAssocitive" type="logical" title="Associative Clearance" value="false" ver="1847" scope="Session">
+                <Description>This option determines whether or not pocket clearances should be made associative.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                    <EnumElem name="No" value="false"/>
+                    <EnumElem name="Yes" value="true"/>
+                </Data>
+            </Pref>
+            <Pref name="Tooling_Pocket_TemporaryLayer" type="int" title="Layer" value="111" ver="1847" scope="Session">
+                <Description>This option specifies which layer the temporary pocket objects should be placed on.</Description>
+                <Integer/>
+                <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                </Data>
+            </Pref>
+            <Pref name="Tooling_Pocket_InheritColor" type="int" title="Pocket Display Properties" value="0" ver="1847" scope="Session">
+                <Description>This option specifies if the display properties of the pocket faces are taken from the tool body or using Modeling Default. The &quot;Modeling Default&quot; option means that the Modeling preferences for display properties for new geometry will determine the pocket display properties.</Description>
+                <RadioBox orientation="vertical"/>
+                <Data type="enum">
+                    <EnumElem name="Tool Body Display Properties" value="0"/>
+                    <EnumElem name="Modeling Default" value="3"/>
+                </Data>
+            </Pref>
+
+            <Pref name="Tooling_Pocket_Opacity" type="logical" title="Make Pocket Faces Opaque" value="true" ver="1953" scope="Session">
+                <Description>This option determines whether or not the pocket faces should be made opaque when they are created, even if the body that the pocket is applied to is displayed translucent. This option overrides any other settings that determine display properties for new faces.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                    <EnumElem name="No" value="false"/>
+                    <EnumElem name="Yes" value="true"/>
+                </Data>
+            </Pref>
+            
+           <Pref name="Tooling_Pocket_SymbolicThreadColor" type="int" title="Symbolic Thread Color" value="31" ver="12.0.2" scope="Session">
+             <Description>This option specifies the color of the symbolic thread.</Description>
+             <Color/>
+           </Pref>
+            <Pref name="Tooling_Pocket_UseHiddenTools" type="logical" title="Use Hidden Tool Bodies" value="false" ver="1847" scope="Session">
+                <Description>This option determines whether or not hidden tool bodies will be used to create the pocket. When this option is off, only shown tool bodies are used.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                    <EnumElem name="No" value="false"/>
+                    <EnumElem name="Yes" value="true"/>
+                </Data>
+            </Pref>
+            <Pref name="Tooling_Pocket_LayerControl" type="logical" title="Use Tool Bodies on Invisible Layers" value="true" ver="1847" scope="Session">
+                <Description>This option determines whether or not tool bodies on invisible layers will be used to create the pocket. When this option is off, only tool bodies on Selectable and Visible Only layers are used.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                    <EnumElem name="No" value="false"/>
+                    <EnumElem name="Yes" value="true"/>
+                </Data>
+            </Pref>
+            <Pref name="Tooling_Pocket_ToolBodyReferenceSet" type="string_list" title="Custom Reference Set of Tool Bodies" value="FALSE" ver="1847" scope="Session">
+                <Description>This field allows the custom reference set of tool bodies to be specified.</Description>
+                <MultiLineText height="5"/>
+            </Pref>
+            <Pref name="Tooling_Pocket_LinkWireframeObjects" type="logical" title="Link Wireframe Objects" value="true" ver="2312" scope="Session">
+                <Description>This option determines whether or not wireframe objects should be linked.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                 <EnumElem name="No" value="false"/>
+                 <EnumElem name="Yes" value="true"/>
+               </Data>
+            </Pref>
+            <Pref name="Tooling_Pocket_ScrewHoleDistanceFactor" type="string" title="Screw Through Hole Distance Factor" value="0.5" ver="2312" scope="Session">
+                <Description>This option specifies the factor of the screw hole distance in relation to the screw diameter. Given 0.5, the screw hole distance is calculated as 0.5*SCREW_DIA. If this distance is larger than the distance between the end face of the screw tool body and the target plate, a through hole will be created.</Description>
+              <String/>
+            </Pref>
+            <Pref name="Tooling_Pocket_ThreadLengthIncrement" type="string" title="Thread Length Increment Factor" value="0.5" ver="2312" scope="Session">
+                <Description>This option specifies the thread length increment factor in relation to the screw diameter. Given 0.5, the thread length increment value is calculated by 0.5*SCREW_DIA.</Description>
+              <String/>
+            </Pref>
+           <Pref name="Tooling_Pocket_GroupNames" type="string_list" title="Group Names" value="&quot;None&quot;\&quot;Screw&quot;\&quot;Cooling&quot;\&quot;Ejector Pin&quot;" ver="2312" scope="Session">
+                <Description>This field specifies group names.</Description>
+               <MultiLineText height="5"/>
+            </Pref>
+            <Pref name="Tooling_Pocket_AttributeNameForGroup" type="string" title="Attribute Name for Group Name" value="PocketGroupName" ver="2312" scope="Session">
+                <Description>This option specifies the part attribute name for defining the group name.</Description>
+                <Widestring/>
+            </Pref>
+         </Tab>
+      </Category>
+      <Category name="Design Vent " csh="PMAN_Tooling_Design_Vent">
+        <Tab name="All" csh="PMAN_Tooling_Design_Vent_All">
+          <Group name="Color">
+            <Pref name="Tooling_Venting_FirstLevelColor" type="int" title="First Level Vent" value="31" ver="1953" scope="Session">
+                <Description>This option specifies the color of the first level vent.</Description>
+                <Color/>
+            </Pref>
+           <Pref name="Tooling_Venting_OtherLevelColor" type="int" title="Other Level Vent" value="91" ver="1953" scope="Session">
+             <Description>This option specifies the color of vents other than the first level vent.</Description>
+             <Color/>
+           </Pref>
+          <Pref name="Tooling_Venting_CurveColor" type="int" title="Vent Guide Curves" value="211" ver="1953" scope="Session">
+            <Description>This option specifies the color of the vent guide curves.</Description>
+            <Color/>
+          </Pref>
+          </Group>
+         <Group name="Layer">
+           <Pref name="Tooling_Venting_TemporaryLayer" type="int" title="Temporary Vent Objects" value="255" ver="1953" scope="Session">
+                <Description>This option specifies which layer the temporary vent objects should be placed on.</Description>
+                <Integer/>
+                <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                </Data>
+            </Pref>
+           <Pref name="Tooling_Venting_FeatureLayer" type="int" title="Vent Objects" value="254" ver="1953" scope="Session">
+                <Description>This option specifies which layer the vent objects should be placed on.</Description>
+                <Integer/>
+                <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                </Data>
+            </Pref>
+         </Group>
+       </Tab>
+      </Category>
+      <Category name="Feature2Cost" csh="PMAN_Tooling_Feature2Cost">
+        <Tab name="Stamping" csh="PMAN_Tooling_Feature2Cost_Stamping">
+          <Pref name="Tooling_CalculateUnfoldedValuesByOnestepFeature" type="logical" title="Calculate Unfolded Values by Onestep Feature" value="true" ver="2007" scope="Session">
+            <Description>This option determines whether or not to use the Onestep Unform feature method to calculate unfolded length and width values in the Feature2Cost Stamping command.</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="Yes" value="true"/>
+              <EnumElem name="No" value="false"/>
+            </Data>
+          </Pref>
+          <Pref name="F2C_Stamping_CriticalFacesNumber" type="int" title="Critical Number of Faces to Run Quick Analysis" value="1500" ver="2007+" scope="Session">
+            <Description>This option specifies a threshold number of product body faces for when to give a suggestion message to run a quick analysis.</Description>
+            <Integer/>
+            <Data type="range">
+              <LowerBound value="1" include="1"/>
+            </Data>
+          </Pref>
+        </Tab>
+      </Category>
+      <Category name="BOM" csh="PMAN_Tooling_BOM">
+        <Tab name="All" csh="PMAN_Tooling_BOM_All">
+          <Pref name="TOOLING_BOM_UseLegacyMethodToExportBom" type="logical" title="Use Legacy Method to Export BOM" value="false" ver="2206" scope="Session">
+            <Description>This option determines whether to use the legacy method to export the BOM.</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="No" value="false"/>
+              <EnumElem name="Yes" value="true"/>
+            </Data>
+          </Pref>
+          <Pref name="Tooling_BOM_PartPreviewImage" type="int" title="Part Preview Image" value="0" ver="2206" scope="Session">
+            <Description>This option specifies the method to get a part preview image when exporting it.</Description>
+            <RadioBox/>
+            <Data type="enum">
+              <EnumElem name="Read" value="0"/>
+              <EnumElem name="Create" value="1"/>
+            </Data>
+          </Pref>
+          <Pref name="TOOLING_BOM_ExportPath" type="string" title="Export File Path on Windows" value="../BOM" ver="2206" scope="Session">
+            <Description>This field specifies the relative directory folder where the BOM export file is located. The supplied value (../BOM) means go up one folder (to the root part folder for native NX and to the TEMP folder when connected to Teamcenter) and then down into the BOM folder. If a BOM folder does not exist, it will be created.</Description>
+            <Widestring/>
+          </Pref>
+          <Pref name="TOOLING_BOM_ApplyExportSequenceNumber" type="logical" title="Apply Export Sequence Number" value="false" ver="2312+" scope="Session">
+            <Description>When the $PART_NAME is the key field of the BOM list, this option determines whether to apply an export sequence number to the exported component. The part attribute name is TOOLING_NUMBER and its value is the export sequence number.</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="No" value="false"/>
+              <EnumElem name="Yes" value="true"/>
+            </Data>
+          </Pref>
+        </Tab>
+      </Category>      
+      <Category name="Read-only Management" csh="PMAN_Tooling_Readonly_Management">
+        <Tab name="General" csh="PMAN_Tooling_Readonly_Management_General">
+          <Pref name="Tooling_Readonly_Management_AccessPermission" type="int" title="Allow Access" value="0" ver="2312+" scope="Session">
+            <Description>This option controls the ability to use the Read-only Management command.<Formatted>
+"Yes": Provides full access to this command.
+"Yes, Except Protect Code Input": Provides access to this command, but the Protect Code text input field will be unavailable.
+"No": Prevents access to this command.
+            </Formatted>
+            </Description>
+            <RadioBox/>
+            <Data type="enum">
+              <EnumElem name="Yes" value="0"/>
+              <EnumElem name="Yes, Except Protect Code Input" value="1"/>
+              <EnumElem name="No" value="2"/>
+            </Data>
+          </Pref>
+        </Tab>
+      </Category>
+    </Application>
+</PrefDefinition>

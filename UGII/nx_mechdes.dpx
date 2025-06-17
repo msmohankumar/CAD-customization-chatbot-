@@ -1,0 +1,1213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Mechatronics Concept Designer" csh="PMAN_Mechatronics_Designer" package_suppress="simcenter3d,simviewer,view,nx2dedit">
+        <Category name="General" csh="PMAN_Mechatronics_Designer_General">
+            <Tab name="General" csh="PMAN_Mechatronics_Designer_General_General">
+                <Group name="Objects Not Part of Physics">
+                    <Pref name="MD_NonPhysicsColor" type="int" title="Color" value="15" ver="1980" scope="Part">
+                        <Description>This option specifies the color of objects that are not members of a physics object.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="MD_RichGeomType" type="logical" title="Include Curves, Datums, and PMI" value="true" ver="1980" scope="Part">
+                        <Description>This option determines if curves, datums, and PMI that are not part of the physics also assume the Objects Not Part of Physics color when the Rigid Body Color option is on.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Arrangement">
+                    <Pref name="MD_ArrangementType" type="int" title="Type" value="0" ver="2206" scope="Part">
+                        <Description>This option specifies the capture arrangement type. An isolated arrangement always ignores assembly constraints. A position override in an isolated arrangement exists independently of overrides in other arrangements. A regular arrangement is a standard arrangement which may ignore assembly constraints. A position override in a standard arrangement exists in all other standard arrangements.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Isolated" value="0"/>
+                            <EnumElem name="Regular" value="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Warn on Mass Ratio of Attachment and Base">
+                    <Pref name="MD_RatioLimit" type="real" title="Maximum Limit" value="50.0" ver="1872" scope="Session">
+                        <Description>This option specifies the maximum mass ratio limit of attachment and base in joint. A warning message will display when the mass ratio (the larger value of mass divided by the smaller one) is larger than this limit.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="1.0" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Inverse Kinematics">
+                    <Pref name="MD_Inverse_Kinematics_Configuration_File_WIN" type="string" title="Robot Configuration File" value="$UGII_BASE_DIR\mechatronics\configuration\Mechatronics_IK_Robots.xlsx" ver="2312" scope="Part">
+                        <Description>This field specifies the full file name of the robot configuration file.</Description>
+                        <BrowseFileSel type="xlsx" />
+                    </Pref>
+                    <Pref name="MD_Inverse_Kinematics_Configuration_File_UNX" type="string" title="Robot Configuration File" value="$UGII_BASE_DIR/mechatronics/configuration/Mechatronics_IK_Robots.xlsx" ver="2312" scope="Part">
+                        <Description>This field specifies the full file name of the robot configuration file.</Description>
+                        <BrowseFileSel type="xlsx"/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Gravity and Material" csh="PMAN_Mechatronics_Designer_General_Gravity_and_Material">
+                <Group name="Acceleration due to Gravity">
+                    <Pref name="MD_DefaultGravityX_MU" type="real" title="Gx" value="0.0" unit="mm/sec^2" ver="7.5.1" scope="Part">
+                        <Description>This option specifies the X-component (in absolute coordinates) of the gravitation.</Description>
+                        <Real/>
+                    </Pref>
+                    <Pref name="MD_DefaultGravityX_EU" type="real" title="Gx" value="0.0" unit="in/sec^2" ver="7.5.1" scope="Part">
+                        <Description>This option specifies the X-component (in absolute coordinates) of the gravitation.</Description>
+                        <Real/>
+                    </Pref>
+                    <Pref name="MD_DefaultGravityY_MU" type="real" title="Gy" value="0.0" unit="mm/sec^2" ver="7.5.1" scope="Part">
+                        <Description>This option specifies the Y-component (in absolute coordinates) of the gravitation.</Description>
+                        <Real/>
+                    </Pref>
+                    <Pref name="MD_DefaultGravityY_EU" type="real" title="Gy" value="0.0" unit="in/sec^2" ver="7.5.1" scope="Part">
+                        <Description>This option specifies the Y-component (in absolute coordinates) of the gravitation.</Description>
+                        <Real/>
+                    </Pref>
+                    <Pref name="MD_DefaultGravityZ_MU" type="real" title="Gz" value="-9806.65" unit="mm/sec^2" ver="7.5.1" scope="Part">
+                        <Description>This option specifies the Z-component (in absolute coordinates) of the gravitation.</Description>
+                        <Real/>
+                    </Pref>
+                    <Pref name="MD_DefaultGravityZ_EU" type="real" title="Gz" value="-386.08" unit="in/sec^2" ver="7.5.1" scope="Part">
+                        <Description>This option specifies the Z-component (in absolute coordinates) of the gravitation.</Description>
+                        <Real/>
+                    </Pref>
+                </Group>
+                <Group name="Material Parameters">
+                    <Pref name="MD_DynamicsFriction" type="real" title="Dynamic Friction" value="0.7" ver="7.5.1" scope="Part">
+                        <Description>This option specifies the coefficient of the dynamic friction of the material. Dynamic friction is the force resisting the motion when a body is moving on a surface.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <!---->
+                    <Pref name="MD_RollingFriction" type="real" title="Rolling Friction" value="0.0" ver="9.0.0" scope="Part">
+                        <Description>This option specifies the coefficient of the rolling friction of the material. Rolling friction is the force resisting the motion when a body is rolling on a surface.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_Restitution" type="real" title="Restitution" value="0.01" ver="7.5.1" scope="Part">
+                        <Description>This option specifies the restitution of the material. Restitution is a measure of how much energy is dissipated by a collision impulse. The value is in the range of 0 to 1, where 0 is a fully plastic collision and 1 is a perfectly elastic collision. The restitution is multiplied by the object's velocity to determine how fast the object will move in the opposite direction.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                            <UpperBound value="1.0" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Damping">
+                    <Pref name="MD_LinearDamping_MU" type="real" title="Linear Damping" value="0.05" unit="mN-sec/mm" ver="9.0.0" scope="Part">
+                        <Description>This option specifies the linear damping of a rigid body.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_LinearDamping_EU" type="real" title="Linear Damping" value="0.0002855" unit="lbf-sec/in" ver="9.0.0" scope="Part">
+                        <Description>This option specifies the linear damping of a rigid body.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_AngularDamping_MU" type="real" title="Angular Damping" value="199999.9997715" unit="mN-mm-sec/rad" ver="1872" scope="Part">
+                        <Description>This option specifies the angular damping of a rigid body.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_AngularDamping_EU" type="real" title="Angular Damping" value="1.77015311" unit="lbf-in-sec/rad" ver="1872" scope="Part">
+                        <Description>This option specifies the angular damping of a rigid body.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Flicker Sound File">
+                    <Pref name="MD_FlickerSoundPath_WIN" type="string" title="Location" value="$UGII_BASE_DIR\mechatronics\configuration\audio" ver="2312" scope="Session">
+                         <Description>This field specifies the location of the flicker sound file. </Description>
+                         <BrowseDirSel/>
+                    </Pref>
+                    <Pref name="MD_FlickerSoundPath_UNX" type="string" title="Location" value="$UGII_BASE_DIR/mechatronics/configuration/audio" ver="2312" scope="Session">
+                        <Description>This field specifies the location of the flicker sound file.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Physics Engine" csh="PMAN_Mechatronics_Designer_General_Physics_Engine">
+                <Pref name="MD_PhysicsEngineType" type="int" title="Engine Type" value="0" ver="2312" scope="Session">
+                    <Description>This option specifies which physics engine to use in the simulation.</Description>
+                    <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Bullet" value="0"/>
+                    <EnumElem name="PhysX" value="1"/>
+                        <EnumElem name="Kineo" value="2"/>
+                  </Data>
+                </Pref>
+                <Group name="Runtime Parameters">
+                    <Pref name="MD_CollisionPrecision_MU" type="real" title="Collision Precision" value="0.1" unit="mm" ver="7.5.1" scope="Part">
+                        <Description>This option specifies distance between objects that are considered to be colliding. It represents the maximum distance (the gap) between bodies to be in contact.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_CollisionPrecision_EU" type="real" title="Collision Precision" value="0.0039" unit="in" ver="7.5.1" scope="Part">
+                        <Description>This option specifies distance between objects that are considered to be colliding. It represents the maximum distance (the gap) between bodies to be in contact.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_StepTime" type="real" title="Step Time" value="1" unit="ms" ver="7.5.1" scope="Part">
+                        <Description>This option specifies the amount of time that is simulated in a single compute step.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.1" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_SpringForceMultiplier" type="real" title="Spring Force Multiplier" value="100" ver="7.5.1" scope="Part">
+                        <Description>This option specifies spring force applied when dragging objects in simulation mode.</Description>
+                        <Real/>
+                    </Pref>
+                    <Pref name="MD_CollisionCategory_UNX" type="string" title="Collide Category Specification" value="" ver="7.5.1" scope="Session">
+                        <Description>This option specifies which categories should not collide.</Description>
+                        <BrowseFileSel type="csv"/>
+                    </Pref>
+                    <Pref name="MD_CollisionCategory_WIN" type="string" title="Collide Category Specification" value="" ver="7.5.1" scope="Session">
+                        <Description>This option specifies which categories should not collide.</Description>
+                        <BrowseFileSel type="xls,xlsx,csv"/>
+                    </Pref>
+                </Group>
+                <Group name="Engine Tuning">
+                    <Pref name="MD_PhysicsEngineTolerance_MU" type="real" title="Tolerance" value="0.1" unit="mm" ver="7.5.1" scope="Part">
+                        <Description>This option specifies the amount of movement that the dynamics solver will allow between joints and constraints.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_PhysicsEngineTolerance_EU" type="real" title="Tolerance" value="0.0039" unit="in" ver="7.5.1" scope="Part">
+                        <Description>This option specifies the amount of movement that the dynamics solver will allow between joints and constraints.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_PhysicsEngineErrorReduction" type="real" title="Error Reduction Factor" value="50.0" ver="7.5.1" scope="Part">
+                        <Description>This option specifies how fast the solver converges a constraint and resolves a collision. The larger the value, the relatively bigger impulse will be applied by the solver in each iteration to overcome the position error. This makes it faster to resolve collision interferences and consolidate joints. Note however, the larger this value is, the greater is the risk for instability in the system.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_PhysicsEngineMaxIter" type="int" title="Maximum Iterations" value="100" ver="7.5.1" scope="Part">
+                        <Description>This option specifies the maximum number of iterations the physics engine will perform in a given time step in the attempt to solve the system.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_StickyForce_MU" type="real" title="Sticky Force" value="100000" unit="mN" ver="1926" scope="Part">
+                        <Description>This option specifies the value of the sticky force in the simulation.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_StickyForce_EU" type="real" title="Sticky Force" value="22.4809" unit="lbf" ver="1926" scope="Part">
+                        <Description>This option specifies the value of the sticky force in the simulation.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_EnableParallel" type="logical" title="Use Parallel Calculation" value="false" ver="1899" scope="Part">
+                        <Description>This option determines whether to use parallel calculation.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_RandomizeSolvingOrder" type="logical" title="Randomize Solving Order" value="false" ver="1926" scope="Part">
+                        <Description>This option determines if the Bullet solver will use random order for constraints.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="PhysX Engine Performance">
+                    <Pref name="MD_EnablePhysXCcd" type="logical" title="Use Continuous Collision Detection" value="false" ver="2306" scope="Session">
+                        <Description>This option determines whether to use continuous collision detection.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_EnablePhysXGpuAcceleration" type="logical" title="Use GPU Acceleration" value="false" ver="2306" scope="Session">
+                        <Description>This option determines whether to use CUDA acceleration. Not all features have GPU-accelerated implementations.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_PhysXMultiThreadsNum" type="int" title="Number of Worker Threads" value="4" ver="2306" scope="Session">
+                        <Description>This option specifies how many worker threads the CPU dispatcher will have.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="0" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Inspector" csh="PMAN_Mechatronics_Designer_General_Inspector">
+                <Group name="Step Size">
+                    <Pref name="MD_StepSize" type="int" title="Sample Every n-th Step" value="30" ver="1872" scope="Session">
+                        <Description>This option specifies the sampling interval during the simulation.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Graph">
+                    <Pref name="MD_GraphZoomInScale" type="real" title="Maximum Zoom In Factor" value="100" ver="2206" scope="Session">
+                        <Description>This option specifies the maximum zoom in scale used for the graph in the Runtime Inspector navigator.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="100" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_GraphZoomOutScale" type="real" title="Minimum Zoom Out Factor" value="0.1" ver="2206" scope="Session">
+                        <Description>This option specifies the minimum zoom out scale used for the graph in the Runtime Inspector navigator.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.1" include="1"/>
+                            <UpperBound value="0.9" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Settings">
+                    <Pref name="MD_InsDecimalPlaces" type="int" title="Number of Decimal Places" value="6" ver="2206" scope="Session">
+                        <Description>This option specifies the number of decimal places for values displayed in the Runtime Inspector navigator.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="10" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Runtime" csh="PMAN_Mechatronics_Designer_General_Runtime">
+                <Pref name="MD_DefaultSimulateActiveDisplayedPartOnly" type="int" title="Parts to Simulate" value="0" ver="12.0.2" scope="Session">
+                    <Description>This option specifies if the simulation should be performed in the active displayed part only or in all relevant displayed parts.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Active Displayed Part" value="0"/>
+                        <EnumElem name="All Displayed Parts" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_RuntimeOperationCaptureTime" type="real" title="Operation Capture Time" value="60" unit="sec" ver="8.0.0" scope="Session">
+                    <Description>This option specifies the time window within which the Sequence Editor displays the operations during simulation. Any operation data outside this time window is deleted.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="5" include="1"/>
+                        <UpperBound value="600" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_ForwardStepTime" type="real" title="One Step Forward Time" value="100" unit="ms" ver="10.0.0" scope="Session">
+                    <Description>This option specifies the amount of time that is simulated in a forward step.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                    </Data>
+                </Pref>
+                <Group name="Time Scaling Factor">
+                    <Pref name="MD_MinimumTimeScaleFactor" type="real" title="Minimum" value="0.1" ver="10.0.0" scope="Session">
+                        <Description>The time scaling factor is used to scale the simulation step time. This option specifies the minimum value allowed for this factor.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.01" include="1"/>
+                            <UpperBound value="1.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_MaximumTimeScaleFactor" type="real" title="Maximum" value="10.0" ver="10.0.0" scope="Session">
+                        <Description>The time scaling factor is used to scale the simulation step time. This option specifies the maximum value allowed for this factor.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="1.0" include="1"/>
+                            <UpperBound value="100.0" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Runtime Warning and Error">
+                    <Pref name="MD_Ignore_Runtime_Warning" type="logical" title="Ignore Runtime Warning" value="false" ver="1872" scope="Session">
+                        <Description>This option specifies whether to ignore a runtime warning.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_Pause_Runtime_Error" type="logical" title="Pause at Runtime Error" value="false" ver="1872" scope="Session">
+                        <Description>This option specifies whether to pause when a runtime error occurs.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Monitor">
+                    <Pref name="MD_GraphSampleTime" type="real" title="Graph Sample Time" value="40" unit="ms" ver="2206" scope="Session">
+                        <Description>This option specifies the graph sample time used to monitor a measurement during the simulation.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_BodyToUseForMeasureType" type="int" title="Body Type" value="0" ver="2206" scope="Session">
+                        <Description>This option specifies the body type used to measure distance or angle. The facet body type gives better performance.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Facet Body" value="0"/>
+                            <EnumElem name="Solid Body" value="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Simulation Recording">
+                    <Pref name="MD_RecordingSamplingRate" type="int" title="Sampling Rate" value="5" ver="12.0.2" scope="Session">
+                        <Description>This option specifies how many simulation steps one frame will record.</Description>
+                        <IntegerScale/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="10" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Performance">
+                    <Pref name="MD_SimplyGeomForPerformance" type="logical" title="Simplify Geometries for Better Display Performance" value="false" ver="1926" scope="Session">
+                        <Description>This option specifies whether to simplify the physics geometry to achieve better display performance during the simulation.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="External Data for Position Control">
+                    <Pref name="MD_ExternalAlgorithmForPositionControl" type="int" title="Speed Calculation" value="0" ver="1926" scope="Session">
+                        <Description>This option specifies if the external data algorithm is calculated from external and current position or two external positions.</Description>
+                        <RadioBox/>
+                        <Data type="enum">
+                            <EnumElem name="External and Current Position" value="0"/>
+                            <EnumElem name="Two External Positions" value="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+              <Group name="Unpack FMU File">
+                <Pref name="MD_SpecifyUnpackedFMUControl" type="int" title="Location Method" value="0" ver="2212" scope="Session">
+                  <Description>This option determines whether to specify an unpacked FMU location, or to use the default location.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Use Default" value="0"/>
+                    <EnumElem name="Specify" value="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="MD_FMUUnpackedPath_WIN" type="string" title="Location" value="$UGII_TMP_DIR" ver="2212" scope="Session">
+                  <Description>This field specifies the location of the unpacked FMU. This option applies if the "Location Method" option is set to "Specify".</Description>
+                  <BrowseDirSel/>
+                </Pref>
+                <Pref name="MD_FMUUnpackedPath_UNX" type="string" title="Location" value="$UGII_TMP_DIR" ver="2212" scope="Session">
+                  <Description>This field specifies the location of the unpacked FMU. This option applies if the "Location Method" option is set to "Specify".</Description>
+                  <BrowseDirSel/>
+                </Pref>
+                <Pref name="MD_RemoveFMUUnpackedFilesControl" type="logical" title="Remove Unpacked FMU Files" value="true" ver="2212" scope="Session">
+                  <Description>This option determines whether or not to remove files unpacked from the FMU when the simulation finishes.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="EtherNetIP EDS Repository">
+                <Pref name="MD_SpecifyEtherNetIPEdsControl" type="int" title="Location Method" value="0" ver="2306" scope="Session">
+                  <Description>This option determines whether to specify an EtherNetIP EDS repository location, or to use the default location.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Use Default" value="0"/>
+                    <EnumElem name="Specify" value="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="MD_EtherNetIPEds_WIN" type="string" title="Location" value="$UGII_BASE_DIR\mechatronics\RuntimeInterface\ethernetip" ver="2306" scope="Session">
+                  <Description>This field specifies the location of the EtherNetIP EDS repository. This option applies if the "Location Method" option is set to "Specify".</Description>
+                  <BrowseDirSel/>
+                </Pref>
+                <Pref name="MD_EtherNetIPEds_UNX" type="string" title="Location" value="$UGII_BASE_DIR/mechatronics/RuntimeInterface/ethernetip" ver="2306" scope="Session">
+                  <Description>This field specifies the location of the EtherNetIP EDS repository. This option applies if the "Location Method" option is set to "Specify".</Description>
+                  <BrowseDirSel/>
+                </Pref>
+              </Group>
+            </Tab>
+        </Category>
+        <Category name="Integration Settings" csh="PMAN_Mechatronics_Designer_Integration_Settings">
+            <Tab name="SIZER" csh="PMAN_Mechatronics_Designer_Integration_Settings_SIZER">
+                <Pref name="MD_SIZER_Integration_CAD_Creator_Run_Method" type="int" title="CAD Creator Run Method" value="0" ver="9.0.0" scope="Session">
+                    <Description>This option specifies the run method of CAD Creator software when the motor is imported from SIZER.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Web Service" value="0"/>
+                        <EnumElem name="Local Installation" value="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="SIMIT" csh="PMAN_Mechatronics_Designer_Integration_Settings_SIMIT">
+                <Group name="SIMIT Co-simulation">
+                    <Pref name="MD_CoSimulation" type="logical" title="SIMIT Co-simulation" value="false" ver="9.0.0" scope="Session">
+                        <Description>This option determines whether or not SIMIT co-simulation should be used.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_SIMITconnectURL" type="string" title="SIMIT Control System Server Connection URL" value="net.tcp://localhost:50800/ControlSystemServer" ver="10.0.0" scope="Session">
+                        <Description>This field specifies the URL of the SIMIT co-simulation control system server.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="MD_CoSimulationSIMITMaster" type="int" title="Master" value="0" ver="1926" scope="Session">
+                        <Description>This option specifies if the master of co-simulation is MCD or SIMIT.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="MCD" value="0"/>
+                            <EnumElem name="SIMIT" value="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_EnableTimeSync" type="logical" title="SIMIT Time Synchronization" value="false" ver="9.0.0" scope="Session">
+                        <Description>This option determines whether or not SIMIT time synchronization should be used.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_SyncTime" type ="real" title="Synchronization Time" value="0.005" unit="sec" ver="1926" scope="Session">
+                        <Description>This option specifies the time interval to do synchronization with SIMIT.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.001" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Export Sensors and Actuators to SIMIT">
+                    <Pref name="MD_SIMIT_Template_Path" type="int" title="SIMIT Template File Location" value="0" ver="11.0.0" scope="Session">
+                        <Description>This option specifies the location of the SIMIT template file.</Description>
+                        <RadioBox/>
+                        <Data type="enum">
+                            <EnumElem name="From Local Installation" value="0"/>
+                            <EnumElem name="Custom Location" value="1"/>
+                            <EnumElem name="Both" value="2"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_SIMIT_Customized_Template_Path_UNX" type="string" title="Custom Template File Location" value="" ver="11.0.0" scope="Session">
+                        <Description>This field specifies the custom template file location.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                    <Pref name="MD_SIMIT_Customized_Template_Path_WIN" type="string" title="Custom Template File Location" value="" ver="11.0.0" scope="Session">
+                        <Description>This field specifies the custom template file location.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="EPLAN" csh="PMAN_Mechatronics_Designer_Integration_Settings_EPLAN">
+                <Pref name="MD_ECAD_Page_Macro_Path_Base_UNX" type="string" title="Page Macro Path Base" value="" ver="10.0.0" scope="Session">
+                    <Description>This field specifies the base directory of the Page Macro file.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+                <Pref name="MD_ECAD_Page_Macro_Path_Base_WIN" type="string" title="Page Macro Path Base" value="" ver="10.0.0" scope="Session">
+                    <Description>This field specifies the base directory of the Page Macro file.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+                <Pref name="DEVICELIST_File_Save_Method" type="int" title="Where to Save or Retrieve Device List File" value="0" ver="10.0.0" scope="Session">
+                    <Description>This option specifies the method to save or retrieve the device list XML file.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Native File System" value="0"/>
+                        <EnumElem name="Teamcenter" value="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="PLCSIM Advanced" csh="PMAN_Mechatronics_Designer_Integration_Settings_PlcSimAdv">
+                <Group name="Co-simulation">
+                    <Pref name="MD_PlcSimAdv_Timeout" type="real" title="Timeout" value="20.0" unit="sec" ver="1953" scope="Session">
+                        <Description>This option specifies the timeout of PLCSIM Advanced Co-simulation for TIA portal program downloading during the simulation.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="600" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="EtherNet/IP" csh="PMAN_Mechatronics_Designer_Integration_Settings_EtherNetIP">
+                <Group name="Adapter Server">
+                    <Pref name="MD_EtherNetIP_Timeout" type="real" title="Search Timeout" value="1.0" unit="sec" ver="2306" scope="Session">
+                        <Description>This option specifies the timeout when searching for the Mechatronics Concept Designer EtherNet/IP server.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.1" include="1"/>
+                            <UpperBound value="5" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="System Navigator" csh="PMAN_Mechatronics_Designer_System_Navigator" package_suppress="mechatronicsplayer">
+            <Tab name="General" csh="PMAN_Mechatronics_Designer_System_Navigator_General">
+                <Pref name="MD_System_Navigator_Load_As_Saved" type="logical" title="Load as Saved" value="false" ver="9.0.0" scope="Session">
+                    <Description>This option determines whether or not to load the models as saved the last time.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_System_Navigator_Hide_Function" type="logical" title="Hide Functional Structure" value="false" ver="10.0.0" scope="Session">
+                    <Description>This option determines whether or not to display the functional model in the System Navigator.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Group name="Form Types">
+                    <Pref name="MD_System_Navigator_Function_Form_Type" type="string" title="Function" value="" ver="8.5.0" scope="Session">
+                        <Description>This field specifies the form types for the Function. Multiple form types can be specified separated by comma.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="MD_System_Navigator_Logical_Form_Type" type="string" title="Logical" value="" ver="8.5.0" scope="Session">
+                        <Description>This field specifies the form types for the Logical. Multiple form types can be specified separated by comma.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+                <Group name="Teamcenter Item Type">
+                    <Pref name="MD_System_Navigator_RequirementItemType" type="string" title="Requirement" value="Requirement" ver="9.0.0" scope="Session">
+                        <Description>This option specifies the supported Teamcenter Requirement Revision type.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="MD_System_Navigator_FunctionItemType" type="string" title="Function" value="Functionality" ver="9.0.0" scope="Session">
+                        <Description>This option specifies the supported Teamcenter Function Revision type.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="MD_System_Navigator_LogicalItemType" type="string" title="Logical" value="Fnd0LogicalBlock" ver="9.0.0" scope="Session">
+                        <Description>This option specifies the supported Teamcenter Logical Revision type.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+                <Group name="Logical Data Model">
+                    <Pref name="MD_System_Navigator_Config_File_WIN" type="string" title="Configuration File" value="$UGII_BASE_DIR\mechatronics\configuration\mechatronics_logical_configuration.xml" ver="10.0.1" scope="Session">
+                        <Description>This field specifies the full file name of the configuration file in which the language specific data model configuration files are defined.</Description>
+                        <BrowseFileSel type="xml"/>
+                    </Pref>
+                    <Pref name="MD_System_Navigator_Config_File_UNX" type="string" title="Configuration File" value="$UGII_BASE_DIR/mechatronics/configuration/mechatronics_logical_configuration.xml" ver="10.0.1" scope="Session">
+                        <Description>This field specifies the full file name of the configuration file in which the language specific data model configuration files are defined.</Description>
+                        <BrowseFileSel type="xml"/>
+                    </Pref>
+                </Group>
+                <Group name="Reuse Library">
+                    <Pref name="MD_Integration_Reuse_Dir_UNX" type="string" title="Native NX" value="" ver="9.0.0" scope="Session">
+                        <Description>This field defines the directory in which the ECAD reusable part should be found in Native NX.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                    <Pref name="MD_Integration_Reuse_Dir_WIN" type="string" title="Native NX" value="" ver="9.0.0" scope="Session">
+                        <Description>This field defines the directory in which the ECAD reusable part should be found in Native NX.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                    <Pref name="MD_Integration_Reuse_Dir_TC" type="string" title="Teamcenter Integration" value="" ver="9.0.0" scope="Session">
+                        <Description>This field defines the directory in which the ECAD reusable part should be found in Teamcenter.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="Sequence Editor" csh="PMAN_Mechatronics_Designer_Sequence_Editor"  package_suppress="mechatronicsplayer">
+            <Tab name="General" csh="PMAN_Mechatronics_Designer_Sequence_Editor_General">
+                <Pref name="MD_Sequence_Editor_Auto_Disable_Operation" type="logical" title="Automatically Deactivate Operations" value="true" ver="1847" scope="Part">
+                    <Description>This option determines whether to automatically deactivate operations whose referencing runtime parameters have signals created and mapped with external signals.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_Sequence_Editor_Invoke_After_Export" type="logical" title="Invoke Timing Chart after Export" value="false" ver="10.0.0" scope="Session">
+                    <Description>This option specifies whether to open the Timing Chart File (.xlsx) after export.  </Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_Sequence_Editor_Export_File_WIN" type="string" title="Exported File" value="$UGII_TMP_DIR\MCD_timing_chart.xlsx" ver="1926" scope="Session">
+                    <Description>This field specifies the full file name of exported timing chart file.</Description>
+                    <BrowseFileSel type="xlsx" />
+                </Pref>
+                <Pref name="MD_Sequence_Editor_Export_File_UNX" type="string" title="Exported File" value="$UGII_TMP_DIR/MCD_timing_chart.xlsx" ver="1926" scope="Session">
+                    <Description>This field specifies the full file name of exported timing chart file.</Description>
+                    <BrowseFileSel type="xlsx"/>
+                </Pref>
+                <Pref name="MD_Sequence_Editor_Decimal_Delimiter" type="int" title="Decimal Delimiter" value="0" ver="2212" scope="Session">
+                    <Description>This option specifies the decimal point character used in time columns of exported timing chart.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Period" value="0"/>
+                        <EnumElem name="Comma" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_Sequence_Editor_Use_Interval" type="logical" title="Use User Defined Refresh Interval" value="false" ver="1872" scope="Session">
+                    <Description>This option specifies whether to use a user defined refresh interval.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_Sequence_Editor_Refresh_Interval" type="real" title="Refresh Interval" value="1.0" unit="sec" ver="1872" scope="Session">
+                    <Description>This option specifies the time interval of Sequence Editor refreshing during the simulation.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.001" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Sensor" csh="PMAN_Mechatronics_Designer_Sensor">
+            <Tab name="General" csh="PMAN_Mechatronics_Designer_Sensor_General">
+                <Group name="Show in Simulation">
+                    <Pref name="MD_Sensor_Show_Collision_Sensor" type="logical" title="Collision Sensor" value="true" ver="1980" scope="Part">
+                        <Description>This option determines whether to show the collision sensor during the simulation.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_Sensor_Show_Distance_Sensor" type="logical" title="Distance Sensor" value="true" ver="1980" scope="Part">
+                        <Description>This option determines whether to show the distance sensor during the simulation.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_Sensor_Show_Laser_Scanner" type="logical" title="2D Laser Scanner" value="true" ver="1980" scope="Part">
+                        <Description>This option determines whether to show the 2D laser scanner during the simulation.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_Sensor_Show_Light_Curtain" type="logical" title="Light Curtain" value="true" ver="1980" scope="Part">
+                        <Description>This option determines whether to show the light curtain during the simulation.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_Sensor_Light_Curtain_Show_Inactive_Beams" type="logical" title="Inactive Beams" value="true" ver="1980" scope="Part">
+                        <Description>This option determines whether to show inactive beams during the simulation.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_HighlightShapeOnCollision" type="logical" title="Collision Body" value="true" ver="1926" scope="Part">
+                        <Description>This option determines whether to highlight the shape on a collision.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_HighlightBondZone" type="logical" title="Bond Zone" value="true" ver="1980" scope="Part">
+                        <Description>This option determines whether to highlight the bond zone during the simulation.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_HighlightGripper" type="logical" title="Gripper" value="true" ver="1980" scope="Part">
+                        <Description>This option determines whether to highlight the gripper during the simulation.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Highlight Color">
+                    <Pref name="MD_Sensor_Collision_Sensor_Color" type="int" title="Collision Sensor" value="6" ver="1980" scope="Part">
+                        <Description>This option specifies the highlight color for the collision sensor.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="MD_Sensor_Distance_Sensor_Color" type="int" title="Distance Sensor" value="60" ver="1980" scope="Part">
+                        <Description>This option specifies the highlight color for the distance sensor.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="MD_Sensor_Laser_Scanner_Color" type="int" title="2D Laser Scanner" value="186" ver="1980" scope="Part">
+                        <Description>This option specifies the highlight color for the 2D laser scanner.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="Light Curtain Beams Color">
+                    <Pref name="MD_Sensor_Light_Curtain_Active_Beams" type="int" title="Active Beams" value="164" ver="1980" scope="Part">
+                        <Description>This option specifies the highlight color for active beams.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="MD_Sensor_Light_Curtain_Inactive_Beams" type="int" title="Inactive Beams" value="159" ver="1980" scope="Part">
+                        <Description>This option specifies the highlight color for inactive beams.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="MD_Sensor_Light_Curtain_Blocked_Beams" type="int" title="Blocked Beams" value="186" ver="1980" scope="Part">
+                        <Description>This option specifies the highlight color for blocked beams.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="MD_Sensor_Light_Curtain_Free_Beams" type="int" title="Free Beams" value="60" ver="1980" scope="Part">
+                        <Description>This option specifies the highlight color for free beams.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="2D Laser Scanner Field Color">
+                    <Pref name="MD_Sensor_Laser_Scanner_Protective_Field" type="int" title="Protective Field" value="119" ver="1980" scope="Part">
+                        <Description>This option specifies the highlight color for the protective field.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="MD_Sensor_Laser_Scanner_Warning_Field" type="int" title="Warning Field" value="6" ver="1980" scope="Part">
+                        <Description>This option specifies the highlight color for the warning field.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="MD_Sensor_Laser_Scanner_Contour_Monitor_Field" type="int" title="Contour Monitor Field" value="91" ver="1980" scope="Part">
+                        <Description>This option specifies the highlight color for the contour monitor field.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="Flexible Belt" csh="PMAN_Mechatronics_Designer_Flexible_Belt">
+            <Tab name="Material Properties" csh="PMAN_Mechatronics_Designer_Flexible_Belt_Material_Properties">
+                <Pref name="MD_FlexibleMaterialDensity_MU" type="real" title="Density" value="1.2e-06" unit="kg/mm^3" ver="2007" scope="Part">
+                    <Description>This option specifies the density of a flexible body.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_FlexibleMaterialDensity_EU" type="real" title="Density" value="0.0433527504" unit="lbm/in^3" ver="2007" scope="Part">
+                    <Description>This option specifies the density of a flexible body.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_FlexibleMaterialDamping" type="real" title="Damping" value="0.25" ver="2007" scope="Part">
+                    <Description>This option specifies the coefficient of damping forces acting on flexible bodies to reduce their oscillation over time.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                        <UpperBound value="1.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_FlexibleMaterialDynamicFriction" type="real" title="Dynamic Friction" value="0.2" ver="2007" scope="Part">
+                    <Description>This option specifies the coefficient of the dynamic friction acting on a flexible body against a surface.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                        <UpperBound value="1.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_FlexibleMaterialLinearStiffness" type="real" title="Linear Stiffness" value="1.0" ver="2007" scope="Part">
+                    <Description>This option specifies the coefficient of conservation of distance between adjacent particles. The larger the value, the stronger is the conservation of distance between particles (similar to the stiffness of a spring, a larger value means a stronger, more rigid spring).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                        <UpperBound value="1.0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Engine Tuning" csh="PMAN_Mechatronics_Designer_Flexible_Belt_Engine_Tuning">
+                <Pref name="MD_FlexibleMaterialPrecision_MU" type="real" title="Precision" value="10" unit="mm" ver="2007" scope="Part">
+                    <Description>This option specifies the fineness of the elements in a flexible body. A larger value means larger elements and relatively better simulation performance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_FlexibleMaterialPrecision_EU" type="real" title="Precision" value="0.3937007874" unit="in" ver="2007" scope="Part">
+                    <Description>This option specifies the fineness of the elements in a flexible body. A larger value means larger elements and relatively better simulation performance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_FlexibleMaterialAnchorHardness" type="real" title="Anchor Hardness" value="0.8" ver="2206" scope="Part">
+                    <Description>This option specifies how strongly a flexible body is expected to stick to another object, e.g. a roller.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                        <UpperBound value="1.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_ContactHardnessWithCollisionBody" type="real" title="Contact Hardness with Collision Body" value="2" ver="2206" scope="Part">
+                    <Description>This option specifies how strict any overlap between a flexible body and collision body is treated.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_ContactHardnessWithFlexibleBody" type="real" title="Contact Hardness with Flexible Body" value="0.5" ver="2206" scope="Part">
+                    <Description>This option specifies how strict any overlap between flexible bodies is treated.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_ImpulseSplitWithCollisionBody" type="real" title="Impulse Split with Collision Body" value="0" ver="2007" scope="Part">
+                    <Description>This option specifies how to proportion the impulse generated by a collision between a flexible body and collision body.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                        <UpperBound value="1.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_ImpulseSplitWithFlexibleBody" type="real" title="Impulse Split with Flexible Body" value="0.5" ver="2007" scope="Part">
+                    <Description>This option specifies how to proportion the impulse generated by a collision between flexible bodies.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                        <UpperBound value="1.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_FlexibleCollisionSkipStep" type="int" title="Collision Steps to Skip" value="0" ver="2206" scope="Part">
+                    <Description>This option specifies how many steps to skip when a flexible body collides.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Display" csh="PMAN_Mechatronics_Designer_Flexible_Belt_Display">
+                <Pref name="MD_SameWithFlexibleMaterialPrecision" type="logical" title="Use Same Precision as Engine Tuning" value="true" ver="2206" scope="Part">
+                    <Description>This option determines whether facet bodies should use the same precision as engine tuning.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_FlexibleFacetPrecision_MU" type="real" title="Facet Precision" value="1" unit="mm" ver="2206" scope="Part">
+                    <Description>This option specifies the fineness of the facets in a flexible body. A larger value means larger facets and relatively better simulation performance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_FlexibleFacetPrecision_EU" type="real" title="Facet Precision" value="0.03937007874" unit="in" ver="2206" scope="Part">
+                    <Description>This option specifies the fineness of the facets in a flexible body. A larger value means larger facets and relatively better simulation performance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Flexible Cable" csh="PMAN_Mechatronics_Designer_Flexible_Cable">
+            <Tab name="Material Properties" csh="PMAN_Mechatronics_Designer_Flexible_Cable_Material_Properties">
+                <Pref name="MD_KineoFlexibleMaterial_Density_MU" type="real" title="Density" value="4.7e-07" unit="kg/mm^3" ver="2212" scope="Part">
+                    <Description>This option specifies the density of a flexible body. It controls the weight of the flexible body and affects how it reacts to gravity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleMaterial_Density_EU" type="real" title="Density" value="0.0169798272400393" unit="lbm/in^3" ver="2212" scope="Part">
+                    <Description>This option specifies the density of a flexible body. It controls the weight of the flexible body and affects how it reacts to gravity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleMaterial_YoungModulus_MU" type="real" title="Young's Modulus" value="3" unit="MPa" ver="2212" scope="Part">
+                    <Description>This option specifies the elasticity of the flexible body. The higher the value, the stiffer the flexible body is and the more it will resist the pull of gravity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                        <UpperBound value="100.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleMaterial_YoungModulus_EU" type="real" title="Young's Modulus" value="435.113213190628" unit="lbf/in^2" ver="2212" scope="Part">
+                    <Description>This option specifies the elasticity of the flexible body. The higher the value, the stiffer the flexible body is and the more it will resist the pull of gravity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                        <UpperBound value="14503.77377302093" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleMaterial_FulcrumLength_MU" type="real" title="Fulcrum Length" value="0" unit="mm" ver="2212" scope="Part">
+                    <Description>This option specifies the straight length of a cable. Additional straight cable lengths are created at each point the cable is attached to the robot (the attachment point is at the center of the straight cable length).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleMaterial_FulcrumLength_EU" type="real" title="Fulcrum Length" value="0" unit="in" ver="2212" scope="Part">
+                    <Description>This option specifies the straight length of a cable. Additional straight cable lengths are created at each point the cable is attached to the robot (the attachment point is at the center of the straight cable length).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleMaterial_MaxTension_MU" type="real" title="Maximum Tension" value="9.80665" unit="N" ver="2212" scope="Part">
+                    <Description>This option specifies the maximum tension the cable is able to bear. The cable will be brown if the tension exceeds the limit.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleMaterial_MaxTension_EU" type="real" title="Maximum Tension" value="2.20462262184878" unit="lbf" ver="2212" scope="Part">
+                    <Description>This option specifies the maximum tension the cable is able to bear. The cable will be brown if the tension exceeds the limit.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleMaterial_EnableMaxTwist" type="logical" title="Use Maximum Twist" value="false" ver="2212" scope="Part">
+                    <Description>This option determines whether to use maximum twist. Use it to limit the twist of a cable, for example, when the robot rotates.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleMaterial_MaxTwist_MU" type="real" title="Maximum Twist" value="360" unit="deg/m" ver="2212" scope="Part">
+                    <Description>This option specifies the maximum cable twist allowed. The cable will be magenta if the twist exceeds the specified limit.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleMaterial_MaxTwist_EU" type="real" title="Maximum Twist" value="9.144" unit="deg/in" ver="2212" scope="Part">
+                    <Description>This option specifies the maximum cable twist allowed. The cable will be magenta if the twist exceeds the specified limit.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleMaterial_EnableMaxContactForce" type="logical" title="Use Maximum Contact Force" value="false" ver="2212" scope="Part">
+                    <Description>This option determines whether to use maximum contact force. Use it to prevent damage to a cable, for example, when a robot arm comes into contact with it.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleMaterial_MaxContactForce_MU" type="real" title="Maximum Contact Force" value="9.80665" unit="N" ver="2212" scope="Part">
+                    <Description>This option specifies the maximum contact force allowed for the cable. The cable will be orange if the contact force exceeds the limit.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleMaterial_MaxContactForce_EU" type="real" title="Maximum Contact Force" value="2.20462262184878" unit="lbf" ver="2212" scope="Part">
+                    <Description>This option specifies the maximum contact force allowed for the cable. The cable will be orange if the contact force exceeds the limit.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleMaterial_EnableMinCurvature" type="logical" title="Use Minimum Curvature" value="false" ver="2212" scope="Part">
+                    <Description>This option determines whether to use minimum curvature. Use it to prevent damage to a cable caused by bending it too far.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleMaterial_MinCurvature_MU" type="real" title="Minimum Curvature" value="0" unit="mm" ver="2212" scope="Part">
+                    <Description>This option specifies the minimum curvature radius for a cable. The cable will be yellow if the curvature is less than the specified limit.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleMaterial_MinCurvature_EU" type="real" title="Minimum Curvature" value="0" unit="in" ver="2212" scope="Part">
+                    <Description>This option specifies the minimum curvature radius for a cable. The cable will be yellow if the curvature is less than the specified limit.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleMaterial_Oscillation" type="real" title="Oscillation" value="100" unit="%" ver="2212" scope="Part">
+                    <Description>This option specifies cable oscillation. If a cable is slack, it is likely to oscillate back and forth when the robot stops moving. This option sets a percentage value for oscillation to best imitate the physical cable. For example, if the physical cable has high internal friction, this will tend to dampen the oscillation, in which case a relatively low oscillation percentage can be used for the simulation. The fulcrum parts of the cable do not oscillate at all.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                        <UpperBound value="100.0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Engine Tuning" csh="PMAN_Mechatronics_Designer_Flexible_Cable_Engine_Tuning">
+                <!---->
+                <Pref name="MD_KineoFlexibleEngineTuning_MinNumberOfNodesBetweenAttachments" type="int" title="Min Number of Nodes between Attachments" value="5" ver="2312" scope="Part">
+                    <Description>This option specifies the minimum number of nodes between attachments. A smaller value improves simulation performance. A larger value gives a more precise simulation.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="0"/>
+                        <UpperBound value="500" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleEngineTuning_SkipStepsNumber" type="int" title="Number of Steps to Skip" value="20" ver="2212" scope="Part">
+                    <Description>For each simulation step that is run, this option specifies the the number of steps to skip. Regardless of this option, the step time remains the same (defined by the General -> Physics Engine -> Step Time option). Skipping steps improves performance.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Display" csh="PMAN_Mechatronics_Designer_Flexible_Cable_Display">
+                <!---->
+                <!---->
+                <!---->
+                <Pref name="MD_KineoFlexibleFacetBody_FacetPrecisionOption" type="int" title="Facet Precision Option" value="1" ver="2312" scope="Part">
+                    <Description>This option specifies the fineness of the facets and the smoothness of a circular cross section in a flexible body. Rough precision means larger facets and relatively better simulation performance.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                      <EnumElem name="Rough Mode" value="0"/>
+                      <EnumElem name="Balanced Mode" value="1"/>
+                      <EnumElem name="Fine Mode" value="2"/>
+                      <EnumElem name="User Defined" value="3"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleFacetBody_UserUsingDefinedLinearPrecisionInputType" type="int" title="User Defined Linear Facet Precision Input Type" value="1" ver="2312" scope="Part">
+                    <Description>This option specifies if the user defined facet precision input value is a length or percentage value.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                      <EnumElem name="Value" value="0"/>
+                      <EnumElem name="Percentage" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleFacetBody_UserDefinedLinearPrecisionByPercentage" type="real" title="User Defined Linear Facet Precision" value="1" unit="%" ver="2312" scope="Part">
+                    <Description>This option specifies the fineness of the facets in a flexible body. A larger percentage means larger facets and relatively better simulation performance. This option applies when 'Facet Precision Option' is set to 'User Defined' and 'User Defined Linear Facet Precision Input Type' is set to 'Percentage'.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="0"/>
+                      <UpperBound value="25.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleFacetBody_UserDefinedLinearPrecision_MU" type="real" title="User Defined Linear Facet Precision" value="10" unit="mm" ver="2312" scope="Part">
+                    <Description>This option specifies the fineness of the facets in a flexible body. A larger value means larger facets and relatively better simulation performance. This option applies when 'Facet Precision Option' is set to 'User Defined' and 'User Defined Linear Facet Precision Input Type' is set to 'Value'.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="MD_KineoFlexibleFacetBody_UserDefinedLinearPrecision_EU" type="real" title="User Defined Linear Facet Precision" value="0.3937007874" unit="in" ver="2312" scope="Part">
+                    <Description>This option specifies the fineness of the facets in a flexible body. A larger value means larger facets and relatively better simulation performance. This option applies when 'Facet Precision Option' is set to 'User Defined' and 'User Defined Linear Facet Precision Input Type' is set to 'Value'.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <!---->
+                <Pref name="MD_KineoFlexibleFacetBody_UserDefinedAngularPrecision" type="real" title="User Defined Angular Facet Precision" value="20" unit="degree" ver="2312" scope="Part">
+                    <Description>This option specifies the smoothness of a circular cross section in a flexible body. The input angle is between the center of the circle and the neighboring vertices on a circle cross section. Larger angle means fewer vertices, less smooth circular cross section, and relatively better simulation performance. This option applies when 'Facet Precision Option' is set to 'User Defined'.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="2.0" include="1"/>
+                        <UpperBound value="90.0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="PhysX Flexible Body" csh="PMAN_Mechatronics_Designer_PhysX_Flexible_Body">
+            <Tab name="Material Properties" csh="PMAN_Mechatronics_Designer_PhysX_Flexible_Body_Material_Properties">
+                <Group name="FEM Material Properties">
+                    <Pref name="MD_PhysXFemMaterialDensity_MU" type="real" title="Density" value="1.2e-06" unit="kg/mm^3" ver="2306" scope="Session">
+                        <Description>This option specifies the density of the FEM soft body.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_PhysXFemMaterialDensity_EU" type="real" title="Density" value="0.0433527504" unit="lbm/in^3" ver="2306" scope="Session">
+                        <Description>This option specifies the density the FEM soft body.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_PhysXFemMaterialYoungs_MU" type="real" title="Young's Modulus" value="3" unit="MPa" ver="2306" scope="Session">
+                        <Description>This option specifies the elasticity of the FEM soft body. The higher the value, the stiffer the soft body is and the more it will resist the pull of gravity.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                            <UpperBound value="100.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_PhysXFemMaterialYoungs_EU" type="real" title="Young's Modulus" value="435.113213190628" unit="lbf/in^2" ver="2306" scope="Session">
+                        <Description>This option specifies the elasticity of the FEM soft body. The higher the value, the stiffer the soft body is and the more it will resist the pull of gravity.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                            <UpperBound value="14503.77377302093" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_PhysXFemMaterialPoissons" type="real" title="Poisson's Ratio" value="0.45" ver="2306" scope="Session">
+                        <Description>This option specifies Poisson's Ratio of the FEM soft body.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="-1.0" include="1"/>
+                            <UpperBound value="0.5" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_PhysXFemMaterialDamping" type="real" title="Damping" value="0.25" ver="2306" scope="Session">
+                        <Description>This option specifies the damping coefficient acting on a soft body, reducing its oscillation over time.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                            <UpperBound value="1.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="MD_PhysXFemDynamicFriction" type="real" title="Dynamic Friction" value="0.2" ver="2306" scope="Session">
+                        <Description>This option specifies the coefficient of the dynamic friction acting on a soft body against a surface.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                            <UpperBound value="1.0" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>

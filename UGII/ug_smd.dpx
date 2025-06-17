@@ -1,0 +1,2601 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Sheet Metal (Forming and Flattening)" csh="PMAN_Sheet_Metal_Forming_and_Flattening" package_suppress="simcenter3d,simviewer,view,mechatronicsplayer,nx2dedit">
+        <Category name="General" csh="PMAN_Sheet_Metal_Forming_and_Flattening_General">
+            <Tab name="Preferences" csh="PMAN_Sheet_Metal_Forming_and_Flattening_General_Preferences">
+                <Pref name="SMD_ReferenceLineColor" type="int" title="Reference Line Color" value="140" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color used to draw the reference (contour, mold, form block) line geometry on the Flange, Inset Flange, and General Flange. By hiding all items of this color before placing views onto drawing sheets, you can keep the reference lines from appearing on drawings.</Description>
+                    <Color/>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_DefaultMaterial" type="string" title="Default Material" value="steel" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the default material on the Sheet Metal Preferences dialog box. The material type should be defined in the standards file.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="SMD_CheckStdsOnCreate" type="int" title="Check Standards on Create/Edit" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option determines whether or not a standards check should be performed when either the OK or Apply buttons are chosen on a Sheet Metal feature's Create or Edit Parameters dialog box.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_EnforceCreationStateEditing" type="int" title="Enforce Creation State Editing" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option applies to Sheet Metal Hole, Slot, Cutout, Punch, Solid Punch, and Bend features. This option determines whether or not these features can be edited when the model is not in the same state as when these features were created. When this option is off, these features can be edited in a different state, which will become the features' new creation state.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FormingMethod" type="int" title="Forming Method" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option specifies how Straight Brake and Solid Punch features are formed and unformed.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Use Self-forming Features" value="0"/>
+                        <EnumElem name="Use Forming Operations" value="1"/>
+                    </Data>
+                    <Docum>If the option Use Forming Operations is checked, Straight Brake and Solid Punch features will not be listed in the Form/Unform dialog box. The way to get these features to Form or Unform is to create Unbend and Rebend features on their cylindrical faces. If the option Use Self-Forming Features is checked, Straight Brake and Solid Punch features will be listed in the Form/Unform dialog box. The forming method for existing Straight Brake and Solid Punch features can be changed at any time by using Make Self-Forming Feature and Make Non-Self-Forming Feature. Use the MB3 shortcut menu options in the Part Navigator.</Docum>
+                </Pref>
+                <Pref name="SMD_PIPSequentialProcessing" type="int" title="Sequential Processing" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option determines whether or not the processing of groups or items in Part in Process is processed sequentially. When this option is on, the chosen item and everything above it in the tree list will be executed (all items before the chosen item will be processed first). When this option is off, only the chosen item will be executed.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Off" value="0"/>
+                        <EnumElem name="On" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BracketMaterialMargin" type="real" title="Bracket Margin" value="10" unit="%" ver="3.0.0" scope="Part">
+                    <Description>During construction of a Sheet Metal Bracket, the system creates a base pad that trims to the proper size. The original base pad's size is based on an intersection curve and the clearance distance dimension. The Bracket Margin value is a percentage that increases these dimensions.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="10.0" include="1"/>
+                    </Data>
+                    <Docum>This option only affects the size of the original base pad and not the final Bracket. Increase the value if the Bracket outline curves do not lie entirely on the base pad.</Docum>
+                </Pref>
+            </Tab>
+            <Tab name="Global Parameters" csh="PMAN_Sheet_Metal_Forming_and_Flattening_General_Global_Parameters">
+                <Pref name="SMD_GlobalUseGlobalThickness" type="int" title="Use Global Thickness" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option determines whether or not a thickness will be set to be used for the entire part. When this option is on, feature dialog boxes and application dialog boxes that use a thickness expression or infer their thickness from a selected face or edge will no longer have any thickness widgets.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GlobalThicknessType" type="int" title="Thickness Type" value="0" ver="3.0.0" scope="Part">
+                    <Description>If using a global thickness, the feature or application will use the thickness as specified by this option.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Infer Thickness" value="0"/>
+                        <EnumElem name="Use Expression" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GlobalDefaultThickness_EU" type="real" title="Thickness" value="0.125" unit="in" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the global thickness to be used when Thickness Type is set to Use Expression.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GlobalDefaultThickness_MU" type="real" title="Thickness" value="2.5" unit="mm" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the global thickness to be used when Thickness Type is set to Use Expression.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_GlobalUseGlobalRadius" type="int" title="Use Global Bend Radius" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option determines whether or not a bend radius will be set to be used for the entire part. When this option is on, feature dialog boxes and application dialog boxes that use a radius expression will no longer have any radius widgets.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GlobalRadiusType" type="int" title="Bend Radius Type" value="0" ver="3.0.0" scope="Part">
+                    <Description>If using a global bend radius, this option specifies if the bend radius represents the inside or outside radius.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Inside" value="0"/>
+                        <EnumElem name="Outside" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GlobalDefaultRadius_EU" type="real" title="Bend Radius" value="0.5" unit="in" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the global bend radius.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GlobalDefaultRadius_MU" type="real" title="Bend Radius" value="10.0" unit="mm" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the global bend radius.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_GlobalUseGlobalAngle" type="int" title="Use Global Angle" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option determines whether or not a bend angle will be set to be used for the entire part. When this option is on, feature dialog boxes and application dialog boxes that use an angle expression will no longer have any angle widgets.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GlobalAngleType" type="int" title="Angle Type" value="0" ver="3.0.0" scope="Part">
+                    <Description>If using a global bend angle, this option specifies if the bend angle represents a bend angle or an included angle.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Bend" value="0"/>
+                        <EnumElem name="Included" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GlobalDefaultAngle" type="real" title="Angle" value="90" unit="deg" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the global bend angle.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_GlobalUseGlobalBAF" type="int" title="Use Global Bend Allowance Formula" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option determines whether or not a Bend Allowance Formula will be set to be used for the entire part. When this option is on, feature dialog boxes and application dialog boxes that use Bend Allowance Formulas will no longer have the Bend Allowance Formula button.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GlobalBAFOption" type="int" title="Global Bend Allowance Option" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option specifies from where the feature should get the developed length.
+<Formatted>Expression: Use the Bend Allowance Formula expression as specified below.
+Bend Allowance Table: Use the TCL procedure to calculate the developed length of each self-forming feature in the active part.</Formatted></Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Expression" value="0"/>
+                        <EnumElem name="Bend Allowance Table" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GlobalDefaultBAF" type="string" title="Global Bend Allowance Formula" value="(Radius+(Thickness*0.44))*rad(Angle)" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the Bend Allowance Formula when the above option is set to Expression.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="SMD_GlobalBATAngleType" type="int" title="Global Bend Allowance Table Angle Type" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the type of angle used while creating a Bend Allowance Table. If the formulae in the table are written considering bend angle, this option should be set to Bend. If the Included Angle option is used for creating Flanges, the angle will be converted to Bend when evaluating the Bend Allowance Formula string.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Bend" value="0"/>
+                        <EnumElem name="Included" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GlobalBATRadiusType" type="int" title="Global Bend Allowance Table Radius Type" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the type of radius used while creating a Bend Allowance Table. If the formulae in the table are written considering inside radius, then this option should be set to Inside. If outside radius is used for creating Flanges, the radius will be converted to inside when evaluating the Bend Allowance Formula string.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Inside" value="0"/>
+                        <EnumElem name="Outside" value="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Flanges" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Flanges">
+            <Tab name="Flange" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Flanges_Flange">
+                <Pref name="SMD_FlangeThickOption" type="int" title="Thickness Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how the thickness of the flange should be determined. When set to Infer from Edge, the thickness of the Flange will match the thickness of the body to which the Flange is attached.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Infer from Edge" value="0"/>
+                        <EnumElem name="Use Expression" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeMaterialThickness_EU" type="real" title="Thickness" value="0.125" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thickness of the Flange, when Thickness Type is set to Use Expression.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeMaterialThickness_MU" type="real" title="Thickness" value="2.5" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thickness of the Flange, when Thickness Type is set to Use Expression.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_FlangeWidthOption" type="int" title="Width Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how the width of the Flange should be determined. When set to Infer from Edge, the width of the Flange will match the width of the body to which the Flange is attached.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Infer from Edge" value="0"/>
+                        <EnumElem name="Use Expression" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeWidth_EU" type="real" title="Width" value="1.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the width of the Flange, when Width Type is set to Use Expression.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeWidth_MU" type="real" title="Width" value="20.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the width of the Flange, when Width Type is set to Use Expression.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_FlangeLengthOption" type="int" title="Length Type" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies how the specified length of the Flange should be interpreted.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Tangent" value="0"/>
+                        <EnumElem name="Contour" value="1"/>
+                        <EnumElem name="DIN" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeLength_EU" type="real" title="Length" value="2.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the length of the Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeLength_MU" type="real" title="Length" value="50.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the length of the Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_FlangeAngleType" type="int" title="Angle Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how the specified fully formed angle of the Flange should be interpreted.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Bend" value="0"/>
+                        <EnumElem name="Included" value="1"/>
+                    </Data>
+                    <Docum><Formatted>
+Bend: The angle of the Flange is measured from top of the attachment face.
+Included: The angle of the Flange is measured from the bottom of the attachment face.</Formatted></Docum>
+                </Pref>
+                <Pref name="SMD_FlangeAngle" type="real" title="Angle" value="90" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the fully formed angle of the Flange.</Description>
+                    <Real/>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_FlangeRadiusType" type="int" title="Radius Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how the specified radius of the Flange should be interpreted.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Inside" value="0"/>
+                        <EnumElem name="Outside" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeRadius_EU" type="real" title="Radius" value="0.5" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the bend radius of the Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeRadius_MU" type="real" title="Radius" value="10.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the bend radius of the Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_FlangeRpoMethod" type="int" title="Positioning" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how the Flange should be positioned.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Manual" value="0"/>
+                        <EnumElem name="Automatic" value="1"/>
+                    </Data>
+                </Pref>
+                <Group name="Left Side Parameters">
+                <Pref name="SMD_FlangeLeftSideOption" type="int" title="Joint Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the parameters of the left side of the Flange.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="None" value="0"/>
+                        <EnumElem name="Taper" value="1"/>
+                        <EnumElem name="Simple Miter" value="2"/>
+                        <EnumElem name="Full Miter" value="3"/>
+                        <EnumElem name="Butt Joint" value="4"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeLeftBendTaper" type="real" title="Bend Taper Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left taper angle over the bend area of the Flange.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_FlangeLeftWebTaper" type="real" title="Web Taper Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left taper angle over the web area of the Flange.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_FlangeLeftMiterAngle" type="real" title="Miter Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left miter angle of the Flange. This value applies to both simple and full miter joint types.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_FlangeLeftMiterPhase" type="real" title="Miter Phase Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left miter phase angle of the Flange. This value applies to both simple and full miter joint types.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_FlangeLeftMiterRelief_EU" type="real" title="Miter Relief Radius" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left miter relief radius of the Flange. This value applies only to the simple miter joint type.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeLeftMiterRelief_MU" type="real" title="Miter Relief Radius" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left miter relief radius of the Flange. This value applies only to the simple miter joint type.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeLeftButtLength_EU" type="real" title="Butt Length" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left butt length of the Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeLeftButtLength_MU" type="real" title="Butt Length" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left butt length of the Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Group name="Right Side Parameters">
+                <Pref name="SMD_FlangeRightSideOption" type="int" title="Joint Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the parameters of the right side of the Flange.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="None" value="0"/>
+                        <EnumElem name="Taper" value="1"/>
+                        <EnumElem name="Simple Miter" value="2"/>
+                        <EnumElem name="Full Miter" value="3"/>
+                        <EnumElem name="Butt Joint" value="4"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeRightBendTaper" type="real" title="Bend Taper Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right taper angle over the bend area of the Flange.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_FlangeRightWebTaper" type="real" title="Web Taper Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right taper angle over the web area of the Flange.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_FlangeRightMiterAngle" type="real" title="Miter Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right miter angle of the Flange. This value applies to both simple and full miter joint types.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_FlangeRightMiterPhase" type="real" title="Miter Phase Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right miter phase angle of the Flange. This value applies to both simple and full miter joint types.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_FlangeRightMiterRelief_EU" type="real" title="Miter Relief Radius" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right miter relief radius of the Flange. This value applies only to the simple miter joint type.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeRightMiterRelief_MU" type="real" title="Miter Relief Radius" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right miter relief radius of the Flange. This value applies only to the simple miter joint type.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeRightButtLength_EU" type="real" title="Butt Length" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right butt length of the Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeRightButtLength_MU" type="real" title="Butt Length" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right butt length of the Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Pref name="SMD_FlangeUseContourLines" type="int" title="Contour Lines" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not contour lines should be created. The contour line is defined as the intersection of surfaces extended from the tangent face and the web of the first step.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeUseMoldLines" type="int" title="Mold Lines" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not mold lines should be created. The mold line is defined as the intersection of surfaces extended from the tangent face and a surface normal to that surface and tangent to the bend face.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlangeUseFormBlockLines" type="int" title="Form Block Lines" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not form block lines should be created. The form block line is similar to the contour line, however it applies to the inner surfaces of the Flange.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Inset Flange" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Flanges_Inset_Flange">
+                <Pref name="SMD_InstflngThickOption" type="int" title="Thickness Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how the thickness of the Inset Flange should be determined. When set to Infer from Edge, the thickness of the Inset Flange will match the thickness of the body to which the Inset Flange is attached.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Infer from Edge" value="0"/>
+                        <EnumElem name="Use Expression" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngMaterialThickness_EU" type="real" title="Thickness" value="0.125" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thickness of the Inset Flange, when Thickness Type is set to Use Expression.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngMaterialThickness_MU" type="real" title="Thickness" value="2.5" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thickness of the Inset Flange, when Thickness Type is set to Use Expression.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_InstflngWidthOption" type="int" title="Width Type" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how the width of the Inset Flange should be determined. When set to Infer from Edge, the width of the Inset Flange will match the width of the body to which the Inset Flange is attached.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Infer from Edge" value="0"/>
+                        <EnumElem name="Use Expression" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngWidth_EU" type="real" title="Width" value="1.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the width of the Inset Flange, when Width Type is set to Use Expression.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngWidth_MU" type="real" title="Width" value="20.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the width of the Inset Flange, when Width Type is set to Use Expression.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngFlangeWidthOption" type="int" title="Flange Width" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies if the Inset Flange width includes or excludes the bend relief.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Includes Relief" value="0"/>
+                        <EnumElem name="Excludes Relief" value="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_InstflngLengthOption" type="int" title="Length Type" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies how the specified length of the Inset Flange should be interpreted.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Tangent" value="0"/>
+                        <EnumElem name="Contour" value="1"/>
+                        <EnumElem name="DIN" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngLength_EU" type="real" title="Length" value="2.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the length of the Inset Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngLength_MU" type="real" title="Length" value="50.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the length of the Inset Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_InstflngAngleType" type="int" title="Angle Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how the specified fully formed angle of the Inset Flange should be interpreted.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Bend" value="0"/>
+                        <EnumElem name="Included" value="1"/>
+                    </Data>
+                    <Docum><Formatted>
+Bend: The angle of the Inset Flange is measured from top of the attachment face.
+Included: The angle of the Inset Flange is measured from the bottom of the attachment face.</Formatted></Docum>
+                </Pref>
+                <Pref name="SMD_InstflngAngle" type="real" title="Angle" value="90" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the fully formed angle of the Inset Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_InstflngRadiusType" type="int" title="Radius Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how the specified radius of the Inset Flange should be interpreted.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Inside" value="0"/>
+                        <EnumElem name="Outside" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngRadius_EU" type="real" title="Radius" value="0.5" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the bend radius of the Inset Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngRadius_MU" type="real" title="Radius" value="10.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the bend radius of the Inset Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_InstflngInsetOption" type="int" title="Inset Type" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how to calculate the inset.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Use Expression" value="0"/>
+                        <EnumElem name="Outer Tangent Line" value="1"/>
+                        <EnumElem name="Inner Tangent Line" value="2"/>
+                        <EnumElem name="Outer Mold Line" value="3"/>
+                        <EnumElem name="DIN Mold Line" value="4"/>
+                        <EnumElem name="Inner Mold Line" value="5"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngInset_EU" type="real" title="Inset" value="0.5" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the inset distance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngInset_MU" type="real" title="Inset" value="10.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the inset distance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_InstflngRpoMethod" type="int" title="Positioning" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies how the Inset Flange should be positioned.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Manual" value="0"/>
+                        <EnumElem name="Automatic" value="1"/>
+                    </Data>
+                </Pref>
+                <Group name="Left Side Parameters">
+                <Pref name="SMD_InstflngLeftReliefOption" type="int" title="Relief Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left side relief type.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="None" value="0"/>
+                        <EnumElem name="Rectangular" value="1"/>
+                        <EnumElem name="Obround" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngLeftRelief_EU" type="real" title="Bend Relief" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left side relief value.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_InstflngLeftRelief_MU" type="real" title="Left Bend Relief" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left side relief value.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_InstflngLeftSideOption" type="int" title="Joint Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the parameters of the left side of the Inset Flange.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="None" value="0"/>
+                        <EnumElem name="Taper" value="1"/>
+                        <EnumElem name="Simple Miter" value="2"/>
+                        <EnumElem name="Full Miter" value="3"/>
+                        <EnumElem name="Butt Joint" value="4"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngLeftBendTaper" type="real" title="Bend Taper Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left taper angle over the bend area of the Inset Flange.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_InstflngLeftWebTaper" type="real" title="Web Taper Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left taper angle over the web area of the Inset Flange.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_InstflngLeftMiterAngle" type="real" title="Miter Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left miter angle of the Inset Flange. This value applies to both simple and full miter joint types.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_InstflngLeftMiterPhase" type="real" title="Miter Phase Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left miter phase angle of the Inset Flange. This value applies to both simple and full miter joint types.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_InstflngLeftMiterRelief_EU" type="real" title="Miter Relief Radius" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left miter relief radius of the Inset Flange. This value applies only to the simple miter joint type.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngLeftMiterRelief_MU" type="real" title="Miter Relief Radius" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left miter relief radius of the Inset Flange. This value applies only to the simple miter joint type.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngLeftButtLength_EU" type="real" title="Butt Length" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left butt length of the Inset Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngLeftButtLength_MU" type="real" title="Butt Length" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the left butt length of the Inset Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Group name="Right Side Parameters">
+                <Pref name="SMD_InstflngRightReliefOption" type="int" title="Relief Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right side relief type.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="None" value="0"/>
+                        <EnumElem name="Rectangular" value="1"/>
+                        <EnumElem name="Obround" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngRightRelief_EU" type="real" title="Bend Relief" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right side relief value.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_InstflngRightRelief_MU" type="real" title="Right Bend Relief" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right side relief value.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_InstflngRightSideOption" type="int" title="Joint Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the parameters of the right side of the Inset Flange.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="None" value="0"/>
+                        <EnumElem name="Taper" value="1"/>
+                        <EnumElem name="Simple Miter" value="2"/>
+                        <EnumElem name="Full Miter" value="3"/>
+                        <EnumElem name="Butt Joint" value="4"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngRightBendTaper" type="real" title="Bend Taper Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right taper angle over the bend area of the Inset Flange.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_InstflngRightWebTaper" type="real" title="Web Taper Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right taper angle over the web area of the Inset Flange.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_InstflngRightMiterAngle" type="real" title="Miter Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right miter angle of the Inset Flange. This value applies to both simple and full miter joint types.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_InstflngRightMiterPhase" type="real" title="Miter Phase Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right miter phase angle of the Inset Flange. This value applies to both simple and full miter joint types.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_InstflngRightMiterRelief_EU" type="real" title="Miter Relief Radius" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right miter relief radius of the Inset Flange. This value applies only to the simple miter joint type.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngRightMiterRelief_MU" type="real" title="Miter Relief Radius" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right miter relief radius of the Inset Flange. This value applies only to the simple miter joint type.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngRightButtLength_EU" type="real" title="Butt Length" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right butt length of the Inset Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngRightButtLength_MU" type="real" title="Butt Length" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the right butt length of the Inset Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Pref name="SMD_InstflngUseContourLines" type="int" title="Contour Lines" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not contour lines should be created. The contour line is defined as the intersection of surfaces extended from the tangent face and the web of the first step.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngUseMoldLines" type="int" title="Mold Lines" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not mold lines should be created. The mold line is defined as the intersection of surfaces extended from the tangent face and a surface normal to that surface and tangent to the bend face.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_InstflngUseFormBlockLines" type="int" title="Form Block Lines" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not form block lines should be created. The form block line is similar to the contour line, however it applies to the inner surfaces of the Inset Flange.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Profile Flange" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Flanges_Profile_Flange">
+                <Pref name="SMD_ProfileFlangeWidthOption" type="int" title="Width Option" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the method of defining the width of the Profile Flange.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Infer from Edge" value="0"/>
+                        <EnumElem name="Width + Start Offset" value="1"/>
+                        <EnumElem name="Width + End Offset" value="2"/>
+                        <EnumElem name="Start + End Offset" value="3"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_ProfileFlangeWidth_EU" type="real" title="Width" value="0.25" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the width of the Profile Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_ProfileFlangeWidth_MU" type="real" title="Width" value="5.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the width of the Profile Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_ProfileFlangeStartOffset_EU" type="real" title="Start Offset" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the start offset of the Profile Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_ProfileFlangeStartOffset_MU" type="real" title="Start Offset" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the start offset of the Profile Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_ProfileFlangeEndOffset_EU" type="real" title="End Offset" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the end offset of the Profile Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_ProfileFlangeEndOffset_MU" type="real" title="End Offset" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the end offset of the Profile Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_ProfileFlangeRadiusType" type="int" title="Radius Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies if the Profile Flange radius represents the inner or outer radius.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Inner" value="0"/>
+                        <EnumElem name="Outer" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_ProfileFlangeRadius_EU" type="real" title="Radius" value="0.25" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius of the Profile Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_ProfileFlangeRadius_MU" type="real" title="Radius" value="5.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius of the Profile Flange.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Multibend Bracket" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Flanges_Multibend_Bracket">
+                <Pref name="SMD_MultibendMaterialThickness_EU" type="real" title="Thickness" value="0.125" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thickness of the Multibend Bracket.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MultibendMaterialThickness_MU" type="real" title="Thickness" value="2.5" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thickness of the Multibend Bracket.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MultibendRadius_EU" type="real" title="Radius" value="0.5" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius of the Multibend Bracket.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MultibendRadius_MU" type="real" title="Radius" value="10.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius of the Multibend Bracket.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MultibendOffset_EU" type="real" title="Offset" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset for the Multibend Bracket from the selected geometry.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_MultibendOffset_MU" type="real" title="Offset" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset for the Multibend Bracket from the selected geometry.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_MultibendInterThick_EU" type="real" title="Intersection Thickness" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thickness of the intersection node.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_MultibendInterThick_MU" type="real" title="Intersection Thickness" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thickness of the intersection node.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_MultibendCoplanar" type="int" title="Select Only Coplanar Objects" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not only objects that lie in a single plane can be selected.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="General Flange" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Flanges_General_Flange">
+                <Pref name="SMD_GenflgAddTangentEdges" type="int" title="Add Tangent Edges" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not all edges that are tangent to the current selections will automatically be selected by the system.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_GenflgInferThickness" type="int" title="Infer Thickness" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the thickness should be derived from the target geometry.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GenflgThickness_EU" type="real" title="Thickness" value="0.125" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thickness of the General Flange (when the Infer Thickness option is off).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GenflgThickness_MU" type="real" title="Thickness" value="2.5" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thickness of the General Flange (when the Infer Thickness option is off).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_GenflgPlus_EU" type="real" title="Plus" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how much to extend the tangent faces before attaching the bend.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GenflgPlus_MU" type="real" title="Plus" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how much to extend the tangent faces before attaching the bend.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GenflgRadius_EU" type="real" title="Radius" value="0.5" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the bend radius.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GenflgRadius_MU" type="real" title="Radius" value="10.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the bend radius.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GenflgRadiusType" type="int" title="Radius Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies if the radius value entered should be regarded as the inside or outside radius.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Inside" value="0"/>
+                        <EnumElem name="Outside" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GenflgAngle" type="real" title="Angle" value="90.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the bend angle.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_GenflgLength_EU" type="real" title="Length" value="2.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the web length.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GenflgLength_MU" type="real" title="Length" value="50.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the web length.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_GenflgInferSpine" type="int" title="Infer Spine" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the system should generate a spine that will be usable for the given input data. The spine will be created internally only and it will not be saved. If a spine is selected explicitly, the system will attempt to use it as is, regardless what this option is set to.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                    <Docum>The system will create this curve using the following approaches:
+<Formatted>
+- Bend edges that have a high degree of concavity can be problematic, since they can often yield self-intersecting surfaces. Infer Spine will attempt to generate a spine by smoothing out the bend edge. Note that this will change the shape of the General Flange by making it spread out more. This technique is used by Parameters and Build to Sections methods only.
+- If the creation mode is Build to Sections, the Infer Spine option will cause the system to generate a spine that is normal to all selected section curves.
+- If the creation mode is Punch Vector the system will project the bend edge to a plane that is normal to the punch vector. It will further apply the smoothing algorithms to reduce the amount of concavity.</Formatted></Docum>
+                </Pref>
+                <Group name="Distortion Method">
+                <Pref name="SMD_GenflgAreaPreserveFlag" type="int" title="Area Preserve" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not area preserve should be used as the distortion method. Having this option on is equivalent to specifying an infinite r value.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="On" value="1"/>
+                        <EnumElem name="Off" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GenflgRValue" type="real" title="r Value" value="1.0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the r value (average strain ratio or normal anisotropy). The r value is used as the distortion method when the Area Preserve option is off.</Description>
+                    <Real/>
+                    <Docum>The r value is a property of the material being formed and will affect how the General Flange is mapped to other states. Higher r values represent higher resistance to thinning when the material is being stretched or resistance to thickening when the material is being compressed. The default value of 1.0 corresponds to a homogeneous material.</Docum>
+                </Pref>
+                <Pref name="SMD_GenflgDistortionVersion" type="int" title="Distortion Algorithm" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the distortion algorithm.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Along Sections" value="0"/>
+                        <EnumElem name="Bi-directional" value="1"/>
+                    </Data>
+                    <Docum><Formatted>
+Along Sections: The flow of material is constrained to be along sections normal to the spine. Uniaxial distortion is followed in determining the length of material along each section.
+Bi-directional: Material flow across sections may occur. The system considers the material to be unconstrained except at the bend edge and at any constraints that may be imposed in the Sequence Editor.</Formatted></Docum>
+                </Pref>
+                </Group>
+                <Pref name="SMD_GenflgTolerance_EU" type="real" title="Tolerance" value="0.001" unit="in" ver="3.0.0" scope="Session">
+                    <Description>The construction of a General Flange involves an approximation process. This option specifies the tolerance to be used in this approximation process.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GenflgTolerance_MU" type="real" title="Tolerance" value="0.01" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>The construction of a General Flange involves an approximation process. This option specifies the tolerance to be used in this approximation process.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GenflgMinSamplePoints" type="int" title="Minimum Sampled Points" value="10" ver="3.0.0" scope="Session">
+                    <Description>This option sets the minimum number of sampled points along the bend edge.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_GenflgUseContourLines" type="int" title="Contour Lines" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not contour lines should be created. The contour line is defined as the intersection of surfaces extended from the tangent face and the web of the first step.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GenflgUseMoldLines" type="int" title="Mold Lines" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not mold lines should be created. The mold line is defined as the intersection of surfaces extended from the tangent face and a surface normal to that surface and tangent to the bend face.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_GenflgUseFormBlockLines" type="int" title="Form Block Lines" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not form block lines should be created. The form block line is similar to the contour line, however it applies to the inner surfaces of the Flange.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Bridge" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Flanges_Bridge">
+                <Pref name="SMD_BridgeConstrType" type="int" title="Construction Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the type of Bridge to be constructed.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Tangent at Target" value="0"/>
+                        <EnumElem name="Intersect Angle at Target" value="1"/>
+                        <EnumElem name="Z-Bend (Arc-Line-Arc)" value="2"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_BridgeIntersectAngle" type="real" title="Intersect Angle" value="90" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the intersection angle of the Bridge feature at the target (when the Construction Type option is set to Intersect Angle at Target). The angle is defined between the Bridge surface and the normal to the target face, at the point where the Bridge surface intersects the target profile.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_BridgeAngleType" type="int" title="Angle Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the type of angle.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Constant" value="0"/>
+                        <EnumElem name="Law Controlled" value="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_BridgeInsideRadius_EU" type="real" title="Inside Radius" value="0.25" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the inside radius of the Bridge feature.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BridgeInsideRadius_MU" type="real" title="Inside Radius" value="5.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the inside radius of the Bridge feature.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BridgeRadiusType" type="int" title="Radius Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the type of inside radius.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Constant" value="0"/>
+                        <EnumElem name="Law Controlled" value="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_BridgeThickness_EU" type="real" title="Thickness" value="0.25" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thickness of the Bridge feature.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BridgeThickness_MU" type="real" title="Thickness" value="5.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thickness of the Bridge feature.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BridgeThicknessType" type="int" title="Thickness Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the type of thickness.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Along Bend Direction" value="0"/>
+                        <EnumElem name="Opposite Bend Direction" value="1"/>
+                    </Data>
+                </Pref>
+                <Group name="Distortion Method">
+                <Pref name="SMD_BridgeAreaPreserveFlag" type="int" title="Area Preserve" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not area preserve should be used as the distortion method. Having this option on is equivalent to specifying an infinite r value.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="On" value="1"/>
+                        <EnumElem name="Off" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BridgeRvalue" type="real" title="r Value" value="1.0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the r value (average strain ratio or normal anisotropy). The r value is used as the distortion method when the Area Preserve option is off.</Description>
+                    <Real/>
+                    <Docum>The r value is a property of the material being formed and will affect how the Bridge is mapped to other states. Higher r values represent higher resistance to thinning when the material is being stretched or resistance to thickening when the material is being compressed. The default value of 1.0 corresponds to a homogeneous material.</Docum>
+                </Pref>
+                </Group>
+                <Group name="Construction Method">
+                <Pref name="SMD_BridgeUniteType" type="int" title="Unite" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how the Bridge feature unites with its construction geometry.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="None" value="0"/>
+                        <EnumElem name="Base" value="1"/>
+                        <EnumElem name="Target" value="2"/>
+                    </Data>
+                    <Docum>Because the creation of a Bridge feature involves approximations, sometimes the unite operation will fail. You can improve the changes of success of you specify a tolerance that is no more than 10 times the modeling distance tolerance.</Docum>
+                </Pref>
+                <Pref name="SMD_BridgeTolerance_EU" type="real" title="Tolerance" value="0.01" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the tolerance that is used to construct the B-surface geometry of the Bridge feature.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BridgeTolerance_MU" type="real" title="Tolerance" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the tolerance that is used to construct the B-surface geometry of the Bridge feature.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Bracket" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Flanges_Bracket">
+                <Pref name="SMD_BracketClearanceDist_EU" type="real" title="Clearance Distance" value="0.35" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius of the clearance circles to create the Bracket outline.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                    <Docum>This parameter has two effects. Since the Bracket outline is tangent to these curves, it defines the minimum distance of the clearance point to the edge of the Bracket. It also defines the corner radius (if the Add Rounded Corners option is on).</Docum>
+                </Pref>
+                <Pref name="SMD_BracketClearanceDist_MU" type="real" title="Clearance Distance" value="10" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius of the clearance circles to create the Bracket outline.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                    <Docum>This parameter has two effects. Since the Bracket outline is tangent to these curves, it defines the minimum distance of the clearance point to the edge of the Bracket. It also defines the corner radius (if the Add Rounded Corners option is on).</Docum>
+                </Pref>
+                <Pref name="SMD_BracketMaterialThickness_EU" type="real" title="Material Thickness" value="0.063" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thickness of the Bracket.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                    <Docum>A Bracket is constructed from an Extrude feature and a Flange or General Flange. The Material Thickness is used as the extrusion distance and the Flange thickness.</Docum>
+                </Pref>
+                <Pref name="SMD_BracketMaterialThickness_MU" type="real" title="Material Thickness" value="2" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thickness of the Bracket.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                    <Docum>A Bracket is constructed from an Extrude feature and a Flange or General Flange. The Material Thickness is used as the extrusion distance and the Flange thickness.</Docum>
+                </Pref>
+                <Pref name="SMD_BracketBendRadius_EU" type="real" title="Bend Radius" value="0.13" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the constant inner bend radius of the Flange or General Flange feature.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BracketBendRadius_MU" type="real" title="Bend Radius" value="3.5" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the constant inner bend radius of the Flange or General Flange feature.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BracketPadLength_EU" type="real" title="Pad Length" value="2.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the distance from the Base Face-Reference Face intersection to the opposite edge. This parameter is only used if no Base Clearance Point geometry is selected.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BracketPadLength_MU" type="real" title="Pad Length" value="50.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the distance from the Base Face-Reference Face intersection to the opposite edge. This parameter is only used if no Base Clearance Point geometry is selected.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BracketFlangeLength_EU" type="real" title="Flange Length" value="2" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the contour length of the Flange or General Flange feature. This parameter is only used if no Reference Clearance Point geometry is selected.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BracketFlangeLength_MU" type="real" title="Flange Length" value="50" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the contour length of the Flange or General Flange feature. This parameter is only used if no Reference Clearance Point geometry is selected.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BracketOffsetDistance_EU" type="real" title="Offset Distance" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset distance (in the material direction) at which the Bracket will be created from the reference face. This is useful when you need to allow room for the bend to go around an outside corner.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BracketOffsetDistance_MU" type="real" title="Offset Distance" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset distance (in the material direction) at which the Bracket will be created from the reference face. This is useful when you need to allow room for the bend to go around an outside corner.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BracketChordalTolerance_EU" type="real" title="Chordal Tolerance" value="0.001" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how closely the resulting General Flange will match a non-planar reference face. The General Flange is built from section curves. This parameter controls the number of sections generated.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BracketChordalTolerance_MU" type="real" title="Chordal Tolerance" value="0.01" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how closely the resulting General Flange will match the non-planar reference face. The General Flange is built from section curves. This parameter controls the number of sections generated.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BracketLinearTolerance_EU" type="real" title="Linear Tolerance" value="0.001" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how closely the resulting General Flange will match the non-planar reference face. The General Flange is built from section curves. This parameter controls the maximum distance between the reference face and the General Flange face.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BracketLinearTolerance_MU" type="real" title="Linear Tolerance" value="0.01" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how closely the resulting General Flange will match the non-planar reference face. The General Flange is built from section curves. This parameter controls the maximum distance between the reference face and the General Flange face.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_BracketUseRoundCorners" type="int" title="Add Rounded Corners" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the Bracket should be created with corners that are constructed from the clearance circles.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Cutouts/Punches/Corners" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Cutouts_Punches_Corners">
+            <Tab name="Bead" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Cutouts_Punches_Corners_Bead">
+                <Pref name="SMD_BeadShape" type="int" title="Shape" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option defines the shape of the Bead.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="U" bitmap="bead_u_awh.bmp" value="0"/>
+                        <EnumElem name="V" bitmap="bead_v_aw.bmp" value="1"/>
+                        <EnumElem name="Circular" bitmap="bead_circular_r.bmp" value="2"/>
+                    </Data>
+                </Pref>
+                <Group name="U and V Shaped Beads">
+                <Pref name="SMD_BeadRadius_EU" type="real" title="Radius (R)" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius at the top of the U and V Beads.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BeadRadius_MU" type="real" title="Radius (R)" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius at the top of the U and V Beads.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BeadBlendRadius_EU" type="real" title="Blend Radius (r)" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius between the placement face and the sides of the U and V Beads.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BeadBlendRadius_MU" type="real" title="Blend Radius (r)" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius between the placement face and the sides of the U and V Beads.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BeadHeight_EU" type="real" title="Height (H)" value="1.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the height of the U and V Beads.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BeadHeight_MU" type="real" title="Height (H)" value="20.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the height of the U and V Beads.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BeadPlacementWidth_EU" type="real" title="Placement Width (W)" value="0.5" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the width at the base of the U and V Beads.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BeadPlacementWidth_MU" type="real" title="Placement Width (W)" value="10.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the width at the base of the U and V Beads.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Group name="U Shaped Beads">
+                <Pref name="SMD_BeadUAngle" type="real" title="Angle (A)" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the wall angle of the U Bead.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BeadSecondaryWidth_EU" type="real" title="Secondary Width (w)" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the width at the top of the U Bead.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BeadSecondaryWidth_MU" type="real" title="Secondary Width (w)" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the width at the top of the U Bead.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Group name="V Shaped Beads">
+                <Pref name="SMD_BeadVAngle" type="real" title="Angle (A)" value="30.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the wall angle of the V Bead.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BeadEndCapAngle" type="real" title="End Cap Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the taper angle of the faces placed at the end of the V Bead.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Group name="Circular Shaped Beads">
+                <Pref name="SMD_BeadCircularRadius_EU" type="real" title="Radius (R)" value="0.5" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the cross section radius of the circular Bead.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BeadCircularRadius_MU" type="real" title="Radius (R)" value="10.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the cross section radius of the circular Bead.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BeadCircularHeight_EU" type="real" title="Height (H)" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the height of the circular Bead.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BeadCircularHeight_MU" type="real" title="Height (H)" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the height of the circular Bead.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BeadEndCapRadius_EU" type="real" title="End Cap Radius" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius of the toroidal shape placed at the end of the circular Bead.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BeadEndCapRadius_MU" type="real" title="End Cap Radius" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius of the toroidal shape placed at the end of the circular Bead.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Pref name="SMD_BeadTolerance_EU" type="real" title="Distance Tolerance" value="0.001" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the distance tolerance in approximating the curves created internally to build the Bead.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BeadTolerance_MU" type="real" title="Distance Tolerance" value="0.01" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the distance tolerance in approximating the curves created internally to build the Bead.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_BeadAngleOption" type="int" title="Angle" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies where the angle should be measured from on the U Bead.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="From Normals" value="0"/>
+                        <EnumElem name="From Section Axis" value="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_BeadSecWidthOption" type="int" title="Secondary Width From" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how the secondary width should be measured. The Intersection Point option means that it is measured from the theoretical intersections between the top face and the side faces. The Tangent Point option means that it is measured from the tangents between the top and radius faces.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Intersection Point" value="0"/>
+                        <EnumElem name="Tangent Point" value="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_BeadEndcapOption" type="int" title="End Cap" value="3" ver="3.0.0" scope="Session">
+                    <Description>This option specifies which ends of the Bead should have end caps.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="None" value="0"/>
+                        <EnumElem name="Start" value="1"/>
+                        <EnumElem name="End" value="2"/>
+                        <EnumElem name="Both" value="3"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_BeadAttachBead" type="int" title="Attach Bead" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the Bead should be attached to a sheet or solid body.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                    <Docum>If attaching the Bead to a sheet body, the Bead will sew to the sheet. If attaching the Bead to a solid body, the Bead will either be united to or subtracted from (depending on the direction of the section axis) the solid body.</Docum>
+                </Pref>
+                <Pref name="SMD_BeadHollowBead" type="int" title="Hollow Bead" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not (if attaching the Bead to a solid body) the Bead will remove volume from the face opposite the placement face to maintain a constant thickness.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Punch" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Cutouts_Punches_Corners_Punch">
+                <Pref name="SMD_PunchPunchtype" type="int" title="Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the Punch type to be created.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Emboss" value="0"/>
+                        <EnumElem name="Coin" value="1"/>
+                        <EnumElem name="Lance" value="2"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_PunchToptype" type="int" title="Top Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the top type for the Punch. Round and Cone top types require a closed, circular profile and can only be placed on a single, planar placement face.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Offset" value="0"/>
+                        <EnumElem name="Flat" value="1"/>
+                        <EnumElem name="Round" value="2"/>
+                        <EnumElem name="Cone" value="3"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_PunchDepth_EU" type="real" title="Depth" value="1.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the distance between the placement face and the floor of the Punch feature, measured from the tool center point along the Punch vector. For Coin type Punches, the depth value cannot be more than the thickness of the body on which the Punch is being applied.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_PunchDepth_MU" type="real" title="Depth" value="20.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the distance between the placement face and the floor of the Punch feature, measured from the tool center point along the Punch vector. For Coin type Punches, the depth value cannot be more than the thickness of the body on which the Punch is being applied.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_PunchDieRadius_EU" type="real" title="Die Radius" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius of the blend between the placement and "through" faces and the sides of the Punch. This is a fixed value resulting in a constant-radius blend.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_PunchDieRadius_MU" type="real" title="Die Radius" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius of the blend between the placement and "through" faces and the sides of the Punch. This is a fixed value resulting in a constant-radius blend.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_PunchTaperAngle" type="real" title="Taper Angle (Emboss)" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the constant angle, relative to the Punch direction vector, that determines how the sides of the Punch are angled.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_PunchPunchRadius_EU" type="real" title="Punch Radius" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the blend radius between the sides of the Punch and the Punch top (apex), or the radius used to construct the very top of the Punch in the case of a closed, circular emboss (e.g. dimple) with a round or cone top.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_PunchPunchRadius_MU" type="real" title="Punch Radius" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the blend radius between the sides of the Punch and the Punch top (apex), or the radius used to construct the very top of the Punch in the case of a closed, circular emboss (e.g. dimple) with a round or cone top.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_PunchConeDepth_EU" type="real" title="Cone Depth" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the depth of the cone top. (This parameter is only required for a Cone top type Punch.)</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_PunchConeDepth_MU" type="real" title="Cone Depth" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the depth of the cone top. (This parameter is only required for a Cone top type Punch.)</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_PunchUseFaceNormalDirection" type="int" title="Face Normal Direction" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the Punch should be created normal to the placement face.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_PunchOutlinetype" type="int" title="Placement Outline" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the placement outline type. The Inside option assigns the Punch opening line as the placement outline, the Outside option assigns the perimeter of the Punch.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Inside" value="0"/>
+                        <EnumElem name="Outside" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_PunchUseAutoCentroid" type="int" title="Auto Centroid Creation" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not an automatic tool center point (centroid) should be created based on a 2D analysis of the placement outline curves.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_PunchUseFlangedCutout" type="int" title="Flanged Cutout" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not a flanged cutout (also known as drawn cutout, flanged hole) should be created in lieu of the emboss.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Hole" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Cutouts_Punches_Corners_Hole">
+                <Pref name="SMD_HolePositionMethod" type="int" title="Position Method" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positioning method for the Hole on the sheet metal.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Edge Offsets" value="0"/>
+                        <EnumElem name="Positioning" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_HoleEdge1Offset_EU" type="real" title="Edge 1 Offset" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset for the Hole position from the first edge (when the Hole Position Method option is set to Edge Offsets).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_HoleEdge1Offset_MU" type="real" title="Edge 1 Offset" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset for the Hole position from the first edge (when the Hole Position Method option is set to Edge Offsets).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_HoleOffsetDist2_EU" type="real" title="Edge 2 Offset" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset for the Hole position from the second edge (when the Hole Position Method option is set to Edge Offsets).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_HoleOffsetDist2_MU" type="real" title="Edge 2 Offset" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset for the Hole position from the second edge (when the Hole Position Method option is set to Edge Offsets).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_HoleType" type="int" title="Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the type of Hole. The Punch option means that one thickness of the solid body will be pierced. The Through option means that the Hole will go through to a selected face. Finally, the Depth option allows a depth for the Hole to be specified.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Punch" value="0"/>
+                        <EnumElem name="Through" value="1"/>
+                        <EnumElem name="Depth" value="2"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_HoleDiameter_EU" type="real" title="Diameter" value="1.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the diameter of the Hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_HoleDiameter_MU" type="real" title="Diameter" value="20.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the diameter of the Hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_HoleDepth_EU" type="real" title="Depth" value="1.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the depth of the Hole (when the Type option is set to Depth).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_HoleDepth_MU" type="real" title="Depth" value="20.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the depth of the Hole (when the Type option is set to Depth).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_HoleTipAngle" type="real" title="Tip Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the tip angle at the bottom of the Hole (when the Type option is set to Depth).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                        <UpperBound value="180.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_HoleFaceNormalDirection" type="int" title="Face Normal Direction" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the Hole should be created normal to the placement face.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Slot" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Cutouts_Punches_Corners_Slot">
+                <Pref name="SMD_SlotPosMethod" type="int" title="Position Method" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positioning method for the Slot on the sheet metal.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Edge Offsets" value="0"/>
+                        <EnumElem name="Positioning" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_SlotEdge1Offset_EU" type="real" title="Edge 1 Offset" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset for the Slot position from the first edge (when the Slot Position Method option is set to Edge Offsets).</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_SlotEdge1Offset_MU" type="real" title="Edge 1 Offset" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset for the Slot position from the first edge (when the Slot Position Method option is set to Edge Offsets).</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_SlotEdge2Offset_EU" type="real" title="Edge 2 Offset" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset for the Slot position from the second edge (when the Slot Position Method option is set to Edge Offsets).</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_SlotEdge2Offset_MU" type="real" title="Edge 2 Offset" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset for the Slot position from the second edge (when the Slot Position Method option is set to Edge Offsets).</Description>
+                    <Real/>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_SlotType" type="int" title="Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the type of Slot. The Punch option means that one thickness of the solid body will be pierced. The Through option means that the Slot will go through to a selected face. Finally, the Depth option allows a depth for the Slot to be specified.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Punch" value="0"/>
+                        <EnumElem name="Through" value="1"/>
+                        <EnumElem name="Depth" value="2"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_SlotLength_EU" type="real" title="Length" value="1.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the length of the Slot from arc tangent to arc tangent. The length must be a positive value greater than the width.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_SlotLength_MU" type="real" title="Length" value="20.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the length of the Slot from arc tangent to arc tangent. The length must be a positive value greater than the width.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_SlotWidth_EU" type="real" title="Width" value="0.5" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the width of the Slot. The width value must be a positive value less than the length.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_SlotWidth_MU" type="real" title="Width" value="10.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the width of the Slot. The width value must be a positive value less than the length.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_SlotDepth_EU" type="real" title="Depth" value="1.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the depth of the Slot (when the Type option is set to Depth).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_SlotDepth_MU" type="real" title="Depth" value="20.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the depth of the Slot (when the Type option is set to Depth).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_SlotUseFaceNormalDirection" type="int" title="Face Normal Direction" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the Slot should be created normal to the placement face.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Cutout" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Cutouts_Punches_Corners_Cutout">
+                <Pref name="SMD_CutoutType" type="int" title="Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the type of Cutout. The Punch option means that one thickness of the solid body will be pierced. The Through option means that the Cutout will go through to a selected face.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Punch" value="0"/>
+                        <EnumElem name="Through" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_CutoutCurveProjection" type="int" title="Curve Projection Option" value="3" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how the curves will be projected onto the target body.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Normal to Curves" value="3"/>
+                        <EnumElem name="Along Vector" value="1"/>
+                        <EnumElem name="Along Face Normals" value="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Corner" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Cutouts_Punches_Corners_Corner">
+                <Group name="Butt Joint">
+                <Pref name="SMD_CornerButtGap_EU" type="real" title="Gap" value="0.01" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the gap for the butt joint. This is the minimum distance between parent and associate butt joints.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_CornerButtGap_MU" type="real" title="Gap" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the gap for the butt joint. This is the minimum distance between parent and associate butt joints.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_CornerButtOverlap_EU" type="real" title="Overlap" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the overlap for the butt joint. This is the distance of the parent butt joint over the associate butt joint along the direction of the parent side face normal.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_CornerButtOverlap_MU" type="real" title="Overlap" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the overlap for the butt joint. This is the distance of the parent butt Joint over the associate butt joint along the direction of the parent side face normal.</Description>
+                    <Real/>
+                </Pref>
+                </Group>
+                <Group name="Simple Miter">
+                <Pref name="SMD_CornerMiterGap_EU" type="real" title="Gap" value="0.01" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the gap for the simple miter. This is the minimum distance between the parent and associate miter faces.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_CornerMiterGap_MU" type="real" title="Gap" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the gap for the simple miter. This is the minimum distance between the parent and associate miter faces.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_CornerMiterToggle" type="int" title="Multiple Steps" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies whether or not the simple miter or full miter will build between multiple continuous pairs of Flanges.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Off" value="0"/>
+                        <EnumElem name="On" value="1"/>
+                    </Data>
+                </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Relief" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Cutouts_Punches_Corners_Relief">
+                <Pref name="SMD_ReliefType" type="int" title="Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the type of Relief.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Circular" value="0"/>
+                        <EnumElem name="U" value="1"/>
+                        <EnumElem name="V" value="2"/>
+                        <EnumElem name="Routed" value="3"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_ReliefCenterRadius_EU" type="real" title="Center Radius" value="0.25" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius of the center circle of a Relief.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_ReliefCenterRadius_MU" type="real" title="Center Radius" value="5.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius of the center circle of a Relief.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_ReliefCenterOffsetType" type="int" title="Center Offset Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset technique of the center circle of a Relief.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Center" value="0"/>
+                        <EnumElem name="Tangent" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_ReliefCenterOffset_EU" type="real" title="Center Offset" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset distance of the center circle of a Relief.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_ReliefCenterOffset_MU" type="real" title="Center Offset" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset distance of the center circle of a Relief.</Description>
+                    <Real/>
+                </Pref>
+                <Group name="V Relief">
+                <Pref name="SMD_ReliefVType1" type="int" title="Side 1 Offset Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset technique of the first side of a V Relief.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Offset" value="0"/>
+                        <EnumElem name="Angle" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_ReliefVOffset1_EU" type="real" title="Side 1 Offset" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset distance for the first side of a V Relief when using the offset V type.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_ReliefVOffset1_MU" type="real" title="Side 1 Offset" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset distance for the first side of a V Relief when using the offset V type.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_ReliefVAngle1" type="real" title="Side 1 Angle" value="15.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the angle for the first side of a V Relief when using the angle V type.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_ReliefVType2" type="int" title="Side 2 Offset Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset technique of the second side of a V Relief.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Offset" value="0"/>
+                        <EnumElem name="Angle" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_ReliefVOffset2_EU" type="real" title="Side 2 Offset" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset distance for the second side of a V Relief when using the offset V type.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_ReliefVOffset2_MU" type="real" title="Side 2 Offset" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the offset distance for the second side of a V Relief when using the offset V type.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="SMD_ReliefVAngle2" type="real" title="Side 2 Angle" value="15.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the angle for the second side of a V Relief when using the angle V type.</Description>
+                    <Real/>
+                </Pref>
+                </Group>
+                <Group name="Routed Relief">
+                <Pref name="SMD_ReliefRadius1_EU" type="real" title="Side 1 Radius" value="0.25" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius for the first side of a routed Relief.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_ReliefRadius1_MU" type="real" title="Side 1 Radius" value="5.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius for the first side of a routed Relief.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_ReliefRadius2_EU" type="real" title="Side 2 Radius" value="0.25" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius for the second side of a routed Relief.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_ReliefRadius2_MU" type="real" title="Side 2 Radius" value="5.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius for the second side of a routed Relief.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="Forming Features/Operators" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Forming_Features_Operators">
+            <Tab name="Edge Rip" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Forming_Features_Operators_Edge_Rip">
+                <Pref name="SMD_EdgeRipGapValue_EU" type="real" title="Gap" value="0.05" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum distance between new faces after the Edge Rip removes material from the target body.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_EdgeRipGapValue_MU" type="real" title="Gap" value="1.25" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum distance between new faces after the Edge Rip removes material from the target body.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_EdgeRipGapType" type="int" title="Gap Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the type of gap to be created by the Edge Rip.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Gap" value="0"/>
+                        <EnumElem name="Offset" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_EdgeRipAddTangentEdges" type="int" title="Add Tangent Edges" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not all edges that are tangent to the current selections will automatically be selected by the system.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_EdgeRipEndType" type="int" title="End Condition Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the Edge Rip end condition type.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Rectangular" value="0"/>
+                        <EnumElem name="Obround" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_EdgeRipExtensionValue_EU" type="real" title="Extension" value="0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the extension value for the Edge Rip.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_EdgeRipExtensionValue_MU" type="real" title="Extension" value="0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the extension value for the Edge Rip.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Bend" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Forming_Features_Operators_Bend">
+                <Pref name="SMD_BendAngle" type="real" title="Angle" value="90.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the bend angle.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                        <UpperBound value="180.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BendAngleType" type="int" title="Angle Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the angle type.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Bend" value="0"/>
+                        <EnumElem name="Included" value="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_BendRadius_EU" type="real" title="Radius" value="0.5" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the bend radius.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BendRadius_MU" type="real" title="Radius" value="10.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the bend radius.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BendRadiusType" type="int" title="Radius Type " value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the radius type.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Inside" value="0"/>
+                        <EnumElem name="Outside" value="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_BendAppCrvType" type="int" title="Application Curve Type" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how the application curve should be applied to the base face. The type of application curve determines the amount of geometry that occupies either side of the application curve on the completed Bend.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Bend Centerline" value="1"/>
+                        <EnumElem name="Bend Axis" value="2"/>
+                        <EnumElem name="Bend Tangent Line" value="3"/>
+                        <EnumElem name="Contour Line" value="4"/>
+                        <EnumElem name="Mold Line" value="5"/>
+                    </Data>
+                    <Docum><Formatted>
+Bend Axis: This application curve is unique in the fact that the application curve is not required to reside on the placement face. In fact, the radius value will be grayed out when a bend axis type of application curve is chosen. This is because the radius of the formed Bend feature is inferred from the distance between the application curve and the placement face. In this way, when the Bend is formed, it will be formed around an axis coincident with the application curve.
+Bend Centerline: The resultant Bend will have equal amounts of geometry area on either side of the application curve.
+Bend Tangent Line: The resultant Bend will reside entirely on one side of the application curve or the other. The Stationary Side vector signifies the side on which the Bend is built. The Sheet Metal Bend area will always be opposite the Stationary Side.
+Contour Line: The application curve will be coincident with a contour line when the Bend is formed. The Contour Line option is only valid for Bends whose angles have a value less than 135 degrees.
+Mold Line: The application curve will be coincident with a mold line when the Bend is formed. The Mold Line option is only valid for Bends whose angles have a value greater than 90 degrees.</Formatted></Docum>
+                </Pref>
+            </Tab>
+            <Tab name="Unbend/Rebend" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Forming_Features_Operators_Unbend_Rebend">
+                <Pref name="SMD_BendOperationType" type="int" title="Bend Operation Type" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the type of bend operation. Set to Unbend to unform a region, to Rebend to reform a region to its original shape or to Unbend to Angle to unform a region to a new angle.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Unbend" value="0"/>
+                        <EnumElem name="Rebend" value="1"/>
+                        <EnumElem name="Bend to Angle" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_BendOperationTargetAngle" type="real" title="Angle" value="90.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the angle when Bend Operation Type is set to Bend to Angle.</Description>
+                    <Real/>
+                </Pref>
+            </Tab>
+            <Tab name="MetaForm" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Forming_Features_Operators_MetaForm">
+                <Group name="Material Properties">
+                <Pref name="SMD_MetaformYieldStress_EU" type="real" title="Yield Stress" value="2.80000E+04" unit="psi" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the yield stress. This is the stress at which the material transitions from elastic to plastic behavior.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MetaformYieldStress_MU" type="real" title="Yield Stress" value="1.90000E+05" unit="kPa" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the yield stress. This is the stress at which the material transitions from elastic to plastic behavior.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MetaformElasticModulus_EU" type="real" title="Elastic Modulus" value="3.00E+07" unit="psi" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the elastic modulus (also known as "modulus of elasticity" and "Young's modulus"). This represents the linear relationship between stress and strain. This condition is valid for values of stress that remain below the yield stress of the material.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MetaformElasticModulus_MU" type="real" title="Elastic Modulus" value="2.10E+08" unit="kPa" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the elastic modulus (also known as "modulus of elasticity" and "Young's modulus"). This represents the linear relationship between stress and strain. This condition is valid for values of stress that remain below the yield stress of the material.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MetaformTangentModulus_EU" type="real" title="Tangent Modulus" value="1.00000E+03" unit="psi" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the tangent modulus. This represents the linear relationship between stress and strain that is valid for values of stress that exceed the yield stress of the material.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MetaformTangentModulus_MU" type="real" title="Tangent Modulus" value="6.90000E+03" unit="kPa" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the tangent modulus. This represents the linear relationship between stress and strain that is valid for values of stress that exceed the yield stress of the material.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MetaformPoissonRatio" type="real" title="Poisson's Ratio" value="0.3" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the Poisson's Ratio. This is the ratio of lateral strain to longitudinal strain.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MetaformRValue" type="real" title="r Value" value="1.0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the r value. The r value is a material property that represents resistance to thinning.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                    <Docum>Higher r values represent higher resistance to thinning when the material is being stretched or resistance to thickening when the material is being compressed. The value of 1.0 corresponds to a homogeneous material.</Docum>
+                </Pref>
+                </Group>
+                <Pref name="SMD_MetaformInferThickness" type="int" title="Infer Thickness" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the thickness should be inferred.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MetaformThickness_EU" type="real" title="Thickness" value="0.125" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the material thickness used in the forming analysis.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MetaformThickness_MU" type="real" title="Thickness" value="2.5" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the material thickness used in the forming analysis.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MetaformNeutralOffset" type="real" title="Neutral Offset" value="0.44" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the neutral offset for the thickness of the material. This offset is specified as a ratio of the thickness, so valid values are between 0 and 1.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                        <UpperBound value="1.0" include="1"/>
+                    </Data>
+                    <Docum>The neutral offset represents the offset distance that is applied to the MetaForm mesh during an analysis.</Docum>
+                </Pref>
+                <Group name="Displacement Results">
+                <Pref name="SMD_MetaformPlasticResults" type="int" title="Plastic" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not plastic displacement results should be calculated. These displacements are defined as the preliminary results of the forming analysis from the initial to final region boundary.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="On" value="1"/>
+                        <EnumElem name="Off" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MetaformSpringbackResults" type="int" title="Springback" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not springback displacement results should be calculated. These displacements are defined by the results of the optional linear elastic analysis that may be performed to determine the elastic springback of the region.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="On" value="1"/>
+                        <EnumElem name="Off" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MetaformOvercrownResults" type="int" title="Overcrown" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not overcrown displacement results should be calculated.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="On" value="1"/>
+                        <EnumElem name="Off" value="0"/>
+                    </Data>
+                    <Docum>These displacements are applied as a direct opposite loading condition of the elastic-springback analysis. This option approximates the overcrown shape that would be required of a forming or stamping die to produce the plastic results in a final state.</Docum>
+                </Pref>
+                <Pref name="SMD_MetaformDisplayMesh" type="int" title="Display Region Mesh" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the finite element mesh should display as the analysis proceeds.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Group name="Hole Removal Options">
+                <Pref name="SMD_MetaformRemoveHoles" type="int" title="Remove Holes" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option is used to specify the status of the "Remove Holes" option.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MetaformMinimumModulus_EU" type="real" title="Minimum Modulus" value="1.00000E+2" unit="psi" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum elastic modulus. This value specifies the elastic modulus to apply over removed holes.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_MetaformMinimumModulus_MU" type="real" title="Minimum Modulus" value="6.90000E+2" unit="kPa" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum elastic modulus. This value specifies the elastic modulus to apply over removed holes.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Group name="Meshing Tolerances">
+                <Pref name="SMD_MetaformCrdTol_EU" type="real" title="Chordal" value="0.01" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the chordal meshing tolerance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                    <Docum>The chordal deviation is used to define an upper bound between an element and its originating surface. If the deviation between an element and surface is greater than the provided chordal tolerance, the element will be subdivided. This procedure is repeated until all elements are within the specified chordal tolerance or until the sides of the element have been reduced to 1/4 of the linear tolerance.</Docum>
+                </Pref>
+                <Pref name="SMD_MetaformCrdTol_MU" type="real" title="Chordal" value="0.25" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the chordal meshing tolerance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                    <Docum>The chordal deviation is used to define an upper bound between an element and its originating surface. If the deviation between an element and surface is greater than the provided chordal tolerance, the element will be subdivided. This procedure is repeated until all elements are within the specified chordal tolerance or until the sides of the element have been reduced to 1/4 of the linear tolerance.</Docum>
+                </Pref>
+                <Pref name="SMD_MetaformAngTol_EU" type="real" title="Angular" value="90.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the angular meshing tolerance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                        <UpperBound value="90.0" include="1"/>
+                    </Data>
+                    <Docum>The angular deviation is used to define the maximum angle that is allowed between an element and its originating surface. This is calculated as the sum of the angular deviation between the surface normal and element planar normal at any two positions within the element boundary. If the angle between the element and surface is greater than the angular deviation tolerance, the element will be subdivided. This procedure is repeated until all elements are within the specified angular tolerance or until the sides of the element have been reduced to 1/4 of the linear tolerance.</Docum>
+                </Pref>
+                <Pref name="SMD_MetaformAngTol_MU" type="real" title="Angular" value="90.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the angular meshing tolerance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                        <UpperBound value="90.0" include="1"/>
+                    </Data>
+                    <Docum>The angular deviation is used to define the maximum angle that is allowed between an element and its originating surface. This is calculated as the sum of the angular deviation between the surface normal and element planar normal at any two positions within the element boundary. If the angle between the element and surface is greater than the angular deviation tolerance, the element will be subdivided. This procedure is repeated until all elements are within the specified angular tolerance or until the sides of the element have been reduced to 1/4 of the linear tolerance.</Docum>
+                </Pref>
+                <Pref name="SMD_MetaformLenTol_EU" type="real" title="Linear" value="1.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the linear meshing tolerance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                    <Docum>The linear deviation is used to determine the maximum side length for each element and if the deviation is greater than the provided tolerance, the element will be subdivided. This procedure is repeated until all elements are within the specified linear tolerance.</Docum>
+                </Pref>
+                <Pref name="SMD_MetaformLenTol_MU" type="real" title="Linear" value="25.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the linear meshing tolerance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                    <Docum>The linear deviation is used to determine the maximum side length for each element and if the deviation is greater than the provided tolerance, the element will be subdivided. This procedure is repeated until all elements are within the specified linear tolerance.</Docum>
+                </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="Flat Pattern" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Flat_Pattern">
+            <Tab name="Preferences" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Flat_Pattern_Preferences">
+                <Pref name="SMD_FlatPatternName" type="string" title="Name" value="FLAT_PAT" ver="3.0.0" scope="Part">
+                    <Description>This field specifies the flat pattern name to be used. This is the name of the group entity created.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="SMD_FlatPatternLayer" type="int" title="Layer" value="1" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the layer to place the flat pattern on.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlatPatternChordLength_EU" type="real" title="Chordal Tolerance" value="0.001" unit="in" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the chordal tolerance to be used for laying out the flat pattern. This is used when approximating curve geometry by line geometry.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlatPatternChordLength_MU" type="real" title="Chordal Tolerance" value="0.01" unit="mm" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the chordal tolerance to be used for laying out the flat pattern. This is used when approximating curve geometry by line geometry.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlatPatternAngleTol" type="real" title="Angle Tolerance" value="0.5" unit="deg" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the angle tolerance to be used for laying out the flat pattern. This will override the Modeling angle tolerance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_FlatPatternLocation" type="int" title="Flat Pattern Location" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the relative position of the generated flat pattern.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Start Face" value="0"/>
+                        <EnumElem name="WCS" value="1"/>
+                    </Data>
+                </Pref>
+                <Group name="Output Objects">
+                <Pref name="SMD_FlatPatternCurveSet" type="int" title="Curve Set" value="1" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the types of curves that can appear in the flat pattern.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Lines" value="0"/>
+                        <EnumElem name="Lines/Arcs" value="1"/>
+                        <EnumElem name="Lines/Arcs/Splines" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlatPatternBendTangentLines" type="int" title="Bend Tangent Curves" value="1" ver="3.0.0" scope="Part">
+                    <Description>This option determines whether or not bend tangent curves in the flat pattern should be output.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlatPatternBendCenterLines" type="int" title="Bend Center Curves" value="1" ver="3.0.0" scope="Part">
+                    <Description>This option determines whether or not bend center curves in the flat pattern should be output.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Pref name="SMD_FlatPatternAutoUpdate" type="int" title="Auto Update" value="1" ver="3.0.0" scope="Part">
+                    <Description>This option determines whether or not the flat pattern should be updated automatically when entering or exiting the Sheet Metal Design application or when updating a Drafting view.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Off" value="0"/>
+                        <EnumElem name="On" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlatPatternDistConstraint" type="int" title="Distortion Constraint" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option specifies which edge to use when flattening a distortion face.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Shortest Edge" value="0"/>
+                        <EnumElem name="Longest Edge" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlatPatternAllowMultiple" type="int" title="Allow Multiple Flat Patterns" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option determines whether or not multiple flat patterns for a body in the part is allowed. When this option is on, only the newest flat pattern maintains associativity with the body.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlatPatternCreationAlgorithm" type="int" title="Geodesics Algorithm" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the Geodesics Algorithm to be used to split each B-surface into small segments. Each algorithm yields an approximation.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Parametric" value="0"/>
+                        <EnumElem name="Knights" value="1"/>
+                        <EnumElem name="Projection" value="2"/>
+                    </Data>
+                    <Docum>If one algorithm doesn't produce a desirable flat pattern, try another one. Parametric is the default and should give the best results in most cases. You can use the Knights algorithm as an alternative. The Projection algorithm was the default for all flat patterns prior to Version 16.0. This method is generally, the least accurate method.</Docum>
+                </Pref>
+                <Separator/>
+                <Pref name="SMD_FlatPatternGridSize_MU" type="real" title="Grid Size" value="20.0" unit="mm" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the grid size to be used for laying out the flat pattern with the Woven Materials solver.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="SMD_FlatPatternGridSize_EU" type="real" title="Grid Size" value="1.0" unit="in" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the grid size to be used for laying out the flat pattern with the Woven Materials solver.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Annotation Preferences" csh="PMAN_Sheet_Metal_Forming_and_Flattening_Flat_Pattern_Annotation_Preferences">
+                <Group name="Bend Center Lines">
+                <Pref name="SMD_FPACenterLinesColor" type="int" title="Color" value="189" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of the bend centerlines.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="SMD_FPACenterLinesFont" type="int" title="Style" value="4" ver="1847" scope="Part">
+                    <Description>This option specifies the line style for the bend centerlines.</Description>
+                  <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                </Pref>
+                <Pref name="SMD_FPACenterLinesWidth" type="int" title="Width" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the line width for the bend centerlines.</Description>
+                    <ObjectLineWidth/>
+                </Pref>
+                </Group>
+                <Group name="Bend Tangent Lines">
+                <Pref name="SMD_FPATangentLinesColor" type="int" title="Color" value="83" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of the bend tangent lines.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="SMD_FPATangentLinesFont" type="int" title="Style" value="3" ver="1847" scope="Part">
+                    <Description>This option specifies the line style for the bend tangent lines.</Description>
+                  <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                </Pref>
+                <Pref name="SMD_FPATangentLinesWidth" type="int" title="Width" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the line width for the bend tangent lines.</Description>
+                    <ObjectLineWidth/>
+                </Pref>
+                </Group>
+                <Group name="Contour Lines">
+                <Pref name="SMD_FPAContourLinesColor" type="int" title="Color" value="108" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of the contour lines.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="SMD_FPAContourLinesFont" type="int" title="Style" value="1" ver="1847" scope="Part">
+                    <Description>This option specifies the line style for the contour lines.</Description>
+                  <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                </Pref>
+                <Pref name="SMD_FPAContourLinesWidth" type="int" title="Width" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the line width for the contour lines.</Description>
+                    <ObjectLineWidth/>
+                </Pref>
+                </Group>
+                <Group name="Mold Lines">
+                <Pref name="SMD_FPAMoldLinesColor" type="int" title="Color" value="71" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of the mold lines.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="SMD_FPAMoldLinesFont" type="int" title="Style" value="1" ver="1847" scope="Part">
+                    <Description>This option specifies the line style for the mold lines.</Description>
+                  <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                </Pref>
+                <Pref name="SMD_FPAMoldLinesWidth" type="int" title="Width" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the line width for the mold lines.</Description>
+                    <ObjectLineWidth/>
+                </Pref>
+                </Group>
+                <Group name="Form Block Lines">
+                <Pref name="SMD_FPAFormBlockLinesColor" type="int" title="Color" value="98" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of the form block lines.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="SMD_FPAFormBlockLinesFont" type="int" title="Style" value="6" ver="1847" scope="Part">
+                    <Description>This option specifies the line style for the form block lines.</Description>
+                  <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                </Pref>
+                <Pref name="SMD_FPAFormBlockLinesWidth" type="int" title="Width" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the line width for the form block lines.</Description>
+                    <ObjectLineWidth/>
+                </Pref>
+                </Group>
+                <Group name="Exterior Edges">
+                <Pref name="SMD_FPAExteriorEdgesColor" type="int" title="Color" value="134" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of the exterior edges.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="SMD_FPAExteriorEdgesFont" type="int" title="Style" value="1" ver="1847" scope="Part">
+                    <Description>This option specifies the line style for the exterior edges.</Description>
+                  <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                </Pref>
+                <Pref name="SMD_FPAExteriorEdgesWidth" type="int" title="Width" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the line width for the exterior edges.</Description>
+                    <ObjectLineWidth/>
+                </Pref>
+                </Group>
+                <Group name="Interior Cutouts">
+                <Pref name="SMD_FPAInteriorCutoutsColor" type="int" title="Color" value="188" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of the interior cutouts.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="SMD_FPAInteriorCutoutsFont" type="int" title="Style" value="1" ver="1847" scope="Part">
+                    <Description>This option specifies the line style for the interior cutouts.</Description>
+                  <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                </Pref>
+                <Pref name="SMD_FPAInteriorCutoutsWidth" type="int" title="Width" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the line width for the interior cutouts.</Description>
+                    <ObjectLineWidth/>
+                </Pref>
+                </Group>
+                <Group name="Projected Edges">
+                <Pref name="SMD_FPAProjectionEdgesColor" type="int" title="Color" value="183" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of the projected edges.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="SMD_FPAProjectionEdgesFont" type="int" title="Style" value="1" ver="1847" scope="Part">
+                    <Description>This option specifies the line style for the projected edges.</Description>
+                  <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                </Pref>
+                <Pref name="SMD_FPAProjectionEdgesWidth" type="int" title="Width" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the line width for the projected edges.</Description>
+                    <ObjectLineWidth/>
+                </Pref>
+                </Group>
+                <Group name="Additional Curves">
+                <Pref name="SMD_FPAAdditionalCurvesColor" type="int" title="Color" value="105" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of the additional curves.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="SMD_FPAAdditionalCurvesFont" type="int" title="Style" value="1" ver="1847" scope="Part">
+                    <Description>This option specifies the line style for the additional curves.</Description>
+                  <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                </Pref>
+                <Pref name="SMD_FPAAdditionalCurvesWidth" type="int" title="Width" value="0" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the line width for the additional curves.</Description>
+                    <ObjectLineWidth/>
+                </Pref>
+                </Group>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>

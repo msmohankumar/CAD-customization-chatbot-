@@ -1,0 +1,1878 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+  <Application name="Progressive Die Wizard" csh="PMAN_PDW" package_suppress="simcenter3d,simviewer,view,mechatronicsplayer,nx2dedit">
+    <Category name="General" csh="PMAN_PDW_General">
+            <Tab name="General" csh="PMAN_PDW_General_General">
+                <Pref name="PDW_LOAD_WAVE_DATA" type="logical" title="Load Wave Data" value="false" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not WAVE data should be loaded.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_KEEP_TC_FOLDER" type="logical" title="Keep Teamcenter Folder Info for Project Attributes" value="true" ver="2206" scope="Session">
+                    <Description>This option determines whether or not to keep Teamcenter folder information for project attributes.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_PART_INSTALLATION_METHOD" type="int" title="Part Installation Method" value="2" ver="6.0.0" scope="Session">
+                    <Description>This option specifies the part installation method used to add standard parts, die base, and initialize a project.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Legacy Method (NX 5 and earlier)" value="0"/>
+                        <EnumElem name="New Method (NX 6 and later)"  value="2"/>
+                    </Data>
+                </Pref>                         
+              <Group name="Teamcenter">
+                <Pref name="PDW_PART_ITEM_TYPE" type="string" title="Part Item Type" value="Item" ver="9.0.1" scope="Session">
+                  <Description>This option specifies the customized item type of the part in Teamcenter.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="PDW_CONFIG_ITEM" type="string" title="Configuration File Item ID and Revision" value="@DB/00005/A" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the item ID and revision of the configuration file type in Teamcenter.</Description>
+                  <String/>
+                </Pref>
+              </Group>
+            </Tab>
+            <Tab name="Part Name Definition" csh="PMAN_PDW_General_Part_Name_Definition">
+                <Group name="Project Settings">
+                <Pref name="PDW_DISPLAY_RENAME_DIALOG" type="logical" title="Display Rename Dialog Box" value="false" ver="6.0.0" scope="Session">
+                    <Description>This option determines whether or not the part name mapping dialog box will be displayed when new parts are added to a Progressive Die Wizard project.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Group name="Common">
+                <Pref name="PDW_NAME_MAP_TEMPLATE_FILE" type="string" title="Template Name Mapping File" value="map_template_name.xlsx::DEFAULT_MAPPING_TEMPLATE" ver="1980" scope="Session">
+                    <Description>This option specifies a customized file to map template name.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="PDW_PART_NAME_RULE" type="string_list" title="Custom Part Naming Rules" value="&quot;&lt;PROJECT_NAME&gt;_&lt;TEMPLATE_NAME&gt;_???&quot;\&quot;&lt;PROJECT_NAME&gt;_&lt;TEMPLATE_NAME&gt;_&lt;???&gt;&quot;" ver="2312" scope="Session">
+                    <Description>This field allows the custom part naming rules to be specified. The part name is formed by combining a series of variables and characters.
+<Formatted>1. All alphanumeric characters are valid except \, /, ", *, :, and ?.
+2. The "?" character is an incrementing or user defined variable.
+The standard variables are:
+"PROJECT_NAME"  (set during project initialization)
+"TEMPLATE_NAME" (the name of the template part being cloned).</Formatted></Description>
+                  <MultiLineText height="6"/>
+                </Pref>
+                </Group>
+                <Group name="Teamcenter">
+                <Pref name="PDW_NAME_IMAN_NUMBER" type="logical" title="Use Teamcenter Number as ??? in above Naming Rule" value="true" ver="6.0.0" scope="Session">
+                    <Description>This option determines whether or not the Teamcenter name number should be used.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_IMAN_NAME_METHOD" type="int" title="Teamcenter Part Naming Method" value="2" ver="6.0.0" scope="Session">
+                    <Description>This option specifies the part naming method in the Teamcenter environment.
+<Formatted>
+First option: DB_PART_NAME = DB_PART_NO, which is defined by name rules.
+
+Second option: DB_PART_NO is defined by name rules, DB_PART_NAME is replaced by TEMPLATE_NAME.
+
+Third option: DB_PART_NO is defined by unique Teamcenter number, DB_PART_NAME is defined by name rules.</Formatted></Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Use Naming Rule for Part Name and Part Number" value="0"/>
+                        <EnumElem name="Use Naming Rule for Part Number, Template Name for Part Name" value="1"/>
+                        <EnumElem name="Use Teamcenter Number for Part Number, Naming Rule for Part Name" value="2"/>
+                    </Data>
+                </Pref>
+                </Group>              
+            </Tab>
+        </Category>
+        <Category name="Unforming Tools" csh="PMAN_PDW_Unforming">
+            <!--<Tab name="SMFR" csh="PMAN_PDW_Unforming_SMFR">
+                <Pref name="PDW_SET_REBUILD_METHOD" type="int" title="Feature Rebuilding Method" value="1" ver="5.0.0" scope="Session">
+                    <Description>This option specifies if features should be built using Sheet Metal Design features or NX Sheet Metal features.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Sheet Metal Design Features" value="1"/>
+                        <EnumElem name="NX Sheet Metal Features" value="0"/>
+                    </Data>
+                </Pref>
+            </Tab>-->
+            <Tab name="Intermediate Stage" csh="PMAN_PDW_Unforming_InterStage">
+              <Pref name="PDW_INTERSTAGE_STAGESEQUENCE" type="int" title="Stage Sequence" value="0" ver="8.5.0" scope="Session">
+                <Description>This option specifies the sequence of intermediate stages.</Description>
+                <RadioBox orientation="vertical"/>
+                <Data type="enum">
+                  <EnumElem name="From Part to Blank" value="0"/>
+                  <EnumElem name="From Blank to Part" value="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_INTERSTAGE_WAVE_SHEET_BODY" type="logical" title="Link Sheet Body for Intermediate Stages" value="true" ver="8.5.0" scope="Session">
+                <Description>This option determines whether or not the sheet body should be WAVE-linked into the intermediate stages.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_INTERSTAGE_RENAME" type="string" title="Naming Rule for Intermediate Stages" value="Final-&lt;number&gt;-&lt;suffix&gt;" ver="8.5.0" scope="Session">
+                <Description>This option specifies a customized naming rule for intermediate stages.</Description>
+                <Widestring/>
+              </Pref>
+            </Tab>
+            <Tab name="Direct Unfolding" csh="PMAN_PDW_Unforming_DirectUnfolding">
+                <Pref name="PDW_DIRECTUNFOLD_K_PRECISION_MU" type="int" title="K Factor Precision" value="4" unit ="mm" ver="8.5.0" scope="Session">
+                    <Description>This option specifies the maximum number of decimal places for the K factor for bends in direct unfolding. It affects the precision of the developed length for bends.</Description>
+                    <IntegerScale/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                        <UpperBound value="10" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_DIRECTUNFOLD_DEVLENGTH_PRECISION_MU" type="int" title="Developed Length Precision" value="4" unit ="mm" ver="8.5.0" scope="Session">
+                    <Description>This option specifies the maximum number of decimal places for the developed length for bends in direct unfolding.</Description>
+                    <IntegerScale/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                        <UpperBound value="10" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_DIRECTUNFOLD_K_PRECISION_EU" type="int" title="K Factor Precision" value="4" unit ="in" ver="6.0.0" scope="Session">
+                    <Description>This option specifies the maximum number of decimal places for the K factor for bends in direct unfolding. It affects the precision of the developed length for bends.</Description>
+                    <IntegerScale/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                        <UpperBound value="10" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_DIRECTUNFOLD_DEVLENGTH_PRECISION_EU" type="int" title="Developed Length Precision" value="4" unit ="in" ver="6.0.0" scope="Session">
+                    <Description>This option specifies the maximum number of decimal places for the developed length for bends in direct unfolding.</Description>
+                    <IntegerScale/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                        <UpperBound value="10" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_DEVLENGTH_CALCULATION" type="int" title="Developed Length Calculation" value="0" ver="10.0.0" scope="Session">
+                  <Description>This option specifies which spreadsheet table will be used to calculate the developed length.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Neutral Factor Table" value="0"/>
+                    <EnumElem name="BAF Table" value="1"/>
+                  </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Initialize Project" csh="PMAN_PDW_Initialize_Project">
+          <Tab name="General" csh="PMAN_PDW_Initialize_Project_General">
+            <Pref name="PDW_Initialize_Project_Attribute_Spreadsheet_WIN" type="string" title="Attribute Spreadsheet" value="$PDIEWIZARD_DIR\templates\custom_attr_template.xlsx" ver="2306" scope="Session">
+              <Description>This field specifies the full file name of the initialize project attribute spreadsheet.</Description>
+              <BrowseFileSel type="xlsx"/>
+            </Pref>
+            <Pref name="PDW_Initialize_Project_Attribute_Spreadsheet_UNX" type="string" title="Attribute Spreadsheet" value="$PDIEWIZARD_DIR/templates/custom_attr_template.xlsx" ver="2306" scope="Session">
+              <Description>This field specifies the full file name of the initialize project attribute spreadsheet.</Description>
+              <BrowseFileSel type="xlsx"/>
+            </Pref>
+          </Tab>
+        </Category>
+        <Category name="Blank Layout" csh="PMAN_PDW_Blank_Layout">
+          <Tab name="General" csh="PMAN_PDW_Blank_Layout_General">
+            <Pref name="PDW_BLANK_LAYOUT_ORIENTATION" type="logical" title="Use Default Orientation" value="false" ver="2306" scope="Session">
+              <Description>This option determines whether or not the default orientation should be used.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+            </Pref>
+          </Tab>
+        </Category>
+        <Category name="Scrap Design" csh="PMAN_PDW_Scrap_Design">
+            <Tab name="General" csh="PMAN_PDW_Scrap_Design_General">
+                <Pref name="PDW_SCRAP_DESIGN_TOLERANCE_MU" type="real" title="Tolerance" value="0.01" unit ="mm" ver="2206" scope="Session">
+                    <Description>This option specifies the tolerance used when cutting off scrap.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SCRAP_DESIGN_TOLERANCE_EU" type="real" title="Tolerance" value="0.0004" unit ="in" ver="2206" scope="Session">
+                    <Description>This option specifies the tolerance used when cutting off scrap.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SCRAP_DESIGN_FIT_TOP_VIEW" type="logical" title="Orient to Top View and Fit" value="true" ver="2312" scope="Session">
+                  <Description>This option determines whether or not the work view should be oriented to the Top view and fitted to its content.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="No" value="false"/>
+                    <EnumElem name="Yes" value="true"/>
+                  </Data>
+              </Pref> 
+            </Tab>
+        </Category>
+        <Category name="Strip Layout" csh="PMAN_PDW_Strip_Layout">
+            <Tab name="General" csh="PMAN_PDW_Strip_Layout_General">
+                <Pref name="PDW_STRIP_LAYOUT_VIEW" type="int" title="Views in Strip Layout" value="0" ver="8.5.3" scope="Session">
+                    <Description>This option specifies the number of views in the strip layout.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Single View" value="0"/>
+                        <EnumElem name="Three Views" value="1"/>
+                    </Data>
+                </Pref>
+            <Pref name="PDW_STRIP_TEXT_ORIENTATION" type="int" title="Orientation of Process Description Text" value="0" ver="1872" scope="Session">
+              <Description>This option specifies the orientation of station information text.</Description>
+              <RadioBox orientation="vertical"/>
+              <Data type="enum">
+                <EnumElem name="Horizontal" value="0"/>
+                <EnumElem name="Vertical (Top to Bottom)" value="1"/>
+                <EnumElem name="Vertical (Bottom to Top)" value="3"/>
+                <EnumElem name="135 Degrees" value="2"/>
+              </Data>
+            </Pref>
+            <Pref name="PDW_STRIP_CHARACTER_COLOR" type="int" title="Color" value="134" ver="10.0.2" scope="Part">
+              <Description>This option specifies the color of the station number and description.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="PDW_STRIP_CHARACTER_FONT" type="string" title="Font" value="blockfont" ver="11.0.1" scope="Part">
+              <Description>This option specifies the font of the station number and description.</Description>
+              <String/>
+            </Pref>
+            <Pref name="PDW_STRIP_CHARACTER_FONT_STYLE" type="int" title="Font Style" value="0" ver="11.0.1" scope="Part">
+              <Description>This option specifies the font style of the station number and description.</Description>
+              <OptionMenu/>
+              <Data type="enum">
+                <EnumElem name="Regular" value="0"/>
+                <EnumElem name="Bold" value="1"/>
+                <EnumElem name="Italic" value="2"/>
+                <EnumElem name="Bold Italic" value="3"/>
+              </Data>
+            </Pref>
+            <Pref name="PDW_STRIP_CHARACTER_WIDTH" type="int" title="Width" value="3" ver="11.0.1" scope="Part">
+              <Description>This option specifies the width of the station number and description.</Description>
+              <AnnotationTextWidth/>
+            </Pref>
+            <Pref name="PDW_STRIP_CHARACTER_SCALE" type="real" title="Scale" value="1.0" ver="11.0.2" scope="Session">
+                <Description>This option specifies the scale of the station number and description.</Description>
+                <Real/>
+                <Data type="range">
+                    <LowerBound value="0.01" include="1"/>
+                    <UpperBound value="30.0" include="1"/>
+                </Data>
+            </Pref>
+                <Pref name="PDW_STRIP_LAYOUT_STATION_INFORMATION" type="string_list" title="Process Description" value="&quot;piercing&quot;\&quot;bending&quot;\&quot;forming&quot;\&quot;burring&quot;" ver="10.0.0" scope="Session">
+              <Description>This option specifies the station information in the strip layout.</Description>
+              <MultiLineText height="4"/>
+            </Pref>
+            </Tab>
+        </Category>
+        <Category name="Die Design" csh="PMAN_PDW_Die_Design">
+            <Tab name="General" csh="PMAN_PDW_Die_Design_General">
+                <Pref name="PDW_GET_DEFAULT_VALUE_METHOD" type="int" title="Read Default Value from" value="0" ver="7.5.0" scope="Session">
+                  <Description>This option specifies where to read the default values.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Customer Defaults" value="0"/>
+                    <EnumElem name="PDW_VAR Part" value="1"/>
+                  </Data>
+                </Pref>                 
+                <Pref name="PDW_SHUT_HEIGHT_MU" type="real" title="Shut Height" value="500.0" unit="mm" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the die base height at close status.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SHUT_HEIGHT_EU" type="real" title="Shut Height" value="20.0" unit="in" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the die base height at close status.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_MACHINE_STROKE_MU" type="real" title="Machine Stroke" value="150.0" unit="mm" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the die set open distance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_MACHINE_STROKE_EU" type="real" title="Machine Stroke" value="6.0" unit="in" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the die set open distance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_PUNCH_PENETRATION_MU" type="real" title="Punch Penetration" value="3.0" unit="mm" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the depth of the piercing punch that goes into the piercing die. This value is also used as the default to calculate piercing punch length.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_PUNCH_PENETRATION_EU" type="real" title="Punch Penetration" value="0.12" unit="in" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the depth of the piercing punch that goes into the piercing die. This value is also used as the default to calculate piercing punch length.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_PUNCH_PP_CLEARANCE_MU" type="real" title="Punch and Punch Plate Clearance" value="0.025" unit="mm" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the clearance between punch and punch plate.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_PUNCH_PP_CLEARANCE_EU" type="real" title="Punch and Punch Plate Clearance" value="0.001" unit="in" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the clearance between punch and punch plate.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_PUNCH_BP_CLEARANCE_MU" type="real" title="Punch and Bottoming Plate Clearance" value="0.1" unit="mm" ver="2312" scope="Session">
+                  <Description>This option specifies the clearance between punch and bottoming plate.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_PUNCH_BP_CLEARANCE_EU" type="real" title="Punch and Bottoming Plate Clearance" value="0.004" unit="in" ver="2312" scope="Session">
+                  <Description>This option specifies the clearance between punch and bottoming plate.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_PUNCH_SP_CLEARANCE_MU" type="real" title="Punch and Stripper Plate Clearance" value="0.05" unit="mm" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the clearance between punch and stripper plate.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                  <Pref name="PDW_PUNCH_SP_CLEARANCE_EU" type="real" title="Punch and Stripper Plate Clearance" value="0.002" unit="in" ver="7.5.0" scope="Session">
+                   <Description>This option specifies the clearance between punch and stripper plate.</Description>
+                   <Real/>
+                   <Data type="range">
+                     <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+               <Pref name="PDW_DIE_PUNCH_CLEARANCE_MU" type="real" title="Punch and Die Clearance" value="0.05" unit="mm" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the single side clearance between piercing punch and die.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_DIE_PUNCH_CLEARANCE_EU" type="real" title="Punch and Die Clearance" value="0.002" unit="in" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the single side clearance between piercing punch and die.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_DIE_DP_CLEARANCE_MU" type="real" title="Die and Die Plate Clearance" value="0.025" unit="mm" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the clearance between die block and die plate.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_DIE_DP_CLEARANCE_EU" type="real" title="Die and Die Plate Clearance" value="0.001" unit="in" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the clearance between die block and die plate.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_DIE_BBP_CLEARANCE_MU" type="real" title="Die and Bottom Backing Plate Clearance" value="0.025" unit="mm" ver="2312" scope="Session">
+                    <Description>This option specifies the clearance between die block and bottom backing plate.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_DIE_BBP_CLEARANCE_EU" type="real" title="Die and Bottom Backing Plate Clearance" value="0.001" unit="in" ver="2312" scope="Session">
+                    <Description>This option specifies the clearance between die block and bottom backing plate.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_DIE_LIFE_MU" type="real" title="Die Life" value="3.0" unit="mm" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the height values for the die life.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_DIE_LIFE_EU" type="real" title="Die Life" value="0.12" unit="in" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the height values for the die life.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_CAVITY_HOLE_ANGLE" type="real" title="Taper Angle" value="-1.0" unit="deg" ver="1847" scope="Session">
+                    <Description>This option specifies the taper angle of the cavity hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="-10.0" include="1"/>
+                    </Data>
+                </Pref>            
+                <Pref name="PDW_SLUG_HOLE_OFFSET1_MU" type="real" title="Clearance of First Slug Hole" value="2.0" unit="mm" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the clearance of the first slug hole in the cavity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.1" include="1"/>
+                        <UpperBound value="100.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SLUG_HOLE_OFFSET1_EU" type="real" title="Clearance of First Slug Hole" value="0.08" unit="in" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the clearance of the first slug hole in the cavity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.01" include="1"/>
+                        <UpperBound value="4.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SLUG_HOLE_OFFSET2_MU" type="real" title="Clearance of Second Slug Hole" value="3.0" unit="mm" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the clearance of the second slug hole in the cavity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.1" include="1"/>
+                        <UpperBound value="100" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SLUG_HOLE_OFFSET2_EU" type="real" title="Clearance of Second Slug Hole" value="0.12" unit="in" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the clearance of the second slug hole in the cavity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.01" include="1"/>
+                        <UpperBound value="4" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SLUG_HOLE_RADIUS_MU" type="real" title="Slug Radius" value="0.5" unit="mm" ver="11.0.0" scope="Session">
+                    <Description>This option specifies the radius of the slug hole in the cavity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.1" include="1"/>
+                        <UpperBound value="100" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SLUG_HOLE_RADIUS_EU" type="real" title="Slug Radius" value="0.002" unit="in" ver="11.0.0" scope="Session">
+                    <Description>This option specifies the radius of the slug hole in the cavity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.001" include="1"/>
+                        <UpperBound value="0.004" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_CAVITY_HOLE_ANGLE_DP2" type="real" title="Taper Angle of Second Die Plate Slug Hole" value="-2.0" unit="deg" ver="1847" scope="Session">
+                    <Description>This option specifies the taper angle of the second die plate cavity hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="-10.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SLUG_HOLE_OFFSET_DP2_MU" type="real" title="Offset of Second Die Plate Slug Hole" value="1.0" unit="mm" ver="1847" scope="Session">
+                    <Description>This option specifies the offset value of the second die plate slug hole in the cavity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.1" include="1"/>
+                        <UpperBound value="100.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SLUG_HOLE_OFFSET_DP2_EU" type="real" title="Offset of Second Die Plate Slug Hole" value="0.04" unit="in" ver="1847" scope="Session">
+                    <Description>This option specifies the offset value of the second die plate slug hole in the cavity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.01" include="1"/>
+                        <UpperBound value="4.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SLUG_HOLE_DP2_HEIGHT_MU" type="real" title="Height of Second Die Plate Slug Hole" value="8.0" unit="mm" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the height of the second die plate slug hole in the cavity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.1" include="1"/>
+                        <UpperBound value="100.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SLUG_HOLE_DP2_HEIGHT_EU" type="real" title="Height of Second Die Plate Slug Hole" value="0.3" unit="in" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the height of the second die plate slug hole in the cavity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.01" include="1"/>
+                        <UpperBound value="4.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SLUG_HOLE_OFFSET_DP3_MU" type="real" title="Offset of Third Die Plate Slug Hole" value="2.0" unit="mm" ver="1847" scope="Session">
+                    <Description>This option specifies the offset value of the third die plate slug hole in the cavity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.1" include="1"/>
+                        <UpperBound value="100" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SLUG_HOLE_OFFSET_DP3_EU" type="real" title="Offset of Third Die Plate Slug Hole" value="0.08" unit="in" ver="1847" scope="Session">
+                    <Description>This option specifies the offset value of the third die plate slug hole in the cavity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.01" include="1"/>
+                        <UpperBound value="4" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SLUG_HOLE_DP3_HEIGHT_MU" type="real" title="Height of Third Die Plate Slug Hole" value="8.0" unit="mm" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the height of the third die plate slug hole in the cavity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.1" include="1"/>
+                        <UpperBound value="100.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SLUG_HOLE_DP3_HEIGHT_EU" type="real" title="Height of Third Die Plate Slug Hole" value="0.3" unit="in" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the height of the third die plate slug hole in the cavity.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.01" include="1"/>
+                        <UpperBound value="4.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_STRIP_LIFT_HEIGHT_MU" type="real" title="Strip Lift Height" value="10.0" unit="mm" ver="4.0.0" scope="Session">
+                <Description>This option specifies the metal strip lifted height when the die set is in open status.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_STRIP_LIFT_HEIGHT_EU" type="real" title="Strip Lift Height" value="0.4" unit="in" ver="4.0.0" scope="Session">
+                <Description>This option specifies the metal strip lifted height when the die set is in open status.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+                <Pref name="PDW_PUNCH_LEN_EU" type="string" title="Punch Length" value="&lt;PDW_VAR&gt;::PUNCH_PENETRATION+&lt;PDW_DB&gt;::PP_DP_CL" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the punch length in the format of an expression.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="PDW_PUNCH_LEN_MU" type="string" title="Punch Length" value="ceil(&lt;PDW_VAR&gt;::PUNCH_PENETRATION+&lt;PDW_DB&gt;::PP_DP_CL)" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the punch length in the format of an expression.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="PDW_PUNCH_TOP_Z_MU" type="real" title="Punch Top Z Value" value="80.0" unit="mm" ver="10.0.0" scope="Session">
+                    <Description>This option specifies the punch top Z value.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_PUNCH_TOP_Z_EU" type="real" title="Punch Top Z Value" value="3.2" unit="in" ver="10.0.0" scope="Session">
+                    <Description>This option specifies the punch top Z value.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_DIE_BOTTOM_Z_MU" type="real" title="Die Bottom Z Value" value="-60.0" unit="mm" ver="10.0.0" scope="Session">
+                    <Description>This option specifies the die bottom Z value.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <UpperBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_DIE_BOTTOM_Z_EU" type="real" title="Die Bottom Z Value" value="-2.4" unit="in" ver="10.0.0" scope="Session">
+                    <Description>This option specifies the die bottom Z value.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <UpperBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Insert Group" csh="PMAN_PDW_Insert_Group">
+            <Tab name="General" csh="PMAN_PDW_Insert_Group_General">
+                <Pref name="PDW_INSERT_LEN_ROUND" type="int" title="Round Insert Length" value="1" ver="5.0.1" scope="Session">
+                    <Description>This option determines whether or not the insert length value should be rounded to the nearest integer value.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_PUNCH_HEAD_OFFSET_EU" type="real" title="Punch Head Offset" value="0.2" unit="in" ver="6.0.0" scope="Session">
+                    <Description>This option specifies how much the punch head is offset from the punch profile.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.01" include="1"/>
+                        <UpperBound value="4.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_PUNCH_HEAD_OFFSET_MU" type="real" title="Punch Head Offset" value="5.0" unit="mm" ver="6.0.0" scope="Session">
+                    <Description>This option specifies how much the punch head is offset from the punch profile.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.1" include="1"/>
+                        <UpperBound value="100" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SLUGHOLE_IN_ONE_PART" type="int" title="All Slug Holes in Same Part" value="0" ver="8.0.0" scope="Session">
+                    <Description>This option determines whether or not all slug holes should be put in the same part.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_BOUNDING_BOX_SIZE_ROUNDING_VALUE_MU" type="int" title="Bounding Box Size Roundoff" value="0" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the size roundoff value of the bounding box in the insert group.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="0" value="0"/>
+                        <EnumElem name="1" value="1"/>
+                        <EnumElem name="5" value="2"/>
+                        <EnumElem name="0.1" value="3"/>
+                        <EnumElem name="0.5" value="4"/>
+                        <EnumElem name="0.01" value="5"/>
+                        <EnumElem name="0.05" value="6"/>
+                        <EnumElem name="0.001" value="7"/>
+                        <EnumElem name="0.005" value="8"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_BOUNDING_BOX_SIZE_ROUNDING_VALUE_EU" type="int" title="Bounding Box Size Roundoff" value="0" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the size roundoff value of the bounding box in the insert group.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="0" value="0"/>
+                        <EnumElem name="1" value="1"/>
+                        <EnumElem name="1/2" value="2"/>
+                        <EnumElem name="1/4" value="3"/>
+                        <EnumElem name="1/8" value="4"/>
+                        <EnumElem name="1/16" value="5"/>
+                        <EnumElem name="1/32" value="6"/>
+                        <EnumElem name="1/64" value="7"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_USE_CLEARANCES_FOR_ALL_INSERTS" type="logical" title="Use Clearances for All Insert Designs" value="true" ver="2306" scope="Session">
+                    <Description>This option determines whether or not to use clearances for all insert designs.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_RECOGNIZE_SUB_DIE_BASE" type="logical" title="Recognize Corresponding Sub-die Base as Parent Part" value="false" ver="2306" scope="Session">
+                    <Description>This option determines whether or not to recognize corresponding sub-die base as parent part.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Piercing" csh="PMAN_PDW_Insert_Group_Piercing">
+                <Pref name="PDW_SUPPORT_MULTIPLE_SKETCHES_FOR_DIE_AND_BACKING_INSERT" type="logical" title="Allow Multiple Sketches" value="false" ver="9.0.3" scope="Session">
+                    <Description>This option determines whether or not to allow multiple sketches.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Group name="Scrap Expression Names">
+                    <Pref name="PDW_SCRAP_LENGTH" type="string" title="Length" value="L_pier_auto" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the expression name for the piercing scrap length.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="PDW_SCRAP_WIDTH" type="string" title="Width" value="W_pier_auto" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the expression name for the piercing scrap width.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="PDW_SCRAP_RADIUS" type="string" title="Radius" value="R_pier_auto" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the expression name for the piercing scrap radius.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="PDW_SCRAP_DIAMETER" type="string" title="Diameter" value="D_pier_auto" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the expression name for the piercing scrap diameter.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="PDW_SCRAP_CORNER_RADIUS" type="string" title="Fillet Radius" value="R_flt_pier_auto" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the expression name for the piercing scrap fillet radius.</Description>
+                        <String/>
+                    </Pref>
+                </Group>
+                <Group name="Standard Punch Expression Names">
+                    <Pref name="PDW_PIERCING_STD_PUNCH_LEN" type="string" title="Length" value="L" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the expression name for the total actual length of the standard piercing punch.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="PDW_PIERCING_STD_PUNCH_STEP_LEN" type="string" title="Step Length" value="B" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the expression name for the actual length of the standard piercing punch step.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="PDW_PIERCING_STD_PUNCH_STEP1_TEMP_H" type="string" title="Step 1 Height" value="F" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the expression name for the distance from the temporary step face to the top face.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="PDW_PIERCING_STD_PUNCH_STEP_SCRAP_CLEARANCE" type="string" title="Punch Clearance" value="clearance" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the expression name for the clearance between the scrap profile and the punch profile.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="PDW_PIERCING_STD_PUNCH_STEP_BLEND_R" type="string" title="Step Blend Radius" value="R" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the expression name for the fillet radius of the standard piercing punch step.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="PDW_PIERCING_STD_PUNCH_POCKET_LEN" type="string" title="Pocket Length" value="L_POCKET" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the expression name for the total length of the standard piercing punch pocket.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="PDW_PIERCING_STD_PUNCH_STEP_POCKET_LEN" type="string" title="Step Pocket Length" value="L1_POCKET" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the expression name for the length of the standard piercing punch step pocket.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="PDW_PIERCING_STD_PUNCH_STEP_POCKET_CLEARANCE" type="string" title="Step Pocket Clearance" value="POCKET_ADJUST1" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the expression name for the offset value between the true body and the pocket body.</Description>
+                        <String/>
+                    </Pref>
+                </Group>
+                <Pref name="PDW_PIERCING_PUNCH_TEMP_STEP_FACE" type="string" title="Standard Punch Temporary Step Face Name" value="TEMP_STEP1" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the name of the temporary step face of the standard piercing punch.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="PDW_PIERCING_STD_PUNCH_ORIENT_FACE" type="string" title="Standard Punch Orient Face Name" value="ORIENT" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the name of the orient face of the standard piercing punch.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="PDW_PIERCING_UDINSERT_PROFILE_LAYER" type="int" title="User Defined Insert Profile Layer" value="63" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the layer user defined insert profiles should be placed on.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+            <Pref name="PDW_PIERCING_PUNCH_AND_DIE_CLEARANCE" type="int" title="Punch and Die Clearance" value="0" ver="11.0.0" scope="Session">
+                    <Description>This option specifies the type of punch and die clearance.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Constant" value="0"/>
+                        <EnumElem name="Variable" value="1"/>
+                        <EnumElem name="Super-offset"  value="2"/>
+                    </Data>
+                </Pref>  
+               <Pref name="PDW_PIERCING_MINIMUM_LENGTH_EU" type="real" title="Minimum Length" value="0.002" unit="in" ver="11.0.0" scope="Session">
+                    <Description>This option specifies the minimum length of the scrap edge.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.00001" include="1"/>
+                        <UpperBound value="4.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_PIERCING_MINIMUM_LENGTH_MU" type="real" title="Minimum Length" value="0.5" unit="mm" ver="11.0.0" scope="Session">
+                    <Description>This option specifies the minimum length of the scrap edge.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0001" include="1"/>
+                        <UpperBound value="10" include="1"/>
+                    </Data>
+                </Pref>
+              
+              <Pref name="PDW_PIERCING_MINIMUM_RADIUS_EU" type="real" title="Minimum Radius" value="0.002" unit="in" ver="11.0.0" scope="Session">
+                    <Description>This option specifies the minimum radius of the offset curves.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.00001" include="1"/>
+                        <UpperBound value="4.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_PIERCING_MINIMUM_RADIUS_MU" type="real" title="Minimum Radius" value="0.5" unit="mm" ver="11.0.0" scope="Session">
+                    <Description>This option specifies the minimum radius of the offset curves.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0001" include="1"/>
+                        <UpperBound value="10" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_PIERCING_STANDARD_PUNCH_CLASSIFICATION_NAME" type="string" title="Standard Punch Catalog" value="PUNCH" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the standard punch classification name for the punch insert design.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="PDW_PIERCING_STANDARD_PUNCH_NAME" type="string" title="Standard Punch Name" value="SSP [Punch Normal]" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the standard punch name for the punch insert design.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="PDW_PIERCING_STANDARD_PUNCH_MAXIMUM_DIAMETER_EU" type="real" title="Standard Punch Maximum Diameter" value="0.4" unit="in" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the maximum diameter to create the standard punch.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.04" include="1"/>
+                        <UpperBound value="4.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_PIERCING_STANDARD_PUNCH_MAXIMUM_DIAMETER_MU" type="real" title="Standard Punch Maximum Diameter" value="10.0" unit="mm" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the maximum diameter to create the standard punch.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="1.0" include="1"/>
+                        <UpperBound value="100.0" include="1"/>
+                    </Data>
+                </Pref>                
+            </Tab>
+            <Tab name="Die Cavity and Slug Hole" csh="PMAN_PDW_Insert_Group_Die_Cavity_And_Slug_Hole">
+                <Group name="Offset Spreadsheet Path">
+                    <Pref name="PDW_DIE_CAVITY_AND_SLUG_HOLE_OFFSET_SPREADSHEET_UNIX_PATH" type="string" title="Unix" value="$PDIEWIZARD_DIR/configuration/offset/" ver="11.0.0" scope="Session">
+                        <Description>This field specifies the directory where the die cavity and slug hole offset spreadsheet is located.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="PDW_DIE_CAVITY_AND_SLUG_HOLE_OFFSET_SPREADSHEET_WIN_PATH" type="string" title="Windows" value="$PDIEWIZARD_DIR\configuration\offset\" ver="11.0.0" scope="Session">
+                        <Description>This field specifies the directory where the die cavity and slug hole offset spreadsheet is located.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="User Defined Insert Display" csh="PMAN_PDW_Insert_Group_Insert_Display">
+                <Group name="False Body">
+                <Pref name="PDW_FALSE_LINE_FONT" type="int" title="Style" value="2" ver="1847" scope="Session">
+                  <GeneralLineFont allowInvisibleFont="true" LineFontOptionMaskString="GeneralLineFonts" />
+                </Pref>
+                <Pref name="PDW_FALSE_LINE_WIDTH" type="int" title="Width" value="6" ver="10.0.0" scope="Session">
+                    <ObjectLineWidth allowDefaultWidth="false" allowWideLineWidth="true"/>
+                </Pref>
+                <Pref name="PDW_FALSE_LAYER" type="int" title="Layer" value="99" ver="6.0.1" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_UDFINSERT_CLEARANCE_POCKET" type="logical" title="Use Clearance Attribute to Pocket" value="true" ver="2312" scope="Session">
+                    <Description>This option determines whether or not the clearance attribute on false body faces should be considered when pocketing.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Group name="True Body">
+                  <Pref name="PDW_INSERT_TRUE_BODY_COLOR_SAME_AS_FALSE_BODY" type="logical" title="Use Same Color as False Body" value="false" ver="1926+" scope="Session">
+                    <Description>This option determines whether or not the true body color should use the same color as the false body.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                      <EnumElem name="No" value="false"/>
+                      <EnumElem name="Yes" value="true"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_INSERT_TRUE_BODY_COLOR" type="int" title="Color" value="129" ver="11.0.0" scope="Session">
+                    <Description>This option specifies the color of the true body. This option has no effect if 'Use Same Color as False Body' is on.</Description>
+                    <Color/>
+                  </Pref>
+                </Group>
+              <Group name="Clearance Color">
+                <Pref name="PDW_INSERT_CLEARANCE_COLOR_SAME_AS_FALSE_BODY" type="logical" title="Use Same Color as False Body" value="true" ver="1926+" scope="Session">
+                  <Description>This option determines whether or not the clearance color should use the same color as the false body.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="No" value="false"/>
+                    <EnumElem name="Yes" value="true"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_PUNCH_CLEARANCE_COLOR" type="int" title="Punch and Punch Plate" value="175" ver="1926" scope="Session">
+                  <Description>This option specifies the color of the pocket face in relation to its clearance to the punch plate. This option has no effect if 'Use Same Color as False Body' is on.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="PDW_BOTTOM_CLEARANCE_COLOR" type="int" title="Punch and Backing Plate" value="182" ver="1926" scope="Session">
+                  <Description>This option specifies the color of the pocket face in relation to its clearance to the backing plate. This option has no effect if 'Use Same Color as False Body' is on.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="PDW_STRIPPER_CLEARANCE_COLOR" type="int" title="Punch and Stripper Plate" value="103" ver="1926" scope="Session">
+                  <Description>This option specifies the color of the pocket face in relation to its clearance to the stripper plate. This option has no effect if 'Use Same Color as False Body' is on.</Description>
+                  <Color/>
+                </Pref>
+              </Group>
+            </Tab>
+            <Tab name="Shim" csh="PMAN_PDW_Insert_Group_Shim">
+                <Pref name="PDW_SHIM_OUTER_PROFILE_OFFSET_EU" type="real" title="Outer Profile Offset" value="0.02" unit="in" ver="10.0.0" scope="Session">
+                    <Description>This option specifies the outer profile offset.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                        <UpperBound value="4.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SHIM_OUTER_PROFILE_OFFSET_MU" type="real" title="Outer Profile Offset" value="0.5" unit="mm" ver="10.0.0" scope="Session">
+                    <Description>This option specifies the outer profile offset.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                        <UpperBound value="100" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SHIM_SLUG_HOLE_PROFILE_OFFSET_EU" type="real" title="Slug Hole Offset" value="0.02" unit="in" ver="10.0.0" scope="Session">
+                    <Description>This option specifies the slug hole profile offset.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                        <UpperBound value="4.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SHIM_SLUG_HOLE_PROFILE_OFFSET_MU" type="real" title="Slug Hole Offset" value="0.5" unit="mm" ver="10.0.0" scope="Session">
+                    <Description>This option specifies the slug hole profile offset.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                        <UpperBound value="100" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SHIM_SHIM_HEIGHT_EU" type="real" title="Shim Height" value="0.02" unit="in" ver="10.0.0" scope="Session">
+                    <Description>This option specifies the shim height.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.01" include="1"/>
+                        <UpperBound value="4.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_SHIM_SHIM_HEIGHT_MU" type="real" title="Shim Height" value="0.5" unit="mm" ver="10.0.0" scope="Session">
+                    <Description>This option specifies the shim height.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.1" include="1"/>
+                        <UpperBound value="100" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Auxiliary" csh="PMAN_PDW_Insert_Group_Auxiliary">
+                <Pref name="PDW_AUXILIARY_RAMP_RADIUS_MU" type="real" title="Ramp Radius" value="10" unit="mm" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the ramp radius in the auxiliary insert group.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                        <UpperBound value="10000" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_AUXILIARY_RAMP_RADIUS_EU" type="real" title="Ramp Radius" value="0.5" unit="in" ver="12.0.0" scope="Session">
+                    <Description>This option specifies the ramp radius in the auxiliary insert group.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                        <UpperBound value="1000" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Die Base" csh="PMAN_PDW_Die_Base">
+          <Tab name="General" csh="PMAN_PDW_Die_Base_General"> 
+            <Pref name="PDW_DIEBASELISTALLPARA" type="int" title="List Parameters" value="1" ver="8.0.0" scope="Session">
+              <Description>This option determines whether to list all the parameters or key parameters only.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="Key Parameters" value="0"/>
+                <EnumElem name="All Parameters" value="1"/>
+              </Data>
+            </Pref>
+            <Pref name="PDW_DBKEYPARAMETER" type="string_list" title="Key Parameters" value="&quot;index&quot;\&quot;PL&quot;\&quot;PW&quot;\&quot;ST&quot;\&quot;TCP_h&quot;\&quot;TSB_h&quot;\&quot;TP_h&quot;\&quot;TBP2_h&quot;\&quot;TBP_h&quot;\&quot;PP_h&quot;\&quot;BP_h&quot;\&quot;SP_h&quot;\&quot;DP_h&quot;\&quot;BBP_h&quot;\&quot;BBP2_h&quot;\&quot;DS_h&quot;\&quot;PB_h&quot;\&quot;BCP_h&quot;\&quot;DX1&quot;\&quot;DX2&quot;\&quot;DY1&quot;\&quot;DY2&quot;\&quot;GAP1&quot;\&quot;GAP2&quot;" ver="8.0.0" scope="Session">
+              <Description>This option specifies the Die Base key parameters to list. The list values are key parameter names of the die base.</Description>
+              <MultiLineText height="4"/>
+            </Pref>
+            <Pref name="PDW_DIEBASEPARENT" type="string_list" title="Additional Parents" value="&quot;PDW_DIE&quot;\&quot;PDW_DB&quot;\&quot;PDW_DIEBASE&quot;" ver="8.0.0" scope="Session">
+              <Description>The Parent option menu in the Die Base Management System allows the parent to be chosen. This box allows additional parents to be specified that will be added to Parent option menu. The list values are attributes names in the components.</Description>
+              <MultiLineText height="4"/>
+            </Pref>
+            <Pref name="PDW_DBCURRENTPARENT" type="string" title="Current Parent" value="PDW_DIEBASE" ver="8.0.0" scope="Session">
+              <Description>This option specifies the parent for a different designer.</Description>
+              <Widestring/>
+            </Pref>
+          </Tab>
+        </Category>
+        <Category name="Standard Parts" csh="PMAN_PDW_Standard_Parts">
+            <Tab name="General" csh="PMAN_PDW_Standard_Parts_General">
+                <Pref name="PDW_STANDARDPOINTCONFIRM" type="logical" title="Confirm Placement" value="false" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not selection confirmation should be used when selecting the placement point of the standard part component in the product model.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_StandardAutoUndo" type="logical" title="Automatically Undo when Failing to Add Standard Part" value="true" ver="1899+" scope="Session">
+                    <Description>When a standard part fails to be added to the product model, this option determines whether or not an automatic undo should be performed.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>        
+                <Pref name="PDW_STANDARDDEFAULTREFSET" type="int" title="Standard Reference Set" value="2" ver="4.0.0" scope="Session">
+                    <Description>This option specifies which reference set that should be displayed for a standard part that is added to the product model. The TRUE reference set usually contains the component body, while the FALSE reference set contains the bodies used for mounting create pockets.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="TRUE" value="0"/>
+                        <EnumElem name="FALSE" value="1"/>
+                        <EnumElem name="Entire Part" value="2"/>
+                    </Data>
+                </Pref>          
+                <Pref name="PDW_STANDARDCORRECTREFSET" type="logical" title="Correct Reference Set after Adding Standard Part" value="true" ver="4.0.3" scope="Session">
+                    <Description>When adding a standard part with child components to the product model, this option determines whether or not the Standard Part's Child Component's Reference Set (TRUE, FALSE, or BOTH) should be added to the corresponding reference set in the standard part.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_CONCEPTDESIGNLAYER" type="int" title="Concept Design Object Layer" value="200" ver="6.0.0" scope="Session">
+                    <Description>This option specifies which layer the linked position planes and points should be placed on.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_STANDARDPARENT" type="string_list" title="Standard Parent" value="&quot;PDW_DB&quot;\&quot;PDW_SUB&quot;\&quot;PDW_DIE&quot;" ver="6.0.1" scope="Session">
+                    <Description>The Parent option menu in the Standard Parts Management System allows the parent of the standard part to be chosen. This box allows additional parents to be specified that will be added to Parent option menu. The list values are attributes names in the components.</Description>
+                    <MultiLineText height="4"/>
+                </Pref>
+                <Pref name="PDW_CURRENT_PARENT" type="string" title="Current Parent" value="PDW_DB" ver="6.0.0" scope="Session">
+                    <Description>This option specifies the parent for a different designer.</Description>
+                    <Widestring/>
+                </Pref>              
+            </Tab>
+            <Tab name="Installation" csh="PMAN_PDW_Standard_Parts_Installation">
+                <Pref name="PDW_STANDARDPLANEVIEW" type="logical" title="Reorient View when Using Plane Position Method" value="true" ver="4.0.0" scope="Session">
+                    <Description>When a standard part is added to the product model using the plane position method, this option determines whether or not the view is reoriented to the placement plane.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Catalog Order" csh="PMAN_PDW_Standard_Parts_Catalog_Order">
+                <Pref name="PDW_STANDARDCATALOGORDER" type="string_list" title="Standard Catalog Order" value="&quot;STRACK_MM&quot;\&quot;MISUMI_MM&quot;\&quot;DAYTON_MM&quot;\&quot;HYSON_MM&quot;\&quot;SUPERIOR_MM&quot;\&quot;DANLY_IN&quot;\&quot;DAYTON_IN&quot;\&quot;HYSON_IN&quot;\&quot;SUPERIOR_IN&quot;\&quot;UNIFIED_IN&quot;" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the listing order of standard parts in the diebase design dialog box.</Description>
+                    <MultiLineText height="15"/>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Relief Design" csh="PMAN_PDW_Relief_Design">
+            <Tab name="General" csh="PMAN_PDW_Relief_Design_General">
+                <Pref name="PDW_relief_face_color" type="int" title="Body Color" value="75" ver="1847" scope="Session">
+                    <Description>This option specifies the color of the relief body faces.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="PDW_relief_face_translucency" type="int" title="Body Translucency" value="50" unit="%" ver="1847" scope="Session">
+                    <Description>This option specifies the translucency of the relief body faces.</Description>
+                    <IntegerScale/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                        <UpperBound value="100" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>       
+        <Category name="Tooling Validation" csh="PMAN_PDW_Validation">
+            <Tab name="Interference Check" csh="PMAN_PDW_Validation_Interference_Check">
+                <Pref name="PDW_CLEARANCE_ZONE_MU" type="real" title="Clearance Zone" value="0.01" unit="mm" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the clearance zone value for interference check.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_CLEARANCE_ZONE_EU" type="real" title="Clearance Zone" value="0.0004" unit="in" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the clearance zone value for interference check.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>                 
+            </Tab>
+            <Tab name="Collision Check" csh="PMAN_PDW_Validation_Collision_Check">
+              <Pref name="PDW_CLEARANCE_MU" type="real" title="Clearance" value="0.1" unit="mm" ver="12.0.0" scope="Session">
+                <Description>This option specifies the clearance value for collision check.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.00001" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_CLEARANCE_EU" type="real" title="Clearance" value="0.004" unit="in" ver="12.0.0" scope="Session">
+                <Description>This option specifies the clearance value for collision check.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0000004" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_MOUNTED_FACET_BODY_LAYER" type="int" title="Mounted Facet Bodies Layer" value="250" ver="1980" scope="Session">
+                <Description>This option specifies the layer on which the user defined mounted facet bodies for simulation should be placed.</Description>
+                <Integer/>
+                <Data type="range">
+                  <LowerBound value="1" include="1"/>
+                  <UpperBound value="256" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_SHOW_MOUNT_FACET_LAYER" type="logical" title="Activate Mounted Facet Bodies Layer" value="true" ver="2007" scope="Session">
+                <Description>This option determines whether or not to activate the layer on which the user defined mounted facet bodies for simulation are placed.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_MOUNTED_FACET_INHERIT_TRANSLUCENCY" type="logical" title="Inherit Translucency from Source" value="false" ver="2007" scope="Session">
+                <Description>This option determines whether or not to inherit the translucency from source the solid.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+            </Tab>
+            <Tab name="Sheet Metal Part" csh="PMAN_PDW_Validation_Sheet_Metal_Part">
+              <Pref name="PDW_sheet_metal_min_bend_angle" type="real" title="Minimum Bend Angle" value="0" unit="deg" ver="1953" scope="Session">
+                <Description>This option specifies the minimum bend angle.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0" include="1"/>
+                  <UpperBound value="180" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_max_bend_angle" type="real" title="Maximum Bend Angle" value="180.0" unit="deg" ver="1953" scope="Session">
+                <Description>This option specifies the maximum bend angle.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0" include="1"/>
+                  <UpperBound value="180" include="1"/>
+                </Data>
+              </Pref>
+               <Pref name="PDW_sheet_metal_min_bend_radius" type="string" title="Minimum Bend Radius" value="0.5*t" ver="1953" scope="Session">
+                <Description>This option specifies the minimum bend radius using the formula a*t, where &apos;a&apos; is a positive coefficient and &apos;t&apos; is the part thickness. The default is 0.5*t.</Description>
+                <String/> 
+              </Pref>
+              <Pref name="PDW_sheet_metal_min_bend_height" type="string" title="Minimum Bend Height" value="2*t+r" ver="1953" scope="Session">
+                <Description>This option specifies the minimum bend height using the formula a*t+r+c, where &apos;a&apos; is a positive coefficient, &apos;t&apos; is the part thickness, &apos;r&apos; is the inside bend radius, and &apos;c&apos; can be any real value. The default formula is 2*t+r.</Description>
+                <String/>
+              </Pref>
+              <Pref name="PDW_sheet_metal_min_cutout_corner_radius_MU" type="real" title="Minimum Cutout Corner Radius" value="0.1" unit="mm" ver="1953" scope="Session">
+                <Description>This option specifies the minimum cutout corner radius for a round shaped corner.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_min_cutout_corner_radius_EU" type="real" title="Minimum Cutout Corner Radius" value="0.004" unit="in" ver="1953" scope="Session">
+                <Description>This option specifies the minimum cutout corner radius for a round shaped corner.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_min_cutout_corner_angle" type="real" title="Minimum Cutout Corner Angle" value="3.0" unit ="deg" ver="1953" scope="Session">
+                <Description>This option specifies the minimum cutout corner angle for a sharp corner.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                  <UpperBound value="179.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_cutout_min_round_radius" type="string" title="Minimum Round Radius" value="0.5*t" ver="1953" scope="Session">
+                <Description>This option specifies the minimum round radius formula for a cutout with a round or circular shape. The minimum round radius is a*t, where &apos;a&apos; is a positive number and &apos;t&apos; is the part thickness. The default is 0.5*t.</Description>
+                <String/>
+              </Pref>
+              <Pref name="PDW_sheet_metal_cutout_min_oblong_radius_MU" type="real" title="Minimum Oblong Radius" value="0.1" unit="mm" ver="1953" scope="Session">
+                <Description>This option specifies the minimum oblong radius for a cutout with an oblong shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_cutout_min_oblong_radius_EU" type="real" title="Minimum Oblong Radius" value="0.004" unit="in" ver="1953" scope="Session">
+                <Description>This option specifies the minimum oblong radius for a cutout with an oblong shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_cutout_min_oblong_length_MU" type="real" title="Minimum Oblong Length" value="2.0" unit="mm" ver="1953" scope="Session">
+                <Description>This option specifies the minimum oblong length for a cutout with an oblong shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_cutout_min_oblong_length_EU" type="real" title="Minimum Oblong Length" value="0.08" unit="in" ver="1953" scope="Session">
+                <Description>This option specifies the minimum oblong length for a cutout with an oblong shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_cutout_min_square_radius_MU" type="real" title="Minimum Square Radius" value="0.1" unit="mm" ver="1953" scope="Session">
+                <Description>This option specifies the minimum radius for the corners of a cutout with a rounded square shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_cutout_min_square_radius_EU" type="real" title="Minimum Square Radius" value="0.004" unit="in" ver="1953" scope="Session">
+                <Description>This option specifies the minimum radius for the corners of a cutout with a rounded square shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_cutout_min_square_length_MU" type="real" title="Minimum Square Length" value="1.0" unit="mm" ver="1953" scope="Session">
+                <Description>This option specifies the minimum square length for a cutout with a square shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_cutout_min_square_length_EU" type="real" title="Minimum Square Length" value="0.04" unit="in" ver="1953" scope="Session">
+                <Description>This option specifies the minimum square length for a cutout with a square shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_cutout_min_rectangle_radius_MU" type="real" title="Minimum Rectangle Radius" value="0.1" unit="mm" ver="1953" scope="Session">
+                <Description>This option specifies the minimum radius for the corners of a cutout with a rounded rectangle shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_cutout_min_rectangle_radius_EU" type="real" title="Minimum Rectangle Radius" value="0.004" unit="in" ver="1953" scope="Session">
+                <Description>This option specifies the minimum radius for the corners of a cutout with a rounded rectangle shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_cutout_min_rectangle_length_MU" type="real" title="Minimum Rectangle Length" value="2.0" unit="mm" ver="1953" scope="Session">
+                <Description>This option specifies the minimum rectangle length for a cutout with a rectangular shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_cutout_min_rectangle_length_EU" type="real" title="Minimum Rectangle Length" value="0.08" unit="in" ver="1953" scope="Session">
+                <Description>This option specifies the minimum rectangle length for a cutout with a rectangular shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_cutout_min_rectangle_width_MU" type="real" title="Minimum Rectangle Width" value="1.0" unit="mm" ver="1953" scope="Session">
+                <Description>This option specifies the minimum rectangle width for a cutout with a rectangular shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_cutout_min_rectangle_width_EU" type="real" title="Minimum Rectangle Width" value="0.04" unit="in" ver="1953" scope="Session">
+                <Description>This option specifies the minimum rectangle width for a cutout with a rectangular shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_cutout_min_hexagon_length_MU" type="real" title="Minimum Hexagon Length" value="1.0" unit="mm" ver="1953" scope="Session">
+                <Description>This option specifies the minimum hexagon length for a cutout with a hexagonal shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_cutout_min_hexagon_length_EU" type="real" title="Minimum Hexagon Length" value="0.04" unit="in" ver="1953" scope="Session">
+                <Description>This option specifies the minimum hexagon length for a cutout with a hexagonal shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_partial_circular_hole" type="string" title="Minimum Partial Circular Hole Diameter" value="t" ver="1980" scope="Session">
+                <Description>This option specifies the minimum partial circular hole diameter using the formula a*t, where &apos;a&apos; is a positive coefficient and &apos;t&apos; is the part thickness. The default is t.</Description>
+                <String/>
+              </Pref>
+              <Pref name="PDW_sheet_metal_min_partial_circular_hole_width_MU" type="real" title="Minimum Partial Circular Hole Width" value="1.0" unit="mm" ver="1980" scope="Session">
+              <Description>This option specifies the minimum partial circular hole width for a hole cutout with a partial circular shape.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="1"/>
+              </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_min_partial_circular_hole_width_EU" type="real" title="Minimum Partial Circular Hole Width" value="0.04" unit="in" ver="1980" scope="Session">
+                <Description>This option specifies the minimum partial circular hole width for a hole cutout with a partial circular shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Image bitmap="double_d_hole.bmp"/>
+              <Pref name="PDW_sheet_metal_min_double_d_hole_length_MU" type="real" title="(L) Minimum Double D Hole Length" value="2.0" unit="mm" ver="1980" scope="Session">
+                <Description>This option specifies the minimum hole length for a hole cutout with a double D shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_min_double_d_hole_length_EU" type="real" title="(L) Minimum Double D Hole Length" value="0.08" unit="in" ver="1980" scope="Session">
+                <Description>This option specifies the minimum hole length for a hole cutout with a double D shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_min_double_d_hole_width_MU" type="real" title="(W) Minimum Double D Hole Width" value="1.0" unit="mm" ver="1980" scope="Session">
+                <Description>This option specifies the minimum width for a hole cutout with a double D shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_min_double_d_hole_width_EU" type="real" title="(W) Minimum Double D Hole Width" value="0.04" unit="in" ver="1980" scope="Session">
+                <Description>This option specifies the minimum width for a hole cutout with a double D shape.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_min_part_thickness_MU" type="real" title="Minimum Part Thickness" value="0.1" unit="mm" ver="1953" scope="Session">
+                <Description>This option specifies the minimum part thickness.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.001" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_min_part_thickness_EU" type="real" title="Minimum Part Thickness" value="0.004" unit="in" ver="1953" scope="Session">
+                <Description>This option specifies the minimum part thickness.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.001" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_max_part_thickness_MU" type="real" title="Maximum Part Thickness" value="10.0" unit="mm" ver="1953" scope="Session">
+                <Description>This option specifies the maximum part thickness.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.001" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_max_part_thickness_EU" type="real" title="Maximum Part Thickness" value="0.4" unit="in" ver="1953" scope="Session">
+                <Description>This option specifies the maximum part thickness.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.001" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_equal_thickness_tol_MU" type="real" title="Equal Thickness Tolerance" value="0.0001" unit="mm" ver="1953" scope="Session">
+                <Description>This option specifies the equal thickness tolerance.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_equal_thickness_tol_EU" type="real" title="Equal Thickness Tolerance" value="0.000004" unit="in" ver="1953" scope="Session">
+                <Description>This option specifies the equal thickness tolerance.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_min_bend_to_bend_dist" type="string" title="Minimum Bend to Bend Distance" value="2*t" ver="1953" scope="Session">
+                <Description>This option specifies the minimum distance tolerance between two bends using the formula a*t, where &apos;a&apos; is a positive coefficient and &apos;t&apos; is the part thickness. The default is 2*t.</Description>
+                <String/>
+              </Pref>
+              <Pref name="PDW_sheet_metal_min_cutout_to_bend_dist" type="string" title="Minimum Cutout to Bend Distance" value="2*t" ver="1953" scope="Session">
+                <Description>This option specifies the minimum distance tolerance between a cutout and a bend using the formula a*t, where &apos;a&apos; is a positive coefficient and &apos;t&apos; is the part thickness. The default is 2*t.</Description>
+                <String/>
+              </Pref>
+              <Pref name="PDW_sheet_metal_min_cutout_to_cutout_dist" type="string" title="Minimum Cutout to Cutout Distance" value="2*t" ver="1953" scope="Session">
+                <Description>This option specifies the minimum distance tolerance between two cutouts using the formula a*t, where &apos;a&apos; is a positive coefficient and &apos;t&apos; is the part thickness. The default is 2*t.</Description>
+                <String/>
+              </Pref>
+              <Pref name="PDW_sheet_metal_tangent_angle_tolerance" type="real" title="Tangent Angle Tolerance" value="0.01" unit="deg" ver="1953" scope="Session">
+                <Description>This option specifies the tangent angle tolerance.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0001" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_hem_clearance_MU" type="real" title="Minimum Hem Clearance" value="0.01" unit="mm" ver="1953" scope="Session">
+                <Description>This option specifies the minimum hem clearance.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.001" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_hem_clearance_EU" type="real" title="Minimum Hem Clearance" value="0.0004" unit="in" ver="1953" scope="Session">
+                <Description>This option specifies the minimum hem clearance.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.00004" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_hem_length" type="string" title="Minimum Hem Length" value="2*t" ver="1953" scope="Session">
+                <Description>This option specifies the minimum hem length using the formula a*t, where &apos;a&apos; is a positive cofficient and &apos;t&apos; is the part thickness. The default is 2*t.</Description>
+                <String/>
+              </Pref>
+              <Pref name="PDW_sheet_metal_hem_height_MU" type="string" title="Maximum Hem Height" value="2*t+0.5" unit="mm" ver="1953" scope="Session">
+                <Description>This option specifies the maximum hem height limit using the formula a*t+c, where &apos;a&apos; is a positive coefficient, &apos;t&apos; is the part thickness, and &apos;c&apos; can be any real number. The default is 2*t+0.5.</Description>
+                <String/>
+              </Pref>
+              <Pref name="PDW_sheet_metal_hem_height_EU" type="string" title="Maximum Hem Height" value="2*t+0.02" unit="in" ver="1953" scope="Session">
+                <Description>This option specifies the maximum hem height limit using the formula a*t+c, where &apos;a&apos; is a positive coefficient, &apos;t&apos; is the part thickness, and &apos;c&apos; can be any real number. The default is 2*t+0.02.</Description>
+                <String/>
+              </Pref>
+              <Pref name="PDW_sheet_metal_hem_angle" type="real" title="Hem Bend Angle Tolerance" value="180.0" unit="deg" ver="1953" scope="Session">
+                <Description>This option specifies the angle at which a sheet metal feature is considered a hem rather than a bend.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="180.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_sheet_metal_n_bend_height_MU" type="string" title="N Bend Height" value="2*t+0.5" unit="mm" ver="1980" scope="Session">
+                <Description>An N Bend feature is a bend with a bend angle of 180 degrees. This option specifies the N Bend height using the formula a*t+c, where &apos;a&apos; is a positive coefficient, &apos;t&apos; is the part thickness, and &apos;c&apos; can be any real number. The default is 2*t+0.5.</Description>
+                <String/>
+              </Pref>
+              <Pref name="PDW_sheet_metal_n_bend_height_EU" type="string" title="N Bend Height" value="2*t+0.02" unit="in" ver="1980" scope="Session">
+                <Description>An N Bend feature is a bend with a bend angle of 180 degrees. This option specifies the N Bend height using the formula a*t+c, where &apos;a&apos; is a positive coefficient, &apos;t&apos; is the part thickness, and &apos;c&apos; can be any real number. The default is 2*t+0.02.</Description>
+                <String/>
+              </Pref>
+            </Tab>
+            <Tab name="Formability Simulation" csh="PMAN_PDW_Validation_Formability_Simulation">
+              <Group name="Forming Press">
+                <Pref name="PDW_FLANGE_FORMING_VELOCITY_MU" type="int" title="Flanging Forming Velocity" value="5000" unit="mm/s" ver="2206" scope="Session">
+                    <Description>This option specifies the flanging simulation forming velocity.</Description>
+                    <Integer/>
+                    <Data type="range">
+                      <LowerBound value="0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_FLANGE_FORMING_VELOCITY_EU" type="int" title="Flanging Forming Velocity" value="196.85" unit="in/s" ver="2206" scope="Session">
+                  <Description>This option specifies the flanging simulation forming velocity.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_FLANGING_SIMULATION_TOOLGAP_COEFFICIENT" type="real" title="Flanging Tool Gap Coefficient" value="1.0" ver="2206" scope="Session">
+                  <Description>This option specifies the flanging simulation tool gap coefficient, which multiplied by the material thickness gives the tool gap.</Description>
+                  <Real/>
+                  <Data type="range">
+                      <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_FLANGING_SIMULATION_STEELGAP_COEFFICIENT" type="real" title="Flanging Steel Gap Coefficient" value="1.0" ver="2206" scope="Session">
+                  <Description>This option specifies the flanging simulation steel gap coefficient, which multiplied by the material thickness gives the steel gap.</Description>
+                  <Real/>
+                  <Data type="range">
+                      <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_FLANGE_FORMING_FRAME" type="int" title="Flanging Forming Results Frames" value="15" ver="2206" scope="Session">
+                  <Description>This option specifies the total number of forming results frames for the flanging simulation.</Description>
+                  <Integer/>
+                  <Data type="range">
+                      <LowerBound value="1" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_DRAWING_FORMING_VELOCITY_MU" type="int" title="Drawing Forming Velocity" value="5000" unit="mm/s" ver="2206" scope="Session">
+                  <Description>This option specifies the drawing simulation forming velocity.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_DRAWING_FORMING_VELOCITY_EU" type="int" title="Drawing Forming Velocity" value="196.85" unit="in/s" ver="2206" scope="Session">
+                  <Description>This option specifies the drawing simulation forming velocity.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_DRAWING_HOLDING_VELOCITY_MU" type="int" title="Drawing Holding Velocity" value="2000" unit="mm/s" ver="2206" scope="Session">
+                  <Description>This option specifies the drawing simulation holding velocity.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_DRAWING_HOLDING_VELOCITY_EU" type="int" title="Drawing Holding Velocity" value="78.74" unit="in/s" ver="2206" scope="Session">
+                  <Description>This option specifies the drawing simulation holding velocity.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_DRAWING_SIMULATION_TOOLGAP_COEFFICIENT" type="real" title="Drawing Tool Gap Coefficient" value="1.0" ver="2206" scope="Session">
+                  <Description>This option specifies the drawing simulation tool gap coefficient, which multiplied by the material thickness gives the tool gap.</Description>
+                  <Real/>
+                  <Data type="range">
+                      <LowerBound value="0.1" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_DRAWING_FORMING_FRAME" type="int" title="Drawing Forming Results Frames" value="15" ver="2206" scope="Session">
+                  <Description>This option specifies the total number of forming results frames for the drawing simulation.</Description>
+                  <Integer/>
+                  <Data type="range">
+                      <LowerBound value="1" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="PDW_DRAWING_HOLDING_FRAME" type="int" title="Drawing Holding Results Frames" value="5" ver="2206" scope="Session">
+                  <Description>This option specifies the total number of holding results frames for the drawing simulation.</Description>
+                  <Integer/>
+                  <Data type="range">
+                      <LowerBound value="1" include="1"/>
+                  </Data>
+                </Pref>
+                  <Pref name="PDW_TRIMMING_SIMULATION_TOOLGAP_COEFFICIENT" type="real" title="Trimming Tool Gap Coefficient" value="1.0" ver="2306" scope="Session">
+                  <Description>This option specifies the trimming simulation tool gap coefficient, which multiplied by the material thickness gives the tool gap.</Description>
+                  <Real/>
+                  <Data type="range">
+                      <LowerBound value="0.1" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+                <Group name="Blank Mesh">
+                  <Pref name="PDW_FORMABILITI_SIMULATION_BLANKMESH_COLOR" type="int" title="Color" value="211" ver="2206" scope="Session">
+                    <Description>This option specifies the color of the blank mesh.</Description>
+                    <Color/>
+                  </Pref>
+                </Group>
+                <Group name="Blank Face Mesh">
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_WARPAGE_MU" type="real" title="Warpage" value="10.0" unit="mm" ver="2206" scope="Session">
+                    <Description>This option specifies the allowed element warpage in a blank face mesh.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="0"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_WARPAGE_EU" type="real" title="Warpage" value="0.39" unit="in" ver="2206" scope="Session">
+                    <Description>This option specifies the allowed element warpage in a blank face mesh.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="0"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_TAPER" type="real" title="Taper" value="0.5" unit="deg" ver="2206" scope="Session">
+                    <Description>This option specifies the allowed element taper in a blank face mesh.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="0"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_ASPECT_RATIO" type="real" title="Aspect Ratio" value="8.0" ver="2206" scope="Session">
+                    <Description>This option specifies the blank face mesh aspect ratio, which is the ratio between the sides of the mesh.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="0"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_TRIA_MAX_ANGLE" type="real" title="Maximum Triangle Angle" value="150.0" unit="deg" ver="2206" scope="Session">
+                    <Description>This option specifies the maximum angle in a three-sided element in a blank face mesh.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="1"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_TRIA_MIN_ANGLE" type="real" title="Minimum Triangle Angle" value="15.0" unit="deg" ver="2206" scope="Session">
+                    <Description>This option specifies the minimum angle in a three-sided element in a blank face mesh.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="1"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_QUAD_MAX_ANGLE" type="real" title="Maximum Quadrangle Angle" value="150.0" unit="deg" ver="2206" scope="Session">
+                    <Description>This option specifies the maximum angle in a four-sided element in a blank face mesh</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="1"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_QUAD_MIN_ANGLE" type="real" title="Minimum Quadrangle Angle" value="30.0" unit="deg" ver="2206" scope="Session">
+                    <Description>This option specifies the minimum angle in a four-sided element in a blank face mesh</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="1"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_MAX_ELEMENT_MU" type="real" title="Maximum Element Size" value="25.0" unit="mm" ver="2206" scope="Session">
+                    <Description>This option specifies the maximum element size in a blank face mesh.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="0"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_MAX_ELEMENT_EU" type="real" title="Maximum Element Size" value="0.984" unit="in" ver="2206" scope="Session">
+                    <Description>This option specifies the maximum element size in a blank face mesh.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="0"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_MIN_ELEMENT_MU" type="real" title="Minimum Element Size" value="5.0" unit="mm" ver="2206" scope="Session">
+                    <Description>This option specifies the minimum element size in a blank face mesh.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="0"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_MIN_ELEMENT_EU" type="real" title="Minimum Element Size" value="0.197" unit="in" ver="2206" scope="Session">
+                    <Description>This option specifies the minimum element size in a blank face mesh.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="0"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_CHECKFACE" type="logical" title="Check Surface" value="true" ver="2206" scope="Session">
+                    <Description>This option determines whether or not to check surface quality before meshing.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                      <EnumElem name="No" value="false"/>
+                      <EnumElem name="Yes" value="true"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_AUTO_REPAIR" type="logical" title="Auto Repair Mesh Data" value="true" ver="2206" scope="Session">
+                    <Description>This option determines whether or not to repair mesh data automatically after meshing.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                      <EnumElem name="No" value="false"/>
+                      <EnumElem name="Yes" value="true"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_BOUNDBADRY_GAP_MU" type="real" title="Maximum Boundary Gap" value="0.5" unit="mm" ver="2206" scope="Session">
+                    <Description>This option specifies the maximum boundary gap for a blank face mesh. Gaps smaller than this will be ignored.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="0"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_BOUNDBADRY_GAP_EU" type="real" title="Maximum Boundary Gap" value="0.020" unit="in" ver="2206" scope="Session">
+                    <Description>This option specifies the maximum boundary gap for a blank face mesh. Gaps smaller than this will be ignored.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="0"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_HOLE_SIZE_MU" type="real" title="Maximum Hole Size" value="0.0" unit="mm" ver="2206" scope="Session">
+                    <Description>This option specifies the maximum hole size in a blank face mesh. Holes smaller than this will be ignored.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="1"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_BLANKFACEMESH_HOLE_SIZE_EU" type="real" title="Maximum Hole Size" value="0.0" unit="in" ver="2206" scope="Session">
+                    <Description>This option specifies the maximum hole size in a blank face mesh. Holes smaller than this will be ignored.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="1"/>
+                    </Data>
+                  </Pref>
+                </Group>
+                <Group name="Tools Colors">
+                  <Pref name="PDW_FORMABILITI_SIMULATION_PUNCH_COLOR" type="int" title="Punch" value="186" ver="2206" scope="Session">
+                    <Description>This option specifies the color of the forming simulation punch face.</Description>
+                    <Color/>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITI_SIMULATION_DIE_COLOR" type="int" title="Die" value="164" ver="2206" scope="Session">
+                    <Description>This option specifies the color of the forming simulation die face.</Description>
+                    <Color/>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITI_SIMULATION_STEEL_COLOR" type="int" title="Steel" value="181" ver="2206" scope="Session">
+                    <Description>This option specifies the color of the forming simulation steel face.</Description>
+                    <Color/>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITI_SIMULATION_HOLDER_COLOR" type="int" title="Holder" value="108" ver="2206" scope="Session">
+                    <Description>This option specifies the color of the drawing simulation holder face.</Description>
+                    <Color/>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITI_SIMULATION_PAD_COLOR" type="int" title="Pad" value="103" ver="2206" scope="Session">
+                    <Description>This option specifies the color of the drawing simulation pad face.</Description>
+                    <Color/>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITI_SIMULATION_CONSTRAINT_COLOR" type="int" title="Constraint" value="78" ver="2306" scope="Session">
+                    <Description>This option specifies the color of the constraint face.</Description>
+                    <Color/>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITI_SIMULATION_STOPPIN_COLOR" type="int" title="Stop Pin" value="114" ver="2206" scope="Session">
+                    <Description>This option specifies the color of the drawing simulation stop pin.</Description>
+                    <Color/>
+                  </Pref>
+                </Group>
+                <Group name="Tools Mesh">
+                  <Pref name="PDW_FORMABILITY_TOOLMESH_MAXFACET_MU" type="real" title="Maximum Facet Size" value="12.0" unit="mm" ver="2206" scope="Session">
+                    <Description>This option specifies the maximum size of facets in a tool mesh.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="0"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_TOOLMESH_MAXFACET_EU" type="real" title="Maximum Facet Size" value="0.472" unit="in" ver="2206" scope="Session">
+                    <Description>This option specifies the maximum size of facets in a tool mesh.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="0"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_TOOLMESH_SURFACE_DISTANCE_TOLER_MU" type="real" title="Surface Distance Tolerance" value="0.19" unit ="mm" ver="2206" scope="Session">
+                  <Description>This option specifies the surface distance tolerance for facets in a tool mesh.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="0"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PDW_FORMABILITY_TOOLMESH_SURFACE_DISTANCE_TOLER_EU" type="real" title="Surface Distance Tolerance" value="0.008" unit ="in" ver="2206" scope="Session">
+                    <Description>This option specifies the surface distance tolerance for facets in a tool mesh.</Description>
+                    <Real/>
+                    <Data type="range">
+                      <LowerBound value="0.0" include="0"/>
+                    </Data>
+                  </Pref>
+                </Group>
+            </Tab>
+
+        </Category>
+        <Category name="Tools" csh="PMAN_PDW_Tools">
+            <Tab name="General" csh="PMAN_PDW_Tools_General">
+                <Pref name="PDW_TOOLSALLOWNONASSOCIATIVE" type="logical" title="Associative Commands" value="true" ver="5.0.0" scope="Session">
+                    <Description>This option determines whether or not Tools commands should be made associative.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_TOOLSTOLERANCE_MU" type="real" title="Tolerance" value="0.025" unit="mm" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the modeling tolerance for the Tools patch command's sheet trim, enlarge face, and traverse loop.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_TOOLSTOLERANCE_EU" type="real" title="Tolerance" value="0.001" unit="in" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the modeling tolerance for the Tools patch command's sheet trim, enlarge face, and traverse loop.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref> 
+                <Pref name="PDW_TOOLSENLARGETYPE" type="int" title="Enlarge Sheet Type" value="0" ver="5.0.0" scope="Session">
+                    <Description>This option specifies how to extend the edges of the enlarge feature.<Formatted>
+Linear: Extends the edges of the enlarge sheet linearly.
+Natural: Extends the edges of the enlarge sheet by following the natural curve of the edges.</Formatted></Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Linear" value="0"/>
+                        <EnumElem name="Natural" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_TOOLSCUTBOUNDARY" type="logical" title="Cut to Boundary" value="true" ver="5.0.0" scope="Session">
+                    <Description>This option determines whether or not the sheet should be trimmed to the highlighted boundary.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_TOOLSENLARGEMAXVALUE" type="int" title="Maximum Percentage Value for U/V Scales" value="300" ver="5.0.0" scope="Session">
+                    <Description>The Enlarge Sheet command uses four percentage sliders to control the size of the enlarged sheet (U and V, minimum and maximum). This option specifies the maximum value for these slider bars.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PDW_MOLDTOOLSSPLITSOLIDFACEOPTION" type="int" title="Split Solid by" value="1" ver="5.0.0" scope="Session">
+                    <Description>The Split Solid command lets you break out a section that will be an insert or slide. This option specifies what object types can be selected as the tool body for the split operation.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Solid, Sheet, or Datum Plane" value="0"/>
+                        <EnumElem name="Face" value="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Wire EDM Start Hole" csh="PMAN_PDW_Tools_Wire_EDM_Start_Hole">
+              <Pref name="PDW_TOOLS_WIREHOLE_DIA_MU" type="real" title="Diameter" value="3.0" unit="mm" ver="6.0.0" scope="Session">
+                <Description>This option specifies the wire EDM start hole diameter.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_TOOLS_WIREHOLE_DIA_EU" type="real" title="Diameter" value="0.12" unit="in" ver="6.0.0" scope="Session">
+                <Description>This option specifies the wire EDM start hole diameter.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>              
+              <Pref name="PDW_TOOLS_WIREHOLE_CENTERLINE" type="string" title="Centerline Length" value="2*d" ver="6.0.0" scope="Session">
+                <Description>This option specifies the wire EDM start hole centerline length.</Description>
+                <String/>
+              </Pref>
+              <Pref name="PDW_TOOLS_WIREHOLE_DISTANCE_TO_MIDPOINT_MU" type="real" title="Distance" value="3.0" unit="mm" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the distance from the wire EDM start hole center to the edge midpoint.</Description>
+                  <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_TOOLS_WIREHOLE_DISTANCE_TO_MIDPOINT_EU" type="real" title="Distance" value="0.12" unit="in" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the distance from the wire EDM start hole center to the edge midpoint.</Description>
+                  <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>              
+            </Tab> 
+            <Tab name="Stripper Venting" csh="PMAN_PDW_Tools_Stripper_Venting">
+              <Pref name="PDW_TOOLS_STRIPPERVENTING_BLENDRADIUS_MU" type="real" title="Edge Blend Radius" value="0.2" unit="mm" ver="10.0.0" scope="Session">
+                <Description>This option specifies the blend radius of venting hole.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="PDW_TOOLS_STRIPPERVENTING_BLENDRADIUS_EU" type="real" title="Edge Blend Radius" value="0.01" unit="in" ver="10.0.0" scope="Session">
+                <Description>This option specifies the blend radius of venting hole.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+            </Tab> 
+            <Tab name="Slug Retention" csh="PMAN_PDW_Tools_Slug_Retention">
+                <Pref name="Tooling_PDW_Slug_Retention_Metric_Spreadsheet_WIN" type="string" title="Metric Part" value="$PDIEWIZARD_DIR\templates\metric\pdw_slug_retention.xlsx" ver="1847" scope="Session">
+                    <Description>This field specifies the full file name of the slug retention spreadsheet with Metric units.</Description>
+                    <BrowseFileSel type="xls,xlsx,xs4"/>
+                </Pref>
+                <Pref name="Tooling_PDW_Slug_Retention_Metric_Spreadsheet_UNX" type="string" title="Metric Part" value="$PDIEWIZARD_DIR/templates/metric/pdw_slug_retention.xs4" ver="11.0.0" scope="Session">
+                    <Description>This field specifies the full file name of the slug retention spreadsheet with Metric units.</Description>
+                    <BrowseFileSel type="xs4"/>
+                </Pref>
+                <Pref name="Tooling_PDW_Slug_Retention_English_Spreadsheet_WIN" type="string" title="English Part" value="$PDIEWIZARD_DIR\templates\english\pdw_slug_retention.xlsx" ver="1847" scope="Session">
+                    <Description>This field specifies the full file name of the slug retention spreadsheet with English units.</Description>
+                    <BrowseFileSel type="xls,xlsx,xs4"/>
+                </Pref>
+                <Pref name="Tooling_PDW_Slug_Retention_English_Spreadsheet_UNX" type="string" title="English Part" value="$PDIEWIZARD_DIR/templates/english/pdw_slug_retention.xs4" ver="11.0.0" scope="Session">
+                    <Description>This field specifies the full file name of the slug retention spreadsheet with English units.</Description>
+                    <BrowseFileSel type="xs4"/>
+                </Pref>
+            </Tab> 
+        </Category>   
+    </Application>
+</PrefDefinition>

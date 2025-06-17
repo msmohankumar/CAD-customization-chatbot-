@@ -1,0 +1,2039 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Drafting" csh="PMAN_Drafting" package_suppress="simcenter3d,simviewer,view,mechatronicsplayer">
+        <Category name="General/Setup" csh="PMAN_Drafting_General_Setup">
+            <Tab name="Standard" csh="PMAN_Drafting_General_Setup_Standard">
+                <Pref name="Drafting_Standard" type="string" title="Drafting Standard" value="ISO" ver="5.0.0" scope="Session">
+                    <Description>This option allows users to specify a drafting standard used for drafting standard customer defaults.</Description>
+                    <DraftingStandard/>
+                </Pref>
+            </Tab>
+            <Tab name="Workflow" csh="PMAN_Drafting_General_Setup_Workflow" package_suppress="nx2dedit">
+                <Group name="Stand-alone">
+                    <Docum>The options in this group will be used when creating drawings that do not reference any models.</Docum>
+                    <Pref name="Drafting_AutoStartInsertSheetDialog" type="logical" title="Always Start Insert Sheet Command" value="true" ver="8.0.0" scope="Session">
+                        <Description>This option determines whether or not the Insert Sheet command will be started the first time entering the Drafting application if no drawing sheets exist in the part.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drafting_StandaloneAutoStartDrawingViewCreation" type="logical" title="Always Start View Creation" value="false" ver="8.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing View command will be started after inserting a drawing sheet with no views.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drafting_StandaloneAutoStartProjectedView" type="logical" title="Always Start Projected View Command" value="true" ver="8.0.0" scope="Session">
+                        <Description>This option determines whether or not the Projected View command will be started after inserting a drawing view.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drafting_AutoStartProjectToView" type="logical" title="Always Start Project to View Command" value="true" ver="7.0.0" scope="Session">
+                        <Description>This option determines whether or not the Project to View command will be started after inserting a projected drawing view. This option has no effect without an NX Layout license or if the Always Start Projected View Command option is on.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Model-based">
+                    <Pref name="Drafting_showNewDrawingDialog" type="int" title="Always Start Insert Sheet Command" value="1" ver="3.0.0" scope="Session">
+                        <Description>This option determines whether or not the Insert Sheet command will be started the first time entering the Drafting application if no drawing sheets exist in the part.</Description>
+                        <Toggle off="0"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="1"/>
+                            <EnumElem name="No" value="0"/>
+                        </Data>
+                    </Pref>
+                    <!--Merged with Drafting_BaseViewOrWizard-->
+                    <!--
+                    <Pref name="Drafting_AutoStartViewCreation" type="logical" title="Automatically Start View Creation" value="true" ver="7.0.0" scope="Session">
+                        <Description>This option determines whether or not a view command will be started after inserting a drawing sheet with no views.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    -->
+                    <Pref name="Drafting_BaseViewOrWizard" type="int" title="Always Start" value="1" ver="1899" scope="Session">
+                        <Description>This option determines which view command will be started after inserting a sheet with no views.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="View Creation Wizard" value="0"/>
+                            <EnumElem name="Base View Command" value="1"/>
+                            <EnumElem name="No View Commands" value="2"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drafting_AutoStartProjectedView" type="logical" title="Always Start Projected View Command" value="true" ver="5.0.0" scope="Session">
+                        <Description>This option determines whether or not the Projected View command will be started after inserting a model view.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drafting_CreateComponentOfMasterModelPart" type="logical" title="Create Drafting Component" value="false" ver="6.0.2" scope="Session">
+                        <Description>This option determines whether or not drafting components will be created when creating a view of the master model part.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Drawing">
+                    <Pref name="Drafting_DrawingSettings" type="int" title="Settings Origination" value="0" ver="5.0.0" scope="Session">
+                        <Description>This option determines if a new part created from a template inherits settings from the template part, or the Drafting Standard.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Drawing Template" value="0"/>
+                            <EnumElem name="Drawing Standard"  value="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UG_gridInDrafting" type="int" title="Grid Settings" value="0" ver="6.0.1" scope="Session">
+                        <Description>This option determines which grid should be used in Drafting.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Drafting" value="0"/>
+                            <EnumElem name="Sketch" value="1"/>
+                            <EnumElem name="Sheet Zone" value="2"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Inherited PMI">
+                    <Pref name="Drafting_AllowPMIBidirectionalEdits" type="logical" title="Allow PMI Bidirectional Edits" value="false" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not model view PMI can be edited while in Drafting.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                  <Pref name="Drafting_PMICustomSymbolSettings" type="int" title="PMI Custom Symbol Settings" value="0" ver="11.0.1" scope="Session">
+                    <Description>This option determines whether settings for inherited PMI custom symbols will use drafting preferences or the settings from the PMI custom symbol instance.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                      <EnumElem name="Use Drafting Preferences" value="0"/>
+                      <EnumElem name="Use PMI Settings" value="1"/>
+                    </Data>
+                  </Pref>
+                </Group>
+                <Group name="Dimension">
+                    <Pref name="Drafting_EditSceneDialogDelay" type="int" title="Pause Delay for On-Screen Dialog" value="1" ver="10.0.2" scope="Session">
+                        <Description>This option specifies the delay, in increments of 250 milliseconds, between pausing the cursor and when the on-screen dialog is displayed during dimension creation.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="0" value="0"/>
+                            <EnumElem name="1" value="1"/>
+                            <EnumElem name="2" value="2"/>
+                            <EnumElem name="3" value="3"/>
+                            <EnumElem name="4" value="4"/>
+                            <EnumElem name="5" value="5"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Retained Annotations" csh="PMAN_Drafting_General_Setup_Retained_Annotations" package_suppress="nx2dedit">
+                <Group name="Retain Annotation">
+                    <Pref name="Drafting_retainAnnotationObjects" type="int" title="Retain Annotations" value="1" ver="3.0.0" scope="Part">
+                        <Description>This option determines whether or not drafting objects associated to objects that have been deleted by a modeling change should be retained (not deleted).</Description>
+                        <Toggle off="0"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="1"/>
+                            <EnumElem name="No" value="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Format">
+                    <Pref name="Drafting_retainColor" type="int" title="Color" value="193" ver="5.0.0" scope="Part">
+                        <Description>This option specifies the color of retained drafting objects.</Description>
+                        <ColorOption/>
+                        <Data type="color">
+                            <EnumElem name="Original" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drafting_retainFont" type="int" title="Style" value="2" ver="1980" scope="Part">
+                        <Description>This option specifies the line style for retained drafting objects. The option Original means that the line style will not be changed from what it was before the drafting object became retained.</Description>
+                      <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" allowInvisibleFont="true" LineFontOptionMaskString="MBDLineFonts" LineFontDefaultValue="0" LineFontInvisibleValue="-1"/>
+                    </Pref>
+                    <Pref name="Drafting_retainWidth" type="int" title="Width" value="0" ver="8.5.0" scope="Part">
+                        <Description>This option specifies the line width for retained drafting objects. The option Original means that the line width will not be changed from what it was before the drafting object became retained.</Description>
+                        <AnnotationLineWidth allowRetainWidth="true" allowWideLineWidth ="true"/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Welcome Page" csh="PMAN_Drafting_General_Setup_Welcome_Page" package_suppress="nx2dedit">
+                <Pref name="Drafting_WelcomePageSetup" type="logical" title="Display Recommended Setup in Welcome Page" value="true" ver="8.0.0" scope="Session">
+                    <Description>This option determines whether or not the "Recommended Setup" section will appear in the Drafting Welcome Page.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="Drafting_WelcomeSessionCount" type="int" title="Drafting Welcome Page Duration" value="5" unit="Times" ver="8.0.0" scope="Session">
+                    <Description>This option determines the number of NX sessions that will display the Drafting Welcome Page when entering the Drafting application. Setting its value to 0 (zero) will result in it never being displayed.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Miscellaneous" csh="PMAN_Drafting_General_Setup_Miscellaneous">
+                <Pref name="Drafting_AllowExpressions" type="logical" title="Allow Expressions" value="false" ver="7.5.0" scope="Session">
+                    <Description>This option determines whether or not the Expressions editor is available in the Drafting application.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Drafting_saveCGMImageWithPart" type="int" title="Save CGM Data in Part" value="1" ver="3.0.0" scope="Part" package_suppress="nx2dedit">
+                    <Description>This option determines whether or not CGM data should be saved for retrieval outside the context of NX.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="Drafting_fontListOption" type="int" title="Fonts to Use" value="1" ver="1953" scope="Session">
+                    <Description>This option determines from where font files will be read. System fonts are read from the systems standard font directory and in the directory pointed to by UGII_STANDARD_FONT_DIR. NX Fonts are located in the directory pointed to by UGII_CHARACTER_FONT_DIR.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Standard and NX Fonts" value="0"/>
+                        <EnumElem name="Standard Fonts Only" value="1"/>
+                        <EnumElem name="NX Fonts Only" value="2"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Text Editor" csh="PMAN_Drafting_General_Setup_Text_Editor" package_suppress="nx2dedit">
+                <Pref name="Drafting_AEcharSizeMenu" type="string_list" title="Character Scale Factor" value="&quot;0.25&quot;\&quot;0.5&quot;\&quot;0.75&quot;\&quot;1.0&quot;\&quot;1.25&quot;\&quot;1.5&quot;\&quot;1.75&quot;\&quot;2.0&quot;\&quot;2.25&quot;\&quot;2.5&quot;\&quot;2.75&quot;\&quot;3.0&quot;\&quot;3.25&quot;\&quot;3.5&quot;\&quot;3.75&quot;\&quot;4.0&quot;" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the items to appear in the Character Scale Factor option menu in the Text Editor dialog box. The items are different scale factors that can be applied to the text. (The order of the items in the list will be the order of the items in the option menu.)</Description>
+                    <MultiLineText height="10"/>
+                </Pref>
+                <Pref name="Drafting_AEbold" type="int" title="Bold Font Width" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies what line width should be used for the Bold text option for NX Fonts.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Normal" bitmap="dui_letter_normal.bmp" value="1"/>
+                        <EnumElem name="Thick" bitmap="dui_letter_thick.bmp" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="Drafting_AEitalic" type="real" title="Italic Slant Angle" value="20.0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the slant angle that should be used for the Italic text option for NX Fonts.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>                
+                <Pref name="Drafting_AEverticalText" type="int" title="Vertical Text" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not notes are created as vertical text.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Group name="Input Windows">
+                    <Pref name="Drafting_AErows" type="int" title="Height" value="5" ver="3.0.0" scope="Session">
+                        <Description>This option specifies the visible vertical size (expressed as number of rows) of the text edit window.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drafting_AEcolumns" type="int" title="Width" value="30" ver="3.0.0" scope="Session">
+                        <Description>This option specifies the visible horizontal size (expressed as number of columns) of the text edit window.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="0" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Preview Windows">
+                    <Pref name="Drafting_AEpreviewSize" type="int" title="Text Size" value="2" ver="3.0.0" scope="Session">
+                        <Description>This option specifies the size of the text in the preview window.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Actual" value="0"/>
+                            <EnumElem name="Fixed Scale" value="1"/>
+                            <EnumElem name="Fixed Character Size" value="2"/>
+                        </Data>
+                        <Docum><Formatted>
+Actual - The size corresponds to the actual character size.
+Fixed Scale - A scale is applied to the actual character size.
+Fixed Character Size - The size is a set character size. This option is very useful when the actual size of the text is very large or very small.</Formatted></Docum>
+                    </Pref>
+                    <Pref name="Drafting_AEpreviewScale" type="real" title="Scale" value="1.0" ver="3.0.0" scope="Session">
+                        <Description>This option specifies the scale applied to the actual character size of the text in the preview window.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drafting_AEpreviewCharSize_MU" type="real" title="Character Size" value="3.0" unit="mm" ver="3.0.0" scope="Session">
+                        <Description>This option specifies the fixed character size used for the text in the preview window.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drafting_AEpreviewCharSize_EU" type="real" title="Character Size" value="0.125" unit="in" ver="3.0.0" scope="Session">
+                        <Description>This option specifies the fixed character size used for the text in the preview window.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="Flat Pattern View" csh="PMAN_Drafting_Flat_Pattern_View" package_suppress="nx2dedit">
+                <Tab name="Lines" csh="PMAN_Drafting_Flat_Pattern_View_Lines">
+                    <Group name="Bend-up Centerline">
+                        <Pref name="NXSM_bendUpCenterLine_FlatPatternView_Enabled" type="logical" title="Show" value="true" ver="6.0.0" scope="Part">
+                            <Description>This option specifies whether Bend-up Centerlines are shown on flat pattern drawing views.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_bendUpCenterLine_FlatPatternView_Color" type="int" title="Color" value="0" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the color of Bend-up Centerlines on flat pattern drawing views.</Description>
+                            <ColorOption/>
+                            <Data type="color">
+                                <EnumElem name="Original" value="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_bendUpCenterLine_FlatPatternView_Font" type="int" title="Style" value="0" ver="1847" scope="Part">
+                            <Description>This option specifies the style for Bend-up Centerlines on flat pattern drawing views.</Description>
+                          <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                        </Pref>
+                        <Pref name="NXSM_bendUpCenterLine_FlatPatternView_Width" type="int" title="Width" value="0" ver="8.5.0" scope="Part">
+                            <Description>This option specifies the width for Bend-up Centerlines on flat pattern drawing views.</Description>
+                            <AnnotationLineWidth allowRetainWidth="true" allowWideLineWidth="true"/>
+                        </Pref>
+                    </Group>
+                    <Group name="Bend-down Centerline">
+                        <Pref name="NXSM_bendDownCenterLine_FlatPatternView_Enabled" type="logical" title="Show" value="true" ver="6.0.0" scope="Part">
+                            <Description>This option specifies whether Bend-down Centerlines are shown on flat pattern drawing views.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_bendDownCenterLine_FlatPatternView_Color" type="int" title="Color" value="0" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the color of Bend-down Centerlines on flat pattern drawing views.</Description>
+                            <ColorOption/>
+                            <Data type="color">
+                                <EnumElem name="Original" value="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_bendDownCenterLine_FlatPatternView_Font" type="int" title="Style" value="0" ver="1847" scope="Part">
+                            <Description>This option specifies the line style for Bend-down Centerlines on flat pattern drawing views.</Description>
+                          <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                        </Pref>
+                        <Pref name="NXSM_bendDownCenterLine_FlatPatternView_Width" type="int" title="Width" value="0" ver="8.5.0" scope="Part">
+                            <Description>This option specifies the width for Bend-down Centerlines on flat pattern drawing views.</Description>
+                            <AnnotationLineWidth allowRetainWidth="true" allowWideLineWidth="true"/>
+                        </Pref>
+                    </Group>
+                    <Group name="Bend Tangent Line">
+                        <Pref name="NXSM_bendTangentLine_FlatPatternView_Enabled" type="logical" title="Show" value="true" ver="5.0.0" scope="Part">
+                            <Description>This option specifies whether Bend Tangent Lines are shown on flat pattern drawing views.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_bendTangentLine_FlatPatternView_Color" type="int" title="Color" value="0" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the color of Bend Tangent Lines on flat pattern drawing views.</Description>
+                            <ColorOption/>
+                            <Data type="color">
+                                <EnumElem name="Original" value="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_bendTangentLine_FlatPatternView_Font" type="int" title="Style" value="0" ver="1847" scope="Part">
+                            <Description>This option specifies the line style for Bend Tangent Lines on flat pattern drawing views.</Description>
+                          <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                        </Pref>
+                        <Pref name="NXSM_bendTangentLine_FlatPatternView_Width" type="int" title="Width" value="0" ver="8.5.0" scope="Part">
+                            <Description>This option specifies the width for Bend Tangent Lines on flat pattern drawing views.</Description>
+                            <AnnotationLineWidth allowRetainWidth="true" allowWideLineWidth="true"/>
+                        </Pref>
+                    </Group>
+                    <Group name="Inner Mold Line">
+                        <Pref name="NXSM_bendInnerMoldLine_FlatPatternView_Enabled" type="logical" title="Show" value="true" ver="5.0.0" scope="Part">
+                            <Description>This option specifies whether Inner Mold Lines are shown on flat pattern drawing views.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_bendInnerMoldLine_FlatPatternView_Color" type="int" title="Color" value="0" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the color of Inner Mold Lines on flat pattern drawing views.</Description>
+                            <ColorOption/>
+                            <Data type="color">
+                                <EnumElem name="Original" value="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_bendInnerMoldLine_FlatPatternView_Font" type="int" title="Style" value="0" ver="1847" scope="Part">
+                            <Description>This option specifies the line style for Inner Mold Lines on flat pattern drawing views.</Description>
+                          <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                        </Pref>
+                        <Pref name="NXSM_bendInnerMoldLine_FlatPatternView_Width" type="int" title="Width" value="0" ver="8.5.0" scope="Part">
+                            <Description>This option specifies the width for Inner Mold Lines on flat pattern drawing views.</Description>
+                            <AnnotationLineWidth allowRetainWidth="true" allowWideLineWidth="true"/>
+                        </Pref>
+                    </Group>
+                    <Group name="Outer Mold Line">
+                        <Pref name="NXSM_bendOuterMoldLine_FlatPatternView_Enabled" type="logical" title="Show" value="true" ver="5.0.0" scope="Part">
+                            <Description>This option specifies whether Outer Mold Lines are shown on flat pattern drawing views.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_bendOuterMoldLine_FlatPatternView_Color" type="int" title="Color" value="0" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the color of Outer Mold Lines on flat pattern drawing views.</Description>
+                            <ColorOption/>
+                            <Data type="color">
+                                <EnumElem name="Original" value="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_bendOuterMoldLine_FlatPatternView_Font" type="int" title="Style" value="0" ver="1847" scope="Part">
+                            <Description>This option specifies the line style for Outer Mold Lines on flat pattern drawing views.</Description>
+                          <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                        </Pref>
+                        <Pref name="NXSM_bendOuterMoldLine_FlatPatternView_Width" type="int" title="Width" value="0" ver="8.5.0" scope="Part">
+                            <Description>This option specifies the width for Outer Mold Lines on flat pattern drawing views.</Description>
+                            <AnnotationLineWidth allowRetainWidth="true" allowWideLineWidth="true"/>
+                        </Pref>
+                    </Group>
+                    <Group name="Exterior Curves">
+                        <Pref name="NXSM_exteriorCurves_FlatPatternView_Color" type="int" title="Color" value="0" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the color of Exterior Curves on flat pattern drawing views.</Description>
+                            <ColorOption/>
+                            <Data type="color">
+                                <EnumElem name="Original" value="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_exteriorCurves_FlatPatternView_Font" type="int" title="Style" value="0" ver="1847" scope="Part">
+                            <Description>This option specifies the line style for Exterior Curves on flat pattern drawing views.</Description>
+                          <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                        </Pref>
+                        <Pref name="NXSM_exteriorCurves_FlatPatternView_Width" type="int" title="Width" value="0" ver="8.5.0" scope="Part">
+                            <Description>This option specifies the width for Exterior Curves on flat pattern drawing views.</Description>
+                            <AnnotationLineWidth allowRetainWidth="true" allowWideLineWidth="true"/>
+                        </Pref>
+                    </Group>
+                    <Group name="Interior Cutout Curves">
+                        <Pref name="NXSM_interiorCutoutCurves_FlatPatternView_Enabled" type="logical" title="Show" value="true" ver="6.0.0" scope="Part">
+                            <Description>This option specifies whether Interior Cutout Curves are shown on flat pattern drawing views.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_interiorCutoutCurves_FlatPatternView_Color" type="int" title="Color" value="0" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the color of Interior Cutout Curves on flat pattern drawing views.</Description>
+                            <ColorOption/>
+                            <Data type="color">
+                                <EnumElem name="Original" value="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_interiorCutoutCurves_FlatPatternView_Font" type="int" title="Style" value="0" ver="1847" scope="Part">
+                            <Description>This option specifies the line style for Interior Cutout Curves on flat pattern drawing views.</Description>
+                          <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                        </Pref>
+                        <Pref name="NXSM_interiorCutoutCurves_FlatPatternView_Width" type="int" title="Width" value="0" ver="8.5.0" scope="Part">
+                            <Description>This option specifies the width for Interior Cutout Curves on flat pattern drawing views.</Description>
+                            <AnnotationLineWidth allowRetainWidth="true" allowWideLineWidth="true"/>
+                        </Pref>
+                    </Group>
+                    <Group name="Interior Feature Curves">
+                        <Pref name="NXSM_interiorFeatureCurves_FlatPatternView_Enabled" type="logical" title="Show" value="true" ver="6.0.0" scope="Part">
+                            <Description>This option specifies whether Interior Feature Curves are shown on flat pattern drawing views.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_interiorFeatureCurves_FlatPatternView_Color" type="int" title="Color" value="0" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the color of Interior Feature Curves on flat pattern drawing views.</Description>
+                            <ColorOption/>
+                            <Data type="color">
+                                <EnumElem name="Original" value="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_interiorFeatureCurves_FlatPatternView_Font" type="int" title="Style" value="0" ver="1847" scope="Part">
+                            <Description>This option specifies the line style for Interior Feature Curves on flat pattern drawing views.</Description>
+                          <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                        </Pref>
+                        <Pref name="NXSM_interiorFeatureCurves_FlatPatternView_Width" type="int" title="Width" value="0" ver="8.5.0" scope="Part">
+                            <Description>This option specifies the width for Interior Feature Curves on flat pattern drawing views.</Description>
+                            <AnnotationLineWidth allowRetainWidth="true" allowWideLineWidth="true"/>
+                        </Pref>
+                    </Group>
+                    <Group name="Lightening Hole">
+                        <Pref name="NXSM_holeCenter_FlatPatternView_Enabled" type="logical" title="Show" value="true" ver="5.0.0" scope="Part">
+                            <Description>This option specifies whether Lightening Hole Center Markers are shown on flat pattern drawing views.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_holeCenter_FlatPatternView_Color" type="int" title="Color" value="0" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the color of Lightening Hole Center Markers on flat pattern drawing views.</Description>
+                            <ColorOption/>
+                            <Data type="color">
+                                <EnumElem name="Original" value="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_holeCenter_FlatPatternView_Font" type="int" title="Style" value="0" ver="1847" scope="Part">
+                            <Description>This option specifies the line style for Lightening Hole Center Markers on flat pattern drawing views.</Description>
+                          <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                        </Pref>
+                        <Pref name="NXSM_holeCenter_FlatPatternView_Width" type="int" title="Width" value="0" ver="8.5.0" scope="Part">
+                            <Description>This option specifies the width for Lightening Hole Center Markers on flat pattern drawing views.</Description>
+                            <AnnotationLineWidth allowRetainWidth="true" allowWideLineWidth="true"/>
+                        </Pref>
+                    </Group>
+                    <Group name="Joggle Line">
+                        <Pref name="NXSM_joggleLine_FlatPatternView_Enabled" type="logical" title="Show" value="true" ver="5.0.0" scope="Part">
+                            <Description>This option specifies whether Joggle Lines are shown on flat pattern drawing views.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_joggleLine_FlatPatternView_Color" type="int" title="Color" value="0" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the color of Joggle Lines on flat pattern drawing views.</Description>
+                            <ColorOption/>
+                            <Data type="color">
+                                <EnumElem name="Original" value="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_joggleLine_FlatPatternView_Font" type="int" title="Style" value="0" ver="1847" scope="Part">
+                            <Description>This option specifies the line style for Joggle Lines on flat pattern drawing views.</Description>
+                          <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                        </Pref>
+                        <Pref name="NXSM_joggleLine_FlatPatternView_Width" type="int" title="Width" value="0" ver="8.5.0" scope="Part">
+                            <Description>This option specifies the width for Joggle Lines on flat pattern drawing views.</Description>
+                            <AnnotationLineWidth allowRetainWidth="true" allowWideLineWidth="true"/>
+                        </Pref>
+                    </Group>
+                    <Group name="Added Top Geometry">
+                        <Pref name="NXSM_addedTop_FlatPatternView_Enabled" type="logical" title="Show" value="true" ver="6.0.0" scope="Part">
+                            <Description>This option specifies whether Added Top Objects are shown on flat pattern drawing views.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_addedTop_FlatPatternView_Color" type="int" title="Color" value="0" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the color of Added Top Objects on flat pattern drawing views.</Description>
+                            <ColorOption/>
+                            <Data type="color">
+                                <EnumElem name="Original" value="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_addedTop_FlatPatternView_Font" type="int" title="Style" value="0" ver="1847" scope="Part">
+                            <Description>This option specifies the style for Added Top Objects on flat pattern drawing views.</Description>
+                          <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                        </Pref>
+                        <Pref name="NXSM_addedTop_FlatPatternView_Width" type="int" title="Width" value="0" ver="8.5.0" scope="Part">
+                            <Description>This option specifies the width for Added Top Objects on flat pattern drawing views.</Description>
+                            <AnnotationLineWidth allowRetainWidth="true" allowWideLineWidth="true"/>
+                        </Pref>
+                    </Group>
+                    <Group name="Added Bottom Geometry">
+                        <Pref name="NXSM_addedBottom_FlatPatternView_Enabled" type="logical" title="Show" value="true" ver="6.0.0" scope="Part">
+                            <Description>This option specifies whether Added Bottom Objects are shown on flat pattern drawing views.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_addedBottom_FlatPatternView_Color" type="int" title="Color" value="0" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the color of Added Bottom Objects on flat pattern drawing views.</Description>
+                            <ColorOption/>
+                            <Data type="color">
+                                <EnumElem name="Original" value="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_addedBottom_FlatPatternView_Font" type="int" title="Style" value="0" ver="1847" scope="Part">
+                            <Description>This option specifies the style for Added Bottom Objects on flat pattern drawing views.</Description>
+                          <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                        </Pref>
+                        <Pref name="NXSM_addedBottom_FlatPatternView_Width" type="int" title="Width" value="0" ver="8.5.0" scope="Part">
+                            <Description>This option specifies the width for Added Bottom Objects on flat pattern drawing views.</Description>
+                            <AnnotationLineWidth allowRetainWidth="true" allowWideLineWidth="true"/>
+                        </Pref>
+                    </Group>
+                    <Group name="Tool Marker">
+                        <Pref name="NXSM_toolMarker_FlatPatternView_Enabled" type="logical" title="Show" value="true" ver="6.0.3" scope="Part">
+                            <Description>This option specifies whether Tool Marker objects are shown on flat pattern drawing views.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_toolMarker_FlatPatternView_Color" type="int" title="Color" value="0" ver="6.0.3" scope="Part">
+                            <Description>This option specifies the color of Tool Marker objects on flat pattern drawing views.</Description>
+                            <ColorOption/>
+                            <Data type="color">
+                                <EnumElem name="Original" value="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXSM_toolMarker_FlatPatternView_Font" type="int" title="Style" value="0" ver="1847" scope="Part">
+                            <Description>This option specifies the style for Tool Marker objects on flat pattern drawing views.</Description>
+                          <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                        </Pref>
+                        <Pref name="NXSM_toolMarker_FlatPatternView_Width" type="int" title="Width" value="0" ver="8.5.0" scope="Part">
+                            <Description>This option specifies the width for Tool Marker objects on flat pattern drawing views.</Description>
+                            <AnnotationLineWidth allowRetainWidth="true" allowWideLineWidth="true"/>
+                        </Pref>
+                    </Group>
+                  <Group name="Hole Feature Curves">
+                    <Pref name="NXSM_holeFeatureCurves_FlatPatternView_Enabled" type="logical" title="Show" value="true" ver="1847" scope="Part">
+                      <Description>This option specifies whether Hole Feature Curves are shown on flat pattern drawing views.</Description>
+                      <Toggle off="false"/>
+                      <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                      </Data>
+                    </Pref>
+                    <Pref name="NXSM_holeFeatureCurves_FlatPatternView_Color" type="int" title="Color" value="0" ver="1847" scope="Part">
+                      <Description>This option specifies the color of Hole Feature Curves on flat pattern drawing views.</Description>
+                      <ColorOption/>
+                      <Data type="color">
+                        <EnumElem name="Original" value="0"/>
+                      </Data>
+                    </Pref>
+                    <Pref name="NXSM_holeFeatureCurves_FlatPatternView_Font" type="int" title="Style" value="0" ver="1847" scope="Part">
+                      <Description>This option specifies the line style for Hole Feature Curves on flat pattern drawing views.</Description>
+                      <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                    </Pref>
+                    <Pref name="NXSM_holeFeatureCurves_FlatPatternView_Width" type="int" title="Width" value="0" ver="1847" scope="Part">
+                      <Description>This option specifies the width for Hole Feature Curves on flat pattern drawing views.</Description>
+                      <AnnotationLineWidth allowRetainWidth="true" allowWideLineWidth="true"/>
+                    </Pref>
+                  </Group>
+                  <Group name="Center Marks">
+                    <Pref name="NXSM_centerMarks_FlatPatternView_Enabled" type="logical" title="Show" value="true" ver="1847" scope="Part">
+                      <Description>This option specifies whether Center Marks are shown on flat pattern drawing views.</Description>
+                      <Toggle off="false"/>
+                      <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                      </Data>
+                    </Pref>
+                    <Pref name="NXSM_centerMarks_FlatPatternView_Color" type="int" title="Color" value="0" ver="1847" scope="Part">
+                      <Description>This option specifies the color of Center Marks on flat pattern drawing views.</Description>
+                      <ColorOption/>
+                      <Data type="color">
+                        <EnumElem name="Original" value="0"/>
+                      </Data>
+                    </Pref>
+                    <Pref name="NXSM_centerMarks_FlatPatternView_Font" type="int" title="Style" value="0" ver="1847" scope="Part">
+                      <Description>This option specifies the line style for Center Marks on flat pattern drawing views.</Description>
+                      <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="0"/>
+                    </Pref>
+                    <Pref name="NXSM_centerMarks_FlatPatternView_Width" type="int" title="Width" value="0" ver="1847" scope="Part">
+                      <Description>This option specifies the width for Center Marks on flat pattern drawing views.</Description>
+                      <AnnotationLineWidth allowRetainWidth="true" allowWideLineWidth="true"/>
+                    </Pref>
+                  </Group>
+                </Tab>
+                <Tab name="Callouts" csh="PMAN_Drafting_Flat_Pattern_View_Callouts">
+                    <Group name="Custom Callout 1">
+                        <Pref name="NXCustomCallout_FlatPatternView_1_Available" type="logical" title="Available" value="true" ver="5.0.0" scope="Session">
+                            <Description>This option determines whether or not Custom Callout 1 will be available on the Preferences and Settings dialog boxes for flat pattern drawings.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_1_Enabled" type="logical" title="Create" value="true" ver="5.0.0" scope="Session">
+                            <Description>This option determines whether or not Custom Callout 1 will be created on flat pattern drawings.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_1_Name" type="string" title="Name" value="Bend Radius" ver="5.0.0" scope="Session">
+                            <Description>This field defines the name that Custom Callout 1 has on the Preferences and Settings dialog boxes.</Description>
+                            <Widestring/>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_1_AutoAttachTypes" type="string" title="Object Types" value="Bend-up Centerline, Bend-down Centerline, Outer Mold Line, Inner Mold Line" ver="6.0.0" scope="Session">
+                            <Description>This field defines the object types for which Custom Callout 1 is added automatically to flat pattern views.</Description>
+                            <Widestring/>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_1_Content" type="string_list" title="Content" value="Bend Radius = &lt;!KEY=0,3.2@UGS.radius&gt;" ver="5.0.0" scope="Session">
+                            <Description>This field defines the content for Custom Callout 1.</Description>
+                            <MultiLineText height="2"/>
+                            <Docum>
+                                The content can consist of any combination of expressions, special symbols, and automatic
+                                callout keyword references. An automatic callout keyword reference is replaced by the value specified
+                                by an object and a keyword name. An automatic callout keyword reference is a reference between &lt; and
+                                &gt; characters, like expressions, except that the leading text is !KEY. Any text outside the &lt; and
+                                &gt; characters may be modified. Only certain fields within the keyword reference may be modified. The
+                                number between the = and the , characters should not be changed. (No harm will befall you, it simply
+                                does not mean anything to change it. It references the object to which the callout will be attached when
+                                it is created.) The numbers between the , and the @ characters are the length and precision values used
+                                to format a floating point value and may be changed as needed. The keyword name must be one of the names
+                                specified by NX, and extends from the @ character to the &gt; or a space, whichever comes first. If there
+                                are any characters between the keyword name and the &gt; character, the keyword replacement is binary-valued.
+                                If the value returned for the keyword by the object is not zero, the first string is substituted, otherwise
+                                the second string is substituted. These strings may be modified and may contain drafting symbols or user-defined
+                                symbols.
+                            </Docum>
+                        </Pref>
+                    </Group>
+                    <Group name="Custom Callout 2">
+                        <Pref name="NXCustomCallout_FlatPatternView_2_Available" type="logical" title="Available" value="true" ver="5.0.0" scope="Session">
+                            <Description>This option determines whether or not Custom Callout 2 will be available on the Preferences and Settings dialog boxes for flat pattern drawings.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_2_Enabled" type="logical" title="Create" value="true" ver="5.0.0" scope="Session">
+                            <Description>This option determines whether or not Custom Callout 2 will be created on flat pattern drawings.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_2_Name" type="string" title="Name" value="Bend Angle" ver="5.0.0" scope="Session">
+                            <Description>This field defines the name that Custom Callout 2 has on the Preferences and Settings dialog boxes.</Description>
+                            <Widestring/>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_2_AutoAttachTypes" type="string" title="Object Types" value="Bend-up Centerline, Bend-down Centerline, Outer Mold Line, Inner Mold Line" ver="6.0.0" scope="Session">
+                            <Description>This field defines the object types for which Custom Callout 2 is added automatically to flat pattern views.</Description>
+                            <Widestring/>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_2_Content" type="string_list" title="Content" value="Bend Angle = &lt;!KEY=0,3.2@UGS.angle&gt;" ver="5.0.0" scope="Session">
+                            <Description>This field defines the content for Custom Callout 2.</Description>
+                            <MultiLineText height="2"/>
+                            <Docum>
+                                The content can consist of any combination of expressions, special symbols, and automatic
+                                callout keyword references. An automatic callout keyword reference is replaced by the value specified
+                                by an object and a keyword name. An automatic callout keyword reference is a reference between &lt; and
+                                &gt; characters, like expressions, except that the leading text is !KEY. Any text outside the &lt; and
+                                &gt; characters may be modified. Only certain fields within the keyword reference may be modified. The
+                                number between the = and the , characters should not be changed. (No harm will befall you, it simply
+                                does not mean anything to change it. It references the object to which the callout will be attached when
+                                it is created.) The numbers between the , and the @ characters are the length and precision values used
+                                to format a floating point value and may be changed as needed. The keyword name must be one of the names
+                                specified by NX, and extends from the @ character to the &gt; or a space, whichever comes first. If there
+                                are any characters between the keyword name and the &gt; character, the keyword replacement is binary-valued.
+                                If the value returned for the keyword by the object is not zero, the first string is substituted, otherwise
+                                the second string is substituted. These strings may be modified and may contain drafting symbols or user-defined
+                                symbols.
+                            </Docum>
+                        </Pref>
+                    </Group>
+                    <Group name="Custom Callout 3">
+                        <Pref name="NXCustomCallout_FlatPatternView_3_Available" type="logical" title="Available" value="true" ver="5.0.0" scope="Session">
+                            <Description>This option determines whether or not Custom Callout 3 will be available on the Preferences and Settings dialog boxes for flat pattern drawings.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_3_Enabled" type="logical" title="Create" value="true" ver="5.0.0" scope="Session">
+                            <Description>This option determines whether or not Custom Callout 3 will be created on flat pattern drawings.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_3_Name" type="string" title="Name" value="Bend Direction" ver="5.0.0" scope="Session">
+                            <Description>This field defines the name that Custom Callout 3 has on the Preferences and Settings dialog boxes.</Description>
+                            <Widestring/>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_3_AutoAttachTypes" type="string" title="Object Types" value="Bend-up Centerline, Bend-down Centerline, Outer Mold Line, Inner Mold Line" ver="6.0.0" scope="Session">
+                            <Description>This string defines the object types for which Custom Callout 3 is added automatically to flat pattern views.</Description>
+                            <Widestring/>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_3_Content" type="string_list" title="Content" value="Bend Direction = &lt;!KEY=0,3.2@UGS.direction &quot;up&quot; &quot;down&quot;&gt;" ver="5.0.0" scope="Session">
+                            <Description>This field defines the content for Custom Callout 3.</Description>
+                            <MultiLineText height="2"/>
+                            <Docum>
+                                The content can consist of any combination of expressions, special symbols, and automatic
+                                callout keyword references. An automatic callout keyword reference is replaced by the value specified
+                                by an object and a keyword name. An automatic callout keyword reference is a reference between &lt; and
+                                &gt; characters, like expressions, except that the leading text is !KEY. Any text outside the &lt; and
+                                &gt; characters may be modified. Only certain fields within the keyword reference may be modified. The
+                                number between the = and the , characters should not be changed. (No harm will befall you, it simply
+                                does not mean anything to change it. It references the object to which the callout will be attached when
+                                it is created.) The numbers between the , and the @ characters are the length and precision values used
+                                to format a floating point value and may be changed as needed. The keyword name must be one of the names
+                                specified by NX, and extends from the @ character to the &gt; or a space, whichever comes first. If there
+                                are any characters between the keyword name and the &gt; character, the keyword replacement is binary-valued.
+                                If the value returned for the keyword by the object is not zero, the first string is substituted, otherwise
+                                the second string is substituted. These strings may be modified and may contain drafting symbols or user-defined
+                                symbols.
+                            </Docum>
+                        </Pref>
+                    </Group>
+                    <Group name="Custom Callout 4">
+                        <Pref name="NXCustomCallout_FlatPatternView_4_Available" type="logical" title="Available" value="true" ver="5.0.0" scope="Session">
+                            <Description>This option determines whether or not Custom Callout 4 will be available on the Preferences and Settings dialog boxes for flat pattern drawings.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_4_Enabled" type="logical" title="Create" value="true" ver="5.0.0" scope="Session">
+                            <Description>This option determines whether or not Custom Callout 4 will be created on flat pattern drawings.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_4_Name" type="string" title="Name" value="Hole Diameter" ver="5.0.0" scope="Session">
+                            <Description>This field defines the name that Custom Callout 4 has on the Preferences and Settings dialog boxes.</Description>
+                            <Widestring/>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_4_AutoAttachTypes" type="string" title="Object Types" value="Hole Marker" ver="5.0.0" scope="Session">
+                            <Description>This field defines the object types for which Custom Callout 4 is added automatically to flat pattern views.</Description>
+                            <Widestring/>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_4_Content" type="string_list" title="Content" value="Hole Diameter = &lt;!KEY=0,3.2@UGS.diameter&gt;" ver="5.0.0" scope="Session">
+                            <Description>This field defines the content for Custom Callout 4.</Description>
+                            <MultiLineText height="2"/>
+                            <Docum>
+                                The content can consist of any combination of expressions, special symbols, and automatic
+                                callout keyword references. An automatic callout keyword reference is replaced by the value specified
+                                by an object and a keyword name. An automatic callout keyword reference is a reference between &lt; and
+                                &gt; characters, like expressions, except that the leading text is !KEY. Any text outside the &lt; and
+                                &gt; characters may be modified. Only certain fields within the keyword reference may be modified. The
+                                number between the = and the , characters should not be changed. (No harm will befall you, it simply
+                                does not mean anything to change it. It references the object to which the callout will be attached when
+                                it is created.) The numbers between the , and the @ characters are the length and precision values used
+                                to format a floating point value and may be changed as needed. The keyword name must be one of the names
+                                specified by NX, and extends from the @ character to the &gt; or a space, whichever comes first. If there
+                                are any characters between the keyword name and the &gt; character, the keyword replacement is binary-valued.
+                                If the value returned for the keyword by the object is not zero, the first string is substituted, otherwise
+                                the second string is substituted. These strings may be modified and may contain drafting symbols or user-defined
+                                symbols.
+                            </Docum>
+                        </Pref>
+                    </Group>
+                    <Group name="Custom Callout 5">
+                        <Pref name="NXCustomCallout_FlatPatternView_5_Available" type="logical" title="Available" value="true" ver="5.0.0" scope="Session">
+                            <Description>This option determines whether or not Custom Callout 5 will be available on the Preferences and Settings dialog boxes for flat pattern drawings.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_5_Enabled" type="logical" title="Create" value="true" ver="5.0.0" scope="Session">
+                            <Description>This option determines whether or not Custom Callout 5 will be created on flat pattern drawings.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_5_Name" type="string" title="Name" value="Joggle Runout" ver="5.0.0" scope="Session">
+                            <Description>This field defines the name that Custom Callout 5 has on the Preferences and Settings dialog boxes.</Description>
+                            <Widestring/>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_5_AutoAttachTypes" type="string" title="Object Types" value="Joggle Line" ver="5.0.0" scope="Session">
+                            <Description>This field defines the object types for which Custom Callout 5 is added automatically to flat pattern views.</Description>
+                            <Widestring/>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_5_Content" type="string_list" title="Content" value="Joggle Runout = &lt;!KEY=0,3.2@UGS.joggleRunout&gt;" ver="5.0.0" scope="Session">
+                            <Description>This field defines the content for Custom Callout 5.</Description>
+                            <MultiLineText height="2"/>
+                            <Docum>
+                                The content can consist of any combination of expressions, special symbols, and automatic
+                                callout keyword references. An automatic callout keyword reference is replaced by the value specified
+                                by an object and a keyword name. An automatic callout keyword reference is a reference between &lt; and
+                                &gt; characters, like expressions, except that the leading text is !KEY. Any text outside the &lt; and
+                                &gt; characters may be modified. Only certain fields within the keyword reference may be modified. The
+                                number between the = and the , characters should not be changed. (No harm will befall you, it simply
+                                does not mean anything to change it. It references the object to which the callout will be attached when
+                                it is created.) The numbers between the , and the @ characters are the length and precision values used
+                                to format a floating point value and may be changed as needed. The keyword name must be one of the names
+                                specified by NX, and extends from the @ character to the &gt; or a space, whichever comes first. If there
+                                are any characters between the keyword name and the &gt; character, the keyword replacement is binary-valued.
+                                If the value returned for the keyword by the object is not zero, the first string is substituted, otherwise
+                                the second string is substituted. These strings may be modified and may contain drafting symbols or user-defined
+                                symbols.
+                            </Docum>
+                        </Pref>
+                    </Group>
+                    <Group name="Custom Callout 6">
+                        <Pref name="NXCustomCallout_FlatPatternView_6_Available" type="logical" title="Available" value="true" ver="5.0.0" scope="Session">
+                            <Description>This option determines whether or not Custom Callout 6 will be available on the Preferences and Settings dialog boxes for flat pattern drawings.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_6_Enabled" type="logical" title="Create" value="true" ver="5.0.0" scope="Session">
+                            <Description>This option determines whether or not Custom Callout 6 will be created on flat pattern drawings.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_6_Name" type="string" title="Name" value="Joggle Depth" ver="5.0.0" scope="Session">
+                            <Description>This field defines the name that Custom Callout 6 has on the Preferences and Settings dialog boxes.</Description>
+                            <Widestring/>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_6_AutoAttachTypes" type="string" title="Object Types" value="Joggle Line" ver="5.0.0" scope="Session">
+                            <Description>This field defines the object types for which Custom Callout 6 is added automatically to flat pattern views.</Description>
+                            <Widestring/>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_6_Content" type="string_list" title="Content" value="Joggle Depth = &lt;!KEY=0,3.2@UGS.joggleDepth&gt;" ver="5.0.0" scope="Session">
+                            <Description>This field defines the content for Custom Callout 6.</Description>
+                            <MultiLineText height="2"/>
+                            <Docum>
+                                The content can consist of any combination of expressions, special symbols, and automatic
+                                callout keyword references. An automatic callout keyword reference is replaced by the value specified
+                                by an object and a keyword name. An automatic callout keyword reference is a reference between &lt; and
+                                &gt; characters, like expressions, except that the leading text is !KEY. Any text outside the &lt; and
+                                &gt; characters may be modified. Only certain fields within the keyword reference may be modified. The
+                                number between the = and the , characters should not be changed. (No harm will befall you, it simply
+                                does not mean anything to change it. It references the object to which the callout will be attached when
+                                it is created.) The numbers between the , and the @ characters are the length and precision values used
+                                to format a floating point value and may be changed as needed. The keyword name must be one of the names
+                                specified by NX, and extends from the @ character to the &gt; or a space, whichever comes first. If there
+                                are any characters between the keyword name and the &gt; character, the keyword replacement is binary-valued.
+                                If the value returned for the keyword by the object is not zero, the first string is substituted, otherwise
+                                the second string is substituted. These strings may be modified and may contain drafting symbols or user-defined
+                                symbols.
+                            </Docum>
+                        </Pref>
+                    </Group>
+                    <Group name="Custom Callout 7">
+                        <Pref name="NXCustomCallout_FlatPatternView_7_Available" type="logical" title="Available" value="true" ver="6.0.3" scope="Session">
+                            <Description>This option determines whether or not Custom Callout 7 will be available on the Preferences and Settings dialog boxes for flat pattern drawings.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_7_Enabled" type="logical" title="Create" value="true" ver="6.0.3" scope="Session">
+                            <Description>This option determines whether or not Custom Callout 7 will be created on flat pattern drawings.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <!---->
+                        <Pref name="NXCustomCallout_FlatPatternView_7_Name" type="string" title="Name" value="Tool Id" ver="6.0.3" scope="Session">
+                            <Description>This field defines the name that Custom Callout 7 has on the Preferences and Settings dialog boxes.</Description>
+                            <Widestring/>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_7_AutoAttachTypes" type="string" title="Object Types" value="Tool Marker" ver="6.0.3" scope="Session">
+                            <Description>This field defines the object types for which Custom Callout 7 is added automatically to flat pattern views.</Description>
+                            <Widestring/>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_7_Content" type="string_list" title="Content" value="Tool ID = &lt;!KEY=0,3.2@UGS.toolId&gt;" ver="9.0.0" scope="Session">
+                            <Description>This field defines the content for Custom Callout 7.</Description>
+                            <MultiLineText height="2"/>
+                            <Docum>
+                                The content can consist of any combination of expressions, special symbols, and automatic
+                                callout keyword references. An automatic callout keyword reference is replaced by the value specified
+                                by an object and a keyword name. An automatic callout keyword reference is a reference between &lt; and
+                                &gt; characters, like expressions, except that the leading text is !KEY. Any text outside the &lt; and
+                                &gt; characters may be modified. Only certain fields within the keyword reference may be modified. The
+                                number between the = and the , characters should not be changed. (No harm will befall you, it simply
+                                does not mean anything to change it. It references the object to which the callout will be attached when
+                                it is created.) The numbers between the , and the @ characters are the length and precision values used
+                                to format a floating point value and may be changed as needed. The keyword name must be one of the names
+                                specified by NX, and extends from the @ character to the &gt; or a space, whichever comes first. If there
+                                are any characters between the keyword name and the &gt; character, the keyword replacement is binary-valued.
+                                If the value returned for the keyword by the object is not zero, the first string is substituted, otherwise
+                                the second string is substituted. These strings may be modified and may contain drafting symbols or user-defined
+                                symbols.
+                            </Docum>
+                        </Pref>
+                    </Group>
+                    <Group name="Custom Callout 8">
+                        <Pref name="NXCustomCallout_FlatPatternView_8_Available" type="logical" title="Available" value="true" ver="9.0.0" scope="Session">
+                            <Description>This option determines whether or not Custom Callout 8 will be available on the Preferences and Settings dialog boxes for flat pattern drawings.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_8_Enabled" type="logical" title="Create" value="true" ver="9.0.0" scope="Session">
+                            <Description>This option determines whether or not Custom Callout 8 will be created on flat pattern drawings.</Description>
+                            <Toggle off="false"/>
+                            <Data type="enum">
+                                <EnumElem name="Yes" value="true"/>
+                                <EnumElem name="No" value="false"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_8_Name" type="string" title="Name" value="Bend Sequence ID" ver="9.0.0" scope="Session">
+                            <Description>This field defines the name that Custom Callout 8 has on the Preferences and Settings dialog boxes.</Description>
+                            <Widestring/>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_8_AutoAttachTypes" type="string" title="Object Types" value="Bend-up Centerline, Bend-down Centerline, Outer Mold Line, Inner Mold Line" ver="9.0.0" scope="Session">
+                            <Description>This field defines the object types for which Custom Callout 8 is added automatically to flat pattern views.</Description>
+                            <Widestring/>
+                        </Pref>
+                        <Pref name="NXCustomCallout_FlatPatternView_8_Content" type="string_list" title="Content" value="Bend Sequence ID = &lt;!KEY=0,3.2@UGS.sequenceId&gt;" ver="9.0.0" scope="Session">
+                            <Description>This field defines the content for Custom Callout 8.</Description>
+                            <MultiLineText height="2"/>
+                            <Docum>
+                                The content can consist of any combination of expressions, special symbols, and automatic
+                                callout keyword references. An automatic callout keyword reference is replaced by the value specified
+                                by an object and a keyword name. An automatic callout keyword reference is a reference between &lt; and
+                                &gt; characters, like expressions, except that the leading text is !KEY. Any text outside the &lt; and
+                                &gt; characters may be modified. Only certain fields within the keyword reference may be modified. The
+                                number between the = and the , characters should not be changed. (No harm will befall you, it simply
+                                does not mean anything to change it. It references the object to which the callout will be attached when
+                                it is created.) The numbers between the , and the @ characters are the length and precision values used
+                                to format a floating point value and may be changed as needed. The keyword name must be one of the names
+                                specified by NX, and extends from the @ character to the &gt; or a space, whichever comes first. If there
+                                are any characters between the keyword name and the &gt; character, the keyword replacement is binary-valued.
+                                If the value returned for the keyword by the object is not zero, the first string is substituted, otherwise
+                                the second string is substituted. These strings may be modified and may contain drafting symbols or user-defined
+                                symbols.
+                            </Docum>
+                        </Pref>
+                    </Group>
+                  <Group name="Custom Callout 9">
+                    <Pref name="NXCustomCallout_FlatPatternView_9_Available" type="logical" title="Available" value="true" ver="1847" scope="Session">
+                      <Description>This option determines whether or not Custom Callout 9 will be available on the Preferences and Settings dialog boxes for flat pattern drawings.</Description>
+                      <Toggle off="false"/>
+                      <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                      </Data>
+                    </Pref>
+                    <Pref name="NXCustomCallout_FlatPatternView_9_Enabled" type="logical" title="Create" value="true" ver="1847" scope="Session">
+                      <Description>This option determines whether or not Custom Callout 9 will be created on flat pattern drawings.</Description>
+                      <Toggle off="false"/>
+                      <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                      </Data>
+                    </Pref>
+                    <Pref name="NXCustomCallout_FlatPatternView_9_Name" type="string" title="Name" value="Hole Details" ver="1847" scope="Session">
+                      <Description>This field defines the name that Custom Callout 9 has on the Preferences and Settings dialog boxes.</Description>
+                      <Widestring/>
+                    </Pref>
+                    <Pref name="NXCustomCallout_FlatPatternView_9_AutoAttachTypes" type="string" title="Object Types" value="Hole Curve" ver="1847" scope="Session">
+                      <Description>This field defines the object types for which Custom Callout 9 is added automatically to flat pattern views.</Description>
+                      <Widestring/>
+                    </Pref>
+                    <Pref name="NXCustomCallout_FlatPatternView_9_Content" type="string_list" title="Content" value="&lt;!KEY=0,3.2@UGS.holeParameters&gt;" ver="1847" scope="Session">
+                      <Description>This field defines the content for Custom Callout 9.</Description>
+                      <MultiLineText height="2"/>
+                      <Docum>
+                        The content can consist of any combination of expressions, special symbols, and automatic
+                        callout keyword references. An automatic callout keyword reference is replaced by the value specified
+                        by an object and a keyword name. An automatic callout keyword reference is a reference between &lt; and
+                        &gt; characters, like expressions, except that the leading text is !KEY. Any text outside the &lt; and
+                        &gt; characters may be modified. Only certain fields within the keyword reference may be modified. The
+                        number between the = and the , characters should not be changed. (No harm will befall you, it simply
+                        does not mean anything to change it. It references the object to which the callout will be attached when
+                        it is created.) The numbers between the , and the @ characters are the length and precision values used
+                        to format a floating point value and may be changed as needed. The keyword name must be one of the names
+                        specified by NX, and extends from the @ character to the &gt; or a space, whichever comes first. If there
+                        are any characters between the keyword name and the &gt; character, the keyword replacement is binary-valued.
+                        If the value returned for the keyword by the object is not zero, the first string is substituted, otherwise
+                        the second string is substituted. These strings may be modified and may contain drafting symbols or user-defined
+                        symbols.
+                      </Docum>
+                    </Pref>
+                  </Group>
+                </Tab>
+            </Category>
+        <Category name="Drawing Compare" csh="PMAN_Drafting_Drawing_Compare" package_suppress="nx2dedit">
+            <Tab name="Report General" csh="PMAN_Drafting_Drawing_Compare_Report_General">
+               <Group name="Compare Against">
+                   <Pref name="Drawing_Compare_Method" type="int" title="Method" value="0" ver="11.0.0" scope="Session">
+                        <Description>This option determines the compare method to use for tracking drawing changes.<Formatted>
+Another Drawing/Revision: Compares the current drawing to another drawing file or drawing revision.
+Active Drawing Snapshot Data: Compares the current drawing file to snapshot data within the same drawing file.
+Open Saved Comparison Report: Opens a comparison report that is saved in the current drawing file.</Formatted></Description>
+                    <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Another Drawing/Revision" value="0"/>
+                            <EnumElem name="Active Drawing Snapshot Data" value="1"/>
+                            <EnumElem name="Open Saved Comparison Report" value="2"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Report">
+                    <Pref name="Drawing_Compare_Baseline" type="int" title="Baseline for Snapshot Comparison" value="1" ver="11.0.0" scope="Session">
+                        <Description>This option determines the baseline to use when comparing against snapshot data.<Formatted>
+Previously Created in Part: Compares the current drawing file to snapshot data previously saved in the drawing file.
+Temporarily Created at Last Report: Compares the current drawing file to snapshot data temporarily created in the drawing file at the last comparison report execution.</Formatted></Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Previously Created in Part" value="1"/>
+                            <EnumElem name="Temporarily Created at Last Report" value="2"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Tolerance_EU" type="real" title="Compare Tolerance" ver="7.5.0" value="0.00001" unit="in" scope="Session">
+                        <Description>This tolerance is used when comparing decimal numbers in the drawing comparison report. If the difference between the decimal numbers is greater than the compare tolerance, that number will be reported as a change.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Tolerance_MU" type="real" title="Compare Tolerance" ver="7.5.0" value="0.000254" unit="mm" scope="Session">
+                        <Description>This tolerance is used when comparing decimal numbers in the drawing comparison report. If the difference between the decimal numbers is greater than the compare tolerance, that number will be reported as a change.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Restart_ReportId" type="logical" title="Restart ID Number with New Report" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not to restart the ID number at 1 when a new Execute Drawing Comparison Report is run. ID numbers will not be reused between new reports if this option is off.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Increment_ReportId" type="logical" title="Increment ID Number per Report" value="false" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether the same revision ID number will be given for all changed objects that appear in the Comparison Report and in the change symbols. When this option is off, then each changed object in the comparison report will have a unique ID number.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Snapshot Data">
+                    <Pref name="Drawing_Comapre_Create_Overlay_Data" type="logical" title="Create Overlay Data with Snapshot Data" value="false" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not Overlay data used in the Visual Overlay command is created when Snapshot Data is created.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_SnapshotData_To_Use" type="int" title="Snapshot Data to Use" value="0" ver="11.0.0" scope="Session">
+                       <Description>This option determines which snapshot data will be used when the comparison command is invoked.<Formatted>
+Ask at Runtime: Prompts whether to use existing snapshot data or to create new snapshot data.
+Always Use Existing Data: Always uses existing snapshot data.
+Always Create New Data: Always creates new snapshot data regardless of existing data or not.
+Create New Data if None Exists: Creates new snapshot data if none exists.</Formatted></Description>
+                       <RadioBox orientation="vertical"/>
+                        <Data type="enum">
+                            <EnumElem name="Ask at Run Time" value="0"/>
+                            <EnumElem name="Always Use Existing Data" value="1"/>
+                            <EnumElem name="Always Create New Data" value="2"/>
+                            <EnumElem name="Create New Data if None Exists" value="3"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Change Symbol">
+                    <Pref name="Drawing_Compare_Disp_CS" type="logical" title="Display Change Symbol" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not to display change symbols in the graphics window that corresponds to the number in the Drawing Comparison Report.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Preserve_CS_Disp" type="logical" title="Preserve Change Symbol Display" value="false" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether to apply a preserve display status when a change symbol is created. The preserve display status determines whether a change symbol display will be maintained after running a new Drawing Comparison Report.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_CS_Type" type="int" title="Type" value="2" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the type of symbol to use for the change symbol.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Circle" bitmap="circularity.bmp" value="1"/>
+                            <EnumElem name="Triangle Up" bitmap="triangleup.bmp" value="2"/>
+                            <EnumElem name="Triangle Down" bitmap="triangledown.bmp" value="3"/>
+                            <EnumElem name="Square" bitmap="square_large.bmp" value="4"/>
+                            <EnumElem name="Hexagon" bitmap="hexagon.bmp" value="5"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_CS_Size_EU" type="real" title="Size" ver="7.5.0" value="0.79" unit="in" scope="Session">
+                        <Description>This option specifies the size of the change symbol.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_CS_Size_MU" type="real" title="Size" ver="7.5.0" value="20.0" unit="mm" scope="Session">
+                        <Description>This option specifies the size of the change symbol.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_CS_Color" type="int" title="Color" value="216" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the color of the change symbol.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="Drawing_Compare_CS_Font" type="int" title="Style" value="1" ver="1980" scope="Session">
+                        <Description>This option specifies the line style for the change symbol.</Description>
+                      <GeneralLineFont LineFontOptionMaskString="MBDLineFonts"/>
+                    </Pref>
+                    <Pref name="Drawing_Compare_CS_Width" type="int" title="Width" value="8" ver="10.0.0" scope="Session">
+                        <Description>This option specifies the line width for the change symbol.</Description>
+                        <ViewLineWidth allowWideLineWidth="true"/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Report Filter" csh="PMAN_Drafting_Drawing_Compare_Report_Filter">
+                <Pref name="Drawing_Compare_Sheet_Toggle" type="logical" title="Sheets" value="true" ver="7.5.0" scope="Session">
+                    <Description>This option determines whether or not the Drawing Comparison Report will include comparison information for sheets.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Drawing_Compare_View_Toggle" type="logical" title="Views" value="true" ver="7.5.0" scope="Session">
+                    <Description>This option determines whether or not the Drawing Comparison Report will include comparison information for views.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Group name="Dimensions">
+                    <Pref name="Drawing_Compare_Dim_Toggle" type="logical" title="All" value="true" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include all comparison information for dimensions.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Dim_Retained_Toggle" type="logical" title="Retained Status" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include retained status information for dimensions. The Dimension All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Dim_Size" type="logical" title="Size" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include size information for dimensions. The Dimension All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Dim_Origin" type="logical" title="Origin" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include origin information for dimensions. The Dimension All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Notes">
+                    <Pref name="Drawing_Compare_Notes_Toggle" type="logical" title="All" value="true" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include all comparison information for notes.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Notes_Retained_Toggle" type="logical" title="Retained Status" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include retained status information for notes. The Notes All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Notes_Text" type="logical" title="Text" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include text information for notes. The Notes All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Notes_Origin" type="logical" title="Origin" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include origin information for notes. The Notes All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Notes_LeaderTerminator" type="logical" title="Leader Terminator" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include leader terminator information for notes. The Notes All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Feature Control Frames">
+                    <Pref name="Drawing_Compare_FCF_Toggle" type="logical" title="All" value="true" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include all comparison information for feature control frames.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_FCF_Retained_Toggle" type="logical" title="Retained Status" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include retained status information for feature control frames. The Feature Control Frames All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_FCF_Text" type="logical" title="Text" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include text information for feature control frames. The Feature Control Frames All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_FCF_Origin" type="logical" title="Origin" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include origin information for feature control frames. The Feature Control Frames All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_FCF_LeaderTerminator" type="logical" title="Leader Terminator" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include leader terminator information for feature control frames. The Feature Control Frames All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Datum Feature Symbols">
+                    <Pref name="Drawing_Compare_DFS_Toggle" type="logical" title="All" value="true" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include all comparison information for datum feature symbols.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_DFS_Retained_Toggle" type="logical" title="Retained Status" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include retained status information for datum feature symbols. The Datum Feature Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_DFS_Text" type="logical" title="Text" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include text information for datum feature symbols. The Datum Feature Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_DFS_Origin" type="logical" title="Origin" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include origin information for datum feature symbols. The Datum Feature Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_DFS_LeaderTerminator" type="logical" title="Leader Terminator" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include leader terminator information for datum feature symbols. The Datum Feature Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Datum Targets">
+                    <Pref name="Drawing_Compare_Datum_Targets_Toggle" type="logical" title="All" value="true" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include all comparison information for datum targets symbols.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Datum_Targets_Retained_Toggle" type="logical" title="Retained Status" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include retained status information for datum targets symbols. The Datum Targets Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Datum_Targets_Text" type="logical" title="Text" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include text information for datum targets symbols. The Datum Targets Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Datum_Targets_Origin" type="logical" title="Origin" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include origin information for datum targets symbols. The Datum Targets Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Datum_Targets_LeaderTerminator" type="logical" title="Leader Terminator" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include leader terminator information for datum targets symbols. The Datum Targets Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Balloons">
+                    <Pref name="Drawing_Compare_Balloons_Toggle" type="logical" title="All" value="true" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include all comparison information for balloons.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Balloons_Retained_Toggle" type="logical" title="Retained Status" value="false" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include retained status information for balloons. The Balloons All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Balloons_Text" type="logical" title="Text" value="false" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include text information for balloons. The Balloons All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Balloons_Origin" type="logical" title="Origin" value="false" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include origin information for balloons. The Balloons All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Balloons_LeaderTerminator" type="logical" title="Leader Terminator" value="false" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include leader terminator information for balloons. The Balloons All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Edge Condition Symbols">
+                    <Pref name="Drawing_Compare_EdgeCondition_All" type="logical" title="All" value="true" ver="2206" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include all comparison information for edge condition symbols.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_EdgeCondition_RetainedStatus" type="logical" title="Retained Status" value="false" ver="2206" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include retained status information for edge condition symbols. The Edge Condition Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_EdgeCondition_Text" type="logical" title="Text" value="false" ver="2206" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include text information for edge condition symbols. The Edge Condition Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_EdgeCondition_Origin" type="logical" title="Origin" value="false" ver="2206" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include origin information for edge condition symbols. The Edge Condition Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_EdgeCondition_LeaderTerminator" type="logical" title="Leader Terminator" value="false" ver="2206" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include leader terminator information for edge condition symbols. The Edge Condition Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Surface Finish Symbols">
+                    <Pref name="Drawing_Compare_SFS_Toggle" type="logical" title="All" value="true" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include all comparison information for surface finish symbols.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_SFS_Retained_Toggle" type="logical" title="Retained Status" value="false" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include retained status information for surface finish symbols. The Surface Finish Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_SFS_Text" type="logical" title="Text" value="false" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include text information for surface finish symbols. The Surface Finish Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_SFS_Origin" type="logical" title="Origin" value="false" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include origin information for surface finish symbols. The Surface Finish Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_SFS_LeaderTerminator" type="logical" title="Leader Terminator" value="false" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include leader terminator information for surface finish symbols. The Surface Finish Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Weld Symbols">
+                    <Pref name="Drawing_Compare_Weld_Symbols_Toggle" type="logical" title="All" value="true" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include all comparison information for weld symbols.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Weld_Symbols_Retained_Toggle" type="logical" title="Retained Status" value="false" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include retained status information for weld symbols. The Weld Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Weld_Symbols_Text" type="logical" title="Text" value="false" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include text information for weld symbols. The Weld Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Weld_Symbols_Origin" type="logical" title="Origin" value="false" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include origin information for weld symbols. The Weld Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Weld_Symbols_LeaderTerminator" type="logical" title="Leader Terminator" value="false" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include leader terminator information for weld symbols. The Weld Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                    <Pref name="Drawing_Compare_TPS_Toggle" type="logical" title="Target Point Symbols" value="true" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include comparison information for target point symbols.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Intersection_Symbols_Toggle" type="logical" title="Intersection Symbols" value="true" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include comparison information for intersection symbols.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                <Group name="Symbols">
+                    <Pref name="Drawing_Compare_Symbols_Toggle" type="logical" title="All" value="true" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include all comparison information for symbols.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Symbols_Retained_Toggle" type="logical" title="Retained Status" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include retained status information for symbols. The Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Symbols_Text" type="logical" title="Text" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include text information for symbols. The Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Symbols_Origin" type="logical" title="Origin" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include origin information for symbols. The Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Symbols_LeaderTerminator" type="logical" title="Leader Terminator" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include leader terminator information for symbols. The Symbols All option supersedes this option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Tables">
+                    <Pref name="Drawing_Compare_Tables_Toggle" type="logical" title="Tabular Notes" value="true" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include comparison information for tabular notes.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_PartList_Toggle" type="logical" title="Parts Lists" value="true" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include comparison information for parts lists.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_HoleTable_Toggle" type="logical" title="Hole Tables" value="true" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include comparison information for hole tables.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Pref name="Drawing_Compare_Centerlines_Toggle" type="logical" title="Centerlines" value="true" ver="7.5.0" scope="Session">
+                    <Description>This option determines whether or not the Drawing Comparison Report will include comparison information for centerlines.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Drawing_Compare_XHatch_Toggle" type="logical" title="Crosshatches/Area Fills" value="true" ver="7.5.0" scope="Session">
+                    <Description>This option determines whether or not the Drawing Comparison Report will include comparison information for crosshatches and area fills.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Group name="Sketch Curves">
+                    <Pref name="Drawing_Compare_Lines_Toggle" type="logical" title="Lines" value="true" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include comparison information for drafting sketch lines.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Arcs_Toggle" type="logical" title="Arcs" value="true" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include comparison information for drafting sketch arcs.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Circles_Toggle" type="logical" title="Circles" value="true" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include comparison information for drafting sketch circles.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Conics_Toggle" type="logical" title="Conics" value="true" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include comparison information for drafting sketch conics.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drawing_Compare_Splines_Toggle" type="logical" title="Splines" value="true" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not the Drawing Comparison Report will include comparison information for drafting sketch splines.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Visual Overlay" csh="PMAN_Drafting_Drawing_Compare_Visual_Overlay">
+              <Group name="Compare Against">
+                <Pref name="Visual_Overlay_Compare_Method" type="int" title="Method" value="0" ver="11.0.0" scope="Session">
+                  <Description>This option determines the compare against method to use for the overlay command.<Formatted>
+Another Drawing/Revision: Displays overlay data from another drawing file if in native mode or another revision if in managed mode on top of the current drawing.
+Active Drawing Overlay: Displays previously created overlay data from the current drawing file on top of the current drawing.</Formatted></Description>
+                  <OptionMenu/>
+                  <Data type="enum">
+                    <EnumElem name="Another Drawing/Revision" value="0"/>
+                    <EnumElem name="Active Drawing Overlay" value="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Overlay Data">
+                <Pref name="Visual_Overlay_Color" type="int" title="Color" value="76" ver="11.0.0" scope="Session">
+                  <Description>This option determines the color of the compare data that is overlaid on the active drawing sheet.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="Visual_Overlay_Data_To_Use" type="int" title="Overlay Data to Use" value="0" ver="11.0.0" scope="Session">
+                  <Description>This option determines which overlay data will be displayed from the comparison drawing on top of the active drawing sheet when the overlay command is invoked.<Formatted>
+Ask at Runtime: Prompts whether to use existing overlay data or to create new overlay data.
+Always Use Existing Data: Always uses existing overlay data.
+Always Create New Data: Always creates new overlay data regardless of existing data or not.
+Create New Data if None Exists: Creates new overlay data if none exists.</Formatted></Description>
+                  <RadioBox/>
+                  <Data type="enum">
+                    <EnumElem name="Ask at Runtime" value="0"/>
+                    <EnumElem name="Always Use Existing Data" value="1"/>
+                    <EnumElem name="Always Create New Data" value="2"/>
+                    <EnumElem name="Create New Data if None Exists" value="3"/>
+                  </Data>
+                </Pref>
+              </Group>
+            </Tab>
+        </Category>
+        <Category name="Drawing Automation" csh="PMAN_Drafting_Drawing_Automation" package_suppress="nx2dedit">
+            <Tab name="Booklet" csh="PMAN_Drafting_Drawing_Automation_Booklet">
+                <Group name="Wizard Steps">
+                    <Pref name="Drafting_wizardShowTemplateStep" type="logical" title="Show Template" value="false" ver="8.0.0" scope="Session">
+                        <Description>This option determines whether or not the Template step will be shown in the Drawing Automation Wizard. If this step is off, no introductory template can be specified.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drafting_wizardShowReferencesStep" type="logical" title="Show References" value="false" ver="8.0.0" scope="Session">
+                        <Description>This option determines whether or not the References step will be shown in the Drawing Automation Wizard. If this step is off, no references can be specified.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drafting_wizardShowAttributesStep" type="logical" title="Show Attributes" value="false" ver="8.0.0" scope="Session">
+                        <Description>This option determines whether or not the Attributes step will be shown in the Drawing Automation Wizard. If this step is off, no attributes can be specified.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Item Types"  suppress="TCX_LITE">
+                    <Pref name="Drafting_bookletItemType" type="string" title="Booklet" value="NX0BookletItem" ver="8.5.0" scope="Session">
+                        <Description>This option specifies the Teamcenter item type used for drawing booklets created using the Drawing Automation Wizard.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Drafting_bookletDrawingItemType" type="string" title="Booklet Drawing" value="Item" ver="8.5.0" scope="Session">
+                        <Description>This option specifies the Teamcenter item type used for booklet drawings created using the Drawing Automation Wizard.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Drafting_bookletRuleItemType" type="string" title="Booklet Rule" value="Item" ver="8.5.3" scope="Session">
+                        <Description>This option specifies the Teamcenter item type used for drawing booklet rule parts created using the Drawing Automation Wizard.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Drafting_cpdBookletItemType" type="string" title="Product Design Development Booklet" value="NX0BookletItem" ver="8.5.0" scope="Session">
+                        <Description>This option specifies the Teamcenter item type used for drawing booklets created using the Drawing Automation Wizard on a product design.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Drafting_cpdBookletDrawingItemType" type="string" title="Product Design Development Booklet Drawing" value="Cpd0Workset" ver="8.5.0" scope="Session">
+                        <Description>This option specifies the Teamcenter item type used for booklet drawings created using the Drawing Automation Wizard on a product design.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+                <Group name="Secondary Content Visible Line Display">
+                    <Pref name="Drafting_SecondaryContentVisibleColor" type="int" title="Color" value="103" ver="8.0.0" scope="Part">
+                        <Description>This option specifies the color of Secondary Content Visible Lines in all views of drawings created with the Automated Drawing Wizard.</Description>
+                        <ColorOption/>
+                        <Data type="color">
+                            <EnumElem name="Original" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drafting_SecondaryContentVisibleFont" type="int" title="Style" value="8" ver="1847" scope="Part">
+                        <Description>This option specifies the style of Secondary Content Visible Lines in all views of drawings created with the Automated Drawing Wizard.</Description>
+                      <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" allowInvisibleFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="8"/>
+                    </Pref>
+                    <Pref name="Drafting_SecondaryContentVisibleWidth" type="int" title="Width" value="3" ver="8.5.0" scope="Part">
+                        <Description>This option specifies the width of Secondary Content Visible Lines in all views of drawings created with the Automated Drawing Wizard.</Description>
+                        <ObjectLineWidth allowDefaultWidth="true" showDefaultAsOriginal="true" allowWideLineWidth ="true"/>
+                    </Pref>
+                </Group>
+                <Group name="Secondary Content Hidden Line Display">
+                    <Pref name="Drafting_SecondaryContentHiddenColor" type="int" title="Color" value="103" ver="8.0.0" scope="Part">
+                        <Description>This option specifies the color of Secondary Content Hidden Lines in all views of drawings created with the Automated Drawing Wizard.</Description>
+                        <ColorOption/>
+                        <Data type="color">
+                            <EnumElem name="Original" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Drafting_SecondaryContentHiddenFont" type="int" title="Style" value="8" ver="1847" scope="Part">
+                        <Description>This option specifies the style of Secondary Content Hidden Lines in all views of drawings created with the Automated Drawing Wizard.</Description>
+                      <GeneralLineFont allowDefaultFont="true" showDefaultAsOriginalFont="true" allowInvisibleFont="true" LineFontOptionMaskString="GeneralLineFonts" LineFontDefaultValue="8"/>
+                    </Pref>
+                    <Pref name="Drafting_SecondaryContentHiddenWidth" type="int" title="Width" value="3" ver="8.5.0" scope="Part">
+                        <Description>This option specifies the width of Secondary Content Hidden Lines in all views of drawings created with the Automated Drawing Wizard.</Description>
+                        <ObjectLineWidth allowDefaultWidth="true" showDefaultAsOriginal="true" allowWideLineWidth="true"/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Rule" csh="PMAN_Drafting_Drawing_Automation_Rule">
+                <Group name="Annotation Distribution">
+                    <Pref name="Distribution_Rules_AnnotationInsideGeometry" type="logical" title="Allow Inside Geometry" value="false" ver="8.0.0" scope="Part">
+                        <Description>This option determines whether or not the annotations can be placed inside the view geometry.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Distribution_Rules_MinGeomDistance_Real_MM" type="real" title="Minimum Gap to Geometry" value="5.0" unit="mm" ver="8.0.0" scope="Part">
+                        <Description>This option specifies the minimum distance from the view geometry to the annotation.</Description>
+                        <Real/>
+                    </Pref>
+                    <Pref name="Distribution_Rules_MinGeomDistance_Real_IN" type="real" title="Minimum Gap to Geometry" value="1.0" unit="in" ver="8.0.0" scope="Part">
+                        <Description>This option specifies the minimum distance from the view geometry to the annotation.</Description>
+                        <Real/>
+                    </Pref>
+                    <Pref name="Distribution_Rules_MaxGeomDistance_Real_MM" type="real" title="Maximum Gap to Geometry" value="5.0" unit="mm" ver="8.0.0" scope="Part">
+                        <Description>This option specifies the maximum distance from the view geometry to the annotation.</Description>
+                        <Real/>
+                    </Pref>
+                    <Pref name="Distribution_Rules_MaxGeomDistance_Real_IN" type="real" title="Maximum Gap to Geometry" value="1.0" unit="in" ver="8.0.0" scope="Part">
+                        <Description>This option specifies the maximum distance from the view geometry to the annotation.</Description>
+                        <Real/>
+                    </Pref>
+                    <Pref name="Distribution_Rules_MinAnnDistance_Real_MM" type="real" title="Minimum Gap between Annotations" value="5.0" unit="mm" ver="8.0.0" scope="Part">
+                        <Description>This option specifies the minimum distance between the annotations.</Description>
+                        <Real/>
+                    </Pref>
+                    <Pref name="Distribution_Rules_MinAnnDistance_Real_IN" type="real" title="Minimum Gap between Annotations" value="1.0" unit="in" ver="8.0.0" scope="Part">
+                        <Description>This option specifies the minimum distance between the annotations.</Description>
+                        <Real/>
+                    </Pref>
+                    <Pref name="Distribution_Rules_Order" type="list_sel_reorder_value" title="Rule Order" value="&quot;ANNOTATION_LINE_CROSSING&quot;\&quot;MIN_GEOMETRY_DISTANCE&quot;\&quot;MAX_GEOMETRY_DISTANCE&quot;\&quot;MIN_ANNOTATION_DISTANCE&quot;" ver="8.0.0" scope="Part">
+                        <Description>This option specifies the rule priority order. The rule at the top is the most likely to be satisfied whereas the rule at the bottom is the least likely to be satisified while distributing annotations.</Description>
+                        <ListSelReorder height="6" reorderable="true" selectable="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Minimize Annotation Line Crossing" value="ANNOTATION_LINE_CROSSING"/>
+                            <EnumElem name="Minimum Distance to Geometry" value="MIN_GEOMETRY_DISTANCE"/>
+                            <EnumElem name="Maximum Distance to Geometry" value="MAX_GEOMETRY_DISTANCE"/>
+                            <EnumElem name="Minimum Distance between Annotations" value="MIN_ANNOTATION_DISTANCE"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Dimension">
+                    <Pref name="Dimension_Rules_HideFeetInch" type="logical" title="Hide Feet and Inch Marks" value="false" ver="8.0.0" scope="Part">
+                        <Description>This option determines whether or not to hide the feet and inch marks for a dimension.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Separator/>
+                    <Pref name="Dimension_Rules_AllowDisplayInInchFeetGreaterThan" type="logical" title="Use Feet, Inches, and Fraction" value="false" ver="8.0.0" scope="Part">
+                        <Description>This option determines whether or not to display the dimension in engineering feet, inches, and fractions if it is greater than the specified value.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Dimension_Rules_DisplayInInchFeetGreaterThan" type="real" title="Lower Threshold" value="72.0" unit="in" ver="8.0.0" scope="Part">
+                        <Description>This option displays dimension value in engineering feet, inches, and fractions if it is greater than the specified value.</Description>
+                        <Real/>
+                    </Pref>
+                    <Pref name="Dimension_Rules_AllowDisplayInInchFeetNearest" type="logical" title="Round Feet and Inches" value="false" ver="8.0.0" scope="Part">
+                        <Description>This option determines whether or not to display the dimension in inches and fractions to nearest specified value.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Dimension_Rules_DisplayInInchFeetNearest" type="real" title="Increment" value="0.125" unit="in" ver="8.0.0" scope="Part">
+                        <Description>This option displays dimension value in inches and fractions to nearest specified value.</Description>
+                        <Real/>
+                    </Pref>
+                    <Separator/>
+                    <Pref name="Dimension_Rules_ComparsionTol_MM" type="real" title="Equal Dimension Tolerance" value="0.01" unit="mm" ver="8.0.0" scope="Part">
+                        <Description>This option specifies tolerance to compare dimension values to determine whether or not the dimensions are equal.</Description>
+                        <Real/>
+                    </Pref>
+                    <Pref name="Dimension_Rules_ComparisonTol_IN" type="real" title="Equal Dimension Tolerance" value="0.01" unit="in" ver="8.0.0" scope="Part">
+                        <Description>This option specifies tolerance to compare dimension values to determine whether or not the dimensions are equal.</Description>
+                        <Real/>
+                    </Pref>
+                    <Pref name="Dimension_Rules_ReferenceGeomDistance_MM" type="real" title="Reference Geometry Gap Tolerance" value="100.0" unit="mm" ver="8.0.0" scope="Part">
+                        <Description>This option specifies the distance to be used when searching for a reference geometry that will be used for dimensioning.</Description>
+                        <Real/>
+                    </Pref>
+                    <Pref name="Dimension_Rules_ReferenceGeomDistance_IN" type="real" title="Reference Geometry Gap Tolerance" value="4.0" unit="in" ver="8.0.0" scope="Part">
+                        <Description>This option specifies the distance to be used when searching for a reference geometry that will be used for dimensioning.</Description>
+                        <Real/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Region" csh="PMAN_Drafting_Drawing_Automation_Region">
+                <Pref name="Drafting_regionDisplayObject" type="logical" title="Display Region in Non-template Part" value="false" ver="8.0.0" scope="Part">
+                    <Description>This option determines whether or not regions should be displayed in a non-template part.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="Drafting_regionDisplayLabel" type="logical" title="Display Region Label" value="false" ver="8.0.0" scope="Part">
+                    <Description>This option determines whether or not region labels should be displayed.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="Drafting_regionContentGap_EU" type="real" title="Gap Between Overlapping Region Content" value="0.25" unit="in" ver="8.0.0" scope="Session">
+                    <Description>This option specifies the gap between overlapping region content.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="Drafting_regionContentGap_MU" type="real" title="Gap Between Overlapping Region Content" value="5.0" unit="mm" ver="8.0.0" scope="Session">
+                    <Description>This option specifies the gap between overlapping region content.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="Drafting_regionColor" type="int" title="Color" value="193" ver="8.0.0" scope="Part">
+                    <Description>This option specifies the color of region objects.</Description>
+                    <ColorOption/>
+                    <Data type="color">
+                        <EnumElem name="Original" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="Drafting_regionFont" type="int" title="Style" value="3" ver="1847" scope="Part">
+                    <Description>This option specifies the line style for region objects.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="Drafting_regionWidth" type="int" title="Width" value="10" ver="10.0.0" scope="Part">
+                    <Description>This option specifies the line width for region objects.</Description>
+                    <ObjectLineWidth allowWideLineWidth="true"/>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Convert to PMI" csh="PMAN_Drafting_Convert_to_PMI" package_suppress="nx2dedit">
+            <Tab name="General" csh="PMAN_Drafting_Convert_to_PMI_General">
+                <Pref name="Drafting_ConvertToPMI_SettingsFile_UNX" type="string" title="Conversion Settings File" value="$UGII_BASE_DIR/ugii/convertToPmi/convertToPmiSettings.def" ver="11.0.0" scope="Session">
+                    <Description>This field specifies the conversion settings file (.def) that the Convert to PMI product should use.</Description>
+                    <BrowseFileSel type="def"/>
+                </Pref>
+                <Pref name="Drafting_ConvertToPMI_SettingsFile_WIN" type="string" title="Conversion Settings File" value="$UGII_BASE_DIR\ugii\convertToPmi\convertToPmiSettings.def" ver="11.0.0" scope="Session">
+                    <Description>This field specifies the conversion settings file (.def) that the Convert to PMI product should use.</Description>
+                    <BrowseFileSel type="def"/>
+                </Pref>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>

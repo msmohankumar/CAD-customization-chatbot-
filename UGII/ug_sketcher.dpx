@@ -1,0 +1,875 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Sketch" csh="PMAN_Sketch" package_suppress="simviewer,view,mechatronicsplayer">
+        <Category name="General" csh="PMAN_Sketch_General">
+            <Tab name="Sketch Settings" csh="PMAN_Sketch_General_Sketch_Settings">
+              <Group name="Active Sketch">
+                 <Pref name="Sketch_dimensionLabelDesign" type="int" title="Dimension Label in Design Applications" value="0" ver="7.5.0" scope="Session">
+                        <Description>This option specifies how expressions in sketch dimensions are displayed in design applications.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Expression" value="0"/>
+                            <EnumElem name="Name" value="1"/>
+                            <EnumElem name="Value" value="2"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Sketch_dimensionLabelDrafting" type="int" title="Dimension Label in Drafting Application" value="2" ver="7.5.0" scope="Session">
+                        <Description>This option specifies how expressions in sketch dimensions are displayed in the Drafting application.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Expression" value="0"/>
+                            <EnumElem name="Name" value="1"/>
+                            <EnumElem name="Value" value="2"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Sketch_fixedTextSize" type="int" title="Fixed Text Height on Screen" value="0" ver="1926" scope="Session">
+                         <Description>This option determines whether or not the text height remains fixed when zooming in or out.</Description>
+                         <Toggle off="0"/>
+                         <Data type="enum">
+                             <EnumElem name="No" value="0"/>
+                             <EnumElem name="Yes" value="1"/>
+                         </Data>
+                    </Pref>
+                    <Pref name="Sketch_textsizefixed" type="int" title="Fixed Text Height on Screen (Legacy)" value="1" ver="4.0.0" scope="Session">
+                         <Description>This option determines whether or not the text height remains fixed when zooming in or out.</Description>
+                         <Toggle off="0"/>
+                         <Data type="enum">
+                             <EnumElem name="No" value="0"/>
+                             <EnumElem name="Yes" value="1"/>
+                         </Data>
+                    </Pref>
+                    <Pref name="Sketch_fixedTextHeight_MU" type="real" title="Text Height" value="3.000" unit="mm" ver="8.5.0" scope="Session">
+                        <Description>This option specifies the height of fixed text displayed in sketch dimensions when Fixed Text Height on Screen is on.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <!---->
+                    <Pref name="Sketch_fixedTextHeight_MCU" type="real" title="Text Height" value="3.000" unit="mm" ver="2206" scope="Session">
+                        <Description>This option specifies the height of fixed text displayed in sketch dimensions when Fixed Text Height on Screen is on.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Sketch_fixedTextHeight_SIU" type="real" title="Text Height" value="3.000" unit="mm" ver="2206" scope="Session">
+                        <Description>This option specifies the height of fixed text displayed in sketch dimensions when Fixed Text Height on Screen is on.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Sketch_fixedTextHeight_EU" type="real" title="Text Height" value="0.120" unit="in" ver="8.5.0" scope="Session">
+                        <Description>This option specifies the height of fixed text displayed in sketch dimensions when Fixed Text Height on Screen is on.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Sketch_layoutDimensionTextHeight" type="int" title="Dimension Text Height in Layout Application" value="1" ver="1926" scope="Session">
+                        <Description>This option specifies how the text height of the first dimension of a sketch is determined in the Layout application.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Drafting Preferences" value="0"/>
+                            <EnumElem name="Variable Text Height" value="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Sketch_constraintSymbolSize" type="real" title="Relation/Constraint Symbol Size" value="3.000" ver="8.5.0" scope="Session">
+                        <Description>This option specifies the size of the constraint symbols of a sketch using a scale factor.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                            <UpperBound value="100.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Sketch_createInferredConstraints" type="int" title="Create Inferred Constraints (Legacy)" value="1" ver="3.1.0" scope="Session">
+                        <Description>This option determines whether or not inferred constraints should be created during curve creation and curve editing operations. Having this option off gives better performance for large sketches.</Description>
+                        <Toggle off="0"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="0"/>
+                            <EnumElem name="Yes" value="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Sketch_displayShadedRegions" type="logical" title="Display Shaded Regions" value="true" ver="1926" scope="Session">
+                        <Description>This option specifies whether or not closed curve regions are displayed as shaded regions.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Inactive Sketch">
+                     <Pref name="Sketch_displayReferenceGeometry" type="logical" title="Display Reference Curves" value="false" ver="11.0.1" scope="Session">
+                        <Description>This option determines whether or not reference curves and reference points are shown when the sketch is deactivated.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="General">
+                    <Pref name="Sketch_displayobjectcolor" type="int" title="Display Object Color" value="0" ver="4.0.0" scope="Session">
+                         <Description>This option determines whether or not sketch objects should be displayed in their true color. Having this option on gives better performance for large sketches.</Description>
+                         <Toggle off="0"/>
+                         <Data type="enum">
+                             <EnumElem name="No" value="0"/>
+                             <EnumElem name="Yes" value="1"/>
+                         </Data>
+                    </Pref>
+                    <Pref name="Sketch_displayParenthesesOnReferenceDims" type="logical" title="Add Parentheses to Reference Dimensions" value="true" ver="11.0.1" scope="Session">
+                        <Description>This option determines whether or not parentheses are shown around reference dimensions.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Sketch_useTolerance" type="logical" title="Use Solving Tolerance (Legacy)" value="false" ver="8.5.0" scope="Session">
+                         <Description>This option determines whether or not a tolerance is used when solving a sketch.</Description>
+                         <Toggle off="false"/>
+                         <Data type="enum">
+                             <EnumElem name="No" value="false"/>
+                             <EnumElem name="Yes" value="true"/>
+                         </Data>
+                    </Pref>
+                    <Pref name="Sketch_tolerance_MU" type="real" title="Tolerance (Legacy)" value="0.01" unit="mm" ver="11.0.0" scope="Session">
+                        <Description>This option specifies the distance tolerance used when solving a sketch.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.00000001" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Sketch_tolerance_EU" type="real" title="Tolerance (Legacy)" value="0.0004" unit="in" ver="11.0.0" scope="Session">
+                        <Description>This option specifies the distance tolerance used when solving a sketch.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.00000001" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Session Settings" csh="PMAN_Sketch_General_Session_Settings">
+                <Pref name="Sketch_snapAngle" type="real" title="Snap Angle" value="3.000" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>If the angle between a sketch line that is being created and the sketch's vertical or horizontal reference is less than the Snap Angle, the line automatically snaps to a vertical or horizontal position. The valid range for Snap Angle is 0 to 20 degrees.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                        <UpperBound value="20.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_displayDOF" type="int" title="Display Degree-of-Freedom Arrows (Legacy)" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the sketch degree-of-freedom arrows are displayed. Having this option off gives better performance for large sketches.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_dynamicRelationDisplay" type="int" title="Dynamic Sketch Display" value="0" ver="1926" scope="Session">
+                    <Description>This option determines whether or not the sketch relations are displayed dynamically.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_dynamicConstraintDisplay" type="int" title="Dynamic Sketch Display (Legacy)" value="1" ver="5.0.0" scope="Session">
+                    <Description>This option determines whether or not the sketch constraints are displayed dynamically.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_displayPersistentRelations" type="int" title="Display Persistent Relations" value="0" ver="1926" scope="Session">
+                    <Description>This option determines whether or not persistent relations are displayed.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_displayConstraintSymbols" type="int" title="Display Constraint Symbols (Legacy)" value="1" ver="8.5.0" scope="Session">
+                    <Description>This option determines whether or not the sketch constraints symbols are displayed.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_displayAutoDimensions" type="logical" title="Display Auto-dimensions (Legacy)" value="true" ver="11.0.0" scope="Session">
+                    <Description>This option determines whether or not auto-dimensions are displayed.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_evaluateSketchModeling" type="logical" title="Evaluate Sketch in Modeling Application" value="true" ver="1926" scope="Session">
+                    <Description>This option determines whether or not to evaluate the sketch status to create fully defined sketches in the Modeling application.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_evaluateSketchDrafting" type="logical" title="Evaluate Sketch in Drafting and Layout Applications" value="false" ver="1926" scope="Session">
+                    <Description>This option determines whether or not to evaluate the sketch status to create fully defined sketches in the Drafting and Layout applications.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_editDimensionOnCreation" type="logical" title="Edit Dimension after Create" value="true" ver="1926" scope="Session">
+                    <Description>This option determines whether to enter editing mode immediately after a dimension has been created from its previewed state.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                      <EnumElem name="No" value="false"/>
+                      <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_dimensionalConstraints" type="int" title="Create Dimensions for Typed Values" value="1" ver="8.5.0" scope="Session">
+                    <Description>This option determines whether or not driving dimensions are inferred and applied when typed while sketching. Having this option off gives better performance for large sketches.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_scaleOnFirstDrivingDimension" type="logical" title="Scale on First Dimension" value="true" ver="1926" scope="Session">
+                    <Description>This option determines whether or not the entire active sketch is scaled about the sketch origin when the very first non-angular dimension is applied.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                      <EnumElem name="No" value="false"/>
+                      <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+              <Pref name="Sketch_addRemoteFindingAfterSnap" type="logical" title="Add Remote Finding after Snap" value="true" ver="2306" scope="Session">
+                <Description>This option determines whether or not to apply remote finding to curves after curve creation or dragging. Remote finding adds virtual extensions to curves, so relations can be found between curves that are not physically touching.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+                <Pref name="Sketch_selectionScope" type="logical" title="Use &apos;Within Active Sketch Only&apos; Selection Scope" value="true" ver="1926" scope="Session">
+                    <Description>This option determines whether or not sketch commands should use the &apos;Within Active Sketch Only&apos; Selection Scope option.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_selScope" type="logical" title="Use &apos;Within Active Sketch Only&apos; Selection Scope (Legacy)" value="false" ver="11.0.1" scope="Session">
+                <Description>This option determines whether or not sketch commands should use the &apos;Within Active Sketch Only&apos; Selection Scope option.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+                </Pref>
+                <Pref name="Sketch_chainCurves" type="logical" title="Chain Curves" value="true" ver="2206" scope="Session">
+                    <Description>This option determines whether or not to use curve chaining in curve creation commands that support it.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_createReferenceGeometry" type="logical" title="Create Reference Geometry" value="false" ver="2206" scope="Session">
+                    <Description>This option determines whether or not to create reference or active geometry in curve creation commands that support it.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_lineOutputType" type="int" title="Line Output Type" value="0" ver="2206" scope="Session">
+                  <Description>This option specifies if line segments, infinite lines, or both are created in curve creation commands that support it.</Description>
+                  <RadioBox/>
+                  <Data type="enum">
+                    <EnumElem name="Segment Only" value="0"/>
+                    <EnumElem name="Add Infinite Line" value="1"/>
+                    <EnumElem name="Infinite Line Only" value="2"/>
+                  </Data>
+              </Pref>
+                <Pref name="Sketch_displayUseWorkPartOrigin" type="logical" title="Display &apos;Origin Method&apos; on Create Sketch Dialog" value="false" ver="1953" scope="Session">
+                  <Description>This option determines whether or not the option to specify the origin method is displayed on the create sketch dialog.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="No" value="false"/>
+                    <EnumElem name="Yes" value="true"/>
+                  </Data>
+                </Pref>
+                <Pref name="Sketch_originOption" type="int" title="Origin Method" value="0" ver="5.0.0" scope="Session">
+                  <Description>This option specifies whether the Origin Method in the create sketch dialog is set to Infer Origin or Use Work Part Origin.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Infer Origin" value="0"/>
+                    <EnumElem name="Use Work Part Origin" value="1"/>
+                  </Data>
+                </Pref>
+                <Group name="Task Environment">
+                <Pref name="Sketch_delayEvaluation" type="int" title="Delay Evaluation (Legacy)" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not delayed evaluation of the sketch should be used. Using delayed evaluation means that the sketch will not update to the applied dimensions and constraints until specifically instructed to (using the Evaluate Sketch option) or until the sketch task environment is exited.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_viewOrientation" type="int" title="Change View Orientation" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the view orientation changes when a sketch is activated and deactivated.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_maintainBlank" type="int" title="Maintain Hide Status" value="0" ver="6.0.0" scope="Session">
+                    <Description>This option determines whether or not the sketch objects keep their hide status when the sketch is activated.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_layerStatus" type="int" title="Maintain Layer Status" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the work layer remains the same or returns to its previous value when a sketch is deactivated.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_displaySectionMappingWarning" type="logical" title="Display Section Mapping Warning" value="true" ver="7.5.0" scope="Session">
+                    <Description>This option determines whether a warning message is displayed when a sketch edit may require downstream features to map the sections of the sketch.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Group name="Name Prefixes">
+                <Pref name="Sketch_sketchNamePrefix" type="string" title="Sketch" value="SKETCH_" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the prefix for the names of sketches.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="Sketch_vertexNamePrefix" type="string" title="Point" value="Point" ver="8.5.0" scope="Session">
+                    <Description>This option specifies the prefix for the names of points.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="Sketch_lineNamePrefix" type="string" title="Line" value="Line" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the prefix for the names of lines.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="Sketch_arcNamePrefix" type="string" title="Arc" value="Arc" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the prefix for the names of arcs.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="Sketch_conicNamePrefix" type="string" title="Conic" value="Conic" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the prefix for the names of conics.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="Sketch_splineNamePrefix" type="string" title="Spline" value="Spline" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the prefix for the names of splines.</Description>
+                    <String/>
+                </Pref>
+                </Group>
+                <Pref name="Sketch_groupConOption" type="int" title="External Constraints and Dimensions in Rigid and Scalable Groups" value="0" ver="11.0.0" scope="Session">
+                <Description>This option specifies whether the external constraints and dimensions on curves inside rigid and scalable sketch groups are removed when conflicting, or if they are all preserved.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Preserve but Remove Conflicting" value="0"/>
+                        <EnumElem name="Preserve All" value="1"/>
+                    </Data>
+                </Pref>
+              <Pref name="Sketch_displayWelcomeSessions" type="int" title="Display Sketch Welcome Page" value="5" unit="Sessions" ver="1926" scope="Session">
+                <Description>This option specifies for how many sessions the sketch welcome page is displayed when activating a sketch.</Description>
+                <Integer/>
+                <Data type="range">
+                  <LowerBound value="0" include="1"/>
+                </Data>
+              </Pref>
+            </Tab>
+            <Tab name="Part Settings" csh="PMAN_Sketch_General_Part_Settings">
+                <Group name="Colors">
+                <Pref name="Sketch_curveColor" type="int" title="Curves" value="216" ver="1926" scope="Part">
+                    <Description>This option specifies the color of sketch curves.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_movableCurvesColor" type="int" title="Movable Curves" value="189" ver="1926" scope="Part">
+                    <Description>This option specifies the color of curves that can be moved by dragging.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_shadedRegionColor" type="int" title="Shaded Closed Regions" value="133" ver="1926" scope="Part">
+                    <Description>This option specifies the color of shaded closed loops of curves.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_constantDimensionColor" type="int" title="Dimensions" value="173" ver="1926" scope="Part">
+                    <Description>This option specifies the color of dimensions.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_dimensionColor" type="int" title="Dimensions with Expressions" value="134" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of dimensions with expressions.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_previewDimensionColor" type="int" title="Preview Dimensions" value="66" ver="1926" scope="Part">
+                    <Description>This option specifies the color of preview dimensions.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_relationColor" type="int" title="Found Relations" value="103" ver="1926" scope="Part">
+                    <Description>This option specifies the color of found relations.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_persistentRelationColor" type="int" title="Persistent Relations" value="133" ver="1926" scope="Part">
+                    <Description>This option specifies the dimmed color of persistent relations when Display Persistent Relations is on.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_geometricConstraintColor" type="int" title="Active Persistent Relations (Geometric Constraints)" value="206" ver="1926" scope="Part">
+                    <Description>This option specifies the color of active persistent relations. In legacy sketches this option specifies the color of geometric constraints.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_conflictingColor" type="int" title="Relaxed Objects (Conflicting Objects)" value="181" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of relaxed objects. In legacy sketches this option specifies the color of objects that conflict with each other.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_pdatumColour" type="int" title="Associative Curves" value="200" ver="1926" scope="Part">
+                    <Description>This option specifies the color of sketch associative curves. Associative curves are curves that have been created using geometry that doesn't belong to the sketch. Currently, associative curves are those created by the sketch Project Curve and sketch Intersection Curve commands.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_refCurveColor" type="int" title="Reference Curves" value="191" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of sketch reference curves and reference points.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_refDimensionColor" type="int" title="Reference Dimensions" value="191" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of sketch reference dimensions.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_overdefinedColor" type="int" title="Overconstrained Objects" value="186" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of sketch objects that are overconstrained.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_lockedObjectColor" type="int" title="Fixed Objects" value="87" ver="1926" scope="Part">
+                    <Description>This option specifies the color of fixed objects.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_frozenObjectColor" type="int" title="Outside Work Region" value="26" ver="1980" scope="Part">
+                    <Description>This option specifies the color of objects that are not part of the work region.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="Sketch_workRegionBoundaryColor" type="int" title="Work Region Boundary" value="165" ver="1980" scope="Part">
+                    <Description>This option specifies the color of work region boundary objects.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_inactiveSketchColor" type="int" title="Inactive Sketches" value="139" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of an inactive sketch.</Description>
+                    <Color/>
+                </Pref>
+                <Separator/>
+                <Pref name="Sketch_automaticDimensionColor" type="int" title="Automatic Dimensions (Legacy)" value="158" ver="9.0.1" scope="Part">
+                    <Description>This option specifies the color of sketch automatic dimensions.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_unsolvedCurvesColor" type="int" title="Unsolved Curves (Legacy)" value="87" ver="8.5.0" scope="Part">
+                    <Description>This option specifies the color of sketch curves that are not well constrained.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_partiallydefinedColor" type="int" title="Partially Constrained Curves (Legacy)" value="124" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of sketch curves that are partially constrained.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_fullydefinedColor" type="int" title="Fully Constrained Curves (Legacy)" value="60" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of sketch curves that are fully constrained.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_outdatedCurveColor" type="int" title="Out-of-date Objects (Legacy)" value="112" ver="6.0.0" scope="Part">
+                    <Description>This option specifies the color of sketch curves and dimensions that are referencing geometry that are out of date or have been deleted. A sketch curve or dimension can only end up in this state if the general modeling default Delete Child Features is off when the parent geometry becomes out of date or is deleted.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="Sketch_dofColor" type="int" title="Degree-of-Freedom Arrows (Legacy)" value="194" ver="8.5.0" scope="Session">
+                    <Description>This option specifies the color of degree-of-freedom arrows on the sketch.</Description>
+                    <Color/>
+                </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="Inferred Constraints and Dimensions (Legacy)" csh="PMAN_Sketch_Inferred_CandD">
+            <Tab name="Constraints (Legacy)" csh="PMAN_Sketch_Inferred_CandD_Constraints">
+                <Pref name="Sketch_horizontal" type="int" title="Horizontal (Legacy)" value="1" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not horizontal constraints are inferred and applied.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_vertical" type="int" title="Vertical (Legacy)" value="1" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not vertical constraints are inferred and applied.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_horizontalAlign" type="int" title="Horizontal Alignment (Legacy)" value="1" ver="11.0.0" scope="Session">
+                    <Description>This option determines whether or not horizontal alignment constraints should be inferred and applied.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_verticalAlign" type="int" title="Vertical Alignment (Legacy)" value="1" ver="11.0.0" scope="Session">
+                    <Description>This option determines whether or not vertical alignment constraints should be inferred and applied.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_tangent" type="int" title="Tangent (Legacy)" value="1" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not tangent constraints are inferred and applied.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_parallel" type="int" title="Parallel (Legacy)" value="1" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not parallel constraints are inferred and applied.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_perpendicular" type="int" title="Perpendicular (Legacy)" value="1" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not perpendicular constraints are inferred and applied.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_collinear" type="int" title="Collinear (Legacy)" value="1" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not collinear constraints are inferred and applied.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>          
+                <Pref name="Sketch_concentric" type="int" title="Concentric (Legacy)" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not concentric constraints are inferred and applied.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_equalLength" type="int" title="Equal Length (Legacy)" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not equal length constraints are inferred and applied.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_equalRadius" type="int" title="Equal Radius (Legacy)" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not equal radius constraints are inferred and applied.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="Sketch_coincident" type="int" title="Coincident (Legacy)" value="1" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not coincident constraints are applied.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_midpoint" type="int" title="Midpoint (Legacy)" value="1" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not midpoint constraints are applied.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_pointOnCurve" type="int" title="Point on Curve (Legacy)" value="1" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not point on curve constraints are applied.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="Sketch_preferStringCons" type="int" title="Prefer Constraints on String (Legacy)" value="0" ver="10.0.0" scope="Session">
+                    <Description>This option determines whether or not tangent to string, perpendicular to string, and point on string constraints are inferred and applied to a string of associative curves.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="0"/>
+                        <EnumElem name="Yes" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Sketch_createAlignCons" type="logical" title="Create Alignment Constraints (Legacy)" value="false" ver="12.0.0" scope="Session">
+                    <Description>This option determines whether or not alignment constraints are created when snapping to horizontal or vertical alignment helper lines.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Dimensions (Legacy)" csh="PMAN_Sketch_Inferred_CandD_Dimensions">
+              <Pref name="Sketch_dimensionRules" type="list_sel_reorder_value" title="Auto Dimension Rules (Legacy)" value="&quot;CS2_autodim_create_symmetric&quot;\&quot;CS2_autodim_create_adjacent_angle&quot;\&quot;CS2_autodim_create_length&quot;\&quot;CS2_autodim_create_HV&quot;\&quot;CS2_autodim_create_reference_axes&quot;" ver="7.5.0" scope="Session">
+                <Description>This option specifies which order auto dimensioning rules should be applied.</Description>
+                <ListSelReorder height="5" reorderable="true" selectable="false"/>
+                <Data type="enum">
+                  <EnumElem name="Create Symmetric Dimensions"            value="CS2_autodim_create_symmetric"/>
+                  <EnumElem name="Create Adjacent Angles"                 value="CS2_autodim_create_adjacent_angle"/>
+                  <EnumElem name="Create Length Dimensions"               value="CS2_autodim_create_length"/>
+                  <EnumElem name="Create Horizontal and Vertical Dimensions on Lines"  value="CS2_autodim_create_HV"/>
+                  <EnumElem name="Create Dimensions to Reference Axes"    value="CS2_autodim_create_reference_axes"/>
+                </Data>
+              </Pref>
+              <Pref name="Sketch_continuousAutoDimensioningDesign" type="int" title="Continuous Auto Dimensioning in Design Applications (Legacy)" value="1" ver="7.5.0" scope="Session">
+                <Description>This option determines whether or not dimensions are automatically created after a modification to the sketch is made in design applications. Having this option off gives better performance for large sketches.</Description>
+                <Toggle off="0"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="0"/>
+                  <EnumElem name="Yes" value="1"/>
+                </Data>
+              </Pref>
+              <Pref name="Sketch_continuousAutoDimensioningDrafting" type="int" title="Continuous Auto Dimensioning in Drafting (Legacy)" value="0" ver="7.5.0" scope="Session">
+                <Description>This option determines whether or not dimensions are automatically created after a modification to the sketch is made in the Drafting application. Having this option off gives better performance for large sketches.</Description>
+                <Toggle off="0"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="0"/>
+                  <EnumElem name="Yes" value="1"/>
+                </Data>
+              </Pref>
+            </Tab>
+        </Category>
+        <Category name="Curve Snap Options" csh="PMAN_Sketch_Curve_Snap_Options">
+            <Tab name="Settings" csh="PMAN_Sketch_Curve_Snap_Options_Settings">
+               <Pref name="Sketch_curveSnapOrthogonalDirection" type="logical" title="Orthogonal Direction" value="true" ver="1926" scope="Session">
+                  <Description>This option specifies whether curves snap to horizontal and vertical directions during creation and when edited using dragging.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                     <EnumElem name="No" value="false"/>
+                     <EnumElem name="Yes" value="true"/>
+                  </Data>
+               </Pref>
+              <Pref name="Sketch_curveSnapOrthogonalAlignment" type="logical" title="Orthogonal Alignment" value="true" ver="1926" scope="Session">
+                <Description>This option specifies whether curves snap to align point locations horizontally and vertically during creation and when edited using dragging.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+              <Pref name="Sketch_curveSnapTangent" type="logical" title="Tangent" value="true" ver="1926" scope="Session">
+                <Description>This option specifies whether curves snap to tangent directions during creation and when edited using dragging.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+              <Pref name="Sketch_curveSnapParallel" type="logical" title="Parallel" value="true" ver="1926" scope="Session">
+                <Description>This option specifies whether curves snap to parallel directions during creation and when edited using dragging.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+              <Pref name="Sketch_curveSnapPerpendicular" type="logical" title="Perpendicular" value="true" ver="1926" scope="Session">
+                <Description>This option specifies whether curves snap to perpendicular directions during creation and when edited using dragging.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+              <Pref name="Sketch_curveSnapCollinear" type="logical" title="Collinear" value="true" ver="1926" scope="Session">
+                <Description>This option specifies whether lines snap to be collinear during creation and when edited using dragging.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+            </Tab>
+        </Category>
+        <Category name="Relation Finder" csh="PMAN_Sketch_Relation_Finder">
+          <Tab name="Settings" csh="PMAN_Sketch_Relation_Finder_Settings">
+            <Pref name="Sketch_relationFindOrthogonal" type="logical" title="Orthogonal" value ="true" ver="1926" scope="Session">
+              <Description>This option determines whether or not the relation finder should find horizontal and vertical curves.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+            </Pref>
+            <Pref name="Sketch_relationFindCollinear" type="logical" title="Collinear" value ="true" ver="1926" scope="Session">
+              <Description>This option determines whether or not the relation finder should find collinear curves.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+            </Pref>
+            <Pref name="Sketch_relationFindEqualRadius" type="logical" title="Equal Radius" value ="true" ver="1926" scope="Session">
+              <Description>This option determines whether or not the relation finder should find arcs and circles with equal radius.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+              </Pref>
+            <Pref name="Sketch_relationFindConcentric" type="logical" title="Concentric" value ="true" ver="1926" scope="Session">
+              <Description>This option determines whether or not the relation finder should find concentric arcs and circles.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+            </Pref>
+            <Pref name="Sketch_relationFindTangent" type="logical" title="Tangent (non-fillets)" value ="true" ver="1926" scope="Session">
+              <Description>This option determines whether or not the relation finder should find tangent conditions other than filleted corners.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+            </Pref>
+            <Pref name="Sketch_relationFindOffset" type="logical" title="Offset" value ="true" ver="1926" scope="Session">
+              <Description>This option determines whether or not the relation finder should find curves that are offset.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+              </Pref>
+            <Pref name="Sketch_relationFindSymmetric" type="logical" title="Symmetric" value ="true" ver="1926" scope="Session">
+              <Description>This option determines whether or not the relation finder should find symmetric curves relative to active symmetry lines.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+            </Pref>
+            <Pref name="Sketch_relationFindPerpendicular" type="logical" title="Perpendicular (connected)" value ="true" ver="1926" scope="Session">
+              <Description>This option determines whether or not the relation finder should find perpendicular lines that are connected and non-orthogonal.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+            </Pref>
+            <Pref name="Sketch_relationFindParallel" type="logical" title="Parallel" value ="true" ver="1926" scope="Session">
+              <Description>This option determines whether or not the relation finder should find parallel lines that are non-orthogonal.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+            </Pref>
+            <Pref name="Sketch_relationFindMidpoint" type="logical" title="Midpoint" value ="true" ver="2206" scope="Session">
+              <Description>This option determines whether or not the relation finder should find coincident locations between a midpoint and an endpoint, center point, or existing point.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+            </Pref>
+          </Tab>
+        </Category>
+        <Category name="Selection Intent Rules" csh="PMAN_Sketch_Selection_Intent_Rules">
+            <Tab name="All" csh="PMAN_Sketch_Selection_Intent_Rules_All">
+                <Group name="Sketch on Path">
+                <Pref name="Sketch_SketchonPathCurveSIRule" type="int" title="Curve Rule" value="4" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the selection intent rule for the curve on which to create the sketch.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Single Curve" value="1"/>
+                        <EnumElem name="Connected Curves" value="2"/>
+                        <EnumElem name="Tangent Curves" value="4"/>
+                        <EnumElem name="Feature Curves" value="64"/>
+                        <EnumElem name="Face Edges" value="8"/>
+                        <EnumElem name="Sheet Edges" value="32"/>
+                        <EnumElem name="Curves in Group" value="4096"/>                      
+                        <EnumElem name="Infer Curves" value="128"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Group name="Intersection Point">
+                <Pref name="Sketch_IntersectionPointCurveSIRule" type="int" title="Curve Rule" value="1" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the selection intent rule for the curve that intersects the sketch plane.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Single Curve" value="1"/>
+                        <EnumElem name="Connected Curves" value="2"/>
+                        <EnumElem name="Tangent Curves" value="4"/>
+                        <EnumElem name="Feature Curves" value="64"/>
+                        <EnumElem name="Face Edges" value="8"/>
+                        <EnumElem name="Sheet Edges" value="32"/>
+                        <EnumElem name="Region Boundary Curves" value="2048"/>
+                        <EnumElem name="Curves in Group" value="4096"/>                      
+                        <EnumElem name="Infer Curves" value="128"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Group name="Intersection Curve">
+                <Pref name="Sketch_IntersectionCurveCurveSIRule" type="int" title="Face Rule" value="4" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the selection intent rule for the faces that intersect the sketch plane.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Single Face" value="1"/>
+                        <EnumElem name="Tangent Faces" value="4"/>
+                        <EnumElem name="Adjacent Faces" value="64"/>
+                        <EnumElem name="Feature Faces" value="32"/>
+                        <EnumElem name="Body Faces" value="16"/>
+                        <EnumElem name="Region Faces" value="2"/>
+                        <EnumElem name="Tangent Region Faces" value="8"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Group name="Project Curve">
+                <Pref name="Sketch_ProjectCurveSIRule" type="int" title="Curve Rule" value="128" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the selection intent rule for curves to project to the sketch plane.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Single Curve" value="1"/>
+                        <EnumElem name="Connected Curves" value="2"/>
+                        <EnumElem name="Tangent Curves" value="4"/>
+                        <EnumElem name="Feature Curves" value="64"/>
+                        <EnumElem name="Face Edges" value="8"/>
+                        <EnumElem name="Sheet Edges" value="32"/>
+                        <EnumElem name="Body Edges" value="16"/>
+                        <EnumElem name="Curves in Group" value="4096"/>                      
+                        <EnumElem name="Infer Curves" value="128"/>
+                    </Data>
+                </Pref>
+                </Group>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>

@@ -1,0 +1,4287 @@
+#
+#      Copyright (c) 1994,1995,1996  Electronic Data Systems Corp.
+#                 Unpublished - All Rights Reserved
+#
+# ugsmd_def.std
+#
+#    NOTE: Make a copy of this file before making any changes.
+#
+#    This file provides standard material types, Bend Allowance
+#    Formulas (BAF), etc., to the UG/Sheet Metal Design (UG/SMD)
+#    and Modeling application.
+#
+#    This script is normally read into memory when UG/SMD is started
+#    and during sheet metal feature creation. The application will
+#    look for this script file (ugsmd_def.std) in the directory 
+#    specified by the environment variable UGII_UGSMD_STDS_LIBRARY.
+#    If it is not found there it looks in the user's current directory.
+#
+#    It is also a good idea to comment out unwanted features and 
+#    parameters rather than deleting them. You never know when
+#    you may need them or use them as an example.
+#
+#    The default Bend Allowance Formula (BAF) uses 44% of the thickness
+#    of the material. This has been proven empirically to be the
+#    best percentage for creating a flat pattern from a solid body. 
+#    So it is probably a good idea to leave it as the default formula.
+#
+#    NOTES:
+#           If you have previously modified this file, do not try to
+#           use your file. Put your modifications in this file. A major
+#           change in this version is that the BAF cannot have embedded
+#           white space anymore.
+#
+#           The "parms" variable in each object may be used to limit
+#           the parameters checked against the standards, even if
+#           passed in as args, such as eliminating thickness from
+#           checking.
+#
+#
+
+set tol      1.0e-8
+#-------------------------------------------------------------------
+#
+# proc check_value
+#
+#    This proc is used to check a value list of standard parameter 
+#    values against a parameter name/value in the original input.
+#
+#    Input
+#        parmnam - parameter name to be checked (thickness)
+#        parmval - parameter value to be checked (.050)
+#        retl    - list of standard values to check against
+#                  {.030 .040 .050 .060 .070 ...}
+#        pass    - a pass-by-reference indicator of successful match
+#
+#    Output
+#        pass    - set to 1 if PASS
+#      
+#    Returns a string with "PASS or FAIL    - parmnam parmval\n"
+#
+#    There is no need to modify this procedure
+#
+#-------------------------------------------------------------------
+proc check_value {parmnam parmval retl pass} {
+    
+    global tol
+    upvar $pass pas
+    set out ""
+
+    set vall [lrange $retl 0 end]
+    if { [regexp {^([+-.0-9])[+-.0-9eE]+$} $parmval] } {
+        foreach j $vall {
+            if { [expr abs($j - $parmval)] < $tol } {
+                set out "    PASS    - $parmnam $parmval\n"
+                set pas 1
+                break
+            }
+        }
+    } else {
+        foreach j $vall {
+            if { $j == $parmval } {
+                set out "    PASS    - $parmnam $parmval\n"
+                set pas 1
+                break
+            }
+        }
+    }
+
+    if { !$pas } {
+        set out "    FAIL    - $parmnam $parmval\n"
+    }
+
+    return $out
+}
+
+#-------------------------------------------------------------------
+#
+# proc check_parm
+#
+#    This proc is used to check a parml or parmv list of standard 
+#    values against the feature parameter name/value list. Parameter 
+#    name/value pairs may be in any order.
+#
+#    Input
+#        parms - list of parameter/value pairs to be checked
+#                {thickness .050 diameter .025}
+#        retl  - parml list of standard parameter values to check 
+#                {parml: thickness .030 .040 .050 .060 .070 ...}
+#              - parmv list of standard parameter/value pairs to check
+#                {parmv: thickness .050 diameter .025}
+#
+#    Output
+#        None
+#      
+#    Returns strings with "PASS or FAIL    - parm1 val1\n"
+#
+#    There is no need to modify this procedure
+#
+#-------------------------------------------------------------------
+proc check_parm {parms retl} {
+
+    global tol
+    set out ""
+    set pass 0
+
+    if { [lindex $retl 0] == "parml:" } {
+        set idx [lsearch $parms [lindex $retl 1]]
+        if { $idx != -1 } {
+            set out "$out[check_value [lindex $parms $idx] \
+              [lindex $parms [expr $idx+1]] [lrange $retl 2 end] pass]"
+        } else {
+            set out "$out    FAIL    - [lindex $retl 1] - NOT IN INPUT\n"
+        }
+    } elseif { [lindex $retl 0] == "parmv:" } {
+        set vall [lrange $retl 1 end]
+        set valll [llength $vall]
+        for {set idxv 0} {$idxv < $valll} {incr idxv 2} {
+            set pass 0
+            set vallval [lindex $vall [expr $idxv+1]]
+            set idx [lsearch $parms [lindex $vall $idxv]]
+            if { $idx != -1 } {
+                set parmnam [lindex $parms $idx]
+                set parmval [lindex $parms [expr $idx+1]]
+                if { [regexp {^([+-.0-9])[+-.0-9eE]+$} $parmval] } {
+                    if { [expr abs($vallval - $parmval)] < $tol } {
+                        set out "$out    PASS    - $parmnam $parmval\n"
+                        set pass 1
+                    }               
+                } else {
+                    if { $vallval == $parmval } {
+                        set out "$out    PASS    - $parmnam $parmval\n"
+                        set pass 1
+                    }               
+                }
+                if { !$pass } {
+                    set out "$out    FAIL    - $parmnam $parmval\n"
+                }
+            } else {
+                set out "$out    [lindex $vall $idxv] $vallval - NOT IN INPUT \
+- FAIL\n"
+            }
+        }
+    } else {
+        set out "$out[lindex $retl 0] invalid parm data type for varnam\n"
+    }
+    return $out
+}
+
+#-------------------------------------------------------------------
+#
+# proc part
+#
+#    This proc is used to set the part standards for your site.
+#    These standards include material and thickness. The value 
+#    lists should be of the form:
+#
+#    set VARNAM  {set ret "vallist: value_1 value_2...value_n"}
+#
+#    where everything but the "VARNAM" and "value" strings should be 
+#    exactly as shown. See MATERIAL and THICKNESS below for examples.
+#    In the default version, the standard materials are aluminum,
+#    steel, and stainless steel. Notice that the material names 
+#    can not contain blanks or newlines. The names are case sensitive.
+#
+#    The standards are further defined in the UG/SMD User Guide,
+#    but you can use the supplied standard values as a guide.
+#
+#    You should only change "set ret ..." lines in this proc.
+#    Changing other lines may cause the logic of the procedure
+#    to change.
+#
+#    This procedure is used to set standards for Global
+#    preferences.  Also, if any standards are missing from
+#    the procedures for individual features, the system
+#    will read the part standards (if possible).
+#
+#-------------------------------------------------------------------
+proc part {cmd} {
+
+    set parms {MATERIAL BAF THICKNESS ANGLE RADIUS}
+
+    set ret   "error: unknown"
+    set error ""
+    set note  ""
+
+# Scan the command first to get the method: either ask_std or chk_std
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+# Set the return values for the standard parameters
+
+    set MATERIAL  {set ret "vallist: steel stainless_steel aluminum \
+                   aluminum2024-O aluminum2024-AQ aluminum1100-H14  \
+                   magnesiumHK31BCond.O magnesiumHK31ACond.H24 \
+                   magnesiumHM21A-TB"}
+
+    set BAF {
+        switch $mat_val {
+            steel     {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            stainless_steel {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            aluminum {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            default {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+        }
+    }
+    set THICKNESS {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: .030 .050 .070"
+            }
+            stainless_steel {
+                set ret "vallist: .030 .040 .050"
+            }
+            aluminum  {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+            default   {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+        }
+    }
+    set RADIUS {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: .030 .050 .070"
+            }
+            stainless_steel {
+                set ret "vallist: .030 .040 .050"
+            }
+            aluminum  {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+            default   {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+        }
+    }
+    set ANGLE {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: 30 50 70"
+            }
+            stainless_steel {
+                set ret "vallist: 30 40 50"
+            }
+            aluminum  {
+                set ret "vallist: 30 40 50 60 70 80"
+            }
+            default   {
+                set ret "vallist: 30 40 50 60 70 80"
+            }
+        }
+    }
+
+
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for flange"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implemented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [lindex $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    } 
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } elseif { $method == "set_var" } {
+        set cmdl [split $cmd { }]
+        set out ""
+        if { [catch {eval set $varnam [lindex $cmdl 2]}] } {
+                set out "error: varnam [lindex $cmdl 2] not implemented\n"
+                continue
+        }
+        return $out
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------------
+#    proc tip
+#    This procedure is added to define the standard resons
+#    for tipping action
+#-------------------------------------------------------------------------
+
+proc tip {cmd} {
+
+    set parms {REASONS}
+
+    set ret   "error: unknown"
+    set error ""
+    set note  ""
+
+# Scan the command to get the method and the parameters
+
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+    #NOTE: Reasons cannot contain blanks
+    set REASONS {
+        set ret "vallist: TO_BAL_PNL_FOR_DRAW_TOP_TO_BOT\
+                          TO_BAL_PNL_FOR_DRAW_FRT_TO_BACK\
+                          TO_BAL_PNL_FOR_TRIM_TOP_TO_BOT\
+                          TO_BAL_PNL_FOR_TRIM_FRT_TO_BACK\
+                          TO_BAL_PNL_FOR_FLG_TOP_TO_BOT\
+                          TO_BAL_PNL_FOR_FLG_FRT_TO_BACK\
+                          TO_OPEN_FLG_FOR_SPRINGBACK\
+                          TO_ALIGN_PANEL_FOR_JOIN\
+                          TO_OPEN_WALL\
+                          TO_FLATTEN_SURFACE\
+                          TO_ORIENT_O/S_SURFACE_UP\
+                          TO_ORIENT_I/S_SURFACE_UP\
+                          TO_ORIENT_TOP_SURFACE_UP\
+                          TO_ORIENT_BOT_SURFACE_UP\
+                          TO_ORIENT_FRT_SURFACE_UP\
+                          TO_ORIENT_RR_SURFACE_UP\
+                          TO_ALIGN_TOP_OF_PNL_FOR_FLOW\
+                          TO_ALIGN_BOT_PNL_FOR_FLOW\
+                          TO_ALIGN_FRT_OF_PNL_FOR_FLOW\
+                          TO_ALIGN_RR_OF_PNL_FOR_FLOW"
+    } 
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for flange"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implemented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [lindex $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    } 
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } elseif { $method == "set_var" } {
+        set cmdl [split $cmd { }]
+        set out ""
+        if { [catch {eval set $varnam [lindex $cmdl 2]}] } {
+                set out "error: varnam [lindex $cmdl 2] not implemented\n"
+                continue
+        }
+        return $out
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------
+#
+# proc flange
+#
+#    This proc is used to set the flange standards for your site.
+#    These standards include thickness, width, length, angle, radius,
+#    taper and Bend Allowance Formulas (BAF).
+#
+#    Notice that the BAF values can no longer contain blanks or other
+#    whitespace. This has changed from previous version of this
+#    file. The formulas are separated by one or more blanks.
+#
+#    All standards will be listed in scrolled windows in the
+#    application in the order in which the names appear in their
+#    value list.
+#
+#    The standards are further defined in the UG/SMD User Guide,
+#    but you can use the supplied standard values as a guide.
+#
+#    You should only change "set ret ..." lines in this proc.
+#    Changing other lines may cause the logic of the procedure
+#    to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#
+#-------------------------------------------------------------------
+proc flange {cmd} {
+
+    global tol
+
+    set parms {BAF THICKNESS WIDTH LENGTH ANGLE RADIUS TAPER MITER BUTT}
+
+    set ret   "error: unknown"
+    set error ""
+    set note  ""
+
+# Scan the command to get the method and the parameters
+
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+
+# Set the return values for the standard parameters
+
+    set THICKNESS {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: .030 .050 .070"
+            }
+            stainless_steel {
+                set ret "vallist: .030 .040 .050"
+            }
+            aluminum  {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+            default   {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+        }
+    }
+
+    set ANGLE {
+        switch $mat_val {
+            steel {
+                set ret "vallist: 30 45 90 120"
+            }
+            aluminum {
+                set ret "vallist: 45 90"
+            }
+            default {
+                set ret "vallist: 15 30 45 90 120 135"
+            }
+        }
+    }
+
+    set RADIUS {
+        switch $mat_val {
+            steel {
+                if { [expr abs($thick_val - .030)] < $tol } {
+                    set ret "vallist: 0.125 0.25 0.5"
+                } elseif { [expr abs($thick_val - .080)] < $tol } {
+                    set ret "vallist: 0.031 .0625"
+                } else {
+                    set ret "vallist: 0.25 .050"
+                }
+            }
+            stainless_steel {
+                set ret "vallist: 0.125 0.25"
+            }
+            aluminum {
+                set ret "vallist: 0.031 0.125 0.25"
+            }
+            default {
+                set ret "vallist: .200 .250 .375 .500 .625 .750"
+            }
+        }
+    }
+
+    # NOTE: BAF can no longer contain blanks as they did in previous
+    #       versions of this file.
+    set BAF {
+        switch $mat_val {
+            steel {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            stainless_steel {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            aluminum {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            default {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+        }
+    }
+
+    set WIDTH {
+        set ret "vallist: 1.0 2.0 3.0 4.0 5.0"
+    }
+
+    set LENGTH {
+        set ret "vallist: 1.0 2.0 3.0 4.0 5.0"
+    }
+
+    # NOTE: The standards for left and right taper angles are controlled
+    #       via a single list...
+    set TAPER {
+        set ret "vallist: 30 45 90 120"
+    }
+
+    set MITER {
+        set ret "vallist: 30 45 90 120"
+    }
+
+    # Standards for Butt
+    set BUTT {
+        set ret "vallist: .1 .2 .3 .4"
+    }
+
+
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for flange"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implemented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [lindex $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    } 
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } elseif { $method == "set_var" } {
+        set cmdl [split $cmd { }]
+        set out ""
+        if { [catch {eval set $varnam [lindex $cmdl 2]}] } {
+                set out "error: varnam [lindex $cmdl 2] not implemented\n"
+                continue
+        }
+        return $out
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------
+#
+# proc inset_flange
+#
+#    This proc is used to set the inset flange standards for your site.
+#    These standards include thickness, width, length, angle, radius, 
+#    taper, bend allowance formula (BAF), inset and relief.
+#
+#    Most of the standard values for the Inset Flange are actually
+#    read from the flange procedure.  Only the inset and relief standard 
+#    values are needed for the inset_flange.  Other values are included for
+#    legacy purposes.
+#
+#    Notice that the BAF values can no longer contain blanks or other
+#    whitespace. This has changed from previous version of this
+#    file. The formulas are separated by one or more blanks.
+#
+#    All standards will be listed in scrolled windows in the
+#    application in the order in which the names appear in their
+#    value list.
+#
+#    The standards are further defined in the UG/SMD User Guide,
+#    but you can use the supplied standard values as a guide.
+#
+#    You should only change "set ret ..." lines in this proc.
+#    Changing other lines may cause the logic of the procedure
+#    to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#
+#-------------------------------------------------------------------
+proc inset_flange {cmd} {
+
+    global tol
+
+    set parms {BAF THICKNESS WIDTH LENGTH ANGLE RADIUS TAPER INSET RELIEF}
+
+    set ret   "error: unknown"
+    set error ""
+    set note  ""
+
+# Scan the command to get the method and the parameters
+
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+# Set the return values for the standard parameters
+
+    set THICKNESS {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: .030 .050 .070"
+            }
+            stainless_steel {
+                set ret "vallist: .030 .040 .050"
+            }
+            aluminum  {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+            default   {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+        }
+    }
+
+    set ANGLE {
+        switch $mat_val {
+            steel {
+                set ret "vallist: 30 45 90 120"
+            }
+            aluminum {
+                set ret "vallist: 45 90"
+            }
+            default {
+                set ret "vallist: 15 30 45 90 120 135"
+            }
+        }
+    }
+
+    set RADIUS {
+        switch $mat_val {
+            steel {
+                if { [expr abs($thick_val - .030)] < $tol } {
+                    set ret "vallist: 0.125 0.25 0.5"
+                } elseif { [expr abs($thick_val - .080)] < $tol } {
+                    set ret "vallist: 0.031 .0625"
+                } else {
+                    set ret "vallist: 0.25 .050"
+                }
+            }
+            stainless_steel {
+                set ret "vallist: 0.125 0.25"
+            }
+            aluminum {
+                set ret "vallist: 0.031 0.125 0.25"
+            }
+            default {
+                set ret "vallist: .200 .250 .375 .500 .625 .750"
+            }
+        }
+    }
+
+    # NOTE: BAF can no longer contain blanks as they did in previous
+    #       versions of this file.
+    set BAF {
+        switch $mat_val {
+            steel {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            stainless_steel {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            aluminum {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            default {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+        }
+    }
+
+    #set inset and relief values 
+    
+    set INSET {
+        switch $mat_val {
+            steel {
+                set ret "vallist: 0.1 0.1 0.3 0.4"
+            }
+            default {
+                set ret "vallist: 0.1 0.2 0.3 0.4 0.5 0.6"
+            }
+        }
+    }
+    
+    set RELIEF {
+        switch $mat_val {
+            steel {
+                set ret "vallist: 0.01 0.01 0.03 0.04"
+            }
+            default {
+                set ret "vallist: 0.01 0.02 0.03 0.04 0.05 0.06"
+            }
+        }
+    }
+
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for inset flange"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implemented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [lindex $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    } 
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } elseif { $method == "set_var" } {
+        set cmdl [split $cmd { }]
+        set out ""
+        if { [catch {eval set $varnam [lindex $cmdl 2]}] } {
+                set out "error: varnam [lindex $cmdl 2] not implemented\n"
+                continue
+        }
+        return $out
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------
+#
+# proc gen_flange
+#
+#    This proc is used to set the generalized flange standards for your site.
+#    These standards include thickness, length, angle, radius, plus, 
+#    and tolerance.
+#
+#    All standards will be listed in scrolled windows in the
+#    application in the order in which the names appear in their
+#    value list.
+#
+#    The standards are further defined in the UG/SMD User Guide,
+#    but you can use the supplied standard values as a guide.
+#
+#    You should only change "set ret ..." lines in this proc.
+#    Changing other lines may cause the logic of the procedure
+#    to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#
+#-------------------------------------------------------------------
+proc gen_flange {cmd} {
+
+    global tol
+
+    set parms {THICKNESS LENGTH ANGLE RADIUS PLUS TOLERANCE R_VALUE BAF}
+
+    set ret   "error: unknown"
+    set error ""
+    set note  ""
+
+# Scan the command to get the method and the parameters
+
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+# Set the return values for the standard parameters
+
+    set THICKNESS {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: .030 .050 .070"
+            }
+            stainless_steel {
+                set ret "vallist: .030 .040 .050"
+            }
+            aluminum  {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+            default   {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+        }
+    }
+
+    set PLUS {
+        set ret "vallist: 1.0 2.0 3.0 4.0 5.0"
+    }
+
+
+    set ANGLE {
+        switch $mat_val {
+            steel {
+                set ret "vallist: 30 45 90 120"
+            }
+            aluminum {
+                set ret "vallist: 45 90"
+            }
+            default {
+                set ret "vallist: 15 30 45 90 120 135"
+            }
+        }
+    }
+
+    set RADIUS {
+        switch $mat_val {
+            steel {
+                if { [expr abs($thick_val - .030)] < $tol } {
+                    set ret "vallist: 0.125 0.25 0.5"
+                } elseif { [expr abs($thick_val - .080)] < $tol } {
+                    set ret "vallist: 0.031 .0625"
+                } else {
+                    set ret "vallist: 0.25 .050"
+                }
+            }
+            stainless_steel {
+                set ret "vallist: 0.125 0.25"
+            }
+            aluminum {
+                set ret "vallist: 0.031 0.125 0.25"
+            }
+            default {
+                set ret "vallist: .200 .250 .375 .500 .625 .750"
+            }
+        }
+    }
+
+    set LENGTH {
+        set ret "vallist: 1.0 2.0 3.0 4.0 5.0"
+    }
+
+    set R_VALUE {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: 1.0"
+            }
+            stainless_steel {
+                set ret "vallist: 1.0"
+            }
+            aluminum  {
+                set ret "vallist: 1.0"
+            }
+            default   {
+                set ret "vallist: 1.0"
+            }
+        }
+    }
+
+    set TOLERANCE {
+        set ret "vallist: 0.001"
+    }
+
+    set BAF {
+        switch $mat_val {
+            steel {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            stainless_steel {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            aluminum {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            default {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+        }
+   
+    }
+
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for generalized flange"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implemented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [lindex $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    } 
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } elseif { $method == "set_var" } {
+        set cmdl [split $cmd { }]
+        set out ""
+        if { [catch {eval set $varnam [lindex $cmdl 2]}] } {
+                set out "error: varnam [lindex $cmdl 2] not implemented\n"
+                continue
+        }
+        return $out
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------
+#
+# proc smbridge
+#
+#    This proc is used to set the SMBridge standards for your site.
+#    These standards include TANGENT_LENGTH, INTERSECT_ANGLE, 
+#    BEND_ANGLE, INSIDE_RADIUS, THICKNESS, R_VALUE, TOLERANCE,
+#    and BAF.
+#
+#    All standards will be listed in scrolled windows in the
+#    application in the order in which the names appear in their
+#    value list.
+#
+#    The standards are further defined in the UG/SMD User Guide,
+#    but you can use the supplied standard values as a guide.
+#
+#    You should only change "set ret ..." lines in this proc.
+#    Changing other lines may cause the logic of the procedure
+#    to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#
+#-------------------------------------------------------------------
+proc smbridge {cmd} {
+
+    global tol
+
+    set parms {TANGENT_LENGTH INTERSECT_ANGLE BEND_ANGLE \
+               INSIDE_RADIUS THICKNESS R_VALUE TOLERANCE BAF}
+
+    set ret   "error: unknown"
+    set error ""
+    set note  ""
+
+# Scan the command to get the method and the parameters
+
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+# Set the return values for the standard parameters
+
+    set INTERSECT_ANGLE {
+        switch $mat_val {
+            steel {
+                set ret "vallist: 30 45 90 120"
+            }
+            aluminum {
+                set ret "vallist: 45 90"
+            }
+            default {
+                set ret "vallist: 15 30 45 90 120 135"
+            }
+        }
+    }
+
+    set BEND_ANGLE {
+        switch $mat_val {
+            steel {
+                set ret "vallist: 30 45 90 120"
+            }
+            aluminum {
+                set ret "vallist: 45 90"
+            }
+            default {
+                set ret "vallist: 15 30 45 90 120 135"
+            }
+        }
+    }
+
+    set INSIDE_RADIUS {
+        switch $mat_val {
+            steel {
+                if { [expr abs($thick_val - .030)] < $tol } {
+                    set ret "vallist: 0.125 0.25 0.5"
+                } elseif { [expr abs($thick_val - .080)] < $tol } {
+                    set ret "vallist: 0.031 .0625"
+                } else {
+                    set ret "vallist: 0.25 .050"
+                }
+            }
+            stainless_steel {
+                set ret "vallist: 0.125 0.25"
+            }
+            aluminum {
+                set ret "vallist: 0.031 0.125 0.25"
+            }
+            default {
+                set ret "vallist: .200 .250 .375 .500 .625 .750"
+            }
+        }
+    }
+
+    set THICKNESS {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: .030 .050 .070"
+            }
+            stainless_steel {
+                set ret "vallist: .030 .040 .050"
+            }
+            aluminum  {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+            default   {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+        }
+    }
+
+    set R_VALUE {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: 1.0"
+            }
+            stainless_steel {
+                set ret "vallist: 1.0"
+            }
+            aluminum  {
+                set ret "vallist: 1.0"
+            }
+            default   {
+                set ret "vallist: 1.0"
+            }
+        }
+    }
+
+    set TOLERANCE {
+        set ret "vallist: 0.001"
+    }
+
+    set BAF {
+        switch $mat_val {
+            steel {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            stainless_steel {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            aluminum {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            default {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+        }
+   
+    }
+
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for generalized flange"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implemented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [lindex $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    } 
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } elseif { $method == "set_var" } {
+        set cmdl [split $cmd { }]
+        set out ""
+        if { [catch {eval set $varnam [lindex $cmdl 2]}] } {
+                set out "error: varnam [lindex $cmdl 2] not implemented\n"
+                continue
+        }
+        return $out
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------
+#
+# proc simple_smhole
+#
+#    This proc is used to set the simple sheet metal hole standards 
+#    for your site. These standards include diameter and depth.
+#
+#    All standards will be listed in scrolled windows in the
+#    application in the order in which the names appear in their
+#    value list.
+#
+#    The standards are further defined in the UG/SMD User Guide,
+#    but you can use the supplied standard values as a guide.
+#
+#    You should only change "set ret ..." lines in this proc.
+#    Changing other lines may cause the logic of the procedure
+#    to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#
+#-------------------------------------------------------------------
+proc simple_smhole {cmd} {
+
+    set parms {DIAMETER DEPTH TIP_ANGLE}
+
+    set ret   "error: unknown"
+    set error ""
+    set note  ""
+
+# Scan the command to get the method and the parameters
+
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+# Set the return values for the standard parameters
+    
+    set DIAMETER {
+        switch $mat_val {
+            steel {
+                set ret "vallist: .125 .250"
+            }
+            aluminum {
+                set ret "vallist: .125 .250 .312 .500 .750 .825"
+            }
+            stainless_steel {
+                set ret "vallist: .125 .250 .312 .500 .750 .825 1.25"
+            }
+            default {
+                set ret "vallist: .125 .250 .312 .500 .750 .825 .750"
+            }
+        }
+    }
+
+    set DEPTH {
+        set ret "vallist: .010 .020 .030 .040 .050"
+    }
+
+    set TIP_ANGLE {
+        set ret "vallist: 15 30 45 60"
+    }
+
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for simple smhole"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implemented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [lindex $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    } 
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------
+#
+# proc smslot
+#
+#    This proc is used to set the sheet metal slot standards 
+#    for your site. These standards include length, width, and depth.
+#
+#    All standards will be listed in scrolled windows in the
+#    application in the order in which the names appear in their
+#    value list.
+#
+#    The standards are further defined in the UG/SMD User Guide,
+#    but you can use the supplied standard values as a guide.
+#
+#    You should only change "set ret ..." lines in this proc.
+#    Changing other lines may cause the logic of the procedure
+#    to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#
+#-------------------------------------------------------------------
+proc smslot {cmd} {
+
+    set parms {LENGTH WIDTH DEPTH}
+
+    set ret   "error: unknown"
+    set error ""
+    set note  ""
+
+# Scan the command to get the method and the parameters
+
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+    set SMALL { set ret "parmv: LENGTH 1.0 WIDTH .25 DEPTH .5" }
+    set MEDIUM { set ret "parmv: LENGTH 1.5 WIDTH .25 DEPTH .5" }
+    set LARGE { set ret "parmv: LENGTH 2.0 WIDTH .25 DEPTH .5" }
+    set EX_LARGE { set ret "parmv: LENGTH 2.5 WIDTH .5 DEPTH .5" }
+    set USER_DEF { set ret "parmv: LENGTH 1.0 WIDTH .25 DEPTH .5" }
+
+    set LENGTH { set ret "vallist: 0.50 0.75 1.00 1.50 2.00"}
+
+    set WIDTH {
+        switch $mat_val {
+            steel {
+                set ret "vallist: .50 .75 1.00"
+            }
+            aluminum {
+                set ret "vallist: .25 .50 .75 1.00"
+            }
+            stainless_steel {
+                set ret "vallist: .50 .75 1.00 1.25 1.5"
+            }
+            default {
+                set ret "vallist: .25 .50 .75 1.00 1.25 1.5"
+            }
+        }
+    }
+
+    set DEPTH { set ret "vallist: 0.50 0.75 1.00 1.50 2.00"}
+
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for smslot"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "smslot - [lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implemented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [lindex $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    } 
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------
+#
+# proc smpunch
+#
+#    This proc is used to set the sheet metal punch standards 
+#    for your site. These standards include depth, blend, taper,
+#    radius, and cone depth.
+#
+#    All standards will be listed in scrolled windows in the
+#    application in the order in which the names appear in their
+#    value list.
+#
+#    The standards are further defined in the UG/SMD User Guide,
+#    but you can use the supplied standard values as a guide.
+#
+#    You should only change "set ret ..." lines in this proc.
+#    Changing other lines may cause the logic of the procedure
+#    to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#
+#-------------------------------------------------------------------
+proc smpunch {cmd} {
+
+    set parms {DEPTH BLEND TAPER RADIUS CONE}
+
+    set ret   "error: unknown"
+    set error ""
+    set note  ""
+
+# Scan the command to get the method and the parameters
+
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+    set SMALL { set ret "parmv: DEPTH 1.0 BLEND .15 TAPER 15.0 RADIUS .15 CONE .10" }
+    set MEDIUM { set ret "parmv: DEPTH 1.0 BLEND .15 TAPER 15.0 RADIUS .15 CONE .10" }
+    set LARGE { set ret "parmv: DEPTH 1.0 BLEND .15 TAPER 15.0 RADIUS .15 CONE .10" }
+    set EX_LARGE { set ret "parmv: DEPTH 1.0 BLEND .15 TAPER 15.0 RADIUS .15 CONE .10" }
+    set USER_DEF { set ret "parmv: DEPTH 1.0 BLEND .15 TAPER 15.0 RADIUS .15 CONE .10" }
+
+    set DEPTH  { set ret "vallist: 0.50 0.75 1.00 1.50 2.00"}
+    set BLEND  { set ret "vallist: 0.15 0.20 0.25 0.30 0.35"}
+    set TAPER  { set ret "vallist: 10.0 15.0 20.0 25.0 30.0"}
+    set RADIUS { set ret "vallist: 0.15 0.20 0.25 0.30 0.35"}
+    set CONE   { set ret "vallist: 0.10 0.15 0.20 0.25 0.30"}
+
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for smpunch"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "smpunch - [lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implemented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [lindex $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    } 
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------
+#
+# proc bracket
+#
+#    This proc is used to set the bracket standards for your site.
+#    These standards include material thickness, pad length, bend radius, 
+#    flange length, clearance distance 
+#    and tolerance.
+#
+#    All standards will be listed in scrolled windows in the
+#    application in the order in which the names appear in their
+#    value list.
+#
+#    The standards are further defined in the UG/SMD User Guide,
+#    but you can use the supplied standard values as a guide.
+#
+#    You should only change "set ret ..." lines in this proc.
+#    Changing other lines may cause the logic of the procedure
+#    to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#
+#-------------------------------------------------------------------
+proc smbracket {cmd} {
+
+    global tol
+
+    set parms {CLR_DIST MAT_THK BEND_RAD PAD_LEN FLG_LEN OFFSET_DIST CHORD_TOL LIN_TOL}
+
+    set ret   "error: unknown"
+    set error ""
+    set note  ""
+
+# Scan the command to get the method and the parameters
+
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+# Set the return values for the standard parameters
+
+    set CLR_DIST {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: .030 .050 .070"
+            }
+            stainless_steel {
+                set ret "vallist: .030 .040 .050"
+            }
+            aluminum  {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+            default   {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+        }
+    }
+
+    set MAT_THK {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: .030 .050 .070"
+            }
+            stainless_steel {
+                set ret "vallist: .030 .040 .050"
+            }
+            aluminum  {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+            default   {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+        }
+    }
+
+    set BEND_RAD {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: .030 .050 .070"
+            }
+            stainless_steel {
+                set ret "vallist: .030 .040 .050"
+            }
+            aluminum  {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+            default   {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+        }
+    }
+
+    set PAD_LEN {
+        switch $mat_val {
+            steel {
+                if { [expr abs($thick_val - .030)] < $tol } {
+                    set ret "vallist: 0.125 0.25 0.5"
+                } elseif { [expr abs($thick_val - .080)] < $tol } {
+                    set ret "vallist: 0.031 .0625"
+                } else {
+                    set ret "vallist: 0.25 .050"
+                }
+            }
+            stainless_steel {
+                set ret "vallist: 0.125 0.25"
+            }
+            aluminum {
+                set ret "vallist: 0.031 0.125 0.25"
+            }
+            default {
+                set ret "vallist: .200 .250 .375 .500 .625 .750"
+            }
+        }
+    }
+
+    set FLG_LEN {
+        switch $mat_val {
+            steel {
+                if { [expr abs($thick_val - .030)] < $tol } {
+                    set ret "vallist: 0.125 0.25 0.5"
+                } elseif { [expr abs($thick_val - .080)] < $tol } {
+                    set ret "vallist: 0.031 .0625"
+                } else {
+                    set ret "vallist: 0.25 .050"
+                }
+            }
+            stainless_steel {
+                set ret "vallist: 0.125 0.25"
+            }
+            aluminum {
+                set ret "vallist: 0.031 0.125 0.25"
+            }
+            default {
+                set ret "vallist: .200 .250 .375 .500 .625 .750"
+            }
+        }
+    }
+
+    set OFFSET_DIST {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: .030 .050 .070"
+            }
+            stainless_steel {
+                set ret "vallist: .030 .040 .050"
+            }
+            aluminum  {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+            default   {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+        }
+    }
+
+    set CHORD_TOL {
+        set ret "vallist: .001"
+    }
+
+    set LIN_TOL {
+        set ret "vallist: .001"
+    }
+
+
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for generalized flange"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implemented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [lindex $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    } 
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } elseif { $method == "set_var" } {
+        set cmdl [split $cmd { }]
+        set out ""
+        if { [catch {eval set $varnam [lindex $cmdl 2]}] } {
+                set out "error: varnam [lindex $cmdl 2] not implemented\n"
+                continue
+        }
+        return $out
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------------
+#
+# proc smrelief
+#
+#     This proc is used to set the smrelief standards for your site.
+#
+#     The radius, offset, and angle values are used for the SMRelief
+#     feature.  The offset distance, fillet radii, and circle radius
+#     are used by the Routed Relief utility.
+#
+#     All standards will be listed in scrolled windows in the
+#     application in the order in which the names appear in their
+#     value list.
+#
+#     The standards are further defined in the UG/SMD User Guide,
+#     but you can use the supplied standard values as a guide.
+#
+#     ou should only change "set ret ..." lines in this proc.
+#     Changing other lines may cause the logic of the procedure
+#     to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#  
+#------------------------------------------------------------------------
+proc smrelief {cmd} {
+
+
+     global tol
+ 
+     set parms  {RADIUS OFFSET ANGLE OFFSET_DIST FILLET1_RADII FILLET2_RADII OS_CIRCLE_RADII}
+ 
+     set ret   "error: unknown"
+     set error ""
+     set note  " "
+ 
+# Scan the command to get the method and the parameters
+     if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+# Set the return values for the standard parameters
+ 
+      set RADIUS {
+          switch $mat_val {
+                steel
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                stainless_steel
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                aluminum
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                default
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+           }
+      }
+
+      set OFFSET {
+          switch $mat_val {
+                steel
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                stainless_steel
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                aluminum
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                default
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+           }
+      }
+
+      set ANGLE {
+          switch $mat_val {
+                steel
+                 {
+                      set ret "vallist: 5.0 10.0 15.0 20.0"
+                 }
+                stainless_steel
+                 {
+                      set ret "vallist: 5.0 10.0 15.0 20.0"
+                 }
+                aluminum
+                 {
+                      set ret "vallist: 5.0 10.0 15.0 20.0"
+                 }
+                default
+                 {
+                      set ret "vallist: 5.0 10.0 15.0 20.0"
+                 }
+           }
+      }
+
+     set OFFSET_DIST {
+          switch $mat_val {
+                steel
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                stainless_steel
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                aluminum
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                default
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+           }
+      }
+     
+      set FILLET1_RADII {
+          switch $mat_val {
+                steel
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                stainless_steel
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                aluminum
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                default
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+           }
+      }
+
+      set FILLET2_RADII {
+          switch $mat_val {
+                steel
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                stainless_steel
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                aluminum
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                default
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+           }
+      }
+
+      set OS_CIRCLE_RADII {
+          switch $mat_val {
+                steel
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                stainless_steel
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                aluminum
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+                default
+                 {
+                      set ret "vallist: .10 .20 .30 .40"
+                 }
+           }
+      }
+     
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for generalized flange"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implemented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [lindex $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    } 
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } elseif { $method == "set_var" } {
+        set cmdl [split $cmd { }]
+        set out ""
+        if { [catch {eval set $varnam [lindex $cmdl 2]}] } {
+                set out "error: varnam [lindex $cmdl 2] not implemented\n"
+                continue
+        }
+        return $out
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------
+#
+# proc bend_allowance_table
+#
+# This procedure will calculate the developed length of Flanges,
+# Inset Flanges, General Flanges, SMBridges, SMBends, and the 
+# SMStrain utility using a Bend Allowance Table.
+#
+# To use this procedure, toggle on the "Use Bend Allowance Table" 
+# preference on the Sheet Metal Preferences dialog in Modeling.  
+# You can also set the "SMD_GlobalBAFOption" preference in 
+# the ug_smd.def file.
+#
+# This procedure expects a command string ($cmd) in the form of
+# "bend_allowance_table MATERIAL steel THICKNESS 1.0 RADIUS 5.0 ANGLE 90.0"
+#
+# It should return in $ret the "developed length" of the bend area
+# of the flange feature.  The "developed length" is the length of the bend
+# area in the unformed (flat) state of the Flange feature.
+#
+#-------------------------------------------------------------------
+proc bend_allowance_table {cmd} {
+
+    global tol
+
+    set ret   "Error: No developed length calculated."
+    set error ""
+    set note  ""
+    set radians [expr 3.141592654 / 180.0 ]
+
+# Scan the command to get the method and the parameters
+    if { [scan $cmd "%s %s %s %s %s %s %s %s" c_mat    mat_val    \
+                                              c_thick  thick_val  \
+                                              c_radius radius_val \
+                                              c_angle  angle_val ] != 8 } {
+        set method invalidarg
+    }
+
+#
+# This example shows the use of a default Bend Allowance Formula:
+# ( Radius + ( Thickness * 0.44 ) ) * rad( Angle )
+#
+#    set ret [expr ( $radius_val + ( $thick_val * 0.44 ) ) * \
+#                    ( $radians * $angle_val ) ]
+#
+
+# This example shows a few cases of a Bend Allowance Table based on the
+# thickness of the material and the angle of the flange.
+#
+# Note that is it possible for a flange angle to be negative.  Make
+# sure your procedure accepts the full range of acceptable values.
+#
+
+    switch $mat_val {
+        steel {
+            # Thickness = 1.00mm, Angle >= 90
+            if { abs($thick_val -  1.00) <  $tol && \
+                 $angle_val              >= 90.00 } {
+                set ret [expr abs( 31.555 -                                 \
+                                   (  0.88200000 * $angle_val         )   + \
+                                   (  0.00931900 * pow( $angle_val, 2 ) ) + \
+                                   ( -0.00003726 * pow( $angle_val, 3 ) ) + \
+                                   (  0.0 )                               + \
+                                   (  2.260e-10  * pow( $angle_val, 5 ) ) + \
+                                   (  0.0 )                               + \
+                                   (  0.0 ) ) ]
+            }
+
+            # Thickness = 1.25mm, Angle >= 90
+            if { abs($thick_val -  1.25) < $tol && \
+                 $angle_val              >= 90.00 } {
+                set ret [expr abs( 32.620 -                                 \
+                                   (  0.81700000 * $angle_val         )   + \
+                                   (  0.00785800 * pow( $angle_val, 2 ) ) + \
+                                   ( -0.00002917 * pow( $angle_val, 3 ) ) + \
+                                   (  0.0 )                               + \
+                                   (  1.592e-10  * pow( $angle_val, 5 ) ) + \
+                                   (  0.0 )                               + \
+                                   (  0.0 ) ) ]
+            }
+
+            # Thickness = 1.5mm, Angle >= 90
+            if { abs($thick_val -  1.50) < $tol && \
+                 $angle_val              >= 90.00 } {
+                set ret [expr abs( 55.068 -                                  \
+                                   (  2.049000000 * $angle_val )           + \
+                                   (  0.035934000 * pow( $angle_val, 2 ) ) + \
+                                   ( -0.000357320 * pow( $angle_val, 3 ) ) + \
+                                   (  0.000002093 * pow( $angle_val, 4 ) ) + \
+                                   (-71.406e-10   * pow( $angle_val, 5 ) ) + \
+                                   (  1.322e-11   * pow( $angle_val, 6 ) ) + \
+                                   (-10.495e-15   * pow( $angle_val, 7 ) ) ) ]
+            }
+
+            # Thickness = 2mm, Angle >= 90
+            if { abs($thick_val -  2.00) < $tol && \
+                 $angle_val              >= 90.00 } {
+                set ret [expr abs( 38.805 -                                  \
+                                   (  0.956000000 * $angle_val )           + \
+                                   (  0.009235000 * pow( $angle_val, 2 ) ) + \
+                                   ( -0.000034740 * pow( $angle_val, 3 ) ) + \
+                                   (  0.0 )                                + \
+                                   (  1.948e-10   * pow( $angle_val, 5 ) ) + \
+                                   (  0.0 )                                + \
+                                   (  0.0 ) ) ]
+            }
+
+            # Thickness = 2.5mm, Angle >= 90
+            if { abs($thick_val -  2.50) < $tol && \
+                 $angle_val              >= 90.00 } {
+                set ret [expr abs( 48.736 -                                  \
+                                   (  1.189000000 * $angle_val )           + \
+                                   (  0.011424000 * pow( $angle_val, 2 ) ) + \
+                                   ( -0.000042920 * pow( $angle_val, 3 ) ) + \
+                                   (  0.0 )                                + \
+                                   (  2.417e-10   * pow( $angle_val, 5 ) ) + \
+                                   (  0.0 )                                + \
+                                   (  0.0 ) ) ]
+            }
+
+            # Thickness = 3.0mm, Angle >= 90
+            if { abs($thick_val -  3.00) < $tol && \
+                 $angle_val              >= 90.00 } {
+                set ret [expr abs( 57.300 -                                  \
+                                   (  1.420000000 * $angle_val )           + \
+                                   (  0.013869000 * pow( $angle_val, 2 ) ) + \
+                                   ( -0.000052860 * pow( $angle_val, 3 ) ) + \
+                                   (  0.0 )                                + \
+                                   (  3.042e-10   * pow( $angle_val, 5 ) ) + \
+                                   (  0.0 )                                + \
+                                   (  0.0 ) ) ]
+            }
+
+            # Thickness = 4.0mm, Angle >= 90
+            if { abs($thick_val -  4.00) < $tol && \
+                 $angle_val              >= 90.00 } {
+                set ret [expr abs( 58.469 -                                  \
+                                   (  1.261000000 * $angle_val )           + \
+                                   (  0.010833000 * pow( $angle_val, 2 ) ) + \
+                                   ( -0.000037200 * pow( $angle_val, 3 ) ) + \
+                                   (  0.0 )                                + \
+                                   (  1.824e-10   * pow( $angle_val, 5 ) ) + \
+                                   (  0.0 )                                + \
+                                   (  0.0 ) ) ]
+            }
+
+            # Thickness = 5.0mm, Angle >= 90
+            if { abs($thick_val -  5.00) < $tol && \
+                 $angle_val              >= 90.00 } {
+                set ret [expr abs( 65.150 -                                   \
+                                   (  1.329000000 * $angle_val )           + \
+                                   (  0.010939000 * pow( $angle_val, 2 ) ) + \
+                                   ( -0.000036650 * pow( $angle_val, 3 ) ) + \
+                                   (  0.0 )                                + \
+                                   (  1.768e-10   * pow( $angle_val, 5 ) ) + \
+                                   (  0.0 )                                + \
+                                   (  0.0 ) ) ]
+            }
+
+            # Thickness = 6.0mm, Angle >= 90
+            if { abs($thick_val -  6.00) < $tol && \
+                 $angle_val              >= 90.00 } {
+                set ret [expr abs( 58.371 -                                  \
+                                   (  0.907000000 * $angle_val )           + \
+                                   (  0.005091000 * pow( $angle_val, 2 ) ) + \
+                                   ( -0.000010300 * pow( $angle_val, 3 ) ) + \
+                                   (  0.0 )                                + \
+                                   (  0.0 )                                + \
+                                   (  0.0 )                                + \
+                                   (  0.0 ) ) ]
+            }
+
+            # Thickness = 7.0mm, Angle >= 90
+            if { abs($thick_val -  7.00) < $tol && \
+                 $angle_val              >= 90.00 } {
+                set ret [expr abs( 45.161 -                                  \
+                                   (  0.567000000 * $angle_val )           + \
+                                   (  0.002664000 * pow( $angle_val, 2 ) ) + \
+                                   ( -0.000004940 * pow( $angle_val, 3 ) ) + \
+                                   (  0.0 )                                + \
+                                   (  0.0 )                                + \
+                                   (  0.0 )                                + \
+                                   (  0.0 ) ) ]
+            }
+
+            # Thickness = 1.0mm, Angle < 90
+            if { abs($thick_val -  1.00) < $tol && \
+                 $angle_val              < 90.00 } {
+                set ret [expr 31.555 -                                  \
+                              (  0.882000000 * $angle_val )           + \
+                              (  0.009319000 * pow( $angle_val, 2 ) ) + \
+                              ( -0.000037260 * pow( $angle_val, 3 ) ) + \
+                              (  0.0 )                                + \
+                              (  2.260e-10   * pow( $angle_val, 5 ) ) + \
+                              (  0.0 )                                + \
+                              (  0.0 )                                - \
+                              (  2 * ( 20.600                         - \
+                              (  0.707000000 * $angle_val )           + \
+                              (  0.009005000 * pow( $angle_val, 2 ) ) + \
+                              ( -0.000041110 * pow( $angle_val, 3 ) ) ) ) ]
+            }
+
+            # Thickness = 1.25mm, Angle < 90
+            if { abs($thick_val -  1.25) < $tol && \
+                 $angle_val              < 90.00 } {
+                set ret [expr 32.620 -                                  \
+                              (  0.817000000 * $angle_val )           + \
+                              (  0.007858000 * pow( $angle_val, 2 ) ) + \
+                              ( -0.000029170 * pow( $angle_val, 3 ) ) + \
+                              (  0.0 )                                + \
+                              (  1.592e-10   * pow( $angle_val, 5 ) ) + \
+                              (  0.0 )                                + \
+                              (  0.0 )                                - \
+                              (  2 * ( 23.579                         - \
+                              (  0.759000000 * $angle_val )           + \
+                              (  0.009103000 * pow( $angle_val, 2 ) ) + \
+                              ( -0.000039810 * pow( $angle_val, 3 ) ) ) ) ]
+            }
+
+            # Thickness = 1.5mm, Angle < 90
+            if { abs($thick_val -  1.50) < $tol && \
+                 $angle_val              < 90.00 } {
+                set ret [expr 55.068 -                                     \
+                              (   2.049000000 * $angle_val )             + \
+                              (   0.035934000 * pow( $angle_val, 2 ) )   + \
+                              (  -0.000357320 * pow( $angle_val, 3 ) )   + \
+                              (   0.000002093 * pow( $angle_val, 4 ) )   + \
+                              ( -71.406e-10   * pow( $angle_val, 5 ) )   + \
+                              (   1.322e-11   * pow( $angle_val, 6 ) )   + \
+                              ( -10.495e-15   * pow( $angle_val, 7 ) )   - \
+                              (   2 * ( 29.505                           - \
+                              (   0.982000000 * $angle_val )             + \
+                              (   0.010010000 * pow( $angle_val, 2 ) )   + \
+                              (  -0.000052770 * pow( $angle_val, 3 ) ) ) ) ]
+            }
+
+            # Thickness = 2mm, Angle < 90
+            if { abs($thick_val -  2.00) < $tol && \
+                 $angle_val              < 90.00 } {
+                set ret [expr 38.805 -                                     \
+                              (  0.9560000000 * $angle_val )             + \
+                              (  0.0092350000 * pow( $angle_val, 2 ) )   + \
+                              ( -0.0000347400 * pow( $angle_val, 3 ) )   + \
+                              (  0.0 )                                   + \
+                              (  1.948e-10    * pow( $angle_val, 5 ) )   + \
+                              (  0.0 )                                   + \
+                              (  0.0 )                                   - \
+                              (  2 * ( 26.348                            - \
+                              (  0.8030000000 * $angle_val )             + \
+                              (  0.0090810000 * pow( $angle_val, 2 ) )   + \
+                              ( -0.0000379600 * pow( $angle_val, 3 ) ) ) ) ]
+            }
+
+            # Thickness = 2.5mm, Angle < 90
+            if { abs($thick_val -  2.50) < $tol && \
+                 $angle_val              < 90.00 } {
+                set ret [expr 48.736 -                                     \
+                              (  1.1890000000 * $angle_val )             + \
+                              (  0.0114240000 * pow( $angle_val, 2 ) )   + \
+                              ( -0.0000429200 * pow( $angle_val, 3 ) )   + \
+                              (  0.0 )                                   + \
+                              (  2.417e-10    * pow( $angle_val, 5 ) )   + \
+                              (  0.0 )                                   + \
+                              (  0.0 )                                   - \
+                              (  2 * ( 34.435                            - \
+                              (  1.0880000000 * $angle_val )             + \
+                              (  0.0128790000 * pow( $angle_val, 2 ) )   + \
+                              ( -0.0000560200 * pow( $angle_val, 3 ) ) ) ) ]
+            }
+
+            # Thickness = 3mm, Angle < 90
+            if { abs($thick_val -  3.00) < $tol && \
+                 $angle_val              < 90.00 } {
+                set ret [expr 57.300 -                                     \
+                              (  1.4200000000 * $angle_val )             + \
+                              (  0.0138690000 * pow( $angle_val, 2 ) )   + \
+                              ( -0.0000528600 * pow( $angle_val, 3 ) )   + \
+                              (  0.0 )                                   + \
+                              (  3.042e-10    * pow( $angle_val, 5 ) )   + \
+                              (  0.0 )                                   + \
+                              (  0.0 )                                   - \
+                              (  2 * ( 35.244                            - \
+                              (  1.0540000000 * $angle_val )             + \
+                              (  0.0119030000 * pow( $angle_val, 2 ) )   + \
+                              ( -0.0000504600 * pow( $angle_val, 3 ) ) ) ) ]
+            }
+
+            # Thickness = 4mm, Angle < 90
+            if { abs($thick_val -  4.00) < $tol && \
+                 $angle_val              < 90.00 } {
+                set ret [expr 58.469 -                                     \
+                              (  1.2610000000 * $angle_val )             + \
+                              (  0.0108330000 * pow( $angle_val, 2 ) )   + \
+                              ( -0.0000372000 * pow( $angle_val, 3 ) )   + \
+                              (  0.0 )                                   + \
+                              (  1.824e-10    * pow( $angle_val, 5 ) )   + \
+                              (  0.0 )                                   + \
+                              (  0.0 )                                   - \
+                              (  2 * ( 14.625                            - \
+                              (  0.1630000000 * $angle_val )             + \
+                              (  0.0 )                                   + \
+                              (  0.0 ) ) ) ]
+            }
+
+            # Thickness = 5mm, Angle < 90
+            if { abs($thick_val -  5.00) < $tol && \
+                 $angle_val              < 90.00 } {
+                set ret [expr 65.150 -                                     \
+                              (  1.3290000000 * $angle_val )             + \
+                              (  0.0109390000 * pow( $angle_val, 2 ) )   + \
+                              ( -0.0000366500 * pow( $angle_val, 3 ) )   + \
+                              (  0.0 )                                   + \
+                              (  1.768e-10    * pow( $angle_val, 5 ) )   + \
+                              (  0.0 )                                   + \
+                              (  0.0 )                                   - \
+                              (  2 * ( 17.845                            - \
+                              (  0.1980000000 * $angle_val )             + \
+                              (  0.0 )                                   + \
+                              (  0.0 ) ) ) ]
+            }
+
+            # Thickness = 6mm, Angle < 90
+            if { abs($thick_val -  6.00) < $tol && \
+                 $angle_val              < 90.00 } {
+                set ret [expr 58.371 -                                     \
+                              (  0.9070000000 * $angle_val )             + \
+                              (  0.0050910000 * pow( $angle_val, 2 ) )   + \
+                              ( -0.0000103000 * pow( $angle_val, 3 ) )   + \
+                              (  0.0 )                                   + \
+                              (  0.0 )                                   + \
+                              (  0.0 )                                   + \
+                              (  0.0 )                                   - \
+                              (  2 * ( 22.450                            - \
+                              (  0.2450000000 * $angle_val )             + \
+                              (  0.0 )                                   + \
+                              (  0.0 ) ) ) ]
+            }
+
+            # Thickness = 7mm, Angle < 90
+            if { abs($thick_val -  7.00) < $tol && \
+                 $angle_val              < 90.00 } {
+                set ret [expr 45.161 -                                     \
+                              (  0.5670000000 * $angle_val )             + \
+                              (  0.0026640000 * pow( $angle_val, 2 ) )   + \
+                              ( -0.0000049400 * pow( $angle_val, 3 ) )   + \
+                              (  0.0 )                                   + \
+                              (  0.0 )                                   + \
+                              (  0.0 )                                   + \
+                              (  0.0 )                                   - \
+                              (  2 * ( 24.075                            - \
+                              (  0.2670000000 * $angle_val )             + \
+                              (  0.0 )                                   + \
+                              (  0.0 ) ) ) ]
+            } else {
+                set ret [expr ( $radius_val + ( $thick_val * 0.44 ) ) * \
+                                ( $radians * $angle_val ) ]
+            }
+        }
+            
+        stainless_steel {
+            if { [expr $radius_val / $thick_val ] > 5 } {
+                set temp 1.0
+            } else {
+                set temp [expr 0.65 + 0.5 * log10( $radius_val / $thick_val ) ]
+            }
+
+            set ret [expr $radius_val + ( $thick_val / 2.0 ) * \
+                          $temp * ( $radians * $angle_val ) ]
+        }
+            
+        default {
+
+            # Default is standard Bend Allowance Formula
+            set ret [expr ( $radius_val + ( $thick_val * 0.44 ) ) * \
+                            ( $radians * $angle_val ) ]
+        }
+    }
+
+    return $ret
+}
+
+
+#-------------------------------------------------------------------
+#
+# proc smdstd
+#
+#    This procedure is the front end to the others. There is no
+#    need to modify this procedure
+#
+#-------------------------------------------------------------------
+proc smdstd {cmd} {
+    set cmdl [split $cmd { }]
+    set out ""
+# squeeze out any empty elements (multiple blanks between args)
+    while { [set idx [lsearch $cmdl {}]] != -1 } {
+       set cmdl [lreplace $cmdl $idx $idx]
+    }
+#
+# check for cmd errors
+#
+    if { [catch {set out [eval [lindex $cmdl 0] {[lrange $cmdl 1 end]}] }] } {
+        set out "error: object [lindex $cmdl 0] not implemented or uncaught error"
+    }
+    return $out
+}
+#-------------------------------------------------------------------
+#
+# proc smjoggle
+#
+#    This proc is used to set the joggle standards for your site.
+#    These standards include material thickness, bend radius1( face1 ),
+#    bend radius2( face2 ), transition radius, clearance distance, rise and run.
+#
+#    The RISE is entered in ranges. This aids the system to fetch the default
+#    RUN from the standards table below.
+#    Hence, every single entry of the run should correspond to the rise entered.
+#    That is, the related elements should correspond to the same element no.s
+#    in their respective arrays.
+#    ex. If material thickness is within (0-0.022), rise within (0-0.022)
+#        and run value is 0.12. Subsequent set of values should correspond to
+#        each other.
+#           set RISE {
+#                        set ret "vallist: 0-.022 0.023-0.027 ....."
+#           }
+#
+#           set RUN {
+#                       if { ($thick_val >= 0) && ($thick_val <= 0.022) } {
+#                            set ret "vallist: 0.12 0.14 ....."
+#                          }
+#           }
+#
+#    All standards will be listed in scrolled windows in the
+#    application in the order in which the names appear in their
+#    value list.
+#
+#    The standards are further defined in the UG/SMD User Guide,
+#    but you can use the supplied standard values as a guide.
+#
+#    You should only change "set ret ..." lines in this proc.
+#    Changing other lines may cause the logic of the procedure
+#    to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#
+#-------------------------------------------------------------------
+proc smjoggle {cmd} {
+
+    global tol
+
+    set parms {CLR_DIST MAT_THK BEND_RAD1 BEND_RAD2 TRANS_RAD RISE RUN}
+
+    set ret   "error: unknown"
+    set error ""
+    set note  ""
+
+# Scan the command to get the method and the parameters
+
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+# Set the return values for the standard parameters
+
+    set CLR_DIST {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: .030 .050 .070"
+            }
+            stainless_steel {
+                set ret "vallist: .030 .040 .050"
+            }
+            aluminum  {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+            default   {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+        }
+    }
+
+    set MAT_THK {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: 1.0"
+            }
+            stainless_steel {
+                set ret "vallist: 1.0"
+            }
+            aluminum  {
+                set ret "vallist: 1.0"
+            }
+            default   {
+                set ret "vallist: 1.0"
+            }
+        }
+    }
+
+    set BEND_RAD1 {
+        switch $mat_val {
+            aluminum2024-O {
+                if { [expr abs($thick_val - .012)] < $tol } {
+                    set ret "vallist: 0.03"
+                } elseif { [expr abs($thick_val - .016)] < $tol } {
+                    set ret "vallist: 0.03"
+                } else {
+                    set ret "vallist: 0.03"
+                }
+            }
+            aluminum2024-AQ {
+                if { [expr abs($thick_val - .012)] < $tol } {
+                    set ret "vallist: 0.06"
+                } elseif { [expr abs($thick_val - .016)] < $tol } {
+                    set ret "vallist: 0.06"
+                } else {
+                    set ret "vallist: 0.06"
+                }
+            }
+            aluminum1100-H14 {
+                if { [expr abs($thick_val - .012)] < $tol } {
+                    set ret "vallist: 0.06"
+                } elseif { [expr abs($thick_val - .016)] < $tol } {
+                    set ret "vallist: 0.06"
+                } else {
+                    set ret "vallist: 0.06"
+                }
+            }
+            magnesiumHK31BCond.O {
+                if { [expr abs($thick_val - .012)] < $tol } {
+                    set ret "vallist: 0.06"
+                } elseif { [expr abs($thick_val - .016)] < $tol } {
+                    set ret "vallist: 0.09"
+                } else {
+                    set ret "vallist: 0.13"
+                }
+            }
+            magnesiumHK31ACond.H24 {
+                if { [expr abs($thick_val - .012)] < $tol } {
+                    set ret "vallist: 0.09"
+                } elseif { [expr abs($thick_val - .016)] < $tol } {
+                    set ret "vallist: 0.13"
+                } else {
+                    set ret "vallist: 0.16"
+                }
+            }
+            magnesiumHM21A-TB {
+                if { [expr abs($thick_val - .012)] < $tol } {
+                    set ret "vallist: 0.09"
+                } elseif { [expr abs($thick_val - .016)] < $tol } {
+                    set ret "vallist: 0.13"
+                } else {
+                    set ret "vallist: 0.16"
+                }
+            }
+            default {
+                set ret "vallist: 0.03"
+            }
+        }
+    }
+
+    set BEND_RAD2 {
+        switch $mat_val {
+            aluminum2024-O {
+                if { [expr abs($thick_val - .012)] < $tol } {
+                    set ret "vallist: 0.03"
+                } elseif { [expr abs($thick_val - .016)] < $tol } {
+                    set ret "vallist: 0.03"
+                } else {
+                    set ret "vallist: 0.03"
+                }
+            }
+            aluminum2024-AQ {
+                if { [expr abs($thick_val - .012)] < $tol } {
+                    set ret "vallist: 0.06"
+                } elseif { [expr abs($thick_val - .016)] < $tol } {
+                    set ret "vallist: 0.06"
+                } else {
+                    set ret "vallist: 0.06"
+                }
+            }
+            aluminum1100-H14 {
+                if { [expr abs($thick_val - .012)] < $tol } {
+                    set ret "vallist: 0.06"
+                } elseif { [expr abs($thick_val - .016)] < $tol } {
+                    set ret "vallist: 0.06"
+                } else {
+                    set ret "vallist: 0.06"
+                }
+            }
+            magnesiumHK31BCond.O {
+                if { [expr abs($thick_val - .012)] < $tol } {
+                    set ret "vallist: 0.06"
+                } elseif { [expr abs($thick_val - .016)] < $tol } {
+                    set ret "vallist: 0.09"
+                } else {
+                    set ret "vallist: 0.13"
+                }
+            }
+            magnesiumHK31ACond.H24 {
+                if { [expr abs($thick_val - .012)] < $tol } {
+                    set ret "vallist: 0.09"
+                } elseif { [expr abs($thick_val - .016)] < $tol } {
+                    set ret "vallist: 0.13"
+                } else {
+                    set ret "vallist: 0.16"
+                }
+            }
+            magnesiumHM21A-TB {
+                if { [expr abs($thick_val - .012)] < $tol } {
+                    set ret "vallist: 0.09"
+                } elseif { [expr abs($thick_val - .016)] < $tol } {
+                    set ret "vallist: 0.13"
+                } else {
+                    set ret "vallist: 0.16"
+                }
+            }
+            default {
+                set ret "vallist: 0.03"
+            }
+        }
+    }
+
+    set TRANS_RAD {
+        switch $mat_val {
+                steel
+                {
+                    set ret "vallist: .10 .20 .30 .40"
+                }
+                stainless_steel
+                {
+                    set ret "vallist: .10 .20 .30 .40"
+                }
+                aluminum
+                {
+                    set ret "vallist: .10 .20 .30 .40"
+                }
+                default
+                {
+                    set ret "vallist: .10 .20 .30 .40"
+                }
+         }
+    }
+    set RISE {
+                 set ret "vallist: 0-.022 .023-.027 .028-.035 .036-.044 .045-.05
+4"
+    }
+    set RUN {
+                if { ($thick_val >= 0) && ($thick_val <= .022) } {
+                     set ret "vallist: .12 .13 .15 .15 .18"
+                   }
+                if { ($thick_val > .022) && ($thick_val <= .027) } {
+                     set ret "vallist: .14 .15 .16 .16 .17"
+                   }
+                if { ($thick_val > .027) && ($thick_val <= .035) } {
+                     set ret "vallist: .15 .17 .18 .18 .19"
+                   }
+                if { ($thick_val > .035) && ($thick_val <= .044) } {
+                     set ret "vallist: .18 .19 .20 .20 .21"
+                   } else {
+                     set ret "vallist: .18 .19 .20 .20 .21"
+                   }
+    }
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for generalized flange"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implem
+ented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [linde
+x $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    }
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } elseif { $method == "set_var" } {
+        set cmdl [split $cmd { }]
+        set out ""
+        if { [catch {eval set $varnam [lindex $cmdl 2]}] } {
+                set out "error: varnam [lindex $cmdl 2] not implemented\n"
+                continue
+        }
+        return $out
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------
+#
+# proc smbead
+#
+#    This proc is used to set the bead standards for your site.
+#    These standards include radius, blend radius, height, width,
+#    angle, top width, end cap radius, and end cap angle.
+#
+#    All standards will be listed in scrolled windows in the
+#    application in the order in which the names appear in their
+#    value list.
+#
+#    The standards are further defined in the UG/SMD User Guide,
+#    but you can use the supplied standard values as a guide.
+#
+#    You should only change "set ret ..." lines in this proc.
+#    Changing other lines may cause the logic of the procedure
+#    to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#
+#-------------------------------------------------------------------
+proc smbead {cmd} {
+ 
+    global tol
+   
+    set parms {RADIUS BLN_RADIUS HEIGHT ANGLE PLA_WIDTH SEC_WIDTH  EC_RADIUS EC_ANGLE}
+
+    set ret   "error: unknown"
+
+    set error ""
+    set note  ""
+
+# Scan the command to get the method and the parameters
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                         c_thick thick_val ] != 6 } {
+         set method invalidarg
+    }
+
+# Set the return values for the standard parameters
+
+    set  RADIUS {
+         switch $mat_val {
+             steel     {
+                if { [expr abs($thick_val - .030)] < $tol } {
+                       set ret "vallist: .125 .25 .50"
+                } elseif { [expr abs($thick_val - .050)] < $tol } {
+                       set ret "vallist: .013 .03 .060"
+                } elseif { [expr abs($thick_val - .070)] < $tol } {
+                       set ret "vallist: .012 .02 .55"
+                } else {
+                       set ret "vallist: .0125 .025 .50"
+                }
+            }
+            stainless_steel {
+                set ret "vallist: .030 .040 .050"
+            }
+            aluminum  {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+            default   {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+        }
+    }
+
+    set BLN_RADIUS {
+        switch $mat_val {
+             steel {
+                set ret "vallist: .0625 .025 .050"
+            }
+            stainless_steel {
+                set ret "vallist: .0625 .025 .050"
+            }
+            aluminum  {
+                set ret "vallist: .0625 .25 .050"
+            }
+            default   {
+                set ret "vallist: .0625 .050"
+            }
+        }
+    }
+
+    set HEIGHT {
+        switch $mat_val {
+             steel {
+                set ret "vallist: 1 2 3"
+            }
+            stainless_steel {
+                set ret "vallist: 1 2 3"
+            }
+            aluminum  {
+                set ret "vallist:  1 2 3"
+            }
+            default   {
+                set ret "vallist: 1 2 3"
+            }
+        }
+    }
+
+    set ANGLE {
+        switch $mat_val {
+             steel {
+                set ret "vallist: 10 20 30"
+            }
+            stainless_steel {
+                set ret "vallist: 10 20 30"
+            }
+            aluminum  {
+                set ret "vallist: 10 20 30"
+            }
+            default   {
+                set ret "vallist: 10 20 30"
+            }
+        }
+    }
+
+    set PLA_WIDTH {
+        switch $mat_val {
+             steel {
+                set ret "vallist: 1 2 3"
+            }
+            stainless_steel {
+                set ret "vallist: 1 2 3"
+            }
+            aluminum  {
+                set ret "vallist: 1 2 3"
+            }
+            default   {
+                set ret "vallist: 1 2 3"
+            }
+        }
+    }
+
+    set SEC_WIDTH {
+        switch $mat_val {
+             steel     {
+                set ret "vallist: 1 2 3"
+            }
+            stainless_steel {
+                set ret "vallist: 1 2 3"
+            }
+            aluminum  {
+                set ret "vallist: 1 2 3"
+            }
+            default   {
+                set ret "vallist: 1 2 3"
+            }
+        }
+    }
+
+    set EC_ANGLE {
+        switch $mat_val {
+             steel {
+                set ret "vallist: 30 45 90"
+            }
+            stainless_steel {
+                set ret "vallist: 30 45 90"
+            }
+            aluminum  {
+                set ret "vallist:30 45 90"
+            }
+            default   {
+                set ret "vallist: 30 45 90"
+            }
+        }
+    }
+    set EC_RADIUS {
+        switch $mat_val {
+             steel {
+                set ret "vallist: .0125 .0250 .50"
+            }
+            stainless_steel {
+                set ret "vallist: .0125 .0250 .50"
+            }
+            aluminum  {
+                set ret "vallist: .0125 .0250 .50"
+            }
+            default   {
+                set ret "vallist: .0125 .0250 .50"
+            }
+        }
+    }
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for generalized flange"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implem
+ented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [linde
+x $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+
+                    }
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } elseif { $method == "set_var" } {
+        set cmdl [split $cmd { }]
+        set out ""
+        if { [catch {eval set $varnam [lindex $cmdl 2]}] } {
+                set out "error: varnam [lindex $cmdl 2] not implemented\n"
+                continue
+        }
+        return $out
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------
+#
+# proc smbend
+#
+#    This proc is used to set the bend standards for your site.
+#    These standards include radius, and bend angle.
+#
+#    All standards will be listed in scrolled windows in the
+#    application in the order in which the names appear in their
+#    value list.
+#
+#    The standards are further defined in the UG/SMD User Guide,
+#    but you can use the supplied standard values as a guide.
+#
+#    You should only change "set ret ..." lines in this proc.
+#    Changing other lines may cause the logic of the procedure
+#    to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#
+#-------------------------------------------------------------------
+proc smbend {cmd} {
+
+    global tol
+
+    set parms {ANGLE RADIUS BAF}
+
+    set ret   "error: unknown"
+
+    set error ""
+    set note  ""
+
+# Scan the command to get the method and the parameters
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                         c_thick thick_val ] != 6 } {
+         set method invalidarg
+    }
+
+# Set the return values for the standard parameters
+
+    set  RADIUS {
+         switch $mat_val {
+            steel {
+                 if { [expr abs($thick_val - .030)] < $tol } {
+                    set ret "vallist: 0.125 0.25 0.5"
+                } elseif { [expr abs($thick_val - .080)] < $tol } {
+                    set ret "vallist: 0.031 .0625"
+                } else {
+                    set ret "vallist: 0.25 .050"
+                }
+             }
+            stainless_steel {
+                if { [expr abs($thick_val - .030)] < $tol } {
+                   set ret "vallist: 0.125 0.25"
+                } elseif { [expr abs($thick_val - .050)] < $tol } {
+                   set ret "vallist: 0.031 .0625"
+                } else {
+                   set ret "vallist: 0.25 .050"
+                }  
+            }
+            aluminum {
+                set ret "vallist: 0.031 0.125 0.25"
+            }
+            default {
+                set ret "vallist: .200 .250 .375 .500 .625 .750"
+            }
+
+        }
+    }
+
+    set ANGLE {
+        switch $mat_val {
+            steel {
+                set ret "vallist: 30 45 90 120"
+            }
+            aluminum {
+                set ret "vallist: 45 90"
+            }
+            default {
+                set ret "vallist: 15 30 45 90 120 135"
+            }
+        }
+    }
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for generalized flange"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implem
+ented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [linde
+x $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+
+                    }
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } elseif { $method == "set_var" } {
+        set cmdl [split $cmd { }]
+        set out ""
+        if { [catch {eval set $varnam [lindex $cmdl 2]}] } {
+                set out "error: varnam [lindex $cmdl 2] not implemented\n"
+                continue
+        }
+        return $out
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------------
+#
+# proc smcorner
+#
+#     This proc is used to set the smcorner standards for your site.
+#     These standards include butt gap, butt overlap, machinery gap,
+#     machinery offset,simple miter gap, wrap flange length, wrap
+#     flange radius, wrap gap, round gap. 
+#
+#     All standards will be listed in scrolled windows in the
+#     application in the order in which the names appear in their
+#     value list.
+#
+#     The standards are further defined in the UG/SMD User Guide,
+#     but you can use the supplied standard values as a guide.
+#
+#     ou should only change "set ret ..." lines in this proc.
+#     Changing other lines may cause the logic of the procedure
+#     to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+# 
+#------------------------------------------------------------------------
+proc smcorner {cmd} {
+
+
+     global tol
+
+     set parms  {BUTT_GAP, BUTT_OVERLAP, MC_GAP, MC_VALUE_OFFSET, SIMPLE_GAP, WRAP_RADIUS, WRAP_LENGTH, WRAP_GAP, ROUND_GAP }
+
+     set ret   "error: unknown"
+     set error ""
+     set note  " "
+
+# Scan the command to get the method and the parameters
+     if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+# Set the return values for the standard parameters
+
+     set BUTT_GAP {
+          switch $mat_val {
+                steel
+                 {
+                      set ret "vallist: .010 .020 .030 .040"
+                 }
+                stainless_steel
+                 {
+                      set ret "vallist: .010 .020 .030 .040"
+                 }
+                aluminum
+                 {
+                      set ret "vallist: .010 .020 .030 .040"
+                 }
+                default
+                 {
+                      set ret "vallist: .010 .020 .030 .040"
+                 }
+           }
+      }
+
+      set BUTT_OVERLAP {
+          switch $mat_val {
+                steel
+                 {
+                      set ret "vallist: .0 .10 .20 .30 .40"
+                 }
+                stainless_steel
+                 {
+                      set ret "vallist: .0 .10 .20 .30 .40"
+                 }
+                aluminum
+                 {
+                      set ret "vallist: .0 .10 .20 .30 .40"
+                 }
+                default
+                 {
+                      set ret "vallist: .0 .10 .20 .30 .40"
+                 }
+           }
+      }
+
+      set MC_GAP {
+          switch $mat_val {
+                steel
+                 {
+                      set ret "vallist: .010 .020 .030 .040"
+                 }
+                stainless_steel
+                 {
+                      set ret "vallist: .010 .020 .030 .040"
+                 }
+                aluminum
+                 {
+                      set ret "vallist: .010 .020 .030 .040"
+                 }
+                default
+                 {
+                      set ret "vallist: .010 .020 .030 .040"
+                 }
+           }
+      }
+
+      set MC_VALUE_OFFSET {
+          switch $mat_val {
+                steel
+                 {
+                      set ret "vallist: .0 .10 .20 .30 .40"
+                 }
+                stainless_steel
+                 {
+                      set ret "vallist: .0 .10 .20 .30 .40"
+                 }
+                aluminum
+                 {
+                      set ret "vallist: .0 .10 .20 .30 .40"
+                 }
+                default
+                 {
+                      set ret "vallist: .0 .10 .20 .30 .40"
+                 }
+           }
+      }
+
+     set SIMPLE_GAP {                                         
+          switch $mat_val {                                 
+                steel                                       
+                 {                                          
+                      set ret "vallist: .010 .020 .030 .040"
+                 }                                          
+                stainless_steel                             
+                 {                                          
+                      set ret "vallist: .010 .020 .030 .040"
+                 }                                          
+                aluminum                                    
+                 {                                          
+                      set ret "vallist: .010 .020 .030 .040"
+                 }                                          
+                default                                     
+                 {                                          
+                      set ret "vallist: .010 .020 .030 .040"
+                 }                                          
+           }                                                
+    }
+
+    set WRAP_RADIUS {
+        switch $mat_val {
+            steel {
+                if { [expr abs($thick_val - .030)] < $tol } {
+                    set ret "vallist: 0.125 0.25 0.5"
+                } elseif { [expr abs($thick_val - .080)] < $tol } {
+                    set ret "vallist: 0.031 .0625"
+                } else {
+                    set ret "vallist: 0.25 .050"
+                }
+            }
+            stainless_steel {
+                set ret "vallist: 0.125 0.25"
+            }
+            aluminum {
+                set ret "vallist: 0.031 0.125 0.25"
+            }
+            default {
+                set ret "vallist: .200 .250 .375 .500 .625 .750"
+            }
+        }
+    }
+
+     set WRAP_LENGTH {                                         
+          switch $mat_val {                                 
+                steel                                       
+                 {                                          
+                      set ret "vallist: 1.0 2.0"
+                 }                                          
+                stainless_steel                             
+                 {                                          
+                      set ret "vallist: 1.0 2.0"
+                 }                                          
+                aluminum                                    
+                 {                                          
+                      set ret "vallist: 1.0 2.0"
+                 }                                          
+                default                                     
+                 {                                          
+                      set ret "vallist: 1.0 2.0"
+                 }                                          
+           }                                                
+    }
+
+     set WRAP_GAP {                                         
+          switch $mat_val {                                 
+                steel                                       
+                 {                                          
+                      set ret "vallist: .010 .020 .030 .040"
+                 }                                          
+                stainless_steel                             
+                 {                                          
+                      set ret "vallist: .010 .020 .030 .040"
+                 }                                          
+                aluminum                                    
+                 {                                          
+                      set ret "vallist: .010 .020 .030 .040"
+                 }                                          
+                default                                     
+                 {                                          
+                      set ret "vallist: .010 .020 .030 .040"
+                 }                                          
+           }                                                
+    }
+
+
+     set ROUND_GAP {                                         
+          switch $mat_val {                                 
+                steel                                       
+                 {                                          
+                      set ret "vallist: .010 .020 .030 .040"
+                 }                                          
+                stainless_steel                             
+                 {                                          
+                      set ret "vallist: .010 .020 .030 .040"
+                 }                                          
+                aluminum                                    
+                 {                                          
+                      set ret "vallist: .010 .020 .030 .040"
+                 }                                          
+                default                                     
+                 {                                          
+                      set ret "vallist: .010 .020 .030 .040"
+                 }                                          
+           }                                                
+    }
+
+
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for generalized flange"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implem
+ented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [linde
+x $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    }
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } elseif { $method == "set_var" } {
+        set cmdl [split $cmd { }]
+        set out ""
+        if { [catch {eval set $varnam [lindex $cmdl 2]}] } {
+                set out "error: varnam [lindex $cmdl 2] not implemented\n"
+                continue
+        }
+        return $out
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------
+#
+# proc multibend
+#
+#    This proc is used to set the multibend bracket standards for your 
+#    site.  These standards include thickness, radius, offset, and Bend 
+#    Allowance Formulas (BAF).
+#
+#    Notice that the BAF values can no longer contain blanks or other
+#    whitespace. This has changed from previous version of this
+#    file. The formulas are separated by one or more blanks.
+#
+#    All standards will be listed in scrolled windows in the
+#    application in the order in which the names appear in their
+#    value list.
+#
+#    The standards are further defined in the UG/SMD User Guide,
+#    but you can use the supplied standard values as a guide.
+#
+#    You should only change "set ret ..." lines in this proc.
+#    Changing other lines may cause the logic of the procedure
+#    to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#
+#-------------------------------------------------------------------
+proc multibend {cmd} {
+
+    global tol
+
+    set parms {THICKNESS RADIUS OFFSET BAF}
+
+    set ret   "error: unknown"
+    set error ""
+    set note  ""
+
+# Scan the command to get the method and the parameters
+
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+
+# Set the return values for the standard parameters
+
+    set THICKNESS {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: .030 .050 .070"
+            }
+            stainless_steel {
+                set ret "vallist: .030 .040 .050"
+            }
+            aluminum  {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+            default   {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+        }
+    }
+
+    set RADIUS {
+        switch $mat_val {
+            steel {
+                if { [expr abs($thick_val - .030)] < $tol } {
+                    set ret "vallist: 0.125 0.25 0.5"
+                } elseif { [expr abs($thick_val - .080)] < $tol } {
+                    set ret "vallist: 0.031 .0625"
+                } else {
+                    set ret "vallist: 0.25 .050"
+                }
+            }
+            stainless_steel {
+                set ret "vallist: 0.125 0.25"
+            }
+            aluminum {
+                set ret "vallist: 0.031 0.125 0.25"
+            }
+            default {
+                set ret "vallist: .200 .250 .375 .500 .625 .750"
+            }
+        }
+    }
+
+    set OFFSET {
+        switch $mat_val {
+            steel {
+                set ret "vallist: 0.0 0.1 0.2 0.3 0.4"
+            }
+            stainless_steel {
+                set ret "vallist: 0.0 0.1 0.2 0.3 0.4"
+            }
+            aluminum {
+                set ret "vallist: 0.0 0.1 0.2 0.3 0.4"
+            }
+            default {
+                set ret "vallist: 0.0 0.1 0.2 0.3 0.4"
+            }
+        }
+    }
+
+    # NOTE: BAF can no longer contain blanks as they did in previous
+    #       versions of this file.
+    set BAF {
+        switch $mat_val {
+            steel {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            stainless_steel {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            aluminum {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+            default {
+            set ret "vallist: (Radius+(Thickness*0.44))*rad(Angle) \
+                              (Radius+(Thickness*0.40))*rad(Angle) \
+                              (Radius+(Thickness*0.50))*rad(Angle)"
+            }
+        }
+    }
+
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for flange"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implemented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [lindex $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    } 
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } elseif { $method == "set_var" } {
+        set cmdl [split $cmd { }]
+        set out ""
+        if { [catch {eval set $varnam [lindex $cmdl 2]}] } {
+                set out "error: varnam [lindex $cmdl 2] not implemented\n"
+                continue
+        }
+        return $out
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------
+#
+# proc metaform
+#
+#    This proc is used to set the metaform standards for your 
+#    site.  These standards include yeild stress, elastic modulus,
+#    tangent modulus, poisson ratio, r value, & thickness.
+#
+#    All standards will be listed in scrolled windows in the
+#    application in the order in which the names appear in their
+#    value list.
+#
+#    The standards are further defined in the UG/SMD User Guide,
+#    but you can use the supplied standard values as a guide.
+#
+#    You should only change "set ret ..." lines in this proc.
+#    Changing other lines may cause the logic of the procedure
+#    to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#
+#-------------------------------------------------------------------
+proc metaform {cmd} {
+
+    global tol
+
+    set parms {YIELD_STRESS ELASTIC_MODULUS TANGENT_MODULUS \
+               POISSON_RATIO R_VALUE THICKNESS}
+
+    set ret   "error: unknown"
+    set error ""
+    set note  ""
+
+# Scan the command to get the method and the parameters
+
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+
+# Set the return values for the standard parameters
+
+    set YIELD_STRESS {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: 2.80000E+04"
+            }
+            aluminum  {
+                set ret "vallist: 6.40000E+04"
+            }
+            default   {
+                set ret "vallist: 2.80000E+04"
+            }
+        }
+    }
+    set ELASTIC_MODULUS {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: 3.00000E+07"
+            }
+            aluminum  {
+                set ret "vallist: 1.00000E+07"
+            }
+            default   {
+                set ret "vallist: 3.00000E+07"
+            }
+        }
+    }
+    set TANGENT_MODULUS {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: 1.00000E+03"
+            }
+            aluminum  {
+                set ret "vallist: 5.10000E+04"
+            }
+            default   {
+                set ret "vallist: 1.00000E+03"
+            }
+        }
+    }
+    set POISSON_RATIO {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: 0.300000000"
+            }
+            aluminum  {
+                set ret "vallist: 0.340000000"
+            }
+            default   {
+                set ret "vallist: 0.300000000"
+            }
+        }
+    }
+    set R_VALUE {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: 1.000000000"
+            }
+            aluminum  {
+                set ret "vallist: 1.000000000"
+            }
+            default   {
+                set ret "vallist: 1.000000000"
+            }
+        }
+    }        
+    set THICKNESS {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: 0.030000000 0.050000000 0.080000000"
+            }
+            aluminum  {
+                set ret "vallist: 0.030000000 0.050000000 0.080000000"
+            }
+            default   {
+                set ret "vallist: 0.030000000 0.050000000 0.080000000"
+            }
+        }
+    }
+
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for flange"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implemented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [lindex $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    } 
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } elseif { $method == "set_var" } {
+        set cmdl [split $cmd { }]
+        set out ""
+        if { [catch {eval set $varnam [lindex $cmdl 2]}] } {
+                set out "error: varnam [lindex $cmdl 2] not implemented\n"
+                continue
+        }
+        return $out
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+
+#-------------------------------------------------------------------
+#
+# proc solid_punch
+#
+#    This proc is used to set the Solid Punch standards for your site.
+#    These standards include only thickness.
+#
+#    All standards will be listed in scrolled windows in the
+#    application in the order in which the names appear in their
+#    value list.
+#
+#    The standards are further defined in the UG/SMD User Guide,
+#    but you can use the supplied standard values as a guide.
+#
+#    You should only change "set ret ..." lines in this proc.
+#    Changing other lines may cause the logic of the procedure
+#    to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#
+#-------------------------------------------------------------------
+proc solid_punch {cmd} {
+
+    global tol
+
+    set parms {THICKNESS IN_BLEND_RADIUS OUT_BLEND_RADIUS}
+
+    set ret   "error: unknown"
+    set error ""
+    set note  ""
+
+# Scan the command to get the method and the parameters
+
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+
+# Set the return values for the standard parameters
+
+    set THICKNESS {
+        switch $mat_val {
+            steel     {
+                set ret "vallist: .030 .050 .070"
+            }
+            stainless_steel {
+                set ret "vallist: .030 .040 .050"
+            }
+            aluminum  {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+            default   {
+                set ret "vallist: .030 .040 .050 .060 .070 .080"
+            }
+        }
+    }
+
+    set IN_BLEND_RADIUS { set ret "vallist:  0.15 0.20 0.25 0.30 0.35"}
+    set OUT_BLEND_RADIUS { set ret "vallist: 0.15 0.20 0.25 0.30 0.35"}
+
+
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for solid punch"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implemented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [lindex $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    } 
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } elseif { $method == "set_var" } {
+        set cmdl [split $cmd { }]
+        set out ""
+        if { [catch {eval set $varnam [lindex $cmdl 2]}] } {
+                set out "error: varnam [lindex $cmdl 2] not implemented\n"
+                continue
+        }
+        return $out
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------
+#
+# proc smd_bend
+#
+#    This proc is used to set the smd_bend (unbend/rebend/
+#    bend_to_angle) standards for your site.  These standards 
+#    include the bend to angle.
+#
+#    All standards will be listed in scrolled windows in the
+#    application in the order in which the names appear in their
+#    value list.
+#
+#    The standards are further defined in the UG/SMD User Guide,
+#    but you can use the supplied standard values as a guide.
+#
+#    You should only change "set ret ..." lines in this proc.
+#    Changing other lines may cause the logic of the procedure
+#    to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#
+#
+#-------------------------------------------------------------------
+proc smd_bend {cmd} {
+
+    global tol
+
+    set parms {ANGLE BAF}
+
+    set ret   "error: unknown"
+    set error ""
+    set note  ""
+
+# Scan the command to get the method and the parameters
+
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+
+# Set the return values for the standard parameters
+
+    set ANGLE {
+        switch $mat_val {
+            steel {
+                set ret "vallist: 30 45 90 120"
+            }
+            aluminum {
+                set ret "vallist: 45 90"
+            }
+            default {
+                set ret "vallist: 15 30 45 90 120 135"
+            }
+        }
+    }
+
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for flange"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implemented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [lindex $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    } 
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } elseif { $method == "set_var" } {
+        set cmdl [split $cmd { }]
+        set out ""
+        if { [catch {eval set $varnam [lindex $cmdl 2]}] } {
+                set out "error: varnam [lindex $cmdl 2] not implemented\n"
+                continue
+        }
+        return $out
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+#-------------------------------------------------------------------
+#
+# proc profile_flange
+#
+#    This proc is used to set the Profile Flange standards for your 
+#    site.  These standards include the radius and BAF.
+#
+#    All standards will be listed in scrolled windows in the
+#    application in the order in which the names appear in their
+#    value list.
+#
+#    The standards are further defined in the UG/SMD User Guide,
+#    but you can use the supplied standard values as a guide.
+#
+#    You should only change "set ret ..." lines in this proc.
+#    Changing other lines may cause the logic of the procedure
+#    to change.
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#
+#    Any value that is not set in this procedure will be
+#    read from the "part" procedure (proc part).
+#
+#
+#-------------------------------------------------------------------
+proc profile_flange {cmd} {
+
+    global tol
+
+    set parms {RADIUS BAF}
+
+    set ret   "error: unknown"
+    set error ""
+    set note  ""
+
+# Scan the command to get the method and the parameters
+
+    if { [scan $cmd "%s %s %s %s %s %s" method varnam c_mat mat_val \
+                                        c_thick thick_val ] != 6 } {
+        set method invalidarg
+    }
+
+
+# Set the return values for the standard parameters
+
+
+#======= DO NOT MODIFY THE CODE BELOW THIS LINE IN THIS PROC =======
+
+    if { $method == "ask_std" } {
+        if { [catch {eval [eval set ret $$varnam]}] } {
+           set ret "error: $varnam not a standard for flange"
+        }
+        if { $error != "" } {
+            set ret "error: $error"
+        }
+        if { $note != "" } {
+            set ret "$ret note: $note"
+        }
+    } elseif { $method == "chk_std" } {
+        set cmdl [split $cmd { }]
+        set parml [lrange $cmdl 2 end]
+        set out1 "[lindex $cmdl 1]:\n"
+        set out2 ""
+        foreach i $parms {
+            set pass 0
+            if { [catch {eval [eval set ret $$i]}] } {
+                set out2 "$out2    Warning - Explicit standard for $i not implemented\n"
+                continue
+            }
+            set idx [lsearch $parml $i]
+            if { $idx != -1 } {
+                set retl [split $ret { }]
+                set out2  "$out2[check_value [lindex $parml $idx] \
+                  [lindex $parml [expr $idx+1]] [lrange $retl 1 end] pass]"
+                if { $pass  && ([lindex $ret 0] == "varnam:")} {
+                    if { [catch {eval [eval set ret $[lindex $parml \
+                      [expr $idx+1]]]} ]} {
+                        set out2 "$out2    FAIL    - [lindex $parml $idx] [lindex $parml \
+                          [expr $idx+1]] - DOES NOT EVAL\n"
+                        continue
+                    } else {
+                        set out2 "$out2   **** checking standards for [lindex \
+                          $parml [expr $idx+1]]\n"
+                        set retl [split $ret { }]
+                        set out2 "$out2[check_parm $parml $retl]   **** done\n"
+                    } 
+                }
+            } else {
+                set out2 "$out2    FAIL    - $i - NOT IN INPUT\n"
+            }
+        }
+        set ret $out1$out2
+    } elseif { $method == "set_var" } {
+        set cmdl [split $cmd { }]
+        set out ""
+        if { [catch {eval set $varnam [lindex $cmdl 2]}] } {
+                set out "error: varnam [lindex $cmdl 2] not implemented\n"
+                continue
+        }
+        return $out
+    } else {
+        set ret "error: invalid method or argument count"
+    }
+
+    return $ret
+}
+
+####################################EOF#######################################

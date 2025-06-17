@@ -1,0 +1,1453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+  <Application name="Flexible Printed Circuit Design" csh="PMAN_FPCD" package_suppress="simcenter3d,simviewer,view,mechatronicsplayer,nx2dedit">
+    <Category name="General" csh="PMAN_FPCD_General">
+      <Tab name="Global Parameters" csh="PMAN_FPCD_General_Global_Parameters">
+        <Pref name="NXFPCB_MaterialThickness_EU" type="real" title="Material Thickness" value="0.01" unit="in" ver="1847" scope="Part">
+          <Description>This option specifies the global thickness for a Base Flat Segment or a Base Contour Transition feature.</Description>
+          <Real/>
+        </Pref>
+        <Pref name="NXFPCB_MaterialThickness_MU" type="real" title="Material Thickness" value="0.2" unit="mm" ver="1847" scope="Part">
+          <Description>This option specifies the global thickness for a Base Flat Segment or a Base Contour Transition feature.</Description>
+          <Real/>
+        </Pref>
+        <Pref name="NXFPCB_BendRadius_EU" type="real" title="Bend Radius" value="0.02" unit="in" ver="1847" scope="Part">
+          <Description>This option specifies the global bend radius for Flexible PCB features.</Description>
+          <Real/>
+        </Pref>
+        <Pref name="NXFPCB_BendRadius_MU" type="real" title="Bend Radius" value="0.5" unit="mm" ver="1847" scope="Part">
+          <Description>This option specifies the global bend radius for Flexible PCB features.</Description>
+          <Real/>
+        </Pref>
+        <Pref name="NXFPCB_BendReliefDepth_EU" type="real" title="Bend Relief Depth" value="0.005" unit="in" ver="1847" scope="Part">
+          <Description>This option specifies the global bend relief depth for Flexible PCB features.</Description>
+          <Real/>
+        </Pref>
+        <Pref name="NXFPCB_BendReliefDepth_MU" type="real" title="Bend Relief Depth" value="0.1" unit="mm" ver="1847" scope="Part">
+          <Description>This option specifies the global bend relief depth for Flexible PCB features.</Description>
+          <Real/>
+        </Pref>
+        <Pref name="NXFPCB_BendReliefWidth_EU" type="real" title="Bend Relief Width" value="0.005" unit="in" ver="1847" scope="Part">
+          <Description>This option specifies the global bend relief width for Flexible PCB features.</Description>
+          <Real/>
+        </Pref>
+        <Pref name="NXFPCB_BendReliefWidth_MU" type="real" title="Bend Relief Width" value="0.1" unit="mm" ver="1847" scope="Part">
+          <Description>This option specifies the global bend relief width for Flexible PCB features.</Description>
+          <Real/>
+        </Pref>
+        <Separator/>
+        <Pref name="NXFPCB_NeutralFactor" type="string" title="Neutral Factor" value="0.5" ver="4.0.0" scope="Part">
+          <Description>This option specifies the global neutral factor for Flexible PCB features.</Description>
+          <Widestring/>
+        </Pref>
+        <Pref name="NXFPCB_topFace_PartProp_Color" type="int" title="Top Face Color" value="50" ver="7.0.0" scope="Part">
+          <Description>This option specifies the color of the top face of the flexible cable.</Description>
+          <Color/>
+        </Pref>
+        <Pref name="NXFPCB_bottomFace_PartProp_Color" type="int" title="Bottom Face Color" value="100" ver="7.0.0" scope="Part">
+          <Description>This option specifies the color of the bottom face of the flexible cable.</Description>
+          <Color/>
+        </Pref>
+      </Tab>
+      <Tab name="Material Standards" csh="PMAN_FPCD_General_Material_Standards">
+        <Group name="Physical Material Library">
+          <Pref name="NXFPCD_Enable_Material_Library_Integration" type="logical" title="Integrate Physical Material Library" value="true" ver="1953" scope="Session">
+            <Description>This option determines whether or not to integrate a physical material library with the Flexible Printed Circuit Design application.</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="On" value="true"/>
+              <EnumElem name="Off" value="false"/>
+            </Data>
+          </Pref>
+        </Group>
+      </Tab>
+      <Tab name="Layer Scheme" csh="PMAN_FPCD_General_Layer_Scheme" suppress="FPCD_LayerScheme">
+        <Group name="Native NX">
+          <Pref name="NXFPCB_layer_scheme_file_MU_WIN" type="string" title="Metric Part" value="layer_scheme_table.txt" ver="1953" scope="Session">
+            <Description>This field specifies the name of the layer scheme file. The layer scheme file should be a comma separated text file with an extension txt or csv.</Description>
+            <BrowseFileSel type="txt,csv"/>
+          </Pref>
+          <Pref name="NXFPCB_layer_scheme_file_MU_UNX" type="string" title="Metric Part" value="layer_scheme_table.txt" ver="1953" scope="Session">
+            <Description>This field specifies the name of the layer scheme file. The layer scheme file should be a comma separated text file with an extension txt or csv.</Description>
+            <BrowseFileSel type="txt,csv"/>
+          </Pref>
+          <Pref name="NXFPCB_layer_scheme_file_EU_WIN" type="string" title="English Part" value="layer_scheme_table.txt" ver="1953" scope="Session">
+            <Description>This field specifies the name of the layer scheme file. The layer scheme file should be a comma separated text file with an extension txt or csv.</Description>
+            <BrowseFileSel type="txt,csv"/>
+          </Pref>
+          <Pref name="NXFPCB_layer_scheme_file_EU_UNX" type="string" title="English Part" value="layer_scheme_table.txt" ver="1953" scope="Session">
+            <Description>This field specifies the name of the layer scheme file. The layer scheme file should be a comma separated text file with an extension txt or csv.</Description>
+            <BrowseFileSel type="txt,csv"/>
+          </Pref>
+        </Group>
+        <Group name="Teamcenter" suppress="FPCD_LayerSchemeTC">
+          <Pref name="NXFPCB_layer_scheme_item_id" type="string" title="Item ID" value="" ver="1953" scope="Session">
+            <Description>This field specifies the Item ID of the layer scheme file in Teamcenter. Item ID, Item Revision, and Dataset Name; all three must be specified to locate the file in Teamcenter.</Description>
+            <String/>
+          </Pref>
+          <Pref name="NXFPCB_layer_scheme_item_revision" type="string" title="Item Revision" value="" ver="1953" scope="Session">
+            <Description>This field specifies the Item Revision of the layer scheme file in Teamcenter. Item ID, Item Revision, and Dataset Name; all three must be specified to locate the file in Teamcenter.</Description>
+            <String/>
+          </Pref>
+          <Pref name="NXFPCB_layer_scheme_dataset_name" type="string" title="Dataset Name" value="" ver="1953" scope="Session">
+            <Description>This field specifies the Dataset Name of the layer scheme file in Teamcenter. Item ID, Item Revision, and Dataset Name; all three must be specified to locate the file in Teamcenter.</Description>
+            <String/>
+          </Pref>
+        </Group>
+                <Pref name="NXFPCB_show_edit_layer_scheme_button" type="logical" title="Show Edit Layer Scheme Button" value="false" ver="1953" scope="Session" suppress="FPCD_EditLayerScheme">
+                    <Description>This option determines whether or not to show the Edit Layer Scheme button in the Flexible Printed Circuit Design Preferences dialog.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+      </Tab>
+    </Category>
+    <Category name="Convert" csh="PMAN_FPCD_Convert">
+      <SubCategory name="Wrap" csh="PMAN_FPCD_Convert_Wrap">
+        <Tab name="All" csh="PMAN_FPCD_Convert_Wrap_All">
+          <Group name="Settings">
+            <Pref name="NXFPCD_Wrap_HideOriginal" type="logical" title="Hide Original" value="true" ver="1872" scope="Session">
+              <Description>This option determines whether or not the original body will be made hidden after the flexible printed circuit model has been created.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+          </Group>
+        </Tab>
+      </SubCategory>
+      <SubCategory name="Rip" csh="PMAN_FPCD_Convert_Rip">
+        <Tab name="All" csh="PMAN_FPCD_Convert_Rip_All">
+          <Group name="Rip Parameters">
+            <Pref name="NXFPCD_EdgeRip_Type" type="logical" title="Use Minimal Relief" value="true" ver="12.0.2" scope="Session">
+              <Description>This option determines whether or not to create a rip using the system default rip width.</Description>
+              <Toggle off ="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCD_EdgeRip_RipWidth_EU" type="real" title="Rip Width" value="0.2" unit="in" ver="12.0.2" scope="Session">
+              <Description>This option specifies the rip width.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.001575" include="1"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCD_EdgeRip_RipWidth_MU" type="real" title="Rip Width" value="1" unit="mm" ver="12.0.2" scope="Session">
+              <Description>This option specifies the rip width.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.04" include="1"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCD_EdgeRip_EndCapShape" type="int" title="End Cap Shape" value="0" ver="12.0.2" scope="Session">
+              <Description>This option specifies the end cap shape type.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="Square" bitmap="bend_relief_square" value="0"/>
+                <EnumElem name="Round" bitmap="bend_relief_round" value="1"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCD_EdgeRip_BlendSharpCorners" type="logical" title="Blend Sharp Corners" value="false" ver="12.0.2" scope="Session">
+              <Description>This option determines whether or not to apply a blend at sharp corners.</Description>
+              <Toggle off ="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCD_EdgeRip_CurveRadius_EU" type="real" title="Fillet Radius" value="0.1" unit="in" ver="12.0.2" scope="Session">
+              <Description>This option specifies the curve radius.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.001575" include="1"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCD_EdgeRip_CurveRadius_MU" type="real" title="Fillet Radius" value="0.5" unit="mm" ver="12.0.2" scope="Session">
+              <Description>This option specifies the curve radius.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.04" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+        </Tab>
+      </SubCategory>
+      <SubCategory name="Cleanup Utility" csh="PMAN_FPCD_Convert_Cleanup_Utility">
+        <Tab name="All" csh="PMAN_FPCD_Convert_Cleanup_Utility_All">
+          <Group name="Sliver">
+            <Pref name="NXFPCD_SliverTol_EU" type="real" title="Sliver Tolerance" value="0.0004" unit="in" ver="1926" scope="Session">
+              <Description>This option specifies the tolerance value that should be used by the cleanup utility to remove sliver faces.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="0"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCD_SliverTol_MU" type="real" title="Sliver Tolerance" value="0.01" unit="mm" ver="1926" scope="Session">
+              <Description>This option specifies the tolerance value that should be used by the cleanup utility to remove sliver faces.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="0"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Settings">
+            <Pref name="NXFPCD_HideOriginal" type="logical" title="Hide Original" value="true" ver="1926" scope="Session">
+              <Description>This option determines whether or not the original body will be made hidden after the cleanup utility has been run.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+          </Group>
+        </Tab>
+      </SubCategory>
+    </Category>
+    <Category name="Base" csh="PMAN_FPCD_Base">
+      <SubCategory name="Planar Segment" csh="PMAN_FPCD_Base_Planar_Segment">
+        <Tab name="Curves" csh="PMAN_FPCD_Base_Planar_Segment_Curves">
+          <Group name="Bend Centerline">
+            <Pref name="NXFPCB_bendCenterLine_Tab_Enabled" type="logical" title="Display" value="true" ver="12.0.0" scope="Part">
+              <Description>This option determines whether bend centerlines are displayed in planar segment sketches.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_bendCenterLine_Tab_Color" type="int" title="Color" value="189" ver="12.0.0" scope="Part">
+              <Description>This option specifies the color of bend centerlines in planar segment sketches.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="NXFPCB_bendCenterLine_Tab_Font" type="int" title="Style" value="4" ver="1847" scope="Part">
+              <Description>This option specifies the style for bend centerlines in planar segment sketches.</Description>
+              <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+            </Pref>
+            <Pref name="NXFPCB_bendCenterLine_Tab_Width" type="int" title="Width" value="1" ver="12.0.0" scope="Part">
+              <Description>This option specifies the width for bend centerlines in planar segment sketches.</Description>
+              <AnnotationLineWidth/>
+            </Pref>
+          </Group>
+          <Group name="Bend Tangent Line">
+            <Pref name="NXFPCB_bendTangentLine_Tab_Enabled" type="logical" title="Display" value="true" ver="12.0.0" scope="Part">
+              <Description>This option determines whether bend tangent lines are displayed in planar segment sketches.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_bendTangentLine_Tab_Color" type="int" title="Color" value="83" ver="12.0.0" scope="Part">
+              <Description>This option specifies the color of bend tangent lines in planar segment sketches.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="NXFPCB_bendTangentLine_Tab_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+              <Description>This option specifies the style for bend tangent lines in planar segment sketches.</Description>
+              <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+            </Pref>
+            <Pref name="NXFPCB_bendTangentLine_Tab_Width" type="int" title="Width" value="1" ver="12.0.0" scope="Part">
+              <Description>This option specifies the width for bend tangent lines in planar segment sketches.</Description>
+              <AnnotationLineWidth/>
+            </Pref>
+          </Group>
+        </Tab>
+      </SubCategory>
+      <SubCategory name="Extension" csh="PMAN_FPCD_Base_Extension">
+        <Tab name="All" csh="PMAN_FPCD_Base_Extension_All">
+          <Group name="Extension Properties">
+            <Pref name="NXFPCB_ExtensionLength_EU" type="real" title="Length" value="3.0" unit="in" ver="1847" scope="Session">
+              <Description>This option specifies the Extension length.</Description>
+              <Real/>
+            </Pref>
+            <Pref name="NXFPCB_ExtensionLength_MU" type="real" title="Length" value="10.0" unit="mm" ver="1847" scope="Session">
+              <Description>This option specifies the Extension length.</Description>
+              <Real/>
+            </Pref>
+            <Pref name="NXFPCB_ExtensionAngle_EU" type="real" title="Angle" value="90.0" unit="deg" ver="1847" scope="Session">
+              <Description>This option specifies the Extension angle.</Description>
+              <Real/>
+            </Pref>
+            <Pref name="NXFPCB_ExtensionAngle_MU" type="real" title="Angle" value="90.0" unit="deg" ver="1847" scope="Session">
+              <Description>This option specifies the Extension angle.</Description>
+              <Real/>
+            </Pref>
+            <Pref name="NXFPCB_ExtensionLengthOpt" type="int" title="Length Reference" value="0" ver="12.0.2" scope="Session">
+              <Description>This option specifies how the Extension length is measured.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="Inside" bitmap="inside_dimension" value="0"/>
+                <EnumElem name="Outside" bitmap="outside_dimension" value="1"/>
+                <EnumElem name="Web" bitmap="web_length" value="2"/>
+                <EnumElem name="Tangent" bitmap="tangent_dimension" value="3"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_ExtensionInsetOpt" type="int" title="Inset" value="2" ver="12.0.2" scope="Session">
+              <Description>This option specifies the Inset of the Extension feature.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="Material Inside" bitmap="material_inside" value="0"/>
+                <EnumElem name="Material Outside" bitmap="material_outside" value="1"/>
+                <EnumElem name="Bend Outside" bitmap="bend_outside" value="2"/>
+                <EnumElem name="Material Inside OML" bitmap="material_inside" value="3"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_ExtensionOffset_EU" type="real" title="Offset" value="0.0" unit="in" ver="1847" scope="Session">
+              <Description>This option specifies the Extension offset.</Description>
+              <Real/>
+            </Pref>
+            <Pref name="NXFPCB_ExtensionOffset_MU" type="real" title="Offset" value="0.0" unit="mm" ver="1847" scope="Session">
+              <Description>This option specifies the Extension offset.</Description>
+              <Real/>
+            </Pref>
+            <Pref name="NXFPCB_ExtensionEnableGeometryMirrorAndPattern" type="logical" title="Use Geometry Mirror and Pattern" value="false" ver="1926" scope="Session">
+              <Description>This option determines whether or not the Extension command should use the mirror and pattern commands to replicate the geometry rather than the feature parameters.</Description>
+              <Toggle off ="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_ExtensionEnableMiter" type="logical" title="Miter" value="false" ver="1926" scope="Session">
+              <Description>This option determines whether or not miter should be applied to avoid interferences while creating extensions on adjacent edges in a given set.</Description>
+              <Toggle off ="false"/>
+              <Data type="enum">
+                <EnumElem name="On" value="true"/>
+                <EnumElem name="Off" value="false"/>
+              </Data>
+            </Pref>
+          </Group>
+        </Tab>
+      </SubCategory>
+      <SubCategory name="Flexible Cable" csh="PMAN_FPCD_Base_Flexible_Cable">
+        <Tab name="All" csh="PMAN_FPCD_Base_Flexible_Cable_All">
+          <Pref name="NXFPCB_ContactFace" type="int" title="Contact Face" value="0" ver="7.5.0" scope="Session" >
+            <Description>This option specifies the contact face.</Description>
+            <RadioBox/>
+            <Data type="enum">
+              <EnumElem name="Top Face" value="0"/>
+              <EnumElem name="Bottom Face" value="1"/>
+            </Data>
+          </Pref>
+          <Pref name="NXFPCB_ConductorWidth_EU" type="real" title="Conductor Width" value="0.0625" unit="in" ver="1847" scope="Session">
+            <Description>This option specifies the conductor width for the Flexible Cable feature.</Description>
+            <Real/>
+          </Pref>
+          <Pref name="NXFPCB_ConductorWidth_MU" type="real" title="Conductor Width" value="1" unit="mm" ver="1847" scope="Session">
+            <Description>This option specifies the conductor width for the Flexible Cable feature.</Description>
+            <Real/>
+          </Pref>
+          <Pref name="NXFPCB_ConductorSpacing_EU" type="real" title="Conductor Spacing" value="0.0625" unit="in" ver="1847" scope="Session">
+            <Description>This option specifies the conductor spacing for the Flexible Cable feature.</Description>
+            <Real/>
+          </Pref>
+          <Pref name="NXFPCB_ConductorSpacing_MU" type="real" title="Conductor Spacing" value="1" unit="mm" ver="1847" scope="Session">
+            <Description>This option specifies the conductor spacing for the Flexible Cable feature.</Description>
+            <Real/>
+          </Pref>
+          <Pref name="NXFPCB_StrippingLength_EU" type="real" title="Stripping Length" value="0.125" unit="in" ver="1847" scope="Session">
+            <Description>This option specifies the stripping length for the Flexible Cable feature.</Description>
+            <Real/>
+          </Pref>
+          <Pref name="NXFPCB_StrippingLength_MU" type="real" title="Stripping Length" value="3" unit="mm" ver="1847" scope="Session">
+            <Description>This option specifies the stripping length for the flexible cable feature.</Description>
+            <Real/>
+          </Pref>
+        </Tab>
+      </SubCategory>
+      <SubCategory name="Cutout" csh="PMAN_FPCD_Base_Cutout">
+        <Tab name="All" csh="PMAN_FPCD_Base_Cutout_All">
+          <Group name="Cutout Properties">
+            <Pref name="NXFPCB_CutoutType" type="int" title="Cut Method" value="0" ver="11.0.0" scope="Session">
+              <Description>This option specifies the cut method of Cutout.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="Thickness" bitmap="thickness_cut" value="0"/>
+                <EnumElem name="Mid-plane" bitmap="midplane_cut" value="1"/>
+                <EnumElem name="Nearest Face" bitmap="nearest_face_cut" value="2"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_CutoutExtentOption" type="int" title="Limits" value="0" ver="4.0.0" scope="Session">
+              <Description>This option specifies the limits of the Cutout.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="Value" bitmap="finite" value="0"/>
+                <EnumElem name="Between" bitmap="from_to_extent" value="1"/>
+                <EnumElem name="Until Next" bitmap="through_next" value="2"/>
+                <EnumElem name="Through All" bitmap="through_all" value="3"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_CutoutSymmToggle" type="int" title="Symmetric Depth" value="0" ver="11.0.0" scope="Session">
+              <Description>This option determines whether or not the Cutout should be symmetric.</Description>
+              <Toggle off="0"/>
+              <Data type="enum">
+                <EnumElem name="On" value="1"/>
+                <EnumElem name="Off" value="0"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_CutoutExtent_EU" type="real" title="Depth" value="0.2" unit="in" ver="1847" scope="Session">
+              <Description>This option specifies the depth of the Cutout feature.</Description>
+              <Real/>
+            </Pref>
+            <Pref name="NXFPCB_CutoutExtent_MU" type="real" title="Depth" value="5.0" unit="mm" ver="1847" scope="Session">
+              <Description>This option specifies the depth of the Cutout feature.</Description>
+              <Real/>
+            </Pref>
+          </Group>
+        </Tab>
+      </SubCategory>
+    </Category>
+    <Category name="Bend" csh="PMAN_FPCD_Bend">
+      <SubCategory name="General" csh="PMAN_FPCD_Bend_General">
+        <Tab name="Parameters" csh="PMAN_FPCD_Bend_General_Parameters">
+          <Group name="Bend Parameters">
+            <Pref name="NXFPCB_UseGlobalBendRadius" type="int" title="Use Global Bend Radius" value="1" ver="4.0.0" scope="Session">
+              <Description>This option determines whether or not the global bend radius should be used.</Description>
+              <Toggle off="0"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="1"/>
+                <EnumElem name="No" value="0"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_UseGlobalNeutralFactor" type="int" title="Use Global Neutral Factor" value="1" ver="4.0.0" scope="Session">
+              <Description>This option determines whether or not the global neutral factor should be used.</Description>
+              <Toggle off="0"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="1"/>
+                <EnumElem name="No" value="0"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Relief">
+            <Pref name="NXFPCB_BendReliefType" type="int" title="Bend Relief" value="2" ver="4.0.0" scope="Session">
+              <Description>This option specifies the type of bend relief to apply to Transition, Contour Transition, Bend, and Jog features.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="Square" bitmap="bend_relief_square" value="0"/>
+                <EnumElem name="Round" bitmap="bend_relief_round" value="1"/>
+                <EnumElem name="None" bitmap="none" value="2"/>
+              </Data>
+            </Pref>
+          </Group>
+        </Tab>
+      </SubCategory>
+      <SubCategory name="Hem" csh="PMAN_FPCD_Bend_Hem">
+        <Tab name="All" csh="PMAN_FPCD_Bend_Hem_All">
+          <Pref name="NXFPCD_HemTransitionType" type="int" title="Type" value="0" ver="1926" scope="Session">
+            <Description>This option specifies the type of Hem.</Description>
+            <RadioBox orientation="horizontal"/>
+            <Data type="enum">
+              <EnumElem name="Closed" bitmap="hem_closed" value="0"/>
+              <EnumElem name="Open" bitmap="hem_open" value="1"/>
+              <EnumElem name="S-type" bitmap="hem_stype" value="2"/>
+              <EnumElem name="Curl" bitmap="hem_curl" value="3"/>
+              <EnumElem name="Open Loop" bitmap="hem_open_loop" value="4"/>
+              <EnumElem name="Closed Loop" bitmap="hem_closed_loop" value="5"/>
+              <EnumElem name="Centered Loop" bitmap="hem_centered_loop" value="6"/>
+            </Data>
+          </Pref>
+          <Group name="Bend Parameters">
+            <Pref name="NXFPCD_HemSweepAngle_EU" type="real" title="Sweep Angle" value="45.0" unit="deg" ver="1926" scope="Part">
+              <Description>This option specifies the sweep angle for the Hem feature.</Description>
+              <Real/>
+            </Pref>
+            <Pref name="NXFPCD_HemSweepAngle_MU" type="real" title="Sweep Angle" value="45.0" unit="deg" ver="1926" scope="Part">
+              <Description>This option specifies the sweep angle for the Hem feature.</Description>
+              <Real/>
+            </Pref>
+          </Group>
+          <Group name="Miter">
+            <Pref name="NXFPCD_HemMiterAngle_EU" type="real" title="Miter Angle" value="45.0" unit="deg" ver="1926" scope="Part">
+              <Description>This option specifies the miter angle for the Hem feature.</Description>
+              <Real/>
+            </Pref>
+            <Pref name="NXFPCD_HemMiterAngle_MU" type="real" title="Miter Angle" value="45.0" unit="deg" ver="1926" scope="Part">
+              <Description>This option specifies the miter angle for the Hem feature.</Description>
+              <Real/>
+            </Pref>
+          </Group>
+        </Tab>
+      </SubCategory>
+      <SubCategory name="Bridge Transition" csh="PMAN_FPCD_Bend_Bridge_Transition">
+        <Tab name="All" csh="PMAN_FPCD_Bend_Bridge_Transition_All">
+          <Pref name="NXFPCD_Bridge_Transition_Type" type="int" title="Type" value="0" ver="1926" scope="Session">
+            <Description>This option specifies the type of Bridge Transition.</Description>
+            <RadioBox orientation="horizontal"/>
+            <Data type="enum">
+              <EnumElem name="Z or U Transition" bitmap="fpc_z_u_transition" value="0"/>
+              <EnumElem name="Fold Transition" bitmap="fpc_fold_transition" value="1"/>
+            </Data>
+          </Pref>
+        </Tab>
+      </SubCategory>
+      <SubCategory name="Advanced Transition" csh="PMAN_FPCD_Bend_Advanced_Transition" suppress="FPCD_ADV">
+        <Tab name="All" csh="PMAN_FPCD_Bend_Advanced_Transition_All">
+          <Pref name="NXFPCD_AdvancedTransitionType" type="int" title="Type" value="0" ver="1926" scope="Session">
+            <Description>This option specifies the type of Advanced Transition.</Description>
+            <RadioBox orientation="horizontal"/>
+            <Data type="enum">
+              <EnumElem name="By Value" bitmap="sm_general_flange_edge" value="0"/>
+              <EnumElem name="To Reference" bitmap="aerosm_flange_feature" value="1"/>
+            </Data>
+          </Pref>
+          <Group name="Transition Parameters">
+            <Pref name="NXFPCD_AdvancedTransitionInferLength" type="logical" title="Infer Length" value="false" ver="1926" scope="Session">
+              <Description>This option determines whether or not to use the edge of the reference face to define the Advanced Transition length.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCD_AdvancedTransitionLength_EU" type="real" title="Length" value="1.8" unit="in" ver="1926" scope="Session">
+              <Description>This option specifies the length of the Advanced Transition feature. It is used only if the Infer Length option is off.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="0"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCD_AdvancedTransitionLength_MU" type="real" title="Length" value="20.0" unit="mm" ver="1926" scope="Session">
+              <Description>This option specifies the length of the Advanced Transition feature. It is used only if the Infer Length option is off.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="0"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCD_AdvancedTransitionAngle" type="real" title="Angle" value="90.0" unit="deg" ver="1926" scope="Session">
+              <Description>This option specifies the angle of the Advanced Transition feature.</Description>
+              <Real/>
+            </Pref>
+            <Pref name="NXFPCD_AdvancedTransitionLengthOpt" type="int" title="Length Reference" value="0" ver="1926" scope="Session">
+              <Description>This option specifies how the Advanced Transition length is measured.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="Inside" bitmap="inside_dimension" value="0"/>
+                <EnumElem name="Outside" bitmap="outside_dimension" value="1"/>
+                <EnumElem name="Web" bitmap="web_length" value="2"/>
+                <EnumElem name="Tangent" bitmap="tangent_dimension" value="3"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCD_AdvancedTransitionMatType" type="int" title="Inset" value="0" ver="1926" scope="Session">
+              <Description>This option specifies the Inset of the Advanced Transition feature.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="Material Inside" bitmap="material_inside" value="0"/>
+                <EnumElem name="Material Outside" bitmap="material_outside" value="1"/>
+                <EnumElem name="Bend Outside" bitmap="bend_outside" value="2"/>
+                <EnumElem name="Material Inside OML" bitmap="material_inside" value="3"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Settings">
+            <Pref name="NXFPCD_FlatPatternCompensationAtStart" type="logical" title="Flat Pattern Compensation at Start" value="false" ver="1926" scope="Session">
+              <Description>This option determines whether or not compensation will be applied to the start edge while flattening Advanced Transition features.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="On" value="true"/>
+                <EnumElem name="Off" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCD_FlatPatternCompensationAtEnd" type="logical" title="Flat Pattern Compensation at End" value="false" ver="1926" scope="Session">
+              <Description>This option determines whether or not compensation will be applied to the end edge while flattening Advanced Transition features.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="On" value="true"/>
+                <EnumElem name="Off" value="false"/>
+              </Data>
+            </Pref>
+          </Group>
+        </Tab>
+      </SubCategory>
+    </Category>
+    <Category name="Corner" csh="PMAN_FPCD_Corner">
+      <SubCategory name="Break Corner" csh="PMAN_FPCD_Corner_Break_Corner">
+        <Tab name="All" csh="PMAN_FPCD_Corner_Break_Corner_All">
+          <Group name="Break Properties">
+            <Pref name="NXFPCB_Break_Corner_Type" type="int" title="Method" value="0" ver="9.0.0" scope="Session">
+              <Description>This option specifies the type of Break Corner.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="Blend" bitmap="fillet_curve" value="0"/>
+                <EnumElem name="Chamfer" bitmap="chamfer_curve" value="1"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_Break_Corner_Value_EU" type="real" title="Break Value" value="0.1" unit="in" ver="1847" scope="Session">
+              <Description>This option specifies the break value for the Break Corner feature.</Description>
+              <Real/>
+            </Pref>
+            <Pref name="NXFPCB_Break_Corner_Value_MU" type="real" title="Break Value" value="1.0" unit="mm" ver="1847" scope="Session">
+              <Description>This option specifies the break value for the Break Corner feature.</Description>
+              <Real/>
+            </Pref>
+          </Group>
+        </Tab>
+      </SubCategory>
+      <SubCategory name="Bend Taper" csh="PMAN_FPCD_Corner_Bend_Taper">
+        <Tab name="Taper Properties" csh="PMAN_FPCD_Corner_Bend_Taper_Taper_Properties">
+          <Pref name="NXFPCB_BendTaperSides" type="int" title="Taper Sides" value="0" ver="9.0.0" scope="Session">
+            <Description>This option specifies which sides should be tapered.</Description>
+            <RadioBox/>
+            <Data type="enum">
+              <EnumElem name="Both" value="0"/>
+              <EnumElem name="Side 1" value="1"/>
+              <EnumElem name="Side 2" value="2"/>
+              <EnumElem name="Symmetric" value="3"/>
+            </Data>
+          </Pref>
+        </Tab>
+        <Tab name="Taper Definition Side 1" csh="PMAN_FPCD_Corner_Bend_Taper_Taper_Definition_Side_1">
+          <Group name="Bend">
+            <Pref name="NXFPCB_StartType1" type="int" title="Start Type" value="0" ver="10.0.0" scope="Session">
+              <Description>This option specifies the bend taper start type for the first side.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="Taper from Bend" bitmap="taper_from_bend" value="0"/>
+                <EnumElem name="Taper from Web" bitmap="taper_from_web" value="1"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_BendTaperType1" type="int" title="Taper" value="0" ver="9.0.0" scope="Session">
+              <Description>This option specifies the bend taper type for the first side.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="Linear" bitmap="linear_taper" value="0"/>
+                <EnumElem name="Tangent" bitmap="tangent_taper" value="1"/>
+                <EnumElem name="Square" bitmap="square_taper" value="2"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_BendTaperAngle1" type="real" title="Taper Angle" value="2.0" unit="deg" ver="9.0.0" scope="Session">
+              <Description>This option specifies the bend taper angle for the first side.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="1"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_BendTaperDistance1_EU" type="real" title="Taper Distance" value="0.3" unit="in" ver="9.0.0" scope="Session">
+              <Description>This option specifies the bend taper distance for the first side.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="1"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_BendTaperDistance1_MU" type="real" title="Taper Distance" value="2.0" unit="mm" ver="9.0.0" scope="Session">
+              <Description>This option specifies the bend taper distance for the first side.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="1"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_BendTaperStartRadius1_EU" type="real" title="Start Radius" value="0.1" unit="in" ver="9.0.0" scope="Session">
+              <Description>This option specifies the start radius for a tangent taper for the first side.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="0"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_BendTaperStartRadius1_MU" type="real" title="Start Radius" value="2.0" unit="mm" ver="9.0.0" scope="Session">
+              <Description>This option specifies the start radius for a tangent taper for the first side.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="0"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_BendTaperEndRadius1_EU" type="real" title="End Radius" value="0.1" unit="in" ver="9.0.0" scope="Session">
+              <Description>This option specifies the end radius for a tangent taper for the first side.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="0"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_BendTaperEndRadius1_MU" type="real" title="End Radius" value="2.0" unit="mm" ver="9.0.0" scope="Session">
+              <Description>This option specifies the end radius for a tangent taper for the first side.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="0"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Web">
+            <Pref name="NXFPCB_WebTaperType1" type="int" title="Taper" value="0" ver="9.0.0" scope="Session">
+              <Description>This option specifies the web taper type for the first side.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="None" bitmap="none" value="0"/>
+                <EnumElem name="Face" bitmap="face_taper" value="1"/>
+                <EnumElem name="Face Chain" bitmap="chain_taper" value="2"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_WebTaperAngle1" type="real" title="Taper Angle" value="5.0" unit="deg" ver="9.0.0" scope="Session">
+              <Description>This option specifies the web taper angle for the first side.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+        </Tab>
+        <Tab name="Taper Definition Side 2" csh="PMAN_FPCD_Corner_Bend_Taper_Taper_Definition_Side_2">
+          <Group name="Bend">
+            <Pref name="NXFPCB_StartType2" type="int" title="Start Type" value="0" ver="10.0.0" scope="Session">
+              <Description>This option specifies the bend taper start type for the second side.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="Taper from Bend" bitmap="taper_from_bend" value="0"/>
+                <EnumElem name="Taper from Web" bitmap="taper_from_web" value="1"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_BendTaperType2" type="int" title="Taper" value="0" ver="9.0.0" scope="Session">
+              <Description>This option specifies the bend taper type for the second side.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="Linear" bitmap="linear_taper" value="0"/>
+                <EnumElem name="Tangent" bitmap="tangent_taper" value="1"/>
+                <EnumElem name="Square" bitmap="square_taper" value="2"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_BendTaperAngle2" type="real" title="Taper Angle" value="2.0" unit="deg" ver="9.0.0" scope="Session">
+              <Description>This option specifies the bend taper angle for the second side.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="1"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_BendTaperDistance2_EU" type="real" title="Taper Distance" value="0.3" unit="in" ver="9.0.0" scope="Session">
+              <Description>This option specifies the bend taper distance for the second side.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="1"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_BendTaperDistance2_MU" type="real" title="Taper Distance" value="2.0" unit="mm" ver="9.0.0" scope="Session">
+              <Description>This option specifies the bend taper distance for the second side.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="1"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_BendTaperStartRadius2_EU" type="real" title="Start Radius" value="0.1" unit="in" ver="9.0.0" scope="Session">
+              <Description>This option specifies the start radius for a tangent taper for the second side.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="0"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_BendTaperStartRadius2_MU" type="real" title="Start Radius" value="2.0" unit="mm" ver="9.0.0" scope="Session">
+              <Description>This option specifies the start radius for a tangent taper for the second side.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="0"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_BendTaperEndRadius2_EU" type="real" title="End Radius" value="0.1" unit="in" ver="9.0.0" scope="Session">
+              <Description>This option specifies the end radius for a tangent taper for the second side.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="0"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_BendTaperEndRadius2_MU" type="real" title="End Radius" value="2.0" unit="mm" ver="9.0.0" scope="Session">
+              <Description>This option specifies the end radius for a tangent taper for the second side.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="0"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Web">
+            <Pref name="NXFPCB_WebTaperType2" type="int" title="Taper" value="0" ver="9.0.0" scope="Session">
+              <Description>This option specifies the web taper type for the second side.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="None" bitmap="none" value="0"/>
+                <EnumElem name="Face" bitmap="face_taper" value="1"/>
+                <EnumElem name="Face Chain" bitmap="chain_taper" value="2"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_WebTaperAngle2" type="real" title="Taper Angle" value="5.0" unit="deg" ver="9.0.0" scope="Session">
+              <Description>This option specifies the web taper angle for the second side.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+        </Tab>
+      </SubCategory>
+    </Category>
+    <Category name="Resize" csh="PMAN_FPCD_Resize">
+      <SubCategory name="Resize Bend Radius" csh="PMAN_FPCD_Resize_Resize_Bend_Radius">
+        <Tab name="All" csh="PMAN_FPCD_Resize_Resize_Bend_Radius_All">
+          <Pref name="NXFPCB_ResizeBendRadiusType" type="int" title="Type" value="0" ver="9.0.0" scope="Session">
+            <Description>This option specifies the Resize Bend Radius type.</Description>
+            <RadioBox orientation="horizontal"/>
+            <Data type="enum">
+              <EnumElem name="Fixed Planar Segment or Transition Position" bitmap="resize_bend_radius_folded" value="0"/>
+              <EnumElem name="Fixed Unfolded Length" bitmap="resize_bend_radius_unfolded" value="1"/>
+            </Data>
+          </Pref>
+        </Tab>
+      </SubCategory>
+    </Category>
+    <Category name="Flat Pattern" csh="PMAN_FPCD_Flat_Pattern">
+      <SubCategory name="Flat Pattern" csh="PMAN_FPCD_Flat_Pattern_Flat_Pattern">
+        <Tab name="Treatments" csh="PMAN_FPCD_Flat_Pattern_Flat_Pattern_Treatments">
+          <Group name="Treatment Options">
+            <Pref name="NXFPCB_FPOrientation" type="int" title="Orientation Method" value="0" ver="2206" scope="Part">
+              <Description>This option specifies the orientation method to use when creating Flat Solid features. Use Default orientation to leave flat solid body at same place after unfolding. Use Select Edge orientation to align selected edge with the X-axis of absolute CSYS. Use Specify CSYS to align specified CSYS to absolute CSYS.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="Default" value="0"/>
+                <EnumElem name="Select Edge" value="1"/>
+                <EnumElem name="Specify CSYS" value="2"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_FPCornerOutTreatment" type="int" title="Outside Corner Treatments" value="0" ver="4.0.0" scope="Part">
+              <Description>This option specifies the type of corner treatments to be applied to convex corners when creating Flat Solid features.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="None" value="0"/>
+                <EnumElem name="Chamfer" value="1"/>
+                <EnumElem name="Radius" value="2"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_FPCornerOutTreatmentValue_EU" type="real" title="Outside Value" value="0.003937" unit="in" ver="1847" scope="Part">
+              <Description>This option specifies the value for corner treatments to be applied to convex corners when creating Flat Solid features.</Description>
+              <Real/>
+            </Pref>
+            <Pref name="NXFPCB_FPCornerOutTreatmentValue_MU" type="real" title="Outside Value" value="0.1" unit="mm" ver="1847" scope="Part">
+              <Description>This option specifies the value for corner treatments to be applied to convex corners when creating Flat Solid features.</Description>
+              <Real/>
+            </Pref>
+            <Pref name="NXFPCB_FPCornerInTreatment" type="int" title="Inside Corner Treatments" value="0" ver="4.0.0" scope="Part">
+              <Description>This option specifies the type of corner treatments to be applied to concave corners when creating Flat Solid features.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="None" value="0"/>
+                <EnumElem name="Chamfer" value="1"/>
+                <EnumElem name="Radius" value="2"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_FPCornerInTreatmentValue_EU" type="real" title="Inside Value" value="0.003937" unit="in" ver="1847" scope="Part">
+              <Description>This option specifies the value for corner treatments to be applied to concave corners when creating Flat Solid features.</Description>
+              <Real/>
+            </Pref>
+            <Pref name="NXFPCB_FPCornerInTreatmentValue_MU" type="real" title="Inside Value" value="0.1" unit="mm" ver="1847" scope="Part">
+              <Description>This option specifies the value for corner treatments to be applied to concave corners when creating Flat Solid features.</Description>
+              <Real/>
+            </Pref>
+            <Pref name="NXFPCB_FPHoleTreatment" type="int" title="Hole Treatments" value="0" ver="1847" scope="Part">
+              <Description>This option specifies the type of treatments to be applied to circular cutouts when creating Flat Pattern features.</Description>
+              <RadioBox/>
+              <Data type="enum">
+                <EnumElem name="None" value="0"/>
+                <EnumElem name="Center Mark" value="1"/>
+                <EnumElem name="Hole Curve and Center Mark" value="2"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_FPHoleTreatmentValue_EU" type="real" title="Hole Diameter" value="0.003937" unit="in" ver="1847" scope="Part">
+              <Description>This option specifies the diameter value for hole treatments to be applied to circular cutouts when creating Flat Pattern features.</Description>
+              <Real/>
+            </Pref>
+            <Pref name="NXFPCB_FPHoleTreatmentValue_MU" type="real" title="Hole Diameter" value="0.1" unit="mm" ver="1847" scope="Part">
+              <Description>This option specifies the diameter value for hole treatments to be applied to circular cutouts when creating Flat Pattern features.</Description>
+              <Real/>
+            </Pref>
+          </Group>
+          <Group name="Flat Pattern Simplify">
+            <Pref name="NXFPCB_FPSimplify" type="int" title="Simplify B-splines" value="0" ver="4.0.0" scope="Part">
+              <Description>This option determines whether or not the B-splines should be simplified in a Flat Pattern.</Description>
+              <Toggle off="0"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="1"/>
+                <EnumElem name="No" value="0"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_FPMinimumArc_EU" type="real" title="Minimum Arc" value="0.003937" unit="in" ver="4.0.0" scope="Part">
+              <Description>This option specifies the tolerance value for the radius of curvature on the B-splines to be simplified to arcs in a Flat Pattern.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="0"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_FPMinimumArc_MU" type="real" title="Minimum Arc" value="0.1" unit="mm" ver="4.0.0" scope="Part">
+              <Description>This option specifies the tolerance value for the radius of curvature on the B-splines to be simplified to arcs in a Flat Pattern.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="0"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_FPDeviationalTol_EU" type="real" title="Deviational Tolerance" value="0.003937" unit="in" ver="4.0.0" scope="Part">
+              <Description>This option specifies the deviational tolerance value for the tangent along B-splines to be simplified to lines in a Flat Pattern.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="0"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_FPDeviationalTol_MU" type="real" title="Deviational Tolerance" value="0.1" unit="mm" ver="4.0.0" scope="Part">
+              <Description>This option specifies the deviational tolerance value for the tangent along B-splines to be simplified to lines in a Flat Pattern.</Description>
+              <Real/>
+              <Data type="range">
+                <LowerBound value="0.0" include="0"/>
+              </Data>
+            </Pref>
+          </Group>
+
+          <Pref name="NXFPCB_FPEnableAssociative" type="logical" title="Associative" value="true" ver="1926" scope="Part">
+            <Description>This option determines whether or not the Flat Pattern should be created associative to the input data.</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="Yes" value="true"/>
+              <EnumElem name="No" value="false"/>
+            </Data>
+          </Pref>
+          <Pref name="NXFPCB_FPFixAtCurrentTimeStamp" type="logical" title="Fix at Current Timestamp" value="true" ver="2206" scope="Part">
+            <Description>This option determines whether or not a timestamp should be placed at the last feature in the flexible printed circuit design body when the Flat Pattern feature is created. When this option is on, changes made to the flexible printed circuit design body after the Flat Pattern feature was created do not appear in the Flat Pattern.</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="Yes" value="true"/>
+              <EnumElem name="No" value="false"/>
+            </Data>
+          </Pref>
+          <Pref name="NXFPCB_FPShowInteriorFeatureCurves" type="logical" title="Show Interior Feature Curves" value="true" ver="1926" scope="Part">
+            <Description>This option determines whether or not interior feature curves in Flat Pattern features should be shown.</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="Yes" value="true"/>
+              <EnumElem name="No" value="false"/>
+            </Data>
+          </Pref>
+
+          <Pref name="NXFPCB_FPRemoveBendReliefs" type="int" title="Remove System-generated Bend Reliefs" value="0" ver="4.0.0" scope="Part">
+            <Description>This option determines whether or not system-generated bend reliefs in Flat Solid features should be removed.</Description>
+            <Toggle off="0"/>
+            <Data type="enum">
+              <EnumElem name="Yes" value="1"/>
+              <EnumElem name="No" value="0"/>
+            </Data>
+          </Pref>
+          <Pref name="NXFPCB_FPMaintainHoles" type="logical" title="Maintain Circular Shape for Holes in Flat Patterns" value="true" ver="1980" scope="Part">
+            <Description>This option determines whether or not circular shape for holes should be maintained in flat patterns.</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="Yes" value="true"/>
+              <EnumElem name="No" value="false"/>
+            </Data>
+          </Pref>
+          <Separator/>
+          <Pref name="NXFPCB_FPTransformComponents" type="int" title="Transform Components" value="0" ver="10.0.0" scope="Session">
+            <Description>This option specifies if components are transformed onto the flat solid. If transformed, they can be represented by body or CSYS.</Description>
+            <RadioBox orientation="horizontal"/>
+            <Data type="enum">
+              <EnumElem name="None" value="0"/>
+              <EnumElem name="Body"   value="1"/>
+              <EnumElem name="CSYS"   value="2"/>
+            </Data>
+          </Pref>
+          <Pref name="NXFPCB_FPTransformRestrictionAreas" type="logical" title="Transform Restriction Areas" value="false" ver="10.0.0" scope="Session">
+            <Description>This option specifies if restriction areas (Keep-in, Keep-out, Other) are transformed onto the flat solid.</Description>
+            <Toggle off="false"/>
+            <Data type="enum">
+              <EnumElem name="Yes" value="true"/>
+              <EnumElem name="No" value="false"/>
+            </Data>
+          </Pref>
+        </Tab>
+        <Tab name="Curves" csh="PMAN_FPCD_Flat_Pattern_Flat_Pattern_Curves">
+          <Group name="Bend-up Centerline">
+            <Pref name="NXFPCB_bendUpCenterLine_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="6.0.0" scope="Part">
+              <Description>This option specifies whether Bend-up Centerlines are created and displayed on flat patterns.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_bendUpCenterLine_FlatPattern_Color" type="int" title="Color" value="189" ver="6.0.0" scope="Part">
+              <Description>This option specifies the color of Bend-up Centerlines on flat patterns.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="NXFPCB_bendUpCenterLine_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+              <Description>This option specifies the style for Bend-up Centerlines on flat patterns.</Description>
+              <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+            </Pref>
+            <Pref name="NXFPCB_bendUpCenterLine_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+              <Description>This option specifies the width for Bend-up Centerlines on flat patterns.</Description>
+              <AnnotationLineWidth allowWideLineWidth="true"/>
+            </Pref>
+            <Pref name="NXFPCB_bendUpCenterLine_FlatPattern_Layer" type="int" title="Layer" value="1" ver="6.0.0" scope="Part">
+              <Description>This option specifies the layer on which the Bend-up Centerlines will be placed in flat pattern views.</Description>
+              <Integer/>
+              <Data type="range">
+                <LowerBound value="1" include="1"/>
+                <UpperBound value="256" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Bend-down Centerline">
+            <Pref name="NXFPCB_bendDownCenterLine_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="6.0.0" scope="Part">
+              <Description>This option specifies whether Bend-down Centerlines are created and displayed on flat patterns.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_bendDownCenterLine_FlatPattern_Color" type="int" title="Color" value="189" ver="6.0.0" scope="Part">
+              <Description>This option specifies the color of Bend-down Centerlines on flat patterns.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="NXFPCB_bendDownCenterLine_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+              <Description>This option specifies the style for Bend-down Centerlines on flat patterns.</Description>
+              <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+            </Pref>
+            <Pref name="NXFPCB_bendDownCenterLine_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+              <Description>This option specifies the width for Bend-down Centerlines on flat patterns.</Description>
+              <AnnotationLineWidth allowWideLineWidth="true"/>
+            </Pref>
+            <Pref name="NXFPCB_bendDownCenterLine_FlatPattern_Layer" type="int" title="Layer" value="1" ver="6.0.0" scope="Part">
+              <Description>This option specifies the layer on which the Bend-down Centerlines will be placed in flat pattern views.</Description>
+              <Integer/>
+              <Data type="range">
+                <LowerBound value="1" include="1"/>
+                <UpperBound value="256" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Bend Tangent Line">
+            <Pref name="NXFPCB_bendTangentLine_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="5.0.1" scope="Part">
+              <Description>This option specifies whether Bend Tangent Lines are created and displayed on flat patterns.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_bendTangentLine_FlatPattern_Color" type="int" title="Color" value="83" ver="6.0.0" scope="Part">
+              <Description>This option specifies the color of Bend Tangent Lines on flat patterns.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="NXFPCB_bendTangentLine_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+              <Description>This option specifies the style for Bend Tangent Lines on flat patterns.</Description>
+              <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+            </Pref>
+            <Pref name="NXFPCB_bendTangentLine_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+              <Description>This option specifies the width for Bend Tangent Lines on flat patterns.</Description>
+              <AnnotationLineWidth allowWideLineWidth="true"/>
+            </Pref>
+            <Pref name="NXFPCB_bendTangentLine_FlatPattern_Layer" type="int" title="Layer" value="1" ver="5.0.1" scope="Part">
+              <Description>This option specifies the layer on which the Bend Tangent Lines will be placed in flat pattern views.</Description>
+              <Integer/>
+              <Data type="range">
+                <LowerBound value="1" include="1"/>
+                <UpperBound value="256" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Exterior Curves">
+            <Pref name="NXFPCB_exteriorCurves_FlatPattern_Color" type="int" title="Color" value="134" ver="6.0.0" scope="Part">
+              <Description>This option specifies the color of Exterior Curves on flat patterns.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="NXFPCB_exteriorCurves_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+              <Description>This option specifies the style for Exterior Curves on flat patterns.</Description>
+              <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+            </Pref>
+            <Pref name="NXFPCB_exteriorCurves_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+              <Description>This option specifies the width for Exterior Curves on flat patterns.</Description>
+              <AnnotationLineWidth allowWideLineWidth="true"/>
+            </Pref>
+            <Pref name="NXFPCB_exteriorCurves_FlatPattern_Layer" type="int" title="Layer" value="1" ver="5.0.1" scope="Part">
+              <Description>This option specifies the layer on which the Exterior Curves will be placed in flat pattern views.</Description>
+              <Integer/>
+              <Data type="range">
+                <LowerBound value="1" include="1"/>
+                <UpperBound value="256" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Interior Cutout Curves">
+            <Pref name="NXFPCB_interiorCutoutCurves_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="6.0.0" scope="Part">
+              <Description>This option specifies whether Interior Cutout Curves are created and displayed on flat patterns.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_interiorCutoutCurves_FlatPattern_Color" type="int" title="Color" value="98" ver="6.0.0" scope="Part">
+              <Description>This option specifies the color of Interior Cutout Curves on flat patterns.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="NXFPCB_interiorCutoutCurves_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+              <Description>This option specifies the style for Interior Cutout Curves on flat patterns.</Description>
+              <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+            </Pref>
+            <Pref name="NXFPCB_interiorCutoutCurves_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+              <Description>This option specifies the width for Interior Cutout Curves on flat patterns.</Description>
+              <AnnotationLineWidth allowWideLineWidth="true"/>
+            </Pref>
+            <Pref name="NXFPCB_interiorCutoutCurves_FlatPattern_Layer" type="int" title="Layer" value="1" ver="6.0.0" scope="Part">
+              <Description>This option specifies the layer on which the Interior Cutout Curves will be placed in flat pattern views.</Description>
+              <Integer/>
+              <Data type="range">
+                <LowerBound value="1" include="1"/>
+                <UpperBound value="256" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Interior Feature Curves">
+            <Pref name="NXFPCB_interiorFeatureCurves_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="6.0.0" scope="Part">
+              <Description>This option specifies whether Interior Feature Curves are created and displayed on flat patterns.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_interiorFeatureCurves_FlatPattern_Color" type="int" title="Color" value="98" ver="6.0.0" scope="Part">
+              <Description>This option specifies the color of Interior Feature Curves on flat patterns.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="NXFPCB_interiorFeatureCurves_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+              <Description>This option specifies the style for Interior Feature Curves on flat patterns.</Description>
+              <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+            </Pref>
+            <Pref name="NXFPCB_interiorFeatureCurves_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+              <Description>This option specifies the width for Interior Feature Curves on flat patterns.</Description>
+              <AnnotationLineWidth allowWideLineWidth="true"/>
+            </Pref>
+            <Pref name="NXFPCB_interiorFeatureCurves_FlatPattern_Layer" type="int" title="Layer" value="1" ver="6.0.0" scope="Part">
+              <Description>This option specifies the layer on which the Interior Curves will be placed in flat pattern views.</Description>
+              <Integer/>
+              <Data type="range">
+                <LowerBound value="1" include="1"/>
+                <UpperBound value="256" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Center Marks">
+            <Pref name="NXFPCB_centerMarks_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="1847" scope="Part">
+              <Description>This option specifies whether Center Marks are created and displayed on flat patterns.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_centerMarks_FlatPattern_Color" type="int" title="Color" value="186" ver="1847" scope="Part">
+              <Description>This option specifies the color of Center Marks on flat patterns.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="NXFPCB_centerMarks_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+              <Description>This option specifies the line style for Center Marks on flat patterns.</Description>
+              <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+            </Pref>
+            <Pref name="NXFPCB_centerMarks_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+              <Description>This option specifies the width for Center Marks on flat patterns.</Description>
+              <AnnotationLineWidth allowWideLineWidth="true"/>
+            </Pref>
+            <Pref name="NXFPCB_centerMarks_FlatPattern_Layer" type="int" title="Layer" value="1" ver="1847" scope="Part">
+              <Description>This option specifies the layer on which the Center Marks will be placed in flat pattern views.</Description>
+              <Integer/>
+              <Data type="range">
+                <LowerBound value="1" include="1"/>
+                <UpperBound value="256" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Hole Feature Curves">
+            <Pref name="NXFPCB_holeFeatureCurves_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="1847" scope="Part">
+              <Description>This option specifies whether Hole Feature Curves are created and displayed on flat patterns.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_holeFeatureCurves_FlatPattern_Color" type="int" title="Color" value="31" ver="1847" scope="Part">
+              <Description>This option specifies the color of Hole Feature Curves on flat patterns.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="NXFPCB_holeFeatureCurves_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+              <Description>This option specifies the line style for Hole Feature Curves on flat patterns.</Description>
+              <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+            </Pref>
+            <Pref name="NXFPCB_holeFeatureCurves_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+              <Description>This option specifies the width for Hole Feature Curves on flat patterns.</Description>
+              <AnnotationLineWidth allowWideLineWidth="true"/>
+            </Pref>
+            <Pref name="NXFPCB_holeFeatureCurves_FlatPattern_Layer" type="int" title="Layer" value="1" ver="1847" scope="Part">
+              <Description>This option specifies the layer on which the Hole Feature Curves will be placed in flat pattern views.</Description>
+              <Integer/>
+              <Data type="range">
+                <LowerBound value="1" include="1"/>
+                <UpperBound value="256" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Lightening Hole">
+            <Pref name="NXFPCB_holeCenter_FlatPattern_Enabled" type="logical" title="Display" value="false" ver="5.0.1" scope="Part">
+              <Description>This option specifies whether Lightening Hole Center Markers are created and displayed on flat patterns.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_holeCenter_FlatPattern_Color" type="int" title="Color" value="188" ver="6.0.0" scope="Part">
+              <Description>This option specifies the color of Lightening Hole Center Markers on flat patterns.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="NXFPCB_holeCenter_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+              <Description>This option specifies the style for Lightening Hole Center Markers on flat patterns.</Description>
+              <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+            </Pref>
+            <Pref name="NXFPCB_holeCenter_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+              <Description>This option specifies the width for Lightening Hole Center Markers on flat patterns.</Description>
+              <AnnotationLineWidth allowWideLineWidth="true"/>
+            </Pref>
+            <Pref name="NXFPCB_holeCenter_FlatPattern_Layer" type="int" title="Layer" value="1" ver="5.0.1" scope="Part">
+              <Description>This option specifies the layer on which the Lightening Hole Center Markers will be placed in flat pattern views.</Description>
+              <Integer/>
+              <Data type="range">
+                <LowerBound value="1" include="1"/>
+                <UpperBound value="256" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Joggle Line">
+            <Pref name="NXFPCB_joggleLine_FlatPattern_Enabled" type="logical" title="Display" value="false" ver="5.0.1" scope="Part">
+              <Description>This option specifies whether Joggle Lines are created and displayed on flat patterns.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_joggleLine_FlatPattern_Color" type="int" title="Color" value="105" ver="6.0.0" scope="Part">
+              <Description>This option specifies the color of Joggle Lines on flat patterns.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="NXFPCB_joggleLine_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+              <Description>This option specifies the style for Joggle Lines on flat patterns.</Description>
+              <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+            </Pref>
+            <Pref name="NXFPCB_joggleLine_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+              <Description>This option specifies the width for Joggle Lines on flat patterns.</Description>
+              <AnnotationLineWidth allowWideLineWidth="true"/>
+            </Pref>
+            <Pref name="NXFPCB_joggleLine_FlatPattern_Layer" type="int" title="Layer" value="1" ver="5.0.1" scope="Part">
+              <Description>This option specifies the layer on which the Joggle Lines will be placed in flat pattern views.</Description>
+              <Integer/>
+              <Data type="range">
+                <LowerBound value="1" include="1"/>
+                <UpperBound value="256" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Added Top Geometry">
+            <Pref name="NXFPCB_addedTop_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="6.0.0" scope="Part">
+              <Description>This option specifies whether Added Top Objects are created and displayed on flat patterns.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_addedTop_FlatPattern_Color" type="int" title="Color" value="117" ver="1872" scope="Part">
+              <Description>This option specifies the color of Added Top Objects on flat patterns.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="NXFPCB_addedTop_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+              <Description>This option specifies the style for Added Top Objects on flat patterns.</Description>
+              <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+            </Pref>
+            <Pref name="NXFPCB_addedTop_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+              <Description>This option specifies the width for Added Top Objects on flat patterns.</Description>
+              <AnnotationLineWidth allowWideLineWidth="true"/>
+            </Pref>
+            <Pref name="NXFPCB_addedTop_FlatPattern_Layer" type="int" title="Layer" value="1" ver="6.0.0" scope="Part">
+              <Description>This option specifies the layer on which the Added Top Objects will be placed in flat pattern views.</Description>
+              <Integer/>
+              <Data type="range">
+                <LowerBound value="1" include="1"/>
+                <UpperBound value="256" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Added Bottom Geometry">
+            <Pref name="NXFPCB_addedBottom_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="6.0.0" scope="Part">
+              <Description>This option specifies whether Added Bottom Objects are created and displayed on flat patterns.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_addedBottom_FlatPattern_Color" type="int" title="Color" value="117" ver="1872" scope="Part">
+              <Description>This option specifies the color of Added Bottom Objects on flat patterns.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="NXFPCB_addedBottom_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+              <Description>This option specifies the style for Added Bottom Objects on flat patterns.</Description>
+              <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+            </Pref>
+            <Pref name="NXFPCB_addedBottom_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+              <Description>This option specifies the width for Added Bottom Objects on flat patterns.</Description>
+              <AnnotationLineWidth allowWideLineWidth="true"/>
+            </Pref>
+            <Pref name="NXFPCB_addedBottom_FlatPattern_Layer" type="int" title="Layer" value="1" ver="6.0.0" scope="Part">
+              <Description>This option specifies the layer on which the Added Bottom Objects will be placed in flat pattern views.</Description>
+              <Integer/>
+              <Data type="range">
+                <LowerBound value="1" include="1"/>
+                <UpperBound value="256" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+          <Group name="Tool Marker">
+            <Pref name="NXFPCB_toolMarker_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="6.0.3" scope="Part">
+              <Description>This option specifies whether Tool Marker Objects are created and displayed on flat patterns.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="true"/>
+                <EnumElem name="No" value="false"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCB_toolMarker_FlatPattern_Color" type="int" title="Color" value="117" ver="1872" scope="Part">
+              <Description>This option specifies the color of Tool Marker Objects on flat patterns.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="NXFPCB_toolMarker_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+              <Description>This option specifies the style for Tool Marker Objects on flat patterns.</Description>
+              <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+            </Pref>
+            <Pref name="NXFPCB_toolMarker_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+              <Description>This option specifies the width for Tool Marker Objects on flat patterns.</Description>
+              <AnnotationLineWidth allowWideLineWidth="true"/>
+            </Pref>
+            <Pref name="NXFPCB_toolMarker_FlatPattern_Layer" type="int" title="Layer" value="1" ver="6.0.3" scope="Part">
+              <Description>This option specifies the layer on which the Tool Marker Objects will be placed in flat pattern views.</Description>
+              <Integer/>
+              <Data type="range">
+                <LowerBound value="1" include="1"/>
+                <UpperBound value="256" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+        </Tab>
+        <Tab name="Teamcenter Integration" csh="PMAN_FPCD_Flat_Pattern_Flat_Pattern_Teamcenter_Integration">
+          <Group name="Configure Dataset Name">
+            <Pref name="NXFPCD_ExportFP_DatasetName" type="list_sel_reorder_value" title="Dataset Name Strings" value="&quot;ITEM_ID:0&quot;\&quot;ITEM_REVISION:0\&quot;\&quot;FP_VIEW_NAME:0&quot;\&quot;FP_FEATURE_NAME:0&quot;\&quot;FREE_TEXT:0&quot;" ver="1926" scope="Session">
+              <Description>This option specifies the strings to include in the dataset name, and in which order. It is used only when saving to Teamcenter. If all options are off, the Item ID and Item Revision will be added to the dataset name. The system generated feature name will be used for the Flat Pattern Feature Name. The derived dataset name can have a maximum of 128 ASCII characters.</Description>
+              <ListSelReorder height="6" reorderable="true" selectable="true"/>
+              <Data type="enum">
+                <EnumElem name="Item ID" value="ITEM_ID"/>
+                <EnumElem name="Item Revision" value="ITEM_REVISION"/>
+                <EnumElem name="Flat Pattern View Name" value="FP_VIEW_NAME"/>
+                <EnumElem name="Flat Pattern Feature Name" value="FP_FEATURE_NAME"/>
+                <EnumElem name="Free Text" value="FREE_TEXT"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCD_DatasetName_FreeText" type="utf8string" title="Free Text" value="" ver="1926" scope="Session">
+              <Description>This option specifies the free text string that will be added to the configured dataset name.</Description>
+              <Widestring/>
+            </Pref>
+            <Pref name="NXFPCD_DatasetName_Delimiter" type="string" title="Delimiter" value="/" ver="1926" scope="Session">
+              <Description>This option specifies the special character that will be inserted as a delimiter between the different portions in the configured dataset name.</Description>
+              <String/>
+            </Pref>
+          </Group>
+        </Tab>
+      </SubCategory>
+      <SubCategory name="Flat Solid" csh="PMAN_FPCD_Flat_Pattern_Flat_Solid">
+        <Tab name="All" csh="PMAN_FPCD_Flat_Pattern_Flat_Solid_All">
+          <Group name="Flat Solid Properties">
+            <Pref name="NXFPCB_FlatSolid_Color" type="int" title="Color" value="189" ver="1953" scope="Part">
+              <Description>This option specifies the color of the flat solid.</Description>
+              <Color/>
+            </Pref>
+            <Pref name="NXFPCB_FlatSolid_Layer" type="int" title="Layer" value="1" ver="1953" scope="Part">
+              <Description>This option specifies the layer of the flat solid.</Description>
+              <Integer/>
+              <Data type="range">
+                <LowerBound value="1" include="1"/>
+                <UpperBound value="256" include="1"/>
+              </Data>
+            </Pref>
+          </Group>
+        </Tab>
+      </SubCategory>
+      <SubCategory name="Export Flat Pattern" csh="PMAN_FPCD_Flat_Pattern_Export_Flat_Pattern">
+        <Tab name="All" csh="PMAN_FPCD_Flat_Pattern_Export_Flat_Pattern_All">
+          <Pref name="NXFPCD_FPExportLocation" type="int" title="Export Location" value="0" ver="1872" scope="Session">
+            <Description>This option specifies the location of the exported flat pattern file.</Description>
+            <RadioBox orientation="horizontal"/>
+            <Data type="enum">
+              <EnumElem name="Teamcenter" value="0"/>
+              <EnumElem name="Directory" value="1"/>
+            </Data>
+          </Pref>
+          <Pref name="NXFPCD_ExportFP_OutputDirectory_WIN" type="string" title="Output File Directory" value="" ver="1872" scope="Session">
+            <Description>This field specifies the directory to write the output file to when the Export Location is set to Directory.</Description>
+            <BrowseDirSel/>
+          </Pref>
+          <Pref name="NXFPCD_ExportFP_OutputDirectory_UNX" type="string" title="Output File Directory" value="" ver="1872" scope="Session">
+            <Description>This field specifies the directory to write the output file to when the Export Location is set to Directory.</Description>
+            <BrowseDirSel/>
+          </Pref>
+          <Group name="Configure File Name">
+            <Pref name="NXFPCD_ExportFP_FileName" type="list_sel_reorder_value" title="File Name Strings" value="&quot;ITEM_ID:0&quot;\&quot;ITEM_REVISION:0\&quot;\&quot;FP_VIEW_NAME:0&quot;\&quot;FP_FEATURE_NAME:0&quot;\&quot;FREE_TEXT:0&quot;" ver="1926" scope="Session">
+              <Description>This option specifies the strings to include in the file name, and in which order. It is used both when saving to Teamcenter and to a native directory. If all options are off, the Item ID and Item Revision will be added to the file name. The system generated feature name will be used for the Flat Pattern Feature Name. The derived file name can have a maximum of 128 ASCII characters.</Description>
+              <ListSelReorder height="6" reorderable="true" selectable="true"/>
+              <Data type="enum">
+                <EnumElem name="Item ID" value="ITEM_ID"/>
+                <EnumElem name="Item Revision" value="ITEM_REVISION"/>
+                <EnumElem name="Flat Pattern View Name" value="FP_VIEW_NAME"/>
+                <EnumElem name="Flat Pattern Feature Name" value="FP_FEATURE_NAME"/>
+                <EnumElem name="Free Text" value="FREE_TEXT"/>
+              </Data>
+            </Pref>
+            <Pref name="NXFPCD_FileName_FreeText" type="utf8string" title="Free Text" value="" ver="1926" scope="Session">
+              <Description>This option specifies the free text string that will be added to the configured file name. The following special characters are not supported.<Formatted>
+  &quot;
+  *
+  /
+  \
+  :
+  &gt;
+  &lt;
+  `
+  |
+  ?
+              </Formatted></Description>
+              <Widestring/>
+            </Pref>
+            <Pref name="NXFPCD_FileName_Delimiter" type="string" title="Delimiter" value="_" ver="1926" scope="Session">
+              <Description>This option specifies the special character that will be inserted as a delimiter between the different portions in the configured file name. The following special characters are not supported.<Formatted>
+  &quot;
+  *
+  /
+  \
+  :
+  &gt;
+  &lt;
+  `
+  |
+  ?
+              </Formatted></Description>
+              <String/>
+            </Pref>
+          </Group>
+        </Tab>
+      </SubCategory>
+    </Category>
+  </Application>
+</PrefDefinition>

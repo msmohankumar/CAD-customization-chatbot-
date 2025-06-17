@@ -1,0 +1,2040 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Teamcenter Integration" csh="PMAN_TCIN" package_suppress="simviewer,mechatronicsplayer,nx2dedit">
+        <Category name="General" csh="PMAN_TCIN_General">
+            <Tab name="General" csh="PMAN_TCIN_General_General">
+                <Pref name="UGMGR_Export" type="string" title="Export Associated Files" value="on" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not associated files are exported from the database during part load and whether the changed and new associated files (from the export directory) are imported into the database when performing a Save or a Close operation.</Description>
+                    <Toggle off="off"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="on"/>
+                        <EnumElem name="No" value="off"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_UserRole" type="string" title="Role" value="ALL" ver="3.0.0" scope="Session">
+                    <Description>This option specifies which associated files are exported from the database during part load and all the changed and new associated files are imported into the database when performing a Save or a Close operation.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="ALL" value="ALL"/>
+                        <EnumElem name="ANALYSIS" value="ANALYSIS"/>
+                        <EnumElem name="BASE" value="BASE"/>
+                        <EnumElem name="CAM" value="CAM"/>
+                        <EnumElem name="DESIGN" value="DESIGN"/>
+                        <EnumElem name="DRAFTING" value="DRAFTING"/>
+                        <EnumElem name="GATEWAY" value="GATEWAY"/>
+                        <EnumElem name="GFEM" value="GFEM"/>
+                        <EnumElem name="MECHANISM" value="MECHANISM"/>
+                        <EnumElem name="MOLDFLOW" value="MOLDFLOW"/>
+                        <EnumElem name="TEAM" value="TEAM"/>
+                    </Data>
+                    <Docum>This option has no effect when the Export Associated Files option is off.</Docum>
+                </Pref>
+                <Pref name="UGMGR_PromptAssocFilesOnQuit" type="string" title="Warn on Exit" value="Yes" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not a warning message is displayed on exit if associated files have been modified or created in the session and not saved to Teamcenter because the corresponding part has not been saved.</Description>
+                    <Toggle off="No"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="Yes"/>
+                        <EnumElem name="No" value="No"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="UGMGR_LockingPolicy" type="string" title="Check-out/Check-in Policy" value="AutoCheckinClose" ver="1847" scope="Session">
+                  <Description>This option specifies if parts are checked out on modification (Automatic) or explicitly (Manual), as well as when they are checked in.</Description>
+                  <RadioBox orientation="vertical"/>
+                  <Data type="enum">
+                    <EnumElem name="Automatic Check-out on Modify or Save; Check-in on Save/Close" value="AutoCheckinSave"/>
+                    <EnumElem name="Automatic Check-out on Modify or Save; Check-in on Close" value="AutoCheckinClose"/>
+                    <EnumElem name="Automatic Check-out on Save; Check-in on Save" value="Manual"/>
+                    <EnumElem name="Manual Check-out Required for Save; Manual Check-in" value="ManualPlusPlus"/>
+                    <EnumElem name="Manual Check-out Required for Save; Check-in on Close" value="SuperManualPlusPlus"/>
+                  </Data>
+                </Pref>
+                <Pref name="UGMGR_PromptManualCheckOut" type="logical" title="Prompt for Change ID and Comments on Manual Check-out" value="true" ver="2206" scope="Session">
+                  <Description>This option determines whether or not a change ID and comment can be added during manual check-out.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="UGMGR_Unlock" type="string" title="Check In Parts on" value="Close" ver="3.0.0" scope="Session">
+                    <Description>This option specifies if parts are checked in when the part is closed or saved. (This option only applies when the Check-out/Check-in Policy is set to Automatic.)</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Close" value="Close"/>
+                        <EnumElem name="Save" value="Save"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="UGMGR_DisplaySaveasDialog" type="string" title="Save As Non-master Parts Dialog Box" value="display" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how non-master parts belonging to a master are processed. Note: This is applicable only when Save As New Item Type is performed on the master part.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Display Dialog Box" value="display"/>
+                        <EnumElem name="Save All Non-masters" value="save_all"/>
+                        <EnumElem name="Save No Non-masters" value="save_none"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_CheckNonMastersOnSave" type="string" title="Check Non-masters on Save" value="yes" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not non-master parts should be checked on save.</Description>
+                    <Toggle off="no"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="yes"/>
+                        <EnumElem name="No" value="no"/>
+                    </Data>
+                </Pref>
+              <Pref name="UGMGR_Include_Parts_Modified_By_Other_Users" type="string" title="Include Parts Modified by Other Users" value="On" ver="6.0.0" scope="Session">
+                <Description>This option determines whether or not the Reopen Parts dialog box (File -> Close -> Reopen Selected Parts) will include parts that have been updated in Teamcenter since they were opened in the current session. Also, when this option is on, the File -> Close -> Reopen All Modified Parts command will close and reopen all parts flagged as updated in Teamcenter since they were opened in the current session.</Description>
+                <Toggle off="Off"/>
+                <Data type="enum">
+                  <EnumElem name="On" value="On"/>
+                  <EnumElem name="Off" value="Off"/>
+                  </Data>
+                </Pref>
+                <Pref name="UGMGR_DefaultSaveAsAction" type="string" title="Save As Action" value="SAVEAS_NEW_REVISION" ver="6.0.0" scope="Session">
+                  <Description>This option specifies the initial value of the Save As Action in the Save As dialog box.</Description>
+                  <OptionMenu/>
+                  <Data type="enum">
+                    <EnumElem name="New Item Revision" value="SAVEAS_NEW_REVISION"/>
+                    <EnumElem name="New Item" value="SAVEAS_NEW_ITEM"/>
+                  </Data>
+                </Pref>
+
+                <Pref name="UGMGR_PublishDrawingRelations" type="logical" title="Publish Drawing Relations on Save" value="true" ver="11.0.1" scope="Session">
+                    <Description>This option determines whether to publish the following two drawing relations for master parts with drawing sheets in them.
+<Formatted>
+1. The "Drawing Of" relation to their only non-"Reference Only" component.
+2. The "Drawing Using" relation to their "Reference Only" components.
+</Formatted>
+                    </Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_PublishExternalFileRelations" type="logical" title="Publish External File Reference Relations in Teamcenter" value="true" ver="1847" scope="Session">
+                    <Description>This option determines whether to publish the 'External File Reference' relation when part gets saved into Teamcenter.
+                    </Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+              <Pref name="UGMGR_ShowClientCacheWarning" type="logical" title="Show Client Meta Model Cache Warning on Startup" value="true" ver="12.0.2" scope="Session">
+                <Description>This option determines whether or not a warning message is displayed at startup when the Teamcenter client meta-model cache is either not populated or failed to download. The Teamcenter administrator can generate the client meta-model cache to improve performance.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+              <Pref name="UGMGR_AdvSearQueriesSorting" type="logical" title="Show Queries in Alphabetical Order (Advanced Search)" value="true" ver="1899" scope="Session">
+                <Description> This option determines whether or not to show the queries in alphabetical order in "Look For" in the Advanced Search dialog.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+              <Pref name="UGMGR_ExternalRefernecesExportDir_WIN" type="string" title="Export Directory for External File References" value="${UGII_TMP_DIR}\ExternalFileReferences" ver="1847" scope="Session">
+                  <Description>This field specifies the directory to which the external files referenced by parts should be downloaded.</Description>
+                  <BrowseDirSel/>
+              </Pref>
+              <Pref name="UGMGR_ExternalRefernecesExportDir_UNX" type="string" title="Export Directory for External File References" value="${UGII_TMP_DIR}/ExternalFileReferences" ver="1847" scope="Session">
+                  <Description>This field specifies the directory to which the external files referenced by parts should be downloaded.</Description>
+                  <BrowseDirSel/>
+              </Pref>
+              <Pref name="UGMGR_EnableSessionSharing" type="logical" title="Synchronize Settings from Teamcenter to NX" value="false" ver="1847+" scope="Session">
+                    <Description>This option determines whether changes to settings such as group and role will be synchronized from Teamcenter to NX.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+              <Pref name="UGMGR_LoadHonoringRevisionRule" type="logical" title="Honor Precise Term in Revision Rule for Relations" value="true" ver="1980" scope="Session">
+                <Description>This option determines whether or not the precise term, when it is defined in the Revision Rule, is used when configuring a relation.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+
+            </Tab>
+            <Tab name="Assembly" csh="PMAN_TCIN_General_Assembly">
+                <Pref name="UGMGR_StructureUpdateOnLoad" type="string" title="Structure Update on Load" value="add_positioned" ver="4.0.0" scope="Session">
+                    <Description>This option specifies if changes made to the Teamcenter product structure are reflected in the assembly when it is opened and if so which changes are applied.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Complete" value="complete"/>
+                        <EnumElem name="Add Components that have a Position" value="add_positioned"/>
+                        <EnumElem name="None" value="none"/>
+                    </Data>
+                    <Docum><Formatted>'Complete': All components not already present in NX will be added on load, those without transforms being positioned at the origin.
+'Add Components that have a Position': Changes to the product structure will be processed, but intervention (via the Manage Pending Components dialog box) will be required for components without valid transforms in the database.
+'None': The structure in the database is ignored and the NX structure is used as it is.</Formatted></Docum>
+                </Pref>
+                <Pref name="UGMGR_StructureUpdateOnSave" type="string" title="Structure Update on Save" value="on" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not any changes made to the assembly are reflected in the Teamcenter product structure when the assembly is saved.</Description>
+                    <Toggle off="off"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="on"/>
+                        <EnumElem name="No" value="off"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_StructureUpdateOnEmptyBom" type="string" title="Structure Update on Empty BOM" value="on" ver="6.0.0" scope="Session">
+                    <Description>This option determines whether or not the assembly structure in NX should be deleted when the Teamcenter BOM is empty.</Description>
+                    <Toggle off="off" />
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="on" />
+                        <EnumElem name="No" value="off" />
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="UGMGR_SyncArrangements" type="string" title="Synchronize Assembly Arrangements" value="off" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not any changes made to the assembly's arrangements are synchronized between NX and Teamcenter when the assembly is loaded or saved. It should be treated as a site setting.</Description>
+                    <Toggle off="off"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="on"/>
+                        <EnumElem name="No" value="off"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_UpdateTransform" type="string" title="Update Modified Transforms" value="on" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not component repositions performed in the Teamcenter database should be applied when the part is loaded (application may fail if the component position is constrained in NX). This option only applies if Structure Update on Load is on.</Description>
+                    <Toggle off="off"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="on"/>
+                        <EnumElem name="No" value="off"/>
+                    </Data>
+                </Pref>
+              <Separator/>
+              <Pref name="UGMGR_AllowAnyItemtype" type="logical" title="Allow Adding Teamcenter Child Types which Prevent Save" value="false" ver="1847" scope="Session">
+                <Description>This option determines whether or not child types which are not specified in the Teamcenter preference TCAllowedChildTypes can be added as assembly components. If these types are added to an assembly, the assembly cannot be saved, but can be used temporarily in the session.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+              <Separator/>
+            </Tab>
+          <Tab name="Active Workspace" csh="PMAN_TCIN_General_Active_Workspace">
+            <Pref name="ActiveWorkspace_mode" type="string" title="Hosting Location" value="hosted_in_nx" ver="1980" scope="Session">
+              <Description>This option specifies if Active Workspace should be hosted and available in the Resource Bar, or if the default browser should be started, and an application connection should be established between NX and Active Workspace.</Description>
+              <RadioBox orientation="vertical"/>
+              <Data type="enum">
+                <EnumElem name="NX Resource Bar" value="hosted_in_nx"/>
+                <EnumElem name="Application Connect" value="application_connect"/>
+                <EnumElem name="None" value="none"/>
+              </Data>
+            </Pref>
+            <Pref name="ActiveWorkspace_mode_tcxlite" type="string" title="Hosting Location" value="hosted_in_nx" ver="2312" scope="Session">
+                <Description>This option specifies if Active Workspace should be hosted and available in the Resource Bar and an application connection should be established between NX and Active Workspace.</Description>
+                <RadioBox orientation="vertical"/>
+                <Data type="enum">
+                    <EnumElem name="NX Resource Bar" value="hosted_in_nx"/>
+                    <EnumElem name="None" value="none"/>
+                </Data>
+            </Pref>
+            <Group name="NX Resource Bar">
+              <Pref name="UGMGR_DisplayAWOnCloseParts" type="logical" title="Display Active Workspace Tab after Closing Last Part" value="true" ver="1847" scope="Session">
+                <Description>
+                  This option will open the Active Workspace tab in the resource bar instead of the History tab when the last part is closed. Active Workspace must be installed and configured for this setting to take effect.
+                  <Formatted>
+                  </Formatted>
+                </Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+            </Group>
+            <Group name="Application Connect" suppress="TCX_LITE">
+              <Pref name="Auto_Open_AW_Browser" type="logical" title="Open Browser Automatically" value="true" ver="1980" scope="Session">
+                <Description>This option determines whether or not to automatically start the default browser and establish an application connection between NX and Active Workspace.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+            </Group>
+            <Group name="Shape Search">
+              <Pref name="Show_Shape_Search_Results_in_AW" type="logical" title="Display Shape Search Results in Active Workspace" value="true" ver="2007" scope="Session">
+                <Description>This option determines whether or not to display shape search results in Active Workspace.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+            </Group>
+            <Group name="Start from Active Workspace">
+              <Pref name="UGMGR_StartFromAW" type="int" title="Teamcenter Server Connection" value="0" ver="2312" scope="Session">
+                <Description>This option specifies which Teamcenter server to connect to.</Description>
+                <RadioBox/>
+                <Data type="enum">
+                  <EnumElem name="Use Existing Standalone Active Workspace Server" value="0"/>
+                  <EnumElem name="Create New Independent Server" value="1"/>
+                </Data>
+              </Pref>
+            </Group>
+            <Pref name="UGMGR_aw_load_descendants_of_selected_def" type="logical" title="Load Descendants of Selected" value="true" ver="1872" scope="Session">
+              <Description>This option determines whether or not all the descendants of the selected assembly should be loaded. Active Workspace must be installed and configured for this setting to take effect.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+            </Pref>
+          </Tab>
+          <Tab name="Parts without NX Datasets" csh="PMAN_TCIN_General_Parts_without_NX_Datasets">
+            <Label label="Parts with JT Dataset"/>
+              <Pref name="UGMGR_UnpopulatedJTBehaviour" type="string" title="Add NX Datasets" value="never" ver="1872" scope="Session">
+                <Description>When a JT derived part is loaded in NX session, this option specifies if the NX dataset is to be saved to the database during a save operation. The part's structure will be written to the database product structure.</Description>
+                <OptionMenu/>
+                <Data type="enum">
+                  <EnumElem name="On Save" value="if_not_writable"/>
+                  <EnumElem name="When Modifying Part - Prompt"  value="always"/>
+                  <EnumElem name="When Modifying Part - No Prompt"  value="if_modified_no_prompt"/>
+                  <EnumElem name="Never"  value="never"/>
+                </Data>
+                <Docum><Formatted>On Save: Part data will be saved to the database if access controls allows it.
+When Modifying Part - Prompt: When modifying a part, a prompt will display asking if an NX dataset should be created on Save.
+When Modifying Part - No prompt: When modifying a part, no prompt will display and an NX dataset will be created on Save.
+Never: When modifying a part, no prompt will display and an NX dataset will not be created on Save.</Formatted></Docum>
+              </Pref>
+            <Separator/>
+            <Label label="Parts with Other/No Dataset"/>
+            <Pref name="UGMGR_UnpopulatedBehaviour" type="string" title="Add NX Datasets" value="if_not_writable" ver="6.0.3" scope="Session">
+              <Description>When a part in the database does not have an existing NX dataset, this option specifies if the part is to be saved to the database during a save operation. The part's structure will be written to the database product structure.</Description>
+              <OptionMenu/>
+              <Data type="enum">
+                <EnumElem name="On Save" value="if_not_writable"/>
+                <EnumElem name="When Modifying Part - Prompt"  value="always"/>
+                <EnumElem name="When Modifying Part - No Prompt"  value="if_modified_no_prompt"/>
+                <EnumElem name="Never"  value="never"/>
+              </Data>
+              <Docum><Formatted>On Save: Part data will be saved to the database if access controls allows it.
+When Modifying Part - Prompt: When modifying a part, a prompt will display asking if an NX dataset should be created on Save.
+When Modifying Part - No prompt: When modifying a part, no prompt will display and an NX dataset will be created on Save.
+Never: When modifying a part, no prompt will display and an NX dataset will not be created on Save.</Formatted></Docum>
+            </Pref>
+            <Pref name="UGMGR_DisplaySeedDialog" type="string" title="Display Select Template Dialog Box" value="no" ver="2206" scope="Session">
+              <Description>This option specifies how to deal with parts created in Teamcenter when they are opened for the first time. The No option means that a default seed part has to be chosen. The Top option means that the Select Seed Part dialog box will be displayed for top level assembly parts only and that a default seed part has to be chosen for the components.</Description>
+              <RadioBox orientation="horizontal"/>
+              <Data type="enum">
+                <EnumElem name="Yes" value="yes"/>
+                <EnumElem name="No" value="no"/>
+                <EnumElem name="Top" value="top"/>
+              </Data>
+            </Pref>
+            <Pref name="UGMGR_SeedPartName" type="string" title="Default Seed Part" value="None" ver="2206" scope="Session">
+              <Description>This option specifies the seed part that will be used as the basis for new part files created if no dialog box is displayed.</Description>
+              <String/>
+            </Pref>
+            <Pref name="UGMGR_ShowWarningNXDatasetAbsent" type="logical" title="Show Warning for Parts without NX Dataset" value="false" ver="1926" scope="Session">
+              <Description>This option determines whether or not to display warning for parts without NX dataset.</Description>
+              <Toggle off="false"/>
+              <Data type="enum">
+                <EnumElem name="No" value="false"/>
+                <EnumElem name="Yes" value="true"/>
+              </Data>
+            </Pref>
+            <Separator/>
+          </Tab>
+            <Tab name="WAVE" csh="PMAN_TCIN_General_WAVE">
+                <Pref name="UGMGR_WAVERelations" type="string" title="WAVE Relations" value="ItemRevToItem" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how WAVE relations between NX parts should be recorded in the Teamcenter database. This option is used as a site preference; all users of a database should use the same setting.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Item Revision to Item" value="ItemRevToItem"/>
+                        <EnumElem name="Dataset to Dataset" value="DatasetToDataset"/>
+                    </Data>
+                    <Docum>The option Item Revision to Item causes a relation to be created from the Item Revision of the referencing part to the Item of the referenced part. The option Dataset to Dataset means that when a part is saved, the WAVE references from the part will be recorded in relationships connecting the part's dataset to the referenced part's dataset.</Docum>
+                </Pref>
+            </Tab>
+            <Tab name="Feature" csh="PMAN_TCIN_General_Feature">
+                <Label label="Publish the chosen feature categories to Teamcenter"/>
+                <Pref name="UGMGR_PublishWeldPoints" type="string" title="Spot Weld" value="off" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not weld points will be published to Teamcenter. When on at the time of saving a part containing weld points, the part will be treated as an assembly part with all weld points as child components. This will allow the weld points to participate in the querying, browsing, visualizing, and consuming functionality in Teamcenter.</Description>
+                    <Toggle off="off"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="on"/>
+                        <EnumElem name="No" value="off"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_PublishDatumPoints" type="string" title="Datum Location Feature" value="off" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not datum points will be published to Teamcenter. When on at the time of saving a part containing datum points, the part will be treated as an assembly part with all datum points as child components. This will allow the datum points to participate in the querying, browsing, visualizing, and consuming functionality in Teamcenter.</Description>
+                    <Toggle off="off"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="on"/>
+                        <EnumElem name="No" value="off"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_PublishMeasurementPoints" type="string" title="Measurement Point" value="off" ver="2312+" scope="Session">
+                  <Description>This option determines whether or not measurement points will be published to Teamcenter. When on at the time of saving a part containing measurement points, the part will be treated as an assembly part with all measurement points as child components. This will allow the measurement points to participate in the querying, browsing, visualizing, and consuming functionality in Teamcenter.</Description>
+                  <Toggle off="off"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="on"/>
+                    <EnumElem name="No" value="off"/>
+                  </Data>
+                </Pref>
+                <Pref name="UGMGR_PublishArcWelds" type="string" title="Arc Weld" value="off" ver="8.5.0" scope="Session">
+                    <Description>This option determines whether or not arc welds will be published to Teamcenter.</Description>
+                    <Toggle off="off"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="on"/>
+                        <EnumElem name="No" value="off"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_PublishWeldJoint" type="string" title="Welding Joint" value="off" ver="9.0.0" scope="Session">
+                    <Description>This option determines whether or not welding joints will be published to Teamcenter.</Description>
+                    <Toggle off="off"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="on"/>
+                        <EnumElem name="No" value="off"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_PublishSurfaceWeld" type="string" title="Surface Weld" value="off" ver="9.0.0" scope="Session">
+                    <Description>This option determines whether or not surface welds will be published to Teamcenter.</Description>
+                    <Toggle off="off"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="on"/>
+                        <EnumElem name="No" value="off"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_PublishPointJoins" type="logical" title="Join" value="false" ver="1953" scope="Session">
+                    <Description>This option determines whether or not Join features will be published to Teamcenter. If any of the other options are set, no Join feature will be published to any part. Join features published to a part with existing features created by other applications will override the existing features.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_PublishProductInterfaces" type="string" title="Product Interfaces" value="off" ver="2306" scope="Session">
+                    <Description>This option specifies if product interface relations and checksum data will be published to Teamcenter. This checksum data allows out-of-date status to be calculated without requiring parts to be fully loaded.</Description>
+                    <RadioBox orientation="vertical"/>
+                    <Data type="enum">
+                        <EnumElem name="None" value="off"/>
+                        <EnumElem name="Relations" value="on"/>
+                        <EnumElem name="Relations and Out-of-date Status" value="PublishProdIntAndChecksums"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Weld Publishing" csh="PMAN_TCIN_General_Weld_Publishing">
+                <Group name="Arc Weld Publishing">
+                    <Pref name="UGMGR_ArcWeldPreferenceName_Type" type="string" title="Teamcenter Item Type" value="ArcWeld" ver="9.0.0" scope="Session">
+                        <Description>This field specifies Arc Weld class type defined in Teamcenter.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="UGMGR_ArcWeldPreferenceName_Attr" type="string" title="Teamcenter Attribute Form" value="ArcWeld Attribute Form" ver="9.0.0" scope="Session">
+                        <Description>This field specifies Arc Weld attribute form defined in Teamcenter.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="UGMGR_ArcWeldMapFile_WIN" type="string" title="Attribute Mapping File" value="$UGWELD_DIR\samples\ArcWeldAttributeFormMapping.xml" ver="9.0.0" scope="Session">
+                        <Description>This field specifies the file which defines attribute mapping between NX and Teamcenter. The file format is described in the technical documentation.</Description>
+                        <BrowseFileSel type="xml"/>
+                    </Pref>
+                    <Pref name="UGMGR_ArcWeldMapFile_UNX" type="string" title="Attribute Mapping File" value="" ver="9.0.0" scope="Session">
+                        <Description>This field specifies the file which defines attribute mapping between NX and Teamcenter. The file format is described in the technical documentation.</Description>
+                        <BrowseFileSel type="xml"/>
+                    </Pref>
+                </Group>
+                <Group name="Spot Weld Publishing">
+                    <Pref name="UGMGR_WeldPointPreferenceName_Type" type="string" title="Teamcenter Item Type" value="WeldPoint" ver="9.0.0" scope="Session">
+                        <Description>This field specifies Weld Point class type defined in Teamcenter.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="UGMGR_WeldPointPreferenceName_Attr" type="string" title="Teamcenter Attribute Form" value="SpotWeld Attribute Form" ver="9.0.0" scope="Session">
+                        <Description>This field specifies Weld Point attribute form defined in Teamcenter.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="UGMGR_WeldPointMapFile_WIN" type="string" title="Attribute Mapping File" value="$UGWELD_DIR\samples\WeldPointAttributeFormMapping.xml" ver="9.0.0" scope="Session">
+                        <Description>This field specifies the file which defines attribute mapping between NX and Teamcenter. The file format is described in the technical documentation.</Description>
+                        <BrowseFileSel type="xml"/>
+                    </Pref>
+                    <Pref name="UGMGR_WeldPointMapFile_UNX" type="string" title="Attribute Mapping File" value="" ver="9.0.0" scope="Session">
+                        <Description>This field specifies the file which defines attribute mapping between NX and Teamcenter. The file format is described in the technical documentation.</Description>
+                        <BrowseFileSel type="xml"/>
+                    </Pref>
+                    <Pref name="UGMGR_WeldPointJtFiles_WIN" type="string" title="JT Files Directory" value="$UGWELD_DIR\jt_files" ver="10.0.1" scope="Session">
+                        <Description>This field specifies the directory containing weld point JT files.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                    <Pref name="UGMGR_WeldPointJtFiles_UNX" type="string" title="JT Files Directory" value="" ver="10.0.1" scope="Session">
+                        <Description>This field specifies the directory containing weld point JT files.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                </Group>
+                <Group name="Weld Joint Publishing">
+                    <Pref name="UGMGR_WeldJointPreferenceName_Type" type="string" title="Teamcenter Item Type" value="ArcWeld" ver="9.0.0" scope="Session">
+                        <Description>This field specifies Weld Joint class type defined in Teamcenter.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="UGMGR_WeldJointPreferenceName_Attr" type="string" title="Teamcenter Attribute Form" value="ArcWeld Attribute Form" ver="9.0.0" scope="Session">
+                        <Description>This field specifies Weld Joint attribute form defined in Teamcenter.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="UGMGR_WeldJointMapFile_WIN" type="string" title="Attribute Mapping File" value="$UGWELD_DIR\samples\WeldJointAttributeFormMapping.xml" ver="9.0.0" scope="Session">
+                        <Description>This field specifies the file which defines attribute mapping between NX and Teamcenter. The file format is described in the technical documentation.</Description>
+                        <BrowseFileSel type="xml"/>
+                    </Pref>
+                    <Pref name="UGMGR_WeldJointMapFile_UNX" type="string" title="Attribute Mapping File" value="" ver="9.0.0" scope="Session">
+                        <Description>This field specifies the file which defines attribute mapping between NX and Teamcenter. The file format is described in the technical documentation.</Description>
+                        <BrowseFileSel type="xml"/>
+                    </Pref>
+                </Group>
+                <Group name="Surface Weld Publishing">
+                    <Pref name="UGMGR_SurfaceWeldPreferenceName_Type" type="string" title="Teamcenter Item Type" value="WdM0SurfaceAdd" ver="9.0.0" scope="Session">
+                        <Description>This field specifies Surface Weld class type defined in Teamcenter.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="UGMGR_SurfaceWeldPreferenceName_Attr" type="string" title="Teamcenter Attribute Form" value="WdM0SurfaceAddAttributeForm" ver="9.0.0" scope="Session">
+                        <Description>This field specifies Surface Weld attribute form defined in Teamcenter.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="UGMGR_SurfaceWeldMapFile_WIN" type="string" title="Attribute Mapping File" value="$UGWELD_DIR\samples\SurfaceWeldAttributeFormMapping.xml" ver="9.0.0" scope="Session">
+                        <Description>This field specifies the file which defines attribute mapping between NX and Teamcenter. The file format is described in the technical documentation.</Description>
+                        <BrowseFileSel type="xml"/>
+                    </Pref>
+                    <Pref name="UGMGR_SurfaceWeldMapFile_UNX" type="string" title="Attribute Mapping File" value="" ver="9.0.0" scope="Session">
+                        <Description>This field specifies the file which defines attribute mapping between NX and Teamcenter. The file format is described in the technical documentation.</Description>
+                        <BrowseFileSel type="xml"/>
+                    </Pref>
+                </Group>
+                <Group name="Other Options">
+                    <Pref name="UGMGR_PublishConnectedPart" type="logical" title="Include Features with Missing Connected Parts" value="false" ver="1926" scope="Session">
+                        <Description>This option determines if features with missing connected parts will be published to Teamcenter.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Tooling Locator Publishing" csh="PMAN_TCIN_General_Tooling_Locator_Publishing">
+              <Group name="Datum Locator Publishing">
+                <Pref name="UGMGR_DatumWeldPreferenceName_Type" type="string" title="Teamcenter Item Type" value="DatumPoint" ver="9.0.0" scope="Session">
+                  <Description>This field specifies Datum Point class type defined in Teamcenter.</Description>
+                  <Widestring/>
+                </Pref>
+                <Pref name="UGMGR_DatumWeldPreferenceName_Attr" type="string" title="Teamcenter Attribute Form" value="DLF Attribute Form" ver="9.0.0" scope="Session">
+                  <Description>This field specifies Datum Point attribute form defined in Teamcenter.</Description>
+                  <Widestring/>
+                </Pref>
+                <Pref name="UGMGR_DatumWeldMapFile_WIN" type="string" title="Attribute Mapping File" value="$UGWELD_DIR\samples\DatumWeldAttributeFormMapping.xml" ver="9.0.0" scope="Session">
+                  <Description>This field specifies the file which defines attribute mapping between NX and Teamcenter. The file format is described in the technical documentation.</Description>
+                  <BrowseFileSel type="xml"/>
+                </Pref>
+                <Pref name="UGMGR_DatumWeldMapFile_UNX" type="string" title="Attribute Mapping File" value="" ver="9.0.0" scope="Session">
+                  <Description>This field specifies the file which defines attribute mapping between NX and Teamcenter. The file format is described in the technical documentation.</Description>
+                  <BrowseFileSel type="xml"/>
+                </Pref>
+              </Group>
+              <Group name="Measurement Point Publishing">
+                <Pref name="UGMGR_MeasurementPointPreferenceName_Type" type="string" title="Teamcenter Item Type" value="Fnd0MeasurePoint" ver="2312+" scope="Session">
+                  <Description>This field specifies Measurement Point Item type defined in Teamcenter.</Description>
+                  <Widestring/>
+                </Pref>
+                <Pref name="UGMGR_MeasurementPointPreferenceName_Attr" type="string" title="Teamcenter Attribute Form" value="Fnd0MeasurePointAttrForm" ver="2312+" scope="Session">
+                  <Description>This field specifies Measurement Point attribute form defined in Teamcenter.</Description>
+                  <Widestring/>
+                </Pref>
+                <Pref name="UGMGR_MeasurementPointMapFile_WIN" type="string" title="Attribute Mapping File" value="$UGWELD_DIR\samples\MeasurementPointAttributeFormMapping.xml" ver="2312+" scope="Session">
+                  <Description>This field specifies the file which defines attribute mapping between NX and Teamcenter. The file format is described in the technical documentation.</Description>
+                  <BrowseFileSel type="xml"/>
+                </Pref>
+                <Pref name="UGMGR_MeasurementPointMapFile_UNX" type="string" title="Attribute Mapping File" value="" ver="2312+" scope="Session">
+                  <Description>This field specifies the file which defines attribute mapping between NX and Teamcenter. The file format is described in the technical documentation.</Description>
+                  <BrowseFileSel type="xml"/>
+                </Pref>
+                <Pref name="UGMGR_MeasurementPointSurface_JTFile_WIN" type="string" title="Surface JT File" value="$UGWELD_DIR\jt_files\hourglass.jt" ver="2312+" scope="Session">
+                  <Description>This field specifies the JT file published to Teamcenter for Surface Measurement Point.</Description>
+                  <BrowseFileSel type="jt"/>
+                </Pref>
+                <Pref name="UGMGR_MeasurementPointSurface_JTFile_UNX" type="string" title="Surface JT File" value="" ver="2312+" scope="Session">
+                  <Description>This field specifies the JT file published to Teamcenter for Surface Measurement Point.</Description>
+                  <BrowseFileSel type="jt"/>
+                </Pref>
+                <Pref name="UGMGR_MeasurementPointHole_JTFile_WIN" type="string" title="Hole JT File" value="$UGWELD_DIR\jt_files\hourglass.jt" ver="2312+" scope="Session">
+                  <Description>This field specifies the JT file published to Teamcenter for Hole Measurement Point.</Description>
+                  <BrowseFileSel type="jt"/>
+                </Pref>
+                <Pref name="UGMGR_MeasurementPointHole_JTFile_UNX" type="string" title="Hole JT File" value="" ver="2312+" scope="Session">
+                  <Description>This field specifies the JT file published to Teamcenter for Hole Measurement Point.</Description>
+                  <BrowseFileSel type="jt"/>
+                </Pref>
+                <Pref name="UGMGR_MeasurementPointSlot_JTFile_WIN" type="string" title="Slot JT File" value="$UGWELD_DIR\jt_files\hourglass.jt" ver="2312+" scope="Session">
+                  <Description>This field specifies the JT file published to Teamcenter for Slot Measurement Point.</Description>
+                  <BrowseFileSel type="jt"/>
+                </Pref>
+                <Pref name="UGMGR_MeasurementPointSlot_JTFile_UNX" type="string" title="Slot JT File" value="" ver="2312+" scope="Session">
+                  <Description>This field specifies the JT file published to Teamcenter for Slot Measurement Point.</Description>
+                  <BrowseFileSel type="jt"/>
+                </Pref>
+                <Pref name="UGMGR_MeasurementPointTrim_JTFile_WIN" type="string" title="Trim JT File" value="$UGWELD_DIR\jt_files\hourglass.jt" ver="2312+" scope="Session">
+                  <Description>This field specifies the JT file published to Teamcenter for Trim Measurement Point.</Description>
+                  <BrowseFileSel type="jt"/>
+                </Pref>
+                <Pref name="UGMGR_MeasurementPointTrim_JTFile_UNX" type="string" title="Trim JT File" value="" ver="2312+" scope="Session">
+                  <Description>This field specifies the JT file published to Teamcenter for Trim Measurement Point.</Description>
+                  <BrowseFileSel type="jt"/>
+                </Pref>
+                <Pref name="UGMGR_MeasurementPointHem_JTFile_WIN" type="string" title="Hem JT File" value="$UGWELD_DIR\jt_files\hourglass.jt" ver="2312+" scope="Session">
+                  <Description>This field specifies the JT file published to Teamcenter for Hem Measurement Point.</Description>
+                  <BrowseFileSel type="jt"/>
+                </Pref>
+                <Pref name="UGMGR_MeasurementPointHem_JTFile_UNX" type="string" title="Hem JT File" value="" ver="2312+" scope="Session">
+                  <Description>This field specifies the JT file published to Teamcenter for Hem Measurement Point.</Description>
+                  <BrowseFileSel type="jt"/>
+                </Pref>
+              </Group>
+            </Tab>
+            <Tab name="Multiple Revisions" csh="PMAN_TCIN_General_Multiple_Revisions">
+                <Pref name="UGMGR_EnableMultipleRevisions" type="logical" title="Allow Multiple Revisions" value="false" ver="6.0.0" scope="Session">
+                    <Description>This option determines whether or not Multiple Revisions of a part will be allowed in the NX session. This option should be on for 4GD.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Off" value="false"/>
+                        <EnumElem name="On" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_RevisionChecking" type="string" title="Check Revisions on Load" value="off" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not extended revision conflict checking is active. When this option is on and if revision conflicts exist, a report will be displayed.</Description>
+                    <Toggle off="off"/>
+                    <Data type="enum">
+                        <EnumElem name="Off" value="off"/>
+                        <EnumElem name="On" value="on"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_RevisionCheckingOnSave" type="logical" title="Check Revisions on Save" value="true" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not a warning will be displayed during save if multiple revisions of a part exist in the immediate children of an assembly.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Off" value="false"/>
+                        <EnumElem name="On" value="true"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Browse" csh="PMAN_TCIN_General_Browse">
+                <Pref name="UGMGR_DetailLevelFilter" type="string" title="Detail Level Browse Filter" value="full" ver="5.0.0" scope="Session" suppress="TCN">
+                    <Description>This option specifies the detail level to display when browsing for parts. </Description>
+                    <RadioBox orientation="vertical"/>
+                    <Data type="enum">
+                        <EnumElem name="Full" value="full"/>
+                        <EnumElem name="Intermediate" value="intermediate"/>
+                        <EnumElem name="Simple" value="simple"/>
+                    </Data>
+                    <Docum><Formatted>'Full': Display Items, Item Revisions, and Datasets while browsing for parts.
+'Intermediate': Display only Items and Datasets while browsing for parts.
+'Simple': Display only Datasets while browsing for parts.</Formatted></Docum>
+                </Pref>
+                <Pref name="UGMGR_RevisionsFilter" type="string" title="Revisions Browse Filter" value="all" ver="5.0.0" scope="Session" suppress="TCN">
+                    <Description>This option specifies the revisions to display when browsing for parts. </Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="All" value="all"/>
+                        <EnumElem name="Use Current Revision Rule" value="use current revision rule"/>
+                        <EnumElem name="Last Modified" value="last modified"/>
+                        <EnumElem name="Last Two Modified" value="last two modified"/>
+                        <EnumElem name="Last Four Modified" value="last four modified"/>
+                        <EnumElem name="Latest Released" value="latest released"/>
+                    </Data>
+                    <Docum><Formatted>
+'All': Display objects for all Item Revisions while browsing for parts.
+'Use Current Revision Rule': Display each Item's currently configured object as defined by the current revision rule while browsing for parts.
+'Last Modified': Display each Item's last modified object while browsing for parts.
+'Last Two Modified': Display each Item's last two modified objects while browsing for parts.
+'Last Four Modified': Display each Item's last four modified objects while browsing for parts.
+'Latest Released': Display each Item's latest released object while browsing for parts.</Formatted></Docum>
+                </Pref>
+                <Pref name="UGMGR_DatasetIcons" type="string" title="Determine NX Dataset Type" value="Yes" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the dataset icons to use with models and assemblies when browsing for parts. When checked, display dataset-specific icons.</Description>
+                    <Toggle off="No"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="No"/>
+                        <EnumElem name="Yes" value="Yes"/>
+                    </Data>
+                    <Docum><Formatted>'Yes': Display specific icons next to model and assembly datasets to differentiate them.
+'No': Display generic icons next to model and assembly datasets (will always be ugmasters).</Formatted></Docum>
+                </Pref>
+                <Pref name="UGMGR_QuickSearchAlgorithm" type="string" title="Quick Search" value="Item ID Only" ver="2007" scope="Session">
+                    <Description>This option specifies the quick search algorithm to use when browsing for parts. The 'Custom Query' option is used to execute a simple search query defined by the Teamcenter preference 'TC_NX_QuickSearch_Query', which has a single string value. If 'TC_NX_QuickSearch_Query' is not defined, the '__NX_STD_SIMPLE_ITEM_QUERY' query will execute.</Description>
+                    <RadioBox orientation="vertical"/>
+                    <Data type="enum">
+                        <EnumElem name="Item ID Only" value="Item ID Only"/>
+                        <EnumElem name="Names and Description" value="Names and Description"/>
+                        <EnumElem name="Custom Query" value="Custom Query"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_SearchPageSize" type="int" title="Search Result per Page" value="30" ver="5.0.2" scope="Session">
+                    <Description>This option specifies the number of search results to display on a page.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_DefaultContainer" type="string" title="Default Container" value=":Newstuff" ver="9.0.3" scope="Session">
+                    <Description>This option specifies the default container in which new parts will be created.</Description>
+                    <Widestring/>
+                </Pref>
+            </Tab>
+            <Tab name="File New" csh="PMAN_TCIN_General_File_New">
+                <Pref name="UGMGR_FileNewShowBlankTemplates" type="logical" title="Show Blank Templates" value="true" ver="5.0.0" scope="Session">
+                    <Description>This option determines whether or not blank templates are shown in the File New dialog box.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_FileMasterModelSupport" type="logical" title="Master Model Support" value="true" ver="5.0.0" scope="Session">
+                    <Description>This option determines whether or not the File New dialog box uses master model when creating new parts.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Off" value="false"/>
+                        <EnumElem name="On" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_FileNewAcceptAutoName" type="logical" title="Accept Automatic Names for New Parts" value="true" ver="5.0.0" scope="Session">
+                    <Description>This option determines whether or not automatically generated names for new parts are allowed. When this option is off, a dialog will appear to enter a new name on save. Note: This option will have no effect when creating new Design Components.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_SaveAsAllowItemType" type="logical" title="Allow Save As Different Item Type" value="false" ver="5.0.1" scope="Session">
+                    <Description>This option determines whether or not the item type can be changed during a save as.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Off" value="false"/>
+                        <EnumElem name="On" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_SaveAsAllowNonMaster" type="logical" title="Allow Save As Non-Master to a Different Item" value="false" ver="8.0.0" scope="Session">
+                    <Description>This option determines whether or not a non-master can be saved under a different item revision.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Off" value="false"/>
+                        <EnumElem name="On" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_AutoGenerateItemID" type="logical" title="Assign ID and Revision Automatically" value="false" ver="5.0.5" scope="Session">
+                    <Description>This option determines whether or not the ID and revision should be generated automatically.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_AllowNativeLoadInManageSession" type="logical" title="Allow Native Load in Managed Session" value="true" ver="1847" scope="Session">
+                    <Description>This option determines whether or not a native file can be opened in a managed session. When this option is off, the Open Unmanaged Part command will be unavailable.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Teamcenter Navigator" csh="PMAN_TCIN_General_Teamcenter_Navigator" suppress="TCN,TCX_LITE">
+                <Group name="Manufacturing Operations">
+                    <Pref name="TCIN_MFGActivities" type="logical" title="Show Activity Data" value="false" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not manufacturing activity data will be shown in the Teamcenter Navigator.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="TCIN_MFGAttachments" type="logical" title="Show Attachment Data" value="false" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not manufacturing attachments will be shown in the Teamcenter Navigator.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="TCIN_MFGOccurrences" type="logical" title="Show Occurrence Data" value="false" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not manufacturing occurrences of a setup will be shown in the Teamcenter Navigator.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Projects" csh="PMAN_TCIN_General_Projects" suppress="TCX_LITE">
+                <Group name="Project Assignment">
+                    <Pref name="UGMGR_Project_Assignment_Required" type="logical" title="Required" value="false" ver="1899" scope="Session">
+                        <Description>This option determines whether or not a newly created item must be assigned to a project.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UGMGR_Project_Assignment_Use_Default" type="logical" title="Use Default" value="false" ver="1899" scope="Session">
+                        <Description>This option determines whether or not a newly created item should be automatically assigned to the default project.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UGMGR_Retain_Original_Project_Assignments" type="logical" title="Retain Original Project Assignments" value="false" ver="2212" scope="Session">
+                        <Description>This option determines whether or not an item created during Save As or Clone retains the original project. Note: When this option is on, default projects will not be honored during Save As and Clone.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Pref name="UGMGR_Project_Assignment_Object" type="string" title="Project Assignment Object using Assembly Navigator" value="ItemRevision" ver="12.0.1" scope="Session">
+                    <Description>This option specifies which object will be assigned to the project when performed using the Assembly Navigator. Teamcenter project propagation rules will apply from this object.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Item" value="Item"/>
+                        <EnumElem name="Item Revision" value="ItemRevision"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_Default_Project" type="string" title="Default Project" value="" ver="6.0.0" scope="Session">
+                    <Description>This option specifies the default project that will be assigned to newly created items.</Description>
+                    <String/>
+                </Pref>
+            </Tab>
+            <Tab name="Save" csh="PMAN_TCIN_General_Save">
+              <Pref name="UG_saveManagementDialog" type="logical" title="Always Show Save Management Dialog Box" value="false" ver="1872" scope="Session">
+                <Description>
+                  This option determines whether to always show the save management dialog box. The Teamcenter preference 'TC_NX_CM_AutomatedDecision_Actions' takes precedence over this option.
+This option will be ignored in following cases:<Formatted>
+1. No preference defined for its object type or any of its immediate parent type.
+2. 'SaveOnly' operation defined in preference for its object type or any of its immediate parent type.</Formatted>
+                </Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+              <Pref name="UGMGR_SaveDialogOnWoksetSave" type="logical" title="Use Save User Interface when Saving New Workset" value="true" ver="12.0.2" scope="Session">
+                <Description>This option determines whether or not to use the save management user interface when saving new worksets.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>
+              <Pref name="UG_IgnoreActionForSaveCandidates" type="logical" title="Add Ignore Action for Save Candidates" value="false" ver="1872" scope="Session">
+                <Description>This option determines whether to add the 'Ignore' action for save candidates on the save management dialog box. This option is applicable only when the 'Ignore' operation is defined in the Teamcenter preference 'TC_NX_CM_AutomatedDecision_Actions'.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="false"/>
+                  <EnumElem name="Yes" value="true"/>
+                </Data>
+              </Pref>
+              <Pref name="UG_SaveManagementForForceSaveAll" type="logical" title="Use Save Management for Force Save All" value="true" ver="1926" scope="Session">
+                <Description>This option determines whether or not the save management functionality should be used for Force Save All.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>
+              <Pref name="UG_ShowChangeNoticeColumn" type="logical" title="Show ECN Column in Save Management Dialog" value="false" ver="2212" scope="Session">
+                <Description>This option determines whether to show the ECN (Engineering Change Notice) column in the save management dialog box. The column is shown automatically when ECN is required, and so this option takes effect only when ECN is optional.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>                
+              <Group name="Parts with Optional Change Management"  suppress="TCX_LITE">
+                <Pref name="UGMGR_UseActiveEcnForOptionalCandidates" type="logical" title="Use Active Engineering Change Notice" value="true" ver="1899" scope="Session">
+                  <Description>This option determines whether to inherit active Engineering Change Notice for save candidates with optional Change Management behavior.
+This option has no effect if global change context is set in Teamcenter.
+                  </Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Material Specification Table">
+                  <Pref name="UGMGR_PublishMaterialsTable" type="logical" title="Publish on Save" value="true" ver="2306+" scope="Session">
+                      <Description>This option determines whether or not to publish the assigned material for each body when the part is saved to Teamcenter.</Description>
+                      <Toggle off="false"/>
+                      <Data type="enum">
+                          <EnumElem name="No" value="false"/>
+                          <EnumElem name="Yes" value="true"/>
+                      </Data>
+                  </Pref>
+              </Group>
+            </Tab>
+        </Category>
+        <Category name="Part File Name Display" csh="PMAN_TCIN_Part_File_Name_Display">
+            <Tab name="All" csh="PMAN_TCIN_Part_File_Name_Display_All">
+                <Label label="The following options specify additions to the part file names that are displayed in the title bar and in some dialog boxes. The characters &quot;/&quot;, &quot;(&quot;, &quot;)&quot;, and &quot;:&quot; can be kept or ignored."/>
+                <Pref name="UGMGR_ModelPrefix" type="string" title="Part File Name Prefix" value=" (" ver="3.0.0" scope="Session">
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_ModelPostfix" type="string" title="Part File Name Suffix" value=")" ver="3.0.0" scope="Session">
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_ModelTypePrefix" type="string" title="Part File Type Prefix" value="" ver="3.0.0" scope="Session">
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_ModelTypePostfix" type="string" title="Part File Type Suffix" value=": " ver="3.0.0" scope="Session">
+                    <String/>
+                </Pref>
+            </Tab>
+            <Tab name="Legacy" csh="PMAN_TCIN_Part_File_Name_Display_Legacy">
+                <Label label="The following options specify additions to the NX Part Display Name (displayed in the title bar and in some dialog boxes) for systems using legacy display names. These are also available to support NX Open programs."/>
+                <Label label="The NX Part Display Name is now based on the display name of the Item Revision for NX parts and the display name of the dataset for non-master parts, as defined in Teamcenter. Formatting of Item ID (part number) and Item Revision ID (part revision) is no longer supported in NX."/>
+                <Label label="Use the NX Part Display Name only for display."/>
+                <Pref name="UGMGR_PartPrefix" type="string" title="Part Number Prefix" value="" ver="3.0.0" scope="Session">
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_PartPostfix" type="string" title="Part Number Suffix" value="" ver="3.0.0" scope="Session">
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_PartRevPrefix" type="string" title="Part Revision Prefix" value="/" ver="3.0.0" scope="Session">
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_PartRevPostfix" type="string" title="Part Revision Suffix" value="" ver="3.0.0" scope="Session">
+                    <String/>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Clone Assembly" csh="PMAN_TCIN_Clone_Assembly" package_suppress="view">
+            <Tab name="All" csh="PMAN_TCIN_Clone_Assembly_All">
+               <Pref name="UGMGR_DefaultCloningAction" type="string" title="Clone Action" value="Clone" ver="2007" scope="Session">
+                    <Description>This option specifies the action to use on the Clone dialog.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Clone" value="Clone"/>
+                        <EnumElem name="Revise" value="Revise"/>
+                        <EnumElem name="Retain" value="Retain"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_CloneAssignBehavior" type="string" title="Assign Behavior" value="AutoGenerate" ver="2007" scope="Session">
+                    <Description>This option specifies the scheme to use for part ID generation.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Part ID Generator" value="AutoGenerate"/>
+                        <EnumElem name="Numbering Rule" value="NumberingRule"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_CloneNumberingRule" type="string" title="Numbering Rule" value="WithPrefix" ver="2007" scope="Session">
+                    <Description>This option specifies the numbering rule to use for generating a new part ID.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="With Prefix" value="WithPrefix"/>
+                        <EnumElem name="With Suffix" value="WithSuffix"/>
+                        <EnumElem name="With Replace String" value="WithReplaceString"/>
+                        <EnumElem name="With Renumber String" value="WithRenumber"/>
+                        <EnumElem name="Mixed" value="MixedRule"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_ClonePrefix" type="string" title="Prefix" value="" ver="2007" scope="Session">
+                    <Description>This field specifies the prefix to be applied to the source part ID to generate a new part ID.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_CloneSuffix" type="string" title="Suffix" value="" ver="2007" scope="Session">
+                    <Description>This field specifies the suffix to be applied to the source part ID to generate a new part ID.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_CloneStringToReplace" type="string" title="String to Replace" value="" ver="2007" scope="Session">
+                    <Description>This field specifies the string in the source part ID to replace, to generate a new part ID.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_CloneReplacementString" type="string" title="Replacement String" value="" ver="2007" scope="Session">
+                    <Description>This field specifies the string to replace with, to generate a new part ID.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_CloneRenumberString" type="string" title="Renumber String" value="" ver="2007" scope="Session">
+                    <Description>This field specifies the renumber string to generate a new part ID.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_CloneDefaultItemType" type="string" title="Item Type for Alternate ID Assignment" value="" ver="2007" scope="Session">
+                    <Description>This field specifies the item type that should be used to populate alternate ID contexts and types in the Clone dialog.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_CloneEnableAutoAssign" type="logical" title="Automatically Assign Attributes to Parts when Added for Clone" value="true" ver="2007" scope="Session">
+                    <Description>This option determines whether or not the auto-assignable attributes should be assigned based on the chosen numbering scheme when the part is added to the operation.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_CloneShowTopAssySelectionDlg" type="logical" title="Show Top Assemblies Selection Dialog Box" value="true" ver="2007" scope="Session">
+                    <Description>This option determines whether or not to display the top assembly selection dialog box for parts added using a log file. This option is to improve the load performance in case of large assemblies.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_ApplyCloneActionBasedOnItemType" type="string" title="Apply Clone Action Based on Item Type" value="" ver="2007" scope="Session">
+                    <Description>This field specifies clone actions which should be assigned to the provided item type. The list should be in the format &apos;ItemType1:Action,ItemType2:Action&apos; and so on, where the item type should be specified with the internal name.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="UGMGR_SkipMaxAllowedWorkRevCheckForClone" type="logical" title="Skip Maximum Working Revision Limit" value="false" ver="2007" scope="Session">
+                    <Description>This option determines whether or not to skip the maximum allowed working revision limit validation.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_SkipParentChildTypeValidation" type="logical" title="Skip Parent Child Type Validation" value="false" ver="2007" scope="Session">
+                    <Description>This option determines whether or not to skip the parent child type validation.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_ClonePartFamilyMemberTreatmentOption" type="int" title="Treatment of Part Family Member" value="0" ver="2007" scope="Session">
+                    <Description>This option specifies how a part family member will be treated.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Retain Existing Family Part" value="0"/>
+                        <EnumElem name="Clone as New Non-family Part" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_EnableMultirevCloning" type="int" title="Multiple Revisions Clone Result" value="0" ver="2007" scope="Session">
+                    <Description>This option specifies how multiple revisions of a part should be output in a clone operation.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Multiple Revisions" value="0"/>
+                        <EnumElem name="Separate Items" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_AssignNewItemIdBasedOnSourceItemId" type="logical" title="Assign New Item ID based on Source Item ID" value="false" ver="2007" scope="Session">
+                    <Description>This option determines whether or not to assign the new item ID based on the source item ID.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_CloneIgnoreInvalidAttributeValues" type="logical" title="Ignore Invalid Attribute Values" value="false" ver="2212" scope="Session">
+                    <Description>This option determines whether or not to ignore invalid attribute values from the source part.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_ReleaseStatusesForNonMasterToSetNoCopyAction" type="string" title="Set &apos;No Copy&apos; Action for Non-masters with Release Status" value="" ver="2007" scope="Session">
+                  <Description>This field specifies the release statuses to define initial copy action for non-masters. If any of the specified release statuses are present on the non-master, then it will be applied the 'No Copy' action. This should be a comma-separated list. For example: Released, Approved. The value should be specified with the internal name.</Description>
+                  <Widestring/>
+                </Pref>
+                <Group name="Legacy">
+                    <Pref name="UGMGR_CloneSuppressedPanes" type="string" title="Suppress Dialog Box Tabs" value="" ver="3.0.0" scope="Session">
+                        <Description>This field specifies the tabs which should be suppressed from the Assembly Clone dialog box. This should be a comma separated list. The names of the panes may be specified in the localized language or in English.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="UGMGR_CloneDefaultRevRule" type="string" title="Revision Rule" value="" ver="3.0.0" scope="Session">
+                        <Description>This field specifies the revision rule to be applied when cloning an assembly. If not set then the current revision rule will be used.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="UGMGR_CloneCarryForwardSourceRevisionId" type="logical" title="Use Source Revision ID for Multiple Revisions" value="true" ver="1899" scope="Session">
+                        <Description>This option determines whether or not to copy the revision ID from the source parts when there are multiple revisions of the same part in the clone operation.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="Import/Export Assembly" csh="PMAN_TCIN_Import_Export_Assembly" package_suppress="view">
+            <Tab name="Import" csh="PMAN_TCIN_Import_Export_Assembly_Import">
+                <Pref name="UGMGR_ImportItemType" type="string" title="Item Type" value="" ver="10.0.0" scope="Session">
+                    <Description>This field specifies the item type to use for the parts. This option is only used when the "Use Item type in Part File" option is off.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_ImportUseItemTypeFromPartFile" type="logical" title="Use Item type in Part File" value="false" ver="11.0.0" scope="Session">
+                    <Description>If an item type exists in the part file, this option determines whether or not it should be used.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_ImportNumberingSource" type="string" title="Numbering Source" value="Generator" ver="10.0.0" scope="Session">
+                    <Description>This option specifies the source to use as a basis for part ID generation.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Part ID Generator" value="Generator"/>
+                        <EnumElem name="OS Filename" value="OSFilename"/>
+                        <EnumElem name="Attribute" value="Attribute"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_ImportConversionRule" type="string" title="Conversion Rule" value="AsIDAndRevision" ver="2206" scope="Session">
+                    <Description>This option specifies the conversion rule to use, in conjunction with 'OS Filename' numbering source, to generate a new part ID.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="As ID" value="AsNumber"/>
+                        <EnumElem name="As ID and Revision" value="AsIDAndRevision"/>
+                        <EnumElem name="With Prefix" value="Prefix"/>
+                        <EnumElem name="With Suffix" value="Suffix"/>
+                        <EnumElem name="With Replace String" value="Replace"/>
+                        <EnumElem name="Mixed" value="MixedRule"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_ImportPrefix" type="string" title="Prefix" value="" ver="10.0.0" scope="Session">
+                    <Description>This field specifies the prefix to be applied to the OS file name of the part.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_ImportSuffix" type="string" title="Suffix" value="" ver="10.0.0" scope="Session">
+                    <Description>This field specifies the suffix to be applied to the OS file name of the part.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_ImportStringToReplace" type="string" title="String to Replace" value="" ver="10.0.0" scope="Session">
+                    <Description>This field specifies the string in the OS file name to replace, to generate a new part ID.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_ImportReplacementString" type="string" title="Replacement String" value="" ver="10.0.0" scope="Session">
+                    <Description>This field specifies the string to replace with, to generate a new part ID.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_ImportIDAttribute" type="string" title="ID Attribute" value="${DB_PART_NO}" ver="10.0.2" scope="Session">
+                    <Description>This field specifies the attributes whose values, from the part file being operated on, will be used to construct the part ID.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="UGMGR_ImportRevisionAttribute" type="string" title="Revision Attribute" value="${DB_PART_REV}" ver="10.0.2" scope="Session">
+                    <Description>This field specifies the attributes whose values, from the part file being operated on, will be used to construct the part revision.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="UGMGR_ImportDefaultName" type="string" title="Default Name" value="${DB_PART_NAME}" ver="10.0.2" scope="Session">
+                    <Description>This field specifies the attributes whose values, from the part file being operated on, will be used to construct the part name.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="UGMGR_ImportDefaultDescription" type="string" title="Default Description" value="${DB_PART_DESC}" ver="10.0.2" scope="Session">
+                    <Description>This field specifies the attributes whose values, from the part file being operated on, will be used to construct the part description.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="UGMGR_ImportExistingPartAction" type="string" title="Existing Part Action" value="UseExisting" ver="10.0.0" scope="Session">
+                    <Description>This option specifies the action to be applied for the part if it already exists in the database.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Overwrite" value="Overwrite"/>
+                        <EnumElem name="Use Existing" value="UseExisting"/>
+                        <EnumElem name="New Revision" value="NewRevision"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_ImportCheckoutOption" type="string" title="Action on Imported Parts" value="NoChange" ver="1847" scope="Session">
+                    <Description>This option specifies if the part should be checked in, checked out, or retain its state after importing it to Teamcenter. The 'No Change' option is not applicable for new parts being created by the import.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Check-in" value="Checkin"/>
+                        <EnumElem name="Check-out" value="Checkout"/>
+                        <EnumElem name="No Change" value="NoChange"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_ImportDefaultSimItemType" type="string" title="Simulation Item Type" value="" ver="10.0.0" scope="Session">
+                    <Description>This field specifies the item type with which Simulation files will be imported.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_ImportDefaultFemItemType" type="string" title="FE Model Item Type" value="" ver="10.0.0" scope="Session">
+                    <Description>This field specifies the item type with which FE models will be imported.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_ImportDefaultIdealizedItemType" type="string" title="Idealized Part Item Type" value="" ver="10.0.0" scope="Session">
+                    <Description>This field specifies the item type with which Idealized parts will be imported.</Description>
+                    <String/>
+                </Pref>
+                <Group name="Data Conditions">
+                    <Pref name="UGMGR_ImportTransientParts" type="logical" title="Import Transient Parts" value="false" ver="1872" scope="Session">
+                        <Description>This option determines whether or not to import transient parts. When this option is on, transient parts which have persisted during an export operation, will be imported into Teamcenter.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UGMGR_HonorItemTypeInName" type="logical" title="Use Item Type from OS File Name in Multi-field Key Environment" value="false" ver="10.0.0" scope="Session">
+                        <Description>This option determines whether or not to use the item type extracted from the OS file name of the part, using the autotranslate naming technique. This option is available only in Multi-field Key Environment.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UGMGR_showTopAssySelectionDlg" type="logical" title="Show Top Assemblies Selection Dialog Box" value="true" ver="10.0.1" scope="Session">
+                        <Description>This option determines whether or not to display the top assembly selection dialog box for parts added using a log file or from a folder. This option is to improve the load performance in case of large assemblies.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UGMGR_AutoImportAutoAssign" type="logical" title="Automatically Assign Attributes to Parts when Added for Import" value="true" ver="10.0.0" scope="Session">
+                        <Description>This option determines whether or not the auto-assignable attributes should be assigned based on the chosen naming technique when the part is added to the operation.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UGMGR_ImportDatasetForUseExist" type="logical" title="Allow Import to Existing Item Revision with No Datasets" value="false" ver="1953" scope="Session">
+                        <Description>This option is applicable when the 'Use Existing' action is being applied to a part on import. If an existing Item Revision is found for a part being imported, the Use Existing option would mean that the part will not be imported and the existing Item Revision will be used. This option determines whether or not the part can still be imported to the existing Item Revision if there are no datasets present under the Item Revision.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UGMGR_SkipMaxAllowedWorkRevisionValidation" type="logical" title="Skip Maximum Working Revision Limit" value="false" ver="1926" scope="Session">
+                        <Description>This option determines whether or not to skip the maximum allowed working revision limit validation.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UGMGR_ImportRetainBVRPrecise" type="logical" title="Retain Precise Structure" value="false" ver="1953" scope="Session">
+                        <Description>This option determines if the exported precise assembly should retain its precise structure when it is imported.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UGMGR_AssignOwnershipToExistingParts" type="logical" title="Change Ownership for Existing Item Revisions" value="false" ver="12.0.2" scope="Session">
+                        <Description>This option determines whether to allow modifying the ownership of existing Item Revisions in Teamcenter during an import operation.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Import Action">
+                    <Pref name="UGMGR_CloneManageReadOnlyComponents" type="string" title="Apply &apos;Use Existing&apos; Action to All Read-only Parts" value="Yes" ver="3.0.0" scope="Session">
+                        <Description>This option determines whether or not a clone-based import operation defaults to the 'Use Existing' action for parts which are read-only in Teamcenter during the import of assemblies with the overwrite action.</Description>
+                        <Toggle off="No"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="No"/>
+                            <EnumElem name="Yes" value="Yes"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UGMGR_AlwaysUseLatestPartRevision" type="logical" title="Use Latest Revision when Importing into Existing Parts" value="false" ver="1899" scope="Session">
+                        <Description>This option determines whether or not the import operation should use the latest part revision of the existing parts.
+This option is applicable only if the "Apply 'Use Existing' Action to All Read-only Parts" option is off.
+                        </Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                 </Pref>
+                    <Pref name="UGMGR_AlwaysUseLatestPartRevision_NewRev" type="logical" title="Apply &apos;New Revision&apos; Action if Latest Revision is Read-only" value="false" ver="1899" scope="Session">
+                        <Description>This option determines whether or not an import operation defaults to the 'New Revision' action for parts which are read-only in Teamcenter during the import of assemblies with the overwrite action.
+This option is applicable only if the "Use Latest Revision when Importing into Existing Parts" option is being honored.
+                        </Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Non-masters" suppress="TCX_LITE">
+                    <Pref name="UGMGR_TreatDrawingPart" type="logical" title="Treat Part with Drawing Sheets as Non-master" value="false" ver="10.0.0" scope="Session">
+                        <Description>This option determines whether or not to treat parts with drawing sheets as non-master.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UGMGR_ImportUpdateNonMasterDatasetForNewRevision" type="logical" title="Update Non-master Dataset Name for a New Revision" value="false" ver="1899" scope="Session">
+                        <Description>This option determines whether or not to update the non-master dataset name when creating new revision. This will only apply to non-master parts which use the Auto-Translate naming scheme.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UGMGR_UseRelationFromOsFileName" type="logical" title="Identify Non-masters Based on OS File Name" value="false" ver="1980" scope="Session">
+                        <Description>This option determines whether to automatically identify non-masters from the OS file name while applying any numbering scheme. This option will work similarly to the "Based on OS File Name" numbering scheme and use '_' as a delimiter in the OS file name to identify if the OS file is a non-master.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Validation" suppress="TCX_LITE">
+                    <Pref name="UGMGR_ValidationMode" type="int" title="Validation Mode" value="0" ver="10.0.0" scope="Session">
+                        <Description>This option specifies the validation mode for processing validation results.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="No Validation" value="0"/>
+                            <EnumElem name="Import from Part" value="1"/>
+                            <EnumElem name="Run Validation" value="2"/>
+                            <EnumElem name="Run Validation (Hybrid)" value="3"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UGMGR_ValidationRuleSetFile" type="string" title="Validation Rule Set File" value="" ver="10.0.0" scope="Session">
+                        <Description>This field specifies the validation rule set file. If specified, the string will represent the full pathname of a native OS validation rule set file or a CLI string of an ItemRevision whose related ValidationRuleSet dataset will be used for evaluation.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="UGMGR_ValidationTreatWarningAsPass" type="logical" title="Treat Validation Warning as Pass" value="true" ver="10.0.0" scope="Session">
+                        <Description>This option determines whether or not the warning indicated by a validation result will be treated as pass. This option is applicable when validation results are required during import.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UGMGR_ValidationTreatOutdatedAsPass" type="logical" title="Treat Outdated Validation Results as Pass" value="false" ver="10.0.0" scope="Session">
+                        <Description>This option determines whether or not an outdated validation result will be treated as pass. This option is applicable when validation results are required during import.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Import Assembly into Teamcenter (Legacy)" suppress="TCX_LITE">
+                    <Pref name="UGMGR_ImportSuppressedPanes" type="string" title="Suppress Import Dialog Box Tabs" value="" ver="3.0.0" scope="Session">
+                        <Description>This field specifies the tabs which should be suppressed from the old Import Assembly dialog box. This should be a comma separated list. The names of the panes may be specified in the localized language or in English.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Export" csh="PMAN_TCIN_Import_Export_Assembly_Export">
+                <Pref name="UGMGR_ExportDefaultRevRule" type="string" title="Revision Rule" value="" ver="3.0.0" scope="Session">
+                    <Description>This field specifies the revision rule to be applied when exporting an assembly. If not set then the current revision rule will be used.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="UGMGR_ImportExportSeparatorInPartName" type="string" title="Separator in Part Name" value="_" ver="10.0.0" scope="Session">
+                    <Description>This field specifies the separator applied when creating a part name for export operation and also used to decode the part name in import operation. If not set, then the '_' separator will be used.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_ImportExportSeparatorInMfkID" type="string" title="Separator in MFK ID" value="." ver="10.0.0" scope="Session">
+                    <Description>This field specifies the separator applied when creating an Multi-field Key ID for an export operation and also used to decode the Multi-field Key ID in an import operation. If not set, the '.' separator will be used.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_ExportNumberingSource" type="string" title="Numbering Source" value="AutoTranslate" ver="1926" scope="Session">
+                    <Description>This option specifies the source to use as a basis for part file name generation.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Auto Translate" value="AutoTranslate"/>
+                        <EnumElem name="Naming Rule" value="NamingRule"/>
+                        <EnumElem name="Auto Translate with Alternate ID" value="AutoTranslateWithAlternateID"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_ExportNumberingSource_tcxlite" type="string" title="Numbering Source" value="AutoTranslate" ver="2312" scope="Session">
+                    <Description>This option specifies the source to use as a basis for part file name generation.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Auto Translate" value="AutoTranslate"/>
+                        <EnumElem name="Naming Rule" value="NamingRule"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_ExportConversionRule" type="string" title="Conversion Rule" value="WithPrefix" ver="2212" scope="Session">
+                    <Description>This option specifies the conversion rule to use, in conjunction with numbering source, to generate a new part file name.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="With Prefix" value="WithPrefix"/>
+                        <EnumElem name="With Suffix" value="WithSuffix"/>
+                        <EnumElem name="With Replace String" value="WithReplaceString"/>
+                        <EnumElem name="With Rename String" value="WithRenameString"/>
+                        <EnumElem name="Mixed" value="MixedRule"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_ExportPrefix" type="string" title="Prefix" value="" ver="1926" scope="Session">
+                    <Description>This field specifies the prefix to be applied to the part file name.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_ExportSuffix" type="string" title="Suffix" value="" ver="1926" scope="Session">
+                    <Description>This field specifies the suffix to be applied to the part file name.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_ExportStringToReplace" type="string" title="String to Replace" value="" ver="1926" scope="Session">
+                    <Description>This field specifies the string in the file name to replace, to generate a new part file name.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_ExportReplacementString" type="string" title="Replacement String" value="" ver="1926" scope="Session">
+                    <Description>This field specifies the string to replace with, to generate a new part file name.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_ExportRenameString" type="string" title="Rename String" value="" ver="1926" scope="Session">
+                    <Description>This field specifies the new string, used as part file name.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="UGMGR_ExportExistingPartAction" type="string" title="Existing Part Action" value="Overwrite" ver="1926" scope="Session">
+                    <Description>This option specifies the action to be applied for the part if it already exists in the folder exported to.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Overwrite" value="Overwrite"/>
+                        <EnumElem name="Use Existing" value="UseExisting"/>
+                        <EnumElem name="Exclude" value="Exclude"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_ExportEnableMFKAttrNaming" type="logical" title="Include MFK Attribute Values in Name" value="true" ver="1953" scope="Session">
+                    <Description>This option specifies whether to include the Multi-field Key attribute values rather than only item ID in the final name constructed using naming rule for export.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_ExportPrtForJtWithStructure" type="logical" title="Export NX Part Files for JT Assemblies" value="false" ver="2212" scope="Session">
+                    <Description>This option determines whether or not JT assemblies will be exported as NX part files. This will modify the exported NX parent part files containing JT assemblies.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                </Pref>
+                <Group name="Export Assembly outside Teamcenter (Legacy)" suppress="TCX_LITE">
+                    <Pref name="UGMGR_ExportSuppressedPanes" type="string" title="Suppress Dialog Box Tabs" value="" ver="3.0.0" scope="Session">
+                        <Description>This field specifies the tabs which should be suppressed from the old Export Assembly dialog box. This should be a comma separated list. The names of the panes may be specified in the localized language or in English.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Part Family Members" csh="PMAN_TCIN_Import_Export_Assembly_Part_Family_Members">
+                <Pref name="UGMGR_ImportExportAutoAddPFTemplates" type="string" title="Include Part Family Template Part" value="Yes" ver="2212" scope="Session">
+                    <Description>If a part family member is encountered during an import or export operation, this option determines whether or not its template part should be included in the operation.</Description>
+                    <Toggle off="No"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="No"/>
+                        <EnumElem name="Yes" value="Yes"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="UGMGR_ImportExportPFMTreatment" type="string" title="Part Family Member Treatment" value="IgnorePFM" ver="2212" scope="Session">
+                    <Description>This option specifies how to treat part family members encountered during the operation.
+<Formatted>
+Include Part Family Member: Includes the part family member and the exported or imported part retains its part family status.
+Ignore Part Family Member: Ignores the part family member.
+Display Select Part Family Treatment Dialog Box: Displays a dialog box which gives the choice to ignore the part family member or convert it into a normal part.
+</Formatted>
+                    </Description>
+                    <RadioBox orientation="vertical"/>
+                    <Data type="enum">
+                        <EnumElem name="Include Part Family Member" value="IncludePFM"/>
+                        <EnumElem name="Ignore Part Family Member" value="IgnorePFM"/>
+                        <EnumElem name="Display Select Part Family Treatment Dialog Box" value="DisplaySelectTreatmentDialog"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="User Attributes" csh="PMAN_TCIN_User_Attributes" package_suppress="view">
+            <Tab name="All" csh="PMAN_TCIN_User_Attributes_All">
+                <Pref name="UGMGR_AttrSyncVLAAffix" type="string" title="VLA Attribute Affix" value="numeric_bracket" ver="8.0.0" scope="Session">
+                    <Description>This option specifies how a VLA element index of a mapped attribute is appended to the attribute VLA title in NX. All options except for [Numeric] are deprecated.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="[Numeric]" value="numeric_bracket"/>
+                        <EnumElem name=":Numeric" value="numeric_colon"/>
+                        <EnumElem name="_Numeric" value="numeric_underscore"/>
+                        <EnumElem name="_Alphabetic" value="alphabetic_underscore"/>
+                    </Data>
+                </Pref>
+                <Group name="Templates">
+                    <Pref name="UGMGR_AttributeTemplateExport" type="logical" title="Allow Attribute Template Export" value="false" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not a button will be displayed on the Templates menu when running NX in managed mode. This button causes the attribute template files for mapped attributes to be exported to the file system. Such files can be used when NX is run in native mode.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UGMGR_AttributeTemplateImport" type="logical" title="Allow Attribute Template Import" value="false" ver="11.0.0" scope="Session">
+                        <Description>This option determines whether or not previously exported attribute template files for mapped attributes will be imported and used when NX is run in native mode.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UGMGR_AttributeTemplateDir_WIN" type="string" title="Directory Name for Attribute Template Import" value="" ver="11.0.0" scope="Session">
+                        <Description>This field specifies the location of the user attribute template files for Teamcenter-based attributes to be used when NX is run in native mode. To create these files, export them in managed mode from the Templates dialog.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                    <Pref name="UGMGR_AttributeTemplateDir_UNX" type="string" title="Directory Name for Attribute Template Import" value="" ver="11.0.0" scope="Session">
+                        <Description>This field specifies the location of the user attribute template files for Teamcenter-based attributes to be used when NX is run in native mode. To create these files, export them in managed mode from the Templates dialog.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                </Group>
+                <Group name="Callout">
+                    <Pref name="UGMGR_CalloutAttribute" type="string" title="Attribute Title" value="DB_SEQUENCE_NO" ver="3.0.0" scope="Session">
+                        <Description>This option specifies which mapped component instance attribute (Occurrence Note) is synchronized with the CALLOUT attribute in NX. If not specified, this will be mapped to DB_SEQUENCE_NO. It should be treated as a site setting.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+                <Pref name="UGMGR_DescriptionAsAPrimaryAttribute" type="logical" title="Show Description as a Primary Attribute" value="false" ver="12.0.1" scope="Session">
+                    <Description>This option determines whether or not the Description will be treated as a special attribute, and if it will be available on all dialogs as a primary attribute, regardless of whether it is required or not.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_AutoAssignNameAndAttributesForParts" type="logical" title="Auto-assign Name and Attributes for Parts" value="true" ver="1872" scope="Session">
+                    <Description>This option determines whether or not to auto-assign name and attributes for parts on all dialogs.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Miscellaneous" csh="PMAN_TCIN_Miscellaneous">
+            <Tab name="General" csh="PMAN_TCIN_Miscellaneous_General">
+                <Pref name="UGMGR_WebServer" type="string" title="Web Server" value="" ver="3.0.0" scope="Session">
+                    <Description>This field specifies the URL of the Teamcenter Web server.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="UGMGR_WebServerAppName" type="string" title="Web Server Application Name" value="tc" ver="4.0.1" scope="Session">
+                    <Description>This field specifies the URL application name of the Teamcenter Web server.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="UGMGR_PFMOwner" type="string" title="Part Family Member Ownership" value="User" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the ownership assigned to part family members when they are created. The Template option means that the ownership will be set to the owner of the part family template part. The User option means that the ownership remains with the creating user.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="User" value="User"/>
+                        <EnumElem name="Template" value="Template"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_InheritPFTReleaseStatus" type="string" title="Apply Release Statuses to Part Family Members" value="Yes" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the release statuses of the part family template should be applied to the part family members generated from it.</Description>
+                    <Toggle off="No"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="No"/>
+                        <EnumElem name="Yes" value="Yes"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_VariantItemUpdate" type="string" title="Variant Item Update" value="No" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not variant item expression values or solution variant expression values are synchronized from the PLM database.</Description>
+                    <Toggle off="No"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="No"/>
+                        <EnumElem name="Yes" value="Yes"/>
+                    </Data>
+                    <Docum>Before setting this option, be sure that your site is using the Teamcenter Modular Variants functionality and that any parts you are opening will have been designed to expect to receive expression values from Teamcenter.</Docum>
+                </Pref>
+                <Pref name="UGMGR_VariantExpressionPrefix" type="string" title="Variant Expression Prefix" value="ve_" ver="12.0.2" scope="Session">
+                    <Description>This option specifies a prefix to be used when the system imports expressions from the PLM database variant rules.</Description>
+                    <String/>
+                    <Docum>To import expressions from the PLM database variant rules, use the Import Variant Expressions shortcut command on the assembly node in the Assembly Navigator.</Docum>
+                </Pref>
+                <Pref name="UGMGR_ShowTcLoginDialog" type="string" title="Show Teamcenter Login Dialog Box" value="No" ver="3.0.1" scope="Session">
+                    <Description>This option determines whether or not to display the Teamcenter Login dialog box on launching utilities, for example translators.</Description>
+                    <Toggle off="No"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="No"/>
+                        <EnumElem name="Yes" value="Yes"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Security Services" csh="PMAN_TCIN_Miscellaneous_Security_Services">
+                <Label label="The following options apply only if Teamcenter Security Services is activated."/>
+                <Pref name="UGMGR_SSOLoginUrl" type="string" title="Teamcenter Security Services Login URL" value="" ver="3.0.1" scope="Session">
+                    <Description>This option specifies the Teamcenter Security Services Login URL and should be set to the value of the Teamcenter variable TC_SSO_LOGIN_URL. See the Teamcenter documentation for more details.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="UGMGR_SSOAppId" type="string" title="Teamcenter Security Services Application ID" value="" ver="3.0.1" scope="Session">
+                    <Description>This option specifies Teamcenter Security Services Application ID and should be set to the value of the Teamcenter variable TC_SSO_APP_ID. See the Teamcenter documentation for more details.</Description>
+                    <Widestring/>
+                </Pref>
+            </Tab>
+            <Tab name="Remote" csh="PMAN_TCIN_Miscellaneous_Remote" suppress="TCX_LITE">
+                <Pref name="UGMGR_Remote_CICO" type="string" title="Allow Remote Check In and Check Out" value="Disabled" ver="1847" scope="Session">
+                    <Description>This option determines if Remote Check Out and Remote Check In operations are allowed.</Description>
+                    <Toggle off="Disabled"/>
+                    <Data type="enum">
+                        <EnumElem name="On" value="Enabled"/>
+                        <EnumElem name="Off" value="Disabled"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_Remote_Manual_CICO" type="string" title="Allow Only Manual Remote Check In and Check Out" value="Disabled" ver="1899" scope="Session">
+                    <Description>This option determines if manual Remote Check Out and manual Remote Check In operations are allowed.</Description>
+                    <Toggle off="Disabled"/>
+                    <Data type="enum">
+                        <EnumElem name="On" value="Enabled"/>
+                        <EnumElem name="Off" value="Disabled"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="UGMGR_RemoteLockingPolicy" type="string" title="Check-out/Check-in Policy" value="AutoCheckinClose" ver="8.5.0" scope="Session">
+                    <Description>This option specifies if parts are checked out on modification (Automatic) or explicitly (Manual), as well as when they are checked in.</Description>
+                    <RadioBox orientation="vertical"/>
+                    <Data type="enum">
+                        <EnumElem name="Automatic Check-out on Modify or Save; Check-in on Save/Close" value="AutoCheckinSave"/>
+                        <EnumElem name="Automatic Check-out on Modify or Save; Check-in on Close" value="AutoCheckinClose"/>
+                        <EnumElem name="Automatic Check-out on Save; Check-in on Save" value="Manual"/>
+                        <EnumElem name="Manual Check-out Required for Save; Manual Check-in" value="ManualPlusPlus"/>
+                    </Data>
+                </Pref>
+                <Pref name="UGMGR_Remote_Unlock" type="string" title="Check In Remote Parts on" value="Close" ver="4.0.1" scope="Session">
+                    <Description>This option specifies if remote parts are checked in when the part is closed or saved. (This option only applies when the Check-out/Check-in Policy for Remote Items is set to Automatic.)</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Close" value="Close"/>
+                        <EnumElem name="Save" value="Save"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Intellectual Property Protection" csh="PMAN_TCIN_Miscellaneous_IPP" suppress="TCIN_IPP" >
+                <Label label="The following options specify whether commands are blocked and logged or logged only. Commands are blocked based on the clearance level of the user when Authorized Data Access is configured."/>
+                <Pref name="UG_IP_menu_file_saveas" type="int" title="File -> Save As" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_file_export_assembly" type="int" title="File -> Export Assembly outside Teamcenter" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_file_print" type="int" title="File -> Print" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_file_plot" type="int" title="File -> Plot" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_file_send" type="int" title="File -> Send to Package File" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_part" type="int" title="File -> Export -> Part" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_parasolid" type="int" title="File -> Export -> Parasolid" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_user" type="int" title="File -> Export -> User Defined Feature" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_drawings" type="int" title="File -> Export -> Drawings to Teamcenter" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_pdf" type="int" title="File -> Export -> PDF" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_cgm" type="int" title="File -> Export -> CGM" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_stl" type="int" title="File -> Export -> STL" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_poly" type="int" title="File -> Export -> Polygon File" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_author" type="int" title="File -> Export -> Author HTML" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_tcvis" type="int" title="File -> Export -> JT" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_vrml" type="int" title="File -> Export -> VRML" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_png" type="int" title="File -> Export -> PNG" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_jpeg" type="int" title="File -> Export -> JPEG and MB3 -> Capture Image" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_gif" type="int" title="File -> Export -> GIF" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_tiff" type="int" title="File -> Export -> TIFF" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_xwd" type="int" title="File -> Export -> XWD" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_bmp" type="int" title="File -> Export -> BMP" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_iges" type="int" title="File -> Export -> IGES" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_step" type="int" title="File -> Export -> STEP" value="1" ver="11.0.2" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_dxf" type="int" title="File -> Export -> DXF/DWG" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_2d" type="int" title="File -> Export -> 2D Exchange" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_heal" type="int" title="File -> Export -> Heal Geometry" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_v4catia" type="int" title="File -> Export -> CATIA V4" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_export_v5catia" type="int" title="File -> Export -> CATIA V5" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_file_interoperate" type="int" title="File -> Interoperate" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_file_save_outside" type="int" title="File -> Utilities -> Rescue Session Data" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_edit_copy" type="int" title="Edit -> Copy Display" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_view_vis_high" type="int" title="View -> Visualization -> High Quality Image" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_view_vis_create" type="int" title="View -> Visualization -> Create Animation" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_tools_movie" type="int" title="Tools -> Movie -> Record" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_tools_partfamilies_create" type="int" title="Tools -> Part Families" value="0" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_assemblies_comp_add" type="int" title="Assemblies -> Components -> Add Component" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_assemblies_comp_create" type="int" title="Assemblies -> Components -> Create New Component" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_assemblies_comp_parent" type="int" title="Assemblies -> Components -> Create New Parent" value="0" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_assemblies_comp_substitute" type="int" title="Assemblies -> Components -> Replace Component" value="0" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_assemblies_comp_part" type="int" title="Assemblies -> Components -> Part Family Update" value="0" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_assemblies_cloning_create" type="int" title="Assemblies -> Cloning -> Create Clone Assembly" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="UG_IP_menu_assemblies_relations" type="int" title="Assemblies -> WAVE -> Relations Browser" value="1" ver="6.0.1" scope="Session">
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Block" value="1"/>
+                        <EnumElem name="Log" value="0"/>
+                    </Data>
+                </Pref>
+                <Group name="Sequencing">
+                    <Pref name="UG_IP_menu_tools_export_to_movie" type="int" title="Tools -> Export to Movie" value="1" ver="6.0.2" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Block" value="1"/>
+                            <EnumElem name="Log" value="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Navigators">
+                    <Pref name="UG_IP_menu_export_browser" type="int" title="MB3 -> Export to Browser" value="1" ver="7.5.0" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Block" value="1"/>
+                            <EnumElem name="Log" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UG_IP_menu_export_spreadsheet" type="int" title="MB3 -> Export to Spreadsheet" value="1" ver="7.5.0" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Block" value="1"/>
+                            <EnumElem name="Log" value="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Simulation Navigator">
+                    <Pref name="UG_IP_menu_field_export" type="int" title="MB3 -> Export" value="1" ver="6.0.2" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Block" value="1"/>
+                            <EnumElem name="Log" value="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Pre/Post">
+                    <Pref name="UG_IP_menu_file_export_animgif" type="int" title="File -> Export -> Animated GIF" value="1" ver="6.0.2" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Block" value="1"/>
+                            <EnumElem name="Log" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UG_IP_menu_export_sim" type="int" title="File -> Export -> Simulation" value="1" ver="6.0.2" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Block" value="1"/>
+                            <EnumElem name="Log" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UG_IP_menu_tools_post_exportjt" type="int" title="Tools -> Post -> Export JT" value="1" ver="6.0.2" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Block" value="1"/>
+                            <EnumElem name="Log" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UG_IP_menu_tools_export_report" type="int" title="Tools -> Export Report" value="1" ver="6.0.2" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Block" value="1"/>
+                            <EnumElem name="Log" value="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Motion Simulation">
+                    <Pref name="UG_IP_menu_export_recurdyn_solver" type="int" title="File -> Export -> RecurDyn Input" value="1" ver="6.0.2" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Block" value="1"/>
+                            <EnumElem name="Log" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UG_IP_menu_export_adm_dataset" type="int" title="File -> Export -> ADM" value="1" ver="6.0.2" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Block" value="1"/>
+                            <EnumElem name="Log" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UG_IP_menu_export_adams_solver" type="int" title="File -> Export -> Adams Input" value="1" ver="6.0.2" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Block" value="1"/>
+                            <EnumElem name="Log" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UG_IP_menu_export_mech" type="int" title="File -> Export -> Export Mechanism" value="1" ver="6.0.2" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Block" value="1"/>
+                            <EnumElem name="Log" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UG_IP_menu_export_mpeg" type="int" title="File -> Export -> MPEG" value="1" ver="6.0.2" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Block" value="1"/>
+                            <EnumElem name="Log" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UG_IP_menu_export_mpeg2" type="int" title="File -> Export -> MPEG2" value="1" ver="6.0.2" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Block" value="1"/>
+                            <EnumElem name="Log" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UG_IP_menu_export_anim_gif" type="int" title="File -> Export -> Animated GIF" value="1" ver="6.0.2" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Block" value="1"/>
+                            <EnumElem name="Log" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UG_IP_menu_export_anim_tiff" type="int" title="File -> Export -> Animated TIFF" value="1" ver="6.0.2" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Block" value="1"/>
+                            <EnumElem name="Log" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="UG_IP_menu_export_tce_vis" type="int" title="File -> Export -> Teamcenter Visualization" value="1" ver="6.0.2" scope="Session">
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Block" value="1"/>
+                            <EnumElem name="Log" value="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>

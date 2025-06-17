@@ -1,0 +1,1456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="PMI" csh="PMAN_PMI" package_suppress="simviewer,view,mechatronicsplayer,nx2dedit">
+        <Category name="PMI General/Setup" csh="PMAN_PMI_PMI_General">
+            <Tab name="Miscellaneous" csh="PMAN_PMI_PMI_General_Miscellaneous">         
+               <Pref name="PMI_DelayPMILoad" type="logical" title="Delay Component PMI Loading" value="true" ver="2206" scope="Session">
+                 <Description>This option determines whether or not to delay loading component PMI when loading an assembly part.</Description>
+                 <Toggle off="false"/>
+                 <Data type="enum">
+                   <EnumElem name="Yes" value="true"/>
+                   <EnumElem name="No" value="false"/>
+                 </Data>
+               </Pref>              
+                <Group name="Disclosures">
+                  <Pref name="PMI_DiscloseUserDefinedModelViews" type="logical" title="User Defined Model Views" value="false" ver="10.0.3" scope="Part">
+                    <Description>This option determines whether or not user defined model views are marked as candidates for inclusion in a disclosure when they are created.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                      <EnumElem name="Off" value="false"/>
+                      <EnumElem name="On" value="true"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PMI_DiscloseCannedModelViews" type="logical" title="Canned Model Views" value="false" ver="10.0.3" scope="Session">
+                    <Description>This option determines whether or not canned model views are marked as candidates for inclusion in a disclosure when a part is created.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                      <EnumElem name="Off" value="false"/>
+                      <EnumElem name="On" value="true"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PMI_DisclosurePurpose" type="string" title="Disclosure Purpose" value="&quot;Design Review&quot;" ver="10.0.3" scope="Part">
+                    <Description>This option specifies the disclosure purpose for model views when they are marked as publish for disclosure candidates. The "Disclosure Purpose" attribute will not be added to a model view unless its type is included by one of the above options.</Description>
+                    <String/>
+                  </Pref>
+                </Group>
+
+              <Group name="Part Families">
+                <Pref name="PMI_SuppressRetainedPMI" type="logical" title="Suppress Retained PMI" value="false" ver="12.0.0" scope="Part">
+                  <Description>This option determines whether or not retained PMI in part families' members are suppressed.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="PMI_DeleteEmptyUserDefinedModelViews" type="logical" title="Delete Empty User Defined Model Views" value="false" ver="12.0.0" scope="Part">
+                  <Description>This option determines whether or not empty user defined model views in part families' members are deleted.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Neutral File Formats">                
+                <Pref name="PMI_CreatePMIFromJT" type="logical" title="Create PMI and Model Views" value="true" ver="1899" scope="Session">
+                  <Description>This option determines whether or not to create PMI and model views when reading data from a neutral file format such as a JT or STEP file.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Pref name="UG_saveAnn3DDataInPart" type="int" title="Save 3D Annotations" value="0" ver="3.0.0" scope="Part">
+                  <Description>This option determines whether or not PMI data should be saved for retrieval outside the context of NX.</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                      <EnumElem name="Yes" value="1"/>
+                      <EnumElem name="No" value="0"/>
+                  </Data>
+              </Pref>
+              <Pref name="PMI_CreateRealPMIFromJT" type="logical" title="Create Real PMI Objects from Neutral File Formats" value="true" ver="7.5.0" scope="Session">
+                  <Description>This option determines whether or not NX will try to create real PMI objects when reading data from a neutral file format such as a JT or STEP file.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                      <EnumElem name="Yes" value="true"/>
+                      <EnumElem name="No" value="false"/>
+                  </Data>
+              </Pref>
+              <Pref name="PMI_GeometrySharing" type="logical" title="PMI Support for Geometry Sharing" value="false" ver="8.5.0" scope="Part">
+                  <Description>This option determines whether or not PMI includes shared geometry when highlighting, querying, or reporting associated objects.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                      <EnumElem name="Yes" value="true"/>
+                      <EnumElem name="No" value="false"/>
+                  </Data>
+              </Pref>
+              <Pref name="PMI_RuleWelcomePage_MaxSessionCount" type="int" title="Logic Editor Welcome Page Duration" value="5" unit="Times" ver="1953" scope="Session">
+                <Description>This option determines the number of NX sessions that will display the Logic Editor Welcome Page when launching the Logic Editor. Setting its value to 0 (zero) will result in it never being displayed.</Description>
+                <Integer/>
+                <Data type="range">
+                  <LowerBound value="0" include="1"/>
+                </Data>
+              </Pref>
+            </Tab>
+            <Tab name="Display" csh="PMAN_PMI_PMI_General_Display">
+                <Group name="Create">
+                    <Pref name="PMI_ViewIndependent" type="logical" title="Display in all Views" value="false" ver="5.0.0" scope="Part">
+                        <Description>This option determines whether or not PMI should be displayed in all views on create.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMAN_PMI_General_Prediction_Dir_WIN" type="string" title="Prediction Directory" value="${UGII_BASE_DIR}\mbd\prediction\models" ver="2206" scope="Session">
+                        <Description>This field specifies the directory where the PMI prediction files are located. The files are used by the PMI prediction machine learning algorithm to predict PMI annotation plane and model views.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                    <Pref name="PMAN_PMI_General_Prediction_Dir_UNX" type="string" title="Prediction Directory" value="${UGII_BASE_DIR}/mbd/prediction/models" ver="2206" scope="Session">
+                        <Description>This field specifies the directory where the PMI prediction files are located. The files are used by the PMI prediction machine learning algorithm to predict PMI annotation plane and model views.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                </Group>
+                <Group name="Annotation Plane">
+                    <Pref name="PMI_DisplayAnnotationPlane" type="int" title="Display" value="1" ver="1872" scope="Session">
+                        <Description>This option specifies if annotation planes will be displayed while creating and editing PMI.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="All" value="1"/>
+                            <EnumElem name="Active Plane Only" value="2"/>
+                            <EnumElem name="None" value="3"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_AnnotationPlane" type="int" title="Plane" value="2" ver="5.0.0" scope="Part">
+                        <Description>This option specifies the annotation plane that will be used to display PMI.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="XY Plane of WCS" value="1"/>
+                            <EnumElem name="XZ Plane of WCS" value="3"/>
+                            <EnumElem name="YZ Plane of WCS" value="4"/>
+                            <EnumElem name="Model View Plane" value="2"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_AnnotationPlaneTranslucency" type="int" title="Translucency" value="60" unit="%" ver="1872" scope="Part">
+                        <Description>This option specifies the translucency of the annotation plane preview.</Description>
+                        <IntegerScale/>
+                        <Data type="range">
+                            <LowerBound value="30" include="1"/>
+                            <UpperBound value="100" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_AnnotationPlaneBoundaryColor" type="int" title="Color" value="142" ver="1872" scope="Part">
+                        <Description>This option specifies the color of the annotation plane preview.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="PMI_AnnotationPlaneBoundaryFont" type="int" title="Style" value="1" ver="1980" scope="Part">
+                        <Description>This option specifies the line style for the active annotation plane preview boundary line.</Description>
+                        <GeneralLineFont LineFontOptionMaskString="MBDLineFonts"/>
+                    </Pref>
+                    <Pref name="PMI_ProjectontoPlane" type="logical" title="Project onto Plane" value="true" ver="1872" scope="Part">
+                        <Description>This option determines if a PMI object should be projected onto the specified annotation plane.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_ShowOrientXpress" type="logical" title="Show OrientXpress" value="false" ver="1872" scope="Session">
+                        <Description>This option determines whether OrientXpress will be displayed while creating or editing PMI.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Display">
+                    <Pref name="PMI_Display_Shaded_Models" type="logical" title="Display Through Shaded Models" value="true" ver="4.0.0" scope="Part">
+                        <Description>This option determines how PMI is displayed in a shaded model. When on, PMI will show through the shaded model.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_Update_Reading_Direction" type="logical" title="Update Reading Direction after View Rotate" value="true" ver="5.0.0" scope="Session">
+                        <Description>This option determines whether or not PMI text reading direction should be updated in response to view rotation.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_ExcludeCustomSymbolsFromReadingDirection" type="logical" title="Exclude Custom Symbols from Reading Direction Update" value="false" ver="7.5.2" scope="Session">
+                        <Description>This option determines whether to exclude custom symbols from PMI reading direction updates.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                  <Pref name="PMI_DisplayBackground" title="PMI Background" type="logical" value="false" ver="1872" scope="Part">
+                    <Description>This option determines whether or not to display supported PMI with background.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                      <EnumElem name="Yes" value="true"/>
+                      <EnumElem name="No" value="false"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PMI_Background_Color" type="int" title="PMI Background Color" value="50" ver="1872" scope="Part">
+                    <Description>This option specifies the color of the PMI background.</Description>
+                    <Color/>
+                  </Pref>
+                </Group>
+                <Group name="Resize Options">
+                    <Pref name="PMI_EnableResize" type="logical" title="Allow Resize" value="true" ver="10.0.0" scope="Part">
+                        <Description>This option determines whether the resize function for PMI is allowed.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                              <EnumElem name="No" value="false"/>
+                              <EnumElem name="Yes" value="true"/>                        
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_ResizeOnCreate" type="logical" title="Resize on Create" value="false" ver="8.0.0" scope="Part">
+                        <Description>This option determines whether PMI are resized when they are created.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_ResizeOnViewSave" type="logical" title="Resize on View Save" value="false" ver="8.0.0" scope="Part">
+                        <Description>This option determines whether PMI are resized during a view save operation.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_ResizeMethod" type="int" title="Resize Settings" value="1" ver="11.0.0" scope="Part">
+                        <Description>This option specifies the method used to resize PMI.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Relative to Saved View Scale" value="0"/>
+                            <EnumElem name="Relative to View Zoom Factor" value="1"/>
+                            <EnumElem name="Independently" value="2"/>
+                            <EnumElem name="Relative to Part Preferences" value="3"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Objects" csh="PMAN_PMI_PMI_General_Objects">
+                <Group name="Datum Label">
+                    <Pref name="PMI_DatumStartingLetter" type="string" title="Starting Letter" value="A" ver="4.0.0" scope="Part">
+                        <Description>This option specifies the initial letter or letter sequence to use for a PMI datum label. Up to five letters may be specified.</Description>
+                        <String/>
+                    </Pref>
+                </Group>
+                <Group name="Coordinate Note">
+                    <Pref name="PMI_CoordinateNoteDecimalPlaces" type="int" title="Decimal Places" value="4" ver="6.0.0" scope="Part">
+                        <Description>This option specifies the number of decimal places that a coordinate note will display.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="0" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Advisor" csh="PMAN_PMI_PMI_General_Advisor">
+                <Group name="Advisor Settings">
+                    <Pref name="PMI_AdvisorCheckingMode" type="int" title="Checking Mode" value="2" ver="1953" scope="Session">
+                        <Description>This option specifies the PMI Advisor checking behavior.
+<Formatted>
+Advise: Checks supported PMI for errors. Displays alerts during creation and edit of PMI on error.
+Enforce: Checks supported PMI for errors. Displays alerts and prevents creation and edit of PMI on error.
+Off: Deactivates PMI Advisor checking.
+</Formatted>
+                        </Description>
+                      <OptionMenu/>
+                      <Data type="enum">
+                        <EnumElem name="Advise" value="0"/>
+                        <EnumElem name="Enforce" value="1"/>
+                        <EnumElem name="Off" value="2"/>
+                      </Data>
+                    </Pref>
+                    <Pref name="PMI_AdvisorActiveStandard" type="int" title="Active Standard" value="0" ver="1953" scope="Session">
+                        <Description>This option specifies the standard that the PMI Advisor should be checking PMI against.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                          <EnumElem name="ISO" value="0"/>
+                          <EnumElem name="ASME" value="1"/>
+                        </Data>
+                    </Pref>
+                  <Pref name="PMI_AdvisorNavigatorAlerts" type="int" title="Navigator Alerts" value="0" ver="1980" scope="Session">
+                    <Description>This option specifies which types of checking failures are displayed in the alert column of the MBD Navigator.
+<Formatted>
+All: The navigator displays all PMI Advisor failures.
+Only Errors: The navigator displays only PMI Advisor errors.
+None: Deactivates display of PMI Advisor failures in the navigator.
+</Formatted>
+                    </Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                      <EnumElem name="All" value="0"/>
+                      <EnumElem name="Only Errors" value="1"/>
+                      <EnumElem name="None" value="2"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PMI_AdvisorAllowCheckConfiguration" type="logical" title="Allow Configuration of Checks" value="false" ver="1980" scope="Session">
+                      <Description>This option determines whether or not the PMI Advisor Configuration command allows changes to checking behavior.</Description>
+                      <Toggle off="false"/>
+                      <Data type="enum">
+                          <EnumElem name="Yes" value="true"/>
+                          <EnumElem name="No" value="false"/>
+                      </Data>
+                   </Pref>
+                </Group>
+                <Group name="Configuration Settings">
+                    <Pref name="PMI_AdvisorActiveConfiguration" type="string" title="Active Configuration" value="Default" ver="2206" scope="Session">
+                        <Description>This option specifies the active checking configuration. If the one specified does not exist, the Default checking configuration will be used.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="PMI_AdvisorConfigurationSaveType" type="int" title="Save Location" value="0" ver="2206" scope="Session">
+                        <Description>This option specifies if PMI advisor configurations should be stored in Teamcenter or the local file system.</Description>
+                        <RadioBox orientation="horizontal"/>
+                            <Data type="enum">
+                                <EnumElem name="Local File System" value="0"/>
+                                <EnumElem name="Teamcenter" value="1"/>
+                            </Data>
+                    </Pref>
+                    <Pref name="PMI_AdvisorConfigurationSaveLocation_TC" type="string" title="Teamcenter" value="infodba:Advisor Configurations" ver="2206" scope="Session">
+                        <Description>This option specifies the location where PMI advisor configurations are saved in Teamcenter.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="PMI_AdvisorConfigurationSaveLocation_UNX" type="string" title="Local File System" value="${UGII_TMP_DIR}" ver="2206" scope="Session">
+                        <Description>This option specifies the location where PMI advisor configurations are saved in the local file system.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                    <Pref name="PMI_AdvisorConfigurationSaveLocation_WIN" type="string" title="Local File System" value="${UGII_TMP_DIR}" ver="2206" scope="Session">
+                        <Description>This option specifies the location where PMI advisor configurations are saved in the local file system.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Effectivity" csh="PMAN_PMI_PMI_General_Effectivity">
+                <Pref name="PMI_InferEffectivity" type="logical" title="Infer PMI Effectivity" value="false" ver="8.5.1" scope="Session">
+                    <Description>This option determines whether or not the effectivity of Assembly PMI will be inferred based on referenced geometry for Assemblies loaded from Teamcenter.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="PMI_EffectivityOption" type="int" title="Display PMI Associated Only to Primary Geometry" value="1"  ver="8.5.1" scope="Session">
+                    <Description>This option provides additional control over the display of PMI associated to primary geometry when Effectivity is being inferred.</Description>
+                    <RadioBox orientation="vertical"/>
+                    <Data type="enum">
+                        <EnumElem name="If All Associated Occurrences are Loaded" value="0"/>
+                        <EnumElem name="If Any Associated Occurrences are Loaded" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PMI_InferEffectivityIncludeReferenceComponents" type="logical" title="Display PMI Associated to Components Loaded for Reference" value="false" ver="8.5.1" scope="Session">
+                    <Description>This option determines whether or not PMI objects, which are associated to components that have been loaded for reference, are considered for display.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="PMI_EffectivityReferenceOption" type="int" title="Display PMI Associated to Reference Geometry" value="0"  ver="8.5.1" scope="Session">
+                    <Description>This option provides additional control over the display of PMI associated to reference geometry when Effectivity is being inferred.</Description>
+                    <RadioBox orientation="vertical"/>
+                    <Data type="enum">
+                        <EnumElem name="If All Associated Occurrences are Loaded" value="0"/>
+                        <EnumElem name="If Any Associated Occurrences are Loaded" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PMI_EffectivityListFilteredPMIInPartNavigator" type="logical" title="Display Effectivity Filtered Nodes in Part and MBD Navigators" value="false"  ver="8.5.1" scope="Session">
+                    <Description>This option determines whether or not the Effectivity Filtered PMI nodes are displayed in the Part and MBD Navigators.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Parallel to Screen" csh="PMAN_PMI_PMI_General_ParallelToScreen">
+                <Group name="Orientation">
+                    <Pref name="PMI_DisplayParallelToScreen" title="Display Parallel to Screen" type="logical" value="false" ver="11.0.1" scope="Part">
+                        <Description>This option determines whether or not to display supported PMI parallel to screen.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_LockPanZoom" title="Lock Size and Position" type="logical" value="false" ver="11.0.1" scope="Part">
+                        <Description>When panning and zooming, this option determines whether or not to lock the display (size and location) relative to the graphics area for PMI displayed as parallel to screen.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Pref name="PMI_ParallelToScreenTypes" type="list_sel_reorder_value" title="Included PMI Types" value="&quot;Notes:1&quot;\&quot;General Notes:1&quot;\&quot;Specific Notes:1&quot;\&quot;Enterprise Identification:1&quot;\&quot;Material Specification:1&quot;\&quot;Part Identification:1&quot;\&quot;Process Specification:1&quot;\&quot;URL Notes:1&quot;\&quot;String Notes:1&quot;\&quot;Number Notes:1&quot;\&quot;Integer Notes:1&quot;\&quot;Balloons:1&quot;\&quot;Custom Symbols:1&quot;\&quot;Government Security Information:1&quot;\&quot;Company Specific Proprietary Information:1&quot;\&quot;Export Control:1&quot;\&quot;Tables:1&quot;\&quot;Coordinate Notes:1&quot;\&quot;Cutting Plane Symbol:1&quot;\&quot;Feature Control Frames:1&quot;" ver="2306" scope="Part">
+                    <Description>This list specifies which PMI types should be allowed to display parallel to screen.</Description>
+                    <ListSelReorder height="20" reorderable="false" selectable="true"/>
+                    <Data type="enum">
+                        <EnumElem name="Notes" value="Notes"/>                        
+                        <EnumElem name="General Notes" value="General Notes"/>
+                        <EnumElem name="Specific Notes" value="Specific Notes"/>
+                        <EnumElem name="Enterprise Identification" value="Enterprise Identification"/>
+                        <EnumElem name="Material Specification" value="Material Specification"/>
+                        <EnumElem name="Part Identification" value="Part Identification"/>
+                        <EnumElem name="Process Specification" value="Process Specification"/>
+                        <EnumElem name="URL Notes" value="URL Notes"/>
+                        <EnumElem name="String Notes" value="String Notes"/>
+                        <EnumElem name="Number Notes" value="Number Notes"/>
+                        <EnumElem name="Integer Notes" value="Integer Notes"/>
+                        <EnumElem name="Balloons" value="Balloons"/>
+                        <EnumElem name="Custom Symbols" value="Custom Symbols"/>
+                        <EnumElem name="Government Security Information" value="Government Security Information"/>
+                        <EnumElem name="Company Specific Proprietary Information" value="Company Specific Proprietary Information"/>
+                        <EnumElem name="Export Control" value="Export Control"/>
+                        <EnumElem name="Tables" value="Tables"/>
+                        <EnumElem name="Coordinate Notes" value="Coordinate Notes"/>
+                        <EnumElem name="Cutting Plane Symbol" value="Cutting Plane Symbol"/>      
+                        <EnumElem name="Feature Control Frames" value="Feature Control Frames"/>   
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Feature Template" csh="PMAN_PMI_PMI_General_FeatureTemplate">
+                <Group name="Settings">
+                  <Pref name="PMI_DeleteTemplatePMI" type="logical" title="Delete Feature Template PMI" value="false" ver="2212" scope="Session">
+                    <Description>This option determines whether to delete PMI when their owning feature template is deleted.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                      <EnumElem name="Yes" value="true"/>
+                      <EnumElem name="No" value="false"/>
+                    </Data>
+                  </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Context" csh="PMAN_PMI_PMI_General_Context">
+                <Group name="Reuse">
+                  <Pref name="PMI_AllowCreateContext" type="logical" title="Create Context" value="false" ver="2212" scope="Session">
+                    <Description>This option determines whether or not to automatically create a context for linked PMIs, such as WAVE-linked PMI, PMI Mirror, and PMI Reuse.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                      <EnumElem name="Yes" value="true"/>
+                      <EnumElem name="No" value="false"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PMI_ReuseContextFreezeUpdate" type="logical" title="Freeze Update" value="false" ver="2212" scope="Session">
+                    <Description>This option determines whether or not to freeze update of linked PMI associated with a context on changes to source PMI.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                      <EnumElem name="Yes" value="true"/>
+                      <EnumElem name="No" value="false"/>
+                    </Data>
+                  </Pref>
+                  <Pref name="PMI_ReuseContextAllowEdits" type="logical" title="Allow Edits" value="false" ver="2212" scope="Session">
+                    <Description>This option determines whether or not to allow edits to linked PMI associated with a context. It also determines if update should freeze on changes to source PMI.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                      <EnumElem name="Yes" value="true"/>
+                      <EnumElem name="No" value="false"/>
+                    </Data>
+                  </Pref>
+                </Group>
+                <Group name="Arrangement">
+                  <Pref name="PMI_AllowContextSuppressionOnArrangement" type="int" title="Suppress Context" value="0" ver="2312" scope="Session">
+                    <Description>This option specifies which contexts to suppress when the active arrangement changes.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                      <EnumElem name="Related to Inactive Arrangements" value="0"/>
+                      <EnumElem name="None" value="1"/>
+                    </Data>
+                  </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="PMI Supplemental Geometry" csh="PMAN_PMI_Supplemental_Geometry">
+            <SubCategory name="Region" csh="PMAN_PMI_Supplemental_Geometry_Region">
+                <Tab name="Settings" csh="PMAN_PMI_Supplemental_Geometry_Region_Settings">
+                    <Group name="Rectangular">
+                        <Pref name="PMI_RegionWidth_MCU" type="real" title="Width" value="10.0" unit="μm" ver="2306" scope="Part">
+                            <Description>This option specifies the width for rectangular regions.</Description>
+                            <Real/>
+                            <Data type="range">
+                                <LowerBound value="0.0" include="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="PMI_RegionWidth_MU" type="real" title="Width" value="10.0" unit="mm" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the width for rectangular regions.</Description>
+                            <Real/>
+                            <Data type="range">
+                                <LowerBound value="0.0" include="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="PMI_RegionWidth_SIU" type="real" title="Width" value="10.0" unit="m" ver="2306" scope="Part">
+                            <Description>This option specifies the width for rectangular regions.</Description>
+                            <Real/>
+                            <Data type="range">
+                                <LowerBound value="0.0" include="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="PMI_RegionWidth_EU" type="real" title="Width" value="2.0" unit="in" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the width for rectangular regions.</Description>
+                            <Real/>
+                            <Data type="range">
+                                <LowerBound value="0.0" include="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="PMI_RegionHeight_MCU" type="real" title="Height" value="10.0" unit="μm" ver="2306" scope="Part">
+                            <Description>This option specifies the height for rectangular regions.</Description>
+                            <Real/>
+                            <Data type="range">
+                                <LowerBound value="0.0" include="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="PMI_RegionHeight_MU" type="real" title="Height" value="10.0" unit="mm" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the height for rectangular regions.</Description>
+                            <Real/>
+                            <Data type="range">
+                                <LowerBound value="0.0" include="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="PMI_RegionHeight_SIU" type="real" title="Height" value="10.0" unit="m" ver="2306" scope="Part">
+                            <Description>This option specifies the height for rectangular regions.</Description>
+                            <Real/>
+                            <Data type="range">
+                                <LowerBound value="0.0" include="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="PMI_RegionHeight_EU" type="real" title="Height" value="2.0" unit="in" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the height for rectangular regions.</Description>
+                            <Real/>
+                            <Data type="range">
+                                <LowerBound value="0.0" include="0"/>
+                            </Data>
+                        </Pref>
+                    </Group>
+                    <Group name="Circular/Annular">
+                        <Pref name="PMI_RegionOuterDiameter_MCU" type="real" title="Outer Diameter" value="15.0" unit="μm" ver="2306" scope="Part">
+                            <Description>This option specifies the outer diameter for circular and annular regions.</Description>
+                            <Real/>
+                            <Data type="range">
+                                <LowerBound value="0.0" include="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="PMI_RegionOuterDiameter_MU" type="real" title="Outer Diameter" value="15.0" unit="mm" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the outer diameter for circular and annular regions.</Description>
+                            <Real/>
+                            <Data type="range">
+                                <LowerBound value="0.0" include="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="PMI_RegionOuterDiameter_SIU" type="real" title="Outer Diameter" value="15.0" unit="m" ver="2306" scope="Part">
+                            <Description>This option specifies the outer diameter for circular and annular regions.</Description>
+                            <Real/>
+                            <Data type="range">
+                                <LowerBound value="0.0" include="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="PMI_RegionOuterDiameter_EU" type="real" title="Outer Diameter" value="2.5" unit="in" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the outer diameter for circular and annular regions.</Description>
+                            <Real/>
+                            <Data type="range">
+                                <LowerBound value="0.0" include="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="PMI_RegionInnerDiameter_MCU" type="real" title="Inner Diameter" value="10.0" unit="μm" ver="2306" scope="Part">
+                            <Description>This option specifies the inner diameter for annular regions.</Description>
+                            <Real/>
+                            <Data type="range">
+                                <LowerBound value="0.0" include="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="PMI_RegionInnerDiameter_MU" type="real" title="Inner Diameter" value="10.0" unit="mm" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the inner diameter for annular regions.</Description>
+                            <Real/>
+                            <Data type="range">
+                                <LowerBound value="0.0" include="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="PMI_RegionInnerDiameter_SIU" type="real" title="Inner Diameter" value="10.0" unit="m" ver="2306" scope="Part">
+                            <Description>This option specifies the inner diameter for annular regions.</Description>
+                            <Real/>
+                            <Data type="range">
+                                <LowerBound value="0.0" include="0"/>
+                            </Data>
+                        </Pref>
+                        <Pref name="PMI_RegionInnerDiameter_EU" type="real" title="Inner Diameter" value="1.0" unit="in" ver="6.0.0" scope="Part">
+                            <Description>This option specifies the inner diameter for annular regions.</Description>
+                            <Real/>
+                            <Data type="range">
+                                <LowerBound value="0.0" include="0"/>
+                            </Data>
+                        </Pref>
+                    </Group>
+                    <Group name="Boundary Curve">
+                        <Pref name="PMI_RegionBoundaryColor" type="int" title="Color" value="216" ver="11.0.0" scope="Part">
+                            <Description>This option specifies the color of the region boundary line.</Description>
+                            <Color/>
+                        </Pref>
+                        <Pref name="PMI_RegionBoundaryFont" type="int" title="Style" value="1" ver="1980" scope="Part">
+                            <Description>This option specifies the line style for the region boundary line.</Description>
+                            <GeneralLineFont LineFontOptionMaskString="MBDLineFonts"/>
+                        </Pref>
+                        <Pref name="PMI_RegionBoundaryWidth" type="int" title="Width" value="8" ver="11.0.0" scope="Part">
+                            <Description>This option specifies the line width for the region boundary line.</Description>
+                            <ObjectLineWidth allowWideLineWidth="true"/>
+                        </Pref>
+                    </Group>
+                    <Group name = "Crosshatch">
+                        <Pref name="PMI_RegionDisplayCrosshatch" type="logical" title="Display Crosshatch" value="false" ver="2306" scope="Part">
+                            <Description>This option determines whether or not regions should display crosshatch.</Description>
+                            <Toggle off="false"/>
+                            <Data type = "enum">
+                                <EnumElem name = "Yes" value = "true"/>
+                                <EnumElem name = "No" value = "false"/>
+                            </Data>
+                        </Pref>
+                    </Group>
+                </Tab>
+            </SubCategory>
+            <SubCategory name="Product Grid" csh="PMAN_PMI_Supplemental_Geometry_Product_Grid">
+                <Tab name="Reference CSYS Settings" csh="PMAN_PMI_Supplemental_Geometry_Product_Grid_Reference_CSYS_Settings">
+                    <Pref name="PMI_productGridReferenceXAxisLabel" type="utf8string" title="X Axis Label" value="X" ver="1980" scope="Part">
+                        <Description>This option specifies the label string for the X axis of the product grid reference coordinate system.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="PMI_productGridReferenceYAxisLabel" type="utf8string" title="Y Axis Label" value="Y" ver="1980" scope="Part">
+                        <Description>This option specifies the label string for the Y axis of the product grid reference coordinate system.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="PMI_productGridReferenceZAxisLabel" type="utf8string" title="Z Axis Label" value="Z" ver="1980" scope="Part">
+                        <Description>This option specifies the label string for the Z axis of the product grid reference coordinate system.</Description>
+                        <String/>
+                    </Pref>
+                </Tab>
+                <Tab name="Grid Settings" csh="PMAN_PMI_Supplemental_Geometry_Product_Grid_Grid_Settings">
+                    <Pref name="PMI_productGridGridSpacing_EU" type="real" title="Spacing" value="4.0" unit="in" ver="1980" scope="Part">
+                        <Description>This option specifies the distance between grid lines in the product grid.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_productGridGridSpacing_MCU" type="real" title="Spacing" value="100.0" unit="μm" ver="2306" scope="Part">
+                        <Description>This option specifies the distance between grid lines in the product grid.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_productGridGridSpacing_MU" type="real" title="Spacing" value="100.0" unit="mm" ver="1980" scope="Part">
+                        <Description>This option specifies the distance between grid lines in the product grid.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_productGridGridSpacing_SIU" type="real" title="Spacing" value="100.0" unit="m" ver="2306" scope="Part">
+                        <Description>This option specifies the distance between grid lines in the product grid.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_productGridGridOverhang_EU" type="real" title="Overhang" value="2.0" unit="in" ver="1980" scope="Part">
+                        <Description>This option specifies the distance a grid line extends past the last intersecting grid line.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_productGridGridOverhang_MCU" type="real" title="Overhang" value="50.0" unit="μm" ver="2306" scope="Part">
+                        <Description>This option specifies the distance a grid line extends past the last intersecting grid line.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_productGridGridOverhang_MU" type="real" title="Overhang" value="50.0" unit="mm" ver="1980" scope="Part">
+                        <Description>This option specifies the distance a grid line extends past the last intersecting grid line.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_productGridGridOverhang_SIU" type="real" title="Overhang" value="50.0" unit="m" ver="2306" scope="Part">
+                        <Description>This option specifies the distance a grid line extends past the last intersecting grid line.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_productGridShowHorizontalLines" type="logical" title="Show Horizontal Grid Lines" value="true" ver="1980" scope="Part">
+                        <Description>This option determines whether or not horizontal grid lines are displayed for the product grid.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_productGridShowVerticalLines" type="logical" title="Show Vertical Grid Lines" value="true" ver="1980" scope="Part">
+                        <Description>This option determines whether or not vertical grid lines are displayed for the product grid.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Tab>
+                <Tab name="Line Settings" csh="PMAN_PMI_Supplemental_Geometry_Product_Grid_Line_Settings">
+                    <Pref name="PMI_productGridLineColor" type="int" title="Color" value="159" ver="1980" scope="Part">
+                        <Description>This option specifies the color of the product grid.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="PMI_productGridLineFont" type="int" title="Style" value="1" ver="1980" scope="Part">
+                        <Description>This option specifies the line style for the product grid.</Description>
+                        <GeneralLineFont LineFontOptionMaskString="MBDLineFonts"/>
+                    </Pref>
+                    <Pref name="PMI_productGridLineWidth" type="int" title="Width" value="9" ver="1980" scope="Part">
+                        <Description>This option specifies the line width for the product grid.</Description>
+                        <AnnotationLineWidth allowWideLineWidth="true"/>
+                    </Pref>
+                </Tab>
+                <Tab name="Label Settings" csh="PMAN_PMI_Supplemental_Geometry_Product_Grid_Label_Settings">
+                    <Pref name="PMI_productGridLocationRelativeGridHorizontal" type="int" title="Location Relative Grid - Horizontal" value="1" ver="1980" scope="Part">
+                        <Description>This option specifies the sides of the product grid where axis labels are displayed for the horizontal axis.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Before" value="1"/>
+                            <EnumElem name="After" value="2"/>
+                            <EnumElem name="Before and After" value="3"/>
+                            <EnumElem name="None" value="4"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_productGridLocationRelativeGridVertical" type="int" title="Location Relative Grid - Vertical" value="2" ver="1980" scope="Part">
+                        <Description>This option specifies the sides of the product grid where axis labels are displayed for the vertical axis.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Above" value="1"/>
+                            <EnumElem name="Below" value="2"/>
+                            <EnumElem name="Above and Below`" value="3"/>
+                            <EnumElem name="None" value="4"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_productGridLocationRelativeGridValue" type="int" title="Location Relative Grid Value" value="1" ver="1980" scope="Part">
+                        <Description>This option specifies the placement of the product grid axis label relative to its corresponding grid value.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Before" value="1"/>
+                            <EnumElem name="After" value="2"/>
+                            <EnumElem name="Above" value="3"/>
+                            <EnumElem name="Below" value="4"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_productGridLabelGap_EU" type="real" title="Gap" value="0.5" unit="in" ver="1980" scope="Part">
+                        <Description>This option specifies the distance from the end of a grid line to its axis label.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_productGridLabelGap_MCU" type="real" title="Gap" value="12.0" unit="μm" ver="2306" scope="Part">
+                        <Description>This option specifies the distance from the end of a grid line to its axis label.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_productGridLabelGap_MU" type="real" title="Gap" value="12.0" unit="mm" ver="1980" scope="Part">
+                        <Description>This option specifies the distance from the end of a grid line to its axis label.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_productGridLabelGap_SIU" type="real" title="Gap" value="12.0" unit="m" ver="2306" scope="Part">
+                        <Description>This option specifies the distance from the end of a grid line to its axis label.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_productGridLabelDivisor" type="real" title="Divisor" value="1.0" ver="1980" scope="Part">
+                        <Description>This option specifies a common divisor for the grid values of a product grid.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="1.0" include="1"/>
+                        </Data>
+                    </Pref>
+                </Tab>
+            </SubCategory>
+        </Category>
+        <Category name="PMI Section View" csh="PMAN_PMI_Section_View">
+            <Tab name="Section View" csh="PMAN_PMI_Section_View_Section_View">
+                <Group name="General">
+                    <Pref name="PMI_LightweightSectionView_NamePrefix" type="string" title="User Defined Section Name Prefix " value="&quot;Section &quot;" ver="11.0.0" scope="Part">
+                        <Description>This option specifies the prefix for the name of a PMI section view when the name of the view is user defined.</Description>
+                        <String/>
+                    </Pref>
+                    <Pref name="PMI_LightweightSectionView_AssociativePlane" type="logical" title="Associative Plane" value="true" ver="11.0.0" scope="Part">
+                        <Description>This option determines whether or not an option will be available to make the clipping plane associative to the selected geometry when defining a PMI section view.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_LightweightSectionView_ClipCoplanarObjects" type="logical" title="Clip Coplanar Objects" value="false" ver="11.0.0" scope="Part">
+                        <Description> This option determines whether or not coplanar objects are clipped in plane-only PMI section views.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_SectionView_ClipWireframeObjects" type="logical" title="Clip Wireframe Objects" value="true" ver="11.0.1" scope="Part">
+                        <Description>This option determines whether or not points, PMI regions, sketch curves, wireframe curves, and thread curves will be clipped for PMI section views.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Cap">
+                    <Pref name="PMI_LightweightSectionView_Cap" type="int" title="Cap Display" value="1" ver="7.5.0" scope="Part">
+                        <Description>This option specifies if and how a section cap is displayed. A cap is an area of solid color drawn onto the cutting surface of the section, creating a "pseudo face" where the section clipping planes intersect the model.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Off" value="0"/>
+                            <EnumElem name="Specify Custom Color" value="1"/>
+                            <EnumElem name="Body Color" value="2"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_LightweightSectionView_CapColor" type="int" title="Custom Cap Color" value="9" ver="7.5.0" scope="Part">
+                        <Description>This option specifies the color of the section cap when Cap Display is set to Specify Custom Color.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="PMI_LightweightSectionView_TranslucentSectionPlane" type="int" title="Translucent Section Plane" value="1" ver="7.5.0" scope="Part">
+                        <Description>This option specifies if the active plane should be displayed as a translucent plane when the cap is off.</Description>
+                        <Toggle off="0"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="1"/>
+                            <EnumElem name="No" value="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Crosshatch">
+                    <Pref name="PMI_LightweightSectionView_DisplayCrosshatch" type="logical" title="Display Crosshatch" value="false" ver="2007" scope="Part">
+                        <Description>This option determines whether or not cut faces resulting from the section cut should display crosshatch.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_LightweightSectionView_PatternDefinedBy" type="int" title="Pattern Defined By" value="0" ver="2007" scope="Part">
+                        <Description>This option specifies the pattern definition to be used for displaying crosshatch.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="User Specified" value="0"/>
+                            <EnumElem name="Material" value="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_LightweightSectionView_AssemblyCrosshatching" type="logical" title="Assembly Crosshatching" value="0" ver="11.0.0" scope="Part">
+                        <Description>This option determines whether or not the crosshatching angle for adjacent components in an assembly section view should vary to provide better visualization of each component in the view.</Description>
+                        <Toggle off="0"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="1"/>
+                            <EnumElem name="No" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_LightweightSectionView_restrictCrosshatchAngle" type="logical" title="Restrict Crosshatch to +/- 45 degrees" value="0" ver="9.0.0" scope="Part">
+                        <Description>This option determines whether assembly crosshatch angles should be restricted to + or - 45 degrees.</Description>
+                        <Toggle off="0" />
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="1"/>
+                            <EnumElem name="No" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_LightweightSectionView_xhatchAdjacencyToler_MCU" type="real" title="Crosshatch Adjacency Tolerance" value="1.25" unit="μm" ver="2306" scope="Part">
+                        <Description>This option specifies the tolerance that determines the crosshatching angle of adjacent components in an assembly section view. If the adjacent component is at a distance less than the specified tolerance, the system automatically calculates a different crosshatching angle for that component.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_LightweightSectionView_xhatchAdjacencyToler_MU" type="real" title="Crosshatch Adjacency Tolerance" value="1.25" unit="mm" ver="11.0.0" scope="Part">
+                        <Description>This option specifies the tolerance that determines the crosshatching angle of adjacent components in an assembly section view. If the adjacent component is at a distance less than the specified tolerance, the system automatically calculates a different crosshatching angle for that component.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_LightweightSectionView_xhatchAdjacencyToler_SIU" type="real" title="Crosshatch Adjacency Tolerance" value="1.25" unit="m" ver="2306" scope="Part">
+                        <Description>This option specifies the tolerance that determines the crosshatching angle of adjacent components in an assembly section view. If the adjacent component is at a distance less than the specified tolerance, the system automatically calculates a different crosshatching angle for that component.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="PMI_LightweightSectionView_xhatchAdjacencyToler_EU" type="real" title="Crosshatch Adjacency Tolerance" value="0.05" unit="in" ver="11.0.0" scope="Part">
+                        <Description>This option specifies the tolerance that determines the crosshatching angle of adjacent components in an assembly section view. If the adjacent component is at a distance less than the specified tolerance, the system automatically calculates a different crosshatching angle for that component.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Section Curve" csh="PMAN_PMI_Section_View_Section_Curve">
+                <Pref name="PMI_LightweightSectionView_Curve" type="int" title="Curve Display" value="1" ver="7.5.0" scope="Part">
+                    <Description>This option specifies if and how a section curve is displayed.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Off" value="0"/>
+                        <EnumElem name="Specify Custom Color" value="1"/>
+                        <EnumElem name="Body Color" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="PMI_LightweightSectionView_CurveColor" type="int" title="Custom Curve Color" value="9" ver="7.5.0" scope="Part">
+                    <Description>This option specifies the color of the section curves when Curve Display is set to Specify Custom Color.</Description>
+                    <Color/>
+                </Pref>
+            </Tab>
+            <Tab name="Cutting Plane Symbol" csh="PMAN_PMI_Section_View_Cutting_Plane_Symbol">
+                <Pref name="PMI_CuttingPlaneSymbol_DisplayCuttingPlaneSymbol" type="logical" title="Display Cutting Plane Symbol" value="false" ver="2007" scope="Part">
+                    <Description>This option specifies whether or not a PMI cutting plane symbol will be displayed.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+               <Pref name="PMI_CuttingPlaneSymbol_SizeBasedOnSectionCut" type="logical" title="Size Based on Section Cut" value="false" ver="2007" scope="Part">
+                   <Description>This option determines if the size of the cutting plane symbol should be based on the size of the sectioned faces.</Description>
+                   <Toggle off="false"/>
+                   <Data type="enum">
+                     <EnumElem name="Yes" value="true"/>
+                     <EnumElem name="No" value="false"/>
+                   </Data>
+               </Pref>
+               <Pref name="PMI_CuttingPlaneSymbol_MarginPercentage" type="real" title="Margin" value="5.0" unit="%" ver="2007" scope="Part">
+                   <Description>This option specifies the margin, as a percentage of the full symbol, that is added to a cutting plane symbol on all sides relative to the cut geometry.</Description>
+                   <Real/>
+                   <Data type="range">
+                     <LowerBound value="0.0" include="1"/>
+                   </Data>
+               </Pref>
+                <Pref name="PMI_CuttingPlaneSymbolLetter" type="string" title="Starting Letter" value="A" ver="9.0.0" scope="Part">
+                   <Description>This option specifies the initial letter or letter sequence to use for a cutting plane symbol.</Description>
+                   <String/>
+               </Pref>
+                <Pref name="PMI_CuttingPlaneSymbol_UseTwoArrows" type="logical" title="Use Two Arrows" value="false" ver="2007" scope="Part">
+                    <Description>This option specifies whether or not two arrows will be displayed for the cutting plane symbol.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="PMI_CuttingPlaneSymbol_ViewNameFormat" type="int" title="View Name Format" value="0" ver="2007" scope="Part">
+                    <Description>This option specifies the name format of the Section View.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="User Defined" value="0"/>
+                        <EnumElem name="A" value="1"/>
+                        <EnumElem name="A-A" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="PMI_CuttingPlaneSymbol_SectionPrefix" type="string" title="Section Prefix" value="&quot;SECTION&quot;" ver="11.0.0" scope="Part">
+                   <Description>This option specifies the prefix for the name of a PMI section view when the name of the view is based on the corresponding cutting plane symbol.</Description>
+                   <String/>
+               </Pref>
+                <Pref name="PMI_CuttingPlaneSymbol_Color" type="int" title="Color" value="216" ver="9.0.0" scope="Part">
+                   <Description>This option specifies the color of the border and shaded plane of the cutting plane symbol.</Description>
+                   <Color/>
+               </Pref>
+                <Pref name="PMI_CuttingPlaneSymbol_ShadedPlane" type="logical" title="Shaded Plane" value="false" ver="9.0.0" scope="Part">
+                   <Description>This option specifies whether or not a shaded plane is included in the cutting plane symbol.</Description>
+                   <Toggle off="false"/>
+                   <Data type="enum">
+                       <EnumElem name="Yes" value="true"/>
+                       <EnumElem name="No" value="false"/>
+                   </Data>
+               </Pref>
+               <Pref name="PMI_CuttingPlaneSymbol_TextPlane" type="int" title="Text Plane Relative to Arrow" value="0" ver="9.0.0" scope="Part">
+                   <Description>This option specifies the plane in which the text will lie relative to the plane of the arrow. If parallel is chosen, the text of the cutting plane symbol will lie in a plane parallel to the arrow. If perpendicular is chosen, the text of the cutting plane symbol will lie in a plane perpendicular to the arrows.</Description>
+                   <RadioBox orientation="horizontal"/>
+                   <Data type="enum">
+                       <EnumElem name="Parallel" value="0"/>
+                       <EnumElem name="Perpendicular" value="1"/>
+                   </Data>
+               </Pref>
+               <Pref name="PMI_CuttingPlaneSymbol_ArrowDirection" type="int" title="Arrow Direction" value="0" ver="11.0.0" scope="Part">
+                   <Description>This option specifies the direction of the arrow on a cutting plane symbol in relation to the section plane.</Description>
+                   <RadioBox orientation="horizontal"/>
+                   <Data type="enum">
+                       <EnumElem name="Toward Plane" value="0"/>
+                       <EnumElem name="Away from Plane" value="1"/>
+                   </Data>
+               </Pref>
+               <Pref name="PMI_CuttingPlaneSymbol_ArrowLength_MCU" type="real" title="Arrow Line Length" value="10.0" unit="μm" ver="2306" scope="Part">
+                   <Description>This option specifies the length of the arrow for a cutting plane symbol.</Description>
+                   <Real/>
+                   <Data type="range">
+                       <LowerBound value="0.0" include="1"/>
+                   </Data>
+               </Pref>
+                <Pref name="PMI_CuttingPlaneSymbol_ArrowLength_MU" type="real" title="Arrow Line Length" value="10.0" unit="mm" ver="9.0.0" scope="Part">
+                    <Description>This option specifies the length of the arrow for a cutting plane symbol.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PMI_CuttingPlaneSymbol_ArrowLength_SIU" type="real" title="Arrow Line Length" value="10.0" unit="m" ver="2306" scope="Part">
+                    <Description>This option specifies the length of the arrow for a cutting plane symbol.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+               <Pref name="PMI_CuttingPlaneSymbol_ArrowLength_EU" type="real" title="Arrow Line Length" value="0.375" unit="in" ver="9.0.0" scope="Part">
+                   <Description>This option specifies the length of the arrow for a cutting plane symbol.</Description>
+                   <Real/>
+                   <Data type="range">
+                       <LowerBound value="0.0" include="1"/>
+                   </Data>
+               </Pref>
+            </Tab>            
+        </Category>
+
+        <Category name="PMI Compare" csh="PMAN_PMI_PMI_Compare">
+            <Tab name="General" csh="PMAN_PMI_PMI_Compare_General">
+                <Pref name="PMI_WindowLayout" type="int" title="Window Layout" value="0" ver="1847" scope="Session">
+                    <Description>This option specifies the window layout when displaying the parts for PMI compare.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Side by Side" bitmap="layout_view_side_by_side.bmp" value="0"/>
+                        <EnumElem name="Upper and Lower" bitmap="layout_view_upper_and_lower.bmp" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PMI_SourcePartDisplayWindow" type="int" title="Source Part Window" value="0" ver="1847" scope="Session">
+                    <Description>This option specifies in which window the source part will be displayed. The comparison part will be displayed in the other relative window.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Left or Top" value="0"/>
+                        <EnumElem name="Right or Bottom" value="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Sheet Metal" csh="PMAN_PMI_Sheet_Metal">
+          <SubCategory name="General" csh="PMAN_PMI_Sheet_Metal_General">
+            <Tab name="Settings" csh="PMAN_PMI_Sheet_Metal_General_Settings">
+              <Group name="Format">
+                <Pref name="NXSM_Decimal_Places" type="int" title="Decimal Places" value="2" ver="2007" scope="Part">
+                  <Description>This option specifies the number of decimal places for the nominal value of sheet metal label parameters.</Description>
+                  <OptionMenu/>
+                  <Data type="enum">
+                    <EnumElem name="0" value="0"/>
+                    <EnumElem name="1" value="1"/>
+                    <EnumElem name="2" value="2"/>
+                    <EnumElem name="3" value="3"/>
+                    <EnumElem name="4" value="4"/>
+                    <EnumElem name="5" value="5"/>
+                    <EnumElem name="6" value="6"/>
+                  </Data>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Body" csh="PMAN_PMI_Sheet_Metal_Body">
+            <Tab name="Settings" csh="PMAN_PMI_Sheet_Metal_Body_Settings">
+              <Group name="Body Parameters">
+                <Pref name="NXSM_Material_Thickness" type="logical" title="Material Thickness" value="true" ver="2007" scope="Part">
+                  <Description>This option determines whether material thickness will be added to sheet metal body PMI.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_Physical_Material" type="logical" title="Physical Material" value="true" ver="2007" scope="Part">
+                  <Description>This option determines whether physical material will be added to sheet metal body PMI.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_Sheet_Metal_Material" type="logical" title="Sheet Metal Material" value="true" ver="2007" scope="Part">
+                  <Description>This option determines whether sheet metal material will be added to sheet metal body PMI.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Prefix">
+                <Pref name="NXSM_MaterialThicknessPrefix" type="string" title="Material Thickness" value="Material Thickness " ver="2007" scope="Part">
+                  <Description>This option specifies the prefix for the material thickness parameter in sheet metal body PMI.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_PhysicalMaterialPrefix" type="string" title="Physical Material" value="Physical Material " ver="2007" scope="Part">
+                  <Description>This option specifies the prefix for the physical material parameter in sheet metal body PMI.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_SheetMetalMaterialPrefix" type="string" title="Sheet Metal Material" value="Sheet Metal Material " ver="2007" scope="Part">
+                  <Description>This option specifies the prefix for the sheet metal material parameter in sheet metal body PMI.</Description>
+                  <String/>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Bend" csh="PMAN_PMI_Sheet_Metal_Bend">
+            <Tab name="Settings" csh="PMAN_PMI_Sheet_Metal_Bend_Settings">
+              <Group name="Bend Parameters">
+                <Pref name="NXSM_Bend_Radius" type="logical" title="Bend Radius" value="true" ver="2007" scope="Part">
+                  <Description>This option determines whether bend radius will be added to sheet metal bend PMI.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_Bend_Angle" type="logical" title="Bend Angle" value="true" ver="2007" scope="Part">
+                  <Description>This option determines whether bend angle will be added to sheet metal bend PMI.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_Neutral_Factor" type="logical" title="Neutral Factor" value="true" ver="2007" scope="Part">
+                  <Description>This option determines whether neutral factor will be added to sheet metal bend PMI.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Prefix">
+                <Pref name="NXSM_BendRadiusPrefix" type="string" title="Bend Radius" value="Bend Radius " ver="2007" scope="Part">
+                  <Description>This option specifies the prefix for the bend radius parameter in sheet metal bend PMI.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_BendAnglePrefix" type="string" title="Bend Angle" value="Bend Angle " ver="2007" scope="Part">
+                  <Description>This option specifies the prefix for the bend angle parameter in sheet metal bend PMI.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_Neutral_FactorPrefix" type="string" title="Neutral Factor" value="Neutral Factor " ver="2007" scope="Part">
+                  <Description>This option specifies the prefix for the neutral factor parameter in sheet metal bend PMI.</Description>
+                  <String/>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Flat Pattern" csh="PMAN_PMI_Sheet_Metal_Flat_Pattern">
+            <Tab name="View" csh="PMAN_PMI_Sheet_Metal_Flat_Pattern_View">
+              <Group name="Create">
+                <Pref name="NXSM_FlatPatternPMI_Bend" type="logical" title="Bend Labels" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether bend labels will be created in flat pattern views.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMI_Hole" type="logical" title="Hole Details Labels" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether hole details labels will be created in flat pattern views.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMI_Joggle" type="logical" title="Joggle Labels" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether joggle labels will be created in flat pattern views.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMI_LCutout" type="logical" title="Lightening Cutout Labels" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether lightening cutout labels will be created in flat pattern views.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMI_ToolID" type="logical" title="Tool ID Labels" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether tool ID labels will be created in flat pattern views.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMI_Note" type="logical" title="Flat Pattern Notes" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether flat pattern notes will be created in flat pattern views.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+              </Group>
+            </Tab>
+            <Tab name="PMI Configuration" csh="PMAN_PMI_Sheet_Metal_Flat_Pattern_PMI_Configuration">
+              <Group name="Bend">
+                <Pref name="NXSM_FlatPatternPMIConfiguration_BendSeqID" type="logical" title="Sequence ID" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether the bend sequence ID will be added to flat pattern bend labels.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMIConfiguration_BendName" type="logical" title="Name" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether the bend name will be added to flat pattern bend labels.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMIConfiguration_BendDirection" type="logical" title="Direction" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether the bend direction will be added to flat pattern bend labels.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMIConfiguration_BendRadius" type="logical" title="Radius" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether the bend radius will be added to flat pattern bend labels.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMIConfiguration_BendAngle" type="logical" title="Outside Angle" value="true" ver="2206+" scope="Part">
+                  <Description>This option determines whether the outside bend angle will be added to flat pattern bend labels.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMIConfiguration_InsideBendAngle" type="logical" title="Inside Angle" value="false" ver="2206+" scope="Part">
+                  <Description>This option determines whether the inside bend angle will be added to flat pattern bend labels.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMIConfiguration_NeutralFactor" type="logical" title="Neutral Factor" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether the neutral factor will be added to flat pattern bend labels.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMIBendSequenceIDPrefix" type="string" title="Sequence ID Prefix" value="Bend Sequence ID " ver="2206" scope="Part">
+                  <Description>This option specifies the prefix for the bend sequence ID in flat pattern bend labels.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMIBendNamePrefix" type="string" title="Name Prefix" value="Bend Name " ver="2206" scope="Part">
+                  <Description>This option specifies the prefix for the bend name in flat pattern bend labels.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMIBendDirectionPrefix" type="string" title="Direction Prefix" value="Bend Direction " ver="2206" scope="Part">
+                  <Description>This option specifies the prefix for the bend direction in flat pattern bend labels.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMIBendRadiusPrefix" type="string" title="Radius Prefix" value="Bend Radius " ver="2206" scope="Part">
+                  <Description>This option specifies the prefix for the bend radius parameter in flat pattern bend labels.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMIBendAnglePrefix" type="string" title="Outside Angle Prefix" value="Outside Bend Angle " ver="2206+" scope="Part">
+                  <Description>This option specifies the prefix for the outside bend angle parameter in flat pattern bend labels.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMIInsideBendAnglePrefix" type="string" title="Inside Angle Prefix" value="Inside Bend Angle " ver="2206+" scope="Part">
+                  <Description>This option specifies the prefix for the inside bend angle parameter in flat pattern bend labels.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMINeutralFactorPrefix" type="string" title="Neutral Factor Prefix" value="Neutral Factor " ver="2206" scope="Part">
+                  <Description>This option specifies the prefix for the neutral factor parameter in flat pattern bend labels.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMIBendDirectionUpText" type="string" title="Bend Direction Up Text" value="" ver="2212" scope="Part">
+                  <Description>This option specifies the text for the bend direction 'up' label.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMIBendDirectionDownText" type="string" title="Bend Direction Down Text" value="" ver="2212" scope="Part">
+                  <Description>This option specifies the text for the bend direction 'down' label.</Description>
+                  <String/>
+                </Pref>
+              </Group>
+              <Group name="Hole Details">
+                <Pref name="NXSM_FlatPattenPMIHoleDetailsPrefix" type="string" title="Prefix" value="Hole Details " ver="2206" scope="Part">
+                  <Description>This option specifies the prefix for hole details in flat pattern hole labels.</Description>
+                  <String/>
+                </Pref>
+              </Group>
+              <Group name="Tool ID">
+                <Pref name="NXSM_FlatPattenPMIToolIDPrefix" type="string" title="Prefix" value="Tool ID " ver="2206" scope="Part">
+                  <Description>This option specifies the prefix for the tool ID in flat pattern tool ID labels.</Description>
+                  <String/>
+                </Pref>
+              </Group>
+              <Group name="Joggle">
+                <Pref name="NXSM_FlatPatternPMIConfiguration_JoggleRunout" type="logical" title="Runout" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether joggle runout will be added to flat pattern joggle labels.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMIConfiguration_JoggleDepth" type="logical" title="Depth" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether joggle depth will be added to flat pattern joggle labels.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMIJoggleRunoutPrefix" type="string" title="Runout Prefix" value="Joggle Runout " ver="2206" scope="Part">
+                  <Description>This option specifies the prefix for the joggle runout parameter in flat pattern joggle labels.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMIJoggleDepthPrefix" type="string" title="Depth Prefix" value="Joggle Depth " ver="2206" scope="Part">
+                  <Description>This option specifies the prefix for the joggle depth parameter in flat pattern joggle labels.</Description>
+                  <String/>
+                </Pref>
+              </Group>
+              <Group name="Lightening Cutout">
+                <Pref name="NXSM_FlatPatternPMIConfiguration_HoleDiameter" type="logical" title="Hole Diameter" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether hole diameter will be added to flat pattern lightening cutout labels.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMIConfiguration_CutoutDiameter" type="logical" title="Cutout Diameter" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether cutout diameter will be added to flat pattern lightening cutout labels.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMILcHoleDiameterPrefix" type="string" title="Hole Diameter Prefix" value="Hole Diameter " ver="2206" scope="Part">
+                  <Description>This option specifies the prefix for the hole diameter parameter in flat pattern lightening cutout labels.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMILcCutoutPrefix" type="string" title="Cutout Diameter Prefix" value="Cutout Diameter " ver="2206" scope="Part">
+                  <Description>This option specifies the prefix for the cutout diameter parameter in flat pattern lightening cutout labels.</Description>
+                  <String/>
+                </Pref>
+              </Group>
+              <Group name="Flat Pattern Note">
+                <Pref name="NXSM_FlatPatternPMIConfiguration_CutoutCount" type="logical" title="Interior Cutout Count" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether the interior cutout count will be added to the flat pattern properties note.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMIConfiguration_ExtCutLength" type="logical" title="Exterior Cut Length" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether the exterior cut length will be added to the flat pattern properties note.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMIConfiguration_IntCutLength" type="logical" title="Interior Cut Length" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether the interior cut length will be added to the flat pattern properties note.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMIConfiguration_MinimumX" type="logical" title="Minimum X Length" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether the minimum X length will be added to the flat pattern properties note.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMIConfiguration_MinimumY" type="logical" title="Minimum Y Length" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether the minimum Y length will be added to the flat pattern properties note.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPatternPMIConfiguration_TotalCutLength" type="logical" title="Total Cut Length" value="true" ver="2206" scope="Part">
+                  <Description>This option determines whether the total cut length will be added to the flat pattern properties note.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMIInteriorCutoutPrefix" type="string" title="Interior Cutout Count Prefix" value="Interior Cutout - Count " ver="2206" scope="Part">
+                  <Description>This option specifies the prefix for the interior cutout count in the flat pattern properties note.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMIExtCutLengthPrefix" type="string" title="Exterior Cut Length Prefix" value="Exterior Cut Length " ver="2206" scope="Part">
+                  <Description>This option specifies the prefix for the exterior cut length in the flat pattern properties note.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMIIntCutLengthPrefix" type="string" title="Interior Cut Length Prefix" value="Interior Cut Length " ver="2206" scope="Part">
+                  <Description>This option specifies the prefix for the interior cut length in the flat pattern properties note.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMIMinimumXPrefix" type="string" title="Minimum X Length Prefix" value="Minimum X " ver="2206" scope="Part">
+                  <Description>This option specifies the prefix for the minimum X length in the flat pattern properties note.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMIMinimumYPrefix" type="string" title="Minimum Y Length Prefix" value="Minimum Y " ver="2206" scope="Part">
+                  <Description>This option specifies the prefix for the minimum Y length in the flat pattern properties note.</Description>
+                  <String/>
+                </Pref>
+                <Pref name="NXSM_FlatPattenPMITotalCutLengthPrefix" type="string" title="Total Cut Length Prefix" value="Total Cut Length " ver="2206" scope="Part">
+                  <Description>This option specifies the prefix for the total cut length in the flat pattern properties note.</Description>
+                  <String/>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+        </Category>
+      </Application>
+</PrefDefinition>

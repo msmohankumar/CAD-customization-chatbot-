@@ -1,0 +1,1578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Routing" csh="PMAN_Routing" package_suppress="simcenter3d,simviewer,view,mechatronicsplayer,nx2dedit">
+        <Category name="General" csh="PMAN_Routing_General">
+            <Tab name="Paths" csh="PMAN_Routing_General_Paths">
+                <Group name="Control Points">
+                    <Pref name="RTE_PathContolPointsMerge" type="logical" title="Merge Duplicates" value="true" ver="5.0.0" scope="Session">
+                        <Description>Creating, editing, moving and copying segments can duplicate RCPs, which subsequently creates additional routing segments. This option determines whether or not Routing should constantly check for this condition and eliminate such duplicates.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                        <Docum>It is rarely desirable for duplicates to exist so by default this option is on. However, that does add processing overhead while running Routing. If performance is an issue, clear this option and use the Connect Path tool to interactively remove all duplicates in a single process.</Docum>
+                    </Pref>
+                </Group>
+                <Group name="Splines">
+                    <Pref name="RTE_AddPointsOnSubdivide" type="logical" title="Add Points to Subdivided Spline" value="true" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not points should be added to the subdivided curves to maintain the previous shape.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                        <Docum>With DCM3 controlled splines, subdivision creates 2 unique curves. This can cause shape changes not seen with the previous spline implementation. Set this option to maintain the subdivide behavior of the previous spline implementation.</Docum>
+                    </Pref>
+                    <Pref name="RTE_CreateTangencyBetweenSplines" type="logical" title="Create Tangency between Splines" value="true" ver="6.0.0" scope="Session">
+                        <Description>When creating a new spline which attaches to an existing spline or subdividing a spline, this option determines whether or not constraints should be added to ensure the two spline are tangent.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_UseMinimumCheckingRadiusAttribute" type="logical" title="Use Minimum Radius Attribute" value="false" ver="9.0.1" scope="Session">
+                        <Description>This option determines whether or not the value of user attribute MinimumCurveCheck on each path segment should be used when checking minimum radius.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_RadiusAttriubteMethod" type="int" title="Radius Attribute Method" value="1" ver="9.0.1" scope="Session">
+                        <Description>This option specifies the radius attribute method.</Description>
+                        <RadioBox orientation="vertical"/>
+                        <Data type="enum">
+                            <EnumElem name="Radius" value="1"/>
+                            <EnumElem name="Ratio to Diameter" value="2"/>
+                        </Data>
+                        <Docum>
+                            <Formatted>
+Radius: The value entered for the Minimum Checking Radius is the final minimum radius value.
+Ratio to Diameter: A ratio to be multiplied by the diameter of the stock or space reservation to generate the minimum radius value.
+                            </Formatted>
+                        </Docum>
+                    </Pref>
+                    <Pref name="RTE_DefaultPortExtensionLength_MU" type="real" title="Default Port Extension Length" value="1" unit="mm" ver="12.0.0" scope="Session">
+                        <Description>Specifies the value of spline extension magnitude for ports that do not have an extension defined.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_DefaultPortExtensionLength_EU" type="real" title="Default Port Extension Length" value="0.04" unit="in" ver="12.0.0" scope="Session">
+                        <Description>Specifies the value of spline extension magnitude for ports that do not have an extension defined.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_ConstrainedCurvatureFailureColor" type="int" title="Color when Failing Curvature Constraint" value="186" ver="12.0.2" scope="Session">
+                        <Description>This option specifies the color of a constrained curvature spline when it fails to meet the specified radius.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="Allowable Corner Types">
+                    <Docum>Clear all corner types if none are allowed.</Docum>
+                    <Pref name="RTE_PathAllowBendCorner" type="logical" title="Bend" value="true" ver="5.0.0" scope="Session">
+                        <Description>This option determines whether or not a bend corner can be created.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_PathAllowMiterCorner" type="logical" title="Miter" value="true" ver="5.0.0" scope="Session">
+                        <Description>This option determines whether or not a miter corner can be created.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_PathAllowCopeCorner" type="logical" title="Cope" value="true" ver="5.0.0" scope="Session">
+                        <Description>This option determines whether or not a cope corner can be created.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_PathAllowSBendCorner" type="logical" title="S-bend" value="true" ver="5.0.0" scope="Session">
+                        <Description>This option determines whether or not an s-bend corner can be created.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_PathAllowMiteredBendCorner" type="logical" title="Mitered Bend" value="true" ver="8.0.0" scope="Session">
+                        <Description>This option determines whether or not a mitered bend corner can be created.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_PathAllowUBendCorner" type="logical" title="U-bend" value="true" ver="8.0.0" scope="Session">
+                        <Description>This option determines whether or not a u-bend corner can be created.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Pref name="RTE_PathCornerType" type="int" title="Corner Type" value="0" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the type of corner to create.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="None" value="-1"/>
+                        <EnumElem name="Bend" value="0"/>
+                        <EnumElem name="Miter" value="1"/>
+                        <EnumElem name="Cope" value="2"/>
+                    </Data>
+                </Pref>
+                <Group name="Bend">
+                    <Pref name="RTE_PathCornerBendMethod" type="int" title="Radius Method" value="2" ver="1953" scope="Session">
+                        <Description>This option specifies how the bend radius is determined when Corner Type is set to Bend.</Description>
+                        <RadioBox orientation="vertical"/>
+                        <Data type="enum">
+                            <EnumElem name="Radius" value="1"/>
+                            <EnumElem name="Ratio to Diameter" value="2"/>
+                            <EnumElem name="Ratio to Attribute" value="5"/>
+                            <EnumElem name="Bend Radius Table" value="3"/>
+                            <EnumElem name="Inner Radius" value = "4"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_PathCornerBendRadius_MU" type="real" title="Radius" value="75.0" unit="mm" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the corner bend radius when method is set to Radius or Inner Radius.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_PathCornerBendRadius_EU" type="real" title="Radius" value="3.0" unit="in" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the corner bend radius when method is set to Radius or Inner Radius.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_PathCornerBendRadiusToDiameterRatio" type="real" title="Ratio to Diameter" value="2.0" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the ratio between the bend corner radius and the diameter of the stock when Radius Method is set to Ratio to Diameter.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_PathCornerBendRadiusToAttributeRatio" type="real" title="Ratio to Attribute" value="2.0" ver="1953" scope="Session">
+                      <Description>This option specifies the ratio between the bend corner radius and the attribute value of the stock when Radius Method is set to Ratio to Attribute.</Description>
+                      <Real/>
+                      <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                      </Data>
+                    </Pref>
+                    <Pref name="RTE_PathCornerBendRadiusToAttributeName" type="string" title="Attribute Name for Ratio to Attribute" value="" ver="1953" scope="Session">
+                      <Description>This option specifies the name of the attribute when the Radius Method is set to Ratio to Attribute.</Description>
+                      <String/>
+                    </Pref>
+                    <Pref name="RTE_EditBendAngleMeasureInteriorAngle" type="int" title="Edit Bend Angle" value="1" ver="7.5.0" scope="Session">
+                        <Description>This option specifies which side of the bend arc the angle between the segments is measured in the Edit Bend Angle command.</Description>
+                        <RadioBox/>
+                        <Data type="enum">
+                            <EnumElem name ="Measure Interior Angle" value ="1"/>
+                            <EnumElem name ="Measure Exterior Angle" value ="2"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_AddManufacturingAttributes" type="logical" title="Add Manufacturing Attributes" value="false" ver="8.0.0" scope="Session">
+                        <Description>This option determines whether or not manufacturing attributes should be added.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Pref name="RTE_PathConfBranchSel" type="logical" title="Confirm Branch Selection" value="true" ver="5.0.0" scope="Session">
+                    <Description>One method of selection in the Routing Object Selection dialog box is Branch. The direction of the branch is determined starting at one end or the other. This option determines whether or not the system will prompt for a confirmation when selecting a branch. When this option is off, Routing determines the branch rooted on the nearest end of the segment selection point without confirmation.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Group name="Fixed Length">
+                    <Pref name="RTE_PathStockOffsetExp" type="string" title="Stock Offset Expression" value="(MAX_PATH_STOCK_DIA/2.0)" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the expression used to offset a control point due to stock on the path.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Stock" csh="PMAN_Routing_General_Stock">
+                <Pref name="RTE_StockStyle" type="int" title="Style" value="1" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the stock display style.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Centerline" value="0"/>
+                        <EnumElem name="Simple" value="1"/>
+                        <EnumElem name="Detail" value="2"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="RTE_CreateTiledTopologyForStock" type="logical" title="Create Tiled Faces for Stock Bodies" value="false" ver="10.0.3" scope="Session">
+                    <Description>This option determines whether or not to create body faces for each curve in the stock cross-section or path.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="RTE_StockAsComponents" type="logical" title="Stock as Components" value="false" ver="5.0.0" scope="Session">
+                    <Description>This option determines whether or not stock is created as a component. When this option is off, stock is created as solid bodies in the work part (so called Legacy Stock mode).</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="On" value="true"/>
+                        <EnumElem name="Off" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_SpaceReservationAsComponents" type="logical" title="Space Reservation as Components" value="false" ver="7.5.4" scope="Session">
+                    <Description>This option determines whether or not space reservation is created as a component. This option is available only if 'Stock as Components' is on. When this option is off, space reservation is created as solid bodies in the work part.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="On" value="true"/>
+                        <EnumElem name="Off" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_SetSpaceReservationBodyDensityToZero" type="logical" title="Set Space Reservation Body Density to Zero" value="true" ver="12.0.0" scope="Session">
+                    <Description>This option determines whether or not to set the body density to zero for space reservation.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_DeferLegacyStockConversion" type="logical" title="Defer Legacy Stock Conversion During Part Load" value="false" ver="10.0.0" scope="Session">
+                    <Description>This option determines whether or not legacy stock conversion is deferred during part load. When this option is off, legacy stock conversion will be carried out during part load.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_StockCompFolder" type="string" title="Stock Component Folder" value="" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the location of newly created temporary stock components. For Teamcenter, this should be an existing folder. If the folder does not exist, the default folder is used. In native mode, this may be a directory that does not exist, as the directory will then be created. If the directory cannot be created, the work directory is used. The directory specified may be relative or absolute.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="RTE_StockDelOverstockWithStock" type="logical" title="Delete Overstock Along with Stock" value="false" ver="5.0.0" scope="Session">
+                    <Description>This option determines whether or not the overstock is deleted when the stock it covers is deleted. When this option is off, the overstock moves down to cover the next underlying stock. If there is no underlying stock, then overstock models with a minimal diameter or cross section. In Electrical, if stock is then assigned to the segments of the overstock, the overstock automatically covers that new stock. In Mechanical, overstock stays on the segment.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_OverstockSimplification" type="logical" title="Allow Overstock Defining Control Points to be Simplified" value="true" ver="6.0.2" scope="Session">
+                    <Description>This option determines whether or not an overstock's defining control point is simplified away when using Simplify Path.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="No" value="false"/>
+                        <EnumElem name="Yes" value="true"/>
+                    </Data>
+                    <Docum>When simplifying a path with overstock on the path, overstock defining control points may be simplified away. When this option is on, the overstock is deleted when the defining control point is removed. When this option is off, the defining control point is not simplified away and the overstock remains on the path.</Docum>
+                </Pref>
+                <Separator/>
+                <Pref name="RTE_StockSRStockTranslucency" type="int" title="Space Reservation Stock Translucency" value="50" unit="%" ver="6.0.0" scope="Session">
+                    <Description>This option determines the translucency of a Space Reservation stock.</Description>
+                    <IntegerScale/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                        <UpperBound value="100" include="1"/>
+                    </Data>
+                </Pref>
+                <Group name="Stock Seed Part">
+                    <Pref name="RTE_StockSeedPartMM" type="string" title="Metric" value="" ver="10.0.1" scope="Session">
+                        <Description>This option specifies the Metric seed part used to create stock as component.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="RTE_StockSeedPartINCH" type="string" title="English" value="" ver="10.0.1" scope="Session">
+                        <Description>This option specifies the English seed part used to create stock as component.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+                <Separator/>
+                <Group name="Overstock Seed Part">
+                    <Pref name="RTE_OverstockSeedPartMM" type="string" title="Metric" value="" ver="10.0.1" scope="Session">
+                        <Description>This option specifies the Metric seed part used to create overstock as component.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="RTE_OverstockSeedPartINCH" type="string" title="English" value="" ver="10.0.1" scope="Session">
+                        <Description>This option specifies the English seed part used to create overstock as component.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Parts" csh="PMAN_Routing_General_Parts">
+                <Pref name="RTE_PartsLayerOption" type="int" title="Layer" value="1" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the layer option used when adding routing components to an assembly.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Original" value="1"/>
+                        <EnumElem name="Work" value="2"/>
+                        <EnumElem name="As Specified" value="3"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_PartsSpecifiedLayer" type="int" title="Specified Layer" value="1" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the layer routing components be placed on when the Layer option is set to As Specified.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                        <UpperBound value="256" include="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="RTE_PartsUsePrefPortPlacement" type="logical" title="Use Preferred Port Placement" value="false" ver="5.0.0" scope="Session">
+                    <Description>When this option is on and a port is found with a user-specified attribute or name value during Place Part, the most favorable solution derived using this port is suggested as the first solution for placing the routing part.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                    <Docum>Having this option on takes extra processing, so is probably best used only if there are many placement possibilities for the parts.</Docum>
+                </Pref>
+                <Pref name="RTE_PartsMethod" type="int" title="Method" value="0" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the method used for the preferred port placement.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Attribute" value="0"/>
+                        <EnumElem name="Name" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_PartsAttribute" type="string" title="Attribute" value="" ver="5.0.0" scope="Session">
+                    <Description>When Method is set to Attribute, this option defines the name of the port attribute.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="RTE_PartsAttributeValue" type="string" title="Attribute Value" value="" ver="5.0.0" scope="Session">
+                    <Description>When Method is set to Attribute, this option defines the value of the port attribute.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="RTE_PartsNameValue" type="string" title="Name" value="" ver="5.0.0" scope="Session">
+                    <Description>When Method is set to Name, this option defines the name of the port.</Description>
+                    <String/>
+                </Pref>
+            </Tab>
+            <Tab name="Display" csh="PMAN_Routing_General_Display">
+                <Group name="Object Display">
+                    <Pref name="RTE_DisplayAnchors" type="logical" title="Anchors" value="true" ver="5.0.0" scope="Session">
+                        <Description>This option determines whether or not anchors are displayed.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_DisplayControlPoints" type="logical" title="Control Points" value="true" ver="5.0.0" scope="Session">
+                        <Description>This option determines whether or not control points are displayed.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                        <Docum>This option does not affect the behavior of Routing. It's normally kept on during routing tasks, and occasionally cleared to improve viewing.</Docum>
+                    </Pref>
+                    <Separator/>
+                    <Pref name="RTE_DisplayPorts" type="logical" title="Ports" value="true" ver="5.0.0" scope="Session">
+                        <Description>This option determines whether or not ports are displayed.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                        <Docum>This option does not affect the behavior of Routing. It's normally kept on during routing tasks, and occasionally cleared to improve viewing.</Docum>
+                    </Pref>
+                    <Pref name="RTE_DisplayPortLength_MU" type="real" title="Port Length" value="25.4" unit="mm" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the length of ports to display when Display Ports is on.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_DisplayPortLength_EU" type="real" title="Port Length" value="1.0" unit="in" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the length of ports to display when Display Ports is on.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_DisplayConnectedPorts" type="logical" title="Display Connected Ports" value="false" ver="10.0.0" scope="Session">
+                        <Description>This option determines whether or not connected ports are displayed.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Design Rule Display">
+                    <Pref name="RTE_ViolationObjectsColor" type="int" title="Violation Objects Color" value="-1" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the color of violated objects.</Description>
+                        <ColorOption/>
+                        <Data type="color">
+                            <EnumElem name="Default" value="-1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Advance" csh="PMAN_Routing_General_Advance">
+                <Group name="Advance to Routed System Designer">
+                    <Pref name="RTE_AllowAdvanceToRoutedSystemDesigner" type="logical" title="Allow Advancement of Routing Assemblies" value="false" ver="2007" scope="Session">
+                        <Description>This option determines whether the Advance to Routed System Designer command should be available in the traditional Routing applications.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Ship" csh="PMAN_Routing_General_Ship">
+                <Pref name="RTE_ShipIdentifier" type="string" title="Ship Identifier" value="" ver="8.0.0" scope="Session">
+                    <Description>This option specifies the Ship Identifier for searching the matching member parts for given instance name.</Description>
+                    <String/>
+                </Pref>
+            </Tab>
+            <Tab name="Customizable Attributes" csh="PMAN_Routing_General_Customizable_Attributes">
+                <Label label="The following options are used to define customizable attributes for steel features."/>
+                <Pref name="PMAN_Routing_General_Custom_Attributes_Display_Attr_Dlog_On_PlacePart" type="logical" title="Show Attribute Dialog on Place Part" value="false" ver="8.5.0" scope="Session">
+                    <Description>This option determines if the Attribute dialog box is displayed during placing a part. When this option is off, the Attribute dialog box will only display if required attributes need attention.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="PMAN_Routing_General_AttributeTemplateFile_WIN" type="string" title="XML Attribute Template File" value="$UGII_ROUTE_MECH_KIT_DIR\appview\NX_RoutingAttributes.xml" ver="8.5.0" scope="Session">
+                    <Description>This field specifies the XML Attribute Template file.</Description>
+                    <BrowseFileSel type="xml"/>
+                </Pref>
+                <Pref name="PMAN_Routing_General_AttributeTemplateFile_UNX" type="string" title="XML Attribute Template File" value="$UGII_ROUTE_MECH_KIT_DIR/appview/NX_RoutingAttributes.xml" ver="8.5.0" scope="Session">
+                    <Description>This field specifies the XML Attribute Template file.</Description>
+                    <BrowseFileSel type="xml"/>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name ="Part Library" csh="PMAN_Routing_Part_Library">
+            <Tab name="Reuse Library" csh="PMAN_Routing_Part_Library_Reuse_Library">
+                <Group name="Library Configuration">
+                    <!--
+                    
+                  -->
+                    <Pref name="RTE_PartLibraryConfig" type="int" title="Part Library" value="0" ver="8.0.0" scope="Session" suppress="TCX_LITE">
+                        <Description>This option specifies if the part library is driven by Teamcenter Classification or PTB files (Native or Teamcenter).</Description>
+                        <RadioBox orientation="vertical"/>
+                        <Data type ="enum">
+                            <EnumElem name="Native/Teamcenter PTB" value ="0"/>
+                            <EnumElem name="Teamcenter Classification" value="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name ="RTE_PartLibraryClassificationRoot" type="string" title ="Routing Classification Root" value="routing_parts" ver="2007" scope="Session">
+                        <Description>This option is valid for Teamcenter Classification mode only. It specifies which node in the classification hierarchy is the root of the routing part library.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="RTE_SearchOnlyUnderCurrentNode" type="logical" title="Search Only Under Current Node" value="false" ver="8.5.2" scope="Session">
+                        <Description>This option determines whether to search the Routing Part Library only under the current node or to search from the root node.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_EnableSearchingTeamcenterClassificationDirectly" type="logical" title="Provide Search of Teamcenter Classification Directly" value="false" ver="12.0.0" scope="Session" suppress="TCX_LITE">
+                        <Description>This option determines whether or not a Search button should be provided to allow searching of attribute values directly from the Teamcenter Classification database. For large Teamcenter Classification libraries, this is faster than querying for and loading all the underlying members. This option applies only when using the Routing Part Library with Teamcenter Classification.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_ClassificationObjectThresholdForSearchingTeamcenterDirectly" type="int" title="Threshold Value to Search Teamcenter Classification Directly" value="200" ver="12.0.0" scope="Session" suppress="TCX_LITE">
+                        <Description>When the 'Provide Search of Teamcenter Classification Directly' option is on, this option specifies the number of classification objects that have to be classified under a specific node or its child nodes in the Routing Part Library for a Search button to be provided on the Search Children dialog. The Search button allows a search directly of Teamcenter Classification without having to load all the underlying data for the node or its child nodes. This option applies only when using the Routing Part Library with Teamcenter Classification.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="0" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Discipline">
+                    <Docum>The discipline specified here is used as the current discipline on Routing application load. If the discipline specified here is not present in the Application View XML files, then the current discipline is set to "none".</Docum>
+                    <Label label="The following options are used to define the initial discipline for the Routing applications. The available disciplines are defined in the Application View XML files."/>
+                    <Pref name ="RTE_PartLibraryDefaultElecDiscipline" type="string" title ="Routing Electrical" value="Wiring" ver="9.0.0" scope="Session">
+                        <Description>This option specifies the initial discipline for the Routing Electrical application.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name ="RTE_PartLibraryDefaultMechDiscipline" type="string" title ="Routing Mechanical" value="Piping" ver="9.0.0" scope="Session">
+                        <Description>This option specifies the initial discipline for the Routing Mechanical application.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name ="RTE_PartLibraryDefaultLgclDiscipline" type="string" title ="Routing Logical" value="Piping" ver="9.0.0" scope="Session">
+                        <Description>This option specifies the initial discipline for the Routing Logical application.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Specifications - Load" csh="PMAN_Routing_Part_Library_Specifications_Load">
+                <Pref name="PMAN_RoutingSpecificationValidateOption" type="logical" title="Validate" value="true" ver="9.0.0" scope="Session">
+                    <Description>This option determines whether or not a specification file is validated against the specifications schema upon loading.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                    <Docum>It is rarely desirable to not use validation so by default this option is on. In order to convert invalid files to valid files, validation may need to be off. The invalid files need to be loaded initially before being saved as valid files.</Docum>
+                </Pref>
+                <Pref name="PMAN_RoutingElectricalSpecificationLoadOptions" type="int" title="Options - Routing Electrical" value="0" ver="9.0.0" scope="Session">
+                    <Description>This option specifies the filter to apply while loading specifications in Routing Electrical.</Description>
+                    <RadioBox orientation="vertical"/>
+                    <Data type="enum">
+                        <EnumElem name="All from Active Discipline" value="0"/>
+                        <EnumElem name="From Specified Authoring Source" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="PMAN_RoutingMechanicalSpecificationLoadOptions" type="int" title="Options - Routing Mechanical" value="0" ver="9.0.0" scope="Session">
+                    <Description>This option specifies the filter to apply while loading specifications in Routing Mechanical.</Description>
+                    <RadioBox orientation="vertical"/>
+                    <Data type="enum">
+                        <EnumElem name="All from Active Discipline" value="0"/>
+                        <EnumElem name="From Specified Authoring Source" value="1"/>
+                        <EnumElem name="From Work Part Runs" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="PMAN_RoutingLogicalSpecificationLoadOptions" type="int" title="Options - Routing Logical" value="0" ver="9.0.0" scope="Session">
+                    <Description>This option specifies the filter to apply while loading specifications in Routing Logical.</Description>
+                    <RadioBox orientation="vertical"/>
+                    <Data type="enum">
+                        <EnumElem name="All from Active Discipline" value="0"/>
+                        <EnumElem name="From Specified Authoring Source" value="1"/>
+                        <EnumElem name="From Work Part Runs" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="PMAN_RoutingSpecificationAuthoringSource" type="string" title="Authoring Source" value="NX" ver="9.0.1" scope="Session">
+                    <Description>This option specifies the authors of the specification to be loaded.</Description>
+                    <String/>
+                </Pref>
+            </Tab>
+            <Tab name="Specification Folders" csh="PMAN_Routing_Part_Library_Specifications_Folders">
+                <Label label="The following options are used to define the native folder path for the Routing applications."/>
+                <Pref name="PMAN_RoutingElectricalSpecificationsFolder_WIN" type="string" title="Routing Electrical" value="$UGII_ROUTE_ELEC_KIT_DIR\specifications\$UGII_ROUTING_KIT_UNITS\" ver="9.0.0" scope="Session">
+                    <Description>This option specifies the folder path for specification XML files in Routing Electrical.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+                <Pref name="PMAN_RoutingElectricalSpecificationsFolder_UNX" type="string" title="Routing Electrical" value="$UGII_ROUTE_ELEC_KIT_DIR/specifications/$UGII_ROUTING_KIT_UNITS/" ver="9.0.0" scope="Session">
+                    <Description>This option specifies the folder path for specification XML files in Routing Electrical.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+                <Pref name="PMAN_RoutingMechanicalSpecificationsFolder_WIN" type="string" title="Routing Mechanical" value="$UGII_ROUTE_MECH_KIT_DIR\specifications\$UGII_ROUTING_KIT_UNITS\" ver="9.0.0" scope="Session">
+                    <Description>This option specifies the folder path for specification XML files in Routing Mechanical.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+                <Pref name="PMAN_RoutingMechanicalSpecificationsFolder_UNX" type="string" title="Routing Mechanical" value="$UGII_ROUTE_MECH_KIT_DIR/specifications/$UGII_ROUTING_KIT_UNITS/" ver="9.0.0" scope="Session">
+                    <Description>This option specifies the folder path for specification XML files in Routing Mechanical.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+                <Pref name="PMAN_RoutingLogicalSpecificationsFolder_WIN" type="string" title="Routing Logical" value="$UGII_ROUTE_LGCL_KIT_DIR\specifications\$UGII_ROUTING_KIT_UNITS\" ver="9.0.3" scope="Session">
+                    <Description>This option specifies the folder path for specification XML files in Routing Logical.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+                <Pref name="PMAN_RoutingLogicalSpecificationsFolder_UNX" type="string" title="Routing Logical" value="$UGII_ROUTE_LGCL_KIT_DIR/specifications/$UGII_ROUTING_KIT_UNITS/" ver="9.0.3" scope="Session">
+                    <Description>This option specifies the folder path for specification XML files in Routing Logical.</Description>
+                    <BrowseDirSel/>
+                </Pref>
+                <Pref name="PMAN_RoutingSpecificationNativeOption" type="logical" title="Use Native Folders when Connected to Teamcenter" value="true" ver="9.0.0" scope="Session" suppress="TCX_LITE">
+                    <Description>This option applies only when connected to Teamcenter and determines whether or not specification files are loaded and saved exclusively from/to native folders or from/to Teamcenter. The Teamcenter specification folders are set in the Teamcenter preferences.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Electrical" csh="PMAN_Routing_Electrical">
+            <Tab name="General" csh="PMAN_Routing_Electrical_General">
+                <Group name="Allowable Curves">
+                    <Pref name="RTE_ElectricalPathAllowCurvesLine" type="logical" title="Lines" value="true" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not lines are used when creating a path.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_ElectricalPathAllowCurvesArc" type="logical" title="Arcs" value="true" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not arcs are used when creating a path.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_ElectricalPathAllowCurvesSpline" type="logical" title="Splines" value="true" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not splines are used when creating a path.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Pref name="RTE_ElectricalHarnessName" type="string" title="Harness Name" value="" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the harness name supplied to connections that have no specified harness.</Description>
+                    <Widestring/>
+                </Pref>
+                <Separator/>
+                <Pref name="RTE_ElectricalCreateTerminals" type="int" title="Create Terminals" value="0" ver="5.0.0" scope="Session">
+                    <Description>This option specifies which set of terminal ports to create terminals for when performing an Automatic Create Terminals command from the Component List dialog box.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="All" value="0"/>
+                        <EnumElem name="Listed" value="1"/>
+                        <EnumElem name="Routed" value="2"/>
+                    </Data>
+                    <Docum>
+                        <Formatted>
+All: All the terminal ports for all component multiports will have terminals automatically created.
+Listed: Only terminal ports in the connection list will have terminals automatically created.
+Routed: Only terminal ports for routed connections will have terminals automatically created.
+                        </Formatted>
+                    </Docum>
+                </Pref>
+                <Pref name="RTE_ElectricalDisplaySolidonTerminal" type="logical" title="Display Solid on Terminal Segment" value="true" ver="5.0.0" scope="Session">
+                    <Description>This option determines whether or not the wire solid on the terminal segment is displayed.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Group name="Auto Assignment Method">
+                    <Pref name="RTE_ElectricalComponentMatchMethod" type="int" title="Match By" value="0" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the method by which to automatically assign components in the Component List Navigator.</Description>
+                        <RadioBox/>
+                        <Data type="enum">
+                            <EnumElem name="Attribute" value="2"/>
+                            <EnumElem name="Component Name" value="1"/>
+                            <EnumElem name="File Name" value="0"/>
+                        </Data>
+                        <Docum>
+                            <Formatted>
+Attribute: Compares the Component List Navigator cell value under the Column Heading to the value of the component or port attribute of the given title.
+    The column name is the display name of the field in the display format.
+    The comparison is case sensitive.
+
+Component Name: Compares the Connector name, Component name, and Equipment name to the name of each component.
+    The comparison is case sensitive.
+
+File Name: Compares the part name of a Connector to the file name of a candidate part.
+    The comparison is not case sensitive and does not compare the extension.
+                            </Formatted>
+                        </Docum>
+                    </Pref>
+                    <Pref name="RTE_ElectricalColumntoMatch" type="string" title="Component List Column Title" value="&lt;NONE&gt;" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the Component List Navigator column name in which to look for a match to the Component Attribute value. This option is used when Match By is set to Attribute.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="RTE_ElectricalNametoMatch" type="string" title="Component Attribute Title" value="&lt;NONE&gt;" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the component attribute name for which to get the value for matching with the Component List Navigator's specified column's row value for attribute matching. This option is used when Match By is set to Attribute.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+                <Pref name="RTE_ElectricalReportRoutingFailures" type="logical" title="Report Routing Failures" value="true" ver="5.0.0" scope="Session">
+                    <Description>This option determines whether or not automatic or manual routing failures are reported to the Information window.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_ElectricalHighlightWireStock" type="logical" title="Highlight Wire Stock" value="true" ver="5.0.0" scope="Session">
+                    <Description>This option determines whether or not wire stock is highlighted when a Connection List Navigator row is selected.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_ElectricalHighlightWirePath" type="logical" title="Highlight Wire Path" value="false" ver="6.0.0" scope="Session">
+                    <Description>This option determines whether or not wire paths are highlighted when a routed segment is selected.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="RTE_ElectricalBundleColor" type="int" title="Bundle Color" value="134" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the color of routed bundles.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="RTE_ElectricalDeleteSRStockOnRoute" type="logical" title="Delete Space Reservation Stock on Auto or Manual Route" value="false" ver="6.0.0" scope="Session">
+                    <Description>This option determines whether or not to delete Space Reservation stock upon Auto or Manual route. When this option is off, Space Reservation stock remains over the segments along with other stocks but not as a part of the bundle stock.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_ElectricalUseParentCableStock" type="logical" title="Use Cable Stock when Wire Stock is Missing" value="false" ver="1953+" scope="Session">
+                    <Description>This option determines whether or not to use the stock of the parent cable if the stock of the child wire cannot be found.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_ElectricalMinimumOverstockWidth_MU" type="real" title="Minimum Overstock Width" value="2.5" unit="mm" ver="6.0.2" scope="Session">
+                    <Description>This option specifies the minimum overstock length for overstock that does not have a specified width.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_ElectricalMinimumOverstockWidth_EU" type="real" title="Minimum Overstock Width" value="0.1" unit="in" ver="6.0.2" scope="Session">
+                    <Description>This option specifies the minimum overstock length for overstock that does not have a specified width.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Group name="Wire Cut Length Calculation">
+                    <Pref name="RTE_ElectricalCutLengthMultiplier" type="real" title="Cut Length Multiplier" value="10.0" unit="%" ver="1847" scope="Session">
+                        <Description>This option specifies how much a wire's length should be increased when calculating the cut length. The cut length is calculated by multiplying the wire's modeled length by the Cut Length Multiplier and then adding the Cut Length Offset.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_ElectricalCutLengthOffset_MU" type="real" title="Cut Length Offset" value="5.0" unit="mm" ver="1847" scope="Session">
+                        <Description>This option specifies the additional length to add to a wire's length when calculating the cut length. The cut length is calculated by multiplying the wire's modeled length by the Cut Length Multiplier and then adding the Cut Length Offset.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_ElectricalCutLengthOffset_EU" type="real" title="Cut Length Offset" value="0.25" unit="in" ver="1847" scope="Session">
+                        <Description>This option specifies the additional length to add to a wire's length when calculating the cut length. The cut length is calculated by multiplying the wire's modeled length by the Cut Length Multiplier and then adding the Cut Length Offset.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Navigators" csh="PMAN_Routing_Electrical_Navigators">
+                <Group name="Automatic Route">
+                    <Pref name="RTE_ElectricalAutoRoute" type="int" title="Route Level" value="1" ver="5.0.0" scope="Session">
+                        <Description>This option specifies at what level to route. Component level routing does not require that the connection have pin information.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Pin" value="1"/>
+                            <EnumElem name="Component" value="2"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_ElectricalAutoRouteStockStyle" type="int" title="Stock Style" value="1" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the stock style to use during automatic routing. Centerline makes automatic routing faster. Simple shows the wire bundles as sweeps.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Centerline" value="0"/>
+                            <EnumElem name="Simple" value="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Import and Export">
+                    <Pref name="RTE_ElectricalImportDataFromTce" type="logical" title="Import Data from Teamcenter" value="false" ver="5.0.0" scope="Session">
+                        <Description>This option determines whether or not to use Teamcenter to import data into Routing.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No"  value="false"/>
+                        </Data>
+                    </Pref>
+                  <Pref name="RTE_ElectricalCreateBundlesOnRouteListImport" type ="logical" title="Create Bundles during Route List Import" value="false" ver="1953" scope="Session">
+                    <Description>This option determines whether or not to create bundle solids for routed connections in Capital during Route List Import.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                      <EnumElem name="Yes" value="true"/>
+                      <EnumElem name="No" value="false"/>
+                    </Data>
+                  </Pref>
+                    <Pref name="RTE_ElectricalExportPlmxmlToTcOnPartSave" type="logical" title="Export PLM XML Data to Teamcenter on Part Save" value="false" ver="12.0.0" scope="Session">
+                        <Description>This option determines whether or not to automatically update and export PLM XML data to Teamcenter when the part is saved.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No"  value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_ElectricalRecordNetlistHistory" type="logical" title="Record Netlist History" value="false" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not to record the history of import and export activity in the Connection and Component Lists.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_ElectricalFFExportFormatwLegacyFiles" type="logical" title="Export Format with Legacy Files" value="false" ver="5.0.0" scope="Session">
+                        <Description>This option determines whether or not to export the format description in legacy .cmp/.hrn files.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_ElectricalExportPLMXMLTopology" type="logical" title="Export PLM XML with Routed Topology and Parts" value="true" ver="5.0.0" scope="Session">
+                        <Description>This option determines whether or not to export routed topology, additional parts, and parts on routed paths with the Route List PLM XML.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_ElectricalExportPLMXMLUnusedTopology" type="logical" title="Export PLM XML with Un-routed Topology and Parts" value="false" ver="10.0.2" scope="Session">
+                        <Description>This option determines whether or not to export un-routed topology and parts on un-routed topology with the Route List PLM XML.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_ElectricalExportPLMXMLWithComponentAttributes" type="logical" title="Export PLM XML with Component Attributes" value="true" ver="1899" scope="Session">
+                        <Description>This option determines whether or not to export attributes of the components with the Route List PLM XML.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_ElectricalExportRouteListInBulk" type="logical" title="Export Route List in Bulk" value="false" ver="1926" scope="Session">
+                        <Description>This option determines whether or not to export Route List PLM XML from assemblies in the work part.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_ElectricalExportPLMXMLUnusedTerminals" type="logical" title="Export PLM XML Unused Terminals" value="false" ver="10.0.3" scope="Session">
+                        <Description>This option determines whether or not to export unused terminals on each connector.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_ElectricalReportConnectorClockingAngleInfo" type="logical" title="Report Component Orientation" value="false" ver="1899" scope="Session">
+                        <Description>This option determines whether or not to report component orientation in JSON file.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_ElectricalImportPLMXMLUseRListConfigurationFormat" type="logical" title="Use Route List Configuration File Format during PLM XML Import" value="false" ver="8.0.0" scope="Session">
+                        <Description>This option determines whether or not to use a Connection List File Format from the Route List configuration file for attribute type definitions while importing a PLM XML file.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_ElectricalImportPLMXMLRListConfigurationFormat" type="string" title="Connection List File Format Name" value="Example" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the name of the Connection List File Format that defines attribute types while importing a PLM XML file.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="RTE_ElectricalAllowEditOfNavigatorData" type="logical" title="Allow Edit of Navigator Column Data" value="true" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not to allow editing of the data in the Connection and Component List columns.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                        <Docum>When this option is off, you cannot create or edit data in the Connector or Component List. You will still be able to import and export data. You will also still be able to delete entire rows.</Docum>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Logical Associations" csh="PMAN_Routing_Electrical_Logical_Associations">
+                <Pref name="RTE_ElectricalAutomaticExecution" type="logical" title="Automatic Execution" value="true" ver="5.0.0" scope="Session">
+                    <Description>This option determines whether or not logical associations are automatically executed in the work part on a route operation.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="On" value="true"/>
+                        <EnumElem name="Off" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_ElectricalSupprTargetComps" type="logical" title="Suppress Target Components" value="true" ver="5.0.0" scope="Session">
+                    <Description>This option determines whether or not target components of logical associations are suppressed (as well as made hidden).</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Cableways" csh="PMAN_Routing_Electrical_Cableways">
+                <Pref name ="RTE_ElectricalFillPercentage" type="real" title="Fill Percentage" value ="100.0" unit ="%" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the percentage of the Cable Tray or the Space Reservation cross section occupied by the Cableways bundle.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_ElectricalModelBundles" type ="logical" title="Model Bundles in Cable Trays or Space Reservation" value="true" ver="7.5.0" scope="Session">
+                    <Description>This option determines whether or not to model the bundle when Cable Tray or Space Reservation exists.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_ElectricalPerformFillCalculation" type ="logical" title="Perform Fill Calculations when Routing Connections" value="false" ver="11.0.1" scope="Session">
+                    <Description>This option determines whether to perform fill calculations and overfill check while routing wires or cables.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_ElectricalFindAlternatePathsForAutoRoute" type ="logical" title="Auto-route using Alternate Paths for Overfills" value="false" ver="11.0.1" scope="Session">
+                    <Description>If an overfill condition is determined while routing wires or cables, this option determines whether to auto-route through alternate paths. When this option is on, routing may take longer to perform. This option applies only when the 'Perform Fill Calculations when Routing Connections' option is on.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_ElectricalAllowOverfill" type ="logical" title="Allow Overfill" value="false" ver="11.0.1" scope="Session">
+                    <Description>This option determines whether to allow routing of wires or cables through the path segments when the fill percentage limit is reached. For existing paths in a part, this setting can be modified for each individual path segment using the corresponding option on the Cableway Properties dialog box.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_ElectricalIncludeOverstockInFillCalculation" type ="logical" title="Include Overstock in Fill Calculation" value="false" ver="11.0.2" scope="Session">
+                    <Description>This option determines whether or not to include overstocks on path segments in cableways fill calculations.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Capital Integration" csh="PMAN_Routing_Electrical_CapitalIntegration">
+                <Pref name="RTE_ElectricalEnableCapitalDirectIntegration" type ="logical" title="Connect to Capital" value="false" ver="1872" scope="Session">
+                    <Description>This option determines whether to display the Capital Navigator and connect to Capital.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_ElectricalCapitalEnterpriseReporterURL" type="string" title="Capital Enterprise Reporter URL" value="http://localhost:49901/reporter" ver="1872" scope="Session">
+                    <Description>This option specifies the Capital Enterprise Reporter URL where Capital is installed.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="RTE_ElectricalCreateSolidsOnImportedBundles" type ="logical" title="Create Bundles on Read from Capital" value="false" ver="1872" scope="Session">
+                    <Description>When using the Read from Capital command, this option determines whether bundle solids will be created for routed connections within the context diagram selected in Capital.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Formboard" csh="PMAN_Routing_Formboard">
+            <Tab name="Layout Options" csh="PMAN_Routing_Formboard_Layout_Options">
+                <Pref name="RTE_FMBD_MainRunMethod" type="int" title="Main Run" value="0" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the method used to calculate the main run in the Formboard.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Longest"        value="0"/>
+                        <EnumElem name="Thickest"       value="1"/>
+                        <EnumElem name="User Selection" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_FMBD_BranchAngleMethod" type="int" title="Branch Angles" value="0" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the method used to calculate the angles of the flattened branches in the Formboard.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="As Designed"        value="0"/>
+                        <EnumElem name="Standard Angles"    value="1"/>
+                        <EnumElem name="Maximum Angles"     value="2"/>
+                        <EnumElem name="Random Angles"      value="3"/>
+                    </Data>
+                </Pref>
+                <Group name="Standard Angles">
+                    <Pref name="RTE_FMBD_PrimaryAngle" type="real" title="Primary Angle" value="90.0" unit="deg" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the primary standard angle.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                            <UpperBound value="180.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_FMBD_SecondaryAngle" type="real" title="Secondary Angle" value="45.0" unit="deg" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the secondary standard angle (applies only when all of the primary angle locations have been filled with branches).</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                            <UpperBound value="180.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_FMBD_TertiaryAngle" type="real" title="Tertiary Angle" value="30.0" unit="deg" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the tertiary standard angle (applies only when all of the primary and secondary angle locations have been filled with branches).</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                            <UpperBound value="180.0" include="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Random Angles">
+                    <Pref name="RTE_FMBD_MinRandomAngle" type="real" title="Minimum Angle" value="10.0" unit="deg" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the minimum random branch angle.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                            <UpperBound value="180.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_FMBD_MaxRandomAngle" type="real" title="Maximum Angle" value="170.0" unit="deg" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the maximum random branch angle.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                            <UpperBound value="180.0" include="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Pref name="RTE_FMBD_BranchShapeType" type="int" title="Branch Shape" value="0" ver="7.5.0" scope="Session">
+                    <Description>This option specifies if branches should be straightened out or angled when flattening.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Straight"   value="0"/>
+                        <EnumElem name="Angled"     value="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Length Rounding" csh="PMAN_Routing_Formboard_Length_Rounding">
+                <Group name="Modeled Segment Lengths">
+                    <Pref name="RTE_FMBD_SegmentLengthRoundingMethod" type="int" title="Rounding Method" value="2" ver="7.5.0" scope="Session">
+                        <Description>This option specifies if formboard segments should be modeled at a rounded length and if so what rounding method should be used.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Exact"              value="0"/>
+                            <EnumElem name="Nearest"            value="1"/>
+                            <EnumElem name="Up to Nearest"      value="2"/>
+                            <EnumElem name="Down to Nearest"    value="3"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RT_FMBD_SegmentLengthIncrement_MU" type="real" title="Increment" value="10" unit="mm" ver="7.5.0" scope="Part">
+                        <Description>This option specifies the value to round to when not using exact segment lengths.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RT_FMBD_SegmentLengthIncrement_EU" type="real" title="Increment" value=".25" unit="in" ver="7.5.0" scope="Part">
+                        <Description>This option specifies the value to round to when not using exact segment lengths.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Overstock Lengths">
+                    <Pref name="RTE_FMBD_OverstockLengthRoundingMethod" type="int" title="Rounding Method" value="2" ver="7.5.0" scope="Session">
+                        <Description>This option specifies if the wrapped length of overstocks should be rounded and if so what rounding method should be used.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Exact"              value="0"/>
+                            <EnumElem name="Nearest"            value="1"/>
+                            <EnumElem name="Up to Nearest"      value="2"/>
+                            <EnumElem name="Down to Nearest"    value="3"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RT_FMBD_OverstockLengthIncrement_MU" type="real" title="Increment" value="10" unit="mm" ver="7.5.0" scope="Part">
+                        <Description>This option specifies the value to round to when not using exact wrapped overstock lengths.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RT_FMBD_OverstockLengthIncrement_EU" type="real" title="Increment" value=".25" unit="in" ver="7.5.0" scope="Part">
+                        <Description>This option specifies the value to round to when not using exact wrapped overstock lengths.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Connection List Lengths">
+                    <Pref name="RTE_FMBD_NetlistLengthRoundingMethod" type="int" title="Rounding Method" value="2" ver="7.5.0" scope="Session">
+                        <Description>This option specifies if the cut-length values of the connections in the Connection List should be rounded and if so what rounding method should be used.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Exact"              value="0"/>
+                            <EnumElem name="Nearest"            value="1"/>
+                            <EnumElem name="Up to Nearest"      value="2"/>
+                            <EnumElem name="Down to Nearest"    value="3"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RT_FMBD_NetlistLengthIncrement_MU" type="real" title="Increment" value="10" unit="mm" ver="7.5.0" scope="Part">
+                        <Description>This option specifies the value to round to when not using exact connection cut-lengths in the Connection List.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RT_FMBD_NetlistLengthIncrement_EU" type="real" title="Increment" value=".25" unit="in" ver="7.5.0" scope="Part">
+                        <Description>This option specifies the value to round to when not using exact connection cut-lengths in the Connection List.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0.0" include="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Annotation" csh="PMAN_Routing_Formboard_Annotation">
+                <Pref name="RTE_FMBD_CutSheetAttributesList" type="string_list" title="Attribute List" value="unique_id" ver="7.5.0" scope="Session">
+                    <Description>This list defines the attributes for Formboard cut sheets.</Description>
+                    <MultiLineText height="4"/>
+                </Pref>
+                <Group name="Annotation Preference">
+                    <Pref name="RTE_FMBD_AutoUpdate" type="logical" title="Automatic Update" value="true" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not selected objects should update automatically when the formboard is updated.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_FMBD_FlattenHierarchy" type="logical" title="Flatten Hierarchy" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether or not to show Cable/Shield nodes that do not have an explicit route associated with them.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RT_FMBD_tabnoteInitialNumberOfRows" type="int" title="Number of Rows" value="5" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the number of rows for a new, empty tabular note for a cut sheet annotation.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RT_FMBD_tabnoteInitialNumberOfColumns" type="int" title="Number of Columns" value="5" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the number of columns for a new, empty tabular note for a cut sheet annotation.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Pin List Annotation" csh="PMAN_Routing_Formboard_Pin_List_Annotation">
+                <Pref name="RTE_FMBD_PinListAttributesList" type="string_list" title="Attribute List" value="unique_id" ver="7.5.0" scope="Session">
+                    <Description>This list defines the attributes for the Pin List.</Description>
+                    <MultiLineText height="4"/>
+                </Pref>
+                <Pref name="RTE_FMBD_PinListFilter" type="int" title="Pin List Filter" value="0" ver="7.5.0" scope="Session">
+                    <Description>This option specifies what types of connection list items to display in the Pin List tabular note.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Routed and Unrouted Connections"  value="0"/>
+                        <EnumElem name="Only Routed Connections"  value="1"/>
+                        <EnumElem name="Only Unrouted Connections" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_FMBD_PinListHeaderAttribute" type="string" title="Header Attribute" value="" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the attribute name to display in the Pin List header.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="RTE_FMBD_PinListColumnWidth_MU" type="real" title="Column Width" value="40.0" unit="mm" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the column width for a new, empty pin list.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_FMBD_PinListColumnWidth_EU" type="real" title="Column Width" value="2.0" unit="in" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the column width for a new, empty pin list.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Object Attribute Annotation" csh="PMAN_Routing_Formboard_Object_Attribute_Annotation">
+                <Pref name="RT_FMBD_ObjectAttributeInitialNumberOfRows" type="int" title="Number of Rows" value="2" ver="7.5.3" scope="Session">
+                    <Description>This option specifies the number of rows for a new, empty tabular note for an object attribute annotation.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="RT_FMBD_ObjectAttributeInitialNumberOfColumns" type="int" title="Number of Columns" value="5" ver="7.5.3" scope="Session">
+                    <Description>This option specifies the number of columns for a new, empty tabular note for an object attribute annotation.</Description>
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="1" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_FMBD_ObjectAttributeAutoPlacement" type="logical" title="Automatic Placement" value="false" ver="7.5.3" scope="Session">
+                    <Description>This option determines whether or not object attribute annotations should be placed automatically when an object (for example, a stock) is selected.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="On" value="true"/>
+                        <EnumElem name="Off" value="false"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Mechanical" csh="PMAN_Routing_Mechanical">
+            <Tab name="General" csh="PMAN_Routing_Mechanical_General">
+                <Group name="Allowable Curves">
+                    <Pref name="RTE_MechanicalPathAllowCurvesLine" type="logical" title="Lines" value="true" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not lines are used when creating a path.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_MechanicalPathAllowCurvesArc" type="logical" title="Arcs" value="true" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not arcs are used when creating a path.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_MechanicalPathAllowCurvesSpline" type="logical" title="Splines" value="true" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not splines are used when creating a path.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Pref name="RTE_MechanicalMinimumOverstockWidth_MU" type="real" title="Minimum Overstock Width" value="2.5" unit="mm" ver="6.0.2" scope="Session">
+                    <Description>This option specifies the minimum overstock length for overstock that does not have a specified width.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_MechanicalMinimumOverstockWidth_EU" type="real" title="Minimum Overstock Width" value="0.1" unit="in" ver="6.0.2" scope="Session">
+                    <Description>This option specifies the minimum overstock length for overstock that does not have a specified width.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Group name="Split Duct">
+                    <Pref name="RTE_DivisionFlowType" type="int" title="Division Flow Type" value="0" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the type of flow in a division.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Absolute" value="0"/>
+                            <EnumElem name="Relative" value="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_MinimumPercentFlowInDivision" type="real" title="Minimum Absolute or Relative Flow in a Division" value="10" unit="%" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the minimum flow allowed in a division. The type of flow determines if this value is for minimum absolute or relative flow. The highest value for minimum flow can be 50% because divisions are always created in pairs.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="1.0" include="1"/>
+                            <UpperBound value="50.00" include ="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Schematics">
+                    <Pref name="RTE_MechanicalSchematicsIntegrationConnectAtStartup" type="logical" title="Connect Schematics Application at Startup" value="false" ver="7.5.1" scope="Session">
+                        <Description>This option determines whether or not Routing Mechanical should connect with the third-party schematics application when entering the Routing Mechanical application.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_MechanicalSchematicsIntegrationFolder_WIN" type="string" title="Schematics Exchange Folder" value="C:\Temp\SchematicsExchangeDir" ver="7.5.1" scope="Session">
+                        <Description>This option specifies the location where Routing and the third-party schematics application will exchange XML communication files.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                    <Pref name="RTE_MechanicalSchematicsIntegrationFolder_UNX" type="string" title="Schematics Exchange Folder" value="/tmp/SchematicsExchangeDir" ver="7.5.1" scope="Session">
+                        <Description>This option specifies the location where Routing and the third-party schematics application will exchange XML communication files.</Description>
+                        <BrowseDirSel/>
+                    </Pref>
+                </Group>
+                <Group name="Run">
+                    <Pref name="RTE_SplitRunName" type="string" title="Split Run Appended String" value="Split" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the suffix appended to the name of a run created by splitting an existing run in two.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="RTE_AttributePrefix" type="string" title="Run and Run Item Attribute Prefix String" value="COMOS_" ver="10.0.1" scope="Session">
+                        <Description>This option specifies the prefix to be added to the names of the attributes on the Run and its items coming from piperun XML files.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="RTE_AttributeSuffix" type="string" title="Run and Run Item Attribute Suffix String" value="" ver="10.0.1" scope="Session">
+                        <Description>This option specifies the suffix to be added to the names of the attributes on the Run and its items coming from piperun XML files.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+                <Group name="Unify Path">
+                    <Pref name="RTE_UnifyPathAllowDummySymbolPlacement" type="logical" title="Place Dummy Symbol for Parts Not Found" value="false" ver="8.0.0" scope="Session">
+                        <Description>This option determines whether or not to place a dummy symbol if a part with the specified values is not found in the part library.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Bend Radius Table" csh="PMAN_Routing_Mechanical_Bend_Radius_Table">
+                <Pref name="RTE_BendRadiusTableExcel_WIN" type="string" title="Bend Radius Table Spreadsheet File" value="$UGII_ROUTE_MECH_KIT_DIR\metric\tables\bend_radius_table_mm.xlsx" ver="2212" scope="Session">
+                    <Description>This option specifies the bend radius table Excel file for Routing Mechanical.</Description>
+                    <BrowseFileSel type="xlsx"/>
+                </Pref>
+                <Pref name="RTE_BendRadiusTableExcel_UNX" type="string" title="Bend Radius Tables Spreadsheet File" value="$UGII_ROUTE_MECH_KIT_DIR/metric/tables/bend_radius_table_mm.xlsx" ver="2212" scope="Session">
+                    <Description>This option specifies the bend radius table Excel file for Routing Mechanical.</Description>
+                    <BrowseFileSel type="xlsx"/>
+                </Pref>
+            </Tab>
+
+            <Tab name="HVAC" csh="PMAN_Routing_Mechanical_HVAC">
+                <!--  BPN = branch path numbering -->
+                <Pref name="RTE_BPN_SequenceMethod" type="int" title="Sequence Method" value="0" ver="8.5.1" scope="Session">
+                    <Description>This option specifies the sequence method used to label the branches.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="1, 2, 3,..." value="0"/>
+                        <EnumElem name="A, B, C,..." value="1"/>
+                        <EnumElem name="a, b, c,..." value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_BPN_FirstBranchID" type="string" title="First Branch ID" value="(PARENT_BRANCH_ID*2)" ver="9.0.1" scope="Session">
+                    <Description>This option specifies the formula with which to calculate the value of the First Branch ID.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="RTE_BPN_NextBranchID" type="string" title="Next Branch ID" value="(PREVIOUS_BRANCH_ID+1)" ver="8.5.1" scope="Session">
+                    <Description>This option specifies the formula with which to calculate the value of the Next Branch ID.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="RTE_BPN_AttributeName" type="string" title="Attribute Name" value="HVAC Duct Branch ID" ver="8.5.1" scope="Session">
+                    <Description>This option specifies the name of the attribute that will hold the value of the branch ID.</Description>
+                    <String/>
+                </Pref>
+
+                <Pref name="RTE_ForceDuctReinforcementType" type="logical" title="Force Duct Reinforcement Type" value="false" ver="8.5.2" scope="Session">
+                    <Description>This option determines whether or not the default reinforcement type should be used for all ducts.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_DuctReinforcementType" type="int" title="Reinforcement Type" value="0" ver="8.5.2" scope="Session">
+                    <Description>This option specifies if inside, outside, or no reinforcement should be placed on a duct.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="None"        value="0"/>
+                        <EnumElem name="Inside"      value="1"/>
+                        <EnumElem name="Outside"     value="2"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Logical" csh="PMAN_Routing_Logical">
+            <Tab name="General" csh="PMAN_Routing_Logical_General">
+                <Group name="Allowable Curves">
+                    <Pref name="RTE_LogicalPathAllowCurvesLine" type="logical" title="Lines" value="true" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not lines are used when creating a path.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_LogicalPathAllowCurvesArc" type="logical" title="Arcs" value="false" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not arcs are used when creating a path.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_LogicalPathAllowCurvesSpline" type="logical" title="Splines" value="false" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not splines are used when creating a path.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="On" value="true"/>
+                            <EnumElem name="Off" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Line Style Pattern">
+                    <Pref name="RTL_LogicalFontLayer" type="int" title="Layer" value="2" ver="8.5.0" scope="Session">
+                        <Description>This option specifies the layer on which the line style should be used. This value may be overridden by the Work Layer option in the Add Line Font dialog box.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="256" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="Bill of Materials" csh="PMAN_Routing_BOM">
+            <Tab name="General" csh="PMAN_Routing_BOM_General">
+                <Pref name="RTE_BomDetailLevel" type="int" title="Detail Level" value="0" ver="7.5.0" scope="Session">
+                    <Description>This option specifies how fabrications are reported on a Routing Bill of Materials.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Summary" value="0"/>
+                        <EnumElem name="Itemized" value="1"/>
+                    </Data>
+                    <Docum>
+                        <Formatted>
+Summary: The system will report only components and stock in the current work part.
+Itemized: The existence of each routing object is reported individually, regardless of its position in the assembly hierarchy.
+                        </Formatted>
+                    </Docum>
+                </Pref>
+                <Pref name="RTE_BomReportCountOfStockPieces" type="logical" title="Report Count of Stock Pieces" value="true" ver="7.5.0" scope="Session">
+                    <Description>This option determines whether or not the Quantity column for rows containing stocks or overstocks should report the number of pieces of stock for the "Summary" level of reporting.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_BomFabricationNumbering" type="int" title="Fabrication Numbering" value="0" ver="7.5.0" scope="Session">
+                    <Description>This option specifies the numbering of any fabrications in a Routing Bill of Materials.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Sequential" value="0"/>
+                        <EnumElem name="Original" value="1"/>
+                    </Data>
+                    <Docum>
+                        <Formatted>
+Sequential: Sequential numbering is used as the callout in the Routing Bill of Materials.
+Original: The user supplied fabrication numbering is used as the callout in the Routing Bill of Materials.
+                        </Formatted>
+                    </Docum>
+                </Pref>
+                <Pref name="RTE_BomIncludeComponents" type="logical" title="Include Components" value="false" ver="7.5.0" scope="Session">
+                    <Description>This option determines whether to include components underneath the Assembly.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_BomIncludeGaskets" type="logical" title="Include Gaskets, Nuts, and Bolts" value="false" ver="7.5.0" scope="Session">
+                    <Description>This option determines whether to include Routing UDOs created to store information about Bolts and Gaskets (under Piping Preferences of Routing Mechanical).</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Group name="Stock Options">
+                    <Pref name="RTE_BomIncludeStock" type="logical" title="Include Stock" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether to include mechanical stock such as conduit, filler stock, piping, raceway, etc. (anything assigned using the "Stock" dialog box).</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_BomIncludeOverstock" type="logical" title="Include Overstock" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether to include anything assigned using the "Overstock" dialog box (except for overstocks that are defined as "Wrapped" overstocks).</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_BomIncludeWireStock" type="logical" title="Include Wire Stock" value="false" ver="7.5.0" scope="Session">
+                        <Description>This option determines whether to include wire stocks from Routing Electrical that have a "PART_NUMBER" attribute.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="RTE_BomStockLength" type="int" title="Length Reporting" value="0" ver="7.5.0" scope="Session">
+                        <Description>This option specifies how stock length should be reported.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Single Sum" value="0"/>
+                            <EnumElem name="List Each" value="1"/>
+                        </Data>
+                        <Docum>
+                            <Formatted>
+Single Sum: Collapses all stocks of a given type into a single line and displays the sum of all lengths in the "Length" column.
+List Each: Groups all stocks of a given type and length together (applicable only when the "Level" option is set to "Itemized").
+                            </Formatted>
+                        </Docum>
+                    </Pref>
+                </Group>
+                <Group name="Template Parts">
+                    <Pref name="RTE_BomMetricTemplatePartName_WIN" type="string" title="Metric Template" value="routing_bom_metric.prt" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the name of the metric template part to use for the Routing Bill of Materials. If no path is given with the part, the environment variable UGII_ROUTING_BOM_PATH is used as the path to the part.</Description>
+                        <BrowseFileSel type="prt"/>
+                    </Pref>
+                    <Pref name="RTE_BomEnglishTemplatePartName_WIN" type="string" title="English Template" value="routing_bom_english.prt" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the name of the inch template part to use for the Routing Bill of Materials. If no path is given with the part, the environment variable UGII_ROUTING_BOM_PATH is used as the path to the part.</Description>
+                        <BrowseFileSel type="prt"/>
+                    </Pref>
+                    <Pref name="RTE_BomMetricTemplatePartName_UNX" type="string" title="Metric Template" value="routing_bom_metric.prt" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the name of the metric template part to use for the Routing Bill of Materials. If no path is given with the part, the environment variable UGII_ROUTING_BOM_PATH is used as the path to the part.</Description>
+                        <BrowseFileSel type="prt"/>
+                    </Pref>
+                    <Pref name="RTE_BomEnglishTemplatePartName_UNX" type="string" title="English Template" value="routing_bom_english.prt" ver="8.0.0" scope="Session">
+                        <Description>This option specifies the name of the inch template part to use for the Routing Bill of Materials. If no path is given with the part, the environment variable UGII_ROUTING_BOM_PATH is used as the path to the part.</Description>
+                        <BrowseFileSel type="prt"/>
+                    </Pref>
+                </Group>
+                <Pref name="RTE_BomWriteToListingWindow" type="logical" title="Write to Information Window" value="false" ver="7.5.0" scope="Session">
+                    <Description>This option determines whether or not to write the Bill of Materials information to the Information window when a new BOM is created.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="RTE_BomIgnoreReferenceSets" type="logical" title="Ignore Reference Sets" value="false" ver="2206" scope="Session">
+                    <Description>This option determines whether or not the Routing Bill of Materials will ignore reference sets for stock in components.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>
+

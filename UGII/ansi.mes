@@ -1,0 +1,2248 @@
+/
+/ ************************************************************ 
+/ *****      Copyright 1991.  Valisys Corporation.       *****
+/ ***** All rights reserved under Federal copyright law. *****
+/ *****                                                  *****
+/ ***** This program is the sole property of Valisys     *****
+/ ***** Corporation, and is considered a trade secret    *****
+/ ***** and a proprietary product of Valisys Corporation.*****
+/ ***** Use or disclosure of this program or any part of *****
+/ ***** this program in either executable form or source *****
+/ ***** form by other than authorized personnel of       *****
+/ ***** Valisys Corporation or its licensees is strictly *****
+/ ***** forbidden by law.                                *****
+/ ************************************************************
+/
+/ ANSI.MES
+/                    ANSI CHECK MESSAGES
+/
+/23456789 12 15   901234567890123456789012345  49 12345678901234567   72
+/..........V..V.................................V....A.................V
+/
+/ UNKNOWN TYPE  MESSAGE NUMBERS 51000-51019
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051000  3   INVALID TEXT
+&              Text in compartment &C01 is 
+&              invalid.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ EMPTY TYPE  MESSAGE NUMBERS 51020-51039
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051020  3   EMPTY COMPARTMENT
+&              Empty compartment in feature 
+&              control frame.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ SYMBOL TYPE  MESSAGE NUMBERS 51040-51059
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051040  3   EXTRA TEXT
+&              Extra text &C01 found in 
+&              compartment &C02.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051041  3   EXTRA GDT SYMBOLS
+&              &I01 symbols found in compartment
+&              &C01.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051042  3   SYMMETRY NOT SUPPORTED
+&              Symmetry symbol is not supported.
+&              When symmetry is required,
+&              positional tolerancing is used.
+&              ANSI Y14.5M-1982 Section: 5.12.1
+/
+/ TOLERANCE TYPE  MESSAGE NUMBER 51060-51079
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051060  3   NO TOLERANCE SPECIFIED
+&              Tolerance value required.  No 
+&              tolerance found in compartment
+&              &C01.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051061  3   MULTIPLE TOLERANCES FOUND
+&              Only one tolerance allowed per
+&              compartment.  &I01 tolerances 
+&              found in compartment &C01.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051062  3   NEGATIVE TOLERANCE
+&              Positive tolerance value required.
+&              Negative tolerance &R01 found in 
+&              compartment &C01.
+&              ANSI Y14.5M-1982 Section: 2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051063  3   ZERO TOLERANCE AT RFS
+&              Zero based tolerancing should be
+&              used at MMC only.
+&              ANSI Y14.5M-1982 Section: 2.8.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051064  3   INCOMPLETE PER UNIT BASIS
+&              Incomplete per unit basis
+&              tolerance specified in compartment
+&              &C01.
+&              ANSI Y14.5M-1982 Section: 6.4.1.4 &
+&              6.4.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051065  3   DIAMETER SYMBOL IN WRONG LOCATION
+&              Diameter symbol must proceed 
+&              the tolerance value.  A diameter
+&              symbol follows the tolerance in 
+&              compartment &C01.
+&              ANSI Y14.5M-1982 Section: 3.3.7
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051066  3   MODIFIER SYMBOL IN WRONG LOCATION
+&              Modifier symbol must follow the
+&              tolerance value.  
+&              &I01 modifier symbol(s) proceed the
+&              tolerance value in compartment 
+&              &C01.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051067  3   MULTIPLE MCM SYMBOLS
+&              Only one material condition 
+&              modifier can be specified in a 
+&              tolerance compartment.  &I01
+&              material condition modifiers are
+&              specified in compartment &C01.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051068  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              must be specified in its own 
+&              feature control frame.  &I01 other
+&              symbol(s) found in compartment 
+&              &C01.
+&              ANSI Y14.5M-1982 Section: 3.4.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051069  3   ENVELOPE SYMBOL NOT ALLOWED
+&              Envelope symbol can only be
+&              applied to coordinate dimensions.
+&              Envelope symbol found in
+&              compartment &C01.
+&              ANSI Y14.5M-1982 Section: 3.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051070  3   UNIT DESIGNATION IN WRONG LOCATION
+&              Linear unit designation, MM and
+&              IN, must follow the tolerance value
+&              and proceed the material condition 
+&              modifiers.
+&              ANSI Y14.5M-1982 Section: 1.5.3.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051071  3   EXTRA TEXT IN COMPARTMENT
+&              Extra text &C01 found in 
+&              compartment &C02.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051072  2   W: ZERO PROJECTED TOLERANCE
+&              Warning: Zero projected tolerance
+&              value is specified in compartment
+&              &C01.
+/
+/
+/ TOLERANCE_MAX TYPE  MESSAGE NUMBERS 51080-51099
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051080  3   NO TOLERANCE VALUE
+&              Tolerance value required.  No
+&              tolerance found in compartment 
+&              &C01.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051081  3   MULTIPLE TOLERANCES FOUND
+&              Only one tolerance allowed per
+&              compartment.  &I01 tolerances 
+&              found in compartment &C01.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051082  3   NEGATIVE TOLERANCE 
+&              Positive tolerance value required.
+&              Negative tolerance &R01 found in 
+&              compartment &C01.
+&              ANSI Y14.5M-1982 Section: 2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051083  3   DIAMETER SYMBOL IN WRONG LOCATION
+&              Diameter symbol must proceed the 
+&              tolerance value.  A diameter symbol
+&              follows the tolerance in 
+&              compartment &C01.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051084  3   MCM SYMBOL IN WRONG LOCATION
+&              Material condition modifier must 
+&              follow the tolerance value.  
+&              &I01 material condition
+&              modifier(s) proceed the tolerance
+&              value in compartment 
+&              &C01.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051085  3   MMC OR LMC IN MAX TOLERANCE
+&              RFS is the only material condition
+&              modifier allowed when a MAX 
+&              tolerance is specified.  &C01
+&              symbol was found in compartment
+&              &C02.
+&              ANSI Y14.5M-1982 Section: 6.6.1.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051086  3   ENVELOPE SYMBOL NOT ALLOWED
+&              Envelope symbol can only be
+&              applied to coordinate dimensions.
+&              Envelope symbol found in
+&              compartment &C01.
+&              ANSI Y14.5M-1982 Section: 3.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051087  3   UNIT DESIGNATION IN WRONG LOCATION
+&              Linear unit designation, MM and
+&              IN, must follow the tolerance value
+&              and proceed the material condition
+&              modifiers.
+&              ANSI Y14.5M-1982 Section: 1.5.3.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051088  3   MAX SPECIFIED IN WRONG LOCATION
+&              The letters MAX must follow the 
+&              tolerance.  The letters MAX are
+&              in the wrong location in 
+&              compartment &C01.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051089  3   EXTRA TEXT IN COMPARTMENT
+&              Extra text &C01 found in 
+&              compartment &C02.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ DATUM REFERENCE TYPE  MESSAGE NUMBER 51100-51119
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051100  3   INVALID DATUM REFERENCE
+&              Datum references have the form |A|
+&              or |A-B|.  Dashes enclose datum
+&              letters in compartment &C01.
+&              ANSI Y14.5M-1982 Section: 3.4.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051101  3   INCOMPLETE COMPOUND DATUM
+&              Compound datum references have the
+&              form |A-B|.  Compartment &C01
+&              has an incomplete compound datum 
+&              definition.
+&              ANSI Y14.5M-1982 Section: 3.4.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051102  3   MORE THAN TWO DATUM LETTERS
+&              Datum references must have one or
+&              two letters. &I01 letters have
+&              been used in compartment &C01.
+&              ANSI Y14.5M-1982 Section: 3.3.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051103  3   INVALID SYMBOL IN DATUM 
+&              MMC, RFS, and LMC are the only 
+&              valid symbols in a datum
+&              reference.  The symbol &C01 found
+&              in compartment &C02.
+&              ANSI Y14.5M-1982 Section: 3.4.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051104  3   MCM BEFORE DATUM
+&              Material condition modifier must
+&              follow the datum.  The symbol
+&              &C01 proceeds the datum in
+&              compartment &C02.
+&              ANSI Y14.5M-1982 Section: 3.4.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051105  3   MORE THAN THREE COMPOUND DATUMS
+&              Valisys only allows three datums
+&              for a compound datum.  &I01 
+&              datums found in compartment
+&              &C01.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051106  3   LETTERS I, O AND Q ARE NOT ALLOWED
+&              The letters I, O, and Q are not
+&              allowed in datum references.  The
+&              compartment &C01 contains the
+&              letter &C02.
+&              ANSI Y14.5M-1982 Section: 3.3.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051107  3   NUMBER FOUND IN DATUM
+&              Alpha characters must be used in
+&              datum references.  The number
+&              &C01 was found in compartment
+&              &C02.
+&              ANSI Y14.5M-1982 Section: 3.3.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051108  3   EXTRA TEXT IN COMPARTMENT
+&              Extra text &C01 found in 
+&              compartment &C02.
+&              ANSI Y14.5M-1982 Section: 3.4.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051109  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum references can not
+&              be specified in a compound datum.
+&              Datum &C01 was specified &I01 
+&              times in compartment &C02.
+&              ANSI Y14.5M-1982 Section: 3.4.2.1
+/
+/ DATUM DEFINITION TYPE  MESSAGE NUMBERS 51120-51139
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051120  3   MISSING DASH IN DATUM DEFINITION
+&              Datum definitions have the form
+&              |-A-|.  The datum definition
+&              &C01 has a missing dash.
+&              ANSI Y14.5M-1982 Section: 3.3.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051121  3   EXTRA DASH IN DATUM DEFINITION
+&              Datum definitions have the form
+&              |-A-|. The datum definition 
+&              &C01 has an extra dash.
+&              ANSI Y14.5M-1982 Section: 3.3.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051122  3   LETTERS I, O AND Q ARE NOT ALLOWED
+&              The letters I, O, and Q are not
+&              allowed in datum definitions.  The
+&              datum definition &C01 contains the
+&              letter &C02.
+&              ANSI Y14.5M-1982 Section: 3.3.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051123  3   MORE THAN TWO DATUM LETTERS
+&              Datum definitions must have one or
+&              two letters. &I01 letters have
+&              been used in the datum definition.
+&              ANSI Y14.5M-1982 Section: 3.3.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051124  3   SYMBOL IN DATUM DEFINITION
+&              Symbols are not allowed in datum 
+&              definitions.  The symbol &C01
+&              was found in the datum definition.
+&              ANSI Y14.5M-1982 Section: 3.3.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051125  3   NUMBER IN DATUM DEFINITION
+&              Alpha characters must be used in
+&              datum definitions.  The number
+&              &C01 was found in compartment
+&              &C02.
+&              ANSI Y14.5M-1982 Section: 3.3.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051126  3   EXTRA TEXT IN COMPARTMENT
+&              Extra text &C01 found in the 
+&              datum definition &C02.
+&              ANSI Y14.5M-1982 Section: 3.3.2
+/
+/ TOO MANY INVALID COMPARTMENTS  MESSAGE NUMBER 51140-51159
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051140  3  TOO MANY INVALID COMPARTMENTS
+&             Feature control frame checking
+&             was stopped because of excessive
+&             errors in compartments.
+/
+/ ORDER OF COMPARTMENTS  MESSAGE NUMBERS 51160-51179
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051160  3   MORE THAN ONE SYMBOL COMPARTMENT
+&              Only one symbol compartment is 
+&              valid in a feature control frame.
+&              &I01 symbol compartments found.
+&              ANSI Y14.5M-1982 Section: 3.4.1.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051161  3   NO TOLERANCE COMPARTMENT
+&              A tolerance compartment is 
+&              required for each feature control 
+&              frame.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051162  3   MULTIPLE TOLERANCE COMPARTMENTS
+&              Unless MAX tolerance is specified,
+&              only one tolerance compartment is
+&              allowed. &I01 tolerance 
+&              compartments have been specified.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051163  3   MULTIPLE MAX TOL COMPARTMENTS
+&              Only one MAX tolerance compartment
+&              is allowed.  &I01 MAX tolerance
+&              compartments have been specified.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051164  3   MORE THAN THREE DATUM REFERENCES
+&              A maximum of three datum reference
+&              compartments can be specified.
+&              &I01 datum reference compartments
+&              have been specified.
+&              ANSI Y14.5M-1982 Section: 4.1.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051165  3   INCORRECT FCF COMPARTMENT ORDER
+&              The feature control frame 
+&              compartments are not in the 
+&              correct order.  The correct order
+&              is &C01.
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051167  3   NO SYMBOL COMPARTMENT
+&              A symbol compartment must be 
+&              specified in each feature control
+&              frame. 
+&              ANSI Y14.5M-1982 Section: 3.4.1
+/
+/ PROJECTED TOLERANCE ZONE COMPARTMENTS  MESSAGE NUMBER 51180-51199
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051180  3   NO PROJECTED TOLERANCE SYMBOL
+&              Projected tolerance zone symbol
+&              must follow the tolerance value.
+&              The feature control frame 
+&              &C01 does not have a 
+&              projected tolerance zone symbol
+&              following the tolerance value.
+&              ANSI Y14.5M-1982 Section: 3.4.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051181  3   UNIT BASIS NOT ALLOWED
+&              Unit basis tolerance is not 
+&              allowed for projected tolerance
+&              zones.
+&              ANSI Y14.5M-1982 Section: 6.4.1.4 &
+&              6.4.2.1
+/
+/ POSITION FCF's  MESSAGE NUMBERS 51200-51219 
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051200  3   UNIT BASIS NOT ALLOWED
+&              Unit basis tolerance is not 
+&              allowed for position.
+&              ANSI Y14.5M-1982 Section: 6.4.1.4 &
+&              6.4.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051201  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              must be specified in its own 
+&              feature control frame.  Projected 
+&              tolerance zone symbol found in the
+&              position feature control
+&              frame.
+&              ANSI Y14.5M-1982 Section: 3.4.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051202  3   NO MATERIAL CONDITION MODIFIER
+&              Tolerance values and datum
+&              features of size must be followed
+&              by a material condition modifier
+&              for positional tolerances.
+&              ANSI Y14.5M-1982 Section: 2.8
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051203  3   RFS SPECIFIED WITH MAX TOLERANCE
+&              MMC or LMC must be specified in 
+&              the tolerance compartment when MAX
+&              tolerance is specified.
+&              ANSI Y14.5M-1982 Section: 2.8.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051204  3   MAX TOLERANCE LESS THAN TOLERANCE
+&              The tolerance value in the MAX 
+&              tolerance compartment must be
+&              greater than the tolerance value
+&              in the tolerance compartment. The
+&              tolerance value &R01 is greater
+&              than the MAX tolerance of &R02.
+&              ANSI Y14.5M-1982 Section: 2.8.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051205  3   DIFFERENT TOL ZONE TYPE IN MAX
+&              The tolerance zones for the 
+&              tolerance compartment and the MAX
+&              tolerance compartment must both be
+&              diameter or total wide.  The
+&              &C01 compartment has a
+&              diameter zone and the &C02
+&              compartment has a total wide zone.
+&              ANSI Y14.5M-1982 Section: 2.8.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051206  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum references can not
+&              be specified.  Datum &C01 has 
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ANSI Y14.5M-1982 Section: 3.4.2.1
+/
+/ CONCENTRICITY FCF's  MESSAGE NUMBERS 51220-51239
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051220  3   UNIT BASIS NOT ALLOWED
+&              Unit basis tolerance is not allowed
+&              for concentricity.
+&              ANSI Y14.5M-1982 Section: 6.4.1.4 &
+&              6.4.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051221  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              must be specified in its own 
+&              feature control frame.  Projected 
+&              tolerance zone symbol found in the
+&              concentricity feature control
+&              frame.
+&              ANSI Y14.5M-1982 Section: 3.4.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051222  3   DIAMETER SYMBOL REQUIRED
+&              A diameter symbol must be 
+&              specified for concentricity.
+&              ANSI Y14.5M-1982 Section: 5.11.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051223  3   MAX TOLERANCE NOT ALLOWED
+&              MAX tolerance can not be specified
+&              for concentricity. Concentricity
+&              tolerance is applied on a RFS basis
+&              only.
+&              ANSI Y14.5M-1982 Section: 5.11.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051224  3   MMC AND LMC NOT ALLOWED
+&              MMC or LMC can not be specified
+&              for concentricity. Concentricity
+&              tolerance is applied on a RFS
+&              basis only.
+&              ANSI Y14.5M-1982 Section: 5.11.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051225  3   NO DATUM REFERENCED
+&              A concentricity tolerance 
+&              specifies a cylindrical tolerance
+&              zone whose axis coincides with a
+&              datum axis. A datum must be 
+&              be specified for concentricity.
+&              ANSI Y14.5M-1982 Section: 5.11.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051226  3   MMC AND LMC NOT ALLOWED
+&              MMC or LMC can not be specified
+&              for concentricity. Datums for
+&              concentricity are applied on a RFS
+&              basis only.
+&              ANSI Y14.5M-1982 Section: 5.11.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051227  2   W: TERTIARY DATUM IS NOT USED
+&              WARNING: The specification of a 
+&              tertiary datum has no effect on 
+&              the analysis for concentricity.
+&              ANSI Y14.5M-1982 Section: 4.4.9.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051228  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum references can not
+&              be specified.  Datum &C01 has 
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ANSI Y14.5M-1982 Section: 3.4.2.1
+/
+/ SYMMETRY FCF's  MESSAGE NUMBERS 51240-51259
+/-----------------------------------------------------------------------
+/
+/ ANGULARITY FCF's  MESSAGE NUMBERS 51260-51279
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051260  3   UNIT BASIS IS NOT ALLOWED
+&              Unit basis tolerance is not
+&              allowed for angularity.
+&              ANSI Y14.5M-1982 Section: 6.4.1.4 &
+&              6.4.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051261  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              must be specified in its own 
+&              feature control frame.  Projected 
+&              tolerance zone symbol found in the
+&              angularity feature control
+&              frame.
+&              ANSI Y14.5M-1982 Section: 3.4.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051262  3   NO DATUM REFERENCED
+&              At least one datum must be 
+&              specified for angularity.
+&              ANSI Y14.5M-1982 Section: 6.6.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051263  3   RFS SPECIFIED WITH MAX TOLERANCE
+&              When MAX tolerance is specified,
+&              MMC or LMC must be specified in
+&              the tolerance compartment.
+&              ANSI Y14.5M-1982 Section: 2.8.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051264  3   MAX TOLERANCE LESS THAN TOLERANCE
+&              The tolerance value in the MAX
+&              tolerance compartment must be
+&              greater than the tolerance value
+&              in the tolerance compartment. The
+&              tolerance value &R01 is greater
+&              than the MAX tolerance of &R02.
+&              ANSI Y14.5M-1982 Section: 2.8.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051265  3   DIFFERENT TOL ZONE TYPE IN MAX
+&              The tolerance zones for the 
+&              tolerance compartment and the MAX
+&              tolerance compartment must both be
+&              diameter or total wide. The 
+&              &C01 compartment has a
+&              diameter zone and the &C02
+&              compartment has a total wide zone.
+&              ANSI Y14.5M-1982 Section: 2.8.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051266  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum references can not
+&              be specified.  Datum &C01 has 
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ANSI Y14.5M-1982 Section: 3.4.2.1
+/
+/ PERPENDICULARITY FCF's  MESSAGE NUMBERS 51280-51299
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051280  3   UNIT BASIS NOT ALLOWED
+&              Unit basis tolerance is not
+&              allowed for perpendicularity.
+&              ANSI Y14.5M-1982 Section: 6.4.1.4 &
+&              6.4.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051281  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              must be specified in its own 
+&              feature control frame.  Projected 
+&              tolerance zone symbol found in the
+&              perpendicularity feature control
+&              frame.
+&              ANSI Y14.5M-1982 Section: 3.4.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051282  3   NO DATUM REFERENCED
+&              A datum must be specified for 
+&              perpendicularity.
+&              ANSI Y14.5M-1982 Section: 6.6.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051283  3   RFS SPECIFIED WITH MAX TOLERANCE
+&              MMC or LMC must be specified in 
+&              the tolerance compartment when MAX
+&              tolerance is specified.
+&              ANSI Y14.5M-1982 Section: 2.8.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051284  3   MAX TOLERANCE LESS THAN TOLERANCE
+&              The tolerance value in the MAX
+&              tolerance compartment must be 
+&              greater than the tolerance value
+&              in the tolerance compartment. The
+&              tolerance value &R01 is greater
+&              than the MAX tolerance of
+&              &R02.
+&              ANSI Y14.5M-1982 Section: 2.8.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051285  3   DIFFERENT TOL ZONE TYPE IN MAX
+&              The tolerance zones for the 
+&              tolerance compartment and the MAX
+&              tolerance compartment must both be
+&              diameter or total wide. The 
+&              &C01 compartment has a
+&              diameter zone and the &C02
+&              compartment has a total wide zone.
+&              ANSI Y14.5M-1982 Section: 2.8.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051286  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum references can not
+&              be specified.  Datum &C01 has 
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ANSI Y14.5M-1982 Section: 3.4.2.1
+/
+/ PARALLELISM FCF's MESSAGE NUMBERS 51300-51319
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051300  3   UNIT BASIS NOT ALLOWED
+&              Unit basis tolerance is not
+&              allowed for parallelism.
+&              ANSI Y14.5M-1982 Section: 6.4.1.4 &
+&              6.4.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051301  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              must be specified in its own 
+&              feature control frame.  Projected 
+&              tolerance zone symbol found in the
+&              parallelism feature control
+&              frame.
+&              ANSI Y14.5M-1982 Section: 3.4.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051302  3   NO DATUM REFERENCED
+&              A datum must be specified for
+&              parallelism.
+&              ANSI Y14.5M-1982 Section: 6.6.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051303  3   RFS SPECIFIED WITH MAX TOLERANCE
+&              MMC or LMC must be specified in
+&              the tolerance compartment when MAX
+&              tolerance is specified.
+&              ANSI Y14.5M-1982 Section: 2.8.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051304  3   MAX TOLERANCE LESS THAN TOLERANCE
+&              The tolerance value in the MAX
+&              tolerance compartment must be
+&              greater than the tolerance value
+&              in the tolerance compartment. The
+&              tolerance value &R01 is 
+&              greater than the MAX tolerance of
+&              &R02.
+&              ANSI Y14.5M-1982 Section: 2.8.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051305  3   DIFFERENT TOL ZONE TYPE IN MAX
+&              The tolerance zones for the 
+&              tolerance compartment and the MAX
+&              tolerance compartment must both be
+&              diameter or total wide. The 
+&              &C01 compartment has a
+&              diameter zone and the &C02
+&              compartment has a total wide zone.
+&              ANSI Y14.5M-1982 Section: 2.8.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051306  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum references can not
+&              be specified.  Datum &C01 has
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ANSI Y14.5M-1982 Section: 3.4.2.1
+/
+/ CYLINDRICITY FCF's  MESSAGE NUMBERS 51320-51339
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051320  3   DIAMETER SYMBOL NOT ALLOWED
+&              Diameter symbol is not allowed for
+&              cylindricity.  Cylindricity is a
+&              condition of a surface of
+&              revolution in which all points of
+&              a surface are equidistant from a
+&              common center axis.
+&              ANSI Y14.5M-1982 Section: 6.4.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051321  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              must be specified in its own 
+&              feature control frame.  Projected 
+&              tolerance zone symbol found in the
+&              cylindricity feature control
+&              frame.
+&              ANSI Y14.5M-1982 Section: 3.4.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051322  3   MATERIAL CONDITION MODIFIER FOUND
+&              Material condition modifiers can
+&              not be specified for cylindricity.
+&              Cylindricity is a condition of a 
+&              surface of revolution in which all
+&              points are equidistant from a
+&              common center axis.
+&              ANSI Y14.5M-1982 Section: 6.4.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051323  3   UNIT BASIS NOT ALLOWED
+&              Unit basis tolerance is not
+&              allowed for cylindricity.
+&              ANSI Y14.5M-1982 Section: 6.4.1.4 &
+&              6.4.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051324  3   MAX TOLERANCE NOT ALLOWED
+&              MAX tolerance can not be specified
+&              for cylindricity.  
+&              ANSI Y14.5M-1982 Section: 6.4.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051325  3   DATUMS NOT ALLOWED
+&              Datums can not be specified for
+&              cylindricity.  Form tolerances are
+&              applicable to single features or
+&              elements of single features; 
+&              therefore, form tolerances are not
+&              related to datums.
+&              ANSI Y14.5M-1982 Section: 6.4
+/
+/ FLATNESS FCF's  MESSAGE NUMBERS 51340-51359
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051340  3   DIAMETER SYMBOL NOT ALLOWED
+&              Diameter symbol is not allowed for
+&              flatness.  Flatness is a condition
+&              of a surface having all elements
+&              in one plane.
+&              ANSI Y14.5M-1982 Section: 6.4.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051341  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              must be specified in its own 
+&              feature control frame.  Projected 
+&              tolerance zone symbol found in the
+&              flatness feature control
+&              frame.
+&              ANSI Y14.5M-1982 Section: 3.4.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051342  3   MATERIAL CONDITION MODIFIER FOUND
+&              Material condition modifiers can
+&              not be specified for flatness.
+&              Flatness is a condition of a
+&              surface having all elements in one
+&              plane.
+&              ANSI Y14.5M-1982 Section: 6.4.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051343  3   PER UNIT LENGTH TOL IS NOT ALLOWED
+&              Per unit length tolerance is
+&              not allowed for flatness. Flatness
+&              may be applied on a per unit
+&              area.
+&              ANSI Y14.5M-1982 Section: 6.4.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051344  3   MAX TOLERANCE NOT ALLOWED
+&              MAX tolerance can not be specified
+&              for flatness.  
+&              ANSI Y14.5M-1982 Section: 6.4.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051345  3   DATUMS NOT ALLOWED
+&              Datums can not be specified for
+&              flatness.  Form tolerances are
+&              applicable to single features or
+&              elements of single features;
+&              therefore, form tolerances are not
+&              related to datums.
+&              ANSI Y14.5M-1982 Section: 6.4
+/
+/ CIRCULARITY FCF's  MESSAGE NUMBERS 51360-51379
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051360  3   DIAMETER SYMBOL NOT ALLOWED
+&              Diameter symbol is not allowed for
+&              circularity.  Circularity is a
+&              condition of a surface of
+&              revolution where all points of the
+&              surface intersected by a plane are
+&              equidistant from a common center.
+&              ANSI Y14.5M-1982 Section: 6.4.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051361  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              must be specified in its own 
+&              feature control frame.  Projected 
+&              tolerance zone symbol found in the
+&              circularity feature control
+&              frame.
+&              ANSI Y14.5M-1982 Section: 3.4.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051362  3   MATERIAL CONDITION MODIFIER FOUND
+&              Material condition modifiers can
+&              not be specified for circularity.
+&              Circularity is a condition of a
+&              surface of revolution where all
+&              points of the surface intersected
+&              by a plane are equidistant from a
+&              common center.
+&              ANSI Y14.5M-1982 Section: 6.4.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051363  3   UNIT BASIS NOT ALLOWED
+&              Unit basis tolerance is not
+&              allowed for circularity.
+&              ANSI Y14.5M-1982 Section: 6.4.1.4 &
+&              6.4.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051364  3   MAX TOLERANCE NOT ALLOWED
+&              MAX tolerance can not be specified
+&              for circularity.  
+&              ANSI Y14.5M-1982 Section: 6.4.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051365  3   DATUMS NOT ALLOWED
+&              Datums can not be specified for
+&              circularity.  Form tolerances are
+&              applicable to single features or
+&              elements of single features;
+&              therefore, form tolerances are not
+&              related to datums.
+&              ANSI Y14.5M-1982 Section: 6.4
+/
+/ STRAIGHTNESS FCF's  MESSAGE NUMBER 51380-51399
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051380  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              must be specified in its own 
+&              feature control frame.  Projected 
+&              tolerance zone symbol found in the
+&              straightness feature control
+&              frame.
+&              ANSI Y14.5M-1982 Section: 3.4.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051381  3   PER UNIT AREA NOT ALLOWED
+&              Per unit area tolerance is
+&              not allowed for straightness.
+&              Straightness may be applied on a
+&              per unit length tolerance.
+&              ANSI Y14.5M-1982 Section: 6.4.1.5
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051382  3   RFS SPECIFIED WITH MAX TOLERANCE
+&              MMC or LMC must be specified in
+&              the tolerance compartment when MAX
+&              tolerance is specified.
+&              ANSI Y14.5M-1982 Section: 2.8.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051383  3   MAX TOLERANCE LESS THAN TOLERANCE
+&              The tolerance value in the MAX
+&              tolerance compartment must be
+&              greater than the tolerance value
+&              in the tolerance compartment. The
+&              tolerance value &R01 is greater
+&              than the MAX tolerance of &R02.
+&              ANSI Y14.5M-1982 Section: 2.8.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051384  3   DIFFERENT TOL ZONE TYPE IN MAX
+&              The tolerance zones for tolerance
+&              compartment and the MAX tolerance
+&              compartment must both be diameter
+&              or total wide. The &C01
+&              compartment has a diameter zone
+&              and the &C02 compartment
+&              has a total wide zone.
+&              ANSI Y14.5M-1982 Section: 2.8.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051385  3   DATUMS NOT ALLOWED
+&              Datums can not be specified for
+&              straightness.  Form tolerances are
+&              applicable to single features or
+&              elements of single features;
+&              therefore, form tolerances are not
+&              related to datums.
+&              ANSI Y14.5M-1982 Section: 6.4
+/
+/ CIRCULAR RUNOUT FCF's  MESSAGE NUMBERS 51400-51419
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051400  3   DIAMETER SYMBOL NOT ALLOWED
+&              Diameter symbol is not allowed for
+&              circular runout.  Circular runout
+&              provides control of circular
+&              elements of a surface as the part
+&              is rotated about the datum axis.
+&              ANSI Y14.5M-1982 Section: 6.7.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051401  3   MATERIAL CONDITION MODIFIER FOUND
+&              Material condition modifiers can
+&              not be specified for circular
+&              runout.  Circular runout provides
+&              control of circular elements of a
+&              surface as the parts is rotated
+&              about the datum axis.
+&              ANSI Y14.5M-1982 Section: 6.7.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051402  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              must be specified in its own 
+&              feature control frame.  Projected 
+&              tolerance zone symbol found in the
+&              circular runout feature control
+&              frame.
+&              ANSI Y14.5M-1982 Section: 3.4.4
+/ Used in:
+/
+/ Comment:
+/
+ANS051403  3   UNIT BASIS NOT ALLOWED
+&              Unit basis tolerance is not
+&              allowed for circular runout.
+&              ANSI Y14.5M-1982 Section: 6.4.1.4 &
+&              6.4.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051404  3   MAX TOLERANCE NOT ALLOWED
+&              MAX tolerance can not be specified
+&              for circular runout.  
+&              ANSI Y14.5M-1982 Section: 6.7.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051405  3   NO DATUM REFERENCED
+&              One or two datums must be 
+&              specified for circular runout.
+&              ANSI Y14.5M-1982 Section: 6.7
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051406  3   TERTIARY DATUM NOT ALLOWED
+&              Tertiary datums can not be
+&              specified for circular runout.
+&              ANSI Y14.5M-1982 Section: 6.7.3.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051407  3   MMC AND LMC NOT ALLOWED ON DATUMS
+&              MMC or LMC can not be specified
+&              for circular runout datums. 
+&              Circular runout datums are applied
+&              on a RFS basis only.
+&              ANSI Y14.5M-1982 Section: 6.7.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051408  3   DUPLICATE DATUMS SPECIFIED
+&              Duplicate datum references can not
+&              be specified.  Datum &C01 has
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ANSI Y14.5M-1982 Section: 3.4.2.1
+/
+/ TOTAL RUNOUT FCF's  MESSAGE NUMBERS 51420- 51439
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051420  3   DIAMETER SYMBOL NOT ALLOWED
+&              Diameter symbol is not allowed for
+&              total runout.  Total runout 
+&              provides composite control of all
+&              surface elements as the part is
+&              rotated about the datum axis.
+&              ANSI Y14.5M-1982 Section: 6.7.2.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051421  3   MATERIAL CONDITION MODIFIER FOUND
+&              Material condition modifiers can
+&              not be specified for total runout.
+&              Total runout provides composite
+&              control of all surface elements as
+&              the parts is rotated about the
+&              datum axis.
+&              ANSI Y14.5M-1982 Section: 6.7.2.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051422  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              must be specified in its own 
+&              feature control frame.  Projected 
+&              tolerance zone symbol found in the
+&              total runout feature control
+&              frame.
+&              ANSI Y14.5M-1982 Section: 3.4.4
+/ Used in:
+/
+/ Comment:
+/
+ANS051423  3   UNIT BASIS NOT ALLOWED
+&              Unit basis tolerance is not
+&              allowed for total runout.
+&              ANSI Y14.5M-1982 Section: 6.4.1.4 &
+&              6.4.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051424  3   MAX TOLERANCE NOT ALLOWED
+&              MAX tolerance can not be specified
+&              for total runout.  
+&              ANSI Y14.5M-1982 Section: 6.7.2.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051425  3   NO DATUM REFERENCED
+&              One or two datums must be 
+&              specified for total runout.
+&              ANSI Y14.5M-1982 Section: 6.7
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051426  3   TERTIARY DATUM NOT ALLOWED
+&              Tertiary datums can not be
+&              specified for total runout.
+&              ANSI Y14.5M-1982 Section: 6.7.3.3
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051427  3   MMC AND LMC NOT ALLOWED ON DATUMS
+&              MMC or LMC can not be specified
+&              for total runout datums. Datums
+&              for total runout are applied on a
+&              RFS basis only.
+&              ANSI Y14.5M-1982 Section: 6.7.2.2
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051428  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum references can not
+&              be specified.  Datum &C01 has
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ANSI Y14.5M-1982 Section: 3.4.2.1
+/
+/ LINE PROFILE FCF's  MESSAGE NUMBERS 51440-51459
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051440  3   DIAMETER SYMBOL NOT ALLOWED
+&              Diameter symbol is not allowed for
+&              line profile.  Line profile
+&              specifies a two dimensional
+&              uniform boundary along the true
+&              boundary within which the elements
+&              of the surface must lie.
+&              ANSI Y14.5M-1982 Section: 6.5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051441  3   MATERIAL CONDITION MODIFIER FOUND
+&              Material condition modifiers can
+&              not be specified for line profile.
+&              Line profile specifies a two 
+&              dimensional uniform boundary along
+&              the true boundary within which the
+&              elements of the surface must lie.
+&              ANSI Y14.5M-1982 Section: 6.5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051442  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              must be specified in its own 
+&              feature control frame.  Projected 
+&              tolerance zone symbol found in the
+&              line profile feature control
+&              frame.
+&              ANSI Y14.5M-1982 Section: 3.4.4
+/ Used in:
+/
+/ Comment:
+/
+ANS051443  3   UNIT BASIS NOT ALLOWED
+&              Unit basis tolerance is not
+&              allowed for line profile.
+&              ANSI Y14.5M-1982 Section: 6.4.1.4 &
+&              6.4.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051444  3   MAX TOLERANCE NOT ALLOWED
+&              MAX tolerance can not be specified
+&              for line profile.  
+&              ANSI Y14.5M-1982 Section: 6.5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051445  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum references can not
+&              be specified.  Datum &C01 has
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ANSI Y14.5M-1982 Section: 3.4.2.1
+/
+/ SURFACE PROFILE FCF's  MESSAGE NUMBERS 51460-51479
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051460  3   DIAMETER SYMBOL NOT ALLOWED
+&              Diameter symbol is not allowed for
+&              surface profile.  Surface profile
+&              specifies a three dimensional
+&              uniform boundary along the true
+&              boundary within which the elements
+&              of the surface must lie.
+&              ANSI Y14.5M-1982 Section: 6.5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051461  3   MATERIAL CONDITION MODIFIER FOUND
+&              Material condition modifiers can
+&              not be specified for surface
+&              profile. Surface profile specifies
+&              a three dimensional uniform
+&              boundary along the true boundary
+&              within which the elements of the
+&              surface must lie.
+&              ANSI Y14.5M-1982 Section: 6.5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051462  3   PROJECTED TOLERANCE SYMBOL FOUND
+&              Projected tolerance zone symbol 
+&              must be specified in its own 
+&              feature control frame.  Projected 
+&              tolerance zone symbol found in the
+&              surface profile feature control
+&              frame.
+&              ANSI Y14.5M-1982 Section: 3.4.4
+/ Used in:
+/
+/ Comment:
+/
+ANS051463  3   UNIT BASIS NOT ALLOWED
+&              Unit basis tolerance is not allowed
+&              for surface profile.
+&              ANSI Y14.5M-1982 Section: 6.4.1.4 &
+&              6.4.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051464  3   MAX TOLERANCE NOT ALLOWED
+&              MAX tolerance can not be specified
+&              for surface profile.  
+&              ANSI Y14.5M-1982 Section: 6.5.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051465  3   DUPLICATE DATUM SPECIFIED
+&              Duplicate datum references can not
+&              be specified.  Datum &C01 has
+&              been referenced &I01 times in the
+&              same feature control frame.
+&              ANSI Y14.5M-1982 Section: 3.4.2.1
+/
+/ COMPOSITE ENTRY CHECKS  MESSAGE NUMBERS 51500-51519
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051500  3   INCORRECT POSITION CALLOUT ORDER
+&              Composite position feature control
+&              frames must be located vertically
+&              next to each other. The upper
+&              feature control frame is the 
+&              pattern-locating control. The 
+&              lower entry is the feature-
+&              relating control.
+&              ANSI Y14.5M-1982 Section: 5.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051501  3   MORE THAN TWO POSITION CALLOUTS
+&              Composite position can only have
+&              two position feature control 
+&              frames. The upper feature control
+&              frame is the pattern-locating
+&              control. The lower entry is the
+&              feature-relating control.  &I01 
+&              position feature control frames
+&              have been specified.
+&              ANSI Y14.5M-1982 Section: 5.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051502  3   IDENTICAL FEATURE CONTROL FRAME
+&              Identical feature control frame
+&              has been  specified for a feature.
+&              &I01 &C01 callouts have been
+&              specified.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051503  3   UNIT BASIS OUT OF ORDER
+&              The unit basis feature control
+&              frame must be located below the
+&              total variation feature control
+&              frame.
+&              ANSI Y14.5M-1982 Section: 6.4.1.4 &
+&              6.4.2.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051504  2   W: DIFFERENT TOLERANCE ZONE TYPES
+&              WARNING:  The toleranced feature
+&              has both total width and diameter
+&              zones specified.
+/
+/ COMPOSITE POSITION CHECKS  MESSAGE NUMBERS 51520-51539
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051520  3   PRIMARY DATUM REQUIRED
+&              The pattern-locating control 
+&              in a composite position must have
+&              a primary datum.
+&              ANSI Y14.5M-1982 Section: 5.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051521  3   PRIMARY DATUM DOES NOT REPEAT
+&              In composite position callouts, 
+&              the primary datum for the feature-
+&              relating control must be the same
+&              as the primary datum for the 
+&              pattern-locating control. 
+&              ANSI Y14.5M-1982 Section: 5.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051522  3   SECONDARY DATUM NOT ALLOWED
+&              The feature-relating control can
+&              not have a secondary datum for
+&              composite position callouts.
+&              ANSI Y14.5M-1982 Section: 5.4.1
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051523  2   W: FEATURES MUST BE COAXIAL
+&              WARNING: The toleranced features 
+&              must be coaxial when the feature-
+&              relating control does not have a 
+&              primary datum for composite 
+&              position callouts.
+&              ANSI Y14.5M-1982 Section: 5.11.4
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051524  3   TOLERANCE NOT A REFINEMENT
+&              The tolerance for the feature
+&              relating callout must be a 
+&              refinement of the tolerance for
+&              the pattern locating callout.
+&              Tolerance &R01 in the feature-
+&              relating callout is not less
+&              than the tolerance &R02 in the
+&              pattern-relating callout.
+&              ANSI Y14.5M-1982 Section: 5.4.1
+/
+/ COMPOSITE OTHER RELATED CHECKS  MESSAGE NUMBERS 51540-51599
+/-----------------------------------------------------------------------
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051540  3   POSITION LESS THAN ORIENTATION
+&              Position callouts also control
+&              orientation of a feature.  The
+&              orientation tolerance must be a
+&              refinement of the position 
+&              tolerance.  The &C01 
+&              tolerance &R01 is not less than
+&              the position tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051541  3   SURFACE PROF. LESS THAN LINE PROF.
+&              Surface profile callouts also
+&              control line profile of a feature.
+&              The line profile tolerance must
+&              be a refinement of the surface
+&              profile tolerance. The
+&              line profile tolerance &R01 is
+&              not less than the surface profile
+&              tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051542  3   CYLINDRICITY LESS THAN SURF. STR.
+&              Cylindricity callouts also control
+&              surface straightness of a feature.
+&              The surface straightness tolerance
+&              must be a refinement of the 
+&              cylindricity tolerance. The
+&              surface straightness tolerance
+&              &R01 is not less than the 
+&              cylindricity tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051543  3   CYLINDRICITY LESS THAN CIRCULARITY
+&              Cylindricity callouts also control
+&              circularity of a feature. The 
+&              circularity tolerance must be a
+&              refinement of the cylindricity 
+&              tolerance. The circularity 
+&              tolerance &R01 is not less
+&              than the cylindricity tolerance 
+&              &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051544  3   PARALLELISM LESS THAN STRAIGHTNESS
+&              Parallelism callouts also control
+&              straightness of a feature. The 
+&              straightness tolerance must be a
+&              refinement of the parallelism 
+&              tolerance. The straightness
+&              tolerance &R01 is not less
+&              than the parallelism tolerance 
+&              &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051545  3   PARALLELISM LESS THAN FLATNESS
+&              Parallelism callouts also control
+&              flatness of a feature. The 
+&              flatness tolerance must be a
+&              refinement of the parallelism
+&              tolerance. The flatness
+&              tolerance &R01 is not less
+&              than the parallelism tolerance 
+&              &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051546  3   ANGULARITY LESS THAN STRAIGHTNESS
+&              Angularity callouts also control
+&              straightness of a feature. The 
+&              straightness tolerance must be a
+&              refinement of the angularity 
+&              tolerance. The straightness
+&              tolerance &R01 is not less
+&              than the angularity tolerance 
+&              &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051547  3   ANGULARITY LESS THAN FLATNESS
+&              Angularity callouts also control
+&              flatness of a feature. The 
+&              flatness tolerance must be a
+&              refinement of the angularity 
+&              tolerance. The flatness
+&              tolerance &R01 is not less
+&              than the angularity tolerance 
+&              &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051548  3   PERP LESS THAN STRAIGHTNESS
+&              Perpendicularity callouts also
+&              control straightness of a feature.
+&              The straightness tolerance
+&              must be a refinement of the 
+&              perpendicularity tolerance. The 
+&              straightness tolerance &R01 is
+&              not less than the perpendicularity
+&              tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051549  3   PERP LESS THAN FLATNESS
+&              Perpendicularity callouts also
+&              control flatness of a feature.
+&              The flatness tolerance must be a
+&              refinement of the perpendicularity
+&              tolerance. The flatness tolerance
+&              &R01 is not less than the
+&              perpendicularity tolerance
+&              &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051550  3   FLATNESS LESS THAN STRAIGHTNESS
+&              Flatness callouts also control
+&              straightness of a feature.
+&              The straightness tolerance must be
+&              a refinement of the flatness
+&              tolerance. The straightness 
+&              tolerance &R01 is not less
+&              than the flatness tolerance
+&              &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051551  3   TOT. RUNOUT LESS THAN CIR. RUNOUT
+&              Total runout callouts also control
+&              circular runout of a feature.
+&              The circular runout tolerance must
+&              be a refinement of the total 
+&              runout tolerance. The circular
+&              runout tolerance &R01 is not
+&              less than the total runout 
+&              tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051552  3   TOT. RUNOUT LESS THAN CYLINDRICITY
+&              Total runout callouts also control
+&              cylindricity of a feature.
+&              The cylindricity tolerance must
+&              be a refinement of the total 
+&              runout tolerance. The cylindricity
+&              tolerance &R01 is not
+&              less than the total runout 
+&              tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051553  3   TOT. RUNOUT LESS THAN CIRCULARITY
+&              Total runout callouts also control
+&              circularity of a feature.
+&              The circularity tolerance must
+&              be a refinement of the total 
+&              runout tolerance. The circularity
+&              tolerance &R01 is not
+&              less than the total runout 
+&              tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051554  3   TOT. RUNOUT LESS THAN STRAIGHTNESS
+&              Total runout callouts also control
+&              surface straightness of a feature.
+&              The surface straightness tolerance
+&              must be a refinement of the total 
+&              runout tolerance. The surface
+&              straightness tolerance &R01 is
+&              not less than the total runout 
+&              tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051555  3   CIR. RUNOUT LESS THAN CIRCULARITY
+&              Circular runout callouts also 
+&              control circularity of a feature.
+&              The circularity tolerance must
+&              be a refinement of the circular
+&              runout tolerance. The circularity
+&              tolerance &R01 is not
+&              less than the circular runout 
+&              tolerance &R02.
+/
+/ Used in:
+/
+/ Comment:
+/
+ANS051556  3   UNIT BASIS GREATER THAN TOTAL TOL.
+&              The unit basis tolerance must be 
+&              less than the total variation 
+&              tolerance.  The unit basis 
+&              tolerance &R01 is greater than
+&              the total tolerance of &R02.
+&              ANSI Y14.5M-1982 Section: 6.4.1.4 &
+&              6.4.2.1
+/
+/
+/ MISCELLANEOUS MESSAGES MESSAGE NUMBERS 51600-51699
+/-----------------------------------------------------------------------
+/
+/ Used in: BCK33:DP_PARSE_FCF.C
+/
+/ Comment:
+/
+ANS051610  3   GD&T TOL TABLE NOT SUPPORTED
+&              Referencing of tolerance values
+&              from a GD&T tolerance table for
+&              creating gauges is not yet 
+&              supported by Valisys.
+/
+/ Used in: BCK33:DP_PARSE_FCF.C
+/
+/ Comment:
+/
+ANS051611  3   ZERO PROJECTED TOLERANCE
+&              Projected tolerance zone of zero
+&              value is not yet supported by 
+&              Valisys.
+/
+/
+/ Used in: BCK33:DP_PARSE_FCF.C
+/
+/ Comment:
+/
+ANS051612  3   NO PROJECTED TOLERANCE 
+&              Projected tolerance zone with
+&              no tolerance value is not yet
+&              supported by Valisys.
+&              Please re-specify by entering 
+&              the GDT text.
+/
+/
+/
+/ Used in: BCK33:VCHK_OUTPUT_CONTROL.C
+/
+/ Comment:
+/
+ANS051620  3   UNABLE TO OPEN FILE
+&              Unable to open the file &C01
+&              The file cannot be opened because
+&              &C02
+/
+/
+/ Used in: BCK33:VCHK_OUTPUT_CONTROL.C
+/
+/ Comment:
+/
+ANS051621  3   UNABLE TO WRITE TO FILE
+&              Unable to write to the file &C01
+&              The file cannot be written because
+&              &C02
+/
+/
+/ Used in: BCK33:VCHK_OUTPUT_CONTROL.C
+/
+/ Comment:
+/
+ANS051622  3   UNABLE TO CLOSE TO FILE
+&              Unable to close the file &C01
+&              The file cannot be closed because
+&              &C02
+/
+/
+/ Used in: BCK33:VCHK_CHECK_NAME.C
+/
+/ Comment:
+/
+ANS051623  3   ILLEGAL FILE NAME
+&              The file name &C01
+&              is not legal for the following reason:
+&              &C02
+/
+/
+/
+/ Used in: vchk_chk_layer.c
+/
+/ Comment:
+/
+ANS051624  3   INVALID LAYER NUMBER
+&              Layer number &I01 is not valid.  
+&              Valid layer numbers are
+&              between &I02 and &I03, inclusive.
+/
+/ Used in: vchk_chk_color.c
+/
+/ Comment:
+/
+ANS051625  3   INVALID COLOR NUMBER
+&              Color number &I01 is not valid.  
+&              Valid color numbers are
+&              between &I02 and &I03, inclusive.
+/
+/ Used in: vchk_t_chk_options.c
+/
+/ Comment:  
+/
+ANS051626  3   ALL OUTPUT OPTIONS ARE OFF
+&              All the output options have been turned off.  Before
+&              performing any GD&T checks you must turn on at least
+&              one of the output options.
+/
+/
+/ Used in: vchk_t_chk_dft.c
+/
+/ Comment:  
+/
+ANS051627  1   DRAFTING STANDARD CONFLICTS
+&              The Check drafting standard conflicts with the
+&              model drafting standard.
+/
+/
+/ Used in: bck33:vchk_out_chk_msgs.c
+/
+/ Comment:
+/
+ANS051630  1   GD&T OK
+&              No errors or warnings were found 
+&              in the feature control frame.
+/
+/
+/ Used in: bck33:vchk_out_chk_msgs.c
+/
+/ Comment:
+/
+ANS051631  1   GD&T OK
+&              No errors were found in the 
+&              feature control frame.
+/
+/
+/ Used in: bck33:vchk_out_chk_msgs.c
+/
+/ Comment:
+/
+ANS051632  1   GD&T OK
+&              No errors, warnings or notes were
+&              found in the feature control 
+&              frame.
+/
+/
+/
+/ Used in: bck33:vchk_out_format_grp.c
+/
+/ Comment:
+/
+ANS051633  1   No GD&T Text found
+&              No feature control frames were 
+&              selected to be checked.
+/
+/
+/ Used in: bck33:vchk_t_grp_chk
+/
+/ Comment:
+/
+ANS051640  3   NO MORE GROUPS TO CHECK
+&              All composite groups have been 
+&              checked.
+/
+/
+/ Used in: bck33:vchk_t_chk
+/
+/ Comment:
+/
+ANS051641  3   NO MORE ANNOTATIONS TO CHECK
+&              All selected annotations have been 
+&              checked.
+/
+/
+/ Used in: bck33:vchk_composite_ansi82.c
+/
+/ Comment: No composite check was done.
+/
+ANS051650  2   GD&T OK
+&              Feature control frames do not define a
+&              composite callout.
+/
+/

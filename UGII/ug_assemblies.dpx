@@ -1,0 +1,1163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Assemblies" csh="PMAN_Assemblies" package_suppress="simviewer,mechatronicsplayer,nx2dedit">
+        <Category name="General" csh="PMAN_Assemblies_General">
+            <Tab name="Miscellaneous" csh="PMAN_Assemblies_General_Miscellaneous">
+                <Label label="When Generating Missing Part Family Members"/>
+                <Pref name="Assemblies_VerifyPFTWhileAutoRegenPFM" type="int" title="Check for Newer Revisions of the Template Part" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the load operation should check if the part family member referenced by the assembly is generated from the version of the template which is configured based on the load options.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="Assemblies_UpdateSwitch" type="int" title="Display Update Report" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not an update report is automatically displayed when an assembly is loaded (if it has components that require update).</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_MemberSelect" type="int" title="Component Member Select" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines how components are selected with the Class Selection dialog box. When this option is on, the assembly component member is selected. When this option is off, the component itself is selected. Selecting the assembly component member for display changes (such as visibility and color changes) results in different display properties for the component member at the assembly level compared to the component part file itself.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="On" value="1"/>
+                        <EnumElem name="Off" value="0"/>
+                    </Data>
+                    <Docum>Caution: Selecting the members of a component for display changes (such as visibility and color changes), rather than selecting the whole component will result in the part file increasing in size.</Docum>
+                </Pref>
+              <Pref name="Assemblies_RestoreWAVEMode" type="logical" title="Restore WAVE Mode" value="true" ver="11.0.0" scope="Session">
+                <Description>This option determines whether or not an attempt to restore the state of the WAVE Mode option in the Assembly Navigator will be made on NX startup. The attempt will be successful if all of the following conditions are true.<Formatted>
+1. This option is on.
+2. The WAVE Mode option was on when last exiting NX.
+3. A WAVE Control license is available.</Formatted></Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>
+                <Pref name="Assemblies_DisplayReadOnlyNotification" type="logical" title="Display Message when Work Part is Read-only" value="false" ver="8.0.0" scope="Session">
+                  <Description>This option determines whether or not a message is displayed when changing the work part to a part that is read-only. The message box provides an option to cancel the change.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="Assemblies_DisplayReadOnly" type="int" title="Display Message when Modifying Read-only Parts" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not a message is displayed when modifying a read-only part.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_WarnOnPFMemberModification" type="logical" title="Display Message when Modifying Part Family Members" value="true" ver="9.0.0" scope="Session">
+                    <Description>This option determines whether or not a message is displayed when modifying a part family member part.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_WarnReadOnlyOnSave" type="logical" title="Display Message when Saving Read-only Parts" value="true" ver="5.0.0" scope="Session">
+                  <Description>This option determines whether or not a message is displayed when performing any of the Save operations when some of the parts are read-only.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_UpdateStructureOnExpand" type="int" title="Update Structure on Expand" value="1" ver="10.0.0" scope="Session">
+                    <Description>This option determines whether or not the structure of a component should be updated from its immediate child components when that component is expanded in the Assembly Navigator.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+              <Pref name="Assemblies_RestoreShowComponentGroupsSetting" type="int" title="Restore Show Component Groups Setting" value="1" ver="5.0.1" scope="Session">
+                <Description>This option determines whether or not an attempt to restore the state of the Show Component Groups option in the Assembly Navigator will be made on NX startup. The attempt will be successful if all of the following conditions are true.<Formatted>
+1. This option is on.
+2. The Show Component Groups option was on when last exiting NX.
+3. An Advanced Assemblies license is available.</Formatted></Description>
+                <Toggle off="0"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="1"/>
+                  <EnumElem name="No" value="0"/>
+                </Data>
+              </Pref>
+              <Separator/>
+              <Pref name="Assemblies_ProximityComponentGroupDefault" type="real" title="Component Group Proximity Distance" value="10.00" ver="6.0.0" scope="Session">
+                <Description>This option specifies the initial proximity distance value for component groups.</Description>
+                <Real/>
+              </Pref>
+                <Separator/>
+                <Pref name="Assemblies_partDescriptiveName" type="string" title="Part Name Style Attribute" value="$FILENAME" ver="3.0.0" scope="Session">
+                    <Description>This field allows a part attribute title to be entered. The value of this attribute will be displayed in dialog boxes and the graphics window title bar. Valid options include <Code>$FILENAME, $DESCRIPTION</Code>, and anything else deemed to be a part attribute title.</Description>
+                    <Widestring/>
+                    <Docum>The description which appears when creating a part while NX is connected to Teamcenter is accessed through part attribute <Code>DB_PART_DESC</Code>, not <Code>$DESCRIPTION</Code>.</Docum>
+                </Pref>
+                <Separator/>
+                <Pref name="Assemblies_ClrAnlAttenColor" type="int" title="Interference Highlight Color" value="155" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the attention color used to highlight interferences as they are reported. This is used in the Assembly Sequencing, Reposition Component, and View Section (Cap Display) commands.</Description>
+                    <Color/>
+                </Pref>
+                <Separator/>
+                <Pref name="Assemblies_PromptForDeformParameters" type="logical" title="Display Deform Parameters on Update" value="false" ver="6.0.0" scope="Session">
+                    <Description>This option determines whether or not the Deform Parameters dialog box will be presented when a Deform feature is updated through the Update Deform command.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+              <Separator/>
+              <Pref name="Assemblies_PrepopulateSimplifyDialog" type="logical" title="Populate Simplify Assembly Dialog" value="true" ver="1953" scope="Session">
+                <Description>This option determines whether or not the Simplify Assembly dialog is populated with visible bodies when invoked.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>
+            </Tab>
+            <Tab name="Work Part" csh="PMAN_Assemblies_General_Work_Part">
+                <Pref name="Assemblies_ChangeWorkPartRefSet" type="int" title="Display using 'Entire Part' Reference Set" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the action of changing work part will set the new work part to have the 'Entire Part' reference set. The previous reference set in use will be restored automatically when this component is no longer the work part.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_WarnAutoWorkPartChange" type="int" title="Inform on Automatic Change" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not an information message will be displayed when the work part changes automatically as a result of another assemblies operation.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+              <Pref name="Assemblies_WarnOnDelete" type="logical" title="Warn on Delete" value="false" ver="2212" scope="Session">
+                <Description>This option determines whether or not a warning message is displayed when deleting components of an assembly.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data> 
+              </Pref>
+            </Tab>
+            <Tab name="Component Operations" csh="PMAN_Assemblies_General_Component_Operations">
+                <Group name ="General">
+                    <Pref name ="Assemblies_CompOperationsLayer" type ="int" title ="Layer" value ="1" ver="6.0.0" scope ="Session">
+                        <Description>This option specifies which layer option should be used while performing a component operation on an assembly.</Description>
+                        <OptionMenu/>
+                        <Data type ="enum">
+                            <EnumElem name="Original" value="1"/>
+                            <EnumElem name="Work" value="0"/>
+                            <EnumElem name="As Specified" value="2"/>
+                        </Data>                      
+                    </Pref>
+                </Group>
+                <Group name="Add Component">
+                  <Pref name="Assemblies_AddCompScatter" type="logical" title="Scatter" value="true" ver="1847" scope="Session">
+                      <Description>When multiple components are added to an assembly at the same time in the Add Component dialog, this option determines whether or not to scatter their locations.</Description>
+                      <Toggle off="false"/>
+                      <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                      </Data>
+                    </Pref>
+                <Pref name="Assemblies_AddCompLayerOption" type="int" title="Layer" value="1" ver="5.0.0" scope="Session">
+                    <Description>This option specifies which layer option will be used when adding components to an assembly.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Original" value="1"/>
+                        <EnumElem name="Work" value="0"/>
+                        <EnumElem name="As Specified" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_AddComponentCommandForFileNew" type="int" title="Command to Use in File New" value="1" ver="1980" scope="Session">
+                    <Description>This option determines whether the Add Component command or the Assemble command is invoked when creating a new part using an Assemblies template in the File New dialog.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Add Component" value="0"/>
+                        <EnumElem name="Assemble" value="1"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Group name="Drag and Drop">              
+                <Pref name="Assemblies_OnDragAndDropOnGraphics" type="int" title="On Part in Graphics Window" value="2" ver="1980" scope="Session">
+                    <Description>This option specifies which command dialog, if any, should be launched when one or more components are dragged and dropped onto the graphics area of an already displayed part. Use the Position Directly option to skip commands and position using the other options in this group.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                      <EnumElem name="Start Assemble" value="0"/>
+                      <EnumElem name="Start Add Component" value="1"/>
+                      <EnumElem name="Position Directly" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_AddCompPositioningTypeMultiSelect" type="int" title="Positioning" value="2" ver="5.0.0" scope="Session">
+                    <Description>This option specifies which initial positioning type will be used when one or more components are dragged and dropped.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Absolute Origin" value="0"/>
+                        <EnumElem name="Select Origin" value="1"/>
+                        <EnumElem name="By Constraints" value="2"/>
+                        <EnumElem name="Move" value="3"/>                  
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_AddCompOnXYPlaneMultiSelect" type="logical" title="Position on XC-YC Plane" value="false" ver="10.0.0" scope="Session">
+                    <Description>This option determines whether or not the selected components should be placed on the XC-YC plane, i.e. at ZC=0. This option is applicable when the "Positioning" option is either "Select Origin" or "Move".</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                      <EnumElem name="Yes" value="true"/>
+                      <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_AddCompMultiSelectScatter" type="int" title="Scatter" value="1" ver="5.0.0" scope="Session">
+                    <Description>This option determines whether or not multiple selected components should be scattered upon drag and drop.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_AddCompLayerOptionMultiSelect" type="int" title="Layer" value="1" ver="5.0.0" scope="Session">
+                    <Description>This option specifies which initial layer option will be used when one or more components are dragged and dropped.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Original" value="1"/>
+                        <EnumElem name="Work" value="0"/>
+                        <EnumElem name="As Specified" value="2"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Group name="New Component">
+                  <Pref name="Assemblies_CreateNewReferenceSet" type="string" title="Reference Set Name" value="" ver="6.0.2" scope="Session">
+                    <Description>This field specifies the name of the reference set to which geometry selected for the new component will be added.</Description>
+                    <Widestring/>
+                  </Pref>
+                </Group>
+                <Group name="Replace Component">
+                    <Pref name ="Assemblies_ReplaceCompName" type ="int" title ="Component Name" value ="2" ver="7.5.0" scope ="Session">
+                        <Description>This option specifies which component name option should be used while performing a replacement operation on an assembly.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Maintain" value="0"/>
+                            <EnumElem name="Original" value="1"/>
+                            <EnumElem name="As Specified" value="2"/>
+                        </Data>
+                    </Pref>
+                    <Pref name ="Assemblies_ReplaceCompLayer" type ="int" title ="Layer" value ="0" ver="6.0.0" scope ="Session">
+                        <Description>This option specifies which layer option should be used while performing a replacement operation on an assembly.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Maintain" value="0"/>
+                            <EnumElem name="Original" value="1"/>
+                            <EnumElem name="Work" value="2"/>
+                            <EnumElem name="As Specified" value="3"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_PreserveAttributes" type="logical" title="Preserve Component Attributes" value="false" ver="5.0.0" scope="Session">
+                        <Description>This option determines whether or not component attributes are applied to the new component after a Replace Component or Open Component As operation.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                        <Docum>When this option is on, any component attributes in the component that the Replace Component or Open Component As command is performed on will be copied over to the new component. This is restricted to the assembly where the Replace Component or Open Component As command is performed. Component attributes that are inherited from the underlying part are always recreated after a Replace Component or Open Component As operation, so are not affected by this option's setting.</Docum>
+                    </Pref>
+                    <Pref name="Assemblies_ReplaceCompMaintainRelationships" type="logical" title="Maintain Relationships" value="true" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not to perform an associative replacement of components.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Command Part Template Type" csh="PMAN_Assemblies_General_Command_Part_Template_Type">
+              <Pref name ="Assemblies_NewParentTemplateType" type ="int" title ="New Parent" value ="1" ver="1926" scope ="Session">
+                  <Description>This option specifies the part template type to use for the New Parent command. The type refers to the application that the template belongs to (see the Type column in the File New dialog). If only one part template of the specified type exists, it will be used as the template for the New Parent command. If multiple exist, this option will be ignored and the File New dialog will be presented. Use the "Select from File New" option to always present the File New dialog.</Description>
+                  <OptionMenu/>
+                  <Data type ="enum">
+                      <EnumElem name="Gateway" value="0"/>
+                      <EnumElem name="Assemblies" value="1"/>
+                      <EnumElem name="Select from File New" value="2"/>
+                  </Data>
+               </Pref>
+               <Pref name ="Assemblies_NewAssemblyTemplateType" type ="int" title ="Assemble" value ="1" ver="1926" scope ="Session">
+                   <Description>This option specifies the part template type to use for the Assemble command. The type refers to the application that the template belongs to (see the Type column in the File New dialog). If only one part template of the specified type exists, it will be used as the template for the Assemble command. If multiple exist, this option will be ignored and the File New dialog will be presented. Use the "Select from File New" option to always present the File New dialog.</Description>
+                   <OptionMenu/>
+                   <Data type ="enum">
+                       <EnumElem name="Gateway" value="0"/>
+                       <EnumElem name="Assemblies" value="1"/>
+                       <EnumElem name="Select from File New" value="2"/>
+                   </Data>
+                </Pref>
+                <Pref name ="Assemblies_NewComponentTemplateType" type ="int" title ="New Component" value ="1" ver="1926" scope ="Session">
+                    <Description>This option specifies the part template type to use for the New Component and Simplify Assembly commands. The type refers to the application that the template belongs to (see the Type column in the File New dialog). If only one part template of the specified type exists, it will be used as the template for the New Component and Simplify Assembly commands. If multiple exist, this option will be ignored and the File New dialog will be presented. Use the "Select from File New" option to always present the File New dialog.</Description>
+                    <OptionMenu/>
+                    <Data type ="enum">
+                        <EnumElem name="Gateway" value="0"/>
+                        <EnumElem name="Model" value="1"/>
+                        <EnumElem name="Assemblies" value="2"/>
+                        <EnumElem name="Select from File New" value="3"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Interpart Modeling" csh="PMAN_Assemblies_General_Interpart_Modeling">
+              <Pref name="Assemblies_AllowInterPart" type="int" title="Allow Associative Interpart Modeling" value="2" ver="6.0.0" scope="Session">
+                 <Description>This option specifies if associative interpart modeling is allowed and if so, to what extent.<Formatted>
+"Yes": Allows associative interpart modeling everywhere - all WAVE commands are available, the Create Interpart Link option on the Selection Bar for many of the modeling commands is active, and interpart expressions may be created.
+"Yes, but Not within Commands": Provides all explicit associative interpart modeling capabilities, but deactivates the Create Interpart Link option for all modeling commands.
+"No": Disallows associative interpart modeling everywhere.</Formatted></Description>
+                  <RadioBox orientation="vertical"/>
+                  <Data type="enum">
+                      <EnumElem name="Yes" value="2"/>
+                      <EnumElem name="Yes, but Not within Commands" value="1"/>
+                      <EnumElem name="No" value="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="Assemblies_AllowPromotions" type="int" title="Allow Promote Body" value="1" ver="8.0.0" scope="Session">
+                    <Description>This option determines whether or not the Promote Body command is available.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>                
+              <Pref name="Assemblies_InitialUpdateDelay" type="int" title="Delay Link Update" value="0" ver="7.5.0" scope="Session">
+                <Description>This option determines whether or not link update is delayed. When link update is delayed an action is required to cause update, such as "Update Links". Link update includes linked features, linked expressions, and linked PMI.</Description>
+                <Toggle off="0"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="1"/>
+                  <EnumElem name="No" value="0"/>
+                </Data>
+              </Pref>
+                <Pref name="Assemblies_InitialDelayConstraints" type="logical" title="Delay Assembly Constraints" value="false" ver="7.5.0" scope="Session">
+                    <Description>This option determines whether or not update of assembly constraints should be delayed until the "Update Assembly Constraints" command is chosen.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_UpdateDelayScope" type="int" title="Scope of Delayed Update" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies whether all parts loaded in the session or only those in the displayed assembly are updated when an update is triggered.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Displayed Assembly" value="1"/>
+                        <EnumElem name="Session" value="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Instance Attributes" csh="PMAN_Assemblies_General_Instance_Attributes">
+                <Group name="Attribute Control">
+                    <Pref name="Assemblies_AllowCalloutAsPartAttribute" type="logical" title="Allow &apos;CALLOUT&apos; as a Part Attribute" value="false" ver="10.0.0" scope="Session">
+                        <Description>This option allows the 'CALLOUT' instance attribute to be set as a part attribute.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_AllowCalloutOverride" type="logical" title="Allow &apos;CALLOUT&apos; Attribute Override" value="true" ver="10.0.0" scope="Session">
+                        <Description>This option allows the 'CALLOUT' instance attribute to be overridden on a referencing component.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_CopyInstanceAttribute" type="logical" title="Copy Instance Attribute" value="true" ver="12.0.0" scope="Session">
+                        <Description>This option determines whether or not to copy instance attributes on various component copy operations.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Attribute Title Aliases">
+                    <Pref name="Assemblies_ReferenceComponentAttributeTitleAlias" type="utf8string" title="REFERENCE_COMPONENT" value="" ver="10.0.0" scope="Session">
+                        <Description>This option specifies the attribute title alias for the system attribute with the title 'REFERENCE_COMPONENT'.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Assemblies_DraftingComponentAttributeTitleAlias" type="utf8string" title="DRAFTING_COMPONENT" value="" ver="10.0.0" scope="Session">
+                        <Description>This option specifies the attribute title alias for the system attribute with the title 'DRAFTING_COMPONENT'.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Assemblies_PlistIgnoreMemberAttributeTitleAlias" type="utf8string" title="PLIST_IGNORE_MEMBER" value="" ver="10.0.0" scope="Session">
+                        <Description>This option specifies the attribute title alias for the system attribute with the title 'PLIST_IGNORE_MEMBER'.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Assemblies_PlistIgnoreSubAssemblyAttributeTitleAlias" type="utf8string" title="PLIST_IGNORE_SUBASSEMBLY" value="" ver="10.0.0" scope="Session">
+                        <Description>This option specifies the attribute title alias for the system attribute with the title 'PLIST_IGNORE_SUBASSEMBLY'.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Assemblies_DbSequenceNumberAttributeTitleAlias" type="utf8string" title="DB_SEQUENCE_NUMBER" value="" ver="10.0.0" scope="Session">
+                        <Description>This option specifies the attribute title alias for the system attribute with the title 'DB_SEQUENCE_NUMBER'.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Assemblies_CalloutAttributeTitleAlias" type="utf8string" title="CALLOUT" value="" ver="10.0.0" scope="Session">
+                        <Description>This option specifies the attribute title alias for the system attribute with the title 'CALLOUT'.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Assemblies_UgRefSetAttributeTitleAlias" type="utf8string" title="UG REF SET" value="" ver="10.0.0" scope="Session">
+                        <Description>This option specifies the attribute title alias for the system attribute with the title 'UG REF SET'.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Assemblies_UgGeometryAttributeTitleAlias" type="utf8string" title="UG GEOMETRY" value="" ver="10.0.0" scope="Session">
+                        <Description>This option specifies the attribute title alias for the system attribute with the title 'UG GEOMETRY'.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Assemblies_UgAltRepAttributeTitleAlias" type="utf8string" title="UG ALTREP" value="" ver="10.0.0" scope="Session">
+                        <Description>This option specifies the attribute title alias for the system attribute with the title 'UG ALTREP'.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Assemblies_DbCompHandleAttributeTitleAlias" type="utf8string" title="DB_COMP_HANDLE" value="" ver="10.0.0" scope="Session">
+                        <Description>This option specifies the attribute title alias for the system attribute with the title 'DB_COMP_HANDLE'.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Assemblies_DbQuantityAttributeTitleAlias" type="utf8string" title="DB_QUANTITY" value="" ver="10.0.0" scope="Session">
+                        <Description>This option specifies the attribute title alias for the system attribute with the title 'DB_QUANTITY'.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Assemblies_DbUnitsAttributeTitleAlias" type="utf8string" title="DB_UNITS" value="" ver="10.0.0" scope="Session">
+                        <Description>This option specifies the attribute title alias for the system attribute with the title 'DB_UNITS'.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Assemblies_LWDwgGeometryOmittedAttributeTitleAlias" type="utf8string" title="LW_DWG_GEOMETRY_OMITTED" value="" ver="10.0.0" scope="Session">
+                        <Description>This option specifies the attribute title alias for the system attribute with the title 'LW_DWG_GEOMETRY_OMITTED'.</Description>
+                        <Widestring/>
+                    </Pref>
+                    <Pref name="Assemblies_OccurrenceTypeAttributeTitleAlias" type="utf8string" title="OCCURRENCE_TYPE" value="" ver="10.0.0" scope="Session">
+                        <Description>This option specifies the attribute title alias for the system attribute with the title 'OCCURRENCE TYPE'.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Product Interfaces" csh="PMAN_Assemblies_General_Product_Interfaces">
+                <Group name="Part Referencing Rules">
+                <Pref name="Assemblies_ProductInterfaceInterpartLinking" type="int" title="Interpart Linking" value="0" ver="5.0.0" scope="Part">
+                    <Description>This option specifies the rules by which other assembly parts may use geometry and expressions of the part during interpart linking. This option applies only to new parts created using the blank template.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Allow Selection of Any Geometry or Expression" value="0"/>
+                        <EnumElem name="Encourage Use of Interface Objects" value="1"/>
+                        <EnumElem name="Restrict Selection to Only Interface Objects" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_ProductInterfaceMating" type="int" title="Assembly Constraints" value="0" ver="5.0.0" scope="Part">
+                    <Description>This option specifies the rules by which other assembly parts may use geometry of the part during application of assembly constraints. This option applies only to new parts created using the blank template.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Allow Selection of Any Geometry" value="0"/>
+                        <EnumElem name="Encourage Use of Interface Objects" value="1"/>
+                        <EnumElem name="Restrict Selection to Only Interface Objects" value="2"/>
+                    </Data>
+                </Pref>
+                </Group>
+                <Group name="Workflow">
+                 <Pref name="Assemblies_EnableProductInterfaceType" type="logical" title="Allow Product Interface Type" value="true" ver="1872" scope="Session">
+                   <Description>This option determines whether it should be possible to set the type of product interface in the user interface. This is used in Model Based Systems Engineering workflows.</Description>
+                   <Toggle off="false"/>
+                   <Data type="enum">
+                     <EnumElem name="Yes" value="true"/>
+                     <EnumElem name="No" value="false"/>
+                   </Data>
+                 </Pref>
+                </Group>
+                <Group name="Product Interface Name">
+                    <Pref name="Assemblies_ProductInterfaceNameSketch" type="int" title="Sketch" value="1" ver="2306" scope="Session">
+                        <Description>This option specifies whether the Sketch Product Interface should be named by the sketch object or feature.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Object Name" value="1"/>
+                            <EnumElem name="Feature Name" value="2"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_ProductInterfaceNameDatum" type="int" title="Datum" value="1" ver="2306" scope="Session">
+                        <Description>This option specifies whether the Datum Product Interface should be named by the datum object or feature.</Description>
+                        <OptionMenu/>
+                        <Data type="enum">
+                            <EnumElem name="Object Name" value="1"/>
+                            <EnumElem name="Feature Name" value="2"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="General Relinker" csh="PMAN_Assemblies_General_General_Relinker">
+                <Pref name="Assemblies_RelinkerSearchingSourceObject" type="string" title="Source Object Name Filter" value="*" ver="2212" scope="Session">
+                    <Description>This field specifies the filter used to search for the source object.</Description>
+                    <Widestring/>
+                </Pref>
+                <Separator/>
+                <Pref name="Assemblies_RelinkerSearchingDestinationObject" type="string" title="Destination Object Name Filter" value="*" ver="2212" scope="Session">
+                    <Description>This field specifies the filter used to search for the destination object.</Description>
+                    <Widestring/>
+                </Pref>
+                <Separator/>
+                <Pref name="Assemblies_RelinkerSearchingSourcePart" type="string" title="Source Part Name Filter" value="*" ver="5.0.0" scope="Session">
+                    <Description>This field specifies the filter used to search for the source part (the owner of source objects).</Description>
+                    <Widestring/>
+                </Pref>
+                <Separator/>
+                <Pref name="Assemblies_RelinkerSourcePartAttributeName" type="string" title="Source Part Attribute Name" value="SOURCE_PART_STR_ATTR" ver="5.0.0" scope="Session">
+                    <Description>This field specifies a part attribute name. Each part that is owner of links is checked for this part attribute. If it exists, it's value is read and used as a filter to narrow down the search for the source part further.</Description>
+                    <Widestring/>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Positioning" csh="PMAN_Assemblies_Positioning">
+            <Tab name="Interface" csh="PMAN_Assemblies_Positioning_Interface">
+                <Group name="General">
+                    <Pref name="Assemblies_ArrangementSpecific" type="int" title="Arrangements" value="1" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the type of arrangement positioning.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="All Arrangements (Component Properties)" value="1"/>
+                            <EnumElem name="Active Arrangement" value="0"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Move Component">
+                    <Pref name="Assemblies_OriginDrag" type="int" title="Origin Dragging" value="0" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the freedom of movement when dragging a component with the origin handle.
+"Minimum Motion" gives more stable dragging, but may make the drag fail completely if the component has few degrees of freedom.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Free" value="0"/>
+                            <EnumElem name="Minimum Motion" value="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_MoveComponentType" type="int" title="Motion Type" value="0" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the initial Motion Type setting in the Move Component dialog box.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Dynamic" value="0"/>
+                            <EnumElem name="By Constraints" value="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_MoveComponentScope" type="int" title="Scope" value="0" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the scope of edits possible in the Move Component dialog box.<Formatted>
+
+When set to "Work Part Only", only components in the work part can be dragged and only constraints in the work part will be solved during a drag.
+
+When set to "Anywhere in Assembly", components from anywhere in the assembly can be moved, subassemblies are no longer rigid, and constraints from all over the assembly will be simultaneously solved.
+
+The scope will always be treated as "Work Part Only" if the displayed part is a workset.</Formatted>
+
+Warning: The "Anywhere in Assembly" setting is likely to reduce the performance of Move Component if the subassemblies beneath the displayed part contain many assembly constraints.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Work Part Only" value="0"/>
+                            <EnumElem name="Anywhere in Assembly" value="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_StrictComponentSelection" type="int" title="Selection Focus" value="0" ver="5.0.0" scope="Session">
+                        <Description>This option specifies initial selection focus in the "By Constraints" type of the Move Component dialog box.<Formatted>
+When set to "Components", component selection will gain selection focus, unless some components are already selected.
+When set to "Constraints", constraints selection will gain selection focus.</Formatted></Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Components" value="1"/>
+                            <EnumElem name="Constraints" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_DefaultDragHandleLocation" type="int" title="Drag Handle Location" value="0" ver="10.0.0" scope="Session">
+                      <Description>This option specifies the default location of the drag handle when moving a component dynamically.<Formatted>
+When set to "Center of Bounding Box", drag handle will be positioned at the center of the bounding box.
+When set to "Component Origin", drag handle will be positioned at the origin of the component.</Formatted>
+For multiple selection, drag handle will always be positioned at the center of the bounding box of the components.</Description>
+                      <RadioBox orientation="horizontal"/>
+                      <Data type="enum">
+                        <EnumElem name="Center of Bounding Box" value="0"/>
+                        <EnumElem name="Component Origin" value="1"/>
+                      </Data>
+                    </Pref>
+                    <Pref name="Assemblies_FacetSelection" type="int" title="Allow Facet Selection" value="1" ver="5.0.0" scope="Session">
+                        <Description>This option determines whether or not faceted geometry can be selected when creating constraints in the Move Component dialog box.
+Components containing faceted geometry can be dragged regardless of the setting of this option.</Description>
+                        <Toggle off="0"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="1"/>
+                            <EnumElem name="No" value="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_SnapHandles" type="logical" title="Snap Handles Back to Specified Position" value="false" ver="8.0.0" scope="Session">
+                        <Description>After finishing a dynamic component movement, this option specifies whether the move component handles automatically snap back to the last specified position they had in relation to the component.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                </Group>
+                <Group name="Assembly Constraints">
+                    <Pref name="Assemblies_PositioningInterpartCopy" type="logical" title="Allow Interpart Copy" value="false" ver="6.0.1" scope="Session">
+                        <Description>This option determines whether or not associative interpart modeling is allowed within the Assembly Constraints dialog box.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_AnimateForConstraints" type="logical" title="Animate during Constraint Creation or Editing" value="true" ver="2312" scope="Session">
+                        <Description>This option determines whether or not the motion of components is animated during assembly constraint creation and editing.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_WarnOnDeleteComponent" type="logical" title="Warn on Deleting Components" value="false" ver="2212" scope="Session">
+                        <Description>This option determines if a warning dialog should be presented which asks whether to keep or delete constraints on components that are being deleted. When this option is off, the constraints associated with a component will be deleted when the component is deleted.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="No" value="false"/>
+                            <EnumElem name="Yes" value="true"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Display" csh="PMAN_Assemblies_Positioning_Display">
+                <Group name="Constraint Colors">
+                    <Pref name="Assemblies_ConstraintColor" type="int" title="Satisfied" value="134" ver="7.5.2" scope="Session">
+                        <Description>This option specifies the color of constraints that are unsuppressed, not delayed, and have no error, warning, or information status.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="Assemblies_InactiveColor" type="int" title="Suppressed or Ignored" value="191" ver="7.5.2" scope="Session">
+                        <Description>This option specifies the color of constraints that are suppressed or ignored in the current arrangement.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="Assemblies_OverdefinedColor" type="int" title="Error Status" value="186" ver="7.5.2" scope="Session">
+                        <Description>This option specifies the color of constraints that have an error status.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="Assemblies_ConflictingColor" type="int" title="Warning Status" value="181" ver="7.5.2" scope="Session">
+                        <Description>This option specifies the color of constraints that have a warning status.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="Assemblies_OutdatedColor" type="int" title="Information Status" value="112" ver="7.5.2" scope="Session">
+                        <Description>This option specifies the color of constraints that have an information status which are not ignored in the current arrangement.</Description>
+                        <Color/>
+                    </Pref>
+                    <Pref name="Assemblies_DelayedColor" type="int" title="Update Delayed" value="6" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the color of constraints that are update delayed.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+                <Group name="Decimal Places">
+                    <Pref name="Assemblies_DistanceDecimalPlaces" type="int" title="Distance" value="3" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the number of digits to display after the decimal point on distance constraints.</Description>
+                        <IntegerScale/>
+                        <Data type="range">
+                            <LowerBound value="0" include="1"/>
+                            <UpperBound value="9" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_AngleDecimalPlaces" type="int" title="Angle" value="3" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the number of digits to display after the decimal point on angle constraints.</Description>
+                        <IntegerScale/>
+                        <Data type="range">
+                            <LowerBound value="0" include="1"/>
+                            <UpperBound value="9" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_DimensionlessDecimalPlaces" type="int" title="Dimensionless" value="3" ver="1872" scope="Session">
+                        <Description>This option specifies the number of digits to display after the decimal point on dimensionless constraint values.</Description>
+                        <IntegerScale/>
+                        <Data type="range">
+                            <LowerBound value="0" include="1"/>
+                            <UpperBound value="9" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Solver" csh="PMAN_Assemblies_Positioning_Solver">
+                <Pref name="Assemblies_LinearTolerance_MU" type="real" title="Linear Tolerance" value="1.0e-5" unit="mm" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the tolerance used by the solver to make comparisons involving lengths. For example, to determine whether two distances are equal.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="1.0e-8" include="1"/>
+                        <UpperBound value="1.0e+2" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_LinearTolerance_EU" type="real" title="Linear Tolerance" value="3.937e-7" unit="in" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the tolerance used by the solver to make comparisons involving lengths. For example, to determine whether two distances are equal.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="1.0e-9" include="1"/>
+                        <UpperBound value="1.0e+1" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_LinearTolerance_MCU" type="real" title="Linear Tolerance" value="1.0e-5" unit="μm" ver="2212" scope="Session">
+                    <Description>This option specifies the tolerance used by the solver to make comparisons involving lengths. For example, to determine whether two distances are equal.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="1.0e-11" include="1"/>
+                        <UpperBound value="1.0e+2" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_LinearTolerance_SIU" type="real" title="Linear Tolerance" value="1.0e-5" unit="m" ver="2212" scope="Session">
+                    <Description>This option specifies the tolerance used by the solver to make comparisons involving lengths. For example, to determine whether two distances are equal.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="1.0e-8" include="1"/>
+                        <UpperBound value="1.0e+3" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_AngularTolerance" type="real" title="Angular Tolerance" value="5.73e-10" unit="deg" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the tolerance used by the solver to make comparisons involving angles. For example, to determine whether two lines are parallel.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="1.0e-12" include="1"/>
+                        <UpperBound value="1.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_AcceptTolerantCurves" type="int" title="Accept Tolerant Curves" value="0" ver="5.0.0" scope="Session">
+                    <Description>This option determines whether or not curves that are approximately circular (within the Modeling Distance Tolerance) may be used in any constraint that can use a circle or circular arc.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Conversion" csh="PMAN_Assemblies_Positioning_Conversion">
+                <Pref name="Assemblies_ConstraintConversion" type="int" title="Convert to Assembly Constraints on Part Load" value="0" ver="6.0.0" scope="Session">
+                    <Description>This option determines whether or not mating conditions are converted to assembly constraints automatically on load.
+Conversion which takes place on load is not validated.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Group name ="Validate Constraint Conversion">
+                    <Pref name="Assemblies_UseCustomMateconvTolerances" type="logical" title="Use Custom Limits" value="false" ver="6.0.1" scope="Session">
+                        <Description>This option determines whether custom limits are used for checking component movement during constraint conversion. When this option is off, the system bases the limits on the Positioning Linear Tolerance option.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_MateconvHardTolerance_MU" type="real" title="Maximum Acceptable Component Movement" value="1.0e-3" unit="mm" ver="6.0.1" scope="Session">
+                        <Description>During constraint conversion, if a component would move by more than this amount a warning will be issued and the constraint will be suppressed.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="1.0e-8" include="1"/>
+                            <UpperBound value="1.0e+2" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_MateconvHardTolerance_EU" type="real" title="Maximum Acceptable Component Movement" value="3.937e-5" unit="in" ver="6.0.1" scope="Session">
+                        <Description>During constraint conversion, if a component would move by more than this amount a warning will be issued and the constraint will be suppressed.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="1.0e-9" include="1"/>
+                            <UpperBound value="1.0e+1" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_MateconvSoftTolerance_MU" type="real" title="Report Component Movements Greater Than" value="1.0e-5" unit="mm" ver="6.0.1" scope="Session">
+                        <Description>During constraint conversion, if a component would move by more than this amount an informational message will be issued.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="1.0e-8" include="1"/>
+                            <UpperBound value="1.0e+2" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_MateconvSoftTolerance_EU" type="real" title="Report Component Movements Greater Than" value="3.937e-7" unit="in" ver="6.0.1" scope="Session">
+                        <Description>During constraint conversion, if a component would move by more than this amount an informational message will be issued.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="1.0e-9" include="1"/>
+                            <UpperBound value="1.0e+1" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="Site Standards" csh="PMAN_Assemblies_Site_Standards">
+            <Tab name="Reference Sets" csh="PMAN_Assemblies_Site_Standards_Reference_Sets" package_suppress="view">
+                <Label label="System Reference Sets"/>
+                <Group name="Model Reference Set">
+                    <Pref name="Assemblies_ModelReferenceSet" type="string" title="Name" value="MODEL" ver="3.0.0" scope="Session">
+                        <Description>This field specifies the name of the reference set that contains the real model geometry in the part file.</Description>
+                        <Widestring/>
+                        <Docum>If a name is specified, a reference set with this name will be created and solid and sheet bodies will automatically be added to it. It will also be used to determine which geometry to consider when storing a bounding box or if generating a faceted representation when saving a part. If a name is not specified, or the part being saved does not contain the named reference set, all appropriate geometry in the part will be used for these operations.</Docum>
+                    </Pref>
+                    <Pref name="Assemblies_ModelReferenceSetContents" type="int" title="Contents" value="0" ver="7.5.0" scope="Session">
+                        <Description>This option specifies which bodies are automatically added to the model reference set as they are created.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Sheets and Solids" value="0"/>
+                            <EnumElem name="Solids Priority" value="1"/>
+                            <EnumElem name="No Automation" value="2"/>
+                        </Data>
+                        <Docum>With the Sheets and Solids option, both solid bodies and sheet bodies are added. With the Solids Priority option, solid bodies are given priority over sheet bodies. Sheet bodies are deemed to be primarily construction geometry and are only added if there are no solid bodies in the reference set. This second option maintains pre-NX 4 behavior. In both cases, stand alone facet bodies are included in the model reference set.</Docum>
+                    </Pref>
+                    <Pref name="Assemblies_ModelReferenceSet_IncludeWAVE" type="logical" title="Include WAVE Linked Bodies" value="true" ver="4.0.0" scope="Session">
+                        <Description>This option determines whether or not WAVE linked bodies will be added to the Model reference set.</Description>
+                        <Toggle off="false"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="true"/>
+                            <EnumElem name="No" value="false"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="Assemblies_AutoAddNewToRefSet" type="int" title="Add Components Automatically" value="1" ver="3.0.0" scope="Session">
+                        <Description>This option determines whether or not Model reference sets will be created with the property that new components added to the part subsequently will be added to these reference sets automatically. When this option is on and the content of the Model reference sets are automated, Model reference sets will also be created for assembly parts in which model geometry is created.</Description>
+                        <Toggle off="0"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="1"/>
+                            <EnumElem name="No" value="0"/>
+                        </Data>
+                        <Docum>When this option is on and assembly level model geometry is created in an existing assembly part, all of the existing components of the assembly will be added automatically to the Model reference sets that are created. The components will be added to the reference sets using the Model reference sets in the components if these are available.
+
+When this option is on, Model reference sets in existing parts will be converted to have the property that components added to the part should be added to the reference set automatically.
+
+When this option is off, newly created Model reference sets will not have the property that new components are added to them automatically and no attempt will be made to maintain Model reference sets for assembly parts automatically. This allows the pre-NX3 behavior of Model reference sets to be maintained.
+
+To follow Assembly Modeling best practices this option should be set.
+</Docum>
+                    </Pref>
+                </Group>
+                <Pref name="Assemblies_LWRefSetRemoval" type="int" title="Lightweight Reference Set Removal" value="1" ver="7.5.0" scope="Session">
+                    <Description>Lightweight reference sets are no longer needed or supported. They will be automatically removed when legacy parts are loaded except in cases where they have been manually edited. This option determines whether manually edited lightweight reference sets should also be deleted or converted to user-managed reference sets.</Description>
+                    <RadioBox orientation="vertical"/>
+                    <Data type="enum">
+                        <EnumElem name="Remove All" value="1"/>
+                        <EnumElem name="Convert to User Reference Sets" value="0"/>
+                    </Data>
+                    <Docum>When this option is set to "Remove All", the lightweight reference set in legacy parts will unconditionally be deleted at load time.
+
+When the option is set to "Convert to User Reference Sets", the lightweight reference set in legacy parts will still be deleted at load time except under specific circumstances where it was previously manually edited. In these cases, the reference set will be kept as a user-managed reference set. For more detailed information regarding these special situations, refer to the technical documentation for Assemblies.
+</Docum>
+                </Pref>
+                <Group name="Simplified Reference Set">
+                    <Pref name="Assemblies_SimplifiedReferenceSet" type="string" title="Name" value="SIMPLIFIED" ver="2206" scope="Session">
+                        <Description>This field specifies the name of a simplified reference set that will be created automatically when bodies are created by the Simplify Assembly, Wrap Assembly, and Linked Exterior commands.
+If the reference set is created by the Simplify Assembly command, new components will not be added to the reference set by default.
+If the same name is used for the simplified and the model reference sets, the simplified reference set will not be used.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+                <Separator/>
+                <Label label="User Reference Sets"/>
+                <Group name="Additional Model Reference Sets">
+                    <Pref name="Assemblies_AdditionalModelRefSets" type="string" title="Names" value="" ver="3.0.0" scope="Session">
+                        <Description>This field can be used to specify a number of reference sets (delimited by spaces). These would be the names of additional reference sets that represent model geometry (for example if left-hand and right-hand parts are represented in the same part file).</Description>
+                        <Widestring/>
+                        <Docum>These reference sets are taken account of in the process of generating Teamcenter Visualization files (a Teamcenter Visualization file will be  generated to represent each reference set).
+It is necessary to have specified the main Model Reference Set in order for this option to have any effect.</Docum>
+                    </Pref>
+                </Group>
+                    <Pref name="Assemblies_AutoAddNewToUserRefSet" type="int" title="Add Components Automatically" value="1" ver="6.0.0" scope="Session">
+                        <Description>This option determines whether or not user defined reference sets will be created with the property that new components added to the part subsequently will be added automatically, and all existing child components will be included.</Description>
+                        <Toggle off="0"/>
+                        <Data type="enum">
+                            <EnumElem name="Yes" value="1"/>
+                            <EnumElem name="No" value="0"/>
+                        </Data>
+                        <Docum>When this option is on, all of the existing child components of the assembly will be added automatically to the user defined reference sets that are created. The components will be added to the reference sets using the same named reference sets in the components if these are available, otherwise it will use the Entire Part reference set as default.
+
+To follow Assembly Modeling best practices this option should be set.
+</Docum>
+                    </Pref>
+            </Tab>
+            <Tab name="Part Name Versions" csh="PMAN_Assemblies_Site_Standards_Part_Name_Versions">
+                <Docum>The following rules are used to describe the part names the system will use when searching for the version of a part for an assembly. The syntax for the rules follows the Regular Expressions used by the UNIX system. Leaving the rules blank means the system does not recognize versions of files and will compare complete part names when searching for parts. Examples follow.
+<Formatted>
+EXAMPLE 1:
+
+Full Part File Name Format:                         ([a-z_]+_)([0-9]+(\.[0-9]+)*)
+Version Independent Section of the Part File Name:  \1
+Part File Name Match:                               \1([0-9]+(\.[0-9]+)*)
+Version Section of Part File Name Match:            \1
+Version Type:                                       Military
+</Formatted>
+The "Full Part File Name Format" specifies part names of one or more alphabetic characters and underscores "_" followed by an underscore "_", then a number, then 0 or more sets of a period "." and a number.
+<Formatted>
+Example part names in this format are:
+
+          a_1.prt
+          bcd_1.6.prt
+          efg_h_ijk_1.3.2.prt
+
+</Formatted>
+The "Version Independent Section of the Part File Name" indicates that the FIRST section of the "Full Part File Name Format" pattern (i.e., "([a-z_]+_)" ) is the independent section.
+<Formatted>
+Example part names without their versions in this format are:
+
+          a_
+          bcd_
+          efg_h_ijk_
+
+</Formatted>
+The "Part File Name Match" rule indicates that valid versioned part names consist of the part name followed by a number, then 0 or more sets of a period "." and a number.
+
+Example part names are the same as those under "Full Part File Name Format".
+
+The "Version Section of Part File Name Match" indicates that the FIRST section of the "Part File Name Match" pattern (i.e., "([0-9]+(\.[0-9]+)*)" ) is the part version section.
+<Formatted>
+Example versions in this format are:
+
+          1
+          1.6
+          1.3.2
+
+
+EXAMPLE 2:
+
+Full Part File Name Format:                         ([0-9\-]+)(o|([a-hj-np-z]|([a-hj-np-z][a-hj-np-z])))
+Version Independent Section of the Part File Name:  \1
+Part File Name Match:                               \1(o|([a-hj-np-z]|([a-hj-np-z][a-hj-np-z])))
+Version Section of Part File Name Match:            \2
+Version Type:                                       Alphabetic
+
+</Formatted>
+The "Full Part File Name Format" specifies part names of digits and dashes followed by either a letter o (for "original"), or a letter in the range a-z excluding i and o, or 2 letters in the range a-z excluding i's and o's.
+<Formatted>
+Example part names in this format are:
+
+          053316o.prt
+          053316h.prt
+          053316cl.prt
+          1-32e.prt
+          68-9-00x.prt
+          -32-56-kd.prt
+
+</Formatted>
+The "Version Independent Section of the Part File Name" indicates that the FIRST section of the "Full Part File Name Format" pattern (i.e., "([0-9\-]+)" ) is the independent section.
+<Formatted>
+Example part names without their versions in this format are:
+
+          053316
+          1-32
+          68-9-00
+          -32-56-
+
+</Formatted>
+The "Part File Name Match" rule indicates that valid versioned part names consist of the part name followed by either a letter o (for "original"), or a letter in the range a-z excluding i and o, or 2 letters in the range a-z excluding i's and o's.
+
+Example part names are the same as those under "Full Part File Name Format".
+
+The "Version Section of Part File Name Match" rule indicates that the SECOND section of the "Part File Name Match" pattern (i.e., "([a-hj-np-z]|([a-hj-np-z][a-hj-np-z]))") is the part version section.
+<Formatted>
+where:
+        \1(o|([a-hj-np-z]|([a-hj-np-z][a-hj-np-z])))
+          |^|------------------^-------------------|
+           1               section 2
+</Formatted>
+From these rules, the "o" matches as being part of the version, but is not used for the purposes of comparison. Hence, when the version is extracted from a part with "o" as the revision, the system will get the empty string and all versions will match to be greater than this, meaning that "o" is the first version of the part.
+<Formatted>
+Example versions in this format are:
+
+          o
+          h
+          cl
+          e
+          x
+          kd</Formatted></Docum>
+                <Label label="The following options are used to describe the part names the system will use when searching for the correct version of a part for an assembly. The syntax for the rules follows the Regular Expressions used by the UNIX system. Leaving the options blank means the system will not recognize versions of files and will compare complete part names when searching for parts."/>
+                <Pref name="Assemblies_PartNameFormat" type="string" title="Full Part File Name Format" value="" ver="3.0.0" scope="Session">
+                    <Description>This field specifies the general format for the full name of versioned part files.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="Assemblies_PartNameSubstitution" type="string" title="Version Independent Section of the Part File Name" value="" ver="3.0.0" scope="Session">
+                    <Description>This field specifies which section of the Full Part File Name Format that is the version independent section of the name. It consists of a back-slash (\) followed by the number of the section.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="Assemblies_PartNameMatch" type="string" title="Part File Name Match" value="" ver="3.0.0" scope="Session">
+                    <Description>This field is used to match all versions of a part file. It consists of a back-slash (\) followed by the Version Independent Section of the Part File Name along with the section of the Full Part File Name format that specifies the pattern for the part file version.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="Assemblies_VersionSubstitution" type="string" title="Version Section of Part File Name Match" value="" ver="3.0.0" scope="Session">
+                    <Description>This field specifies which section of the Part File Name Match that is the version section of the name. It consists of a back-slash (\) followed by the number of the section.</Description>
+                    <String/>
+                </Pref>
+                <Pref name="Assemblies_VersionType" type="int" title="Version Type" value="4" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the sorting order that will be used to determine the latest version of a part file.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Numeric" value="0"/>
+                        <EnumElem name="Reverse Numeric" value="1"/>
+                        <EnumElem name="Alphabetic" value="2"/>
+                        <EnumElem name="Reverse Alphabetic" value="3"/>
+                        <EnumElem name="Military" value="4"/>
+                        <EnumElem name="Alphanumeric" value="5"/>
+                    </Data>
+                    <Docum>A valid option must be specified even if file versioning is not being used.
+<Formatted>
+Military:               1 &lt; 1.2 &lt; 3.2.1
+Numeric:                2 &lt; 5 &lt; 11
+Reverse Numeric:        15 &lt; 7 &lt; 2
+Alphabetic:             a &lt; m &lt; z &lt; av &lt; ff
+Reverse Alphabetic:     z &lt; a &lt; vv &lt; aa
+Alphanumeric:           a2 &lt; a5 &lt; b2 &lt; b23 &lt; aa12 &lt; bc22</Formatted></Docum>
+                </Pref>
+            </Tab>
+            <Tab name="True Shape" csh="PMAN_Assemblies_Site_Standards_True_Shape" package_suppress="view">
+                <Docum>True Shape functionality divides space into a grid of cubic cells that are used to generate a coarse representation of the geometry in component parts. This data is used in spatial filtering operations. Specify the size of the cells that will be used in this true shape representation and the units that this cell size is expressed in here.
+
+Note that an inappropriate cell size can negatively impact the performance and/or the quality of results achieved from True Shape spatial filtering. Please read the cell size definition guidelines in the True Shape Filtering portion of the technical documentation before defining a cell size.</Docum>
+                <Pref name="Assemblies_TrueShapeCellSize" type="real" title="Cell Size" value="0.0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the size of the cells to be used in True Shape operations. A value of 0.0 indicates that True Shape data should not be employed in evaluating spatial filtering operations and that True Shape data should not be generated on part save.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_TrueShapeCellSizeUnits" type="int" title="Cell Units" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the units of the cells used in True Shape representations. When this option is set to "Undefined", the cell size will be interpreted in the units specified by the "Defaults Units" option on the Gateway -&gt; General -&gt; Part tab.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Undefined" value="0"/>
+                        <EnumElem name="Inches" value="2"/>
+                        <EnumElem name="Millimeters" value="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_TrueShapeGenerate" type="int" title="Generate Component Shape Representations on Save" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not True Shape spatial filtering generates component shape representations (&lt;component name&gt;.tso) on part save. (Note that a non-zero Cell Size must also be defined in order for True Shape data to be generated.)</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_TrueShapeUtilize" type="int" title="Utilize Component Shape Representations in Filtering" value="0" ver="10.0.0" scope="Session">
+                    <Description>This option determines whether or not the evaulation of spatial filtering operations will utilize True Shape representations. (Note that a non-zero Cell Size must also be defined in order for True Shape data to be utilized.)</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Lightweight Representations" csh="PMAN_Assemblies_Site_Standards_Lightweight_Representations" package_suppress="view">
+                <Pref name="Assemblies_FacetToleranceOption" type="int" title="Lightweight Facet Tolerance" value="1" ver="7.5.0" scope="Session">
+                    <Description>This option specifies how accurate newly created lightweight geometry should be. Smoother options result in better visualization, but require more memory and will result in larger file sizes.</Description>
+                    <RadioBox orientation="vertical"/>
+                    <Data type="enum">
+                        <EnumElem name="Rough" value="0"/>
+                        <EnumElem name="Standard" value="1"/>
+                        <EnumElem name="Smooth" value="2"/>
+                        <EnumElem name="Extra Smooth" value="3"/>
+                        <EnumElem name="Custom" value="4"/>
+                    </Data>
+                </Pref>
+                <Group name="Custom Tolerances">
+                <Pref name="Assemblies_FacetRepTolerance" type="real" title="Distance" value="0.0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the distance tolerance value to be used when creating lightweight representations. This value is interpreted in the units specified by the Defaults Units option on the Gateway -&gt; General -&gt; Part tab.
+
+When a value of 0.0 is specified, the system will govern the tolerance, using a technique which sets the tolerance values according to the size of the body being faceted.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                    <Docum>This value will be used whenever a facet body is created, unless an alternative tolerance is specified through the Edit Facet Parameters command available from the Part Navigator context menu.</Docum>
+                </Pref>
+                    <Pref name="Assemblies_FacetAngleTolerance" type="real" title="Angle (recommended range: 5 - 60 degrees)" value="0.0" unit="deg" ver="5.0.0" scope="Session">
+                        <Description>This option specifies the angle tolerance value to be used when creating new lightweight representations. The angle tolerance controls the maximum angle in degrees between facet edges used to approximate curves and the triangles used to approximate surfaces.
+
+Smaller values will typically result in larger numbers of facets. Specifying a value less than 1 is likely to result in very large numbers of facets and excessive memory usage during the creation of a faceted representation.
+
+When a value of 0.0 is specified, a system-defined default tolerance will be used.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                        <UpperBound value="90.0" include="1"/>
+                    </Data>
+                    <Docum>This value will be used whenever a new facet body is created. When the value of this option is set to 0.0, the system will use a predetermined angle tolerance value for the body being faceted.</Docum>
+                </Pref>
+                </Group>
+                <Pref name="Assemblies_FacetRepLODGeneration" type="logical" title="Generate Levels of Detail" value="true" ver="5.0.0" scope="Session">
+                    <Description>This option determines whether or not levels of detail are to be generated when creating lightweight representations.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                    </Data>
+                </Pref>
+                <Pref name="Assemblies_AutoLightweightGeneration" type="int" title="Automatic Lightweight Generation for" value="2" ver="7.5.0" scope="Session">
+                    <Description>This option specifies which reference sets will be automatically populated with lightweight geometry for the solid geometry it contains.</Description>
+                    <RadioBox orientation="vertical"/>
+                    <Data type="enum">
+                        <EnumElem name="All in Part" value="0"/>
+                        <EnumElem name="All in Model Reference Set" value="1"/>
+                        <EnumElem name="All in Model and User Reference Sets" value="2"/>
+                        <EnumElem name="None" value="3"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Miscellaneous" csh="PMAN_Assemblies_Site_Standards_Miscellaneous" package_suppress="view">
+                <Group name="Product Outlines">
+                    <Pref name="Assemblies_ProductOutlineLayer" type="int" title="Layer" value="190" ver="3.0.0" scope="Session">
+                        <Description>This option specifies what layer the product outline will be placed on when there is no <Code>PRODUCT_OUTLINE</Code> layer category in the part file.</Description>
+                        <Integer/>
+                        <Data type="range">
+                            <LowerBound value="1" include="1"/>
+                            <UpperBound value="256" include="1"/>
+                        </Data>
+                    </Pref>
+                  <Pref name="Assemblies_ProductOutlineIsSelectable" type="int" title="Layer Setting when Shown" value="0" ver="6.0.0" scope="Session">
+                      <Description>This option specifies the layer setting for the product outline layer when the menu bar option Show Product Outline is on.</Description>
+                      <OptionMenu/>
+                      <Data type="enum">
+                          <EnumElem name="Visible Only" value="0"/>
+                          <EnumElem name="Selectable" value="1"/>
+                      </Data>
+                  </Pref>
+                </Group>
+                <Group name="Assembly Mirror">
+                    <Pref name="Assemblies_MirrorAbsoluteOriginLocation" type="logical" title="Mirror Absolute Origin Location" value="false" ver="12.0.2" scope="Session">
+                      <Description>This option determines if the absolute origin location of all mirrored assemblies or components should be mirrored.</Description>
+                      <Toggle off="false"/>
+                      <Data type="enum">
+                        <EnumElem name="Yes" value="true"/>
+                        <EnumElem name="No" value="false"/>
+                      </Data>
+                    </Pref>
+                    <Pref name="Assemblies_SymmetryPlaneName" type="string" title="Name of Symmetry Datum CSYS/Plane" value="Symmetry Override" ver="7.5.0" scope="Session">
+                        <Description>This option specifies the name of the user defined datum CSYS or plane that will be used as a plane of symmetry.</Description>
+                        <Widestring/>
+                    </Pref>
+                </Group>
+                <Group name="Assembly Reflection">
+                    <Pref name="Assemblies_ReflectionName" type="int" title="Reflected Components" value="0" ver="12.0.2" scope="Session">
+                        <Description>This option specifies if components with reflection transforms should be displayed and if so, whether the Reflect Component command should be available, which allows new components with reflection transforms to be created.</Description>
+                        <OptionMenu/>
+                        <Data type ="enum">
+                            <EnumElem name="Disallow" value="0"/>
+                            <EnumElem name="Display Only" value="1"/>
+                            <EnumElem name="Display and Create" value="2"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+        </Category>
+        <Category name="Synchronous Assemblies" csh="PMAN_Assemblies_Synchronous_Assemblies">
+            <Tab name="Component Display" csh="PMAN_Assemblies_Synchronous_Assemblies_Component_Display" package_suppress="view">
+                <Group name="Modeling Component">
+                    <Pref name="Assemblies_ModelingComponentColor" type="int" title="Color" value="109" ver="2306" scope="Session">
+                        <Description>This option specifies the color of modeling components that can change shape when using the Synchronous Assemblies Move command.</Description>
+                        <Color/>
+                    </Pref>
+                </Group>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>

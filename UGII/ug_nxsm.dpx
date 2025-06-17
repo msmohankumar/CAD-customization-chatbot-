@@ -1,0 +1,2892 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Sheet Metal" csh="PMAN_Sheet_Metal" package_suppress="simcenter3d,simviewer,view,mechatronicsplayer,nx2dedit">
+        <Category name="General" csh="PMAN_Sheet_Metal_General">
+          <SubCategory name="Part Properties" csh="PMAN_Sheet_Metal_General_Part_Properties">
+            <Tab name="Global Parameters" csh="PMAN_Sheet_Metal_General_Part_Properties_Global_Parameters">
+                <Pref name="NXSM_MaterialThickness_EU" type="real" title="Material Thickness" value="0.1" unit="in" ver="1847" scope="Part">
+                    <Description>This option specifies the global thickness for a Base Tab, a Base Contour Flange, or Sheet Metal From Solid feature.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="NXSM_MaterialThickness_MU" type="real" title="Material Thickness" value="3.0" unit="mm" ver="1847" scope="Part">
+                    <Description>This option specifies the global thickness for a Base Tab, a Base Contour Flange, Base Lofted Flange, or Sheet Metal From Solid feature.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="NXSM_UseGlobalMaterialThickness" type="int" title="Use Global Material Thickness" value="1" ver="6.0.0" scope="Part">
+                    <Description>This option determines whether or not the global material thickness should be used.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="NXSM_BendRadius_EU" type="real" title="Bend Radius" value="0.1" unit="in" ver="1847" scope="Part">
+                    <Description>This option specifies the global bend radius for sheet metal features.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="NXSM_BendRadius_MU" type="real" title="Bend Radius" value="3.0" unit="mm" ver="1847" scope="Part">
+                    <Description>This option specifies the global bend radius for sheet metal features.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="NXSM_BendReliefDepth_EU" type="real" title="Bend Relief Depth" value="0.1" unit="in" ver="1847" scope="Part">
+                    <Description>This option specifies the global bend relief depth for sheet metal features.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="NXSM_BendReliefDepth_MU" type="real" title="Bend Relief Depth" value="3.0" unit="mm" ver="1847" scope="Part">
+                    <Description>This option specifies the global bend relief depth for sheet metal features.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="NXSM_BendReliefWidth_EU" type="real" title="Bend Relief Width" value="0.1" unit="in" ver="1847" scope="Part">
+                    <Description>This option specifies the global bend relief width for sheet metal features.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="NXSM_BendReliefWidth_MU" type="real" title="Bend Relief Width" value="3.0" unit="mm" ver="1847" scope="Part">
+                    <Description>This option specifies the global bend relief width for sheet metal features.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="NXSM_BendDefinitionMethod" type="int" title="Bend Definition Method" value="0" ver="12.0.0" scope="Part">
+                    <Description>This option specifies the global bend definition method for sheet metal features.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Neutral Factor Value" value="0"/>
+                        <EnumElem name="Bend Table" value="1"/>
+                        <EnumElem name="Bend Allowance Formula" value="2"/>
+                        <EnumElem name="Bend Deduction Formula" value="3"/>
+                        <EnumElem name="Bend Formula DIN6935" value="4"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="NXSM_NeutralFactor" type="string" title="Neutral Factor" value="0.33" ver="3.0.0" scope="Part">
+                    <Description>This option specifies the global neutral factor for sheet metal features.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="NXSM_BendAllowanceFormula" type="string" title="Bend Allowance Formula" value="(Radius+(Thickness*0.44))*rad(Angle)" ver="5.0.0" scope="Part">
+                    <Description>This option specifies the global bend allowance formula for sheet metal features.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="NXSM_BendDeductionFormula" type="string" title="Bend Deduction Formula" value="2*(tan(Angle/2)*(Radius+Thickness))-(rad(Angle)*(Radius+ (0.44 * Thickness)))" ver="1926" scope="Part">
+                  <Description>This option specifies the global bend deduction formula for sheet metal features.</Description>
+                  <Widestring/>
+                </Pref>
+                <Pref name="NXSM_BendTableType" type="int" title="Bend Table Type" value="0" ver="12.0.0" scope="Part">
+                  <Description>This option specifies the bend table type used if the bend definition method is set to bend table.</Description>
+                  <RadioBox/>
+                  <Data type="enum">
+                    <EnumElem name="Neutral Factor Table" value="0"/>
+                    <EnumElem name="Bend Allowance Table" value="1"/>
+                    <EnumElem name="Bend Deduction Table" value="2"/>
+                  </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Material Standards" csh="PMAN_Sheet_Metal_General_Part_Properties_Material_Standards">
+                <Group name="Native NX">
+                  <Pref name="NXSM_standards_file_MU_WIN" type="string" title="Metric Part" value="sheet_metal_material_table.txt" ver="12.0.0" scope="Session">
+                    <Description>This field specifies the name of the Sheet Metal Material Standards file. The standards file should be a comma separated text file with an extension txt or csv.</Description>
+                    <BrowseFileSel type="txt,csv"/>
+                  </Pref>
+                  <Pref name="NXSM_standards_file_MU_UNX" type="string" title="Metric Part" value="sheet_metal_material_table.txt" ver="12.0.0" scope="Session">
+                    <Description>This field specifies the name of the Sheet Metal Material Standards file. The standards file should be a comma separated text file with an extension txt or csv.</Description>
+                    <BrowseFileSel type="txt,csv"/>
+                  </Pref>
+                  <Pref name="NXSM_standards_file_EU_WIN" type="string" title="English Part" value="sheet_metal_material_table.txt" ver="12.0.0" scope="Session">
+                    <Description>This field specifies the name of the Sheet Metal Material Standards file. The standards file should be a comma separated text file with an extension txt or csv.</Description>
+                    <BrowseFileSel type="txt,csv"/>
+                  </Pref>
+                  <Pref name="NXSM_standards_file_EU_UNX" type="string" title="English Part" value="sheet_metal_material_table.txt" ver="12.0.0" scope="Session">
+                    <Description>This field specifies the name of the Sheet Metal Material Standards file. The standards file should be a comma separated text file with an extension txt or csv.</Description>
+                    <BrowseFileSel type="txt,csv"/>
+                  </Pref>
+                </Group>
+                <Group name="Teamcenter">
+                <Pref name="NXSM_nxmgr_item_id_MU" type="string" title="Item ID" value="" ver="1953+" scope="Session">
+                    <Description>This field specifies the Item ID of the Sheet Metal Material Standards File in Teamcenter. Item ID, Item Revision, and Dataset Name; all three must be specified to locate the file in Teamcenter.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="NXSM_nxmgr_item_revision_MU" type="string" title="Item Revision" value="" ver="1953+" scope="Session">
+                    <Description>This field specifies the Item Revision of the Sheet Metal Material Standards file in Teamcenter. Item ID, Item Revision, and Dataset Name; all three must be specified to locate the file in Teamcenter.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="NXSM_nxmgr_dataset_name_MU" type="string" title="Dataset Name" value="" ver="1953+" scope="Session">
+                    <Description>This field specifies the Dataset Name of the Sheet Metal Material Standards file in Teamcenter. Item ID, Item Revision, and Dataset Name; all three must be specified to locate the file in Teamcenter.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="NXSM_nxmgr_item_id_EU" type="string" title="Item ID" value="" ver="1953+" scope="Session">
+                    <Description>This field specifies the Item ID of the Sheet Metal Material Standards File in Teamcenter. Item ID, Item Revision, and Dataset Name; all three must be specified to locate the file in Teamcenter.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="NXSM_nxmgr_item_revision_EU" type="string" title="Item Revision" value="" ver="1953+" scope="Session">
+                    <Description>This field specifies the Item Revision of the Sheet Metal Material Standards file in Teamcenter. Item ID, Item Revision, and Dataset Name; all three must be specified to locate the file in Teamcenter.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="NXSM_nxmgr_dataset_name_EU" type="string" title="Dataset Name" value="" ver="1953+" scope="Session">
+                    <Description>This field specifies the Dataset Name of the Sheet Metal Material Standards file in Teamcenter. Item ID, Item Revision, and Dataset Name; all three must be specified to locate the file in Teamcenter.</Description>
+                    <Widestring/>
+                </Pref>
+                </Group>
+                <Group name="Physical Material Library">
+                <Pref name="NXSM_Enable_Material_Library_Integration" type="logical" title="Integrate Physical Material Library" value="true" ver="1953" scope="Session">
+                    <Description>This option determines whether or not to integrate a physical material library with the Sheet Metal application.</Description>
+                    <Toggle off="false"/>
+                    <Data type="enum">
+                      <EnumElem name="On" value="true"/>
+                      <EnumElem name="Off" value="false"/>
+                    </Data>
+                </Pref>
+                </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Sheet Metal Validation" csh="PMAN_Sheet_Metal_General_Sheet_Metal_Validation">
+            <Tab name="Validation Parameters" csh="PMAN_Sheet_Metal_General_Sheet_Metal_Validation_Validation_Parameters">
+              <Pref name="NXSM_Validation_Min_Punch_Clearance_EU" type="real" title="Minimum Tool Clearance" value="0.5" unit="in" ver="1847" scope="Part">
+                <Description>This option specifies the global minimum tool clearance for sheet metal validation.</Description>
+                <Real/>
+              </Pref>
+              <Pref name="NXSM_Validation_Min_Punch_Clearance_MU" type="real" title="Minimum Tool Clearance" value="5.0" unit="mm" ver="1847" scope="Part">
+                <Description>This option specifies the global minimum tool clearance for sheet metal validation.</Description>
+                <Real/>
+              </Pref>
+              <Pref name="NXSM_Validation_Min_Web_Length_EU" type="real" title="Minimum Web Length" value="0.5" unit="in" ver="1847" scope="Part">
+                <Description>This option specifies the global minimum web length for sheet metal validation.</Description>
+                <Real/>
+              </Pref>
+              <Pref name="NXSM_Validation_Min_Web_Length_MU" type="real" title="Minimum Web length" value="5.0" unit="mm" ver="1847" scope="Part">
+                <Description>This option specifies the global minimum web length for sheet metal validation.</Description>
+                <Real/>
+              </Pref>
+            </Tab>
+          </SubCategory>
+        </Category>
+        <Category name="Convert" csh="PMAN_Sheet_Metal_Convert">
+          <SubCategory name="Sheet Metal from Solid" csh="PMAN_Sheet_Metal_Convert_Sheet_Metal_from_Solid">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Convert_Sheet_Metal_from_Solid_All">
+              <Group name="Settings">
+                <Pref name="NXSM_SheetMetalfromSolidHideOriginal" type="logical" title="Hide Original" value="true" ver="1872" scope="Session">
+                  <Description>This option determines whether or not the original body will be made hidden after the sheet metal model has been created.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Rip" csh="PMAN_Sheet_Metal_Convert_Rip">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Convert_Rip_All">
+              <Group name="Rip Parameters">
+              <Pref name="NXSM_EdgeRip_Type" type="logical" title="Use Minimal Relief" value="true" ver="12.0.2" scope="Session">
+                <Description>This option determines whether or not to create a rip using the system default rip width.</Description>
+                <Toggle off ="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_EdgeRip_RipWidth_EU" type="real" title="Rip Width" value="0.2" unit="in" ver="12.0.2" scope="Session">
+                <Description>This option specifies the rip width.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.001575" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_EdgeRip_RipWidth_MU" type="real" title="Rip Width" value="1" unit="mm" ver="12.0.2" scope="Session">
+                <Description>This option specifies the rip width.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.04" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_EdgeRip_EndCapShape" type="int" title="End Cap Shape" value="0" ver="12.0.2" scope="Session">
+                <Description>This option specifies the end cap shape type.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                  <EnumElem name="Square" bitmap="bend_relief_square" value="0"/>
+                  <EnumElem name="Round" bitmap="bend_relief_round" value="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_EdgeRip_BlendSharpCorners" type="logical" title="Blend Sharp Corners" value="false" ver="12.0.2" scope="Session">
+                <Description>This option determines whether or not to apply a blend at sharp corners.</Description>
+                <Toggle off ="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_EdgeRip_CurveRadius_EU" type="real" title="Fillet Radius" value="0.1" unit="in" ver="12.0.2" scope="Session">
+                <Description>This option specifies the curve radius.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.001575" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_EdgeRip_CurveRadius_MU" type="real" title="Fillet Radius" value="0.5" unit="mm" ver="12.0.2" scope="Session">
+                <Description>This option specifies the curve radius.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.04" include="1"/>
+                </Data>
+              </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Cleanup Utility" csh="PMAN_Sheet_Metal_Convert_Cleanup_Utility">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Convert_Cleanup_Utility_All">
+              <Group name="Sliver">
+              <Pref name="NXSM_SliverTol_EU" type="real" title="Sliver Tolerance" value="0.0004" unit="in" ver="7.5.0" scope="Session">
+                <Description>This option specifies the tolerance value for the Sheet Metal Cleanup utility to remove sliver faces.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_SliverTol_MU" type="real" title="Sliver Tolerance" value="0.01" unit="mm" ver="7.5.0" scope="Session">
+                <Description>This option specifies the tolerance value for the Sheet Metal Cleanup utility to remove sliver faces.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              </Group>
+              <Group name="Settings">
+              <Pref name="NXSM_HideOriginal" type="int" title="Hide Original" value="1" ver="7.5.0" scope="Session">
+                <Description>This option determines whether or not the original body will be made hidden after the sheet metal cleanup utility has been run.</Description>
+                <Toggle off="0"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="1"/>
+                  <EnumElem name="No" value="0"/>
+                </Data>
+              </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+        </Category>
+        <Category name="Base" csh="PMAN_Sheet_Metal_Base">
+          <SubCategory name="Tab" csh="PMAN_Sheet_Metal_Base_Tab">
+            <Tab name="Curves" csh="PMAN_Sheet_Metal_Base_Tab_Curves">
+              <Group name="Bend Centerline">
+                <Pref name="NXSM_bendCenterLine_Tab_Enabled" type="logical" title="Display" value="true" ver="12.0.0" scope="Part">
+                  <Description>This option determines whether bend centerlines are displayed in tab sketches.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_bendCenterLine_Tab_Color" type="int" title="Color" value="189" ver="12.0.0" scope="Part">
+                  <Description>This option specifies the color of bend centerlines in tab sketches.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="NXSM_bendCenterLine_Tab_Font" type="int" title="Style" value="4" ver="1847" scope="Part">
+                  <Description>This option specifies the style for bend centerlines in tab sketches.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="NXSM_bendCenterLine_Tab_Width" type="int" title="Width" value="1" ver="12.0.0" scope="Part">
+                  <Description>This option specifies the width for bend centerlines in tab sketches.</Description>
+                  <AnnotationLineWidth/>
+                </Pref>
+               </Group>
+              <Group name="Bend Tangent Line">
+                <Pref name="NXSM_bendTangentLine_Tab_Enabled" type="logical" title="Display" value="true" ver="12.0.0" scope="Part">
+                  <Description>This option determines whether bend tangent lines are displayed in tab sketches.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_bendTangentLine_Tab_Color" type="int" title="Color" value="83" ver="12.0.0" scope="Part">
+                  <Description>This option specifies the color of bend tangent lines in tab sketches.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="NXSM_bendTangentLine_Tab_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the style for bend tangent lines in tab sketches.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="NXSM_bendTangentLine_Tab_Width" type="int" title="Width" value="1" ver="12.0.0" scope="Part">
+                  <Description>This option specifies the width for bend tangent lines in tab sketches.</Description>
+                  <AnnotationLineWidth/>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Flange" csh="PMAN_Sheet_Metal_Base_Flange">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Base_Flange_All">
+              <Group name="Flange Properties">
+                <Pref name="NXSM_FlangeLength_EU" type="real" title="Length" value="1.0" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the Flange length.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_FlangeLength_MU" type="real" title="Length" value="20.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the Flange length.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_FlangeAngle_EU" type="real" title="Angle" value="90.0" unit="deg" ver="1847" scope="Session">
+                  <Description>This option specifies the Flange angle.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_FlangeAngle_MU" type="real" title="Angle" value="90.0" unit="deg" ver="1847" scope="Session">
+                  <Description>This option specifies the Flange angle.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_FlangeLengthOpt" type="int" title="Length Reference" value="0" ver="12.0.2" scope="Session">
+                  <Description>This option specifies how the Flange length is measured.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Inside" bitmap="inside_dimension" value="0"/>
+                    <EnumElem name="Outside" bitmap="outside_dimension" value="1"/>
+                    <EnumElem name="Web" bitmap="web_length" value="2"/>
+                    <EnumElem name="Tangent" bitmap="tangent_dimension" value="3"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlangeInsetOpt" type="int" title="Inset" value="0" ver="12.0.2" scope="Session">
+                  <Description>This option specifies the Inset of the Flange feature.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Material Inside" bitmap="material_inside" value="0"/>
+                    <EnumElem name="Material Outside" bitmap="material_outside" value="1"/>
+                    <EnumElem name="Bend Outside" bitmap="bend_outside" value="2"/>
+                    <EnumElem name="Material Inside OML" bitmap="material_inside" value="3"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlangeOffset_EU" type="real" title="Offset" value="0.0" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the Flange offset.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_FlangeOffset_MU" type="real" title="Offset" value="0.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the Flange offset.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_FlangeEnableGeometryMirrorAndPattern" type="logical" title="Use Geometry Mirror and Pattern" value="false" ver="1926" scope="Session">
+                  <Description>This option determines whether or not the Flange command should use the mirror and pattern commands to replicate the geometry rather than the feature parameters.</Description>
+                  <Toggle off ="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FlangeEnableMiter" type="logical" title="Miter" value="false" ver="1926" scope="Session">
+                  <Description>This option determines whether or not miter should be applied to avoid interferences while creating flanges on adjacent edges in a given set.</Description>
+                  <Toggle off ="false"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="true"/>
+                    <EnumElem name="Off" value="false"/>
+                  </Data>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Normal Cutout" csh="PMAN_Sheet_Metal_Base_Normal_Cutout">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Base_Normal_Cutout_All">
+              <Group name="Cutout Properties">
+                <Pref name="NXSM_NormalCutoutType" type="int" title="Cut Method" value="0" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the cut method of Normal Cutout.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Thickness" bitmap="thickness_cut" value="0"/>
+                    <EnumElem name="Mid-plane" bitmap="midplane_cut" value="1"/>
+                    <EnumElem name="Nearest Face" bitmap="nearest_face_cut" value="2"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_NormalCutoutExtentOption" type="int" title="Limits" value="0" ver="4.0.0" scope="Session">
+                  <Description>This option specifies the limits of the Normal Cutout.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Value" bitmap="finite" value="0"/>
+                    <EnumElem name="Between" bitmap="from_to_extent" value="1"/>
+                    <EnumElem name="Until Next" bitmap="through_next" value="2"/>
+                    <EnumElem name="Through All" bitmap="through_all" value="3"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_SymmToggle" type="int" title="Symmetric Depth" value="0" ver="11.0.0" scope="Session">
+                  <Description>This option determines whether or not the Cutout should be symmetric.</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="1"/>
+                    <EnumElem name="Off" value="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_Extent_EU" type="real" title="Depth" value="0.2" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the depth of the Normal Cutout feature.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_Extent_MU" type="real" title="Depth" value="5.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the depth of the Normal Cutout feature.</Description>
+                  <Real/>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+        </Category>
+        <Category name="Bend" csh="PMAN_Sheet_Metal_Bend">
+          <SubCategory name="General" csh="PMAN_Sheet_Metal_Bend_General">
+            <Tab name="Parameters" csh="PMAN_Sheet_Metal_Bend_General_Parameters">
+              <Group name="Bend Parameters">
+                <Pref name="NXSM_UseGlobalBendRadius" type="int" title="Use Global Bend Radius" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the global bend radius should be used.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="NXSM_UseGlobalNeutralFactor" type="int" title="Use Global Neutral Factor" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the global neutral factor should be used.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+              </Group>
+              <Group name="Relief">
+                <Pref name="NXSM_BendReliefType" type="int" title="Bend Relief" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the type of bend relief to apply to Flange, Contour Flange, Bend, and Jog features.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Square" bitmap="bend_relief_square" value="0"/>
+                        <EnumElem name="Round" bitmap="bend_relief_round" value="1"/>
+                        <EnumElem name="None" bitmap="none" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="NXSM_UseGlobalBendReliefDepth" type="int" title="Use Global Bend Relief Depth" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the global bend relief depth should be used.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="NXSM_UseGlobalBendReliefWidth" type="int" title="Use Global Bend Relief Width" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option determines whether or not the global bend relief width should be used.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="NXSM_ExtendBendRelief" type="int" title="Extend Relief" value="1" ver="4.0.0" scope="Session">
+                    <Description>This option determines whether or not the bend relief should extend to the edge of the part.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="NXSM_CornerReliefType" type="int" title="Corner Relief" value="0" ver="4.0.0" scope="Session">
+                    <Description>This option specifies the type of corner relief to apply to Flange, Contour Flange, Bend, and Jog features. The corner relief type will default to Bend Only for Bend and Jog features if this option is set to None.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Bend Only" bitmap="corner_relief_bend_only" value="0"/>
+                        <EnumElem name="Bend/Face" bitmap="corner_relief_bend_and_face" value="1"/>
+                        <EnumElem name="Bend/Face Chain" bitmap="corner_relief_bend_and_face_chain" value="2"/>
+                        <EnumElem name="None" bitmap="none" value="3"/>
+                    </Data>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Hem" csh="PMAN_Sheet_Metal_Bend_Hem">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Bend_Hem_All">
+                <Pref name="NXSM_HemFlangeType" type="int" title="Type" value="0" ver="5.0.0" scope="Session">
+                    <Description>This option specifies the type of Hem.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Closed" bitmap="hem_closed" value="0"/>
+                        <EnumElem name="Open" bitmap="hem_open" value="1"/>
+                        <EnumElem name="S-type" bitmap="hem_stype" value="2"/>
+                        <EnumElem name="Curl" bitmap="hem_curl" value="3"/>
+                        <EnumElem name="Open Loop" bitmap="hem_open_loop" value="4"/>
+                        <EnumElem name="Closed Loop" bitmap="hem_closed_loop" value="5"/>
+                        <EnumElem name="Centered Loop" bitmap="hem_centered_loop" value="6"/>
+                    </Data>
+                </Pref>
+              <Group name="Bend Parameters">
+                <Pref name="NXSM_HemSweepAngle_EU" type="real" title="Sweep Angle" value="45.0" unit="deg" ver="1847" scope="Part">
+                  <Description>This option specifies the sweep angle for Hem feature.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_HemSweepAngle_MU" type="real" title="Sweep Angle" value="45.0" unit="deg" ver="1847" scope="Part">
+                  <Description>This option specifies the sweep angle for Hem feature.</Description>
+                  <Real/>
+                </Pref>
+              </Group>
+              <Group name="Miter">
+                <Pref name="NXSM_HemMiterAngle_EU" type="real" title="Miter Angle" value="45.0" unit="deg" ver="1847" scope="Part">
+                    <Description>This option specifies the miter angle for Hem feature.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="NXSM_HemMiterAngle_MU" type="real" title="Miter Angle" value="45.0" unit="deg" ver="1847" scope="Part">
+                    <Description>This option specifies the miter angle for Hem feature.</Description>
+                    <Real/>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Bridge Bend" csh="PMAN_Sheet_Metal_Bend_Bridge_Bend">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Bend_Bridge_Bend_All">
+                <Pref name="NXSM_BridgeBendType" type="int" title="Type" value="0" ver="1926" scope="Session">
+                    <Description>This option specifies the type of Bridge Bend.</Description>
+                    <RadioBox orientation="horizontal"/>
+                    <Data type="enum">
+                        <EnumElem name="Z or U Transition" bitmap="fpc_z_u_transition" value="0"/>
+                        <EnumElem name="Fold Transition" bitmap="fpc_fold_transition" value="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Advanced Flange" csh="PMAN_Sheet_Metal_Bend_Advanced_Flange">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Bend_Advanced_Flange_All">
+              <Pref name="NXSM_AdvancedFlangeType" type="int" title="Type" value="0" ver="11.0.0" scope="Session">
+                <Description>This option defines the Advanced Flange type.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                  <EnumElem name="By Value" bitmap="sm_general_flange_edge" value="0"/>
+                  <EnumElem name="To Reference" bitmap="aerosm_flange_feature" value="1"/>
+                </Data>
+              </Pref>
+              <Group name="Flange Parameters">
+              <Pref name="NXSM_AdvancedFlangeInferLength" type="logical" title="Infer Length" value="false" ver="11.0.0" scope="Session">
+                <Description>This option determines whether or not to use the edge of the reference face to define the Advanced Flange length.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_AdvancedFlangeLength_EU" type="real" title="Length" value="1.8" unit="in" ver="11.0.0" scope="Session">
+                <Description>This option specifies the length of the Advanced Flange feature.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_AdvancedFlangeLength_MU" type="real" title="Length" value="20.0" unit="mm" ver="11.0.0" scope="Session">
+                <Description>This option specifies the length of the Advanced Flange feature.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_AdvancedFlangeAngle" type="real" title="Angle" value="90.0" unit="deg" ver="11.0.0" scope="Session">
+                <Description>This option specifies the angle of the Advanced Flange feature.</Description>
+                <Real/>
+              </Pref>
+              <Pref name="NXSM_AdvancedFlangeLengthOpt" type="int" title="Length Reference" value="0" ver="12.0.2" scope="Session">
+                <Description>This option specifies how the Advanced Flange length is measured.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                  <EnumElem name="Inside" bitmap="inside_dimension" value="0"/>
+                  <EnumElem name="Outside" bitmap="outside_dimension" value="1"/>
+                  <EnumElem name="Web" bitmap="web_length" value="2"/>
+                  <EnumElem name="Tangent" bitmap="tangent_dimension" value="3"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_AdvancedFlangeMatType" type="int" title="Inset" value="0" ver="12.0.2" scope="Session">
+                <Description>This option specifies the Inset of the Advanced Flange feature.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                  <EnumElem name="Material Inside" bitmap="material_inside" value="0"/>
+                  <EnumElem name="Material Outside" bitmap="material_outside" value="1"/>
+                  <EnumElem name="Bend Outside" bitmap="bend_outside" value="2"/>
+                  <EnumElem name="Material Inside OML" bitmap="material_inside" value="3"/>
+                </Data>
+              </Pref>
+              </Group>
+              <Group name="Settings">
+              <Pref name="NXSM_FlatPatternCompensationAtStart" type="logical" title="Flat Pattern Compensation at Start" value="false" ver="11.0.0" scope="Session">
+                <Description>This option determines whether or not compensation will be applied to the start edge while flattening Advanced Flanges.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="On" value="true"/>
+                  <EnumElem name="Off" value="false"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_FlatPatternCompensationAtEnd" type="logical" title="Flat Pattern Compensation at End" value="false" ver="11.0.0" scope="Session">
+                <Description>This option determines whether or not compensation will be applied to the end edge while flattening Advanced Flanges.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="On" value="true"/>
+                  <EnumElem name="Off" value="false"/>
+                </Data>
+              </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Joggle" csh="PMAN_Sheet_Metal_Bend_Joggle">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Bend_Joggle_All">
+              <Pref name="SM_JoggleDepth_EU" type="real" title="Depth" value="0.36" unit="in" ver="11.0.0" scope="Session">
+                <Description>This option specifies the depth of the Joggle feature.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="SM_JoggleDepth_MU" type="real" title="Depth" value="9.0" unit="mm" ver="11.0.0" scope="Session">
+                <Description>This option specifies the depth of the Joggle feature.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Group name="Limits">
+              <Pref name="SM_JoggleType" type="int" title="Limit Type" value="0" ver="11.0.0" scope="Session">
+                <Description>This option specifies if the Joggle is single sided or two sided.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                  <EnumElem name="Single" bitmap="aerosm_single_joggle_feature" value="0"/>
+                  <EnumElem name="Twin"   bitmap="aerosm_twin_joggle_feature"   value="1"/>
+                </Data>
+              </Pref>
+              </Group>
+              <Group name="Transition">
+                <Pref name="SM_JoggleUseStandardRunoutValue" type="int" title="Use Standard Runout Value" value="1" ver="11.0.0" scope="Session">
+                  <Description>This option determines whether or not the standard runout value should be used.</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="1"/>
+                    <EnumElem name="No" value="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="SM_JoggleRunout_EU" type="real" title="Runout" value="1.08" unit="in" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the runout for the Joggle feature, when the standard value is not used.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="SM_JoggleRunout_MU" type="real" title="Runout" value="27.0" unit="mm" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the runout for the Joggle feature, when the standard value is not used.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="SM_JoggleClearance_EU" type="real" title="Clearance" value="0.0" unit="in" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the clearance for the Joggle feature.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="SM_JoggleClearance_MU" type="real" title="Clearance" value="0.0" unit="mm" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the clearance for the Joggle feature.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="SM_JoggleRadius1_EU" type="real" title="Stationary Radius" value="0.12" unit="in" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the stationary radius for the Joggle feature, when the global value is not used.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="SM_JoggleRadius1_MU" type="real" title="Stationary Radius" value="3.0" unit="mm" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the stationary radius for the Joggle feature, when the global value is not used.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="SM_JoggleRadius2_EU" type="real" title="Offset Radius" value="0.12" unit="in" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the offset radius for the Joggle feature, when the global value is not used.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="SM_JoggleRadius2_MU" type="real" title="Offset Radius" value="3.0" unit="mm" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the offset radius for the Joggle feature, when the global value is not used.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Flattening Compensation Thresholds">
+                <Pref name="SM_JoggleDepthThreshold_EU" type="real" title="Depth" value="0.06" unit="in" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the depth threshold for flattening the Joggle feature.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="SM_JoggleDepthThreshold_MU" type="real" title="Depth" value="1.5" unit="mm" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the depth threshold for flattening for the Joggle feature.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="SM_JoggleDistanceThreshold_EU" type="real" title="Distance" value="3" unit="in" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the distance threshold for flattening for the Joggle feature.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="SM_JoggleDistanceThreshold_MU" type="real" title="Distance" value="75.0" unit="mm" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the distance threshold for flattening for the Joggle feature.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Settings">
+                <Pref name="SM_FlatPatternCompensation" type="int" title="Flat Pattern Compensation" value="0" ver="11.0.0" scope="Session">
+                  <Description>This option determines whether or not compensation will be applied while flattening flanges with joggles.</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="1"/>
+                    <EnumElem name="Off" value="0"/>
+                  </Data>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="MetaForm" csh="PMAN_Sheet_Metal_Bend_Metaform">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Bend_Metaform_All">
+              <Group name="Thickness">
+                <Pref name="NXSM_MetaformInferThickness" type="int" title="Infer Thickness" value="0" ver="7.5.0" scope="Session">
+                  <Description>This option determines whether or not the thickness should be inferred.</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="1"/>
+                    <EnumElem name="No" value="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_MetaformThickness_EU" type="real" title="Thickness" value="0.125" unit="in" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the material thickness used in the forming analysis.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_MetaformThickness_MU" type="real" title="Thickness" value="2.5" unit="mm" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the material thickness used in the forming analysis.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Material Properties">
+                <Pref name="NXSM_MetaformYieldStress_EU" type="real" title="Yield Stress" value="2.80000E+04" unit="psi" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the yield stress. This is the stress at which the material transitions from elastic to plastic behavior.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_MetaformYieldStress_MU" type="real" title="Yield Stress" value="1.90000E+05" unit="kPa" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the yield stress. This is the stress at which the material transitions from elastic to plastic behavior.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_MetaformElasticModulus_EU" type="real" title="Elastic Modulus" value="3.00E+07" unit="psi" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the elastic modulus (also known as "modulus of elasticity" and "Young's modulus"). This represents the linear relationship between stress and strain. This condition is valid for values of stress that remain below the yield stress of the material.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_MetaformElasticModulus_MU" type="real" title="Elastic Modulus" value="2.10E+08" unit="kPa" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the elastic modulus (also known as "modulus of elasticity" and "Young's modulus"). This represents the linear relationship between stress and strain. This condition is valid for values of stress that remain below the yield stress of the material.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_MetaformTangentModulus_EU" type="real" title="Tangent Modulus" value="1.00000E+03" unit="psi" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the tangent modulus. This represents the linear relationship between stress and strain that is valid for values of stress that exceed the yield stress of the material.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_MetaformTangentModulus_MU" type="real" title="Tangent Modulus" value="6.90000E+03" unit="kPa" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the tangent modulus. This represents the linear relationship between stress and strain that is valid for values of stress that exceed the yield stress of the material.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_MetaformPoissonRatio" type="real" title="Poisson's Ratio" value="0.3" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the Poisson's Ratio. This is the ratio of lateral strain to longitudinal strain.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_MetaformRValue" type="real" title="r-Value" value="1.0" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the r-value. The r-value is a material property that represents resistance to thinning.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                  <Docum>Higher r-values represent higher resistance to thinning when the material is being stretched or resistance to thickening when the material is being compressed. The value of 1.0 corresponds to a homogeneous material.</Docum>
+                </Pref>
+                <Pref name="NXSM_MetaformNeutralFactor" type="real" title="Neutral Factor" value="0.44" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the neutral factor of the material.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                    <UpperBound value="1.0" include="1"/>
+                  </Data>
+                  <Docum>The neutral factor represents the offset distance that is applied to the MetaForm mesh during an analysis.</Docum>
+                </Pref>
+              </Group>
+              <Group name="Remove Holes">
+                <Pref name="NXSM_MetaformRemoveHoles" type="int" title="Remove Holes" value="0" ver="7.5.0" scope="Session">
+                  <Description>This option is used to specify the status of the "Remove Holes" option.</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="1"/>
+                    <EnumElem name="No" value="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_MetaformMinimumModulus_EU" type="real" title="Minimum Modulus" value="1.00000E+2" unit="psi" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the minimum elastic modulus. This value specifies the elastic modulus to apply over removed holes.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_MetaformMinimumModulus_MU" type="real" title="Minimum Modulus" value="6.90000E+2" unit="kPa" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the minimum elastic modulus. This value specifies the elastic modulus to apply over removed holes.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Tolerances">
+                <Pref name="NXSM_MetaformCrdTol_EU" type="real" title="Chordal" value="0.01" unit="in" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the chordal meshing tolerance.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                  <Docum>The chordal deviation is used to define an upper bound between an element and its originating surface. If the deviation between an element and surface is greater than the provided chordal tolerance, the element will be subdivided. This procedure is repeated until all elements are within the specified chordal tolerance or until the sides of the element have been reduced to 1/4 of the linear tolerance.</Docum>
+                </Pref>
+                <Pref name="NXSM_MetaformCrdTol_MU" type="real" title="Chordal" value="0.25" unit="mm" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the chordal meshing tolerance.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                  <Docum>The chordal deviation is used to define an upper bound between an element and its originating surface. If the deviation between an element and surface is greater than the provided chordal tolerance, the element will be subdivided. This procedure is repeated until all elements are within the specified chordal tolerance or until the sides of the element have been reduced to 1/4 of the linear tolerance.</Docum>
+                </Pref>
+                <Pref name="NXSM_MetaformAngTol_EU" type="real" title="Angular" value="90.0" unit="deg" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the angular meshing tolerance.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                    <UpperBound value="90.0" include="1"/>
+                  </Data>
+                  <Docum>The angular deviation is used to define the maximum angle that is allowed between an element and its originating surface. This is calculated as the sum of the angular deviation between the surface normal and element planar normal at any two positions within the element boundary. If the angle between the element and surface is greater than the angular deviation tolerance, the element will be subdivided. This procedure is repeated until all elements are within the specified angular tolerance or until the sides of the element have been reduced to 1/4 of the linear tolerance.</Docum>
+                </Pref>
+                <Pref name="NXSM_MetaformAngTol_MU" type="real" title="Angular" value="90.0" unit="deg" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the angular meshing tolerance.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                    <UpperBound value="90.0" include="1"/>
+                  </Data>
+                  <Docum>The angular deviation is used to define the maximum angle that is allowed between an element and its originating surface. This is calculated as the sum of the angular deviation between the surface normal and element planar normal at any two positions within the element boundary. If the angle between the element and surface is greater than the angular deviation tolerance, the element will be subdivided. This procedure is repeated until all elements are within the specified angular tolerance or until the sides of the element have been reduced to 1/4 of the linear tolerance.</Docum>
+                </Pref>
+                <Pref name="NXSM_MetaformLenTol_EU" type="real" title="Linear" value="1.0" unit="in" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the linear meshing tolerance.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                  <Docum>The linear deviation is used to determine the maximum side length for each element and if the deviation is greater than the provided tolerance, the element will be subdivided. This procedure is repeated until all elements are within the specified linear tolerance.</Docum>
+                </Pref>
+                <Pref name="NXSM_MetaformLenTol_MU" type="real" title="Linear" value="25.0" unit="mm" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the linear meshing tolerance.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                  <Docum>The linear deviation is used to determine the maximum side length for each element and if the deviation is greater than the provided tolerance, the element will be subdivided. This procedure is repeated until all elements are within the specified linear tolerance.</Docum>
+                </Pref>
+              </Group>
+              <Group name="Results">
+                <Pref name="NXSM_MetaformDisplayMesh" type="int" title="Display Region Mesh" value="1" ver="7.5.0" scope="Session">
+                  <Description>This option determines whether or not the finite element mesh should display as the analysis proceeds.</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="1"/>
+                    <EnumElem name="No" value="0"/>
+                  </Data>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Lightening Cutout" csh="PMAN_Sheet_Metal_Bend_Lightening_Cutout">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Bend_Lightening_Cutout_All">
+              <Pref name="NXSM_LighteningCutout_Type" type="int" title="Type" value="1" ver="11.0.0" scope="Session">
+                <Description>This option specifies the Lightening Cutout type.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                  <EnumElem name="Hole" bitmap="sm_hole" value="0"/>
+                  <EnumElem name="User Defined" bitmap="drawn_cutout" value="1"/>
+                </Data>
+              </Pref>
+              <Group name="Cutout Properties">
+                <Pref name="NXSM_LighteningCutout_diameter_EU" type="real" title="Hole Diameter" value="3" unit="in" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the diameter of the hole. It is used only when the feature type is Hole and a standard Hole is not selected.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_LighteningCutout_diameter_MU" type="real" title="Hole Diameter" value="50" unit="mm" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the diameter of the hole. It is used only when the feature type is Hole and a standard Hole is not selected.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_LighteningCutout_length_EU" type="real" title="Length" value="0.2" unit="in" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the length of the flange which is measured from the Outer Mold Line.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_LighteningCutout_length_MU" type="real" title="Length" value="5.0" unit="mm" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the length of the flange which is measured from the Outer Mold Line.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_LighteningCutout_angle_EU" type="real" title="Angle" value="45" unit="deg" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the angle of the flange which is measured from the plane of the profile.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                    <UpperBound value="90.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_LighteningCutout_angle_MU" type="real" title="Angle" value="45" unit="deg" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the angle of the flange which is measured from the plane of the profile.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                    <UpperBound value="90.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_LighteningCutout_checkClearance" type="logical" title="Check Clearance" value="true" ver="11.0.0" scope="Session">
+                  <Description>This option determines whether to perform clearance check.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_LighteningCutout_clearance_EU" type="real" title="Clearance" value="0.2" unit="in" ver="11.0.0" scope="Session">
+                  <Description>This option specifies minimum distance of the lightening cutout from the nearest boundary.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_LighteningCutout_clearance_MU" type="real" title="Clearance" value="5.0" unit="mm" ver="11.0.0" scope="Session">
+                  <Description>This option specifies minimum distance of the lightening cutout from the nearest boundary.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_LighteningCutout_sectionCornerRadius_EU" type="real" title="Section Corner Radius" value="1" unit="in" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the radius of the fillet which is added to any sharp corners in the user defined profile.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_LighteningCutout_sectionCornerRadius_MU" type="real" title="Section Corner Radius" value="15" unit="mm" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the radius of the fillet which is added to any sharp corners in the user defined profile.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Bend Properties">
+                <Pref name="NXSM_LighteningCutout_dieRadius_EU" type="real" title="Die Radius" value="0.2" unit="in" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the inside bend radius of the flange.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_LighteningCutout_dieRadius_MU" type="real" title="Die Radius" value="5.0" unit="mm" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the inside bend radius of the flange.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Lofted Flange" csh="PMAN_Sheet_Metal_Bend_Lofted_Flange">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Bend_Lofted_Flange_All">
+              <Pref name="NXSM_LoftedFlangeBendingMethodType" type="int" title="Bending Method" value="0" ver="2212" scope="Session">
+                <Description>This option specifies the bending method for the Lofted Flange feature.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                  <EnumElem name="Formed" value="0"/>
+                  <EnumElem name="Advanced" value="1"/>
+                  <EnumElem name="Bends" value="2"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_LoftedFlangeAutoReliefType" type="int" title="Auto-relief" value="0" ver="2212" scope="Session">
+                <Description>This option specifies the auto-relief for the Lofted Flange feature.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                  <EnumElem name="Linear" value="0"/>
+                  <EnumElem name="Spherical" value="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_LoftedFlangeTrimEndPlates" type="logical" title="Trim End Plates" value="true" ver="2212" scope="Session">
+                <Description>This option determines whether or not end plates will be trimmed.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_LoftedFlangeBendDivideParameter" type="int" title="Divide Parameter" value="0" ver="2212" scope="Session">
+                <Description>This option specifies the bend divide parameter for the Lofted Flange feature.</Description>
+                <RadioBox orientation="vertical"/>
+                <Data type="enum">
+                  <EnumElem name="Bend Segments" value="0"/>
+                  <EnumElem name="Chord Height" value="1"/>
+                  <EnumElem name="Segment Length" value="2"/>
+                  <EnumElem name="Segment Angle" value="3"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_LoftedFlangeNumberOfBendSegments" type="int" title="Number of Bend Segments" value="10" ver="2212" scope="Part">
+                <Description>This option specifies the number of bend segments.</Description>
+                <Integer/>
+                <Data type="range">
+                  <LowerBound value="1" include="1"/>
+                  <UpperBound value="99" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_MaximumChordHeight_EU" type="real" title="Maximum Chord Height" value=".25" unit="in" ver="2212" scope="Part">
+                  <Description>This option specifies the maximum chord height for the Lofted Flange feature.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0" include="0"/>
+                  </Data>
+              </Pref>
+              <Pref name="NXSM_MaximumChordHeight_MU" type="real" title="Maximum Chord Height" value="6.5" unit="mm" ver="2212" scope="Part">
+                  <Description>This option specifies the maximum chord height for the Lofted Flange feature.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0" include="0"/>
+                  </Data>
+              </Pref>
+              <Pref name="NXSM_MaximumSegmentLength_EU" type="real" title="Maximum Segment Length" value=".25" unit="in" ver="2212" scope="Part">
+                  <Description>This option specifies the maximum segment length for the Lofted Flange feature.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0" include="0"/>
+                  </Data>
+              </Pref>
+              <Pref name="NXSM_MaximumSegmentLength_MU" type="real" title="Maximum Segment Length" value="6.5" unit="mm" ver="2212" scope="Part">
+                  <Description>This option specifies the maximum segment length for the Lofted Flange feature.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0" include="0"/>
+                  </Data>
+              </Pref>
+              <Pref name="NXSM_MaximumSegmentAngle" type="real" title="Maximum Segment Angle" value="20.0" unit="deg" ver="2212" scope="Part">
+                  <Description>This option specifies the maximum segment angle for the Lofted Flange feature.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                    <UpperBound value="360" include="0"/>
+                </Data>
+              </Pref>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Bend Bulge Relief" csh="PMAN_Sheet_Metal_Bend_Bend_Bulge_Relief">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Bend_Bend_Bulge_Relief_All">
+                <Group name="Relief Properties">
+                    <Pref name="NXSM_Bend_Bulge_Relief_Type" type="int" title="Relief Type" value="0" ver="2212" scope="Session">
+                        <Description>This option specifies the type of Bend Bulge Relief.</Description>
+                        <RadioBox orientation="horizontal"/>
+                        <Data type="enum">
+                            <EnumElem name="Circular" bitmap="sm_relief_circular" value="0"/>
+                            <EnumElem name="U-Shaped" bitmap="sm_relief_u" value="1"/>
+                            <EnumElem name="V-Shaped" bitmap="sm_relief_v" value="2"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="NXSM_Width_EU" type="real" title="Width" value="0.23" unit="in" ver="2212" scope="Session">
+                        <Description>This option specifies the width value for the Bend Bulge Relief feature.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="NXSM_Width_MU" type="real" title="Width" value="6.0" unit="mm" ver="2212" scope="Session">
+                        <Description>This option specifies the width value for the Bend Bulge Relief feature.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="NXSM_Depth_EU" type="real" title="Depth" value="0.11" unit="in" ver="2212" scope="Session">
+                        <Description>This option specifies the depth value for the Bend Bulge Relief feature.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="NXSM_Depth_MU" type="real" title="Depth" value="3.0" unit="mm" ver="2212" scope="Session">
+                        <Description>This option specifies the depth value for the Bend Bulge Relief feature.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0" include="0"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="NXSM_Radius_EU" type="real" title="Radius" value="0.11" unit="in" ver="2212" scope="Session">
+                        <Description>This option specifies the radius value for the Bend Bulge Relief feature.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0" include="1"/>
+                        </Data>
+                    </Pref>
+                    <Pref name="NXSM_Radius_MU" type="real" title="Radius" value="3.0" unit="mm" ver="2212" scope="Session">
+                        <Description>This option specifies the radius value for the Bend Bulge Relief feature.</Description>
+                        <Real/>
+                        <Data type="range">
+                            <LowerBound value="0" include="1"/>
+                        </Data>
+                    </Pref>
+                </Group>
+            </Tab>
+         </SubCategory>
+        </Category>
+        <Category name="Corner" csh="PMAN_Sheet_Metal_Corner">
+          <SubCategory name="Break Corner" csh="PMAN_Sheet_Metal_Corner_Break_Corner">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Corner_Break_Corner_All">
+              <Group name="Break Properties">
+                <Pref name="NXSM_Break_Corner_Type" type="int" title="Method" value="0" ver="4.0.0" scope="Session">
+                  <Description>This option specifies the type of Break Corner.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Blend" bitmap="fillet_curve" value="0"/>
+                    <EnumElem name="Chamfer" bitmap="chamfer_curve" value="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_Break_Corner_Value_EU" type="real" title="Break Value" value="0.1" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the break value for the Break Corner feature.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_Break_Corner_Value_MU" type="real" title="Break Value" value="2.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the break value for the Break Corner feature.</Description>
+                  <Real/>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Closed Corner" csh="PMAN_Sheet_Metal_Corner_Closed_Corner">
+            <Tab name="Corner Properties" csh="PMAN_Sheet_Metal_Corner_Closed_Corner_Corner_Properties">
+              <Pref name="NXSM_ClosedCornerType" type="int" title="Type" value="0" ver="7.5.0" scope="Session">
+                <Description>This option specifies the Closed Corner type.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                  <EnumElem name="Close and Relief" bitmap="sm_corner_butt" value="0"/>
+                  <EnumElem name="Relief" bitmap="sm_corner_relief" value="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerTreatmentType" type="int" title="Treatment" value="0" ver="7.5.0" scope="Session">
+                <Description>This option specifies the treatment type.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                  <EnumElem name="Open" bitmap="treatment_open" value="0"/>
+                  <EnumElem name="Closed" bitmap="treatment_type_closed" value="1"/>
+                  <EnumElem name="Circular Cutout" bitmap="sm_relief_circular" value="2"/>
+                  <EnumElem name="U Cutout" bitmap="sm_relief_u" value="3"/>
+                  <EnumElem name="V Cutout" bitmap="sm_relief_v" value="4"/>
+                  <EnumElem name="Rectangular Cutout" bitmap="treatment_type_rectangular_cutout" value="5"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerOverlapType" type="int" title="Overlap" value="0" ver="1926" scope="Session">
+                <Description>This option specifies the overlap type.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                  <EnumElem name="None" bitmap="closure_type_close" value="0"/>
+                  <EnumElem name="Side 1" bitmap="closure_type_overlap" value="1"/>
+                  <EnumElem name="Side 2" bitmap="closure_type_reverse_overlap" value="2"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerGap_EU" type="real" title="Gap" value="0.0" unit="in" ver="7.5.0" scope="Session">
+                <Description>This option specifies corner gap distance.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerGap_MU" type="real" title="Gap" value="0.0" unit="mm" ver="7.5.0" scope="Session">
+                <Description>This option specifies corner gap distance.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerOverlap" type="real" title="Overlap Ratio" value="1.0" ver="7.5.0" scope="Session">
+                <Description>This option specifies corner overlap ratio.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                  <UpperBound value="1.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerMiterCorner" type="int" title="Miter Corner" value="0" ver="7.5.0" scope="Session">
+                <Description>This option specifies if the corner should be closed with the miter option.</Description>
+                <Toggle off="0"/>
+                <Data type="enum">
+                  <EnumElem name="Off" value="0"/>
+                  <EnumElem name="On" value="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerBlendMiter" type="int" title="Blend Miter" value="0" ver="8.5.0" scope="Session">
+                <Description>When the Miter Corner option is on, this option specifies if the transition from miter to cutout edges should be smooth.</Description>
+                <Toggle off="0"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="0"/>
+                  <EnumElem name="Yes" value="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerBlendMiterRadius_EU" type="real" title="Blend Miter Radius" value="0.02" unit="in" ver="1872" scope="Session">
+                <Description>This option specifies the blend miter radius.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerBlendMiterRadius_MU" type="real" title="Blend Miter Radius" value="0.5" unit="mm" ver="1872" scope="Session">
+                <Description>This option specifies the blend miter radius.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+            </Tab>
+            <Tab name="Relief Properties" csh="PMAN_Sheet_Metal_Corner_Closed_Corner_Relief_Properties">
+              <Pref name="NXSM_ClosedCornerCutMethod" type="int" title="Cut Method" value="1" ver="1872" scope="Session">
+                <Description>This option specifies the cut method for U and V reliefs.</Description>
+                <RadioBox/>
+                <Data type="enum">
+                  <EnumElem name="By Tool" value="0"/>
+                  <EnumElem name="By Path" value="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerOrigin" type="int" title="Origin" value="0" ver="6.0.0" scope="Session">
+                <Description>This option specifies the location of the corner relief origin.</Description>
+                <RadioBox/>
+                <Data type="enum">
+                  <EnumElem name="Bend Center" value="0"/>
+                  <EnumElem name="Corner Point" value="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerCircleCutoutDiameter_EU" type="real" title="Cutout Diameter" value="0.1" unit="in" ver="6.0.0" scope="Session">
+                <Description>This option specifies the circular, U, and V cutout diameter.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerCircleCutoutDiameter_MU" type="real" title="Cutout Diameter" value="2.5" unit="mm" ver="6.0.0" scope="Session">
+                <Description>This option specifies the circular, U, and V cutout diameter.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerOffset_EU" type="real" title="Cutout Offset" value="0.0" unit="in" ver="7.5.0" scope="Session">
+                <Description>This option specifies the circular, U, and V cutout offset distance.</Description>
+                <Real/>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerOffset_MU" type="real" title="Cutout Offset" value="0.0" unit="mm" ver="7.5.0" scope="Session">
+                <Description>This option specifies the circular, U, and V cutout offset distance.</Description>
+                <Real/>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerVAngle1" type="real" title="V Angle 1" value="20.0" unit="deg" ver="7.5.0" scope="Session">
+                <Description>This option specifies the first angle for V corner reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerVAngle2" type="real" title="V Angle 2" value="20.0" unit="deg" ver="7.5.0" scope="Session">
+                <Description>This option specifies the second angle for V corner reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerVLength1_EU" type="real" title="V Length 1" value="0.4" unit="in" ver="1872" scope="Session">
+                <Description>This option specifies the first length for V corner reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerVLength1_MU" type="real" title="V Length 1" value="10.0" unit="mm" ver="1872" scope="Session">
+                <Description>This option specifies the first length for V corner reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerVLength2_EU" type="real" title="V Length 2" value="0.4" unit="in" ver="1872" scope="Session">
+                <Description>This option specifies the second length for V corner reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerVLength2_MU" type="real" title="V Length 2" value="10.0" unit="mm" ver="1872" scope="Session">
+                <Description>This option specifies the second length for V corner reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerULength_EU" type="real" title="U Length" value="0.4" unit="in" ver="1872" scope="Session">
+                <Description>This option specifies the length for U corner reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerULength_MU" type="real" title="U Length" value="10.0" unit="mm" ver="1872" scope="Session">
+                <Description>This option specifies the length for U corner reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerRectangularLength_EU" type="real" title="Rectangular Length" value="0.1" unit="in" ver="7.5.0" scope="Session">
+                <Description>This option specifies the length for rectangular reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerRectangularLength_MU" type="real" title="Rectangular  Length" value="1.0" unit="mm" ver="7.5.0" scope="Session">
+                <Description>This option specifies the length for rectangular reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerRectangularWidth_EU" type="real" title="Rectangular Width" value="0.1" unit="in" ver="7.5.0" scope="Session">
+                <Description>This option specifies the width for rectangular reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ClosedCornerRectangularWidth_MU" type="real" title="Rectangular Width" value="1.0" unit="mm" ver="7.5.0" scope="Session">
+                <Description>This option specifies the width for rectangular reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Bend Taper" csh="PMAN_Sheet_Metal_Corner_Bend_Taper">
+            <Tab name="Taper Properties" csh="PMAN_Sheet_Metal_Corner_Bend_Taper_Taper_Properties">
+              <Pref name="NXSM_BendTaperSides" type="int" title="Taper Sides" value="0" ver="6.0.0" scope="Session">
+                <Description>This option specifies which sides should be tapered.</Description>
+                <RadioBox/>
+                <Data type="enum">
+                  <EnumElem name="Both" value="0"/>
+                  <EnumElem name="Side 1" value="1"/>
+                  <EnumElem name="Side 2" value="2"/>
+                  <EnumElem name="Symmetric" value="3"/>
+                </Data>
+              </Pref>
+            </Tab>
+            <Tab name="Taper Definition Side 1" csh="PMAN_Sheet_Metal_Corner_Bend_Taper_Taper_Definition_Side_1">
+              <Group name="Bend">
+                <Pref name="NXSM_StartType1" type="int" title="Start Type" value="0" ver="10.0.0" scope="Session">
+                  <Description>This option specifies the bend taper start type for the first side.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Taper from Bend" bitmap="taper_from_bend" value="0"/>
+                    <EnumElem name="Taper from Web" bitmap="taper_from_web" value="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BendTaperType1" type="int" title="Taper" value="0" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the bend taper type for the first side.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Linear" bitmap="linear_taper" value="0"/>
+                    <EnumElem name="Tangent" bitmap="tangent_taper" value="1"/>
+                    <EnumElem name="Square" bitmap="square_taper" value="2"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BendTaperAngle1" type="real" title="Taper Angle" value="5.0" unit="deg" ver="6.0.0" scope="Session">
+                  <Description>This option specifies the bend taper angle for the first side.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BendTaperDistance1_EU" type="real" title="Taper Distance" value="0.3" unit="in" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the bend taper distance for the first side.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BendTaperDistance1_MU" type="real" title="Taper Distance" value="5.0" unit="mm" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the bend taper distance for the first side.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BendTaperStartRadius1_EU" type="real" title="Start Radius" value="0.1" unit="in" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the start radius for a tangent taper for the first side.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BendTaperStartRadius1_MU" type="real" title="Start Radius" value="2.0" unit="mm" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the start radius for a tangent taper for the first side.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BendTaperEndRadius1_EU" type="real" title="End Radius" value="0.1" unit="in" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the end radius for a tangent taper for the first side.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BendTaperEndRadius1_MU" type="real" title="End Radius" value="2.0" unit="mm" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the end radius for a tangent taper for the first side.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Web">
+                <Pref name="NXSM_WebTaperType1" type="int" title="Taper" value="0" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the web taper type for the first side.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="None" bitmap="none" value="0"/>
+                    <EnumElem name="Face" bitmap="face_taper" value="1"/>
+                    <EnumElem name="Face Chain" bitmap="chain_taper" value="2"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_WebTaperAngle1" type="real" title="Taper Angle" value="5.0" unit="deg" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the web taper angle for the first side.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+            </Tab>
+            <Tab name="Taper Definition Side 2" csh="PMAN_Sheet_Metal_Corner_Bend_Taper_Taper_Definition_Side_2">
+              <Group name="Bend">
+                <Pref name="NXSM_StartType2" type="int" title="Start Type" value="0" ver="10.0.0" scope="Session">
+                  <Description>This option specifies the bend taper start type for the second side.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Taper from Bend" bitmap="taper_from_bend" value="0"/>
+                    <EnumElem name="Taper from Web" bitmap="taper_from_web" value="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BendTaperType2" type="int" title="Taper" value="0" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the bend taper type for the second side.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Linear" bitmap="linear_taper" value="0"/>
+                    <EnumElem name="Tangent" bitmap="tangent_taper" value="1"/>
+                    <EnumElem name="Square" bitmap="square_taper" value="2"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BendTaperAngle2" type="real" title="Taper Angle" value="5.0" unit="deg" ver="6.0.0" scope="Session">
+                  <Description>This option specifies the bend taper angle for the second side.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BendTaperDistance2_EU" type="real" title="Taper Distance" value="0.3" unit="in" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the bend taper distance for the second side.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BendTaperDistance2_MU" type="real" title="Taper Distance" value="5.0" unit="mm" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the bend taper distance for the second side.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BendTaperStartRadius2_EU" type="real" title="Start Radius" value="0.1" unit="in" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the start radius for a tangent taper for the second side.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BendTaperStartRadius2_MU" type="real" title="Start Radius" value="2.0" unit="mm" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the start radius for a tangent taper for the second side.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BendTaperEndRadius2_EU" type="real" title="End Radius" value="0.1" unit="in" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the end radius for a tangent taper for the second side.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BendTaperEndRadius2_MU" type="real" title="End Radius" value="2.0" unit="mm" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the end radius for a tangent taper for the second side.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Web">
+                <Pref name="NXSM_WebTaperType2" type="int" title="Taper" value="0" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the web taper type for the second side.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="None" bitmap="none" value="0"/>
+                    <EnumElem name="Face" bitmap="face_taper" value="1"/>
+                    <EnumElem name="Face Chain" bitmap="chain_taper" value="2"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_WebTaperAngle2" type="real" title="Taper Angle" value="5.0" unit="deg" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the web taper angle for the second side.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Three Bend Corner" csh="PMAN_Sheet_Metal_Corner_Three_Bend_Corner">
+            <Tab name="Corner Properties" csh="PMAN_Sheet_Metal_Corner_Three_Bend_Corner_Corner_Properties">
+              <Pref name="NXSM_ThreeBendCorner_TreatmentType" type="int" title="Treatment" value="0" ver="8.5.0" scope="Session">
+                <Description>This option specifies the treatment type.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                  <EnumElem name="Open" bitmap="treatment_open" value="0"/>
+                  <EnumElem name="Closed" bitmap="treatment_type_closed" value="1"/>
+                  <EnumElem name="Circular Cutout" bitmap="sm_relief_circular" value="2"/>
+                  <EnumElem name="U Cutout" bitmap="sm_relief_u" value="3"/>
+                  <EnumElem name="V Cutout" bitmap="sm_relief_v" value="4"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_MiterCorner" type="int" title="Miter Corner" value="1" ver="9.0.1" scope="Session">
+                <Description>This option specifies if the corner should be closed with the miter option.</Description>
+                <Toggle off="0"/>
+                <Data type="enum">
+                  <EnumElem name="Off" value="0"/>
+                  <EnumElem name="On" value="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_MiterRootRadius_EU" type="real" title="Miter Root Radius" value="0.02" unit="in" ver="1847" scope="Session">
+                <Description>This option specifies the miter root radius.</Description>
+                <Real/>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_MiterRootRadius_MU" type="real" title="Miter Root Radius" value="0.5" unit="mm" ver="1847" scope="Session">
+                <Description>This option specifies the miter root radius.</Description>
+                <Real/>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_BlendMiter" type="int" title="Blend Miter" value="0" ver="9.0.0" scope="Session">
+                <Description>When the Miter Corner option is on, this option specifies if the transition from miter to cutout edges should be smooth.</Description>
+                <Toggle off="0"/>
+                <Data type="enum">
+                  <EnumElem name="No" value="0"/>
+                  <EnumElem name="Yes" value="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_BlendMiterRadius_EU" type="real" title="Blend Miter Radius" value="0.1" unit="in" ver="1847" scope="Session">
+                <Description>This option specifies the blend miter radius.</Description>
+                <Real/>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_BlendMiterRadius_MU" type="real" title="Blend Miter Radius" value="2.5" unit="mm" ver="1847" scope="Session">
+                <Description>This option specifies the blend miter radius.</Description>
+                <Real/>
+              </Pref>
+            </Tab>
+            <Tab name="Relief Properties" csh="PMAN_Sheet_Metal_Corner_Three_Bend_Corner_Relief_Properties">
+              <Pref name="NXSM_ThreeBendCorner_CutMethod" type="int" title="Cut Method" value="1" ver="1872" scope="Session">
+                <Description>This option specifies the cut method for U and V reliefs.</Description>
+                <RadioBox/>
+                <Data type="enum">
+                  <EnumElem name="By Tool" value="0"/>
+                  <EnumElem name="By Path" value="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_Origin" type="int" title="Origin" value="0" ver="9.0.0" scope="Session">
+                <Description>This option specifies the location of the corner relief origin.</Description>
+                <RadioBox/>
+                <Data type="enum">
+                  <EnumElem name="Bend Center" value="0"/>
+                  <EnumElem name="Corner Point" value="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_CircleCutoutDiameter_EU" type="real" title="Cutout Diameter" value="0.1" unit="in" ver="1847" scope="Session">
+                <Description>This option specifies the circular, U, and V cutout diameter.</Description>
+                <Real/>
+              </Pref>
+              <Pref name="NXSM_CircleCutoutDiameter_MU" type="real" title="Cutout Diameter" value="2.54" unit="mm" ver="1847" scope="Session">
+                <Description>This option specifies the circular, U, and V cutout diameter.</Description>
+                <Real/>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_Offset_EU" type="real" title="Cutout Offset" value="0.0" unit="in" ver="1847" scope="Session">
+                <Description>This option specifies the circular, U, and V cutout offset distance.</Description>
+                <Real/>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_Offset_MU" type="real" title="Cutout Offset" value="0.0" unit="mm" ver="1847" scope="Session">
+                <Description>This option specifies the circular, U, and V cutout offset distance.</Description>
+                <Real/>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_VAngle1" type="real" title="V Angle 1" value="20.0" unit="deg" ver="8.5.0" scope="Session">
+                <Description>This option specifies the first angle for V corner reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_VAngle2" type="real" title="V Angle 2" value="20.0" unit="deg" ver="8.5.0" scope="Session">
+                <Description>This option specifies the second angle for V corner reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_VLength1_EU" type="real" title="V Length 1" value="0.4" unit="in" ver="1872" scope="Session">
+                <Description>This option specifies the first length for V corner reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_VLength1_MU" type="real" title="V Length 1" value="10.0" unit="mm" ver="1872" scope="Session">
+                <Description>This option specifies the first length for V corner reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_VLength2_EU" type="real" title="V Length 2" value="0.4" unit="in" ver="1872" scope="Session">
+                <Description>This option specifies the second length for V corner reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_VLength2_MU" type="real" title="V Length 2" value="10.0" unit="mm" ver="1872" scope="Session">
+                <Description>This option specifies the second length for V corner reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_ULength_EU" type="real" title="U Length" value="0.4" unit="in" ver="1872" scope="Session">
+                <Description>This option specifies the length for U corner reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_ULength_MU" type="real" title="U Length" value="10.0" unit="mm" ver="1872" scope="Session">
+                <Description>This option specifies the length for U corner reliefs.</Description>
+                <Real/>
+                <Data type="range">
+                  <LowerBound value="0.0" include="0"/>
+                </Data>
+              </Pref>
+            </Tab>
+            <Tab name="Settings" csh="PMAN_Sheet_Metal_Corner_Three_Bend_Corner_Settings">
+              <Pref name="NXSM_ThreeBendCorner_FlangeClearance_EU" type="real" title="Flange Clearance" value="0.1" unit="in" ver="1847" scope="Session">
+                <Description>This option specifies the tool clearance.</Description>
+                <Real/>
+              </Pref>
+              <Pref name="NXSM_ThreeBendCorner_FlangeClearance_MU" type="real" title="Flange Clearance" value="2.5" unit="mm" ver="1847" scope="Session">
+                <Description>This option specifies the tool clearance.</Description>
+                <Real/>
+              </Pref>
+            </Tab>
+          </SubCategory>
+        </Category>
+        <Category name="Punch" csh="PMAN_Sheet_Metal_Punch">
+          <SubCategory name="Dimple" csh="PMAN_Sheet_Metal_Punch_Dimple">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Punch_Dimple_All">
+              <Group name="Dimple Properties">
+                <Pref name="NXSM_TaperAngle_EU" type="real" title="Side Angle" value="0.0" unit="deg" ver="1847" scope="Session">
+                  <Description>This option specifies the side angle.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_TaperAngle_MU" type="real" title="Side Angle" value="0.0" unit="deg" ver="1847" scope="Session">
+                  <Description>This option specifies the side angle.</Description>
+                  <Real/>
+                </Pref>
+              </Group>
+              <Group name="Settings">
+                <Pref name="NXSM_DimpleRounding" type="int" title="Blend Dimple Edges" value="1" ver="4.0.0" scope="Session">
+                  <Description>This option determines whether or not the Dimple should be rounded.</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="1"/>
+                    <EnumElem name="No" value="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_DimplePunchRadius_EU" type="real" title="Punch Radius" value="0.1" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the punch radius.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_DimplePunchRadius_MU" type="real" title="Punch Radius" value="2.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the punch radius.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_DimpleDieRadius_EU" type="real" title="Die Radius" value="0.1" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the die radius.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_DimpleDieRadius_MU" type="real" title="Die Radius" value="2.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the die radius.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_DimpleProfileCornerRounding" type="int" title="Blend Section Corners" value="1" ver="4.0.0" scope="Session">
+                  <Description>This option determines whether or not the section corners should be rounded automatically.</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="1"/>
+                    <EnumElem name="No" value="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_DimpleAutomaticProfileCornerRadius_EU" type="real" title="Corner Radius" value="0.1" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the profile corner radius.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_DimpleAutomaticProfileCornerRadius_MU" type="real" title="Corner Radius" value="2.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the profile corner radius.</Description>
+                  <Real/>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Louver" csh="PMAN_Sheet_Metal_Punch_Louver">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Punch_Louver_All">
+              <Group name="Louver Properties">
+                <Pref name="NXSM_LouverDepth_EU" type="real" title="Depth" value="0.2" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the depth of the Louver feature.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_LouverDepth_MU" type="real" title="Depth" value="5.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the depth of the Louver feature.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_LouverWidth_EU" type="real" title="Width" value="0.5" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the width of the Louver feature.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_LouverWidth_MU" type="real" title="Width" value="10.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the width of the Louver feature.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_LouverType" type="int" title="Louver Shape" value="0" ver="9.0.3" scope="Session">
+                  <Description>This option specifies the type of Louver to be created.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Lanced" bitmap="louver_lanced_end" value="0"/>
+                    <EnumElem name="Formed" bitmap="louver_formed_end" value="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Settings">
+                <Pref name="NXSM_LouverRounding" type="int" title="Blend Louver Edges" value="0" ver="4.0.0" scope="Session">
+                  <Description>This option determines whether or not the Louver should be rounded.</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="1"/>
+                    <EnumElem name="No" value="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_LouverDieRadius_EU" type="real" title="Die Radius" value="0.1" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the die radius.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_LouverDieRadius_MU" type="real" title="Die Radius" value="2.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the die radius.</Description>
+                  <Real/>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Drawn Cutout" csh="PMAN_Sheet_Metal_Punch_Drawn_Cutout">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Punch_Drawn_Cutout_All">
+              <Group name="Cutout Properties">
+                <Pref name="NXSM_DrawnCutout_TaperAngle_EU" type="real" title="Side Angle" value="0.0" unit="deg" ver="1847" scope="Session">
+                  <Description>This option specifies the side angle.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_DrawnCutout_TaperAngle_MU" type="real" title="Side Angle" value="0.0" unit="deg" ver="1847" scope="Session">
+                  <Description>This option specifies the side angle.</Description>
+                  <Real/>
+                </Pref>
+              </Group>
+              <Group name="Settings">
+                <Pref name="NXSM_DrawnCutoutRounding" type="int" title="Blend Drawn Cutout Edges" value="1" ver="4.0.0" scope="Session">
+                  <Description>This option determines whether or not the Drawn Cutout should be rounded.</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="1"/>
+                    <EnumElem name="No" value="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_DrawnCutoutDieRadius_EU" type="real" title="Die Radius" value="0.1" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the die radius.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_DrawnCutoutDieRadius_MU" type="real" title="Die Radius" value="2.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the die radius.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_DrawnCutoutProfileCornerRounding" type="int" title="Blend Section Corners" value="1" ver="4.0.0" scope="Session">
+                  <Description>This option determines whether or not the section corners should be rounded automatically.</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="1"/>
+                    <EnumElem name="No" value="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_DrawnCutoutAutomaticProfileCornerRadius_EU" type="real" title="Corner Radius" value="0.1" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the profile corner radius.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_DrawnCutoutAutomaticProfileCornerRadius_MU" type="real" title="Corner Radius" value="2.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the profile corner radius.</Description>
+                  <Real/>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Bead" csh="PMAN_Sheet_Metal_Punch_Bead">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Punch_Bead_All">
+              <Group name="Bead Properties">
+                <Pref name="NXSM_BeadProfileType" type="int" title="Cross Section" value="0" ver="4.0.0" scope="Session">
+                  <Description>This option specifies the Bead profile type.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Circular" bitmap="circular_shaped_dim" value="0"/>
+                    <EnumElem name="U-shaped" bitmap="u_shaped_dim" value="1"/>
+                    <EnumElem name="V-shaped" bitmap="v_shaped_dim" value="2"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BeadDepth_EU" type="real" title="Depth" value="0.1" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the Bead depth.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_BeadDepth_MU" type="real" title="Depth" value="3.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the Bead depth.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_BeadRadius_EU" type="real" title="Radius" value="0.1" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the Bead radius.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_BeadRadius_MU" type="real" title="Radius" value="3.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the Bead radius.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_BeadWidth_EU" type="real" title="Width" value="0.1" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the Bead width.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_BeadWidth_MU" type="real" title="Width" value="3.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the Bead width.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_BeadAngle_EU" type="real" title="Angle" value="45.0" unit="deg" ver="1847" scope="Session">
+                  <Description>This option specifies the Bead angle.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_BeadAngle_MU" type="real" title="Angle" value="45.0" unit="deg" ver="1847" scope="Session">
+                  <Description>This option specifies the Bead angle.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_BeadEndType" type="int" title="End Condition" value="0" ver="8.5.0" scope="Session">
+                  <Description>This option specifies the Bead end type.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Formed" bitmap="bead_circular" value="0"/>
+                    <EnumElem name="Lanced" bitmap="bead_circular_lanced_end" value="1"/>
+                    <EnumElem name="Punched" bitmap="bead_circular_punched_end" value="2"/>
+                    <EnumElem name="Tapered" bitmap="bead_tapered_end" value="3"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BeadPunchedWidth_EU" type="real" title="Punch Width" value="0.1" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the punch width.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_BeadPunchedWidth_MU" type="real" title="Punch Width" value="2.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the punch width.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_BeadTaperDistance_EU" type="real" title="Taper Distance" value="0.3" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the taper distance.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_BeadTaperDistance_MU" type="real" title="Taper Distance" value="6.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the taper distance.</Description>
+                  <Real/>
+                </Pref>
+              </Group>
+              <Group name="Settings">
+                <Pref name="NXSM_BeadRounding" type="int" title="Blend Bead Edges" value="1" ver="4.0.0" scope="Session">
+                  <Description>This option determines whether or not the Bead should be rounded.</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="1"/>
+                    <EnumElem name="No" value="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_BeadDieRadius_EU" type="real" title="Die Radius" value="0.1" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the die radius.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_BeadDieRadius_MU" type="real" title="Die Radius" value="2.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the die radius.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_BeadPunchRadius_EU" type="real" title="Punch Radius" value="0.1" unit="in" ver="1847" scope="Session">
+                  <Description>This option specifies the punch radius.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_BeadPunchRadius_MU" type="real" title="Punch Radius" value="2.0" unit="mm" ver="1847" scope="Session">
+                  <Description>This option specifies the punch radius.</Description>
+                  <Real/>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Solid Punch" csh="PMAN_Sheet_Metal_Punch_Solid_Punch">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Punch_Solid_Punch_All">
+              <Pref name="SMD_SolidPunchType" type="int" title="Type" value="0" ver="3.0.0" scope="Session">
+                <Description>This option specifies the solid punch type.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                  <EnumElem name="Punch" bitmap="sm_solid_punch_punchtype" value="0"/>
+                  <EnumElem name="Die" bitmap="sm_solid_punch_dietype" value="1"/>
+                </Data>
+              </Pref>
+              <Group name="Settings">
+                <Pref name="SMD_SolidPunchEdgeBlend" type="int" title="Blend Edges" value="1" ver="11.0.0" scope="Session">
+                  <Description>This option determines whether or not die blends should be applied to the edges between the target body and the solid punch.</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="1"/>
+                    <EnumElem name="No" value="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="SMD_SolidPunchInBlendRadius_EU" type="real" title="Die Radius" value="0.1" unit="in" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the inner radius to apply when the Die Blend option is on. The outer radius is calculated as the inner radius plus the thickness.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="SMD_SolidPunchInBlendRadius_MU" type="real" title="Die Radius" value="2.0" unit="mm" ver="11.0.0" scope="Session">
+                  <Description>This option specifies the inner radius to apply when the Die Blend option is on. The outer radius is calculated as the inner radius plus the thickness.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="SMD_SolidPunchConstantThickness" type="int" title="Constant Thickness" value="1" ver="6.0.0" scope="Session">
+                  <Description>This option determines whether or not sharp edges on the tool body will yield blended edges with constant thickness. If this option is off, the solid punch will contain sharp edges without constant thickness.</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="1"/>
+                    <EnumElem name="Off" value="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="SMD_SolidPunchAutoCentroid" type="int" title="Centroid Point" value="1" ver="3.0.0" scope="Session">
+                  <Description>This option determines whether or not a point is created at the centroid of the solid punch. This point is often used for manufacturing purposes</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                    <EnumElem name="On" value="1"/>
+                    <EnumElem name="Off" value="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="SMD_SolidPunchBlankTool" type="int" title="Hide Tool Body" value="1" ver="3.0.0" scope="Session">
+                  <Description>This option determines whether or not the tool body will be made hidden after creation of the solid punch.</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="1"/>
+                    <EnumElem name="No" value="0"/>
+                  </Data>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Gusset" csh="PMAN_Sheet_Metal_Punch_Gusset">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Punch_Gusset_All">
+              <Pref name="NXSM_GussetType" type="int" title="Type" value="0" ver="7.5.0" scope="Session">
+                <Description>This option defines the Gusset type.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                  <EnumElem name="Automatic Profile" bitmap="gusset" value="0"/>
+                  <EnumElem name="User Defined Profile" bitmap="userdef_profile_gusset" value="1"/>
+                </Data>
+              </Pref>
+              <Group name="Shape">
+                <Pref name="NXSM_GussetDepth_EU" type="real" title="Depth" value="0.4" unit="in" ver="10.0.0" scope="Session">
+                  <Description>This option specifies the depth value of Automatic Profile Gussets.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_GussetDepth_MU" type="real" title="Depth" value="10.0" unit="mm" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the depth value of Automatic Profile Gussets.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_GussetShape" type="int" title="Form" value="0" ver="7.5.0" scope="Session">
+                  <Description>This option defines the Gusset shape.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Square" value="0"/>
+                    <EnumElem name="Round" value="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_GussetWidth_EU" type="real" title="Width" value="0.3" unit="in" ver="10.0.0" scope="Session">
+                  <Description>This option specifies the width value of Gussets.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_GussetWidth_MU" type="real" title="Width" value="8.0" unit="mm" ver="10.0.0" scope="Session">
+                  <Description>This option specifies the width value of Gussets.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_GussetSideAngle" type="real" title="Side Angle" value="30.0" unit="deg" ver="10.0.0" scope="Session">
+                  <Description>This option specifies the side angle.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_GussetPunchRadius_EU" type="real" title="Punch Radius" value="0.1" unit="in" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the punch radius.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_GussetPunchRadius_MU" type="real" title="Punch Radius" value="3.0" unit="mm" ver="10.0.0" scope="Session">
+                  <Description>This option specifies the punch radius.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_GussetDieRadius_EU" type="real" title="Die Radius" value="0.1" unit="in" ver="7.5.0" scope="Session">
+                  <Description>This option specifies the die radius.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_GussetDieRadius_MU" type="real" title="Die Radius" value="3.0" unit="mm" ver="10.0.0" scope="Session">
+                  <Description>This option specifies the die radius.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+        </Category>
+        <Category name="Resize" csh="PMAN_Sheet_Metal_Resize">
+          <SubCategory name="Resize Bend Radius" csh="PMAN_Sheet_Metal_Resize_Resize_Bend_Radius">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Resize_Resize_Bend_Radius_All">
+              <Pref name="NXSM_ResizeBendRadiusType" type="int" title="Type" value="0" ver="7.0.0" scope="Session">
+                <Description>This option specifies the Resize Bend Radius type.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                  <EnumElem name="Fixed Tab/Flange Position" bitmap="resize_bend_radius_folded" value="0"/>
+                  <EnumElem name="Fixed Unfolded Length" bitmap="resize_bend_radius_unfolded" value="1"/>
+                </Data>
+              </Pref>
+            </Tab>
+          </SubCategory>
+        </Category>
+        <Category name="Flat Pattern" csh="PMAN_Sheet_Metal_Flat_Pattern">
+          <SubCategory name="Flat Pattern" csh="PMAN_Sheet_Metal_Flat_Pattern_Flat_Pattern">
+            <Tab name="Treatments" csh="PMAN_Sheet_Metal_Flat_Pattern_Flat_Pattern_Treatments">
+              <Group name="Treatment Options">
+                <Pref name="NXSM_FPOrientation" type="int" title="Orientation Method" value="0" ver="2206" scope="Part">
+                  <Description>This option specifies the orientation method to use when creating Flat Solid features. Use Default orientation to leave flat solid body at same place after unfolding. Use Select Edge orientation to align selected edge with the X-axis of absolute CSYS. Use Specify CSYS to align specified CSYS to absolute CSYS.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="Default" value="0"/>
+                    <EnumElem name="Select Edge" value="1"/>
+                    <EnumElem name="Specify CSYS" value="2"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FPCornerOutTreatment" type="int" title="Outside Corner Treatments" value="0" ver="3.0.0" scope="Part">
+                  <Description>This option specifies the type of corner treatments to be applied to convex corners when creating Flat Solid features.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="None" value="0"/>
+                    <EnumElem name="Chamfer" value="1"/>
+                    <EnumElem name="Radius" value="2"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FPCornerOutTreatmentValue_EU" type="real" title="Outside Value" value="0.003937" unit="in" ver="1847" scope="Part">
+                  <Description>This option specifies the value for corner treatments to be applied to convex corners when creating Flat Solid features.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_FPCornerOutTreatmentValue_MU" type="real" title="Outside Value" value="0.1" unit="mm" ver="1847" scope="Part">
+                  <Description>This option specifies the value for corner treatments to be applied to convex corners when creating Flat Solid features.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_FPCornerInTreatment" type="int" title="Inside Corner Treatments" value="0" ver="3.0.0" scope="Part">
+                  <Description>This option specifies the type of corner treatments to be applied to concave corners when creating Flat Solid features.</Description>
+                  <RadioBox orientation="horizontal"/>
+                  <Data type="enum">
+                    <EnumElem name="None" value="0"/>
+                    <EnumElem name="Chamfer" value="1"/>
+                    <EnumElem name="Radius" value="2"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FPCornerInTreatmentValue_EU" type="real" title="Inside Value" value="0.003937" unit="in" ver="1847" scope="Part">
+                  <Description>This option specifies the value for corner treatments to be applied to concave corners when creating Flat Solid features.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_FPCornerInTreatmentValue_MU" type="real" title="Inside Value" value="0.1" unit="mm" ver="1847" scope="Part">
+                  <Description>This option specifies the value for corner treatments to be applied to concave corners when creating Flat Solid features.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_FPHoleTreatment" type="int" title="Hole Treatments" value="0" ver="1847" scope="Part">
+                  <Description>This option specifies the type of treatments to be applied to circular cutouts when creating Flat Pattern features.</Description>
+                  <RadioBox/>
+                  <Data type="enum">
+                    <EnumElem name="None" value="0"/>
+                    <EnumElem name="Center Mark" value="1"/>
+                    <EnumElem name="Hole Curve and Center Mark" value="2"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FPHoleTreatmentValue_EU" type="real" title="Hole Diameter" value="0.003937" unit="in" ver="1847" scope="Part">
+                  <Description>This option specifies the diameter value for hole treatments to be applied to circular cutouts when creating Flat Pattern features.</Description>
+                  <Real/>
+                </Pref>
+                <Pref name="NXSM_FPHoleTreatmentValue_MU" type="real" title="Hole Diameter" value="0.1" unit="mm" ver="1847" scope="Part">
+                  <Description>This option specifies the diameter value for hole treatments to be applied to circular cutouts when creating Flat Pattern features.</Description>
+                  <Real/>
+                </Pref>
+              </Group>
+              <Group name="Flat Pattern Simplify">
+                <Pref name="NXSM_FPSimplify" type="int" title="Simplify B-splines" value="0" ver="3.0.0" scope="Part">
+                  <Description>This option determines whether or not the B-splines should be simplified in a Flat Pattern.</Description>
+                  <Toggle off="0"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="1"/>
+                    <EnumElem name="No" value="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FPMinimumArc_EU" type="real" title="Minimum Arc" value="0.003937" unit="in" ver="3.0.0" scope="Part">
+                  <Description>This option specifies the tolerance value for the radius of curvature on the B-splines to be simplified to arcs in a Flat Pattern.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FPMinimumArc_MU" type="real" title="Minimum Arc" value="0.1" unit="mm" ver="3.0.0" scope="Part">
+                  <Description>This option specifies the tolerance value for the radius of curvature on the B-splines to be simplified to arcs in a Flat Pattern.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FPDeviationalTol_EU" type="real" title="Deviational Tolerance" value="0.003937" unit="in" ver="3.0.0" scope="Part">
+                  <Description>This option specifies the deviational tolerance value for the tangent along B-splines to be simplified to lines in a Flat Pattern.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FPDeviationalTol_MU" type="real" title="Deviational Tolerance" value="0.1" unit="mm" ver="3.0.0" scope="Part">
+                  <Description>This option specifies the deviational tolerance value for the tangent along B-splines to be simplified to lines in a Flat Pattern.</Description>
+                  <Real/>
+                  <Data type="range">
+                    <LowerBound value="0.0" include="0"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Pref name="NXSM_FPEnableAssociative" type="logical" title="Associative" value="true" ver="1926" scope="Part">
+                <Description>This option determines whether or not the Flat Pattern should be created associative to the input data.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_FPFixAtCurrentTimeStamp" type="logical" title="Fix at Current Timestamp" value="true" ver="2206" scope="Part">
+                <Description>This option determines whether or not a timestamp should be placed at the last feature in the sheet metal body when the Flat Pattern feature is created. When this option is on, changes made to the sheet metal body after the Flat Pattern feature was created do not appear in the Flat Pattern.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>              
+              <Pref name="NXSM_FPEnableShowInteriorFeatureCurves" type="logical" title="Show Interior Feature Curves" value="true" ver="1926" scope="Part">
+                <Description>This option determines whether or not interior feature curves in Flat Pattern features should be shown.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_FPRemoveBendReliefs" type="int" title="Remove System-generated Bend Reliefs" value="0" ver="3.0.0" scope="Part">
+                <Description>This option determines whether or not system-generated bend reliefs in Flat Solid features should be removed.</Description>
+                <Toggle off="0"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="1"/>
+                  <EnumElem name="No" value="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_FPMaintainHoles" type="int" title="Maintain Circular Shape for Holes in Flat Patterns" value="1" ver="6.0.0" scope="Part">
+                <Description>This option determines whether or not circular shape for holes should be maintained in flat patterns.</Description>
+                <Toggle off="0"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="1"/>
+                  <EnumElem name="No" value="0"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_FPLouverCutoutCurves" type="logical" title="Show Louver Cutout Curves as Interior Cutout" value="true" ver="2206" scope="Part">
+                <Description>This option determines whether or not Louver feature cutout curves should classify as interior cutout curves in flat patterns.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_FPKeepFlatSolidExternal" type="logical" title="Keep Flat Solid External" value="false" ver="2312" scope="Part">
+                <Description>This option determines whether or not the flat solid should be kept external while creating the flat pattern feature.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_FPSingleBendLine" type="logical" title="Show Single Bend Line for Aligned Bends" value="false" ver="2312" scope="Part">
+                <Description>This option determines whether or not the flat pattern should show a single bend line if the bends align.</Description>
+                <Toggle off="false"/>
+                <Data type="enum">
+                  <EnumElem name="Yes" value="true"/>
+                  <EnumElem name="No" value="false"/>
+                </Data>
+              </Pref>   
+              <Separator/>
+              <Pref name="NXSM_FPReferenceSetName" type="string" title="Name of Reference Set for Curves" value="FLAT-PATTERN-OBJECTS" ver="7.5.0" scope="Session">
+                <Description>This option specifies the name of the reference set that is to be used to create the reference components that support drawing member views of flat patterns. There is only one such reference set in any one part.</Description>
+                <Widestring/>
+              </Pref>
+            </Tab>
+            <Tab name="Curves" csh="PMAN_Sheet_Metal_Flat_Pattern_Flat_Pattern_Curves">
+              <Group name="Bend-up Centerline">
+                <Pref name="NXSM_bendUpCenterLine_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="6.0.0" scope="Part">
+                  <Description>This option specifies whether Bend-up Centerlines are created and displayed on flat patterns.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_bendUpCenterLine_FlatPattern_Color" type="int" title="Color" value="189" ver="6.0.0" scope="Part">
+                  <Description>This option specifies the color of Bend-up Centerlines on flat patterns.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="NXSM_bendUpCenterLine_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the style for Bend-up Centerlines on flat patterns.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="NXSM_bendUpCenterLine_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+                  <Description>This option specifies the width for Bend-up Centerlines on flat patterns.</Description>
+                  <AnnotationLineWidth allowWideLineWidth="true"/>
+                </Pref>
+                <Pref name="NXSM_bendUpCenterLine_FlatPattern_Layer" type="int" title="Layer" value="1" ver="6.0.0" scope="Part">
+                  <Description>This option specifies the layer on which the Bend-up Centerlines will be placed in flat pattern views.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Bend-down Centerline">
+                <Pref name="NXSM_bendDownCenterLine_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="6.0.0" scope="Part">
+                  <Description>This option specifies whether Bend-down Centerlines are created and displayed on flat patterns.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_bendDownCenterLine_FlatPattern_Color" type="int" title="Color" value="165" ver="6.0.0" scope="Part">
+                  <Description>This option specifies the color of Bend-down Centerlines on flat patterns.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="NXSM_bendDownCenterLine_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the style for Bend-down Centerlines on flat patterns.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="NXSM_bendDownCenterLine_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+                  <Description>This option specifies the width for Bend-down Centerlines on flat patterns.</Description>
+                  <AnnotationLineWidth allowWideLineWidth="true"/>
+                </Pref>
+                <Pref name="NXSM_bendDownCenterLine_FlatPattern_Layer" type="int" title="Layer" value="1" ver="6.0.0" scope="Part">
+                  <Description>This option specifies the layer on which the Bend-down Centerlines will be placed in flat pattern views.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Bend Tangent Line">
+                <Pref name="NXSM_bendTangentLine_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="5.0.0" scope="Part">
+                  <Description>This option specifies whether Bend Tangent Lines are created and displayed on flat patterns.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_bendTangentLine_FlatPattern_Color" type="int" title="Color" value="83" ver="6.0.0" scope="Part">
+                  <Description>This option specifies the color of Bend Tangent Lines on flat patterns.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="NXSM_bendTangentLine_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the style for Bend Tangent Lines on flat patterns.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="NXSM_bendTangentLine_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+                  <Description>This option specifies the width for Bend Tangent Lines on flat patterns.</Description>
+                  <AnnotationLineWidth allowWideLineWidth="true"/>
+                </Pref>
+                <Pref name="NXSM_bendTangentLine_FlatPattern_Layer" type="int" title="Layer" value="1" ver="5.0.0" scope="Part">
+                  <Description>This option specifies the layer on which the Bend Tangent Lines will be placed in flat pattern views.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Inner Mold Line">
+                <Pref name="NXSM_bendInnerMoldLine_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="5.0.0" scope="Part">
+                  <Description>This option specifies whether Inner Mold Lines are created and displayed on flat patterns.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_bendInnerMoldLine_FlatPattern_Color" type="int" title="Color" value="71" ver="6.0.0" scope="Part">
+                  <Description>This option specifies the color of Inner Mold Lines on flat patterns.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="NXSM_bendInnerMoldLine_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the style for Inner Mold Lines on flat patterns.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="NXSM_bendInnerMoldLine_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+                  <Description>This option specifies the width for Inner Mold Lines on flat patterns.</Description>
+                  <AnnotationLineWidth allowWideLineWidth="true"/>
+                </Pref>
+                <Pref name="NXSM_bendInnerMoldLine_FlatPattern_Layer" type="int" title="Layer" value="1" ver="5.0.0" scope="Part">
+                  <Description>This option specifies the layer on which the Inner Mold Lines will be placed in flat pattern views.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Outer Mold Line">
+                <Pref name="NXSM_bendOuterMoldLine_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="5.0.0" scope="Part">
+                  <Description>This option specifies whether Outer Mold Lines are created and displayed on flat patterns.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_bendOuterMoldLine_FlatPattern_Color" type="int" title="Color" value="108" ver="6.0.0" scope="Part">
+                  <Description>This option specifies the color of Outer Mold Lines on flat patterns.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="NXSM_bendOuterMoldLine_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the style for Outer Mold Lines on flat patterns.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="NXSM_bendOuterMoldLine_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+                  <Description>This option specifies the width for Outer Mold Lines on flat patterns.</Description>
+                  <AnnotationLineWidth allowWideLineWidth="true"/>
+                </Pref>
+                <Pref name="NXSM_bendOuterMoldLine_FlatPattern_Layer" type="int" title="Layer" value="1" ver="5.0.0" scope="Part">
+                  <Description>This option specifies the layer on which the Outer Mold Lines will be placed in flat pattern views.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Exterior Curves">
+                <Pref name="NXSM_exteriorCurves_FlatPattern_Color" type="int" title="Color" value="134" ver="6.0.0" scope="Part">
+                  <Description>This option specifies the color of Exterior Curves on flat patterns.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="NXSM_exteriorCurves_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the style for Exterior Curves on flat patterns.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="NXSM_exteriorCurves_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+                  <Description>This option specifies the width for Exterior Curves on flat patterns.</Description>
+                  <AnnotationLineWidth allowWideLineWidth="true"/>
+                </Pref>
+                <Pref name="NXSM_exteriorCurves_FlatPattern_Layer" type="int" title="Layer" value="1" ver="5.0.0" scope="Part">
+                  <Description>This option specifies the layer on which the Exterior Curves will be placed in flat pattern views.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Interior Cutout Curves">
+                <Pref name="NXSM_interiorCutoutCurves_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="6.0.0" scope="Part">
+                  <Description>This option specifies whether Interior Cutout Curves are created and displayed on flat patterns.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_interiorCutoutCurves_FlatPattern_Color" type="int" title="Color" value="98" ver="6.0.0" scope="Part">
+                  <Description>This option specifies the color of Interior Cutout Curves on flat patterns.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="NXSM_interiorCutoutCurves_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the style for Interior Cutout Curves on flat patterns.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="NXSM_interiorCutoutCurves_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+                  <Description>This option specifies the width for Interior Cutout Curves on flat patterns.</Description>
+                  <AnnotationLineWidth allowWideLineWidth="true"/>
+                </Pref>
+                <Pref name="NXSM_interiorCutoutCurves_FlatPattern_Layer" type="int" title="Layer" value="1" ver="6.0.0" scope="Part">
+                  <Description>This option specifies the layer on which the Interior Cutout Curves will be placed in flat pattern views.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Interior Feature Curves">
+                <Pref name="NXSM_interiorFeatureCurves_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="6.0.0" scope="Part">
+                  <Description>This option specifies whether Interior Feature Curves are created and displayed on flat patterns.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_interiorFeatureCurves_FlatPattern_Color" type="int" title="Color" value="165" ver="6.0.0" scope="Part">
+                  <Description>This option specifies the color of Interior Feature Curves on flat patterns.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="NXSM_interiorFeatureCurves_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the style for Interior Feature Curves on flat patterns.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="NXSM_interiorFeatureCurves_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+                  <Description>This option specifies the width for Interior Feature Curves on flat patterns.</Description>
+                  <AnnotationLineWidth allowWideLineWidth="true"/>
+                </Pref>
+                <Pref name="NXSM_interiorFeatureCurves_FlatPattern_Layer" type="int" title="Layer" value="1" ver="6.0.0" scope="Part">
+                  <Description>This option specifies the layer on which the Interior Curves will be placed in flat pattern views.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Center Marks">
+                <Pref name="NXSM_centerMarks_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="1847" scope="Part">
+                  <Description>This option specifies whether Center Marks are created and displayed on flat patterns.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_centerMarks_FlatPattern_Color" type="int" title="Color" value="186" ver="1847" scope="Part">
+                  <Description>This option specifies the color of Center Marks on flat patterns.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="NXSM_centerMarks_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the line style for Center Marks on flat patterns.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="NXSM_centerMarks_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+                  <Description>This option specifies the width for Center Marks on flat patterns.</Description>
+                  <AnnotationLineWidth allowWideLineWidth="true"/>
+                </Pref>
+                <Pref name="NXSM_centerMarks_FlatPattern_Layer" type="int" title="Layer" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the layer on which the Center Marks will be placed in flat pattern views.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Hole Feature Curves">
+                <Pref name="NXSM_holeFeatureCurves_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="1847" scope="Part">
+                  <Description>This option specifies whether Hole Feature Curves are created and displayed on flat patterns.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_holeFeatureCurves_FlatPattern_Color" type="int" title="Color" value="31" ver="1847" scope="Part">
+                  <Description>This option specifies the color of Hole Feature Curves on flat patterns.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="NXSM_holeFeatureCurves_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the line style for Hole Feature Curves on flat patterns.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="NXSM_holeFeatureCurves_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+                  <Description>This option specifies the width for Hole Feature Curves on flat patterns.</Description>
+                  <AnnotationLineWidth allowWideLineWidth="true"/>
+                </Pref>
+                <Pref name="NXSM_holeFeatureCurves_FlatPattern_Layer" type="int" title="Layer" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the layer on which the Hole Feature Curves will be placed in flat pattern views.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Lightening Hole">
+                <Pref name="NXSM_holeCenter_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="5.0.0" scope="Part">
+                  <Description>This option specifies whether Lightening Hole Center Markers are created and displayed on flat patterns.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_holeCenter_FlatPattern_Color" type="int" title="Color" value="188" ver="6.0.0" scope="Part">
+                  <Description>This option specifies the color of Lightening Hole Center Markers on flat patterns.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="NXSM_holeCenter_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the style for Lightening Hole Center Markers on flat patterns.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="NXSM_holeCenter_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+                  <Description>This option specifies the width for Lightening Hole Center Markers on flat patterns.</Description>
+                  <AnnotationLineWidth allowWideLineWidth="true"/>
+                </Pref>
+                <Pref name="NXSM_holeCenter_FlatPattern_Layer" type="int" title="Layer" value="1" ver="5.0.0" scope="Part">
+                  <Description>This option specifies the layer on which the Lightening Hole Center Markers will be placed in flat pattern views.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Joggle Line">
+                <Pref name="NXSM_joggleLine_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="5.0.0" scope="Part">
+                  <Description>This option specifies whether Joggle Lines are created and displayed on flat patterns.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_joggleLine_FlatPattern_Color" type="int" title="Color" value="105" ver="6.0.0" scope="Part">
+                  <Description>This option specifies the color of Joggle Lines on flat patterns.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="NXSM_joggleLine_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the style for Joggle Lines on flat patterns.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="NXSM_joggleLine_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+                  <Description>This option specifies the width for Joggle Lines on flat patterns.</Description>
+                  <AnnotationLineWidth allowWideLineWidth="true"/>
+                </Pref>
+                <Pref name="NXSM_joggleLine_FlatPattern_Layer" type="int" title="Layer" value="1" ver="5.0.0" scope="Part">
+                  <Description>This option specifies the layer on which the Joggle Lines will be placed in flat pattern views.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Added Top Geometry">
+                <Pref name="NXSM_addedTop_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="6.0.0" scope="Part">
+                  <Description>This option specifies whether Added Top Objects are created and displayed on flat patterns.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_addedTop_FlatPattern_Color" type="int" title="Color" value="117" ver="1872" scope="Part">
+                  <Description>This option specifies the color of Added Top Objects on flat patterns.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="NXSM_addedTop_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the style for Added Top Objects on flat patterns.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="NXSM_addedTop_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+                  <Description>This option specifies the width for Added Top Objects on flat patterns.</Description>
+                  <AnnotationLineWidth allowWideLineWidth="true"/>
+                </Pref>
+                <Pref name="NXSM_addedTop_FlatPattern_Layer" type="int" title="Layer" value="1" ver="6.0.0" scope="Part">
+                  <Description>This option specifies the layer on which the Added Top Objects will be placed in flat pattern views.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Added Bottom Geometry">
+                <Pref name="NXSM_addedBottom_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="6.0.0" scope="Part">
+                  <Description>This option specifies whether Added Bottom Objects are created and displayed on flat patterns.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_addedBottom_FlatPattern_Color" type="int" title="Color" value="117" ver="1872" scope="Part">
+                  <Description>This option specifies the color of Added Bottom Objects on flat patterns.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="NXSM_addedBottom_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the style for Added Bottom Objects on flat patterns.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="NXSM_addedBottom_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+                  <Description>This option specifies the width for Added Bottom Objects on flat patterns.</Description>
+                  <AnnotationLineWidth allowWideLineWidth="true"/>
+                </Pref>
+                <Pref name="NXSM_addedBottom_FlatPattern_Layer" type="int" title="Layer" value="1" ver="6.0.0" scope="Part">
+                  <Description>This option specifies the layer on which the Added Bottom Objects will be placed in flat pattern views.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+              <Group name="Tool Marker">
+                <Pref name="NXSM_toolMarker_FlatPattern_Enabled" type="logical" title="Display" value="true" ver="6.0.3" scope="Part">
+                  <Description>This option specifies whether Tool Marker Objects are created and displayed on flat patterns.</Description>
+                  <Toggle off="false"/>
+                  <Data type="enum">
+                    <EnumElem name="Yes" value="true"/>
+                    <EnumElem name="No" value="false"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_toolMarker_FlatPattern_Color" type="int" title="Color" value="117" ver="1872" scope="Part">
+                  <Description>This option specifies the color of Tool Marker Objects on flat patterns.</Description>
+                  <Color/>
+                </Pref>
+                <Pref name="NXSM_toolMarker_FlatPattern_Font" type="int" title="Style" value="1" ver="1847" scope="Part">
+                  <Description>This option specifies the style for Tool Marker Objects on flat patterns.</Description>
+                  <GeneralLineFont LineFontOptionMaskString="GeneralLineFonts"/>
+                </Pref>
+                <Pref name="NXSM_toolMarker_FlatPattern_Width" type="int" title="Width" value="1" ver="1872" scope="Part">
+                  <Description>This option specifies the width for Tool Marker Objects on flat patterns.</Description>
+                  <AnnotationLineWidth allowWideLineWidth="true"/>
+                </Pref>
+                <Pref name="NXSM_toolMarker_FlatPattern_Layer" type="int" title="Layer" value="1" ver="6.0.3" scope="Part">
+                  <Description>This option specifies the layer on which the Tool Marker Objects will be placed in flat pattern views.</Description>
+                  <Integer/>
+                  <Data type="range">
+                    <LowerBound value="1" include="1"/>
+                    <UpperBound value="256" include="1"/>
+                  </Data>
+                </Pref>
+              </Group>
+            </Tab>
+          <Tab name="Teamcenter Integration" csh="PMAN_Sheet_Metal_Flat_Pattern_Flat_Pattern_Teamcenter_Integration">
+            <Group name="Configure Dataset Name">
+                <Pref name="NXSM_FlatPattern_DatasetName" type="list_sel_reorder_value" title="Dataset Name Strings" value="&quot;ITEM_ID:0&quot;\&quot;ITEM_REVISION:0\&quot;\&quot;FP_VIEW_NAME:0&quot;\&quot;FP_FEATURE_NAME:0&quot;\&quot;FREE_TEXT:0&quot;" ver="1926" scope="Session">
+                  <Description>This option specifies the strings to include in the dataset name, and in which order. It is used only when saving to Teamcenter. If all options are off, the Item ID and Item Revision will be added to the dataset name. The system generated feature name will be used for the Flat Pattern Feature Name. The derived dataset name can have a maximum of 128 ASCII characters.</Description>
+                  <ListSelReorder height="6" reorderable="true" selectable="true"/>
+                  <Data type="enum">
+                    <EnumElem name="Item ID" value="ITEM_ID"/>
+                    <EnumElem name="Item Revision" value="ITEM_REVISION"/>
+                    <EnumElem name="Flat Pattern View Name" value="FP_VIEW_NAME"/>
+                    <EnumElem name="Flat Pattern Feature Name" value="FP_FEATURE_NAME"/>
+                    <EnumElem name="Free Text" value="FREE_TEXT"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_DatasetName_FreeText" type="utf8string" title="Free Text" value="" ver="1926" scope="Session">
+                  <Description>This option specifies the free text string that will be added to the configured dataset name.</Description>
+                  <Widestring/>
+                </Pref>
+                <Pref name="NXSM_DatasetName_Delimiter" type="string" title="Delimiter" value="/" ver="1926" scope="Session">
+                  <Description>This option specifies the special character that will be inserted as a delimiter between the different portions in the configured dataset name.</Description>
+                  <String/>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Flat Solid" csh="PMAN_Sheet_Metal_Flat_Pattern_Flat_Solid">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Flat_Pattern_Flat_Solid_All">
+              <Group name="Flat Solid Properties">
+              <Pref name="NXSM_FlatSolid_Color" type="int" title="Color" value="189" ver="1953" scope="Part">
+                <Description>This option specifies the color of the flat solid.</Description>
+                <Color/>
+              </Pref>
+              <Pref name="NXSM_FlatSolid_Layer" type="int" title="Layer" value="1" ver="1953" scope="Part">
+                <Description>This option specifies the layer of the flat solid.</Description>
+                <Integer/>
+                <Data type="range">
+                  <LowerBound value="1" include="1"/>
+                  <UpperBound value="256" include="1"/>
+                </Data>
+              </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+          <SubCategory name="Export Flat Pattern" csh="PMAN_Sheet_Metal_Flat_Pattern_Export_Flat_Pattern">
+            <Tab name="All" csh="PMAN_Sheet_Metal_Flat_Pattern_Export_Flat_Pattern_All">
+              <Pref name="NXSM_FPExportLocation" type="int" title="Export Location" value="0" ver="1872" scope="Session">
+                <Description>This option specifies the location of the exported flat pattern file.</Description>
+                <RadioBox orientation="horizontal"/>
+                <Data type="enum">
+                  <EnumElem name="Teamcenter" value="0"/>
+                  <EnumElem name="Directory" value="1"/>
+                </Data>
+              </Pref>
+              <Pref name="NXSM_ExportFP_OutputDirectory_WIN" type="string" title="Output File Directory" value="" ver="1872" scope="Session">
+                <Description>This field specifies the directory to write the output file to when the Export Location is set to Directory.</Description>
+                <BrowseDirSel/>
+              </Pref>
+              <Pref name="NXSM_ExportFP_OutputDirectory_UNX" type="string" title="Output File Directory" value="" ver="1872" scope="Session">
+                <Description>This field specifies the directory to write the output file to when the Export Location is set to Directory.</Description>
+                <BrowseDirSel/>
+              </Pref>
+              <Group name="Configure File Name">
+                <Pref name="NXSM_ExportFP_FileName" type="list_sel_reorder_value" title="File Name Strings" value="&quot;ITEM_ID:0&quot;\&quot;ITEM_REVISION:0\&quot;\&quot;FP_VIEW_NAME:0&quot;\&quot;FP_FEATURE_NAME:0&quot;\&quot;FREE_TEXT:0&quot;" ver="1926" scope="Session">
+                  <Description>This option specifies the strings to include in the file name, and in which order. It is used both when saving to Teamcenter and to a native directory. If all options are off, the Item ID and Item Revision will be added to the file name. The system generated feature name will be used for the Flat Pattern Feature Name. The derived file name can have a maximum of 128 ASCII characters.</Description>
+                  <ListSelReorder height="6" reorderable="true" selectable="true"/>
+                  <Data type="enum">
+                    <EnumElem name="Item ID" value="ITEM_ID"/>
+                    <EnumElem name="Item Revision" value="ITEM_REVISION"/>
+                    <EnumElem name="Flat Pattern View Name" value="FP_VIEW_NAME"/>
+                    <EnumElem name="Flat Pattern Feature Name" value="FP_FEATURE_NAME"/>
+                    <EnumElem name="Free Text" value="FREE_TEXT"/>
+                  </Data>
+                </Pref>
+                <Pref name="NXSM_FileName_FreeText" type="utf8string" title="Free Text" value="" ver="1926" scope="Session">
+                  <Description>This option specifies the free text string that will be added to the configured file name. The following special characters are not supported.<Formatted>
+  &quot;
+  *
+  /
+  \
+  :
+  &gt;
+  &lt;
+  `
+  |
+  ?
+                   </Formatted></Description>
+                  <Widestring/>
+                </Pref>
+                <Pref name="NXSM_FileName_Delimiter" type="string" title="Delimiter" value="_" ver="1926" scope="Session">
+                  <Description>This option specifies the special character that will be inserted as a delimiter between the different portions in the configured file name. The following special characters are not supported.<Formatted>
+  &quot;
+  *
+  /
+  \
+  :
+  &gt;
+  &lt;
+  `
+  |
+  ?
+                    </Formatted></Description>
+                  <String/>
+                </Pref>
+              </Group>
+            </Tab>
+          </SubCategory>
+        </Category>
+    </Application>
+</PrefDefinition>

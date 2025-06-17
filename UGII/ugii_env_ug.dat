@@ -1,0 +1,3646 @@
+#
+#
+#     Copyright 1991 - 2012 Siemens Product Lifecycle Management Software Inc.
+#                                   All Rights Reserved.
+#
+#  NOTE:  Customer changes should be made to the ugii_env.dat file directly.
+#         Any variable in that file will override the values listed here.
+#         This file will be overwritten by maintenance releases, so customers
+#         should not edit this file.
+#         
+#         If the UGII_ENV_FILE variable is set, it should point to the user's
+#         customization file.  This file is always read in and provides the
+#         default values.  Variables set in ugii_env.dat or in the file pointed
+#         to by UGII_ENV_FILE will supercede any values here, so override the
+#         defaults by defining the values in one of those files.
+#
+#
+###############################################################################
+# 
+#
+#  The following is the list of published environment variables for
+#  Windows NT systems.  
+#
+#  There is now an environment variable, UGII_ENV_FILE, that can be used to
+#  locate user's customizations.  This variable can be set in the environment, 
+#  and must point to a valid environment file.  This file should only contain
+#  the user's customizations.  The search for the environment files
+#  proceeds as follows:
+#
+#  1.  If the file $UGII_BASE_DIR\ugii\ugii_env.master exists, the values are
+#      read.  This is a list of environment variables that the system manager
+#      wishes to lock down to prevent changes.  Values in this file supercede
+#      values set in the environment, so that users can not change the default
+#      values as set by the system manager unless they have access to the file.
+#
+#  2.  User customizations of enviroment variables are loaded.  The first file
+#      found in this sequence is used:
+#     
+#      a. If the environment variable UGII_ENV_FILE is set, then the file
+#         it refers to is loaded.  This file should just contain user
+#         customizations.
+#      b. The ugii_env.dat file from the directory where ugraf.exe was started,
+#         e.g. the user's current directory.
+#      c. The ugii_env.dat file from the user's home directory.
+#      d. The ugii_env.dat file from the $UGII_BASE_DIR\ugii directory.
+#  3.  Files are read in from manifests as specified by the Applications that
+#      have been loaded.  These files will be listed in the syslog and contain
+#      mostly variables required to locate the applications.
+#  4.  The NX default environment variable list is read in from 
+#      $UGII_BASE_DIR\ugii\ugii_env_ug.dat.
+#
+#  The remainder of the variables are defined in this file and are divided
+#  into the following sections:
+#
+#     DISK FILES        - variables relating to *.ugf files that are used.
+#     MODELING          - variables relating to modeling
+#     MACHINING         - variables relating to machining products
+#     CGM               - variables relating to the CGM product
+#     ERROR and HELP    - variables relating to error and help files
+#     USER FUNCTION     - variables relating to user function
+#     MISCELLANEOUS     - miscellaneous variables used by NX
+#     USER EXITS        - variables relating to user exits.
+#     SMD               - variables relating to sheet metal design
+#     ROUTING           - variables relating to the UG/Routing product
+#     GRIP BATCH        - variables relating to grip batch
+#     DISPLAY DRIVERS   - variables relating to the display drivers
+#     PLOTTER           - variables relating to plotter configuration.
+#     TRANSLATORS       - translators & process specific applications.
+#     SCENARIO          - variables relating to the SCENARIO product
+#     MACHINE DEPENDENT - variables with  platform specific settings.
+#     DESIGN TOOLS      - variables relating to design tools products, such as 
+#                         Check-Mate, Requirements and Issue Management
+#
+# The following platform variable should not be changed.  It is defined
+# here for legacy purposes.
+#
+#if x64wnt
+UGII_PLATFORM=x64wnt
+#endif
+
+#########################################################################
+#
+# Set the product and version constants before ugii_package_env.dat is loaded
+# since Simcenter 3D offset path segments defined in the package file depend on these values
+#
+UGII_DOC_VERSION=PL20230425446868577
+UGII_DOC_VERSION_SC=PL20230419932494371
+UGII_UGDOC_PRODUCT=209349590
+UGII_UGDOC_PRODUCT_SC=289054037
+
+#
+# The following allows products like Power Drafting or NX Viewer to set
+# environment variables that customize the NX behavior.  
+#
+#if ${UGII_PACKAGE} != ""
+#if FILE $UGII_BASE_DIR\$UGII_PACKAGE\ugii_package_env.dat
+#include $UGII_BASE_DIR\$UGII_PACKAGE\ugii_package_env.dat
+#endif
+UGII_PACKAGE_DIR=$UGII_BASE_DIR\$UGII_PACKAGE
+#endif
+#
+#
+#  Some variables do not need to be set, the code has a default value.  These
+#  variables will be commented out using the "#" sign.  If you assign a local
+#  value you must uncomment the line.
+#
+#  NOTE: If you change this file, save a copy. The install script WILL
+#  put a new copy into place EVERY TIME it is run.
+#
+#
+#  Define a location for a users default directory.  Since it is used
+#  several places in this file, HOME is defined as a shorthand.
+#
+HOME=${TMP}
+#
+#####################################################################
+#
+#  Language definition.  This must be done first, as other environment
+#  variables may depend on the setting.
+#
+#  UGII_LANG is set to the current language, and is used to find
+#  the proper interface files.  The language setting must be specified in lower
+#  case only.  
+UGII_LANG=english
+#
+#  UGII_LOCALIZATION_FILES points to the specific path of the translated files
+#
+UGII_LOCALIZATION_FILES=${UGII_BASE_DIR}\localization
+#
+#  UGII_LOCALIZATION_CUSTOMIZED_FILES points to the location of any customized
+#  localization files.  Note that this should specify a directory which has
+#  the $UGII_LANG directories underneath for any customized languages.  So for
+#  example if you have some German customizations and you set 
+#  UGII_LOCALIZATION_CUSTOMIZED_FILES=w:\my_shared_translations
+#  then NX would look for files in the w:\my_shared_translations\german
+#  subdirectory.  This allows customization support for multiple languages.
+#  Note that files in UGII_LOCALIZATION_CUSTOMIZED_FILES are preferred to files
+#  in UGII_LOCALIZATION_FILES.  This lets a customer correct the text files
+#  released by NX.
+#
+# UGII_LOCALIZATION_CUSTOMIZED_FILES=
+#
+#  Variables for country customizations.  Currently only used for PRC.
+#if $UGII_LANG = "simpl_chinese"
+UGII_COUNTRY=prc
+UGII_COUNTRY_TEMPLATES=$UGII_BASE_DIR\gctoolkit\$UGII_COUNTRY\simpl_chinese
+#endif
+#if $UGII_COUNTRY = "prc"
+UGII_COUNTRY_TEMPLATES=$UGII_BASE_DIR\gctoolkit\$UGII_COUNTRY\english
+#endif
+GEARWIZARD_DIR=$UGII_BASE_DIR\gctoolkit\$UGII_COUNTRY\GearModeling
+GC_TOOL_DIR=$UGII_BASE_DIR\gctoolkit\$UGII_COUNTRY\gc_tools
+
+#########################################################################
+#
+# Great China(GC) Tool kit
+# 
+# GCTOOLKIT_DIR indicates kits\gctoolkit directory for GC tools application.
+#
+GCTOOLKIT_DIR=${UGII_BASE_DIR}\gctoolkit
+#########################################################################
+
+#####################################################################
+#
+#  DISK FILES
+#
+#  The following variables are used to point the disk files required
+#  by Unigraphics.
+#
+#  Grip meta language assembler.
+#
+#  Note:  Default is $UGII_BASE_DIR\ugopen\08.ugf
+UGII_08_FILE=${UGII_BASE_DIR}\ugopen\08.ugf
+#
+#
+#  Font library
+#  Note:  Default is $UGII_BASE_DIR\ugii\10.ugf
+UGII_10_FILE=${UGII_BASE_DIR}\ugii\10.ugf
+#
+
+#  Directory mapping file
+#  This variable is optional. If present its value must be the name of
+#  a disk file that contains the mapping between Unix and NT directory
+#  names for disks that are accessible from both operating systems.
+#  It is used to allow the "As Saved" load option to work.
+# UGII_DIRECTORY_MAP_FILE=
+
+
+############################################################################
+#
+#  MODELING
+#
+#  UGII_UGSOLIDS_TMP is used to locate temporary files created by modeling,
+#  such as xxx.rol_bin, and xxx.jbl_txt.  These files can be large, and
+#  modeling performance will be improved if they are kept on the local machine.
+#  If unset, the default will be /var/tmp or /tmp depending on the platform.
+#UGII_UGSOLIDS_TMP=
+#
+#  UGII_SCHEMA is used by Unigraphics to find the schema files that are
+#  required to retrieve parts.
+UGII_SCHEMA=${UGII_BASE_DIR}\ugii\ugschema
+#
+#  UGII_KEEP_SYSTEM_LOG if you uncomment the following line, your system log
+#  will always be kept.  The default is to keep the syslog only if there is
+#  an error reported.
+#
+#UGII_KEEP_SYSTEM_LOG=yes
+#
+#  UGII_ENGLISH_THREADS and UGII_METRIC_THREADS are used by Unigraphics
+#  to find the default thread table files for the Symbolic Thread feature.
+#  UGII_ENGLISH_THREADS should point to a file containing english unit
+#  values, UGII_METRIC_THREADS should point to a file containing metric
+#  unit values.
+#  UGII_ENGLISH_THREADS and UGII_METRIC_THREADS are used for the Symbolic 
+#  Thread feature prior to NX1926. NX1926 onwards UGII_THREADED_HOLE_STANDARD_DIR  
+#  will be used for Thread feature.
+#
+UGII_ENGLISH_THREADS=${UGII_BASE_DIR}\ugii\thd_english.dat
+UGII_METRIC_THREADS=${UGII_BASE_DIR}\ugii\thd_metric.dat
+
+#
+#  UGII_DUMBIFY_FEATURE    If set as 0, freeform features (e.g. bridge surface, quilt surface,
+#                          and through-curve surface etc) will be deleted when their parent features
+#                          are deleted. By default, these freeform features are dumbified when deleting
+#                          their parent features.
+UGII_DUMBIFY_FEATURE=1
+
+#
+# MOLDWIZARD_DIR is the directory that the templates and database of the option product, moldwizard, is
+# installed into.  This defaults to UGII_BASE_DIR\moldwizard.
+MOLDWIZARD_DIR=${UGII_BASE_DIR}\moldwizard
+#
+# MOLDWIZARD_LIB_DIR is the directory that the kit of the option product, moldwizard, is
+# installed into.  This defaults to UGII_BASE_DIR\moldwizard.
+MOLDWIZARD_LIB_DIR=${UGII_BASE_DIR}\moldwizard
+#
+# ELECTRODE_DESIGN_DIR is the directory that the templates and database of electrode design
+ELECTRODE_DESIGN_DIR=${UGII_BASE_DIR}\moldwizard\electrode
+#
+# GEARWIZARD_DIR is the directory where the option product, gearwizard, will
+# be installed.  By default this will be $UGII_BASE_DIR\gearmodeling
+#
+GEARWIZARD_DIR=${UGII_BASE_DIR}\gearmodeling
+#
+# PDIEWIZARD_DIR is the directory where the template and database of the option product, pdiewizard, will
+# be installed.  By default this will be $UGII_BASE_DIR\pdiewizard
+#
+PDIEWIZARD_DIR=${UGII_BASE_DIR}\stamping_tools\pdiewizard
+#
+# PDIEWIZARD_LIB_DIR is the directory where the kit of the option product, pdiewizard, will
+# be installed.  By default this will be $UGII_BASE_DIR\pdiewizard
+#
+PDIEWIZARD_LIB_DIR=${UGII_BASE_DIR}\stamping_tools\pdiewizard
+#
+# TOOLING_BASE_DIR is the directory where the common libraries for PDIEWIZARD, MOLDWIZARD and Stamping Die Design products,
+# will be installed.  This will always be $UGII_BASE_DIR\
+#
+TOOLING_BASE_DIR=${UGII_BASE_DIR}\tooling_base
+#
+#
+# EDIEWIZARD_DIR is the directory where the template and database of the option product, ediewizard, will
+# be installed.  By default this will be $UGII_BASE_DIR\ediewizard
+#
+EDIEWIZARD_DIR=${UGII_BASE_DIR}\stamping_tools\ediewizard
+#
+#
+# EDIEWIZARD_LIB_DIR is the directory where the kit of the option product, ediewizard, will
+# be installed.  By default this will be $UGII_BASE_DIR\ediewizard
+#
+EDIEWIZARD_LIB_DIR=${UGII_BASE_DIR}\stamping_tools\ediewizard
+#
+#   UGII_EDU_PAUSE_OPTION   If set to pause, the EDU (Edit During Update) dialog is
+#                           displayed with the Pause option set instead of the continue
+#UGII_EDU_PAUSE_OPTION=pause
+#
+# UGWELD_DIR is the directory where the optional product, UG/Weld, will
+# be installed.  By default this will be $UGII_BASE_DIR\ugweld
+#
+UGWELD_DIR=${UGII_BASE_DIR}\ugweld
+# UGII_WELD_BASE_DIR is the directory that contains site specific
+# customization files, like the default preferences.
+# By default this variable will be the same as $UGWELD_DIR. If the user
+# wishes to customize the defaults then this variable needs to point to
+# the directory that contains the customized files.
+UGII_WELD_BASE_DIR=${UGWELD_DIR}
+
+
+#
+#  Please do not remove the following two env. variables which are commented out.
+#
+# QUICKSHAPE_DIR is the directory where the product, Quick Shape Integration,
+# will be installed.  By default this will be $UGII_BASE_DIR/qshape_integ
+# This name needs to be the same as the Kit name in bom.dat
+#
+#QUICKSHAPE_DIR=${UGII_BASE_DIR}\qshape_integ
+
+# This variable should point to the Quick Shape executable that is available
+# on your machine. The setting here is just a default value.
+#UGII_QUICKSHAPE_EXEC="C:\Program Files\Quickshape\Quickshape 1.2\Quickshape"
+#
+
+#
+# You can set environment variables to define your user defined feature environment.
+# These variables are described in more detail in the Modeling on-line help.
+#
+# Under Teamcenter Engineering, all user defined feature environment variables are
+# optional.  We recommend setting:
+# UGII_UDF_IMAN_TOP_LEVEL_FOLDER is the top level folder in Teamcenter Engineering
+#    where your user defined features reside. Use this to improve browse performance.
+#
+# Under Teamcenter Engineering, these may be set to access legacy user defined feature libraries:
+# UGII_UDF_IMAN_WITH_NATIVE_DATABASE=yes allows access to user defined features outside
+#    the IMAN database. It will override your ability to access hierarchical folders
+#    of user defined features in Teamcenter Engineering.
+# UGII_UDF_IMAN_LOCAL_DATABASE_FILE defines the location of your local user defined features.
+#    A sample database file is located at $UGII_BASE_DIR\ugii\udf\udf_database.txt
+# UGII_UDF_IMAN_GLOBAL_DATABASE_FILE defines the location of your global user defined features.
+#    Its format is similar to the UGII_UDF_IMAN_LOCAL_DATABASE_FILE.
+# UGII_UDF_DEFINITION_FILE is a file that determines your hierarchical library structure.
+#    A sample definition file is located at $UGII_BASE_DIR\ugii\udf\dbc_udf_ugmgr.def
+# UGII_UDF_EVENT_FILE is the TCL file that accesses the database files. We do not recommend
+#    changing this file that is located at $UGII_BASE_DIR\ugii\udf\dbc_udf_ugmgr.tcl
+#
+# Native Unigraphics user defined feature environment variables that optionally can be set are:
+# UGII_UDF_DEFINITION_FILE is a file that determines your hierarchical library structure.
+#    A sample definition file is located at $UGII_BASE_DIR\ugii\udf\dbc_udf_ascii.def and
+#    we recommend its use.
+# UGII_UDF_DATABASE_FILE defines the location of your user defined features.
+#    A sample database file is located at $UGII_BASE_DIR\ugii\udf_database.txt
+# UGII_UDF_LIBRARY_DIR, used in sample UGII_UDF_DEFINITION_FILE, defines the full path of your user
+#    defined features directory so that a relative path can be defined in the database file for cgm
+#    and part locations. It has an old version UDF_LIBRARY_DIR.
+# UGII_UDF_EVENT_FILE is the TCL file that accesses the database files. We do not recommend
+#    changing this file that is located at $UGII_BASE_DIR\ugii\udf\dbc_udf_ugmgr.tcl
+
+# UGII_UDF_LAYER_ORIGINAL specifies that all objects created by a new UDF instance will be by default added to the
+# layers where they are original created in the UDF definition part. Users can change to work layer or new layer
+# when inserting a UDF. To turn this on, set the value to 1.
+UGII_UDF_LAYER_ORIGINAL=0
+
+#
+# UGII_INOP_SE_IMPORT_ONLY_DESIGN_PART
+#
+# This environment variable is for Solid Edge interoperability. If the value of this
+# variable is set to 1 then only the design part is imported.
+# By default the value is 0. i.e., by default all the representations - design,simplified
+# and flat are imported.
+#
+UGII_INOP_SE_IMPORT_ONLY_DESIGN_PART=0
+
+#
+# UGII_SE_NO_ASSEMBLY_FEATURE
+#
+# This environment variable is for Solid Edge assembly-level features.
+# The default is to always allow assembly-level features to be loaded when they are encountered,
+# but that imposes some restrictions on what features can be loaded from the component parts of
+# the assembly.  With assembly-level features active, only the main representation from the 
+# component parts is loaded; other representations and construction geometry are not loaded.
+# This will cause problems if the component parts only contain construction geometry.  If in your
+# case you are interested in the construction geometry of the piece parts and not interested in
+# assembly-level features, uncomment the following line.
+#UGII_SE_NO_ASSEMBLY_FEATURE=1
+
+# ==============================================================================
+# DESIGN TOOLS 
+# ==============================================================================
+# NXDESIGNTOOLS_DIR is used to point to the root directory that 
+# the option products, such as Check-Mate, Requirements and Issue Tracking,
+# are installed into.
+# This defaults to $UGII_BASE_DIR\design_tools
+#
+NXDESIGNTOOLS_DIR=${UGII_BASE_DIR}\design_tools
+
+
+############################################################################
+#
+# UGCHECKMATE_DIR points to the directory where Check-Mate is installed.
+# This defaults to $NXDESIGNTOOLS_DIR\checkmate
+#
+UGCHECKMATE_DIR=${NXDESIGNTOOLS_DIR}\checkmate
+
+#
+# UGCHECKMATE_CONFIG points to specific file containing the definitions of 
+# the variables that will be read by Check-Mate during starts up.
+# This defaults to $UGCHECKMATE_DIR\customization\ugcheckmate.dat.
+#
+UGCHECKMATE_CONFIG=${UGCHECKMATE_DIR}\customization\ugcheckmate.dat
+
+#
+# UGII_CHECKMATE_DEFAULT_CHECKER indicates the pre-selected checks for execution.
+# It can be used to identify one or more checkers or profiles that should be added to
+# the "Chosen Tests" list of the Check-Mate Set Up Tests dialog by default. 
+# i.e. UGII_CHECKMATE_DEFAULT_CHECKER=mqc_update_all_features,mqc_check_buried_features
+#
+# UGII_CHECKMATE_DEFAULT_CHECKER=
+
+#
+# UGCHECKMATE_USER_DIR points to the directory for multiple purposes:
+#    - where customized checkers and profiles to load from recursively
+#    - where Check-Mate authoring tool authored checkers and profiles to save to
+#    - if UGCHECKMATE_USER_DIR/startup folder exists, UG will read from
+#      this folder menu files, toolbar files and etc
+#      The menu files and toolbar files generated via Check-Mate authoring tool
+#      can be saved here.
+# If it is used as the destination for receiving authored files and/or for saving log files, 
+# make sure the directory has write permission.
+#
+# UGCHECKMATE_USER_DIR=
+
+#
+# UGII_CHECKMATE_LOG_DIR points to the directory where the Check-Mate results (log files)
+#    can be saved to.
+#    This defaults to $UGCHECKMATE_USER_DIR
+#
+# UGII_CHECKMATE_LOG_DIR=${UGCHECKMATE_USER_DIR}
+
+#
+# UGCHECKMATE_XMLLOG_XSL_FILE  points to the URL pathed XSL file (XML stylesheet file)
+# which is used in displaying Check-Mate results XML log file in Web Browser.
+# An example of URL pathed XSL file is like this:
+#      UGCHECKMATE_XMLLOG_XSL_FILE=http://www.somecompany.com/company_log.xsl.
+#
+# If the XSL file is located in local disk, you can specify the file location
+# like this:
+#      UGCHECKMATE_XMLLOG_XSL_FILE=file://c:/nx/ugcheckmate/examples/checkmate_log.xsl
+# 
+#    - default is the checkmate_log.xsl file under $UGCHECKMATE_DIR\examples folder.
+#
+UGCHECKMATE_XMLLOG_XSL_FILE=${UGCHECKMATE_DIR}\examples\checkmate_log.xsl
+
+#
+# UGCHECKMATE_MENU_TEMPLATE_FILE points to the file specifying the format of a menu file 
+# to be created during authoring tests.
+# By default, it is $UGCHECKMATE_DIR\templates\user_defined_menu_template.txt
+#
+UGCHECKMATE_MENU_TEMPLATE_FILE=${UGCHECKMATE_DIR}\templates\user_defined_menu_template.txt
+
+#
+# UGCHECKMATE_TEMPLATE_DIR points to the directory where various HD3D template files 
+# used by HD3D Check-Mate.
+# The full set of the template files can be copied to other location for selected modification.
+# The location of the templates can be defined by this environment variable or by customer default.
+# The one defined by this environment variable overrides that defined by customer default. 
+#
+# UGCHECKMATE_TEMPLATE_DIR=${UGCHECKMATE_DIR}\customization
+
+#
+# UGCHECKMATE_CHECKER_BITMAP_SETTING_FILE points to the checker-bitmap mapping file
+# The installed checker_bitmap.xml bitmap mapping file can be copied to other location for modification.
+# THe new file can be defined by this environment variable or by the customer default.
+# The one defined by this environment variable overrides that defined by customer default. 
+#
+# UGCHECKMATE_CHECKER_BITMAP_SETTING_FILE=${UGCHECKMATE_DIR}\customization\checker_bitmap.xml
+
+#
+# UGCHECKMATE_COLUMN_CONFIGURATION_FILE points to the file containing column configuration used 
+# in HD3D Check-Mate Gadget tree.
+# The out-of-the-box column_configuration.xml contains the information about what and how to.
+# User configuration file can be pointed by this environment variable or by customer default.
+# The one defined by the environment variable overrides the one defined by customer default. 
+#
+# UGCHECKMATE_COLUMN_CONFIGURATION_FILE=${UGCHECKMATE_DIR}\customization\column_configuration.xml
+
+#
+# NXCHECKMATE_LOCALIZATION_DIR points to the directory where the html documentation files for 
+# Check-Mate checker classes used by HD3D Check-Mate.
+#
+NXCHECKMATE_LOCALIZATION_DIR=${UGCHECKMATE_DIR}\localization
+
+############################################################################
+#
+# NXREQUIREMENT_DIR points to the directory for product Check Requirements
+# This defaults to $NXDESIGNTOOLS_DIR\requirement
+#
+NXREQUIREMENT_DIR=${NXDESIGNTOOLS_DIR}\requirement
+
+############################################################################
+#
+# NXISSUETRACKING_DIR is used to point to the directory for the files used
+# by product Issue Management
+# This defaults to $NXDESIGNTOOLS_DIR\issue_tracking
+#
+NXISSUETRACKING_DIR=${NXDESIGNTOOLS_DIR}\issue_tracking
+
+############################################################################
+#
+#
+# ==============================================================================
+# Unigraphics Manufacturing Environment Variables
+# ==============================================================================
+
+# This is the root for CAM specific files
+UGII_CAM_BASE_DIR=${UGII_BASE_DIR}\mach\
+
+# This is used for configuration files to add to or supercede the ones in
+# the configuration directory
+UGII_CAM_CUSTOM_DIR=${UGII_CAM_BASE_DIR}custom\
+
+# This is the root for platform independent resource files. Many other
+# locations are defined based on this loacation.
+UGII_CAM_RESOURCE_DIR=${UGII_CAM_BASE_DIR}resource\
+
+# This is for sample part files
+UGII_CAM_SAMPLES_DIR=${UGII_CAM_BASE_DIR}samples\
+
+
+# This is the root for platform dependent executable files
+UGII_CAM_AUXILIARY_DIR=${UGII_CAM_BASE_DIR}auxiliary\
+
+UGII_APT_VOC=${UGII_CAM_AUXILIARY_DIR}apt.voc
+UGII_BCL_VOC=${UGII_CAM_AUXILIARY_DIR}bcl.voc
+UGII_ISO_VOC=${UGII_CAM_AUXILIARY_DIR}iso.voc
+UGII_UNIMAJ_VOC=${UGII_CAM_AUXILIARY_DIR}unimaj.voc
+UGII_UNIMIN_VOC=${UGII_CAM_AUXILIARY_DIR}unimin.voc
+UGII_VERICUT=${UGII_BASE_DIR}\win_nt\commands\vericut.bat
+# UGII_GPM_REV_HISTORY=yes
+# UGII_MDF_DIR=
+
+# For Milling operations with +ZM Tool Axis, when the variable
+# UGII_CAM_NO_TOOL_AXIS_OUTPUT is set, it supresses the output
+# of a (0,0,1) tool axis at the first GOTO or FROM in the CLSF.
+# The default behavior is to output the tool axis with the first
+# GOTO or FROM.
+# UGII_CAM_NO_TOOL_AXIS_OUTPUT=yes
+
+# This is where the thread milling files are located
+UGII_CAM_THREAD_MILL_DIR=${UGII_CAM_AUXILIARY_DIR}thread_mill\
+UGII_CAM_THREAD_MILL=${UGII_CAM_THREAD_MILL_DIR}thrm.dll
+#
+# UGII_CAM_BATCH_DIR is the directory where CAM batch files will be installed.
+# By default this will be ${UGII_CAM_AUXILIARY_DIR}batch\
+UGII_CAM_BATCH_DIR=${UGII_CAM_AUXILIARY_DIR}batch\
+UGII_CAMBATCH_BACKGROUND_EXE=${UGII_CAM_BATCH_DIR}cambatch_background.exe
+#
+# UGII_CAM_TAGGING_DIR is the directory where CAM Tagging files will be installed.
+# By default this will be ${UGII_CAM_AUXILIARY_DIR}tagging\
+UGII_CAM_TAGGING_DIR=${UGII_CAM_AUXILIARY_DIR}tagging\
+UGII_CAM_TAGGING_DLL_DIR=${UGII_CAM_TAGGING_DIR}application\
+UGII_CAM_TAGGING_ENGLISH_DIR=${UGII_CAM_TAGGING_DIR}english\
+UGII_CAM_TAGGING_METRIC_DIR=${UGII_CAM_TAGGING_DIR}metric\
+# ------------------------------------------------------------------------------
+
+UGII_CAM_FILE_SEARCH_PATH=.\;${UGII_CAM_BASE_DIR};${UGII_CAM_RESOURCE_DIR}
+
+# This is where default configuration .dat files are located. This is used to
+# build the list of configurations to choose when entering Manufacturing.
+# The custom directory is also searched for configurations.
+UGII_CAM_CONFIG_DIR=${UGII_CAM_RESOURCE_DIR}configuration\
+
+# This is the default configuration when opening a file that already contains CAM.
+UGII_CAM_CONFIG=${UGII_CAM_CONFIG_DIR}cam_general.dat
+
+# These are the default configurations for SHOPS
+UGII_SHOPS_DIE_MOLD_CONFIG=${UGII_CAM_CONFIG_DIR}shops_diemold.dat
+UGII_SHOPS_MACHINERY_CONFIG=${UGII_CAM_CONFIG_DIR}shops_machinery.dat
+
+# This is the location of template set .opt files
+UGII_CAM_TEMPLATE_SET_DIR=${UGII_CAM_RESOURCE_DIR}template_set\
+
+# These are the locations of the english and metric template parts
+UGII_CAM_TEMPLATE_PART_DIR=${UGII_CAM_RESOURCE_DIR}template_part\
+UGII_CAM_TEMPLATE_PART_ENGLISH_DIR=${UGII_CAM_TEMPLATE_PART_DIR}english\
+UGII_CAM_TEMPLATE_PART_METRIC_DIR=${UGII_CAM_TEMPLATE_PART_DIR}metric\
+
+# This is the location of the images for the tool tips in the Create Object dialogs.
+# This is typically included in the CAM_PICTURE attribute value.
+UGII_CAM_TEMPLATE_IMAGE_DIR=${UGII_CAM_TEMPLATE_PART_DIR}images\
+
+# If setup libraries or palettes are used, the dbc and ascii database are here.
+UGII_CAM_LIBRARY_TEMPLATE_DIR=${UGII_CAM_RESOURCE_DIR}template_dir\
+
+# The template data file will also be read from here
+UGII_CAM_LIBRARY_TEMPLATE_DATA_DIR=${UGII_CAM_LIBRARY_TEMPLATE_DIR}
+
+# This is where shop documentation tcl and def files are located
+UGII_CAM_SHOP_DOC_DIR=${UGII_CAM_RESOURCE_DIR}shop_doc\
+
+# This file contains the list of documentation templates
+UGII_CAM_PART_DOC_CONFIG_FILE=${UGII_CAM_SHOP_DOC_DIR}shop_doc.dat
+
+# This is where work instruction template, tcl, and def files are located
+UGII_CAM_WORK_INSTRUCTION_DIR=${UGII_CAM_RESOURCE_DIR}owi\
+
+# This is where postprocessor .tcl .def and .pui files are located
+UGII_CAM_POST_DIR=${UGII_CAM_RESOURCE_DIR}postprocessor\
+
+# This ifile contains the list of posts used only when running Post from the start
+# menu or the command line. When running post from inside UG, the CAM configuration
+# file is used for this.
+UGII_CAM_POST_CONFIG_FILE=${UGII_CAM_POST_DIR}template_post.dat
+#
+#  If a machine is retrieved from the library, then the name of the machine configuration file
+#  is specified in the library. If this specification does not contain any path information,
+#  the library system looks for that file in the directory that is
+#  specified in the following environment variable.
+UGII_CAM_LIBRARY_MACHINE_CONFIG_DIR=${UGII_CAM_POST_DIR}
+
+# This is the location of user defined event .ude files
+UGII_CAM_USER_DEF_EVENT_DIR=${UGII_CAM_RESOURCE_DIR}user_def_event\
+
+# This is the location of the tcl and def files for listing a tool path
+UGII_CAM_TOOL_PATH_DIR=${UGII_CAM_RESOURCE_DIR}tool_path\
+
+# This is the location of the Process Assistant files
+UGII_CAM_WIZARD_DIR=${UGII_CAM_RESOURCE_DIR}wizard\
+
+# This is the location of tcl files for debugging and the review tool
+UGII_CAM_DEBUG_DIR=${UGII_CAM_RESOURCE_DIR}debug\
+
+# If LIBRARY_CAM_OUTPUT is defined in the CAM configuration file, then
+# this directs MOM to place output files in a specific location.
+# A folder under this root with the part name is created for each CAM setup.
+# If not defined, the folder is created in the current part directory.
+# UGII_CAM_SETUP_ROOT_DIR=
+
+# These are the template sets to be used if no template set is defined
+UGII_CAM_DEFAULT_TYPE_TEMPLATE=${UGII_CAM_TEMPLATE_SET_DIR}cam_general.opt
+UGII_CAM_IMAN_TYPE_TEMPLATE=${UGII_CAM_TEMPLATE_SET_DIR}cam_teamcenter_general.opt
+
+
+# This is for data files used by feature based CAM templates
+UGII_CAM_FEATURE_DATA_DIR=${UGII_CAM_RESOURCE_DIR}feature\
+UGII_CAM_FEATURE_DATA_ENGLISH_DIR=${UGII_CAM_RESOURCE_DIR}feature\english\
+UGII_CAM_FEATURE_DATA_METRIC_DIR=${UGII_CAM_RESOURCE_DIR}feature\metric\
+
+# This is for CAM feature images used by MFN
+UGII_CAM_FEATURE_IMAGES_DIR=${UGII_CAM_FEATURE_DATA_DIR}images\
+
+# This is the directory in which CAM related spread sheets are located
+UGII_CAM_SPREADSHEET_DIR=${UGII_CAM_RESOURCE_DIR}spreadsheet\
+
+# This is the directory for the machining knowledge definition files
+UGII_CAM_MACHINING_KNOWLEDGE_DIR=${UGII_CAM_RESOURCE_DIR}machining_knowledge\
+
+# This is the directory for the Cloud Tool Manager static HTML files
+UGII_CAM_CLOUD_TOOL_MANAGER=${UGII_CAM_BASE_DIR}cloud_tool_manager\
+
+# ------------------------------------------------------------------------------
+
+# This is the location of the general dbc if ug library
+UGII_UG_LIBRARY_DIR=${UGII_CAM_RESOURCE_DIR}ug_library\
+
+# This location is the root for specific library dbc and ascii databases
+UGII_CAM_LIBRARY_DIR=${UGII_CAM_RESOURCE_DIR}library\
+
+# These are the locations for the dbc and ascii databases for the cutting tool library
+UGII_CAM_LIBRARY_TOOL_DIR=${UGII_CAM_LIBRARY_DIR}tool\
+UGII_CAM_LIBRARY_TOOL_ASCII_DIR=${UGII_CAM_LIBRARY_TOOL_DIR}ascii\
+UGII_CAM_LIBRARY_TOOL_GENIUS_DIR=${UGII_CAM_LIBRARY_TOOL_DIR}genius\
+UGII_CAM_LIBRARY_TOOL_INCLASS_DIR=${UGII_CAM_LIBRARY_TOOL_DIR}inclass\
+UGII_CAM_LIBRARY_TOOL_ENGLISH_DIR=${UGII_CAM_LIBRARY_TOOL_DIR}english\
+UGII_CAM_LIBRARY_TOOL_METRIC_DIR=${UGII_CAM_LIBRARY_TOOL_DIR}metric\
+# This is the location of the part files for library cutting tools
+UGII_CAM_LIBRARY_TOOL_GRAPHICS_PATH=${UGII_CAM_LIBRARY_TOOL_DIR}graphics\
+
+#
+# If the file size of tool_database.dat (english)
+#      + file size of tool_database.dat (metric)
+# is less than the number of bytes specified in the following variable then
+# both files will be loaded into internal memory for tool
+# search and retrieve. This improves performance.
+#
+UGII_CAM_LIBRARY_TOOL_ASCII_LOAD_LIMIT=100000
+
+
+# These are the locations for the dbc and ascii databases for the device library
+UGII_CAM_LIBRARY_DEVICE_DIR=${UGII_CAM_LIBRARY_DIR}device\
+UGII_CAM_LIBRARY_DEVICE_DATA_DIR=${UGII_CAM_LIBRARY_DEVICE_DIR}ascii\
+UGII_CAM_LIBRARY_DEVICE_ASCII_DIR=${UGII_CAM_LIBRARY_DEVICE_DIR}ascii\
+UGII_CAM_LIBRARY_DEVICE_INCLASS_DIR=${UGII_CAM_LIBRARY_DEVICE_DIR}inclass\
+# This is the location of the part files for library cutting tools
+UGII_CAM_LIBRARY_DEVICE_GRAPHICS_PATH=${UGII_CAM_LIBRARY_DEVICE_DIR}graphics\
+
+
+
+
+
+# These are the locations for the dbc and ascii databases for the machine tool library
+UGII_CAM_LIBRARY_MACHINE_DIR=${UGII_CAM_LIBRARY_DIR}machine\
+UGII_CAM_LIBRARY_MACHINE_ASCII_DIR=${UGII_CAM_LIBRARY_MACHINE_DIR}ascii\
+UGII_CAM_LIBRARY_MACHINE_DATA_DIR=${UGII_CAM_LIBRARY_MACHINE_DIR}ascii\
+UGII_CAM_LIBRARY_MACHINE_GENIUS_DIR=${UGII_CAM_LIBRARY_MACHINE_DIR}genius\
+UGII_CAM_LIBRARY_MACHINE_INCLASS_DIR=${UGII_CAM_LIBRARY_MACHINE_DIR}inclass\
+# This is the location of the part files for library machine tools
+UGII_CAM_LIBRARY_MACHINE_GRAPHICS_PATH=${UGII_CAM_LIBRARY_MACHINE_DIR}graphics\
+
+# This is the location for machine related files like
+# postprocessor files, part files and files required by the common simulation engine.
+# If UGII_CAM_LIBRARY_INSTALLED_MACHINES_DIR is not set
+# or the graphics part files or post cannot be located there, the system will still support
+# the old structure using UGII_CAM_LIBRARY_MACHINE_GRAPHICS_PATH and UGII_CAM_POST_DIR.
+UGII_CAM_LIBRARY_INSTALLED_MACHINES_DIR=${UGII_CAM_LIBRARY_MACHINE_DIR}installed_machines\
+
+#
+# The following environment variable affects the UG/Library dialog sequents when you
+# replace a machine in the CAM setup. By default we have:
+#
+# Class selection dialog
+# Search result dialog
+#
+# That means the system searches for all the machines of a chosen class (for example milling)
+# and presents the result in the Search Result Dialog.
+#
+# If you want to have the following dialog sequence
+#
+# Class Selection Dialog
+# Search Criteria Dialog
+# Search Result Dialog
+#
+# which in addition provides the possibility to search for a machine within a chosen class
+# then you have to set the environment variable below.
+#
+# UGII_CAM_MACHINE_QUERY_DIALOG=yes
+
+# analog flag also for machine device library
+# UGII_CAM_DEVICE_QUERY_DIALOG=yes
+
+
+# These are the locations for the dbc and ascii databases for the feed and speed library
+UGII_CAM_LIBRARY_FEEDS_SPEEDS_DIR=${UGII_CAM_LIBRARY_DIR}feeds_speeds\
+UGII_CAM_LIBRARY_FEEDS_SPEEDS_ASCII_DIR=${UGII_CAM_LIBRARY_FEEDS_SPEEDS_DIR}ascii\
+UGII_CAM_LIBRARY_FEEDS_SPEEDS_DATA_DIR=${UGII_CAM_LIBRARY_FEEDS_SPEEDS_DIR}ascii\
+UGII_CAM_LIBRARY_FEEDS_SPEEDS_GENIUS_DIR=${UGII_CAM_LIBRARY_FEEDS_SPEEDS_DIR}genius\
+UGII_CAM_LIBRARY_FEEDS_SPEEDS_INCLASS_DIR=${UGII_CAM_LIBRARY_FEEDS_SPEEDS_DIR}inclass\
+
+UGII_CAM_LIBRARY_UDF_DIR=${UGII_CAM_LIBRARY_DIR}udf\
+
+#
+# If the Genius database system is used as external library then the
+# communication with the library is made by means of a TCP/IP connection
+# between UG and the "UG/Library Genius Server". This Server is a process,
+# which has to run on one specific host in the network. UG has to know this
+# hostname and the port number in order to connect to the Genius Server
+# correctly. For this purpose we have the following two variables.
+# They must be adapted due to the actual installation of UG and Genius.
+#
+UGII_UG_LIBRARY_GENIUS_TCP_HOST=localhost
+UGII_UG_LIBRARY_GENIUS_TCP_PORT=2326
+
+# In Surface Contouring with Surface Area Drive Method and 
+# Stepover method set to scallop, this will restore the pre-NX 7.5
+# checking of the material side, and raise an error message if it
+# is wrong. This should only be used if the pre-NX 7.5 behavior is
+# required for legacy API programs.
+# UGII_CAM_REVERT_MATSIDE_SCALLOP_CHECK=1
+# 
+
+# This is the location of the On Machine Probing cycle files.
+UGII_CAM_PROBING_DIR=${UGII_CAM_RESOURCE_DIR}probing_cycles\
+
+############################################################################
+#
+#
+# ==============================================================================
+# CMM Inspection Environment Variables
+# ==============================================================================
+#
+# This is the root for CMM Inspection specific files
+UGII_INSPECTION_BASE_DIR=${UGII_BASE_DIR}\cmm_inspection\
+
+# This is the root for platform independent resource files. Many other
+# locations are defined based on this location.
+UGII_INSPECTION_RESOURCE_DIR=${UGII_INSPECTION_BASE_DIR}resource\
+
+# This is where default configuration .dat files are located. 
+UGII_INSPECTION_CONFIG_DIR=${UGII_INSPECTION_RESOURCE_DIR}configuration\
+
+# This is the default configuration when opening a file that already contains Inspection.
+UGII_INSPECTION_CONFIG=${UGII_INSPECTION_CONFIG_DIR}inspection_general.dat
+
+# This is the location of user defined event .ude files
+UGII_INSPECTION_USER_DEF_EVENT_DIR=${UGII_INSPECTION_RESOURCE_DIR}user_def_event\
+
+# This is the location of template set .opt files
+UGII_INSPECTION_TEMPLATE_SET_DIR=${UGII_INSPECTION_RESOURCE_DIR}template_set\
+
+# These are the locations of the english and metric template parts
+UGII_INSPECTION_TEMPLATE_PART_DIR=${UGII_INSPECTION_RESOURCE_DIR}template_part\
+UGII_INSPECTION_TEMPLATE_PART_ENGLISH_DIR=${UGII_INSPECTION_TEMPLATE_PART_DIR}english\
+UGII_INSPECTION_TEMPLATE_PART_METRIC_DIR=${UGII_INSPECTION_TEMPLATE_PART_DIR}metric\
+
+# This is where postprocessor .tcl .def and .pui files are located
+UGII_INSPECTION_POST_DIR=${UGII_INSPECTION_RESOURCE_DIR}postprocessor\
+
+# ------------------------------------------------------------------------------
+
+# This location is the root for specific library dbc and ascii databases
+UGII_INSPECTION_LIBRARY_DIR=${UGII_INSPECTION_RESOURCE_DIR}library\
+
+# These are the locations for the dbc and ascii databases for the probe tool library
+UGII_INSPECTION_LIBRARY_TOOL_DIR=${UGII_INSPECTION_LIBRARY_DIR}tool\
+UGII_INSPECTION_LIBRARY_TOOL_ASCII_DIR=${UGII_INSPECTION_LIBRARY_TOOL_DIR}ascii\
+UGII_INSPECTION_LIBRARY_TOOL_GENIUS_DIR=${UGII_INSPECTION_LIBRARY_TOOL_DIR}genius\
+UGII_INSPECTION_LIBRARY_TOOL_INCLASS_DIR=${UGII_INSPECTION_LIBRARY_TOOL_DIR}inclass\
+UGII_INSPECTION_LIBRARY_TOOL_ENGLISH_DIR=${UGII_INSPECTION_LIBRARY_TOOL_DIR}english\
+UGII_INSPECTION_LIBRARY_TOOL_METRIC_DIR=${UGII_INSPECTION_LIBRARY_TOOL_DIR}metric\
+# This is the location of the part files for library probe tools
+UGII_INSPECTION_LIBRARY_TOOL_GRAPHICS_PATH=${UGII_INSPECTION_LIBRARY_TOOL_DIR}graphics\
+
+# These are the locations for the dbc and ascii databases for the device library
+UGII_INSPECTION_LIBRARY_DEVICE_DIR=${UGII_INSPECTION_LIBRARY_DIR}device\
+UGII_INSPECTION_LIBRARY_DEVICE_DATA_DIR=${UGII_INSPECTION_LIBRARY_DEVICE_DIR}ascii\
+UGII_INSPECTION_LIBRARY_DEVICE_ASCII_DIR=${UGII_INSPECTION_LIBRARY_DEVICE_DIR}ascii\
+UGII_INSPECTION_LIBRARY_DEVICE_INCLASS_DIR=${UGII_INSPECTION_LIBRARY_DEVICE_DIR}inclass\
+# This is the location of the part files for library devices like heads
+UGII_INSPECTION_LIBRARY_DEVICE_GRAPHICS_PATH=${UGII_INSPECTION_LIBRARY_DEVICE_DIR}graphics\
+
+# These are the locations for the dbc and ascii databases for the CMM machine library
+UGII_INSPECTION_LIBRARY_MACHINE_DIR=${UGII_INSPECTION_LIBRARY_DIR}machine\
+UGII_INSPECTION_LIBRARY_MACHINE_ASCII_DIR=${UGII_INSPECTION_LIBRARY_MACHINE_DIR}ascii\
+UGII_INSPECTION_LIBRARY_MACHINE_DATA_DIR=${UGII_INSPECTION_LIBRARY_MACHINE_DIR}ascii\
+UGII_INSPECTION_LIBRARY_MACHINE_GENIUS_DIR=${UGII_INSPECTION_LIBRARY_MACHINE_DIR}genius\
+UGII_INSPECTION_LIBRARY_MACHINE_INCLASS_DIR=${UGII_INSPECTION_LIBRARY_MACHINE_DIR}inclass\
+# This is the location of the part files for library CMM machines
+UGII_INSPECTION_LIBRARY_MACHINE_GRAPHICS_PATH=${UGII_INSPECTION_LIBRARY_MACHINE_DIR}graphics\
+
+# This is the location for machine related files like
+# postprocessor files, part files and files required by the common simulation engine.
+# If UGII_INSPECTION_LIBRARY_INSTALLED_MACHINES_DIR is not set
+# or the graphics part files or post cannot be located there, the system will still support
+# the old structure using UGII_INSPECTION_LIBRARY_MACHINE_GRAPHICS_PATH and UGII_INSPECTION_POST_DIR.
+UGII_INSPECTION_LIBRARY_INSTALLED_MACHINES_DIR=${UGII_INSPECTION_LIBRARY_MACHINE_DIR}installed_machines\
+
+# ------------------------------------------------------------------------------
+
+######################################################
+###
+#  The following variables are used by the Knowledge Fusion product
+#
+#
+#  The following variable is used to set where UG looks for DFA files
+#
+  UGII_KF_CLASS_DIR=${UGII_BASE_DIR}\ugii\dfa
+#
+#  This variable controls where the system looks for
+#  customer created DFA files
+#
+#  UGII_KF_USER_CLASS_DIR can now be a path where path
+#     entries are separated by a colon on UNIX and a semicolon on WNT.
+#     For example:
+#
+#       export UGII_KF_USER_CLASS_DIR=${HOME}\dfa_files;${HOME}\other_dfa
+#
+#  UGII_KF_USER_CLASS_DIR=${HOME}\dfa_files
+#
+#  This variable controls which text editor will be used
+#  when it is invoked from the KF class editor
+#
+#  EDITOR=notepad.exe
+#
+#############################################################################
+#
+#  DRAFTING
+#
+#  The following variables are used by the DRAFTING Product
+#
+#  When UGII_ANG_DIM_DISALLOW_FLIP is set to anything, angular dimensions with
+#  manual text/arrow placement will not be allowed to "flip" when their origin
+#  moves closer to the opposite angle. Automatic text/arrow placement will
+#  operate as usual, as will all other dimensions, and manual angular
+#  dimensions when this is not set.
+#UGII_ANG_DIM_DISALLOW_FLIP=
+#
+#  UGII_ANNOTATION_DIR allows a set of company standard note files to be
+#  placed in a specific directory which be displayed as the default directory
+#  for the Annotation Editor Include and Save As functions.  If it is desired
+#  not to have individual user modify or add notes to this directory using the
+#  Save As function, the files and the directory, respectively, can be made
+#  read only.  By default, this environment variable is not set, and this
+#  default setting will result in the user's current directory being displayed
+#  in the file selection box for these two Annotation Editor functions.
+#UGII_ANNOTATION_DIR=
+#
+# UGII_TAB_LABEL_FORMATS_FILE contains custom templates for tabular labels.
+UGII_TAB_LABEL_FORMATS_FILE=${UGII_BASE_DIR}\ugii\tab_label_format_file.xml
+#
+#  UGII_PMI_SYMBOL_LIBRARY_DIR specifies the location of the Unigraphics PMI symbol
+#  library containing the special .sym.prt files and icon files for each symbol.
+UGII_PMI_SYMBOL_LIBRARY_DIR=${UGII_BASE_DIR}\ugii\symbol\PMI_Symbols
+#
+#  Drafting text has never supported tab (\t, \011) or line feed (\n, \012) characters.
+#  Consequently, these characters are no longer allowed in Drafting text.
+#  These characters should neither be entered interactively in the Annotation Editor
+#  nor included in text read from a file such as text read by the "Insert from File" function
+#  in the Annotation Editor, or a file specified for the GRIP NOTE command.
+#  To support legacy file text that includes these characters, the
+#  UGII_DRAFT_REMOVE_UNSUPPORTED_CONTROL_CHARACTERS can be set to either TRUE or true.
+#  Setting this variable to true will cause all tab and line feed characters included
+#  in the text to be automatically removed.  To use this environment variable simply remove
+#  the "#" comment character from the front of the declaration below.
+#
+#  To have tab and line feed characters permanently removed from a note template file:
+#      1) run Unigraphics with UGII_DRAFT_REMOVE_UNSUPPORTED_CONTROL_CHARACTERS=TRUE,
+#      2) Open the Annotation Editor
+#      3) Use the "Insert from File" function to read in the note template file.
+#         A status message should be displayed indicating that control characters were removed.
+#      4) You can optionally try placing the note to verify that an
+#         "Invalid text in Annotation Editor" message is not reported and that the note can
+#         be created.
+#      5) Use the "Save As" function to save the note template text back to the file
+#         without the control characters.
+#
+#
+#UGII_DRAFT_REMOVE_UNSUPPORTED_CONTROL_CHARACTERS=TRUE
+#
+#  In earlier versions of Unigraphics (pre-V10), the ability to represent
+#  annotation as text boxes was supported.  This capability has been removed
+#  from the interactive system.  Although supported through UG/Open, there is
+#  often a desire to reset this setting in any part that is loaded.
+#
+#  To turn of the text box setting for any part that is loaded, enable the
+#  environment variable below.
+#
+#UGII_DISABLE_V9_TEXT_BOX_DISPLAY=TRUE
+#
+# In V18.0.4 a fix was submitted to extend the dimension line under all the
+# text when the text crossed one or both extension lines with manual placement.
+# To ignore this correction, set the following variable to TRUE
+#UGII_DRAFT_IGNORE_DIM_LINE_EXTENSION_CORRECTION=TRUE
+#
+#############################################################################
+#
+#  CGM
+#
+#  The following variables are used by the CGM Product
+#
+#  The cgmdef.txt file describes how to translate NX fonts
+#  to cgm fonts and vice versa.  This is used by File->Export CGM and
+#  file->Export PDF to map NX fonts to True Type fonts.
+#
+UGII_CGM_DEFAULTS=${UGII_BASE_DIR}\ugii\cgmdef.txt
+#
+# The following variable is used to control the line style when generating
+# a CGM file.  The choices are bevel, miter and round.  The default is to
+# use a bevel style.
+#UGII_CGM_LINE_STYLE=bevel
+#
+# The following variable is used on CGM import to control the crosshatching
+# size used for filling polygons.  Since NX does not support filled polygons,
+# a filled polygon (which is often used for text) must be simulated by adding
+# crosshatching lines.  If this value is to small, the crosshatching will tend
+# to create thousands of lines which makes the NX part difficult to work with.
+# The default value is .3.  For some CGM files a value of 10 has given good
+# results.
+# UGII_CGM_IMPORT_HATCH_SPACING=.3
+
+#########################################################################
+#
+#  ERROR and HELP Variables.
+#
+#  NX Documentation and online help is now based on a web server.
+#  So UGII_UGDOC_BASE should point to the server that is being used, e.g.
+#  UGII_UGDOC_BASE=http://localhost:8181
+#  The rest of the documentation and context sensitive help variables are
+#  based on this one setting and should not change.  
+#
+
+#  The Help and API collections are now separate installs.  Allow for local help
+#  and API help on the Siemens Documentation Center by separating the two variables
+#if ${UGII_UGDOC_BASE} != ""
+#else
+UGII_UGDOC_BASE=https://docs.sw.siemens.com
+#endif
+#if ${UGII_UGDOC_API_BASE} != ""
+#else
+UGII_UGDOC_API_BASE=https://docs.sw.siemens.com
+#endif
+
+# Convert the runtime language setting to the language setting for help
+# to use in the static help content definitions.
+#if ${UGII_LANG} = "english"
+UGII_UGDOC_LANG="en-US"
+#endif
+#if ${UGII_LANG} = "braz_portuguese"
+UGII_UGDOC_LANG="pt-BR"
+#endif
+#if ${UGII_LANG} = "czech"
+UGII_UGDOC_LANG="cs-CZ"
+#endif
+#if ${UGII_LANG} = "french"
+UGII_UGDOC_LANG="fr-FR"
+#endif
+#if ${UGII_LANG} = "german"
+UGII_UGDOC_LANG="de-DE"
+#endif
+#if ${UGII_LANG} = "hungarian"
+UGII_UGDOC_LANG="en-US"
+#endif
+#if ${UGII_LANG} = "italian"
+UGII_UGDOC_LANG="it-IT"
+#endif
+#if ${UGII_LANG} = "japanese"
+UGII_UGDOC_LANG="ja-JP"
+#endif
+#if ${UGII_LANG} = "korean"
+UGII_UGDOC_LANG="ko-KR"
+#endif
+#if ${UGII_LANG} = "polish"
+UGII_UGDOC_LANG="pl-PL"
+#endif
+#if ${UGII_LANG} = "russian"
+UGII_UGDOC_LANG="ru-RU"
+#endif
+#if ${UGII_LANG} = "simpl_chinese"
+UGII_UGDOC_LANG="zh-CN"
+#endif
+#if ${UGII_LANG} = "spanish"
+UGII_UGDOC_LANG="es-ES"
+#endif
+#if ${UGII_LANG} = "trad_chinese"
+UGII_UGDOC_LANG="zh-TW"
+#endif
+# Set default help language as English "en-US"
+UGII_UGDOC_LANG="en-US"
+
+#
+#  Defines the location component of context sensitive help URLs
+UGII_UGDOC_LOC=external
+
+#
+# Default base path and offset path segments for package-specific help content (release notes, what's new guide, help navigation page, and embedded help files)
+# 
+# These variables are the HTML pages shown from
+# Help->Release Notes and Help->What's New 
+#
+# Only point to the PDF files if the documentation server has not been set up
+UGII_HELP_RELEASE_NOTES_OFFSET=${UGII_UGDOC_PRODUCT}/doc/${UGII_DOC_VERSION}.xid1753866/html/xid1759099
+UGII_HELP_WHATS_NEW_OFFSET=${UGII_UGDOC_PRODUCT}/doc/${UGII_DOC_VERSION}.whatsnew/html/xid1854658
+
+UGII_HELP_RELEASE_NOTES=${UGII_UGDOC_BASE}/${UGII_UGDOC_LANG}/product/${UGII_HELP_RELEASE_NOTES_OFFSET}
+UGII_HELP_WHATS_NEW=${UGII_UGDOC_BASE}/${UGII_UGDOC_LANG}/product/${UGII_HELP_WHATS_NEW_OFFSET}
+
+#
+#  URL for starting NX on-line documentation
+#  The default for this variable is now set internally by NX to support
+#  having different home pages.  However if the variable is set it will be
+#  used which supports the customer overriding the value.
+UGII_HTML_UGDOC_OFFSET=${UGII_UGDOC_PRODUCT}/doc/${UGII_DOC_VERSION}.xid1851843/html/xid1851946_v1
+#UGII_HTML_UGDOC=${UGII_UGDOC_BASE}/${UGII_UGDOC_LANG}/product/$UGII_HTML_UGDOC_OFFSET
+
+#  Embedded Help variable
+#
+#  Define location of static help used for first help and welcome page
+#
+UGII_EMBEDDED_HELP_OFFSET=${UGII_DOC_VERSION}
+UGII_EMBEDDED_HELP=${UGII_UGDOC_BASE}/documentation/${UGII_UGDOC_LOC}/$UGII_EMBEDDED_HELP_OFFSET/${UGII_UGDOC_LANG}/static
+
+#
+#  NX Context Sensitive Help variables
+#
+#  There are five context sensitive help variables
+
+#  1.  For accessing the main help collection
+UGII_CSHELP_DOCS=${UGII_UGDOC_BASE}/${UGII_UGDOC_LANG}/product
+#  2.  For accessing the API help collection
+UGII_CSHELP_API_DOCS=${UGII_UGDOC_BASE}/${UGII_UGDOC_LANG}/product
+#  3.  For accessing the Customer Default files
+UGII_CSHELP_DEFAULTS_DOCS=${UGII_UGDOC_BASE}/documentation/${UGII_UGDOC_LOC}/${UGII_DOC_VERSION}/${UGII_UGDOC_LANG}/custom_help/customer_defaults 
+#  4.  For accessing the Fusion files
+UGII_CSHELP_FUSION_DOCS=${UGII_UGDOC_BASE}/documentation/${UGII_UGDOC_LOC}/${UGII_DOC_VERSION}/${UGII_UGDOC_LANG}/custom_api/fusion_1
+
+#  The Computer Learning Advantage Self Teach executable, executed from Help->Learning Advantage
+#
+UGII_LEARNING_CFM_URL=https://training.plm.automation.siemens.com/index.cfm
+#
+#
+#  The UGII_ERRONLY variable, if set, will cause the GRIP compiler (GRADE)
+#  to set the compile listing default to errors only.
+#
+#UGII_ERRONLY=yes
+#
+#
+#########################################################################
+#
+#  USER FUNCTION
+#
+#  The following variables are used by User Function.
+#
+#  The UGII_USERFCN variable is used by the uflink script to find the
+#  user function libraries.
+#  This variable is defined with machine dependant values. See the section
+#  on MACHINE DEPENDENT variables for the definition on this platform.
+#
+#  UFUN_DEFAULT is the default user function program.
+#UFUN_DEFAULT=
+#
+#
+
+
+############################################################################
+#
+#  UGALLIANCE Variables
+#
+#  UG Alliance partners (UGALLIANCE)
+#
+#  The directory defined by variable 'UGALLIANCE_DIR' is used by third
+#  parties to put their product executables and their authorization files.
+#  This directory has two subdirectories -- 'program_files' and 'auth_files'.
+#  They contain the product executables and authorization files
+#  respectively.
+#
+UGALLIANCE_DIR=${UGII_BASE_DIR}\ugalliance
+
+#####################################################################
+#
+# Unigraphics Customization Variables
+#  These environment variables provide customization for the following
+#  Unigraphics Customization Products:
+#
+#     UG/Open MenuScript - Customization of menu files, custom functions and
+#                          custom applications
+#
+#     User Defined Objects - Define classes and methods for User Defined
+#                            Objects
+#
+#
+#  This is the directory containing the menu files delivered with
+#        Unigraphics.  DO NOT MODIFY THE FILES IN THIS DIRECTORY;
+#        DO NOT MODIFY THIS ENVIRONMENT VARIABLE; Use UGII_SITE_DIR
+#        and/or UGII_USER_DIR to customize Unigraphics menus
+#
+UGII_DEFAULT_MENU_DIR=${UGII_BASE_DIR}\ugii\menus
+#
+# The UGII_CUSTOM_DIRECTORY_FILE can be used to configure the directories
+# in which Unigraphics will search for menu files, toolbar files, UDO libraries,
+# or dialog files.  The data file supports the use of #include to allow users to
+# segregate changes into multiple files.  UGII_UG_CUSTOM_DIRECTORY_FILE is
+# the file containing the Unigraphics Solution products.  Unigraphics
+# will search the directores in UGII_UG_CUSTOM_DIRECTORY_FILE first, and
+# then the directories in UGII_CUSTOM_DIRECTORY_FILE.
+#
+# When a customer has multiple third party products, it is suggested
+# that they create a global file that contains the directories to search
+# for these products.  They can then set UGII_CUSTOM_DIRECTORY_FILE to point
+# all users to this common file.  If a new product is then added, the
+# directory for this new product can be added to the global file for all
+# users to gain access.
+#
+#
+#if ${UGII_PACKAGE_DIR} != ""
+#if FILE $UGII_PACKAGE_DIR\menus\custom_dirs.dat
+UGII_CUSTOM_DIRECTORY_FILE=$UGII_PACKAGE_DIR\menus\custom_dirs.dat
+#endif
+#endif
+UGII_CUSTOM_DIRECTORY_FILE=$UGII_DEFAULT_MENU_DIR\custom_dirs.dat
+#
+# The UGII_MDP_AUTOMATION_EXCEPTION_FILE can be used to configure
+# applications when run inside of NX to turn MDP off, execute the 
+# program, and then turn MDP back on.   This will only impact 
+# those programs that are run while the UI is up.  For example
+# launched through toolbars or menubars.
+#
+# Please reference the NXOpen Programmer's Guide for more infomation 
+# on this file.
+UGII_MDP_AUTOMATION_EXCEPTION_FILE=${UGII_BASE_DIR}\ugii\custom_mdp_exceptions.dat
+#
+#
+# Customers should not edit the value of the UGII_UG_CUSTOM_DIRECTORY_FILE.
+#
+#
+#if ${UGII_PACKAGE_DIR} != ""
+#if FILE $UGII_PACKAGE_DIR\menus\ug_custom_dirs.dat
+UGII_UG_CUSTOM_DIRECTORY_FILE=$UGII_PACKAGE_DIR\menus\ug_custom_dirs.dat
+#endif
+#endif
+UGII_UG_CUSTOM_DIRECTORY_FILE=$UGII_DEFAULT_MENU_DIR\ug_custom_dirs.dat
+#
+#
+#  This is the Unigraphics main menubar menu file to be read at startup.
+#        DO NOT MODIFY THIS FILE; To customize this file copy it and
+#        and change the environment variable to point to your copy.
+#        You can also add or HIDE menu items by creating an auxiliary
+#        menu file with a name of you choosing and placing the file
+#        in the  $UGII_SITE_DIR\startup or $UGII_USER_DIR\startup directory
+#
+# UGII_MAIN_MENU_FILE=${UGII_DEFAULT_MENU_DIR}\ug_main.men
+#
+#  This is the Unigraphics view popup menu file to be read at startup.
+#        DO NOT MODIFY THIS FILE; To customize this file copy it and
+#        and change the environment variable to point to your copy.
+#        You can also add or HIDE menu items by creating an auxiliary
+#        menu file with a name of you choosing and placing the file
+#        in the  $UGII_SITE_DIR\startup or $UGII_USER_DIR\startup directory
+#
+# UGII_VIEW_POPUP_MENU_FILE=${UGII_DEFAULT_MENU_DIR}\ug_view_popup.men
+#
+#  UGII_USER_DIR, UGII_SITE_DIR and UGII_VENDOR_DIR are three variables that
+#  point to directories where third parties can install their menu files and
+#  shared libraries.  These directories have three subdirectories:
+#        startup - contains menu files that each append a button
+#                  button to the Unigraphics Application menu to provide
+#                  access to the application.
+#        application - contains menu files defining the menus for
+#                      for the applications and the shared libraries
+#                      containing the actions to be executed for these menus.
+#                      Loading of each shared library is deferred until
+#                      you enter the application that names the library on the
+#                      LIBRARIES statement in the menu file definition
+#                      for the Application Button for the application.
+#                      User Tool Definition files, GRIP programs,
+#                      User Function programs that are referenced by menu
+#                      file actions.
+#        udo - contains the shared libraries defining methods for User
+#              Defined Objects supplied by third-party vendors.
+#
+#  *** NOTE: The UGII_SITE_DIR, UGII_VENDOR_DIR and UGII_USER_DIR variables
+#  can still be used, but a better way to point to customizations is to
+#  use the UGII_CUSTOM_DIRECTORY_FILE environment variable to point to a global
+#  file, and to list the directories in that file.  See the documentation
+#  on UGII_CUSTOM_DIRECTORY_FILE above.
+#
+#UGII_VENDOR_DIR=${UGALLIANCE_DIR}\vendor
+#UGII_SITE_DIR=${UGALLIANCE_DIR}\site
+#UGII_USER_DIR=${HOME}
+#
+# This variable defines the default role that NX will use at startup time.
+# If directory path is omitted then the system will look for the specified file in the NX/Open roles directories.
+#UGII_DEFAULT_ROLE=advanced_full_menus.mtx
+#
+#
+###########################################################################
+#
+#  MISCELLANEOUS
+#
+# This variable defines the file that contains the customer defaults customizations for the user.
+# The variable is a fully qualified files specification.
+# The file need not exist. The file will be created when the initial customizations are saved.
+# The directory path must exist and be writeable to create the file.
+# The recommended file extension is .dpv
+UGII_LOCAL_USER_DEFAULTS=${NX_DEFAULT_SETTINGS_DIR}\${UGII_PRODUCT_NAME}_user.dpv
+
+UGII_LOCAL_USER_TOGGLE_DEFAULTS="${NX_DEFAULT_SETTINGS_DIR}\feature_toggle_user.fcg"
+
+# The following variables are not needed for NX3
+# UGII_DEFAULTS_FILE, UGII_MODELING_DEFAULTS_FILE, UGII_CAM_DEFAULTS_FILE,
+# UGII_SMD_DEFAULTS_FILE, UGII_BODYDES_DEFAULTS_FILE, UGII_DIE_DEFAULTS_FILE.
+# Use File-> Utilities-> Customer Defaults to change the default settings.
+# See the release note for more information.
+
+#  This variable defines the ascii file that contains customer defaults used
+#  by Unigraphics.  There are two files available: ug_english.def and
+#  ug_metric.def Obsolete in NX3.0
+#UGII_DEFAULTS_FILE=${UGII_BASE_DIR}\ugii\ug_english.def
+#
+#  This variable defines the ascii file that contains customer defaults used
+#  by Modeling. Obsolete in NX3.0
+#UGII_MODELING_DEFAULTS_FILE=${UGII_BASE_DIR}\ugii\ug_modeling.def
+#
+#  This variable defines the ascii file that contains customer defaults used
+#  by CAM. Obsolete in NX3.0
+#UGII_CAM_DEFAULTS_FILE=${UGII_BASE_DIR}\ugii\ug_cam.def
+#
+#
+#  This variable defines the ascii file that contains customer defaults used
+#  by SMD. Obsolete in NX3.0
+#UGII_SMD_DEFAULTS_FILE=${UGII_BASE_DIR}\ugii\ug_smd.def
+#
+#  This variable defines the ascii file that contains customer defaults used
+#  by Body Design. Obsolete in NX3.0
+#
+#UGII_BODYDES_DEFAULTS_FILE=${UGII_BASE_DIR}\ugii\ug_bodydes.def
+#
+#  This variable defines the ascii file that contains customer defaults used
+#  by Die Engineering/Design. Obsolete in NX3.0
+#UGII_DIE_DEFAULTS_FILE=${UGII_BASE_DIR}\ugii\ug_die.def
+#
+#  This variable defines the directory location for user defined bitmaps.
+#UGII_BITMAP_PATH
+#
+#  The following variable defines the directory that will be used to find
+#  the Unigraphics Character Font binary files.
+#
+UGII_CHARACTER_FONT_DIR=${UGII_BASE_DIR}\ugii\ugfonts
+#
+#  The following variable defines the set of directories that will be used 
+#  in addition to operating system paths to load true type fonts.  Directories
+#  should be separated by semicolons.
+#
+# UGII_STANDARD_FONT_DIR=
+#
+#  The following variable defines the font file that will be used if
+#  Unigraphics can not find the actual font used in the
+#  UGII_CHARACTER_FONT_DIR.
+#
+UGII_CHARACTER_FONT_DEFAULT=blockfont
+#
+#
+#  The following environment variable is used by Unigraphics to specify the
+#  Editor to start if you edit a text file or Grip source file using the
+#  operating system editor.
+UGII_EDITOR=notepad
+#
+#  UGII_PATDIR is used to locate pattern files when they are retrieved.
+#UGII_PATDIR=
+#
+#  UGII_INITIAL_MACRO_DIR is used to locate macros when an explicit
+#  path is not defined. This overrides the customer defaults setting
+#  Important always add the last / in macro definition
+#  E.G. UGII_INITIAL_MACRO_DIR=\users\area\macros\
+#UGII_INITIAL_MACRO_DIR=
+#
+#  UGII_INITIAL_GRIP_DIR is used to locate grip programs when an explicit
+#  path is not defined. This overrides the customer defaults setting
+#  E.G. UGII_INITIAL_GRIP_DIR=\users\area\grip\mach
+#UGII_INITIAL_GRIP_DIR=
+#
+#  UGII_INITIAL_UFUN_DIR is used to locate User Function programs when an
+#  explicit path is not defined. This overrides the customer defaults
+#  setting
+#  E.G. UGII_INITIAL_UFUN_DIR=\users\area\ufun\mach
+#UGII_INITIAL_UFUN_DIR=
+#
+#  UGII_INITIAL_JOURNAL_DIR is used to locate the initial path where
+#  Journal files will be saved or opened.
+#  E.G. UGII_INITIAL_JOURNAL_DIR=\users\area\journals\
+#UGII_INITIAL_JOURNAL_DIR=
+#
+#  UGII_JOURNAL_INDICATOR is used to turn off journal indicators that
+#  convey whether a menu command can be journaled. Setting the variable
+#  to 0 will turn the indcators off.  If unset or any other value, then the
+#  indicators will be on.
+#  E.G. UGII_JOURNAL_INDICATOR=0
+#UGII_JOURNAL_INDICATOR=
+#
+#  Alternate Unigraphics directories
+#
+#  The "$" directory
+UGII_LIB1=${TMP}
+#
+#  The "!" directory
+UGII_LIB2=${UGII_BASE_DIR}\ugii\
+#
+#  The util directory used for user defined symbol and crosshatching files.
+UGII_UTIL=${UGII_BASE_DIR}\ugii\
+#
+#  File system options.  If LOWER is set, filenames will be converted to lower
+#  case before being used.  If UPPER is set, filenames will be converted to upper
+#  case before being used.  If neither is set, filenames will be used as the
+# user types them in.
+
+#UGII_OPTION=
+#
+#  UGII_PRINTER can be set to print to API listing device(s) (including files-on-disk).
+#  It has no relation to Serial Peripheral Interface (SPI) for print/plotting.
+#
+UGII_PRINTER=
+#
+#  The Baud rate of the paper tape output device
+UGII_TAPEBAUD=1200
+#
+#  The UGII_TMP_DIR variable points to a temporary directory that is used
+#  for syslog files and can be used for automatic machine conversion.
+#  Since parts are large, the best performance for part conversion will be
+#  attained if this directory is on the local node.
+UGII_TMP_DIR=${TMP}
+
+#  UGS_LICENSE_BUNDLE is the name of the licensing bundle in effect for this
+#  client.   By default this should be undefined.
+#UGS_LICENSE_BUNDLE=
+#
+#  For cl-files, post machine files, pixel files,
+#  symbol font files or pattern facet files which have the extensions .clf,
+#  .mdf, .pix, .sbf, and .fac respectively, the following variable must
+#  be set if Unigraphics needs to automatically convert those types of
+#  files between heterogeneous machine operating systems.
+#  With V9 or earlier releases, the following variable also must be set if
+#  you want to file parts in a format OTHER than the machine you are running
+#  on.
+#  This environment variable, if set, MUST BE SET TO A VALID VALUE.  Valid
+#  values are: DG, DEC, IBM, UNX, or ULT.  Note that DEC refers to DEC/VMS
+#  format, and IBM refers to VM/CMS format.
+#UGII_MACHINE_FORMAT=
+#
+#  Unigraphics Migration Extension (UGMX) startup script
+UGII_UGMX=${UGII_BASE_DIR}\ugmx\me\etc\startmcad
+#
+#  Unigraphics Migration Extension (UGMX) data exchange directory.
+#  All MX<->UG data exchange files have a file extension of ".ugmx"
+#  UGII_MXUG_FILE is defined as the directory where MX->UG data
+#  exchange files can be found.
+UGII_MXUG_FILE=${HOME}\
+#  UGII_UGMX_FILE is defined as the directory where UG->MX data
+#  exchange files can be found.
+UGII_UGMX_FILE=${HOME}\
+#
+#  UGII_SHARE is used when loading shared libraries at runtime.  It is
+#  the default directory for these files.  If you have multiple directories
+#  to be searched, they can be separated with a ; much like the PATH
+#  environment variable.
+#
+UGII_SHARE=${UGII_BASE_DIR}\nxbin
+#
+#  UGII_SPREADSHEET is used for the default location of the spreadsheet
+#  files
+UGII_SPREADSHEET=${UGII_BASE_DIR}\nxbin\
+#
+#  This variable defines the ascii file that contains the load options settings.
+#  If it is not set, a file called load_options.def in the current directory
+#  is searched for instead.  NOTE: If you set this to a file specification
+#  that contains spaces, you must enclose the file in quotes, e.g
+#  UGII_LOAD_OPTIONS="c:\my Data Files\load_options.def"
+#
+UGII_LOAD_OPTIONS=
+#
+# UGII_UGOPEN_SESSION        If set, retains the "UG/OPEN API (User
+#                            Function) Execute License" for the entire
+#                            UG session after User Function is initialized.
+#UGII_UGOPEN_SESSION=true
+#
+#  The Physical Material Library uses several environment variables to locate its program and
+#  data files. The defaults coded here point to the UG kit directories.
+#  Customers may override the variables to point at different versions of the files.
+#
+#  A legacy Material Library database is supported by core UG and it is a 
+#  text-based row-column file
+#
+#  The files are:
+#      phys_material.def      Database meta definition file
+#      phys_material.tcl      Database access program
+#  Text-based only:
+#      phys_material.dat      The default, text based material library.
+#  
+#  Two layers are provided for the def and tcl files. 
+#
+#  If the override def & tcl files are in a single directory,
+#  set UGII_USER_MATERIAL_LIB_DIR to point at the directory. 
+#  If any of the files are not found in the UGII_USER_MATERIAL_LIB_DIR, 
+#  the Library will then search the second layer for the missing file. 
+#
+#  The second search layer uses UGII_PHYS_MATERIAL_LIB_DIR. 
+#  The def file is keyed to UGII_LANG to allow native language translation.
+#  E.g., %UGII_PHYS_MATERIAL_LIB_DIR%\%UGII_LANG%\phys_material.def
+#
+#  The tcl program is searched first in UGII_PHYS_MATERIAL_LIB_DIR, then searched in yet another
+#  directory, UGII_PHYS_MATERIAL_LIB_PATH. Having 2 variables allows the same tcl program to be
+#  used for all NLM def versions.
+#
+#  By intent, the customer can set the UGII_USER_MATERIAL_LIB_DIR and leave UGII_PHYS_MATERIAL_LIB_DIR
+#  as the back-up, the default. Customers can also set UGII_PHYS_MATERIAL_LIB_DIR at the risk of
+#  losing the back-up path when anything goes wrong.
+#
+#  The actual database files are accessed by the tcl program. 
+#
+#  The text-based version looks for phys_material.dat in UGII_PHYS_MATERIAL_LIB_DATA_DIR.
+#  There is no first layer search for the dat file.
+#
+#  By intent, advanced customers may edit/customize the tcl programs. The search for the database
+#  may be customized by editing the tcl program.
+#
+#  UGII_USER_MATERIAL_LIB_DIR, UGII_PHYS_MATERIAL_LIB_DIR, UGII_PHYS_MATERIAL_LIB_PATH may each be
+#  coded as path strings. That is, more than on directory name separated by the ';' character.
+#
+#  The default settings:
+#
+#if FILE ${UGII_BASE_DIR}\ugii\materials\${UGII_LANG}
+UGII_PHYS_MATERIAL_LIB_DIR = ${UGII_BASE_DIR}\ugii\materials\${UGII_LANG}\
+#else
+UGII_PHYS_MATERIAL_LIB_DIR = ${UGII_BASE_DIR}\ugii\materials\english\
+#endif
+UGII_PHYS_MATERIAL_LIB_DATA_DIR = ${UGII_BASE_DIR}\ugii\materials\
+UGII_PHYS_MATERIAL_LIB_PATH=.\;${UGII_BASE_DIR}\ugii\materials\
+#
+#
+#
+# UGII_CAE_REPORT_TEMPLATES_DIR is a dir where UG-shipped UG/Structures
+# templates (.htt) files are found. These support the UG/Structures
+# implementation of UG/Web publishing, the Report Writer.
+# Site users may override this directory by exporting another variable,
+# UGII_USER_REPORT_TEMPLATES_DIR which points at a directory containing
+# replacement templates. UGII_USER_REPORT_TEMPLATES_DIR is searched first,
+# then UGII_CAE_REPORT_TEMPLATES_DIR for each template file.
+#
+UGII_CAE_REPORT_TEMPLATES_DIR = ${UGII_BASE_DIR}\UGSTRUCTURES\
+#
+#
+#  This is the default directory structure for placement of user-specific
+#  CAE post template files.
+#
+UGII_CAE_POST_TEMPLATE_USER_DIR=${HOME}\post_template_files
+#
+#
+#########################################################################
+#
+#  USER EXITS
+#
+#  User exits which if set will execute a user written grip program
+#  or executable program at various points of Unigraphics execution
+#
+#  If these are needed they should be setup by the user.  If the user
+#  exit is a grip program procede the name with an asterisk (*).  If
+#  the user exit is an operating system executable, just give the full
+#  pathname to the program.
+#
+#  The following user exits are special.  They point to modules released
+#  by Unigraphics.
+#
+#  The following exit is taken when the user selects geometry unfold
+#  from the sheet metal module.  It is a grip program and should be set up
+#  by install.
+USER_GEO_UNF=*${UGII_BASE_DIR}\unfold\flatpat.grx
+#
+#  The following exit is taken when the user selects the tooling option
+#  of the punchpress sheet metal module.
+USER_PUNCHTOOLS=*${UGII_BASE_DIR}\punchpress\buildtool.grx
+#
+#  The following exit is taken when the user selects the punch laser
+#  option from the sheet metal module
+USER_PUNCH=*${UGII_BASE_DIR}\punchpress\punchlaser.grx
+#
+#  The following exit is taken when the user selects the part gridding option
+#  of the punch press option of the sheet metal module
+USER_PUNCHGRID=*${UGII_BASE_DIR}\punchpress\punchgrid.grx
+#
+#  The following exit is taken when the user selects the PDA interface.
+USER_PDAIF=${UGII_BASE_DIR}\ugpatif\ugpatif
+#
+#   The following exit is taken when the user selects the Generative Modeling
+#  option on the Applications pulldown menu.
+USER_ICADIF=${UGII_BASE_DIR}\icadif\uficad
+#
+#  USER_UNISIM is the variable pointing to the UG/Unisim shared library.
+#  This variable will be set at UG/Unisim installation time.
+#USER_UNISIM=
+#
+########This ends the special Unigraphics released user exits #################
+#
+#  If the following variable is set, whenever a user goes through code
+#  which tries to execute a user exit, and the user exit variable is not
+#  set, then the following program is executed.
+#USER_DEFAULT=
+#
+#  USER_STARTUP is an environment variable to identify an internal user
+#  function program, which is to be loaded and executed up at Unigraphics'
+#  start up time.  This environment variable should include the directory
+#  path along with the name of the internal user function program to be
+#  executed.  This internal user function program can either be a custom
+#  application which attaches to the menubar (see the User Function Manual for
+#  complete details) or a separate internal user function program.
+#USER_STARTUP=
+#
+#  The following exit is taken when the user tries to create a part
+#USER_CREATE=
+#
+#  The following exit is taken when the user tries to export a part
+#USER_FCOMP=
+#
+#  The following exit is taken when the user changes the displayed part
+#USER_CDISP=
+#
+#  The following exit is taken when the user renames a component
+#USER_NCOMP=
+#
+#  The following exit is taken when the user enters the part filing routine,
+#  prior to the menu selection of how to file the part
+#USER_FILE=
+#
+#  The following exit is taken when the user enters the part save as routine,
+#  prior to the menu selection of how to file the part
+#USER_SAVEAS=
+#
+#  The following exit is taken when the user selects the part merge option
+#  within assemblies and components
+#USER_MERGE=
+#
+#  The following exit is taken when the user selects plot file generation
+#USER_PLOT=
+#
+#  The following exit is taken when the user tries to retrieve a component
+#USER_RCOMP=
+#
+#  The following exit is taken when the user tries to retrieve a part
+#USER_RETRIEVE=
+#
+#  The following exit is taken when the user selects the where used
+#  option of assemblies and components
+#USER_WHERE_USED=
+#
+#  The following exit is taken when the user selects 2d area properties
+#  using curves.
+#USER_AREAPROPCRV=
+#
+#  The following exit is taken when the user selects user defined symbols
+#USER_UDSYMBOL=
+#
+#  The following exit is taken when a CL source file is opened
+#USER_CLS_OPEN=
+#
+#  The following exit is taken when a CL source file is saved
+#USER_CLS_SAVE=
+#
+#  The following exit is taken when a CL source file is renamed
+#USER_CLS_RENAME=
+#
+#  The following exit is taken when a CL file is generated
+#USER_CL_GEN=
+#
+#  The following exit is taken when a CL source file is postprocessed
+#USER_POST=
+#
+#  The following exit is taken to access the Genius Library Management System
+#USER_GENIUS=
+#
+#  The following exit is taken when a component is created
+#USER_CCOMP=
+#
+#  The following exit is taken when the work part is changed
+#USER_CWORK=
+#
+#  The following exit is taken when a component is deleted
+#USER_DCOMP=
+#
+#  The following exit is taken when a component is moved
+#USER_MCOMP=
+#
+#  The following exit is taken when a component is substituted out
+#USER_SCOMP1=
+#
+#  The following exit is taken when a component is substituted in
+#USER_SCOMP2=
+#
+#  The following exit is taken when a reference set is replaced
+#USER_RRSET=
+#
+#  The following exit is taken when a GRIP program is executed via
+#  'File->Execute->GRIP'.  By using it, the Motif file selection box can be
+#  replaced with whatever mechanism is desired or the functionality can be
+#  disabled completely
+#USER_GRIP=
+#
+#  The following exit is taken when a GRIP program is executed via
+#  'File->Execute->Debug GRIP'.  By using it, the Motif file selection box
+#  can be replaced with whatever mechanism is desired or the functionality
+#  can be disabled completely
+#USER_GRIPDEBUG=
+#
+#  The following exit is taken when a User Function program is executed via
+#  'File->Execute->User Function'.  By using it, the Motif file selection box
+#  can be replaced with whatever mechanism is desired or the functionality
+#  can be disabled completely
+#USER_UFUN=
+#
+#  The following exit is invoked when
+#    (1) creating a new operation using an Operation Template
+# or
+#    (2) re-initializing an existing operation from an Operation Template
+#USER_CREATE_OPER=
+#
+#  The following exit is invoked when you start up the Manufacturing
+#  application.
+#
+#USER_CAM_STARTUP=
+#
+#   Set up the language for sheet metal manufacturing menus/dialogs.
+#   Possible values are "eng" for English or "ger" for German.
+#
+UNC_LANG=eng
+#
+#   Set up the base directory for the sheet metal manufacturing modules
+UNC_CAM_DIR=${UGII_BASE_DIR}\sheetmfg\unc\
+#
+#       Infomanager CL Source file retrieve
+#EIM_CLSRET=
+#
+#       Infomanager CL source file file
+#EIM_CLSFIL=
+#
+
+#
+############################################################################
+#
+#  SMD PRODUCT
+#
+#  UGII_UGSMD_STDS_LIBRARY is used to find the engineering standards files
+#
+UGII_UGSMD_STDS_LIBRARY=${UGII_BASE_DIR}\ugii\
+#
+#
+
+############################################################################
+#
+#  Units Manager
+#
+#  UGII_UNITS_USER_DEFINED_FILE
+#      Points to a customer-supplied XML file containing custom measures and units and custom designations of units for data entry and information output.
+#UGII_UNITS_USER_DEFINED_FILE=
+#
+############################################################################
+
+
+########################################################################
+#
+#  ROUTING Application Environment Variables
+#
+#  The Routing Applications are  Routing Electrical, Routing Mechanical,
+#  and Routing Logical.
+#  The environment variables in this section apply to one or all of
+#  these applications.
+#
+#  Variables that apply to a single application include the name
+#  of the application in the variable name.  Variables that apply to
+#  all applications have ROUTING or ROUTE in their names.
+#
+#  The UGII_ROUTE_UGMANAGER_MODE variables specifies if the Routing
+#  administrative files should be loaded from Teamcenter or not.  It
+#  can have values of TRUE or FALSE.
+#
+#  If set to TRUE then the Routing administrative files will be loaded
+#  from Teamcenter. If FALSE then the default mechanism of looking for
+#  these files in the kits or in the directory specified by environment
+#  variables will be used.
+#
+#  The Routing administrative files are loaded upon entering a Routing
+#  application.  It consists of the following files:
+#       1. Application view         - .xml
+#       2. XML Schema file          - .xsd
+#       3. Part Library View        - .plv
+#       4. Part Tables              - .ptb
+#       5. Routing Configuration    - .cfg
+#
+#  These files will only be searched in one place, i.e. either in
+#  Teamcenter or in the kits, based on the value of this variable.
+#  An error will be raised if any of these files are not found.
+#
+#  Additionaly, if this variable is set to TRUE then users who want to
+#  select a Routing Harness (.hrn), Routing Component (.cmp) Routing
+#  Format (.fmt) or Routing Filter (.flt) file in Routing Electrical
+#  will have to do it from Teamcenter.
+#
+#      UGII_ROUTE_UGMANAGER_MODE      Variable indicating if Routing
+#                                     administrative files (.xml, .xsd,
+#                                     .plv, etc) should be loaded from
+#                                     Teamcenter or not.
+#
+#  The following variables define the application view file (.apv) for
+#  each Routing application.  The variable provides either the file
+#  name only or the full path specification.
+#
+#      UGII_ROUTE_ELEC_APP_VIEW       Electrical APV
+#      UGII_ROUTE_MECH_APP_VIEW       Mechanical APV
+#      UGII_ROUTE_LGCL_APP_VIEW       Logical APV
+#      UGII_RSD_MECH_APP_VIEW         RSD Mechanical APV
+#      UGII_RSD_ELEC_APP_VIEW         RSD Electrical APV
+#
+#  If the APP_VIEW variable specifies only the APV file name, then the
+#  APV file must be in the directory specified by the variable
+#  UGII_ROUTING_APP_VIEW_DIR.
+#
+#      UGII_ROUTING_APP_VIEW_DIR      Directory containing APV files
+#
+# The Part Library View (.plv) file for each application determines the
+# part selection hierarchy when using Routing's Place Part.  The APV
+# file specifies the PLV file used for a particular application.  If the
+# APV file does not provide the complete path specification, then the
+# PLV file must reside in one of the directories specified by
+# UGII_EPLIB_PART_LIB_VIEW_PATH.
+#
+#      UGII_EPLIB_PART_LIB_VIEW_PATH  Directory paths of PLV files
+#
+# Part Table files (.ptb) define Routing Characteristics for parts and
+# stock used by Routing.  The PLV file of the application references the
+# PTB files.  If the PLV file does not provide the complete file path
+# specification of a PTB file, then the PTB file must reside in one of
+# the directories specified by UGII_EPLIB_TABLE_PATH.
+#
+#      UGII_EPLIB_TABLE_PATH          Directory paths of PTB files.
+#
+# The PTB files reference existing part files, which may be part family
+# template parts or individual part files.  Any part referenced by a PTB
+# must reside in one of the directories specified by the Part Path
+# variable for that application.
+#
+#      UGII_ROUTE_ELEC_PART_PATH      Electrical Part Path
+#      UGII_ROUTE_MECH_PART_PATH      Mechanical Part Path
+#      UGII_ROUTE_LGCL_PART_PATH      Logical Part(symbol)Path
+#
+# If the PTB files reference Part Family template files, then Place Part
+# generates the member parts as needed.  Member part files are generated
+# in the same directory as those created by standard Part Family unless
+# the following variable is defined, which provides the Routing specific
+# destination directory.
+#
+#      UGII_ROUTING_MEMBER_SAVE_DIR   Directory in which Routing creates
+#                                     part family members from template
+#                                     files during Place Part
+#                                     operation (no default value)
+#
+#  Routing Electrical Specific Variables
+#      UGII_RLIST_PATH                The directory paths containing
+#                                     Routing List (RLIST) configuration
+#                                     files (such as ugroute_elec.cfg.
+#
+#      UGII_FMBD_FORMATS_FILE         The file containing formats for
+#                                     the Formboard annotation functions.
+#
+#      UGII_FMBD_USE_LAYOUTS          Switch that controls whether to
+#                                     use a split screen layout to
+#                                     display the harness and formboard
+#                                     assemblies in Formboard Sync. If
+#                                     TRUE then split screen is used.
+#
+#      UGII_FMBD_PATTERN_DIR          Directory that contains pattern
+#                                     part files for use in Formboard
+#                                     Frame Tool.
+#
+#      UGII_FMBD_CGM_DIR              Directory that contains CGM (.cgm)
+#                                     files for use in Formboard Frame.
+#
+#      UGII_FMBD_DISABLE_ROTATION_VECTOR_ALIGNMENT          Switch that controls whether to
+#                                                           use rotation vector defined on ports
+#                                                           for orientation of components during 
+#                                                           create formboard layout.
+#
+#  Routing Mechanical Specific Variables
+#
+#      UGII_ROUTING_BOM_PATH          Directory paths containing Routing
+#                                     Bill of Materials part list format
+#                                     part files.
+#
+#      UGII_ROUTING_BEND_TABLES_PATH  Directory paths that Routing
+#                                     searches to locate Bend Table
+#                                     files referenced in the
+#                                     Application View file.
+#
+#      UGII_ROUTE_SKIP_ENGAGE_CHARX=TRUE  Causes system to skip the check
+#                                         for the ENGAGE characteristic on a
+#                                         port, which can significantly
+#                                         improve the performance of the
+#                                         Place Part operation.
+#
+#
+####################################################################################
+#
+#                           NOTE ON ROUTING UNITS SYSTEMS
+#        The example libraries are provided in both english and metric units.
+#        Environment variables are predefined for both unit systems below.
+#        Where both versions are provided, those belonging to the inch system are
+#        initially commented out.  This line is identified by a plus sign following
+#        the pound sign comment character (#+)  To change unit system examples,
+#        comment out the appropriate UGII_ROUTING_KIT_UNITS variable and uncomment
+#        the other.
+#
+####################################################################################
+#
+#     Should Routing Administrative files be loaded from Teamcenter
+UGII_ROUTE_UGMANAGER_MODE=FALSE
+#
+
+#   Routing Kit directories
+
+UGII_ROUTE_ELEC_KIT_DIR=${ROUTING_APP_DIR}\ugroute_elec
+UGII_ROUTE_MECH_KIT_DIR=${ROUTING_APP_DIR}\ugroute_mech
+UGII_ROUTE_LGCL_KIT_DIR=${ROUTING_APP_DIR}\ugroute_mech
+#
+#   Routing Units
+UGII_ROUTING_KIT_UNITS=metric
+#+ UGII_ROUTING_KIT_UNITS=inch
+#
+#     Application View File Locations
+UGII_ROUTING_APP_VIEW_DIR=${UGII_ROUTE_MECH_KIT_DIR}\appview\;${UGII_ROUTE_ELEC_KIT_DIR}\appview\
+#
+#     Application View Files
+UGII_ROUTE_ELEC_APP_VIEW=${UGII_ROUTE_ELEC_KIT_DIR}\appview\ugroute_elec_${UGII_ROUTING_KIT_UNITS}.xml
+UGII_ROUTE_MECH_APP_VIEW=${UGII_ROUTE_MECH_KIT_DIR}\appview\ugroute_mech_${UGII_ROUTING_KIT_UNITS}.xml
+UGII_ROUTE_LGCL_APP_VIEW=${UGII_ROUTE_LGCL_KIT_DIR}\appview\ugroute_lgcl_${UGII_ROUTING_KIT_UNITS}.xml
+UGII_RSD_ELEC_APP_VIEW=${UGII_ROUTE_ELEC_KIT_DIR}\appview\ugroute_rsd_elec_${UGII_ROUTING_KIT_UNITS}.xml
+UGII_RSD_MECH_APP_VIEW=${UGII_ROUTE_MECH_KIT_DIR}\appview\ugroute_rsd_mech_${UGII_ROUTING_KIT_UNITS}.xml
+#
+#     Part Library View Locations
+UGII_EPLIB_PART_LIB_VIEW_PATH=${UGII_ROUTE_MECH_KIT_DIR}\appview\;${UGII_ROUTE_ELEC_KIT_DIR}\appview\
+#
+#     Part Table Locations
+UGII_EPLIB_TABLE_PATH=${UGII_ROUTE_MECH_KIT_DIR}\${UGII_ROUTING_KIT_UNITS}\tables\;${UGII_ROUTE_ELEC_KIT_DIR}\${UGII_ROUTING_KIT_UNITS}\tables\
+#
+#     Library Part File Location
+UGII_ROUTE_BASE_PART_PATH=${ROUTING_APP_DIR}\parts
+
+UGII_ROUTE_ELEC_PART_PATH=${UGII_ROUTE_BASE_PART_PATH}\${UGII_ROUTING_KIT_UNITS}
+UGII_ROUTE_MECH_PART_PATH=${UGII_ROUTE_BASE_PART_PATH}\${UGII_ROUTING_KIT_UNITS}
+UGII_ROUTE_LGCL_PART_PATH=${UGII_ROUTE_BASE_PART_PATH}\${UGII_ROUTING_KIT_UNITS}
+#
+#     Part Family Member Save Location
+#UGII_ROUTING_MEMBER_SAVE_DIR
+#
+#     Electrical Specific Variables
+UGII_RLIST_PATH=${UGII_ROUTE_ELEC_KIT_DIR}\rlist\
+UGII_FMBD_FORMATS_FILE=${UGII_ROUTE_ELEC_KIT_DIR}\rlist\fmbd_annotation.fmt
+UGII_FMBD_USE_LAYOUTS=FALSE
+UGII_FMBD_PATTERN_DIR=${UGII_ROUTE_ELEC_PART_PATH}
+UGII_FMBD_CGM_DIR=${UGII_ROUTE_ELEC_PART_PATH}
+UGII_FMBD_DISABLE_ROTATION_VECTOR_ALIGNMENT=FALSE
+UGII_RLIST_SCHEMA_FILE=${UGII_ROUTE_ELEC_KIT_DIR}\rlist\routelist.xsd
+#
+#     Mechanical Specific Variables
+#
+#         Bill of Materials
+UGII_ROUTING_BOM_PATH=${UGII_ROUTE_MECH_PART_PATH}
+#
+#         Bend Tables
+UGII_ROUTING_BEND_TABLES_PATH=${UGII_ROUTE_MECH_KIT_DIR}\${UGII_ROUTING_KIT_UNITS}\tables\
+#
+# Comment out the following environment variable if you want to use ENGAGE
+# attributes to override the engagement values on ports or in .ptb files.
+# This will slow down your peformance on larger assemblies.
+# See "Advanced Engagement Value Assignment" for more information on engagements.
+UGII_ROUTE_SKIP_ENGAGE_CHARX=TRUE
+
+# Comment the following environment variable if you want to use LENGTH_ADDITION
+# attributes to add additional wire lengths for wires attached to ports.
+# This can drastically affect peformance on larger assemblies for Routing Electrical
+# operations (Auto-Route, Manual Route, etc).
+# See "Routing Aware Characteristics" for more information on the LENGTH_ADDITION
+# characteristic.
+UGII_ROUTE_SKIP_LENGTH_ADDITION_CHARX=TRUE
+
+# Routing doesn't support the use of load option revision rules such as "Precise",
+# where the user must manually specify the item revision.  To allow Routing operations
+# such as Place Part and Assign Stock to work with a "Precise" load option, the
+# following environment variable must be set to some fallback load option.  This
+# fallback revision rule will be used whenever a part fails to load because it's
+# currently configured revision cannot be found.
+#
+# UGII_ROUTE_CONFIG_RULE="Latest Working"
+
+# Uncomment the following variable to for NX to use the same bundling
+# rules for cables that were used in NX2.  For NX2 the OD of the
+# bundle for the cable was just the OD of one of the cable's wires.  For
+# NX3 the bundle is computed using all of the wires of the cable.
+#
+#UGII_ROUTE_NX2_CABLE_OD=TRUE
+
+# In some configurations the links between RCPs and components (such as clips)
+# may be lost or become invalid.  This affects formboard synchronization and
+# may result in many unneccessary missing/extra non-electrical component discrepancies.
+# Set the environment variable below if you believe that formboard synchronization
+# is incorrectly identifying clip discrepancies.
+#UGII_FMBD_LINK_PORTS=TRUE
+
+
+# When converting NX5 locked length splines to NX6 locked length splines, this variable
+# ensures that the splines are converted to "Lock Length" instead of "Lock Length With Slack"
+# splines.  This avoids major shape changes that will occur because multiple Routing segments
+# can no longer share a single follow curve.  
+UGII_ROUTE_CONVERT_SLACK_TO_LOCK_LENGTH=TRUE
+
+# This variable force Assemblies Positioning to use tight tolerances when solving constraints that contain 
+# Routing geometry.  This prevents inconsistent or strange behavior when the Assemblies Positioning 
+# tolerances are set to very loose values. Only use this variable if you have modified the default 
+# Assemblies Positioning tolerances and see inconsistent behavior when moving Routing geometry.
+#UGII_COMPOS_USE_ROUTING_DEFAULT_TOLS=TRUE
+
+# This variable forces Assemblies Positioning to skip searching for Routing geometry when determining which 
+# drag mode to apply when dragging objects.  Setting this variable significantly affects the 
+# dragging behavior of Routing objects.  Only set this variable if directly constraining Routing
+# work part geometry to components that require the default Assemblies drag mode to solve
+# properly.
+#UGII_COMPOS_DISABLE_ROUTING_MOVE_MODE=TRUE
+
+############# End Routing Variables ##############
+#
+############################################################################
+#
+#  MAYA PCB PRODUCT
+#
+#  MAYA_PCB_DIR is the directory where the Maya Printed Circuit Board
+#  product is installed.
+MAYA_PCB_DIR=${UGII_BASE_DIR}\ugpcbxchange
+#
+############# End Maya PCB Variables ##############
+#
+#
+############################################################################
+#
+#  FLEXIBLE PIPE PRODUCT
+#
+#  UGII_FLEXIBLEPIPE_DIR is the directory where the Flexible Pipe product
+#  product is installed.
+UGII_FLEXIBLEPIPE_DIR=${UGII_BASE_DIR}\simulation\flexiblepipe
+#
+############# End FLEXIBLE PIPE Variables ##############
+#
+#
+############################################################################
+#
+#  SCD5 Tools
+#
+#  UGII_SCD5TOOLS_DIR is the directory where the SCD5 tools
+#  are installed.
+UGII_SCD5TOOLS_DIR=${UGII_BASE_DIR}\simulation\simcenterdatafile
+#
+############# End SCD5 Tools Variables ##############
+
+#
+#
+############################################################################
+#
+#  GRIP BATCH
+#
+#  The following are the environment variables used by Grip Batch
+#
+#  GBATCH_DIRECTORY is the default directory for the grip batch process.
+#GBATCH_DIRECTORY=$HOME
+#
+#  GBATCH_STRING can be set to a string that will be passed to all programs
+#  run using grip batch.
+#GBATCH_STRING=no_default
+#
+
+
+############################################################################
+#
+#  DISPLAY DRIVER ENVIRONMENT VARIABLES:
+#
+#  For more information about the following variables, consult your
+#  terminal operator guide.
+#
+#  UGII_KEYBOARD_TYPE is used to override the default keyboard
+#  setting.  Possible settings include:
+#       dec                     (all Digital keyboards)
+#       hp                      (Standard HP keyboard)
+#       ibm                     (Standard IBM keyboard)
+#       mac                     (Macintosh keyboard)
+#       pc                      (IBM PC & HP PC keyboards)
+#       sgi                     (Silicon Graphics keyboard)
+#       sun_model4              (Sun Model 4 keyboard)
+#       sun_model5              (Sun Model 5 keyboard)
+#  Normally, the correct keyboard type is picked based on the X Server
+#  displaying Unigraphics.  By default, Unigraphics uses the "hp"
+#  setting for the HP server and "sun_model5" for the Sun server.  If
+#  you are using Macintosh keyboards, this must be to "mac" for proper
+#  accelerator operation.
+#UGII_KEYBOARD_TYPE=
+#
+#  UGII_REFL_IMAGE_DIR defines the directory in which the image files
+#  for Face Analysis Reflections reside.  This environment variable
+#  must be defined, or else an error will occur when UG or user-defined
+#  reflection images are requested.
+UGII_REFL_IMAGE_DIR=${UGII_BASE_DIR}\ugii\ugvisuals\
+#
+#  UGII_TEXTURE_TIFF_IMAGE_DIR defines the directory in which the tif image
+#  files for studio/ugphoto textures reside.  This environment variable
+#  must be defined, or else an error will occur when textures
+#  are requested during studio rendering.
+UGII_TEXTURE_TIFF_IMAGE_DIR=${UGII_BASE_DIR}\ugstudio\
+#
+# UGII_TEXTURE_LIB defines a directory where the user can put custom image files used by 
+# NX high end visualization such as materials, decals and background. To allow parts using 
+# customized materials with images to be shared between NX installations, the user 
+# specified images should be placed in each installation's UGII_TEXTURE_LIB directory 
+# and specified using a relative path in the Studio Material Editor or Decal Sticker or
+# Scene Editor. 
+# UGII_TEXTURE_LIB=
+#
+#  Full path names of TIFF files used for textures or backgrounds are saved with the part.
+#  Upon part load, if a TIFF file is not found as specified by its name,
+#  UG will search for the TIFF fill in directories specified by UGII_TEXTURE_LIB,
+#  part directories and Load Options Search Directories.
+#  If this search is not desired (since it may take a long time),
+#  set the UGII_NO_TIFF_SEARCH environment variable to 1 to skip the search if
+#  a texture or background file is not found.
+#  By default this environment variable is not set.
+UGII_NO_TIFF_SEARCH=
+#
+#
+#  LI_TOP defines the directory where all the support files for Ray Traced
+#  Studio reside.  LI_TOP must point to the directory containing the "plugins"
+#  and "programs" folders used by Ray Traced Studio for its display.
+UGII_LI_TOP=${UGII_BASE_DIR}\ugphoto\ray_traced_studio
+#
+#  UGII_LI_CLBIN_DIR defines the directory where all the dynamically compiled Ray Traced Studio OpenCL programs reside.
+#  The clbin files will be saved in a sub-folder CL_binaries under the UGII_LI_CLBIN_DIR.
+UGII_LI_CLBIN_DIR=${UGII_TMP_DIR}
+#
+#
+#UGII_LI_LAYLA_DIR defines the directory to locate all the support files
+#for the LightWorks Session Manager.  This is also the directory where
+#the LightWorks archive data files have to be located.
+UGII_LI_LAYLA_DIR=${UGII_BASE_DIR}\ugphoto
+# 
+# UGII_LWIRAY_ROOTDIR 
+# This defines the root content and authentication directory for the Iray+ 
+# rendering engine.
+UGII_LWIRAY_ROOTDIR=${UGII_LI_LAYLA_DIR}\Iray+\content\core
+# 
+# UGII_LWIRAY_CONTENT_ROOTDIR 
+# This defines the image resource base directory for the Iray+ rendering
+# engine.
+UGII_LWIRAY_CONTENT_ROOTDIR=${UGII_LI_LAYLA_DIR}\Iray+\content\evaluation
+#
+# NX_SVM_SYSTEM_STUDIO_MATERIALS
+# This defines the directory where all the system SVM materials reside
+NX_SVM_SYSTEM_STUDIO_MATERIALS=${UGII_LI_LAYLA_DIR}\SVM\Materials
+
+
+# NX_RENDER_LWIRAY_MDL_USER_PATHS
+#
+# This defines a path (or multiple paths, separated by semi-colons) to
+# location(s) where user installed MDL material content is installed.  Note that
+# the following MDL-related system environment variables are referenced automatically
+# by NX; MDL content located at these locations does not need 
+#
+#    MDL_USER_PATH: Set when the NVIDIA vMaterials collection is installed.  Points to
+#       MDL component and texture/image resources. 
+#    
+#    MDL_SYSTEM_PATH: Set when the MDL Material Exchange package is installed.  This
+#       package is required to support exchange of MDL between supporting applications.
+#       Points to MDL component resources.
+#  
+# NOTE: Texture/image resources needed to support MDL materials (not located under the
+#    MDL_USER_PATH) should be placed in the directory referenced by the UGII_TEXTURE_LIB
+#    environment variable.
+#NX_RENDER_LWIRAY_MDL_USER_PATHS= 
+
+#
+# NX_SVM_MATERIAL_TEXTURES_DIR
+#
+# This defines the directory where SVM texture resources are located.  
+#
+# Textures are structured into the following sub-directories:
+#   Bump
+#   Color
+#   Decal
+#   IES
+#   Opacity
+#   Weight
+#
+# Texture names use the following naming convention:
+#   MaterialName_TypeofTexture_Color_MapType_MappingSize.png
+#
+# Texture naming notes:
+#   Use underscores instead of spaces to assist with paths.
+#   Use Camel Case.
+#
+# Texture MapTypes:
+#   Albedo: D 
+#   Metallic: M 
+#   Roughness:R 
+#   Specular: S 
+#   Specular Tint: ST 
+#   Normal: N 
+#   Opacity: O 
+#   Anisotropy: A 
+#   Anisotropy Rotation: AR 
+#   Sheen: SH 
+#   Sheen Tint: SHT 
+#   Clear Coat: CC 
+#   Clear Coat Roughness: CCR 
+#   Clear Coat Normal: CCN 
+#   Transmission Weight: T 
+#   Transmission Roughness: TR 
+#   Displacement Height: DH 
+#   Emission Color: EC
+#
+# Examples:
+#   Leather_LargeGrain_Tan_D_150mm.png
+#   Leather_LargeGrain_CCN_150mm.png
+#   Leather_LargeGrain_N_150mm.png
+#   Leather_LargeGrain_SaddleLeather_D_150mm.png
+#   Leather_LargeGrain_R_150mm.png
+#
+NX_SVM_MATERIAL_TEXTURES_DIR=${UGII_LI_LAYLA_DIR}\SVM\Textures
+
+#  UGII_RENDER_ARTISTIC_DIR defines the directory where all the support
+#  files for the LightWorks Artistic (Sketch) Rendering application reside.
+#  This environment variable must be defined, or else an error will occur
+#  when the Artistic (Sketch) Rendering application is used.
+UGII_RENDER_ARTISTIC_DIR=${UGII_BASE_DIR}\ugphoto\artistic_render\
+#
+#  UGII_SHOWROOM_DATA_DIR defines the directory where all the support files
+#  for the Default Showroom Environments reside.  These files are used for generating
+#  high quality images as well as during Studio display mode, when a default
+#  showroom environment has been added to the view.  This environment variable must
+#  be defined
+UGII_SHOWROOM_DATA_DIR=${UGII_BASE_DIR}\ugphoto\ug_environment
+#
+#  UGII_USER_SHOWROOM_DATA_DIR defines the directory where all the support
+#  files for the showroonm environments created by user reside.
+#  These files are used for both UGPHOTO and Studio display.
+#  It is strongly recommented for user to define this environment variable
+#  and use this diretory as a central storage for all User Showroom Environment files.
+#  UG searches in this directory to resolve all part references to environment files.
+#  If not defined, directory UGII_TMP_DIR\user_showroom_data_dir is used to
+#  store all the user showroom environment files.
+#  The directory needs to have full write permission.
+UGII_USER_SHOWROOM_DATA_DIR=
+#
+#  UGII_CANNED_MATERIAL_DIR defines the directory where all the canned materials
+#  reside.   These files are used for both generating high quality images as well
+#  as during Studio display mode.
+UGII_CANNED_MATERIAL_DIR=${UGII_BASE_DIR}\ugphoto\ug_canned_mattex
+#
+#  UGII_HDR_IMAGE_DIR
+#  This defines the directory where all the supporting files for the High
+#  Dynamic Range Image (HDRI) Palette are stored.  These files can be used for
+#  Image-Based Lighting (IBL) and reflections.
+UGII_HDR_IMAGE_DIR=${UGII_BASE_DIR}\ugphoto\hdr_images
+#
+#  UGII_ENV_IMAGE_DIR
+#  This defines the directory where all the supporting files for the background
+#  and refletion Palettes are stored.  These files can be used for
+#  background and reflections in a scene setup.
+UGII_ENV_IMAGE_DIR=${UGII_BASE_DIR}\ugphoto\env_images\
+#
+#  UGII_SYSTEM_SCENE_DATA_DIR
+#  This defines the directory where all the supporting files for the system
+#  scenes palette reside.  These files are used to set up basic scene
+#  characteristics such as Image Based Lighting, Background, Reflection and
+#  stage.
+UGII_SYSTEM_SCENE_DATA_DIR=${UGII_BASE_DIR}\ugphoto\system_scene_data_dir
+#
+#  UGII_TRUESHADING_DIR
+#  This defines the directory where all the supporting files for True 
+#  Shading display reside.  These files are used to set up True Shading
+#  characteristics such as textures, reflections and backgrounds.
+UGII_TRUESHADING_DIR=${UGII_BASE_DIR}\ugii\true_shading
+#
+#  UGII_USE_OLD_GRADUATED_BACKGROUND
+#  The new default graduated background only has color graduation in the top 75
+#  percent of the window; the lower portion of the window is rendered using
+#  the bottom color only.  UGII_USE_OLD_GRADUATED_BACKGROUND is used to override
+#  this new default so that the graduation will occur in the whole window.
+#  To use the old graduated background uncomment the following line
+# UGII_USE_OLD_GRADUATED_BACKGROUND=1
+#
+#  UGII_MAX_FACETING_SCALE
+#  This determines the largest view scale which will be used when computing
+#  the tolerances to be used for generating facets.  This insures that
+#  parts saved with a very high zoom scale can still be rendered in
+#  a shaded mode without exhausting memory.  You can use a smaller value
+#  than the default to further reduce the number of facets generated.  You
+#  can use a larger value than the default to generate facets more densely,
+#  if you have enough memory and time.
+#
+UGII_MAX_FACETING_SCALE=125.0
+#
+#  The following variable controls whether the values of the front and back
+#  Z clipping planes are modified when a component is added to an assembly,
+#  or a hidden component is shown.  The default is that the Z clipping planes
+#  are updated to include the Z values of the newly visible component.
+#  If you do not want the Z clipping planes to change when a component
+#  becomes visible, set this variable to 1.
+#
+#UGII_DISABLE_UPDATE_Z_CLIP_FOR_COMPONENT=0
+#
+#  Starting with NX 6.0.4, the use of the "Rotate Point", also known as
+#  the "Center of Rotation", has been extended so that rotation will occur
+#  around this point (when defined) for View -> Orient, View Popup -> Orient View,
+#  F8 (Snap to nearest orthographic view orientation),
+#  Home (Snap to TFR-TRI view orientation), End (Snap to TFR-ISO view orientation),
+#  F4 (Snap to nearest view orientation, when UGII_FKEY_DYNAMICS=1).
+#  View -> Operation -> Rotate and View -> Set to WCS.
+#  The following variable, if set, will cause NX to revert to limit the
+#  use of the "Rotate Point" to what it was before NX 6.0.4.
+#UGII_DISABLE_EXTENDED_CENTER_OF_ROTATION_USE=1
+#
+#  Starting with NX 8.0, a new option has been added to the Preferences ->
+#  Visalization View/Screen page: "High Precision Rotation".  When enabled,
+#  rotation using mouse motion will be changed so that you can obtain a more
+#  precise setting of the rotation angle, making it easier to look at the model
+#  from exactly the desired angle.  This is done by dividing the rotation angle
+#  by a factor, whose default value is 8.0.  A value of 1.0 corresponds to the
+#  value when this oprion is not tured on.  You can change the factor from its
+#  default value by seting the following environment variable, which has a
+#  range of 0.1 to 25.0 inclusive.  Using values less than 1.0 makes the rotation
+#  less precise but faster than with the option disabled
+#UGII_ROTATION_PRECISION_VALUE 8.0
+#
+#  Starting with NX 8.0.3, an environment variable has been added to allow
+#  omitting the recording in a journal file of objects to be unblanked by
+#  a "Show All" operation.  This will be useful when the Customer Default setting
+#  for "Part Name Style Attribute" under Assembies -> Miscellaneous is set to some
+#  user-defined attibute.  There may be some other similar conditions.  If so,
+#  and if "Show All" must show a large number of objects under these conditions,
+#  its performance may be slow.  To improve the performance, set
+#  UGII_DONT_JOURNAL_UNBLANK environment variable to 1.  Note that when this
+#  environment variable is set, you will not be able to record the "Show All" in
+#  a journal file, and Redo of "Show All" will not be available.
+#UGII_DONT_JOURNAL_UNBLANK=1  
+#
+# UGII_PDF_LINE_STYLE
+# This variable will force the cgm2pdf utility program to use the line
+# style specified.  The default behavior is to use a round capping, so that
+# lines have a rounded end point.  You may set this to "bevel", "miter" or
+# "round" to produce the desired line end styles.
+# UGII_PDF_LINE_STYLE=round
+#
+# UGII_PDF_LINE_WIDTH
+# This variable will force the cgm2pdf utility program to generate all lines
+# with zero width if it is set to "pixel".  This will create a PDF file where
+# all lines have a single pixel width no matter what scale they are zoomed
+# to.  This option is useful when the line width does not matter, and you
+# want to be able to zoom into the PDF and not see very wide lines.  The
+# default if this variable is not set is the use the line width as specified
+# by the CGM file.
+# UGII_PDF_LINE_WIDTH=pixel
+#
+# UGII_PDF_FONTNAME
+# This variable will set the default fontname to be used by the cgm2pdf utility.
+# This font will be used if a truetype font matching the font named in the 
+# cgm file is not found on the system.  It is quite likely that the NX fontname
+# will not be found as a TrueType font, so this font becomes the default for all
+# text.  Since the visible text is stroked with polylines, the font used is not
+# very important, as the hidden text is only there so that searching for text will 
+# work.  However for non-ASCII data, the default font needs to include all of the 
+# Unicode characters that are normally output.  The default used if this variable
+# is not set is Arial.  MS Mincho should be used for Japanese, as that font contains
+# the Japanese characters.
+# UGII_PDF_FONTNAME=Arial
+#
+# UGII_PDF_ACROBAT_VERSION
+# This variable will set the PDF library (and thus Acrobat) compatibility version.
+# It will default to whatever is the latest version supported. Customers can set
+# this to a prior version, and the cgm2pdf.exe tool will produce files compatible
+# with that version. This may cause some features to be unavailable, so this should
+# be used with extreme caution. Valid values are 1.3, 1.4, 1.5, 1.6 and 1.7.
+# UGII_PDF_ACROBAT_VERSION=
+############################################################################
+#
+#  PLOTTER AND PRINTER ENVIRONMENT VARIABLES:
+#
+#  Variables in this section configure SDI plotting software used by NX.
+#
+#  By default, only variable UGII_SDI_BASE is set and other plotting
+#  variables are unset (commented out). NX uses variable UGII_SDI_BASE
+#  to initialize unset variables as shown below.
+#
+#  The base directory where the plot kit can be found.  All variables default
+#  to values based off of this variable.
+#
+UGII_SDI_BASE=${UGII_BASE_DIR}\nxplot
+#
+#  When plotting, NX will automatically append the sheet name to the jobname
+#  so that the files generated for different sheets can be distinguished.  If
+#  the sheet name is not wanted, then set the following variable to disable
+#  this functionality.  Turning this off will generate the same CGM jobname 
+#  for multiple sheets, so it should be used with caution.
+#  
+#UGII_PLOT_DONT_APPEND_SHEET_NAME=1
+#
+#  The location of the cgm to pdf conversion utility
+#
+UGII_CGM2PDF=${UGII_SDI_BASE}\bin\pdf
+#
+#  When you use cgm2pdf as an image for a plotter queue, the SDI
+#  software will call it with one parameter, the CGM file to be
+#  created.  In this case UGII_PDF_OUTPUT_DIR tells the cgm2pdf
+#  image where the output PDF file is to be created.
+#
+#UGII_PDF_OUTPUT_DIR=
+#
+# UGII_PDF_APPEND
+# This variable will force the cgm2pdf utility program to append to the
+# output PDF file if it exists rather than overwrite it.  The append
+# option can be selected interactively or through command line switches.
+# This variable is only meant to be used when the program is set up as
+# a plotter driver through the SDI plotting interface via the execute
+# program on input file option.  Set the variable to any value to get
+# this behavior.
+# UGII_PDF_APPEND=1
+#
+#
+#  This variable specifies a single printer group directory that is
+#  shared by all users. If you prefer to use multiple printer group
+#  directories, then specify the directories in a printer group list
+#  file instead. Before setting this variable, review printer group
+#  concepts presented in NX Help documentation.
+#
+#UGII_SDI_SERVER_CFG_DIR=${UGII_SDI_BASE}\config\pm_server
+#
+#  The directory that SDI software will use as default for input.  This
+#  will effect the directory that the user sees when they press "browse"
+#  in the NX Plot Print screen.
+#
+#UGII_SDI_IP_DIR=${UGII_TMP_DIR}
+#
+#  The directory that SDI software will use as the default for output.  This
+#  will effect the default directory when a user plots to a file.
+#
+#UGII_SDI_OP_DIR=${UGII_TMP_DIR}
+#
+# The following variable is used to control the resolution used to convert
+# a CGM to an EMF file when printing a wireframe display.  The default
+# resolution is 600 DPI, the variable can be set from 200 to 9600.
+#UGII_SDI_CGM2EXP_RESOLUTION=600
+#
+#  Set the following variable to cause the SDI printing software to suppress
+#  the generation of registration marks at the corner of HPGL output.  In 
+#  order to ensure the plot is aligned correctly on hardcopy, this variable
+#  will ignore margins and translations.  Note this variable should be used 
+#  instead of UGII_IGNORE_OFFSET which it replaces.
+# UGII_SDI_IGNORE_HPGL_OFFSET=1
+#
+#  Set the following variable to cause the SDI printing software to suppress
+#  the generation of registration marks at the corner of HPGL-2 output.  In 
+#  order to ensure the plot is aligned correctly on hardcopy, this variable
+#  will ignore margins and translations. 
+# UGII_SDI_IGNORE_HPGL2_OFFSET=1
+#
+#  Set the following variable to cause the SDI printing software to suppress the
+#  message box that the Image exceeds the printable page size.
+# UGII_SDI_IGNORE_SIZE_WARNING=1
+#
+#  Set the following variable to cause the SDI printing software to suppress the
+#  generation of the IW (Image Window) command for HPGL2 output.  On some plotters
+#  this caused D and E size plots to be cropped.
+# UGII_SDI_CGM_HPGL2_NO_IW=1
+#
+#  Set the following variable to specify the output directory for Gerber format
+#  files generated by the SDI gerber solution.
+#
+UGII_SDI_OUTPUT_DIR=${UGII_TMP_DIR}
+#
+#  The following variable, if set, will cause the pen mapping commands
+#  to be removed from the HPGL-1 header.  This has been determined to
+#  cause some HPGL-1 devices to not accept the HPGL that SDI outputs.
+#UGII_SDI_HPGL1_NO_PEN_COL=0
+#
+#  The following variable, if set, will cause the PS command to be removed
+#  from the HPGL1 output.
+#UGII_SDI_HPGL1_NO_PS=1
+#
+#  The following variable, if set, will cause the PS command to be removed
+#  from the HPGL2 output.
+#UGII_SDI_HPGL2_NO_PS=1
+#
+#  The following variable, if set, will cause the HPGL2 output to not use the
+#  circle command, and will instead tessellate the circle.  Some viewing
+#  software can not handle the circle commands in the output.
+#UGII_SDI_HPGL2_NOCI=1
+#
+#  The following variable, if set, will cause SDI to show the command prompt
+#  window when a render then execute command is started.  
+#UGII_SDI_SHOW_PROMPT=1
+#
+#  This is the directory the SDI software uses to look for executables.
+#
+#UGII_SDI_BIN=${UGII_SDI_BASE}\bin
+#
+#  This is the location of the various fonts that are required when
+#  rendering PostScript fonts.
+#
+#UGII_SDI_ADOBE_PATH=${UGII_SDI_BASE}\fonts
+#
+# This is the top level directory where the language files are found for
+# displaying the SDI user interface.
+#
+#UGII_SDI_LANGUAGES=${UGII_SDI_BASE}\languages
+#
+# This directory is the directory where the actual language files are found.
+#
+#UGII_SDI_PM_LANGUAGES=${UGII_SDI_BASE}\languages\pm
+#
+# This variable can be set to BPS or WORKGROUP. BPS is the setting for
+# SDI Basic Print Solution software provided with NX. WORKGROUP is the
+# setting for optional SDI Print Master Server software.
+#
+#UGII_SDI_SERVER_TYPE=BPS
+#
+# This is the directory where temporary jobs are created for the user when
+# plotting is done.
+#
+#UGII_SDI_BPS_JOBS_DIR=${UGII_TMP_DIR}\bps
+#
+# This is the executable used to implement the Basic Print Solution.
+#
+#UGII_SDI_SERVER_PLOT=bpsplot_sdrc.exe
+#
+# This variable determines the logo displayed by the SDI user interface.
+#
+#UGII_SDI_LOGO_NAME=NX
+#
+# This variable will turn on the page size on the fly command for postscript
+# output.  It is on by default to make long Postscript plots to HP plotters
+# work.
+#
+UGII_SDI_PS_PAGE_SIZE=1
+#
+# This variable, if set, will allow plotting to a TIF image format to create
+# large TIF files (greater than 32767 pixels).  These TIF files will cause 
+# some viewers to fail.  The default is to allow the creation of the files.  If
+# you remove this setting then trying to create a large TIF file will result in
+# an error log in the SDI queue.
+UGII_SDI_ALLOW_LARGE_TIF=1
+#
+# This variable, if set, will force the image output formats to be created
+# with XRENDER which was a new process in NX 9.  Unsetting the variable, or
+# setting it to zero will cause the older bigband processing which was the 
+# default in NX 8.5 and earlier.  The new XRENDER output results in more 
+# accurate image formats.
+UGII_SDI_EXPORT_NEW=1
+
+############################################################################
+#
+#  TRANSLATORS & PROCESS SPECIFIC APPLICATION PRODUCTS.
+#
+#  Variables in this section are used Unigraphics translators such
+#  as iges or process specific applications such as ICAD.
+#
+#  These variables can also be added or modified by the individual product
+#  installation scripts.
+#
+#  Directory containing the AP203 STEP executables.
+STEP203UG_DIR=${UGII_BASE_DIR}\step203ug\
+#
+#  Directory containing the AP214 STEP executables.
+STEP214UG_DIR=${UGII_BASE_DIR}\step214ug\
+#
+#  Directory containing the AP242 STEP executables.
+STEP242_DIR=${UGII_BASE_DIR}\translators\step242\
+#
+#  Directory containing the DXFDWG executables.
+DXFDWG_DIR=${UGII_BASE_DIR}\dxfdwg\
+#
+#  Directory containing the IGES executables.
+IGES_DIR=${UGII_BASE_DIR}\iges\
+#
+#  Directory containing the UGTO2D executables.
+UGTO2D_DIR=${UGII_BASE_DIR}\ugto2d\
+#
+#  If the following flag is set, surfaces that are sent from ICAD
+#  to Unigraphics will not broken up into multiple faces
+#UGII_ICADIF_SURF_CLEANUP=true
+#
+# Directory that contains the DLL's that run the Parasolid CATIA translator
+UGII_CATIA_DIR=${UGII_BASE_DIR}\ugcatia\
+#
+# Directory that contains the DLL's that run the NX_CATIAV5 translator
+UGII_CATIAV5_DIR=${UGII_BASE_DIR}\catiav5\
+#
+# Directory that contains the DLL's that run the Parasolid CREO translator
+UGII_NXCREO_DIR=${UGII_BASE_DIR}\nxcreo\
+#
+# Directory that contains the DLLs that run the ACIS translator.
+UGII_NXACIS_DIR=${UGII_BASE_DIR}\translators\nxacis\
+#
+# Schema directory used by SolidWorks loading code
+UGII_SW_SCHEMA=${UGII_BASE_DIR}\ugii
+#
+# Library used by SolidWorks loading code
+UGII_SW_LIBRARY=CrossCadWareX64.dll
+#
+# Directory containing the Virtuallab translator executables.
+UGII_VL2SC_DIR=${UGII_BASE_DIR}\mech\vl2sc_toolkit\
+#
+# Directory that contains the DLLs that run the OBJ translator.
+UGII_OBJ_DIR=${UGII_BASE_DIR}\translators\wavefrontobj\
+#
+# Directory that contains the DLLs that run the IFC translator.
+UGII_IFC_DIR=${UGII_BASE_DIR}\translators\ifc\
+# Directory that contains the DLLs that run the G3D translator.
+UGII_G3D_DIR=${UGII_BASE_DIR}\translators\g3d\
+#
+# Directory that contains the SW translator specific files.
+NX_SOLIDWORKS_DIR=${UGII_BASE_DIR}\translators\solidworks\
+#
+############################################################################
+#
+#  UG/MANAGER PRODUCTS.
+#
+#  Variables in this section are used to configure UG/Manager
+#
+#  Directory containing the UG/Manager executables
+UGII_UGMANAGER_DIR=${UGII_BASE_DIR}\nxbin\
+
+#######################################################################
+#
+#  SIMULATION PRODUCT
+#
+#  UGII_MSC_NASTRAN must point to the MSC NASTRAN executable
+#
+UGII_MSC_NASTRAN="C:\Program Files\msc\bin\nastran.exe"
+#
+#  UGII_NX_NASTRAN must point to the NX NASTRAN executable
+#
+UGII_NX_NASTRAN="${UGII_BASE_DIR}\nxnastran\bin\nastran.exe"
+#
+#  UGII_FEA_FOREGROUND = 1 sets the Nastran job to execute in the foreground
+#
+# UGII_MSC_NASTRAN_VERSION sets the MSC NASTRAN version number of the solver.
+# Valid versions are 68 for 68.2, 69, 70, 2001, and 2005. This environment variable
+# allows the authorization to work on various versions of MSC Nastran. If you are using
+# another version besides 2005 you must set this variable for the appropriate version.
+#
+UGII_MSC_NASTRAN_VERSION=2022.2
+#
+# UGII_NX_NASTRAN_VERSION sets the NX NASTRAN version number of the solver, this 
+# environment variable allows the authorization to work on various versions of NX Nastran. 
+#
+UGII_NX_NASTRAN_VERSION=2312
+#
+#  UGII_SAMCEF must point to the Samcef folder (or file of the folder)
+#
+# UGII_ADINA_NASTRAN_VERSION sets the Adina NASTRAN Interface version number of the solver
+# This environment variable allows the authorization to work on various versions 
+# of Adina Nastran Interface. 
+#
+UGII_ADINA_NASTRAN_VERSION=9.8
+#
+UGII_SAMCEF="${UGII_BASE_DIR}\simulation\samcef\Exec\"
+#
+#  UGII_ANSYS must point to the ANSYS executable
+#
+UGII_ANSYS="C:\Program Files\ansys_inc\ansys100\win\v100\ANSYS\bin\intel\ansys100.exe"
+#
+#  UGII_ANSYS_VERSION sets the ANSYS executable version.
+#  Valid executable versions are "5.5" and above.
+#
+UGII_ANSYS_VERSION=19
+#
+#  UGII_ANSYS_PRODUCT sets the ANSYS product used for Scenario Analysis.
+#  For valid product variables refer to Ansys Installation Guide or Ansys
+#  Operations Guide.The default product is "ane3fl".
+#
+UGII_ANSYS_PRODUCT=ansys
+#
+#  UGII_REPARENT_SCENARIO_3MB_ACTION = 1 displays "Reparent Scenario" action
+#  on the master node of Scenario Navigator. This allows users to reparent a
+#  scenario from one master to another. NOTE: It is very important that both
+#  masters are identical
+#
+#  UGII_ABAQUS must point to the ABAQUS executable
+#
+UGII_ABAQUS="C:\Program Files\abaqus\win\6.6-2\exec\abq662.exe"
+#
+# UGII_ABAQUS_VERSION refers to the version being used.
+#
+UGII_ABAQUS_VERSION=6.6
+#
+#  UGII_ADINA_NASTRAN must point to the ADINA NASTRAN Interface executable
+#
+#if ${ADINAHOME} != ""
+#if FILE ${ADINAHOME}\bin\adina.bat
+UGII_ADINA_NASTRAN=${ADINAHOME}\bin\adina.bat
+#endif
+#endif
+UGII_ADINA_NASTRAN="C:\Program Files\adina\bin\adina.bat"
+#
+# UGII_TMG_DIR - Refers to the NX Thermal Flow, NX Electronic Systems Cooling
+#                and NX Space Systems Thermal solver location
+#
+UGII_TMG_DIR=${UGII_BASE_DIR}\nxcae_extras\tmg
+#
+# UGII_REMOTE_SIMCENTER_DIR - Refers to the location of the plugin for the 
+#                Remote Simcenter
+#
+UGII_REMOTE_SIMCENTER_DIR=${UGII_BASE_DIR}\nxcae_extras\nxrsimc_wntx64\nx_plugin
+#
+#  UGII_SYSNOISE must point to the script that launches the Sysnoise Solver
+#
+UGII_SYSNOISE="${UGII_BASE_DIR}\acoustics\sysnoise\bin\sysnoise_nogui.bat"
+#
+#  UGII_SONATE must point to the script that launches the Sonate Solver
+#
+UGII_SONATE="${UGII_BASE_DIR}\acoustics\sonate\sonate.bat"
+#
+#  UGII_HERMES must point to the hermes executable
+#
+UGII_HERMES="${UGII_BASE_DIR}\simulation\hermes\bin\hermes.exe"
+#
+#  UGII_ICAR3 must point to icar3 executable
+#
+UGII_ICAR3="${UGII_BASE_DIR}\acoustics\icare\icar3-unxml.exe"
+#
+# UGII_MONITOR_DIR  Must be set for NX Nastran to use the new runtime monitor
+# introduced in NX10  
+#
+UGII_MONITOR_DIR=${UGII_BASE_DIR}\nxcae_extras\tmg\exe      
+#
+# Message files for the durability specialist solver
+LMSDurMessagePath=${UGII_BASE_DIR}\simulation\durspecialist\Resources
+#
+############################################################################
+#
+#  MOTION PRODUCT
+#
+#  Unigraphics sets the following three variables internally for ADAMS if
+#  they are not set in the system. These variables should be set by user
+#  only if the path for the respective files/directory is changed. In a
+#  typical installation they are set properly to the files/directory as
+#  shown below.
+#
+#  LM_LICENSE_FILE=${UGII_BASE_DIR}\mech\license.dat
+#  MDI_AVIEW_MESSAGES=${UGII_BASE_DIR}\mech\aview.msg
+#  MDI_USER_PLUGIN_DIR=${UGII_BASE_DIR}\mech
+#
+#  The following variable are not needed for NX3
+#  UGII_CAEMOTION_DEFAULTS_FILE
+#  Use File-> Utilities-> Customer Defaults to change the default settings.
+#  See the release note for more information.
+#  Customer defaults file path for motion
+#UGII_CAEMOTION_DEFAULTS_FILE=${UGII_BASE_DIR}\ugii\ug_cae_motion.def
+#
+#
+#  Variables to convert old 3D contacts.
+#  UGII_CONVERT_OLD_MOTION_CONTACTS=0 or 1. If it is 0, user retains the old contacts.
+#  If it is 1, the old 3D contacts are converted into the new body-to-body 3D contacts.
+#  The default is set to 0.
+#
+UGII_CONVERT_OLD_MOTION_CONTACTS=0
+#
+#  UGII_CREATE_OLD_MOTION_CONTACTS=0 or 1. If it is 0, user gets the new
+# contacts. If it is 1, user gets the old contacts.The default is set to 0.
+#
+#  UGII_CREATE_OLD_MOTION_CONTACTS=0 is the default setting. This allows
+#  user to create new 3D contacts in th the system.
+UGII_CREATE_OLD_MOTION_CONTACTS=0
+############################################################################
+#
+#  MACHINE DEPENDENT VARIABLES - Windows NT
+#
+#  Variable to define the Unigraphics executable. Used by UG batch process.
+UG_IMAGE=ugspawn.bat
+#
+#  The following variable is used by uflink to find the user function libraries.
+UGII_USERFCN=${UGII_BASE_DIR}\ugopen
+#
+
+############################################################################
+#
+#  GEOMETRIC TOLERANCING
+#
+#  UGII_GDT_DIR is used to locate all the files used by the Geometric
+#  Tolerancing module including the vc_*.txt files used by the
+#  Geometric Tolerancing Checker.
+#  This directory is divided into several subdirectories, one for each
+#  Geometric Tolerancing standard.  Each subdirectory contains all files
+#  used by the Geometric Tolerancing module with the data for the
+#  corresponding standard.
+#
+UGII_GDT_DIR=${UGII_BASE_DIR}\ugii\gdt_files
+
+
+############################################################################
+#
+#  QUICKSTACK
+#
+# QUICKSTACK_DIR points to the top-level directory containting the
+# QuickStack runtime structure.
+#
+QUICKSTACK_DIR=${UGII_BASE_DIR}\tolstackup\ugquickstack
+#
+# UGII_QS_DEFS_DIR points to the directory which contains the QuickStack
+# customer defaults file.
+#
+UGII_QS_DEFS_DIR=${QUICKSTACK_DIR}\application
+#
+#
+############################################################################
+#
+#  Tolerance Stackup Validation
+#
+# TOLSTACKUP_DIR points to the top-level directory containing the
+# Tolerance Stackup Validation runtime structure.
+#
+TOLSTACKUP_DIR=${UGII_BASE_DIR}\tolstackup
+#
+# UGII_TSV_DEFS_DIR points to the directory which contains the Tolerance Stackup Validation
+# customer defaults file.
+#
+UGII_TSV_DEFS_DIR=${TOLSTACKUP_DIR}\application
+#
+#
+############################################################################
+#
+#  INHERIT FEATURE DATA
+#
+#  UGII_ANNOTATION_TEMPLATE_DIR is used to locate all files needed
+#  for the inherit feature data functionality.
+#
+UGII_ANNOTATION_TEMPLATE_DIR=${UGII_BASE_DIR}\ugii\inh_files\
+
+#
+############################################################################
+#
+#  TABLE TEMPLATES FILES
+#
+#  UGII_TABLE_TEMPLATES points to the directory where table files
+#  (tabular note and parts list templates and palette file) are located
+#
+UGII_TABLE_TEMPLATES=${UGII_BASE_DIR}\ugii\table_files\
+
+############################################################################
+#
+#  If UGII_UPDATE_ALL_ID_SYMBOLS_WITH_PLIST is set to a non-zero value
+#  then parts lists will have the pre-NX2 behavior of updating all ID
+#  symbols in the part that have rows in the parts list when the parts
+#  list updates.  Also, creation of multiple parts lists will not be
+#  allowed when this variable is set.
+UGII_UPDATE_ALL_ID_SYMBOLS_WITH_PLIST=1
+
+#
+############################################################################
+#
+# VisVSA Exporter
+#
+# UGII_VSAEXPORT_DIR points to the top-level directory containting the
+# VisVSA Exporter runtime structure.
+#
+UGII_VSAEXPORT_DIR=${UGII_BASE_DIR}\ugvsaexport
+#
+#
+
+# Added for Moldlfow PPA hookup with UG
+
+## This is the default moldflow setup directory. The user needs to reset this
+## variable to the directory he has set moldflow in.
+
+UF_MF_PA_PATH=C:\moldflow\mpa300\bin
+UF_MF_PA_FACET_TOL=0.05
+UF_MF_PA_MAX_EDGE=10.0
+UF_MF_PA_STL_DIR=""
+UF_MF_PA_STL_SUF=slp
+
+## These are variables that the user should set to yes if they
+## want the desired effects.
+
+#UF_MF_PA_DELETE_STL=yes    # set if the user wants to delete stl file.
+#UF_MF_PA_HP_PEX=yes        # used only if PEX graphics is used on HP.
+
+# UGII_FEAT_FAILURE_REPORT_TEMPLATE_FILE will specify the full path file (XSL) that will
+# specify the template to view relinker feature failure report.
+UGII_FEAT_FAILURE_REPORT_TEMPLATE_FILE=${UGII_BASE_DIR}\ugii\xsl\FeatureFailureReportTemplate.xsl
+
+
+# UGII_ONESTEP_ANALYSIS_TEMPLATE_FILE will specify the full path to a XSL file that will
+# specify the template to view One-step Formability Analysis report.
+UGII_ONESTEP_ANALYSIS_TEMPLATE_FILE=${UGII_BASE_DIR}\ugii\xsl\OnestepAnalysisTemplate.xsl
+
+# UGAUTOMOTIVE_DIR is the directory where the optional Automotive kit will be
+# installed. Define a directory for each application.
+UGAUTOMOTIVE_DIR = ${UGII_BASE_DIR}\ugautomotive
+UGBODYDES_DIR = ${UGAUTOMOTIVE_DIR}\bodydes
+UGDIEDES_DIR = ${UGAUTOMOTIVE_DIR}\diedes
+UGDIEENG_DIR = ${UGAUTOMOTIVE_DIR}\dieeng
+UG_VPACK_DIR=${UGAUTOMOTIVE_DIR}\packaging
+AUTOSTAMPING_DATA_DIR=${UGII_BASE_DIR}\ugautomotive\diedes
+#
+# UG_BD_DEFAULTS_FILE was used for Automotive Body Design Wizards 
+# Obsoleted in NX4.0
+#UG_BD_DEFAULTS_FILE=${UGBODYDES_DIR}\defdat\ug_body_design.def
+#
+
+# UGII_VD_WS_REQ_SPREADSHEET_FILE is used for Windshield Vision Zones Wizard in Vehicle Packaging
+# It points to the spreadsheet file used for requirements reading.
+UGII_VD_WS_REQ_SPREADSHEET_FILE=${UG_VPACK_DIR}\requirements\windshield_vision_zones_requirement_spreadsheet.xlsx
+
+# UGII_VD_WS_REQ_XML_FILE is used for Windshield Vision Zones Wizard in Vehicle Packaging
+# It points to the xml file used for requirements reading.
+UGII_VD_WS_REQ_XML_FILE=${UG_VPACK_DIR}\requirements\windshield_vision_zones_requirement_text.xml
+
+# UGII_VD_APO_REQ_SPREADSHEET_FILE is used for A Pillar Obstruction Angle Wizard in Vehicle Packaging
+# It points to the spreadsheet file used for requirements reading.
+UGII_VD_APO_REQ_SPREADSHEET_FILE=${UG_VPACK_DIR}\requirements\a_pillar_obstruction_requirement_spreadsheet.xlsx
+
+# UGII_VD_APO_REQ_XML_FILE is used for A Pillar Obstruction Angle Wizard in Vehicle Packaging
+# It points to the xml file used for requirements reading.
+UGII_VD_APO_REQ_XML_FILE=${UG_VPACK_DIR}\requirements\a_pillar_obstruction_requirement_text.xml
+
+# UGII_VD_MC_REQ_SPREADSHEET_FILE is used for Mirror Certification in Vehicle Packaging
+# It points to the spreadsheet file used for requirements reading.
+UGII_VD_MC_REQ_SPREADSHEET_FILE=${UG_VPACK_DIR}\requirements\mirror_certification_requirement_spreadsheet.xlsx
+
+# UGII_VD_MC_REQ_XML_FILE is used for Mirror Certification in Vehicle Packaging
+# It points to the xml file used for requirements reading.
+UGII_VD_MC_REQ_XML_FILE=${UG_VPACK_DIR}\requirements\mirror_certification_requirement_text.xml
+
+
+# UGII_VD_DFV_REQ_SPREADSHEET_FILE is used for Direct Field of View Wizard in Vehicle Packaging
+# It points to the spreadsheet file used for requirements reading.
+UGII_VD_DFV_REQ_SPREADSHEET_FILE=${UG_VPACK_DIR}\requirements\direct_field_view_requirement_spreadsheet.xlsx
+
+# UGII_VD_DFV_REQ_XML_FILE is used for Direct Field of View Wizard in Vehicle Packaging
+# It points to the xml file used for requirements reading.
+UGII_VD_DFV_REQ_XML_FILE=${UG_VPACK_DIR}\requirements\direct_field_view_requirement_text.xml
+
+# UGII_VD_DP_REQ_SPREADSHEET_FILE is used for Driver Posture in Vehicle Packaging
+# It points to the spreadsheet file used for requirements reading.
+UGII_VD_DP_REQ_SPREADSHEET_FILE=${UG_VPACK_DIR}\requirements\driver_posture_requirement_spreadsheet.xlsx
+
+# UGII_VD_DP_REQ_XML_FILE is used for Drive Posture in Vehicle Packaging
+# It points to the xml file used for requirements reading.
+UGII_VD_DP_REQ_XML_FILE=${UG_VPACK_DIR}\requirements\driver_posture_requirement_text.xml
+
+# UGII_VD_JOINT_REQ_SPREADSHEET_FILE is used for Manikin Joint Angle in Vehicle Packaging
+# It points to the spreadsheet file used for requirements reading.
+UGII_VD_JOINT_REQ_SPREADSHEET_FILE=${UG_VPACK_DIR}\requirements\manikin_joint_angle_requirement_spreadsheet.xlsx
+
+# UGII_VD_JOINT_REQ_XML_FILE is used for Manikin Joint Angle in Vehicle Packaging
+# It points to the xml file used for requirements reading.
+UGII_VD_JOINT_REQ_XML_FILE=${UG_VPACK_DIR}\requirements\manikin_joint_angle_requirement_text.xml
+
+#
+UGDIEDES_STANDARD_DIR = ${UGAUTOMOTIVE_DIR}\diedes
+#
+#
+# NXSHIP_DIR is the directory where the ship concept gsd package.
+NXSHIP_DIR = ${UGII_BASE_DIR}\nxship
+#
+# Ship Concept gsd package.
+NXSHIP_GSD_DIR=${NXSHIP_DIR}\shipgsd
+#
+# Ship Concept config directory for .dat files.
+NXSHIP_CONFIG_DIR=${NXSHIP_DIR}\data
+#
+# Ship steelfeature library directory
+# by default steelfeatuer is located at ${NXSHIP_DIR}\data\steelfeature
+NXSHIP_STEELFEATURE_DIR=${NXSHIP_CONFIG_DIR}\steelfeature
+#
+# Ship standard part library directory
+NXSHIP_STDPART_DIR=${NXSHIP_DIR}\StandardPart
+#
+# Ship Number
+NXSHIP_NUMBER=S3522
+#
+# The path/name of the NX Ship Materials spreadsheet.
+NXSHIP_MATERIAL_REPOSITORY=${NXSHIP_CONFIG_DIR}\nxship_materials.xlsx
+#
+#########################################################################
+# Python NXOpen Environment Variables
+#########################################################################
+#
+# UGII_PYTHON_HOME should point to the base directory of your Python installation. 
+# The value below is just an example that will be different on your system.
+# Changing this variable will cause all NX Python based applications to use the specified
+# Python installation. This is an example of how this value can be set.
+#if FILE ${UGII_BASE_DIR}\nxbin\python
+UGII_PYTHON_HOME=${UGII_BASE_DIR}\nxbin\python
+#endif
+#
+# This is the name of the Python shared library 
+UGII_PYTHON_DLL=python310.dll
+#
+# This is the location of the Python interpreter that will be loaded as needed by NX
+# UGII_PYTHON_LIBRARY_DIR is set to the directory specified in UGII_PYTHON_HOME.
+# NOTE: changing this value only changes the Python interpreter used by NX Open applications.
+UGII_PYTHON_LIBRARY_DIR=${UGII_PYTHON_HOME}
+UGII_PYTHONPATH=${UGII_PYTHON_HOME};${UGII_PYTHON_HOME}\Python310.zip;${UGCHECKMATE_DIR}\python;$UGII_BASE_DIR\automated_testing\python
+# 
+
+############################################################################
+#
+# The following are the environment variables related to Human Modeling.
+#
+# JK_KIT points to the directory containing JACK toolkit files and Human
+# posture prediction defaults file ug_hm.def
+#
+# JK_KIT_DEV points to the same directory as JK_KIT
+#
+# JK_KIT_PLATFORM sets to nt4 for the WNT platform
+#
+# PYTHONPATH points to the directories in the JACK toolkit containing the
+# Python scripts.
+#
+JK_KIT=${UGII_BASE_DIR}\nxhuman\jack_toolkit
+JK_KIT_DEV=${JK_KIT}
+JK_KIT_PLATFORM=nt4
+PYTHONPATH=${UGII_PYTHONPATH};${JK_KIT}\lib;${JK_KIT}\library\script
+############################################################################
+
+############################################################################
+#
+#  UDF_LIB_NATIVE_INCH  and UDF_LIB_NATIVE_METRIC are used to
+#  specify the libraray path for the native UDFs used by Automotive Applications
+#  If these two are changed to other than default values, the database file (defined
+#  by UGII_UDF_DATABASE_FILE) should also be updated.
+#
+#  UDF_LIB_IMAN_INCH  and UDF_LIB_IMAN_METRIC are used to
+#  specify the libraray path for the UDFs used by Automotive Applications under UG Manager
+#  environment
+#
+# If these environments varibales are not set, the default value will be used to
+# load UDFS for Automotive Applications, the default values are:
+# UDF_LIB_NATIVE_INCH=/english
+# UDF_LIB_NATIVE_METRIC=/metric
+# UDF_LIB_IMAN_INCH=/Unigraphics_UDF_parts/Inch
+# UDF_LIB_IMAN_METRIC=/Unigraphics_UDF_parts/Metric
+#
+############################################################################
+#UDF_LIB_NATIVE_INCH=/english
+#UDF_LIB_NATIVE_METRIC=/metric
+#UDF_LIB_IMAN_INCH=/Unigraphics_UDF_parts/Inch
+#UDF_LIB_IMAN_METRIC=/Unigraphics_UDF_parts/Metric
+#
+############################################################################
+#
+#  VDA Checker
+#
+#  The variable
+#  UGII_VDA4955_CFG_FILE
+#  is used to define a default configuration file (*.cfg)
+#  that is loaded when the VDA Checker is started interactively.
+#  The file specified must have created by the VDA Checker to ensure proper
+#  functioning.
+#
+#  Example:
+#  UGII_VDA4955_CFG_FILE=C:\vdac\config\default_config.cfg
+#
+
+############################################################################
+#
+#  The following variable defines the initial state of "Preview" check box
+#  in File/Open dialog. The default value is ON.
+#
+#  Example:
+#  UGII_SHOW_PART_PREVIEW=OFF
+#
+############################################################################
+#
+#  UGII_DISABLE_COMPONENT_PREVIEWS is used to disable preview generation for components
+#  at save time. The preview generation of components is turned on by default.
+#
+#  To turn off preview generation uncomment the following line. The value assigned to this
+#  variable is not important.
+#  UGII_DISABLE_COMPONENT_PREVIEWS=ON
+
+############################################################################
+#
+#  UGII_DISABLE_PREVIEW is used to disable all preview generation for all parts, bookmarks
+#  and udfs. The preview generation of parts, bookmarks and udfs is turned on by default.
+#
+#  To turn off all preview generation uncomment the following line
+# UGII_DISABLE_PREVIEW=ON
+
+############################################################################
+#
+#  UGII_RADIAL_POPUP is used to turn on/off the Radial Popup. If unset or
+#  setting the variable to 1 will turn the Radial Popup on.
+#
+#  To turn the Radial Popup off, uncomment the following line
+# UGII_RADIAL_POPUP=0
+
+############################################################################
+#  If set, UGII_NO_KANJI_CONVERSION, will prevent the automatic conversion
+#  of Kanji objects to drafting notes.  This conversion is automatically
+#  done when pre-V16 parts are retrieved.  Setting this variable will
+#  prevent the automatic conversion.
+#UGII_NO_KANJI_CONVERSION=1
+
+#  If set, UGII_FORCE_KANJI_CONVERSION will force the conversion of Kanji 
+#  objects to drafting notes.  This variable will only work on Japanese 
+#  operating systems, and overrides the value of UGII_NO_KANJI_CONVERSION, 
+#  which prevents the conversion of Kanji objects.  Conversion of KANJI 
+#  objects to drafting notes happens automatically when V15 or older parts 
+#  are retrieved unless UGII_NO_KANJI_CONVERSION is set.  
+#  UGII_FORCE_KANJI_CONVERSION is a way to get this conversion run on v16 
+#  or newer parts that still have Kanji objects.
+# UGII_FORCE_KANJI_CONVERSION=1
+
+#  If set, UGII_MIG_CMM_NATIVE, will enable the Content Migration Manager - Native. It can be accessed
+#  from the Content Migration Manager - Native option in the Tools menubar. This application
+#  provides the ability to migrate items from an I-deas TDM to NX. The migrated NX parts will be saved
+#  on to the file system. Note: This option is available only if NX is running in Native mode. It will
+#  remain disabled if NX is running in the context of a PDM system.
+# UGII_MIG_USE_CMM_NATIVE=1
+
+#  If set, UGII_MIG_VIS_COMPARE_PATH will define the path to the 2D drawing
+#  comparison utility used for validating drawings migrated from I-deas to NX
+#  through the content migration manager tools.  Note: The location of the 2D
+#  drawing comparison tool was defined by the install of the content migration
+#  tools.
+# UGII_MIG_VIS_COMPARE_PATH=
+
+# If set, UGII_CMM_NATIVE_OPTIONS_FILE will specify the full path to a XML file that will
+# contain the options to configure the Content Migration Manager - Native.
+# Provided the user has write access, Content Migration Manager - Native will persist any
+# modifications to the configuration options to the file specified by the environment variable.
+# UGII_CMM_NATIVE_OPTIONS_FILE=${UGII_BASE_DIR}\ugii\cmmOptions.xml
+
+# If set, UGII_INOP_GATEWAY_DIR will set the location of the IdeasGateway application.
+# The IdeasGateway application is a service used in I-deas to NX data migration to export data
+# from I-deas.
+# UGII_INOP_IDEAS_GATEWAY_DIR=
+
+#
+#
+############################################################################
+#
+#  Open Tools Publish Application
+#
+# OT_PUB_APPLICATION_DIR points to the top-level directory containing the
+# Open Tools Publishing application.
+#
+OT_PUB_APPLICATION_DIR=${UGII_BASE_DIR}\pvtrans\ot_pub
+
+#########################################################################
+# .Net NXOpen Environment Variables
+#########################################################################
+#
+# UGII_DOTNET_USE_USER_DEFINED_KEYS is used to indicate to the .Net 
+# framework to use the Machine Key Store or not when signing or verifying 
+# author license signatures on shared libraries or executables.  If this 
+# variable is set the framework will not use the Machine Key Store. To have 
+# the .Net framework use Machine Key Store when signing or verifying author 
+# license signatures on shared libraries or executables, comment out this 
+# variable.
+UGII_DOTNET_USE_USER_DEFINED_KEYS=1
+
+
+#########################################################################
+# C++ NXOpen Environment Variables
+#########################################################################
+#
+# UGII_CPP_SKIP_UFUNC_EXECUTE_CHECK is used to bypass the check for a ufunc_execute_license 
+# when running a C++ NX Open application. If the application is not signed, then an author
+# license must be available to run the application. 
+UGII_CPP_SKIP_UFUNC_EXECUTE_CHECK=TRUE
+
+#########################################################################
+# Java NXOpen Environment Variables
+#########################################################################
+#
+# UGII_JAVA_HOME should point to the base directory of the JRE Installation.
+# The value below is just an example that will be different on your system.
+# Changing this variable will cause all NX java based applications to use the specified JRE. 
+# This is an example of how this value can be set.  Note that UGII_JAVA_HOME
+# is now read from the registry as well.  So the order of precedence becomes:
+#    1.  ugii_env.master file if set
+#    2.  System environment variable
+#    3.  value read from UGII_ENV_FILE if set
+#    4.  value read from users ugii_env.dat file if set
+#    5.  Registry value read from HKLM\SOFTWARE\JavaSoft
+#    6.  The value set below.
+# in addition if the ugii_env.master file has a value of:
+#    UGII_JAVA_HOME=
+# then this forces the reading of the registry bypassing steps 2-4 above.
+# For additional information, please refer to the NXOpen Programmer's Guide 
+# on the JVM settings.
+
+#if FILE C:\apps\Java\adopt-jre-11-hotspot-x64
+UGII_JAVA_HOME=C:\apps\Java\adopt-jre-11-hotspot-x64
+#endif
+
+#
+# This is the JVM that will be used for NXOpen Java applications.
+# UGII_JVM_LIBRARY_DIR is set to the directory specified in UGII_JAVA_HOME.
+# NOTE: changing this value only changes the JRE used by NX Open applications.
+#
+# On windows 64 only the server JVM library is in the JRE
+#
+
+#if FILE "${UGII_JAVA_HOME}\bin\server\jvm.dll"
+UGII_JVM_LIBRARY_DIR=${UGII_JAVA_HOME}\bin\server
+#else
+UGII_JVM_LIBRARY_DIR=
+#endif
+
+#UGII_JVM_OPTIONS can be set with optional JVM options
+# To make sure the JVM can start up on windows we will
+# set the max heap size.  This will help ensure the
+# JVM is able to start up correctly
+UGII_JVM_OPTIONS=
+#UGII_CLASSPATH can be set to a common class repository
+UGII_CLASSPATH=
+
+#
+# If set, UGII_JAVA_USE_RETIRING_REMOTING_JARS, will add retiring remoting jars
+# of NXOpen and NX Java Applications to the java.class.path given to the JVM.
+# All the retiring remoting jars are available in the directory $(UGII_BASE_DIR)\nxbin\RetiringRemotingJars
+# By default, UGII_JAVA_USE_RETIRING_REMOTING_JARS, is unset and will not add any
+# remoting jars of NXOpen and NX Java Applications to the java.class.path given to the JVM.
+# If java remoting doesn't work for NX Java Applications or any custom Java Applications for NX,
+# then only set this environment variable.
+#
+UGII_JAVA_USE_RETIRING_REMOTING_JARS=0
+
+############################################################################
+#
+#  PVTRANSUI
+#
+# PVTRANSUI_DIR points to the directory containing pvtransui application
+#
+PVTRANSUI_DIR=${UGII_BASE_DIR}\pvtrans
+#
+
+############################################################################
+#
+#  DRAFTING STANDARD PRE-DEFINED
+#
+#  UGII_DRAFTING_STANDARD_DIR is used to locate all the pre-defined drafting
+#  standard files which contains all the drafting standard controlled customer
+#  defaults. The files format is *.dpv file. The files have the following
+#  naming convention.
+#
+#   nx_YYY_Drafting_Standard_Shipped.dpv
+#
+#   Where:
+#   YYY =   Standard name
+#
+#   For example, for NX12, ISO standard, the file will be:
+#
+#   nx_ISO_Drafting_Standard_Shipped.dpv
+#
+UGII_DRAFTING_STANDARD_DIR=${UGII_BASE_DIR}\ugii\drafting_standards
+#
+
+############################################################################
+#
+#  DRAFTING STANDARD LOCAL USER
+#
+#  UGII_LOCAL_USER_DRAFTING_STANDARD_DIR is used to locate all the user created
+#  drafting standard files which contains all the drafting standard controlled
+#  customer defaults. The files format is *.dpv file. The files have the following
+#  naming convention.
+#
+#   nx_YYY_Drafting_Standard_ZZZ.dpv
+#
+#   Where:
+#   YYY =   Standard name (User defined name)
+#   ZZZ =   Level (User or Group or Site)
+#
+#   For example, for NX12, My_ISO standard, at the group level, the file will be:
+#
+#   nx_My_ISO_Drafting_Standard_group.dpv
+#
+UGII_LOCAL_USER_DRAFTING_STANDARD_DIR="${NX_DEFAULT_SETTINGS_DIR}"
+
+
+############################################################################
+# PMI Environment Variables
+############################################################################
+#
+# UGII_PMI_DIR points to the top-level directory of files for the PMI
+# application.
+UGII_PMI_DIR=${UGII_BASE_DIR}\ugii\pmi
+#
+
+############################################################################
+#
+#  Modeling Hole STANDARD PRE-DEFINED
+#
+#  UGII_SCREW_CLEARANCE_HOLE_STANDARD_DIR is used to locate all the pre-defined
+#  screw clearance standard file which contains all the screw clearance standards.
+#
+#  File Name: NX_Screw_Clearance_Hole_Standard.xml
+#
+UGII_SCREW_CLEARANCE_HOLE_STANDARD_DIR=${UGII_BASE_DIR}\ugii\modeling_standards
+
+############################################################################
+#
+#  Modeling Threaded Hole/Thread STANDARD PRE-DEFINED
+#
+#  UGII_THREADED_HOLE_STANDARD_DIR is used to locate all the pre-defined
+#  threaded hole standard file which contains all the threaded hole standards.
+#  
+#  NX1926 onwards Symbolic/Detailed Thread feature also uses this standard file.
+#  
+#  File Name: NX_Thread_Standard.xml
+#
+UGII_THREADED_HOLE_STANDARD_DIR=${UGII_BASE_DIR}\ugii\modeling_standards
+
+#  If set, UGII_ENABLE_HOLE_SERIES, will enable the Hole Series. It can be accessed
+#  from the Hole feature. Hole Series provides a set of related holes needed to mount 
+#  a fastener across multiple components.
+UGII_ENABLE_HOLE_SERIES=1
+
+############################################################################
+#
+#  Modeling Hole STANDARD PRE-DEFINED
+#
+#  UGII_DRILL_SIZE_HOLE_STANDARD_DIR is used to locate all the pre-defined
+#  drill size standard file which contains all the drill size standards.
+#  The files format is *.xml file. 
+#
+#  File Name: NX_Drill_Size_Hole_Standard.xml
+#
+UGII_DRILL_SIZE_HOLE_STANDARD_DIR=${UGII_BASE_DIR}\ugii\modeling_standards
+
+###############################################################
+#  Cam express environment file
+#if FILE ${UGII_CAM_AUXILIARY_DIR}\cam_express_env.dat
+#include ${UGII_CAM_AUXILIARY_DIR}\cam_express_env.dat
+#endif
+###############################################################
+#
+#  Drawing Compare environment variables
+#  If UGII_DRAWING_COMPARE_OUTPUT_XML is set to a 1 value
+#  then drawing compare will dump the output XML
+UGII_DRAWING_COMPARE_OUTPUT_XML=0
+#
+###############################################################
+# If set, UGII_DONT_ACTIVATE_GATEWAY_NAVIGATOR, will not open
+# the part navigator and assembly navigator when a part is opened in
+# gateway or no part. The user will explicitly have to select the
+# part navigator or assembly navigator tabs in the resource bar to open them.
+#UGII_DONT_ACTIVATE_GATEWAY_NAVIGATOR
+
+#######################################################################
+#
+#  ShipDrafting
+#
+#  The following variables are used by the ShipDrafting applications
+#  Framebar, Symbol, Drafting Line, Area CenterLine, Annotation and
+#  Dimension.
+#
+UGII_SHIP_DRAFTING_DIR=${NXSHIP_DIR}\shipdrafting
+UGII_SHIP_DRAFTING_CONFIG_DIR=${UGII_SHIP_DRAFTING_DIR}\application
+UGII_SHIP_DRAFTING_ANNOTATION_MAPPING=${UGII_SHIP_DRAFTING_DIR}\XML\ship_annotation_mapping_file.xml
+UGII_SHIP_DRAFTING_AREACENTERLINES_MAPPING=${UGII_SHIP_DRAFTING_DIR}\XML\ship_area_centerline_mapping_file.xml
+UGII_SHIP_DRAFTING_DRAFTINGLINES_MAPPING=${UGII_SHIP_DRAFTING_DIR}\XML\ship_drafting_line_mapping_file.xml
+UGII_SHIP_DRAFTING_SYMBOLS_MAPPING=${UGII_SHIP_DRAFTING_DIR}\XML\ship_symbols_mapping_file.xml
+UGII_SHIP_DRAFTING_ANNOTATION_SYMBOLS=${UGII_SHIP_DRAFTING_DIR}\symbol\ug_drafting_shipbuilding_default_symbols.sbf
+
+############################################################################
+# If set, UGII_SELECT_LATEST_SHEET_FEATURE, will prioritize
+# selection of the latest feature on a sheet body over earlier features.
+#UGII_SELECT_LATEST_SHEET_FEATURE
+
+############################################################################
+# If set, UGII_LEGACY_STATIC_WF_SMOOTH_EDGE_DISPLAY, will use the legacy (NX8.0)
+# smooth edge display behavior for Static Wireframe rendering style,
+# that is using the default angle tolerance of Parasolid, not the tolerance set by user. 
+# Note: if set, there will be inconsistency exist for different rendering styles 
+# for smooth edges display.
+#UGII_LEGACY_STATIC_WF_SMOOTH_EDGE_DISPLAY
+
+############################################################################
+# Indicates the version of TC SOA client libraries that NX is using. 
+UGII_TC_SOA_VERSION=TC2312
+#
+
+# ==============================================================================
+# NX REPORTS
+# ==============================================================================
+# NXREPORTS_DIR is used to point to the root directory that 
+# the reporting products, such as Visual Reporting is installed into.
+# This defaults to ${UGII_BASE_DIR}\nxreports
+#
+NXREPORTS_DIR=${UGII_BASE_DIR}\nxreports
+
+
+############################################################################
+#
+# Visual Reporting
+#
+# NXVISUALREPORTING_DIR points to the directory where Visual Reporting is intalled.
+# This default to ${NXREPORTS_DIR}\visual_reporting
+#
+NXVISUALREPORTING_DIR=${NXREPORTS_DIR}\visual_reporting
+
+#
+# NXVISUALREPORTING_USER_DIR points to the user directory for your customized Visual Reporting files. 
+# The user directory overlays the visual reporting top level directory specified by NXVISUALREPORTING_DIR. 
+# NX searches for files in the user directory first, but if a file cannot be found there,
+# NX reads the file from the visual reporting top level directory.
+# The location of the user directory can be defined by this environment variable or by customer default.
+# If you set both, the path you provide in the NXVISUALREPORTING_USER_DIR environment variable takes precedence.
+#
+# NXVISUALREPORTING_USER_DIR=
+
+#
+# NXVISUALREPORTING_BITMAP_CONFIG_FILE points to the configuration file used to define bitmaps
+# that are used in Visual Reporting.
+#
+# NXVISUALREPORTING_BITMAP_CONFIG_FILE=${NXVISUALREPORTING_DIR}\customization\bitmap_config.xml
+
+#
+# NXVISUALREPORTING_PROPERTY_CONFIG_FILE points to the configuration file used to define properties
+# that can appear in all tag tooltips and info views in Visual Reporting.
+#
+# NXVISUALREPORTING_PROPERTY_CONFIG_FILE=${NXVISUALREPORTING_DIR}\customization\system_property_config.xml
+
+#
+# Some report properties have detailed related information. NXVISUALREPORTING_PROPERTY_STYLESHEET_CONFIG_FILE
+# points to the configuration file that defines style sheet files that are used to present the detailed 
+# related-information for such properties.
+#
+# NXVISUALREPORTING_PROPERTY_STYLESHEET_CONFIG_FILE=${NXVISUALREPORTING_DIR}\customization\related_info_stylesheets_config.xml
+
+###############################################################
+#  Stereo Display environment variables
+#  If UGII_STEREO is set to ON (1), then the NX Stereo code will be active.
+#  However, to see correct stereo display, you need a supported graphics card, a 3D Stereo Display or Projector, 
+#  and 3D glasses (and possibly a hub).  The hardware vendor control panel Stereo option must also be turned on.
+UGII_STEREO=1
+#
+
+###############################################################
+#  Stereo Display user interface environment variables
+#  Due to limitations in the Windows operating system related to translucency and stereo,
+#  there are some operations that can cause NX to stop rendering a stereo display.
+#  To avoid this issue, turn off layered window style to disable UI windows transparency when stereo is on.
+#  Windows 8 is supposed to address all of the UI issues with stereo, disabling the environment variable will
+#  allow user to prevent having the UI "layered" style (i.e. effects) turned off for stereo.
+#  If UGII_STEREO_DISABLES_UI_TRANSPARENCY is set to ON (1), NX will disable user interface transparency 
+#  when toggle on stereo.
+UGII_STEREO_DISABLES_UI_TRANSPARENCY=1
+#
+
+###############################################################
+#  Stereo Display adjust perspective param environment variables
+#  If UGII_STEREO_ADJUST_PERSPECTIVE_AUTOMATICALLY is set to ON (1), 
+#  NX will adjust perspective parameters to get a better stereo 3D display when the Stereo toggle is on.
+#  If UGII_STEREO_ADJUST_PERSPECTIVE_AUTOMATICALLY is set to OFF (0), 
+#  NX will not change perspective parameters(except projection type) when Stereo toggle is on/off.
+UGII_STEREO_ADJUST_PERSPECTIVE_AUTOMATICALLY=1
+#
+
+
+#  The following variable controls visible of Tolerance Feature setting 
+#  If you do not want to visible of Tolerance Feature setting set this to 0
+#  to visible, set this variable to 1.
+UGII_LEGACY_TOL_FEAT_SETTINGS=0
+
+############################################################################
+# Trimmed Sheet feature update environment variables
+# If UGII_ENABLE_TS_UPDATE_FOR_SLIVER_REGIONS is set to 1, then the Trim Sheet will update differently.
+# During feature playback, if trimmed sheet output change is observed then the enviroment variable can be used.
+UGII_ENABLE_TS_UPDATE_FOR_SLIVER_REGIONS=0
+
+############################################################################
+# NX DIAGRAM
+# 
+# SPLM_DIAGRAM_DIR is used to point to the root directory that 
+# contains the Siemens PLM Diagram Foundation product.
+# This defaults to ${UGII_BASE_DIR}\diagramcore
+#
+SPLM_DIAGRAM_DIR=${UGII_BASE_DIR}\diagramcore
+
+#
+# SPLM_DIAGRAM_LAUNCH_PAGE points to the HTML launch page
+# that is used for NX Diagramming applications.
+#
+# SPLM_DIAGRAM_LAUNCH_PAGE=${SPLM_DIAGRAM_DIR}\interop\nxdiagram.htm
+#
+
+############################################################################
+#
+#  If a 3Dconnexion motion control device is installed on the system, then
+#  UGII_3DCONNEXION_LIBRARY specifies the full path name of the 3Dconnexion
+#  library that supports the current version of NX.
+#
+UGII_3DCONNEXION_LIBRARY=${UGII_3DCONNEXION_DIR}\v${NX_RELEASE_VERSION}\startup\3DxNX.dll
+
+###############################################################################
+#
+# UGII_IRAY_DISABLE_CPU_FOR_RENDERING
+#
+# When set, on systems capable of CPU+GPU Iray+ rendering, the CPU will be disabled
+# for rendering.  On system configurations where the CPU is under-powered 
+# relative to the available GPU(s), this setting should be considered to prevent
+# CPU usage from slowing rendering performance.
+#  
+#UGII_IRAY_DISABLE_CPU_FOR_RENDERING=1
+
+###############################################################################
+#
+# NX_RTS_DYNAMIC_QUALITY
+#
+# When set, overrides the session's default RTS dynamic display quality setting:
+#    1 - Photoreal (Gold)
+#    2 - Quality Interactive (Silver)
+#    3 - Fast Interactive (Bronze)
+#
+#NX_RTS_DYNAMIC_QUALITY=2
+
+###############################################################################
+#
+# NX_IRAY_OUTPUT_ABOUT_INFO
+#
+# When set, information about Iray+, NVIDIA Iray, and the GPU resources 
+# recognized on the system will be output to the syslog when Ray Traced Studio
+# is first activated in the NX session. 
+#
+#NX_IRAY_OUTPUT_ABOUT_INFO=1
+
+###############################################################################
+#   Definitions for Fibersim, Syncrofit and Mastertrim products
+#
+#if FILE $SYNCROFIT_HOME
+#   Syncrofit is installed, set the NX directory
+UGII_SYNCROFIT_DIR=${SYNCROFIT_HOME}\ugnx${UGII_MAJOR_VERSION}_64
+#endif
+
+#if FILE $FIBERSIM_HOME
+# Fibersim is installed, set the NX directory
+UGII_FIBERSIM_DIR=${FIBERSIM_HOME}\ugnx${UGII_MAJOR_VERSION}_64
+#endif
+
+#if FILE $MASTERTRIM_HOME
+# Mastertrim is installed, set the NX directory
+UGII_MASTERTRIM_DIR=${MASTERTRIM_HOME}\ugnx${UGII_MAJOR_VERSION}_64
+#endif
+
+############################################################################
+#
+#  ShipNavigator
+#
+#  UGII_LOCAL_USER_DRAFTING_STANDARD_DIR points to the directory where user
+#  save its view configuration file when source configuration file is modified
+#  in ship navigator.
+#
+#
+UGII_LOCAL_USER_SHIP_NAVIGATOR_DIR="${NX_DEFAULT_SETTINGS_DIR}"
+############################################################################
+#
+#  AECDesignNavigator
+#
+#  UGII_LOCAL_USER_DRAFTING_STANDARD_DIR points to the directory where user
+#  save its view configuration file when source configuration file is modified
+#  in AECDesign navigator.
+#
+#
+UGII_LOCAL_USER_AECDESIGN_NAVIGATOR_DIR="${NX_DEFAULT_SETTINGS_DIR}"
+############################################################################
+# NX-Imageware Integration
+# 
+# NX_IWARE_INTEG_DIR is used to point to the root directory that 
+# contains the Siemens PLM NX-Imageware integration product.
+# This defaults to ${UGII_BASE_DIR}\ugimw
+#
+#NX_IWARE_INTEG_DIR=${UGII_BASE_DIR}\ugimw
+############################################################################
+###############################################################################
+#
+# NX_APPLY_VISMAT_TO_BODIES_OF_COMP
+#
+# NX_APPLY_VISMAT_TO_BODIES_OF_COMP allows an assembly component to be
+# selected (via the Assembly Navigator, graphics window selection, or QuickPick) when
+# applying a Studio material.  This action will apply the material to all bodies of the 
+# selected component.
+# When unset, a component will not be selectable when applying a Studio material.
+#
+NX_APPLY_VISMAT_TO_BODIES_OF_COMP=1
+
+############################################################################
+#
+#  Additive Manufacturing Simulation
+#
+UGII_AMSIMULATION_DIR=${UGII_BASE_DIR}\am_simulation\pbfsimulation
+
+#
+#  UGII_AMSIMULATION_ALPHA_DATABASE and UGII_AMSIMULATION_ALPHA_SUPPORTMATERIAL_DATABASE are
+#  the paths to the XML databases for parameters sets and material supports
+#
+UGII_AMSIMULATION_ALPHA_DATABASE=${UGII_BASE_DIR}\am_simulation\pbfsimulation\application\Data\SC3DAM_ParametersSet.xml
+#
+############# End Additive Manufacturing Simulation Variables ##############
+#
+############################################################################
+#
+#  Multi Axis Additive Simulation
+#
+
+# Activate Multi Axis Additive application only when libnxopencpp_cam.dll is there.
+# It can be missing when the user installs the application from a Simcenter3d package
+# but still launches ugraf -nx
+
+#if FILE ${UGII_BASE_DIR}\nxbin\libnxopencpp_cam.dll
+    UGII_MULTIAXIS_SIM_DIR=${UGII_BASE_DIR}\simulation\multiaxis_simulation
+#endif
+
+#
+#  UGII_MULTIAXISSIM_MAT_REF and UGII_MULTIAXISSIM_PAR_REF are
+#  the paths to the XML databases for material parameters
+#
+UGII_MULTIAXISSIM_MAT_REF=${UGII_BASE_DIR}\simulation\multiaxis_simulation\application\Data\MultiAxis_Materials.xml
+UGII_MULTIAXISSIM_PAR_REF=${UGII_BASE_DIR}\simulation\multiaxis_simulation\application\Data\MultiAxis_Parameters.xml
+#
+############# End Multi Axis Additive Simulation Variables ##############
+
+#
+############################################################################
+#
+#  Support Homogenization
+#
+UGII_SUPPORT_HOMOGENIZATION_DIR=${UGII_BASE_DIR}\simulation\support_homogenization
+#
+################### End Support Homogenization Variables ####################
+#
+############################################################################
+# UGII CAE ASMUTILS DIR
+# 
+# UGII_CAE_ASMUTILS_DIR points to the root directory that 
+# contains the Siemens Simulation Assembly Tools product.
+# This defaults to ${UGII_BASE_DIR}/simulation/asmutilities 
+# It must be present to enable the Simulation AsmUtils Tools product. 
+#
+UGII_CAE_ASMUTILS_DIR=${UGII_BASE_DIR}/simulation/asmutilities
+#########################################################################
+# EAICOM Environment Variables
+#########################################################################
+#
+# UGII_EAICOM_HOME should point to the base directory of your EAICOM installation. 
+# The value below is just an example that will be different on your system.
+# Changing this variable will cause all NX EAICOM based applications to use the specified
+# EAICOM installation. This is an example of how this value can be set.
+#if FILE ${UGII_BASE_DIR}\nx_vsa\EAICOM
+UGII_EAICOM_HOME=${UGII_BASE_DIR}\nx_vsa\EAICOM
+#endif
+#
+UGII_EAICOM_DLL=EAIComCreate.dll
+#
+# This is the location of the EAICOM interpreter that will be loaded as needed by NX
+# UGII_EAICOM_LIBRARY_DIR is set to the directory specified in UGII_EAICOM_HOME.
+# NOTE: changing this value only changes the EAICOM interpreter used by NX Open applications.
+UGII_EAICOM_LIBRARY_DIR=${UGII_EAICOM_HOME}
+#
+#  The UGII_SAVE_PDO variables specifies Save Process Document functionality default disabled.
+UGII_SAVE_PDO=FALSE
+#
+############################################################################
+# Materials Engineering
+# 
+# UGII_MATENG_DIR points to the root directory that 
+# contains the Siemens Materials Engineering toolkit.
+# The toolkit will be installed as an add-on with separate installer.
+#
+UGII_MATENG_DIR=${UGII_BASE_DIR}\simulation\materialseng
+#########################################################################
+# Simcenter Multimech
+# 
+# UGII_MULTIMECH points to the root directory that 
+# contains the Siemens Multimech solver executables/dlls.
+#
+UGII_MULTIMECH=${UGII_BASE_DIR}\simulation\materialseng\multimech\bin
+#########################################################################
+#
+# Simcenter MAGNET
+# 
+# UGII_MAGNET_DIR points to the root directory that 
+# contains the Simcenter 3D Low Frequency EM solver.
+#
+UGII_MAGNET_DIR=${UGII_BASE_DIR}\simulation\magnet
+#########################################################################
+
+############################################################################
+#
+#
+# ==============================================================================
+# XC_SHARE Environment Variables
+# ==============================================================================
+#
+# NX_XC_SHARE_DIR is used to point to the root directory the option product
+# cloud is installed.
+# This defaults to $UGII_BASE_DIR\clouddm
+#
+NX_XC_SHARE_DIR=${UGII_BASE_DIR}\clouddm
+
+############################################################################
+#
+# NX_XC_ENV_FILE points to specific file containing the definitions of 
+# the variables that will be read by NX XC during starts up.
+# This defaults to NX_XC_SHARE_DIR\customization
+#
+NX_XC_ENV_FILE=${NX_XC_SHARE_DIR}\customization\ugii_cloud_env.dat
+#########################################################################
+

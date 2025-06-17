@@ -1,0 +1,2109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="docum.xsl"?>
+<!--
+
+-->
+<PrefDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www-cyp.ugsolutions.com/assemblies/pman">
+    <Application name="Design for Manufacturing" csh="PMAN_Design_for_Manufacturing" package_suppress="simcenter3d,simviewer,view,mechatronicsplayer,nx2dedit">
+        <Docum>The Design for Manufacturing (DFM) advisor can be used to check the manufacturability of a die design before any manufacturing tasks are performed on it. The early detection of manufacturing problems can help reduce the number of engineering changes triggered by downstream processes. It also allows design alternatives to be rapidly evaluated and enables the design to be stabilized sooner.</Docum>
+        <Category name="Criteria Sorting" csh="PMAN_Design_for_Manufacturing_Criteria_Sorting">
+            <Docum>The options in this category specify which criteria checks to perform. Apart from specifying which checks to perform (1 to perform, 0 to not perform), sorting of the results can also be achieved by using numbers greater than 1. Then, when Sort Criteria is turned on in the DFM Advisor Nonconformance window, the results will be sorted in an ascending order according to the entered number. For this sorting to work correctly, all criteria checks must have a unique number.</Docum>
+            <Tab name="Draw" csh="PMAN_Design_for_Manufacturing_Criteria_Sorting_Draw">
+                <Label label="The following options specify which criteria checks to perform. To perform a check, enter 1. To not perform a a check, enter 0 (zero)."/>
+                <Pref name="DFM_AllowWrinkling" type="int" title="Wrinkling" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowStrong" type="int" title="Strong" value="0" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowMedium" type="int" title="Medium" value="0" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowWeak" type="int" title="Weak" value="0" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowSplitting" type="int" title="Splitting" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowDrawWallAngle" type="int" title="Draw Wall Angle" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Trim" csh="PMAN_Design_for_Manufacturing_Criteria_Sorting_Trim">
+                <Label label="The following options specify which criteria checks to perform. To perform a check, enter 1. To not perform a a check, enter 0 (zero)."/>
+                <Pref name="DFM_AllowTrimSurfaceAngles" type="int" title="Trim Surface Angles" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowTrimWallAngles" type="int" title="Trim Wall Angles" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowTrimCorners" type="int" title="Trim Corners" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowComplexCutout" type="int" title="Complex Cutout" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowTrimRelief" type="int" title="Trim Relief" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowTrimCutoutTypes" type="int" title="Trim Cutout Types" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowTypicalCutouts" type="int" title="Typical Cutouts" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowTrimtoTrim" type="int" title="Trim to Trim" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowTrimtoTrimPerimeter" type="int" title="Trim to Trim Perimeter" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowScrapShedAngle" type="int" title="Scrap Shed Angle" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Pierce" csh="PMAN_Design_for_Manufacturing_Criteria_Sorting_Pierce">
+                <Label label="The following options specify which criteria checks to perform. To perform a check, enter 1. To not perform a a check, enter 0 (zero)."/>
+                <Pref name="DFM_AllowTypicalHole" type="int" title="Typical Hole" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowFlangedHole" type="int" title="Flanged Hold" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowHoleSize" type="int" title="Hole Size" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowHoleCornerRadii" type="int" title="Hole Corner Radii" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowPierceCommonization" type="int" title="Pierce Commonization" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowPierceAngle" type="int" title="Pierce Angle" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowHoleToWall" type="int" title="Hole to Wall" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowHoleToTrim" type="int" title="Hole to Trim" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowHoleToHole" type="int" title="Hole to Hole" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowComplexHole" type="int" title="Complex Hole" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Flange" csh="PMAN_Design_for_Manufacturing_Criteria_Sorting_Flange">
+                <Label label="The following options specify which criteria checks to perform. To perform a check, enter 1. To not perform a a check, enter 0 (zero)."/>
+                <Pref name="DFM_AllowFlangedCutouts" type="int" title="Flanged Cutouts" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowFlangeTypes" type="int" title="Flange Types" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowSingleBreak" type="int" title="Return Flange/Single Break" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowDoubleBreak" type="int" title="Return Flange/Double Break" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowFlangeBreaklineAngle" type="int" title="Flange Breakline Angle" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowFlangeDirection" type="int" title="Flange Direction" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowFlangeBreakRadius" type="int" title="Flange Break Radius" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowFlangeFlatLength" type="int" title="Flange Flat Length" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowFlangeToTrim" type="int" title="Flange to Trim" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowFlangeToHole" type="int" title="Flange to Hole" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowFlangeSpringback" type="int" title="Flange Springback" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AllowFlangeToFlange" type="int" title="Flange to Flange" value="1" ver="3.0.0" scope="Session">
+                    <Integer/>
+                    <Data type="range">
+                        <LowerBound value="0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="General" csh="PMAN_Design_for_Manufacturing_General">
+            <Tab name="All" csh="PMAN_Design_for_Manufacturing_General_All">
+                <Pref name="DFM_StandardsVersionDisplay" type="int" title="Standards Version Display" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies how the Standards Version should be displayed.</Description>
+                    <OptionMenu/>
+                    <Data type="enum">
+                        <EnumElem name="Do Not Display Messages" value="-1"/>
+                        <EnumElem name="Use Native Language Menu Text" value="0"/>
+                        <EnumElem name="Display First Line Below" value="1"/>
+                        <EnumElem name="Display Both Lines Below" value="2"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AdvisorStandardsVersionLine1" type="string" title="Standards Version First Line" value="File Version:" ver="3.0.0" scope="Session">
+                    <Description>This field allows the text for the first line of the standards version to be specified. The number of characters for this text must be between 1 and 42.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_AdvisorStandardsVersionLine2" type="string" title="Standards Version Second Line" value="---------  2.0 --------" ver="3.0.0" scope="Session">
+                    <Description>This field allows the text for the second line of the standards version to be specified. The number of characters for this text must be between 1 and 42.</Description>
+                    <Widestring/>
+                </Pref>
+                <Separator/>
+                <Pref name="DFM_ToleranceCharsForDisplay" type="int" title="Tolerance Characters for Display" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the number of characters that is displayed in front of each computed size for the Hole Size and Flanged Hole criteria. A value of 1 means that a G, C, or S is displayed. For example "G 10.0" would be a Gage hole of 10.0. A value of 2 means that Ga, Cr, or St is displayed. A limit of 20 characters is used for the entire field. Therefore, the number of characters specified here should not be more than about 5.</Description>
+                    <Integer/>
+                </Pref>
+                <Pref name="DFM_UseEdgeNamesForObjects" type="int" title="Use Edge Names for Objects" value="1" ver="3.0.0" scope="Session">
+                    <Description>DFM feature names will be generated automatically. If the part file is modified, these automatically generated names will probably change as well. This option determines whether or not names attached to the part sheet edges (not tipped data) should be used.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_DeleteTempDrawFiles" type="int" title="Delete Temporary Draw Files" value="1" ver="3.0.0" scope="Session">
+                    <Description>The Splitting, Wrinkling, Strong, Medium, and Weak Draw analysis creates temporary files to run the draw analysis. This option determines whether or not these files should be deleted. If the files are saved, they can be viewed in the analysis package used.</Description>
+                    <Toggle off="0"/>
+                    <Data type="enum">
+                        <EnumElem name="Yes" value="1"/>
+                        <EnumElem name="No" value="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_PressCamDirectionColor" type="int" title="Press Cam Direction Color" value="134" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the color of the temporary conehead vector which represents the direction of the pierce, trim, or flange when DFM features are displayed.</Description>
+                    <Color/>
+                </Pref>
+                <Pref name="DFM_AdvisorPierceLimit_MU" type="real" title="Pierce Limit" value="100.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the upper limit for the circumscribed diameters which are to be considered Pierce objects. Circumscribed diameters greater than this value are considered to be Trim objects.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_AdvisorPierceLimit_EU" type="real" title="Pierce Limit" value="3.9370078" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the upper limit for the circumscribed diameters which are to be considered Pierce objects. Circumscribed diameters greater than this value are considered to be Trim objects.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Draw Criteria" csh="PMAN_Design_for_Manufacturing_Draw_Criteria">
+            <Tab name="Draw Wall Angle" csh="PMAN_Design_for_Manufacturing_Draw_Criteria_Draw_Wall_Angle">
+                <Docum>The purpose of this check is to determine if any backdraft conditions exist for the sheet metal being drawn or if flanges can be formed in the draw die.</Docum>
+                <Label label="The following option is used to determine if any backdraft conditions exist for the sheet metal being drawn or if flanges can be formed in the draw die."/>
+                <Pref name="DFM_DrawWallAngleRanges" type="string" title="Ranges" value="0.2 0.1" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies limit values for ranges of angles between the sheet normal and the press direction vector. 2, 3, or 4 angle values can be specified (largest first). The range between each value are then used to apply a color fringe plot on the sheet metal.</Description>
+                    <Widestring/>
+                </Pref>
+                <Label label="Angle &gt; first value: Pass"/>
+                <Label label="Second value &lt; Angle &lt; first value: Warning"/>
+                <Label label="Angle &lt; second (third and fourth) value: Failure"/>
+            </Tab>
+            <Tab name="Splitting and Wrinkling" csh="PMAN_Design_for_Manufacturing_Draw_Criteria_Splitting_and_Wrinkling">
+                <Label label="The splitting check is used to ensure that splitting does not occur when there is no restraint at the boundary (the holding condition = free). The wrinkling check is used to ensure that wrinkling does not occur when the sheet metal is locked at the boundary (the holding condition = locked)."/>
+                <Label label="The following options supply values used for the Forming Limit Diagram curves."/>
+                <Pref name="DFM_FLDMargin" type="real" title="Margin" value="10.0" unit="%" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the safety factor for the marginal curve below the forming limit curve.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FLDMaximumThinning" type="real" title="Maximum Thinning" value="30.0" unit="%" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the maximum thinning factor for the curve that represents the minor strain, major strain combinations at which the thickness of the sheet has a constant thinning. Any point above this curve represents elements which have excess thinning.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FLDMinimumStrain" type="real" title="Minimum Strain Threshold" value="2.0" unit="%" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the value for the minimum strain threshold curve. Sheet metal requires a certain minimum strain in order to hold its shape well. Any point below this curve represents elements with insufficient stretching.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Binder Force" csh="PMAN_Design_for_Manufacturing_Draw_Criteria_Binder_Force">
+                <Label label="The following options specify a factor to use between a free binder and a clamped binder."/>
+                <Pref name="DFM_StrongBinderForce" type="real" title="Strong" value="0.9" ver="3.0.0" scope="Session">
+                    <RealScale precision="2"/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1" name="Free"/>
+                        <UpperBound value="1.0" include="1" name="Locked"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_MediumBinderForce" type="real" title="Medium" value="0.35" ver="3.0.0" scope="Session">
+                    <RealScale precision="2"/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1" name="Free"/>
+                        <UpperBound value="1.0" include="1" name="Locked"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_WeakBinderForce" type="real" title="Weak" value="0.15" ver="3.0.0" scope="Session">
+                    <RealScale precision="2"/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1" name="Free"/>
+                        <UpperBound value="1.0" include="1" name="Locked"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Trim Criteria" csh="PMAN_Design_for_Manufacturing_Trim_Criteria">
+            <Tab name="Scrap Shed Angles" csh="PMAN_Design_for_Manufacturing_Trim_Criteria_Scrap_Shed_Angles">
+                <Label label="The following options are used to determine if the external trim curve will cause scrap to become trapped in the manufacturing process."/>
+                <Pref name="DFM_ScrapShedStandardAngle" type="real" title="Standard" value="0.1" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the Standard angle for each side of the opening (if your standard is specified as an included angle, divide it by 2). If the angle is less than this value (but larger than the Standard Minimum angle), it is a Parallel Scrap condition. If the angle is larger than this value it is a Standard Scrap condition.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="DFM_ScrapShedStandardAngleMin" type="real" title="Standard Minimum" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the Standard Minimum angle for each side of the opening (if your standard is specified as an included angle, divide it by 2). If the angle is less than this value, it is a Trapped Scrap condition.</Description>
+                    <Real/>
+                </Pref>
+            </Tab>
+            <Tab name="Trim Relief" csh="PMAN_Design_for_Manufacturing_Trim_Criteria_Trim_Relief">
+                <Label label="The following options are used to ensure that an adequate notch at the end points of the flange breakline is present and constructed correctly to reduce the possibility of metal splitting during the flanging operation."/>
+                <Pref name="DFM_TrimReliefAngle" type="real" title="Minimum Start Angle" value="60.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the angle the trimming curve makes with the breakline. If the trim relief starts at less then this angle then the trim relief feature will not pass.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                    <Docum>This value should be less than 90.0 - (Standard Scrap Shed Angle)/2 or the scrap shed check will fail before this check.</Docum>
+                </Pref>
+                <Pref name="DFM_TrimReliefOffset_MU" type="real" title="Minimum Offset Distance" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the distance from a point on the trimming curve to the end of the breakline (measured perpendicular to its tangent). The point on the trimming curve is the point where its tangent matches the tangent at the end of the breakline (i.e. the two tangents are parallel).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                    <Docum>If no matching tangents are found and the trim relief starts at the correct angle (see Angle check above), then the trim relief is considered as a pass and the radii check is not performed.</Docum>
+                </Pref>
+                <Pref name="DFM_TrimReliefOffset_EU" type="real" title="Minimum Offset Distance" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the distance from a point on the trimming curve to the end of the breakline (measured perpendicular to its tangent). The point on the trimming curve is the point where its tangent matches the tangent at the end of the breakline (i.e. the two tangents are parallel).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                    <Docum>If no matching tangents are found and the trim relief starts at the correct angle (see Angle check above), then the trim relief is considered as a pass and the radii check is not performed.</Docum>
+                </Pref>
+                <Pref name="DFM_TrimReliefAwayDistance_MU" type="real" title="Away Distance" value="12.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>If the Offset Distance found is greater than the value specified here, then the Offset Distance is considered an automatic pass and the checking of the radii is skipped.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TrimReliefAwayDistance_EU" type="real" title="Away Distance" value="0.4724409" unit="in" ver="3.0.0" scope="Session">
+                    <Description>If the Offset Distance found is greater than the value specified here, then the Offset Distance is considered an automatic pass and the checking of the radii is skipped.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TrimReliefRadiiStandard_MU" type="real" title="Minimum Standard Radii" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>The radii checked are those from the flange breakline end point, to the first flat portion of the trimming curve after the trim relief offset point.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TrimReliefRadiiStandard_EU" type="real" title="Minimum Standard Radii" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>The radii checked are those from the flange breakline end point, to the first flat portion of the trimming curve after the trim relief offset point.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TrimReliefRadiiDev_MU" type="real" title="Deviation Radii" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>Any radii less than this causes higher die costs. The radii checked are those from the flange breakline end point, to the first flat portion of the trimming curve after the trim relief offset point.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TrimReliefRadiiDev_EU" type="real" title="Deviation Radii" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>Any radii less than this causes higher die costs. The radii checked are those from the flange breakline end point, to the first flat portion of the trimming curve after the trim relief offset point.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Trim Cutout Types" csh="PMAN_Design_for_Manufacturing_Trim_Criteria_Trim_Cutout_Types">
+                <Docum>The surface tangent direction is a direction 90 degrees to the surface normal and trimming curve tangent. The zero reference direction is a direction 90 degrees to the trimming direction and trimming curve tangent.
+A true angle measurement is taken between the surface tangent and zero reference directions at a sufficient number of points along the boundary of the trimming object. (Said another way, the angle between two planes is being computed. One plane is defined by the trimming curve tangent and the surface normal. The other plane is defined by the trimming curve tangent and the trimming direction.) Up and down angles are in reference to the zero reference direction. If the angle measured from the zero reference direction to the surface tangent direction is in the opposite direction of the trimming direction, we have an up angle. If the opposite is true, we have a down angle.</Docum>
+                <Label label="The following options are used to determine if the trimming shape can be made using only one trimming direction or if a complex cutout (two trimming directions) is needed."/>
+                <Pref name="DFM_TrimCutoutMaxAngleUp" type="real" title="Maximum Up Angle" value="5.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the maximum allowed Up Angle.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TrimCutoutMaxAngleDown" type="real" title="Maximum Down Angle" value="5.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the maximum allowed Down Angle.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Typical Cutouts" csh="PMAN_Design_for_Manufacturing_Trim_Criteria_Typical_Cutouts">
+                <Label label="The following options are used to determine if any cutouts require additional die maintenance and construction costs."/>
+                <Pref name="DFM_TypicalCutoutMaxCutoutSize_MU" type="real" title="Maximum Cutout Size" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the maximum circumscribed shape for a cutout.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalCutoutMaxCutoutSize_EU" type="real" title="Maximum Cutout Size" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the maximum circumscribed shape for a cutout.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Label label="The following options are used to determine if the trimming shape can be made using only one trimming direction or if a complex cutout (two trimming directions) is needed."/>
+                <Pref name="DFM_TypicalCutoutMinRoundDimension_MU" type="real" title="Minimum Round Diameter" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum diameter for a round cutout.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalCutoutMinRoundDimension_EU" type="real" title="Minimum Round Diameter" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum diameter for a round cutout.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalCutoutMinSquareDimension_MU" type="real" title="Minimum Square Width" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum width for a square cutout.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalCutoutMinSquareDimension_EU" type="real" title="Minimum Square Width" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum width for a square cutout.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalCutoutMinRectangleDimW_MU" type="real" title="Minimum Rectangle Width" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum width for a rectangular cutout.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalCutoutMinRectangleDimW_EU" type="real" title="Minimum Rectangle Width" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum width for a rectangular cutout.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalCutoutMinRectangleDimL_MU" type="real" title="Minimum Rectangle Length" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum length for a rectangular cutout.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalCutoutMinRectangleDimL_EU" type="real" title="Minimum Rectangle Length" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum length for a rectangular cutout.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalCutoutMinOblongDimW_MU" type="real" title="Minimum Oblong Width" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum width for an oblong cutout.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalCutoutMinOblongDimW_EU" type="real" title="Minimum Oblong Width" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum width for an oblong cutout.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalCutoutMinOblongDimL_MU" type="real" title="Minimum Oblong Length" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum length for an oblong cutout.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalCutoutMinOblongDimL_EU" type="real" title="Minimum Oblong Length" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum length for an oblong cutout.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalCutoutCornerRadius_MU" type="real" title="Square or Rectangle Corner Radius" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>For irregular shapes, a check is performed to see if one of the standard shapes (round, square, rectangle, or oblong) will fit inside the irregular shape. When checking to see if an irregular shape can fit into the standard square or rectangle, this option gives the corner radius of the square or rectangle.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalCutoutCornerRadius_EU" type="real" title="Square or Rectangle Corner Radius" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>For irregular shapes, a check is performed to see if one of the standard shapes (round, square, rectangle, or oblong) will fit inside the irregular shape. When checking to see if an irregular shape can fit into the standard square or rectangle, this option gives the corner radius of the square or rectangle.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Trim Surface Angles" csh="PMAN_Design_for_Manufacturing_Trim_Criteria_Trim_Surface_Angles">
+                <Docum>The surface tangent direction is a direction 90 degrees to the surface normal and trimming curve tangent. The zero reference direction is a direction 90 degrees to the trimming direction and trimming curve tangent.
+A true angle measurement is taken between the surface tangent and zero reference directions at a sufficient number of points along the boundary of the trimming object. (Said another way, the angle between two planes is being computed. One plane is defined by the trimming curve tangent and the surface normal. The other plane is defined by the trimming curve tangent and the trimming direction.) Up and down angles are in reference to the zero reference direction. If the angle measured from the zero reference direction to the surface tangent direction is in the opposite direction of the trimming direction, we have an up angle. If the opposite is true, we have a down angle.</Docum>
+                <Label label="The following options are used to ensure that the trimming operation is not at an angle that will cause trimming steels to fracture or dull prematurely."/>
+                <Pref name="DFM_TrimSurfaceAnglesUpAngles" type="string" title="Up Angles" value="0.1 5.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>If the up angle is greater than the first one specified here, a deviation is reported. One or more angles can be specified.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_TrimSurfaceAnglesDownAngles" type="string" title="Down Angles" value="0.1 5.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>If the down angle is greater than the first one specified here, a deviation is reported. One or more angles can be specified.</Description>
+                    <Widestring/>
+                </Pref>
+            </Tab>
+            <Tab name="Trim Wall Angles" csh="PMAN_Design_for_Manufacturing_Trim_Criteria_Trim_Wall_Angles">
+                <Docum>These options are used to check the angle between the trimming curve (wall) and the trimming direction.
+<Formatted>1. Sample points are generated on the trimming curve boundary.
+2. At each sample point a 3D tanget to this curve is computed.
+3. To compute the wall angle, a measuring orientation (view) is constructed.
+4. The wall angle is then the true angle between the zero vector and the 3D curve tangent.
+
+First thickness value &lt;= Thickness &lt; second thickness value: Maximum wall angle allowed = first value
+Second thickness value &lt;= Thickness &lt; third thickness value: Maximum wall angle allowed = second value
+Thickness &gt;= third thickness value: Maximum wall angle allowed = third value</Formatted></Docum>
+                <Label label="The following options are used to ensure that the trimming operation is not at an angle that will cause trimming steels to fracture or dull prematurely."/>
+                <Pref name="DFM_TrimWallAnglesThicknesses_MU" type="string" title="Thickness Ranges" value="0.0 0.1 0.2" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This list specifies thickness ranges for each of the maximum wall angles.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_TrimWallAnglesThicknesses_EU" type="string" title="Thickness Ranges" value="0.0 0.004 0.008" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This list specifies thickness ranges for each of the maximum wall angles.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_TrimWallAnglesMaxAngles" type="string" title="Maximum Angles" value="0.3 0.2 0.1" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This list specifies the maximum wall angle allowed for each thickness range.</Description>
+                    <Widestring/>
+                </Pref>
+            </Tab>
+            <Tab name="Trim Corners" csh="PMAN_Design_for_Manufacturing_Trim_Criteria_Trim_Corners">
+                <Docum>This check will analyze all interior and exterior trimming curves to ensure radii are optimal for manufacturing. Both invalid radii and mission radii are reported.
+<Formatted>1. Edges from the trim line are extracted and projecting into the plane of the trimming direction. (All radii are analyzed in a plane.)
+2. The project curves are broken (simplified) into arcs and lines.
+
+First corner angle value &gt; Corner Angle &gt;= second corner angle value: Minimum corner radius allowed = first value
+Second corner angle value &gt; Corner Angle &gt;= third corner angle value: Minimum corner radius allowed = second value
+and so on
+Corner Angle &lt;= nth corner angle value: Minimum corner radius allowed = nth value
+
+If the first angle value specified is an angle close to 180 degrees, then the first corner angle range is:
+First corner angle value &lt; Corner Angle &gt;= second corner angle value: Minimum corner radius allowed = first value
+This implies that if the corner angle is greater than the first corner angle specified, it is considered smooth.</Formatted></Docum>
+                <Label label="The following options are used to ensure radii are large enough so hand finishing is not required or die steels do not fracture prematurely."/>
+                <Pref name="DFM_TrimCornersCornerAngles" type="string_list" title="Corner Angle Ranges" value="&quot;177.5&quot;\&quot;0.5&quot;\&quot;0.4&quot;\&quot;0.3&quot;\&quot;0.2&quot;\&quot;0.1&quot;" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This list specifies corner angle ranges for each of the minimum corner radii.</Description>
+                    <MultiLineText height="5"/>
+                </Pref>
+                <Pref name="DFM_TrimCornersCornerRadii_MU" type="string_list" title="Minimum Corner Radii" value="&quot;0.1&quot;\&quot;0.2&quot;\&quot;0.3&quot;\&quot;0.4&quot;\&quot;0.5&quot;\&quot;0.6&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This list specifies the minimum corner radius allowed for each corner angle range.</Description>
+                    <MultiLineText height="5"/>
+                </Pref>
+                <Pref name="DFM_TrimCornersCornerRadii_EU" type="string_list" title="Minimum Corner Radii" value="&quot;0.004&quot;\&quot;0.008&quot;\&quot;0.012&quot;\&quot;0.016&quot;\&quot;0.020&quot;\&quot;0.024&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This list specifies the minimum corner radius allowed for each corner angle range.</Description>
+                    <MultiLineText height="5"/>
+                </Pref>
+            </Tab>
+            <Tab name="Complex Cutout" csh="PMAN_Design_for_Manufacturing_Trim_Criteria_Complex_Cutout">
+                <Docum>A complex cutout is a shape that requires two or more trim shapes to construct; each trim area having a shape that contributes to the overall shape. This shape is used when the cutout shape on the product varies too much to be manufactured with one trim.</Docum>
+                <Label label="The following options are used to ensure that each trim area shape has the proper offset from the other trim shape and meets at a hard corner angle within the minimum angle value."/>
+                <Pref name="DFM_ComplexCutoutCornerAngle" type="real" title="Minimum Corner Angle" value="5.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>The trim area shapes must form a sharp angle with each other. This option specifies the minimum corner angle allowed. The angle is measure in a plane normal to the press direction.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_ComplexCutoutOffsetDist_MU" type="real" title="Minimum Offset" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>The trim area shapes must be offset from each other so that the trim shapes do not interfere with each other during the manufacturing process. This option specifies the minimum offset distance allowed between cutout halves. This measurement is performed in a plane normal to each cam direction.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_ComplexCutoutOffsetDist_EU" type="real" title="Minimum Offset" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>The trim area shapes must be offset from each other so that the trim shapes do not interfere with each other during the manufacturing process. This option specifies the minimum offset distance allowed between cutout halves. This measurement is performed in a plane normal to each cam direction.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Pierce Criteria" csh="PMAN_Design_for_Manufacturing_Pierce_Criteria">
+            <Tab name="Pierce Commonization" csh="PMAN_Design_for_Manufacturing_Pierce_Criteria_Pierce_Commonization">
+                <Docum>This check compares all pierce types (gage, critical, or standard), hole sizes, shank sizes, and shapes for each die and reports objects that are not common.
+<Formatted>For each pierce object:
+1. Get the shape of the Pierce object.
+2. Get the largest (circumscribed diameter) dimension of the pierce object.
+3. From the largest dimension and the shape of the pierce object, obtain the appropriate shank diameter based on the following.
+Round Shape &lt;= first value or Other Shape &lt;= first value: Shank Diameter = first value
+First value &lt; Round Shape &lt;= second value or first value &lt; Other Shape &lt;= second value: Shank Diameter = second value
+Second value &lt; Round Shape &lt;= third value or second value &lt; Other Shape &lt;= third value: Shank Diameter = third value
+and so on.
+4. Identify the pierce type (gage, critical, or standard).
+5. Then for each die, determine if all objects have the following in common.
+- The shapes are standard (round, square, etc.) and are all the same. Irregular shapes cause a non-conformance.
+- The types (gage, critical, or standard) are all the same.
+- The circumscribed diameters are all the same. When checking if two diameters are the same the smaller hole tolerance of the objects is used.
+- The shank sizes are all the same.
+If any object is not common with all the other objects for a die, then each object for that particular die will generate a nonconformance.</Formatted></Docum>
+                <Label label="The following options are used to identify if identical hole sizes, pierce types, or shapes for each punch shank diameter are used within a single die."/>
+                <Pref name="DFM_PierceCommonizationShankDias_MU" type="string_list" title="Shank Diameters" value="&quot;0.1&quot;\&quot;0.2&quot;\&quot;0.3&quot;\&quot;0.4&quot;\&quot;0.5&quot;\&quot;0.6&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This list specifies the shank diameter to use for each of the shape ranges.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceCommonizationShankDias_EU" type="string_list" title="Shank Diameters" value="&quot;0.004&quot;\&quot;0.008&quot;\&quot;0.012&quot;\&quot;0.016&quot;\&quot;0.020&quot;\&quot;0.024&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This list specifies the shank diameter to use for each of the shape ranges.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceCommonizationRoundRanges_MU" type="string_list" title="Round Shape Ranges" value="&quot;0.1&quot;\&quot;0.2&quot;\&quot;0.3&quot;\&quot;0.4&quot;\&quot;0.5&quot;\&quot;0.6&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This list specifies the diameter ranges for a pierce object that is round.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceCommonizationRoundRanges_EU" type="string_list" title="Round Shape Ranges" value="&quot;0.004&quot;\&quot;0.008&quot;\&quot;0.012&quot;\&quot;0.016&quot;\&quot;0.020&quot;\&quot;0.024&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This list specifies the diameter ranges for a pierce object that is round.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceCommonizationOtherRanges_MU" type="string_list" title="Other Shapes Ranges" value="&quot;0.1&quot;\&quot;0.2&quot;\&quot;0.3&quot;\&quot;0.4&quot;\&quot;0.5&quot;\&quot;0.6&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This list specifies the circumscribed diameter ranges for a pierce object that is not round.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceCommonizationOtherRanges_EU" type="string_list" title="Other Shapes Ranges" value="&quot;0.004&quot;\&quot;0.008&quot;\&quot;0.012&quot;\&quot;0.016&quot;\&quot;0.020&quot;\&quot;0.024&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This list specifies the circumscribed diameter ranges for a pierce object that is not round.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Group name="Tolerances">
+                <Pref name="DFM_PierceCommonizationGageTol_MU" type="real" title="Gage" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the tolerance for checking if two holes have the same diameter, if the Gage pierce type is the smallest.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_PierceCommonizationGageTol_EU" type="real" title="Gage" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the tolerance for checking if two holes have the same diameter, if the Gage pierce type is the smallest.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_PierceCommonizationCriticalTol_MU" type="real" title="Critical" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the tolerance for checking if two holes have the same diameter, if the Critical pierce type is the smallest.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_PierceCommonizationCriticalTol_EU" type="real" title="Critical" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the tolerance for checking if two holes have the same diameter, if the Critical pierce type is the smallest.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_PierceCommonizationStandardTol_MU" type="real" title="Standard" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the tolerance for checking if two holes have the same diameter, if the Standard pierce type is the smallest.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_PierceCommonizationStandardTol_EU" type="real" title="Standard" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the tolerance for checking if two holes have the same diameter, if the Standard pierce type is the smallest.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Typical Hole" csh="PMAN_Design_for_Manufacturing_Pierce_Criteria_Typical_Hole">
+                <Docum>A typical hole is any shape having a circumscribed shape less than Pierce Limit (see General category's All tab) and is manufactured using a single punch.
+The 3D shape of the object is projected onto the plane of the punch direction. The shape is then analyzed to see if it is round, oblong, square, rectangular, or hexagonal within the tolerance specified (gage, critical, or standard).</Docum>
+                <Label label="The following options are used to determine if standard pierce equipment can be used."/>
+                <Pref name="DFM_TypicalHoleMaxPierceAngle" type="real" title="Maximum Pierce Angle" value="5.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the maximum pierce angle allowed. (The method for computing the pierce angle is the same as it is in Trim Surface Angles.)</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Group name="Tolerances">
+                <Pref name="DFM_TypicalHolePosGageTol_MU" type="real" title="Positive Gage" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the gage type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHolePosGageTol_EU" type="real" title="Positive Gage" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the gage type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleLongPosGageTol_MU" type="real" title="Positive Gage (Long)" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the gage type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleLongPosGageTol_EU" type="real" title="Positive Gage (Long)" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the gage type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleNegGageTol_MU" type="real" title="Negative Gage" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the gage type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleNegGageTol_EU" type="real" title="Negative Gage" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the gage type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleLongNegGageTol_MU" type="real" title="Negative Gage (Long)" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the gage type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleLongNegGageTol_EU" type="real" title="Negative Gage (Long)" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the gage type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHolePosCriticalTol_MU" type="real" title="Positive Critical" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the critical type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHolePosCriticalTol_EU" type="real" title="Positive Critical" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the critical type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleLongPosCriticalTol_MU" type="real" title="Positive Critical (Long)" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the critical type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleLongPosCriticalTol_EU" type="real" title="Positive Critical (Long)" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the critical type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleNegCriticalTol_MU" type="real" title="Negative Critical" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the critical type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleNegCriticalTol_EU" type="real" title="Negative Critical" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the critical type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleLongNegCriticalTol_MU" type="real" title="Negative Critical (Long)" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the critical type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleLongNegCriticalTol_EU" type="real" title="Negative Critical (Long)" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the critical type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHolePosStandardTol_MU" type="real" title="Positive Standard" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the standard type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHolePosStandardTol_EU" type="real" title="Positive Standard" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the standard type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleLongPosStandardTol_MU" type="real" title="Positive Standard (Long)" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the standard type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleLongPosStandardTol_EU" type="real" title="Positive Standard (Long)" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the standard type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleNegStandardTol_MU" type="real" title="Negative Standard" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the standard type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleNegStandardTol_EU" type="real" title="Negative Standard" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the standard type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleLongNegStandardTol_MU" type="real" title="Negative Standard (Long)" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the standard type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TypicalHoleLongNegStandardTol_EU" type="real" title="Negative Standard (Long)" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the standard type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Flanged Hole" csh="PMAN_Design_for_Manufacturing_Pierce_Criteria_Flanged_Hole">
+                <Docum>A flanged hole has a continuous flange around a circle or oblong.</Docum>
+                <Label label="The following options are used to ensure that the flange hole shape can be manufactured using standard pierce equipment."/>
+                <Pref name="DFM_FlangedHoleWipeAngleMax" type="real" title="Maximum Wipe Angle" value="180.5" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the maximum wipe angle.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleWipeAngleMin" type="real" title="Minimum Wipe Angle" value="179.5" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum wipe angle.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleStdDias_MU" type="string" title="Round Sizes" value="0.1 0.2" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable standard and critical sizes for round flanged holes.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangedHoleStdDias_EU" type="string" title="Round Sizes" value="0.004 0.008" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable standard and critical sizes for round flanged holes.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangedHoleStdDiasGage_MU" type="string" title="Round Sizes, Gage" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable gage sizes for round flanged holes.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangedHoleStdDiasGage_EU" type="string" title="Round Sizes, Gage" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable gage sizes for round flanged holes.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangedHoleOblongSizes_MU" type="string" title="Oblong Sizes" value="0.0 0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable standard and critical sizes for oblong flanged holes. The entries are dimension pairs (smaller dimension first). There must be an even number of entries.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangedHoleOblongSizes_EU" type="string" title="Oblong Sizes" value="0.0 0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable standard and critical sizes for oblong flanged holes. The entries are dimension pairs (smaller dimension first). There must be an even number of entries.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangedHoleOblongSizesGage_MU" type="string" title="Oblong Sizes, Gage" value="0.0 0.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable gage sizes for oblong flanged holes. The entries are dimension pairs (smaller dimension first). There must be an even number of entries.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangedHoleOblongSizesGage_EU" type="string" title="Oblong Sizes, Gage" value="0.0 0.0" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable gage sizes for oblong flanged holes. The entries are dimension pairs (smaller dimension first). There must be an even number of entries.</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangedHoleMultipleFlangeLen" type="real" title="Flange Length Maximum Multiple" value="0.1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a factor. If the flanged hole length is greater than the flanged hole size (smaller dimension of oblong) divided by this factor, a deviation is reported.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleMultipleFlatLenAllHoles" type="real" title="Flat Length Minimum Multiple" value="0.1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a factor that will be multiplied with the material thickness. If the flange flat length is less than this value (all hole types), a deviation is reported.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleMultipleFlatLenGageHoles" type="real" title="Flat Length Maximum Multiple, Gage" value="0.1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a factor that will be multiplied with the material thickness. If the flange flat length is greater than this value (gage hole type only), a deviation is reported. NOT SUPPORTED AT THIS TIME</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleMultipleRadius" type="real" title="Radius Multiple" value="0.1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a factor that will be multiplied with the material thickness. If the inside break radius is less than this value, a deviation is reported.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Group name="Tolerances">
+                <Pref name="DFM_FlangedHoleGagePosTol_MU" type="real" title="Positive Gage" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the gage type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleGagePosTol_EU" type="real" title="Positive Gage" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the gage type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleGagePosLongTol_MU" type="real" title="Positive Gage (Long)" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the gage type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleGagePosLongTol_EU" type="real" title="Positive Gage (Long)" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the gage type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleGageNegTol_MU" type="real" title="Negative Gage" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the gage type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleGageNegTol_EU" type="real" title="Negative Gage" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the gage type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleGageNegLongTol_MU" type="real" title="Negative Gage (Long)" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the gage type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleGageNegLongTol_EU" type="real" title="Negative Gage (Long)" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the gage type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleCriticalPosTol_MU" type="real" title="Positive Critical" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the critical type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleCriticalPosTol_EU" type="real" title="Positive Critical" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the critical type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleCriticalPosLongTol_MU" type="real" title="Positive Critical (Long)" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the critical type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleCriticalPosLongTol_EU" type="real" title="Positive Critical (Long)" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the critical type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleCriticalNegTol_MU" type="real" title="Negative Critical" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the critical type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleCriticalNegTol_EU" type="real" title="Negative Critical" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the critical type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleCriticalNegLongTol_MU" type="real" title="Negative Critical (Long)" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the critical type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleCriticalNegLongTol_EU" type="real" title="Negative Critical (Long)" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the critical type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleStandardPosTol_MU" type="real" title="Positive Standard" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the standard type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleStandardPosTol_EU" type="real" title="Positive Standard" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the standard type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleStandardPosLongTol_MU" type="real" title="Positive Standard (Long)" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the standard type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleStandardPosLongTol_EU" type="real" title="Positive Standard (Long)" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the standard type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleStandardNegTol_MU" type="real" title="Negative Standard" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the standard type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleStandardNegTol_EU" type="real" title="Negative Standard" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the standard type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleStandardNegLongTol_MU" type="real" title="Negative Standard (Long)" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the standard type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangedHoleStandardNegLongTol_EU" type="real" title="Negative Standard (Long)" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the standard type hole (long side of oblong).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Hole Size" csh="PMAN_Design_for_Manufacturing_Pierce_Criteria_Hole_Size">
+                <Label label="The following options are used to reduce the number of unique pierce punched used in a die."/>
+                <Pref name="DFM_HoleSizeRoundSizes_MU" type="string_list" title="Round Sizes" value="&quot;0.1&quot;\&quot;0.2&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable standard and critical sizes for round holes.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizeRoundSizes_EU" type="string_list" title="Round Sizes" value="&quot;0.004&quot;\&quot;0.008&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable standard and critical sizes for round holes.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizeRoundSizesGage_MU" type="string_list" title="Round Sizes, Gage" value="&quot;0.1&quot;\&quot;0.2&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable gage sizes for round holes.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizeRoundSizesGage_EU" type="string_list" title="Round Sizes, Gage" value="&quot;0.004&quot;\&quot;0.008&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable gage sizes for round holes.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizeSquareSizes_MU" type="string_list" title="Square Sizes" value="&quot;0.1&quot;\&quot;0.2&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable standard and critical sizes for square holes.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizeSquareSizes_EU" type="string_list" title="Square Sizes" value="&quot;0.004&quot;\&quot;0.008&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable standard and critical sizes for square holes.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizeSquareSizesGage_MU" type="string_list" title="Square Sizes, Gage" value="&quot;0.1&quot;\&quot;0.2&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable gage sizes for square holes.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizeSquareSizesGage_EU" type="string_list" title="Square Sizes, Gage" value="&quot;0.004&quot;\&quot;0.008&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable gage sizes for square holes.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizeRectangleSizes_MU" type="string_list" title="Rectangle Sizes" value="&quot;0.1 0.2&quot;\&quot;0.3 0.4&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable standard and critical sizes for rectangular holes. The entries are dimension pairs (smaller dimension first). There must be an even number of entries.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizeRectangleSizes_EU" type="string_list" title="Rectangle Sizes" value="&quot;0.004 0.008&quot;\&quot;0.012 0.018&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable standard and critical sizes for rectangular holes. The entries are dimension pairs (smaller dimension first). There must be an even number of entries.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizeRectangleSizesGage_MU" type="string_list" title="Rectangle Sizes, Gage" value="&quot;0.1 0.2&quot;\&quot;0.3 0.4&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable gage sizes for rectangular holes. The entries are dimension pairs (smaller dimension first). There must be an even number of entries.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizeRectangleSizesGage_EU" type="string_list" title="Rectangle Sizes, Gage" value="&quot;0.004 0.008&quot;\&quot;0.012 0.018&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable gage sizes for rectangular holes. The entries are dimension pairs (smaller dimension first). There must be an even number of entries.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizeOblongSizes_MU" type="string_list" title="Oblong Sizes" value="&quot;0.1 0.2&quot;\&quot;0.3 0.4&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable standard and critical sizes for oblong holes. The entries are dimension pairs (smaller dimension first). There must be an even number of entries.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizeOblongSizes_EU" type="string_list" title="Oblong Sizes" value="&quot;0.004 0.008&quot;\&quot;0.012 0.018&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable standard and critical sizes for oblong holes. The entries are dimension pairs (smaller dimension first). There must be an even number of entries.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizeOblongSizesGage_MU" type="string_list" title="Oblong Sizes, Gage" value="&quot;0.1 0.2&quot;\&quot;0.3 0.4&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable gage sizes for oblong holes. The entries are dimension pairs (smaller dimension first). There must be an even number of entries.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizeOblongSizesGage_EU" type="string_list" title="Oblong Sizes, Gage" value="&quot;0.004 0.008&quot;\&quot;0.012 0.018&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable gage sizes for oblong holes. The entries are dimension pairs (smaller dimension first). There must be an even number of entries.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizHexSizes_MU" type="string_list" title="Hexagonal Sizes" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable standard and critical sizes for hexagonal holes.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizHexSizes_EU" type="string_list" title="Hexagonal Sizes" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable standard and critical sizes for hexagonal holes.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizHexSizesGage_MU" type="string_list" title="Hexagonal Sizes, Gage" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable gage sizes for hexagonal holes. If none, use 0.0.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizHexSizesGage_EU" type="string_list" title="Hexagonal Sizes, Gage" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the allowable gage sizes for hexagonal holes. If none, use 0.0.</Description>
+                    <MultiLineText height="1"/>
+                </Pref>
+                <Pref name="DFM_HoleSizeMetalThicknessFactor" type="real" title="Metal Thickness Factor" value="0.1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a factor that will be multiplied with the material thickness. If a hole size is less than this value, a deviation is reported.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_HoleSizeMetalThicknessFactorGage" type="real" title="Metal Thickness Factor, Gage" value="0.1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a factor that will be multiplied with the material thickness. If a gage hole size is less than this value, a deviation is reported.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Hole Corner Radii" csh="PMAN_Design_for_Manufacturing_Pierce_Criteria_Hole_Corner_Radii">
+                <Label label="The following options are use to verify that pierce shape have correct corner radii to meet manufacturing conditions."/>
+                <Pref name="DFM_HoleCornerRadiiMaxCornerAngle" type="real" title="Maximum Corner Angle" value="5.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>Corner angles less than this value must have a corner radius.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_HoleCornerRadiiCornerRadius_MU" type="real" title="Corner Radius" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>For standard pierce shapes (excluding round, oblong, and hexagonal), the corner radii must be equal to this value. For non-standard pierce shapes the corner radii must be greater than or equal to this value.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_HoleCornerRadiiCornerRadius_EU" type="real" title="Corner Radius" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>For standard pierce shapes (excluding round, oblong, and hexagonal), the corner radii must be equal to this value. For non-standard pierce shapes the corner radii must be greater than or equal to this value.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Pierce Angle" csh="PMAN_Design_for_Manufacturing_Pierce_Criteria_Pierce_Angle">
+                <Docum>These option are used to to determine the maximum pierce angle (A) for each hole type (gage, critical, or standard). The maximum angle depends on the hole size (S) and the material thickness (T) according to a table arranged like this:<Formatted>
+|    ||  S1 |  S2 |  S3 |  S4 |  S5 |
+=====================================
+| T1 ||  A1 |  A2 |  A3 |  A4 |  A5 |
+| T2 ||  A6 |  A7 |  A8 |  A9 | A10 |
+| T3 || A11 | A12 | A13 | A14 | A15 |
+</Formatted>
+Each thickness (T), hole size (S), and angle (A) in the table has a unique number. This number represents the array number for the Thicknesses, Hole Sizes, and Angles specified.</Docum>
+                <Label label="The following options are used to determine the maximum pierce angle for a given hole type (gage, critical, or standard)."/>
+                <Pref name="DFM_PierceAngleGageThicknesses_MU" type="string_list" title="Gage Thicknesses" value="&quot;0.1&quot;\&quot;0.2&quot;\&quot;0.3&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thicknesses provided to determine the maximum pierce angle for a gage type hole.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceAngleGageThicknesses_EU" type="string_list" title="Gage Thicknesses" value="&quot;0.004&quot;\&quot;0.008&quot;\&quot;0.012&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thicknesses provided to determine the maximum pierce angle for a gage type hole.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceAngleGageHoleSizes_MU" type="string_list" title="Gage Hole Sizes" value="&quot;0.1&quot;\&quot;0.2&quot;\&quot;0.3&quot;\&quot;0.4&quot;\&quot;0.5&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the hole sizes provided to determine the maximum pierce angle for a gage type hole.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceAngleGageHoleSizes_EU" type="string_list" title="Gage Hole Sizes" value="&quot;0.004&quot;\&quot;0.008&quot;\&quot;0.012&quot;\&quot;0.016&quot;\&quot;0.020&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the hole sizes provided to determine the maximum pierce angle for a gage type hole.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceAngleGageFlangedHole" type="real" title="Gage Flanged Hole" value="5.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the maximum pierce angle for flanged holes. A value of -1 means that the angels below should be used.</Description>
+                    <Real/>
+                </Pref>
+                <Pref name="DFM_PierceAngleGageAngles" type="string_list" title="Gage Angles" value="&quot;0.1 0.2 0.3 0.4 0.5&quot;\&quot;0.6 0.7 0.8 0.1 0.2&quot;\&quot;0.3 0.4 0.5 -1 0.1&quot;" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the maximum pierce angles for a gage type hole. Each angle corresponds to a specific thickness and hole size combination according to a table (see documentation). Valid angles are 0 to 90 degrees, although it is expected that pierce angles are much smaller than 90 degrees. A value of -1 indicates a combination that is not valid.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceAngleCriticalThicknesses_MU" type="string_list" title="Critical Thicknesses" value="&quot;0.1&quot;\&quot;0.2&quot;\&quot;0.3&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thicknesses provided to determine the maximum pierce angle for a critical type hole.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceAngleCriticalThicknesses_EU" type="string_list" title="Critical Thicknesses" value="&quot;0.004&quot;\&quot;0.008&quot;\&quot;0.012&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thicknesses provided to determine the maximum pierce angle for a critical type hole.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceAngleCriticalHoleSizes_MU" type="string_list" title="Critical Hole Sizes" value="&quot;0.1&quot;\&quot;0.2&quot;\&quot;0.3&quot;\&quot;0.4&quot;\&quot;0.5&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the hole sizes provided to determine the maximum pierce angle for a critical type hole.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceAngleCriticalHoleSizes_EU" type="string_list" title="Critical Hole Sizes" value="&quot;0.004&quot;\&quot;0.008&quot;\&quot;0.012&quot;\&quot;0.016&quot;\&quot;0.020&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the hole sizes provided to determine the maximum pierce angle for a critical type hole.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceAngleCriticalAngles" type="string_list" title="Critical Angles" value="&quot;0.1 0.2 0.3 0.4 0.5&quot;\&quot;0.6 0.7 0.8 0.1 0.2&quot;\&quot;0.3 0.4 0.5 -1 0.1&quot;" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the maximum pierce angles for a critical type hole. Each angle corresponds to a specific thickness and hole size combination according to a table (see documentation). Valid angles are 0 to 90 degrees, although it is expected that pierce angles are much smaller than 90 degrees. A value of -1 indicates a combination that is not valid.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceAngleStandardThicknesses_MU" type="string_list" title="Standard Thicknesses" value="&quot;0.1&quot;\&quot;0.2&quot;\&quot;0.3&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thicknesses provided to determine the maximum pierce angle for a standard type hole.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceAngleStandardThicknesses_EU" type="string_list" title="Standard Thicknesses" value="&quot;0.004&quot;\&quot;0.008&quot;\&quot;0.012&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the thicknesses provided to determine the maximum pierce angle for a standard type hole.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceAngleStandardHoleSizes_MU" type="string_list" title="Standard Hole Sizes" value="&quot;0.1&quot;\&quot;0.2&quot;\&quot;0.3&quot;\&quot;0.4&quot;\&quot;0.5&quot;" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the hole sizes provided to determine the maximum pierce angle for a standard type hole.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceAngleStandardHoleSizes_EU" type="string_list" title="Standard Hole Sizes" value="&quot;0.004&quot;\&quot;0.008&quot;\&quot;0.012&quot;\&quot;0.016&quot;\&quot;0.020&quot;" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the hole sizes provided to determine the maximum pierce angle for a standard type hole.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Pref name="DFM_PierceAngleStandardAngles" type="string_list" title="Standard Angles" value="&quot;0.1 0.2 0.3 0.4 0.5&quot;\&quot;0.6 0.7 0.8 0.1 0.2&quot;\&quot;0.3 0.4 0.5 -1 0.1&quot;" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the maximum pierce angles for a standard type hole. Each angle corresponds to a specific thickness and hole size combination according to a table (see documentation). Valid angles are 0 to 90 degrees, although it is expected that pierce angles are much smaller than 90 degrees. A value of -1 indicates a combination that is not valid.</Description>
+                    <MultiLineText height="2"/>
+                </Pref>
+                <Group name="Tolerances">
+                <Pref name="DFM_PierceAnglePosGageTol_MU" type="real" title="Positive Gage" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the gage type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_PierceAnglePosGageTol_EU" type="real" title="Positive Gage" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the gage type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_PierceAngleNegGageTol_MU" type="real" title="Negative Gage" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the gage type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_PierceAngleNegGageTol_EU" type="real" title="Negative Gage" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the gage type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_PierceAnglePosCriticalTol_MU" type="real" title="Positive Critical" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the critical type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_PierceAnglePosCriticalTol_EU" type="real" title="Positive Critical" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the critical type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_PierceAngleNegCriticalTol_MU" type="real" title="Negative Critical" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the critical type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_PierceAngleNegCriticalTol_EU" type="real" title="Negative Critical" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the critical type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_PierceAnglePosStandardTol_MU" type="real" title="Positive Standard" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the standard type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_PierceAnglePosStandardTol_EU" type="real" title="Positive Standard" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the positive maximum tolerance for the standard type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_PierceAngleNegStandardTol_MU" type="real" title="Negative Standard" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the standard type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_PierceAngleNegStandardTol_EU" type="real" title="Negative Standard" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the negative maximum tolerance for the standard type hole.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                </Group>
+            </Tab>
+            <Tab name="Complex Hole" csh="PMAN_Design_for_Manufacturing_Pierce_Criteria_Complex_Hole">
+                <Docum>A complex hole is a shape that requires two or more punch shapes to construct; each punch having a pierce shape that contributes to the overall shape of the hole. This shape is used when the included angle between the two punch shapes of a hole on the product varies too much to be manufactured with one punch.</Docum>
+                <Label label="The following options are used to ensure that each punch pierce shape has the proper offset from the other pierce shape and meets at a hard corner angle within the minimum angle value."/>
+                <Pref name="DFM_ComplexHoleCornerAngle" type="real" title="Minimum Corner Angle" value="5.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>The punch shapes must form a sharp angle with each other. This option specifies the minimum corner angle allowed. The angle is measure in a plane normal to the press direction.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_ComplexHoleOffsetDist_MU" type="real" title="Minimum Offset" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>The punch shapes must be offset from each other so that the shapes do not interfere with each other during the manufacturing process. This option specifies the minimum offset distance allowed between cutout halves. This measurement is performed in a plane normal to each cam direction.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_ComplexHoleOffsetDist_EU" type="real" title="Minimum Offset" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>The punch shapes must be offset from each other so that the shapes do not interfere with each other during the manufacturing process. This option specifies the minimum offset distance allowed between cutout halves. This measurement is performed in a plane normal to each cam direction.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Flange Criteria" csh="PMAN_Design_for_Manufacturing_Flange_Criteria">
+            <Tab name="Flange Breakline Angle" csh="PMAN_Design_for_Manufacturing_Flange_Criteria_Flange_Breakline_Angle">
+                <Docum>The breakline angle is the flanging angle with respect to the flanging direction. The ideal flanging angle is 90 degrees.</Docum>
+                <Label label="The following options are used to determine if a flange can be manufactured at an optimal angle."/>
+                <Pref name="DFM_FlangeBreaklineSpringbackSw" type="int" title="Springback Angle" value="0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies if springback based on material type should be compensated for in the check.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Compare Using Below Values Only" value="0"/>
+                        <EnumElem name="Add Springback Angles to Below Values" value="1"/>
+                        <EnumElem name="Subtract Springback Angle from Below Values" value="-1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeBreaklineStandard" type="real" title="Standard Angle" value="85.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the standard angle. Angles less than this (down to the Deviation Angle) are considered minor deviations.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeBreaklineDev1" type="real" title="Deviation Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the deviation angle. Angles less than or equal to this value are considered major deviations (product redesign recommended).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Flanged Cutouts" csh="PMAN_Design_for_Manufacturing_Flange_Criteria_Flanged_Cutouts">
+                <Docum>This check is performed using sections that are cut normal to the trimming direction. Each section is then sampled at various locations. The open angle is checked at every point.</Docum>
+                <Label label="The following options are used to determine if a flanged cutout is open enough so that the sheet metal can be easily removed from the die."/>
+                <Pref name="DFM_FlangeCutoutsSpringbackSw" type="int" title="Springback Angle" value="0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies if springback based on material type should be compensated for in the check.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Compare Using Below Values Only" value="0"/>
+                        <EnumElem name="Add Springback Angles to Below Values" value="1"/>
+                        <EnumElem name="Subtract Springback Angle from Below Values" value="-1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeCutoutsStandard" type="real" title="Standard Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the standard angle. An angle less than this is considered a deviation.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Flange Types" csh="PMAN_Design_for_Manufacturing_Flange_Criteria_Flange_Types">
+                <Docum>A flange is a protruding edge of a part typically used for fastening to something else. A 'wipe flange' is the simplest flange type to manufacture. Other flange types increase die costs.
+The flange types criteria check is section based. The sections used for this check are called die view or flanging direction view sections. A die view section is obtained by projecting the flange tangency curve into the plane of the press direction (or flanging direction if a cam was specified.) Planes normal to this curve are the planes use to generate the section curves.
+Sections are cut on the faces that represent the flange. All sections are analyzed and compared to a known type. The section with the highest complexity will be reported. The following describes the steps used to analyze each section.
+<Formatted>1. Count the number of straight segments in the section.
+2. If the section being analyzed has exactly one straight segment the system evaluates whether a 'wipe flange', 'spank flange', or 'single break return flange' exists.
+3. If the section being analyzed has exactly two straight segments the system evaluates the second region to determine whether a 'single break return- with spank', 'double flange', or 'double break return- no spank' exists.
+- If the second straight segment has the same angle as the 'wipe flange' then it is a 'single break return- with spank'.
+- If the second straight segment has the same angle as the 'spank flange' then it is a 'double flange'.
+- If the second straight segment has the flange has the same angle as the 'single break return flange' then it is a 'double break return- no spank'.
+4. If the flange has exactly three straight segments, there may be a 'double break return- spank' flange.
+5. If the flange has more then three straight segments, then the section will be classified as "unknown".</Formatted></Docum>
+                <Label label="The following options are used to indicate any flanges that are not wipe flanges."/>
+                <Pref name="DFM_FlangeTypesMinSpringbackSw" type="int" title="Minimum Springback Angle" value="-1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies if springback based on material type should be compensated for in the check.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Compare Using Below Values Only" value="0"/>
+                        <EnumElem name="Add Springback Angles to Below Values" value="1"/>
+                        <EnumElem name="Subtract Springback Angle from Below Values" value="-1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeTypesMinWipeAngle" type="real" title="Minimum Wipe Angle" value="180.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum angle to be used to test if a flange is a wipe flange. If the angle is less than this, then the flange is a 'spank flange'.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeTypesMaxSpringbackSw" type="int" title="Maximum Springback Angle" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies if springback based on material type should be compensated for in the check.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Compare Using Below Values Only" value="0"/>
+                        <EnumElem name="Add Springback Angles to Below Values" value="1"/>
+                        <EnumElem name="Subtract Springback Angle from Below Values" value="-1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeTypesMaxWipeAngle" type="real" title="Maximum Wipe Angle" value="180.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the maximum angle to be used to test if a flange is a wipe flange. If the angle is greater than this, then the flange is a 'single break return flange'.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="DFM_FlangeTypesTextDisplay" type="int" title="Text Display" value="1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies if names defined below or if the native language menu conversion text should be used.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Native Language Menus" value="0"/>
+                        <EnumElem name="Names as Defined Below" value="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="DFM_FlangeTypesWipe" type="string" title="Custom Name for 'wipe flange'" value="wipe flange" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the custom name for a 'wipe flange' (maximum 32 characters).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangeTypesWipeWt" type="real" title="Weighting" value="2.0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a weighting of the manufacturing complexity. Higher numbers indicate increased complexity. If set to 1, then no nonconformance is reported. A nonconformance is reported for any number other than a weighting of 1.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="1.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="DFM_FlangeTypesSpank" type="string" title="Custom Name for 'spank flange'" value="spank flange" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the custom name for a 'spank flange' (maximum 32 characters).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangeTypesSpankWt" type="real" title="Weighting" value="2.0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a weighting of the manufacturing complexity. If set to 1, then no deviation is reported.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="1.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="DFM_FlangeTypesSbRet" type="string" title="Custom Name for 'single break return flange'" value="single break return flange" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the custom name for a 'single break return flange' (maximum 32 characters).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangeTypesSbRetWt" type="real" title="Weighting" value="2.0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a weighting of the manufacturing complexity. If set to 1, then no deviation is reported.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="1.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="DFM_FlangeTypesDbRetNs" type="string" title="Custom Name for 'double break return flange no spank'" value="double break return- no spank" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the custom name for a 'double break return flange no spank' (maximum 32 characters).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangeTypesDbRetNsWt" type="real" title="Weighting" value="2.0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a weighting of the manufacturing complexity. If set to 1, then no deviation is reported.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="1.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="DFM_FlangeTypesDbFlange" type="string" title="Custom Name for 'double flange'" value="double flange" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the custom name for a 'double flange' (maximum 32 characters).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangeTypesDbFlangeWt" type="real" title="Weighting" value="2.0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a weighting of the manufacturing complexity. If set to 1, then no deviation is reported.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="1.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="DFM_FlangeTypesSbRetWs" type="string" title="Custom Name for 'single break return flange with spank'" value="single break return- with spank" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the custom name for a 'single break return flange with spank' (maximum 32 characters).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangeTypesSbRetWsWt" type="real" title="Weighting" value="2.0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a weighting of the manufacturing complexity. If set to 1, then no deviation is reported.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="1.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Separator/>
+                <Pref name="DFM_FlangeTypesDbRetWs" type="string" title="Custom Name for 'double break flange with spank'" value="double break return- spank" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the custom name for a 'double break flange with spank' (maximum 32 characters).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangeTypesDbRetWsWt" type="real" title="Weighting" value="2.0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a weighting of the manufacturing complexity. If set to 1, then no deviation is reported.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="1.0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Flange Break Radius" csh="PMAN_Design_for_Manufacturing_Flange_Criteria_Flange_Break_Radius">
+                <Docum>The break radius is the inside (smaller) radius that metal is bend around to form a flange. All break radii are rounded to the nearest 0.5 mm (0.0196 in) when comparing to standard values.</Docum>
+                <Label label="The following options are used to determine if a flange radius is too big or too small"/>
+                <Pref name="DFM_FlangeBreakRadiusMultipleStandard" type="real" title="Standard Multiple" value="0.1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a factor that will be multiplied with the material thickness. If a flange break radius is less than this value, a deviation is reported.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeBreakRadiusMultipleDev1" type="real" title="Deviation Multiple" value="0.1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a factor that will be multiplied with the material thickness. This value is used as an additional threshold to indicate a deviation for higher die costs. Deviation Multiple should be greater than Standard Multiple.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Return Flange/Double Break" csh="PMAN_Design_for_Manufacturing_Flange_Criteria_Return_Flange_Double_Break">
+                <Docum>A double break return flange is a return flange condition on the second bend radius.</Docum>
+                <Label label="The following options are used to ensure that enough clearance exists so that the double break return flange can be manufactured."/>
+                <Pref name="DFM_FlangeDoubleBreakSpringbackSw" type="int" title="Springback Angle" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies if springback based on material type should be compensated for in the check.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Compare Using Below Values Only" value="0"/>
+                        <EnumElem name="Add Springback Angles to Below Values" value="1"/>
+                        <EnumElem name="Subtract Springback Angle from Below Values" value="-1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeDoubleBreakWallAngleInner" type="real" title="Minimum Inner Wall Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum wall angle for inner panels.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeDoubleBreakWallAngleOuter" type="real" title="Minimum Outer Wall Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum wall angle for outer panels.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeDoubleBreakHeight_MU" type="real" title="Minimum Flange Height" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum flange height.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeDoubleBreakHeight_EU" type="real" title="Minimum Flange Height" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the minimum flange height.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeDoubleBreakRlRatio" type="real" title="Length Ratio" value="0.1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the length ratio. Multiplied with the return length, it gives the minimum value for the flange opening distance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Return Flange/Single Break" csh="PMAN_Design_for_Manufacturing_Flange_Criteria_Return_Flange_Single_Break">
+                <Docum>A return flange is a flange that has a "return" condition on the first break radius. That is, the flange ends up toward the underside of the part, instead of straight down (wipe flange) or away (spank flange).</Docum>
+                <Label label="The following options are used to determine if the included angle between the return flange and the adjacent surface will result in a weak lower flange steel."/>
+                <Pref name="DFM_FlangeSingleBreakSpringbackSw" type="int" title="Springback Angle" value="0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies if springback based on material type should be compensated for in the check.</Description>
+                    <RadioBox/>
+                    <Data type="enum">
+                        <EnumElem name="Compare Using Below Values Only" value="0"/>
+                        <EnumElem name="Add Springback Angles to Below Values" value="1"/>
+                        <EnumElem name="Subtract Springback Angle from Below Values" value="-1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeSingleBreakStandard" type="real" title="Standard Angle" value="85.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the standard angle. Included angles less than this (down to the Deviation Angle) are considered minor deviations.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeSingleBreakDev1" type="real" title="Deviation Angle" value="0.0" unit="deg" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the deviation angle. Included angles less than or equal to this value are considered major deviations (product redesign recommended).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Flange Flat Length" csh="PMAN_Design_for_Manufacturing_Flange_Criteria_Flange_Flat_Length">
+                <Docum>The flat length of a flange is the distance from the end of the break radius to the end of the flange.</Docum>
+                <Label label="The following options are used to ensure the flat length is large enough so that standard steel flanges can be used and the part can be positioned correctly in the die."/>
+                <Pref name="DFM_FlangeFlatLengthMultiple" type="real" title="Length Multiple" value="0.0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a factor that will be multiplied with the material thickness. If the flat length is less than this value, a deviation is reported.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeFlatLengthStandard_MU" type="real" title="Standard Length" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the standard length. If the flat length is less than this value, a deviation is reported.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeFlatLengthStandard_EU" type="real" title="Standard Length" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the standard length. If the flat length is less than this value, a deviation is reported.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Springback Tolerances" csh="PMAN_Design_for_Manufacturing_Flange_Criteria_Springback_Tolerances">
+                <Pref name="DFM_FlangeSpringbackYield_EU" type="string_list" title="Flange Springback Yield" value="&quot;10.0 0.1 0.005&quot;\&quot;20.0 0.1 0.005&quot;\&quot;30.0 0.1 0.005&quot;\&quot;-1.0 0.1 0.005&quot;" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a table of numbers (Yield Strength, Spring Back Angle, Spring Back Angle Tolerance) used to determine what spring back angle to use for a given material.</Description>
+                    <MultiLineText height="5"/>
+                </Pref>
+                <Pref name="DFM_FlangeSpringbackYield_MU" type="string_list" title="Flange Springback Yield" value="&quot;100.0 0.1 0.005&quot;\&quot;-1 0.1 0.005&quot;" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a table of numbers (Yield Strength, Spring Back Angle, Spring Back Angle Tolerance) used to determine what spring back angle to use for a given material.</Description>
+                    <MultiLineText height="5"/>
+                </Pref>
+            </Tab>
+        </Category>
+        <Category name="Relationship Criteria" csh="PMAN_Design_for_Manufacturing_Relationship_Criteria">
+            <Tab name="Trim to Trim" csh="PMAN_Design_for_Manufacturing_Relationship_Criteria_Trim_to_Trim">
+                <Docum>Distances between cutout to cutout or perimeter to perimeter are measured.
+<Formatted>Cutout to cutout: If both objects are trimmed using the same trimming direction and in the same die, then the distance between the two objects is computed in a plane normal to the common trimming direction (trimming view).
+Perimeter to perimeter: Computed by taking an exterior perimeter curve, sampling it, creating planes perpendicular to this curve, and then intersecting these planes with the other exterior trim curves.</Formatted></Docum>
+                <Label label="The following options are used to analyze whether additional operations or additions of a mounting foot and higher quality pad and trim steel materials are required to accomplish the necessary trimming."/>
+                <Pref name="DFM_TrimToTrimCutoutToCutoutFirst_MU" type="real" title="Cutout to Cutout (First)" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the first cutout to cutout distance. A cutout to cutout distance less than this value is considered a major deviation (product redesign recommended).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TrimToTrimCutoutToCutoutFirst_EU" type="real" title="Cutout to Cutout (First)" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the first cutout to cutout distance. A cutout to cutout distance less than this value is considered a major deviation (product redesign recommended).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TrimToTrimCutoutToCutoutSecond_MU" type="real" title="Cutout to Cutout (Second)" value="0.2" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the second cutout to cutout distance. A cutout to cutout distance less than this value (down to the first cutout to cutout distance) adds an operation.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TrimToTrimCutoutToCutoutSecond_EU" type="real" title="Cutout to Cutout (Second)" value="0.008" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the second cutout to cutout distance. A cutout to cutout distance less than this value (down to the first cutout to cutout distance) adds an operation.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TrimToTrimPerimToPerimFirst_MU" type="real" title="Perimeter to Perimeter (First)" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the first perimeter to perimeter distance. A perimeter to perimeter distance less than this value is considered a major deviation (product redesign recommended).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TrimToTrimPerimToPerimFirst_EU" type="real" title="Perimeter to Perimeter (First)" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the first perimeter to perimeter distance. A perimeter to perimeter distance less than this value is considered a major deviation (product redesign recommended).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TrimToTrimPerimToPerimSecond_MU" type="real" title="Perimeter to Perimeter (Second)" value="0.2" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the second perimeter to perimeter distance. A perimeter to perimeter distance less than this value (down to the first perimeter to perimeter distance) adds an operation.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TrimToTrimPerimToPerimSecond_EU" type="real" title="Perimeter to Perimeter (Second)" value="0.008" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the second perimeter to perimeter distance. A perimeter to perimeter distance less than this value (down to the first perimeter to perimeter distance) adds an operation.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TrimToTrimPerimToPerimThird_MU" type="real" title="Perimeter to Perimeter (Third)" value="0.3" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the third perimeter to perimeter distance. A perimeter to perimeter distance less than this value (down to the second perimeter to perimeter distance) adds die costs.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_TrimToTrimPerimToPerimThird_EU" type="real" title="Perimeter to Perimeter (Third)" value="0.012" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the third perimeter to perimeter distance. A perimeter to perimeter distance less than this value (down to the second perimeter to perimeter distance) adds die costs.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Hole to Trim" csh="PMAN_Design_for_Manufacturing_Relationship_Criteria_Hole_to_Trim">
+                <Docum>This check will determine the distance a hole (pierce object) is from a trim object.</Docum>
+                <Label label="The following options are used to determine if a pierce object can be manufactured using standard pierce equipment."/>
+                <Pref name="DFM_HoleToTrimDistSameDie_MU" type="string" title="Hole to Trim Distances, Same Die" value="0.3 0.2 0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a list of hole to trim distances for the case when hole piercing and trimming are performed in the same die with the same piercing direction. If the distance is less than the first value, a deviation is reported. A distance less than the last value is considered a major deviation (product redesign recommended).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_HoleToTrimDistSameDie_EU" type="string" title="Hole to Trim Distances, Same Die" value="0.012 0.008 0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a list of hole to trim distances for the case when hole piercing and trimming are performed in the same die with the same piercing direction. If the distance is less than the first value, a deviation is reported. A distance less than the last value is considered a major deviation (product redesign recommended).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_HoleToTrimDistDiffDie_MU" type="string" title="Hole to Trim Distances, Different Die" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a list of hole to trim distances for the case when hole piercing and trimming are performed in different dies. If the distance is less than the first value, a deviation is reported. A distance less than the last value is considered a major deviation (product redesign recommended).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_HoleToTrimDistDiffDie_EU" type="string" title="Hole to Trim Distances, Different Die" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a list of hole to trim distances for the case when hole piercing and trimming are performed in different dies. If the distance is less than the first value, a deviation is reported. A distance less than the last value is considered a major deviation (product redesign recommended).</Description>
+                    <Widestring/>
+                </Pref>
+            </Tab>
+            <Tab name="Hole to Hole" csh="PMAN_Design_for_Manufacturing_Relationship_Criteria_Hole_to_Hole">
+                <Docum>This check will find the distance between neighboring holes (pierce object).</Docum>
+                <Label label="The following options are used to determine if holes are designed too close to manufacture with standard pierce equipment."/>
+                <Pref name="DFM_HoleToHoleDistSameDie_MU" type="string" title="Hole to Hole Distances, Same Die" value="0.3 0.2 0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a list of hole to hole distances for the case when both holes are punched using in the same die and the same punch direction. If the distance is less than the first value, a deviation is reported. A distance less than the last value is considered a major deviation (product redesign recommended).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_HoleToHoleDistSameDie_EU" type="string" title="Hole to Hole Distances, Same Die" value="0.012 0.008 0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a list of hole to hole distances for the case when both holes are punched using in the same die and the same punch direction. If the distance is less than the first value, a deviation is reported. A distance less than the last value is considered a major deviation (product redesign recommended).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_HoleToHoleDistDiffDie_MU" type="string" title="Hole to Hole Distances, Different Die" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a list of hole to hole distances for the case when each hole is punched in a different die. If the distance is less than the first value, a deviation is reported. A distance less than the last value is considered a major deviation (product redesign recommended).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_HoleToHoleDistDiffDie_EU" type="string" title="Hole to Hole Distances, Different Die" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a list of hole to hole distances for the case when each hole is punched in a different die. If the distance is less than the first value, a deviation is reported. A distance less than the last value is considered a major deviation (product redesign recommended).</Description>
+                    <Widestring/>
+                </Pref>
+            </Tab>
+            <Tab name="Hole to Wall" csh="PMAN_Design_for_Manufacturing_Relationship_Criteria_Hole_to_Wall">
+                <Docum>This check measures the distance from the punch stripper or button to the nearest walls above and below the pierce shape. This check also measures a minimum flat area around the pierce shape.
+For this check, a mid-plane is computed for the hole that is being pierced. This mid-plane is computed by first finding a centroid of all the sample points on the pierce object edge(s). Then planes are computed using the centroid and two neighboring sample points. The normals from these planes is averaged to establish the direction of the mid-plane. The location point of the mid-plane will be half way between the extreme upper and extreme lower sample points.
+An actual distance between the shank and the nearest wall is not computed. Rather, solid cylinders are constructed and then a check is made to see if these cylinders intersect above or below the sheet.</Docum>
+                <Label label="The following options are used to ensure that a hole is not too close to a wall for using standard pierce equipment for manufacturing and that there is sufficient bearing surface around the pierce shape to avoid hole distortion."/>
+                <Pref name="DFM_HoleToWallShankToWallStandard_MU" type="real" title="Standard Shank to Wall" value="0.2" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the standard shank to wall distance. A distance less than this (down to the Deviation Shank to Wall distance) are considered minor deviations.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_HoleToWallShankToWallStandard_EU" type="real" title="Standard Shank to Wall" value="0.008" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the standard shank to wall distance. A distance less than this (down to the Deviation Shank to Wall distance) are considered minor deviations.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_HoleToWallShankToWallDev_MU" type="real" title="Deviation Shank to Wall" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the deviation shank to wall distance. A distance less than or equal to this value are considered major deviations (product redesign recommended).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_HoleToWallShankToWallDev_EU" type="real" title="Deviation Shank to Wall" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the deviation shank to wall distance. A distance less than or equal to this value are considered major deviations (product redesign recommended).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_HoleToWallHoleFlatDistance_MU" type="real" title="Hole Flat Distance" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>The offset pierce shape must not deviate too much from the mid-plane. To perform this check, the shape of the hole on the sheet is sampled. These points are then offset by the value specified here, normal to the piercing direction, and then projected back to the sheet.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_HoleToWallHoleFlatDistance_EU" type="real" title="Hole Flat Distance" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>The offset pierce shape must not deviate too much from the mid-plane. To perform this check, the shape of the hole on the sheet is sampled. These points are then offset by the value specified here, normal to the piercing direction, and then projected back to the sheet.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_HoleToWallHoleFlatTolerance_MU" type="real" title="Hole Flat Tolerance" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the maximum hole flat tolerance. This is the distance from the projected points to the mid-plane.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_HoleToWallHoleFlatTolerance_EU" type="real" title="Hole Flat Tolerance" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the maximum hole flat tolerance. This is the distance from the projected points to the mid-plane.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_HoleToWallCylinderLen_MU" type="real" title="Cylinder Length" value="55.0" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the length of the solid cylinders used for collision testing above or below the sheet.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_HoleToWallCylinderLen_EU" type="real" title="Cylinder Length" value="2.1653543" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the length of the solid cylinders used for collision testing above or below the sheet.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_HoleToWallWallTolerance_MU" type="real" title="Wall Tolerance" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the distance each cylinder is created above and below (thickness added) the mid-plane used from the flatness check.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_HoleToWallWallTolerance_EU" type="real" title="Wall Tolerance" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the distance each cylinder is created above and below (thickness added) the mid-plane used from the flatness check.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Flange to Hole" csh="PMAN_Design_for_Manufacturing_Relationship_Criteria_Flange_to_Hole">
+                <Docum>When flanging occurs after a pierce, the flange tangency curve to hole distance must be greater than the minimum value for this criteria. If flanging is occurring at the same time or before a pierce, then the Hole to Wall criteria is used and this criteria check is ignored.
+To find the flange to hole distance, the three dimensional distance from the pierce shape to the nearest flange is measured.</Docum>
+                <Label label="The following options are used to determine if flanging can be accomplished with standard equipment or if hole distortion is expected from flanging too close to a pierce shape."/>
+                <Pref name="DFM_FlangeToHoleStdDist_MU" type="real" title="Standard Distance" value="0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the standard flange to hole distance. The minimum acceptable flange to hole distance is the larger of this value and the value computed by (Thickness Multiple) x (material thickness).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeToHoleStdDist_EU" type="real" title="Standard Distance" value="0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies the standard flange to hole distance. The minimum acceptable flange to hole distance is the larger of this value and the value computed by (Thickness Multiple) x (material thickness).</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+                <Pref name="DFM_FlangeToHoleMultipleThickness" type="real" title="Thickness Multiple" value="0.1" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a factor that will be multiplied with the material thickness. The minimum acceptable flange to hole distance is the larger of this value and the Standard Distance.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="0"/>
+                    </Data>
+                </Pref>
+            </Tab>
+            <Tab name="Flange to Trim" csh="PMAN_Design_for_Manufacturing_Relationship_Criteria_Flange_to_Trim">
+                <Docum>When flanging occurs after a trimming operation, the flange tangency curve must not be too close to a trim line. The measurement for this check only considers distances 90 degrees from the flange tangency curve.</Docum>
+                <Label label="The following option is used to determine if the trim line is too close to a flange."/>
+                <Pref name="DFM_FlangeToTrimStds_MU" type="string" title="Standard Distances" value="0.2 0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a list of flange to trim distances. If the distance is less than the first value, a deviation is reported. A distance less than the last value is considered a major deviation (product redesign recommended).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangeToTrimStds_EU" type="string" title="Standard Distances" value="0.008 0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a list of flange to trim distances. If the distance is less than the first value, a deviation is reported. A distance less than the last value is considered a major deviation (product redesign recommended).</Description>
+                    <Widestring/>
+                </Pref>
+            </Tab>
+            <Tab name="Flange to Flange" csh="PMAN_Design_for_Manufacturing_Relationship_Criteria_Flange_to_Flange">
+                <Docum>This check will determine the distance between two opposing flanges. The flanges can be in the same direction or opposite directions and can be any of the following conditions.
+<Formatted>1. Two flanges on the perimeter of the part.
+2. A flanged cutout and a flange on the perimeter.
+3. Two flanged cutouts.</Formatted>
+The computational method is independent of the two flanges (perimeter to perimeter, cutout to cutout, or cutout to perimeter) involved in the measurement, but not all flanges will be measured with each other. For a flange to flange measurement to be made, the two flanges must be opposite each other. To be considered opposite, there must be at least one location where either of the flanges have a tangency curve that is 90 degrees to the other.</Docum>
+                <Label label="The following options are used to determine if two flanges are too close to be manufactured."/>
+                <Pref name="DFM_FlangeToFlangeCutToCut_MU" type="string" title="Cutout to Cutout Distances" value="0.2 0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a list of distances between pairs of flanged cutouts. If the distance is less than the first value, a deviation is reported. A distance less than the last value is considered a major deviation (product redesign recommended).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangeToFlangeCutToCut_EU" type="string" title="Cutout to Cutout Distances" value="0.008 0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a list of distances between pairs of flanged cutouts. If the distance is less than the first value, a deviation is reported. A distance less than the last value is considered a major deviation (product redesign recommended).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangeToFlangeExtToExt_MU" type="string" title="Perimeter to Perimeter Distances" value="0.2 0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a list of distances between pairs of flanges on the perimeter of the part. If the distance is less than the first value, a deviation is reported. A distance less than the last value is considered a major deviation (product redesign recommended).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangeToFlangeExtToExt_EU" type="string" title="Perimeter to Perimeter Distances" value="0.008 0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a list of distances between pairs of flanges on the perimeter of the part. If the distance is less than the first value, a deviation is reported. A distance less than the last value is considered a major deviation (product redesign recommended).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangeToFlangeCutToExt_MU" type="string" title="Cutout to Perimeter Distances" value="0.2 0.1" unit="mm" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a list of distances between pairs of a flanged cutout and a flange on the perimeter of the part. If the distance is less than the first value, a deviation is reported. A distance less than the last value is considered a major deviation (product redesign recommended).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangeToFlangeCutToExt_EU" type="string" title="Cutout to Perimeter Distances" value="0.008 0.004" unit="in" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a list of distances between pairs of a flanged cutout and a flange on the perimeter of the part. If the distance is less than the first value, a deviation is reported. A distance less than the last value is considered a major deviation (product redesign recommended).</Description>
+                    <Widestring/>
+                </Pref>
+                <Pref name="DFM_FlangeToFlangeOpeningMultiple" type="real" title="Opening Multiple" value="0.0" ver="3.0.0" scope="Session">
+                    <Description>This option specifies a factor that will be multiplied with the flange height. The flange opening distance must be greater than this value.</Description>
+                    <Real/>
+                    <Data type="range">
+                        <LowerBound value="0.0" include="1"/>
+                    </Data>
+                </Pref>
+            </Tab>
+        </Category>
+    </Application>
+</PrefDefinition>
